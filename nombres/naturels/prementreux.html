@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nombres premiers entre eux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="js/prementreux.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/prementreux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/prementreux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2>
+          <div id="container">
+            <div id="label">définition</div> Deux nombres entiers naturels m et n sont dits <span style="font-weight: bold; font-style: italic;"> 'premiers entre eux' </span> si leur <input type="button" value="PGCD" onclick="go('pgcd.html')" data-inline="true" /> est égal à 1.
+          </div>
+          <p>Vous pouvez maintenant générer quelques exemples:</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2>
+          <div id="container">
+            <div id="label">definition </div>Two natural numbers m and n are said <span style="font-weight: bold; font-style: italic;"> 'coprimes' or 'mutually prime' </span> if their <input type="button" value="GCD" onclick="go('pgcd.html')" data-inline="true"> is equal to 1.
+          </div>
+          <p>You can now generate some examples: </p>
+        </div>
+        <!-- /en -->
+        <form method="get" name="pgcd">
+          <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; background-color: #f6f6f6; width: 100%;">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">
+                  <div lang="fr"> Donner deux entiers 0 &lt; m,n &lt;=100000</div>
+                  <!-- /fr -->
+                  <div lang="en">Give two naturals 0 &lt; m,n &lt;=100000 </div>
+                  <!-- /en --> m: <input name="getm" /> n: <input name="getn" />
+                  <input name="Go" onclick="ClickOnGoPGCD()" type="button" value="Go!" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <textarea cols="74" name="divmn" readonly="readonly" rows="2"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">Message d'erreur éventuel:</div>
+                  <!-- /fr -->
+                  <div lang="en">Eventual error message:</div>
+                  <!-- /en -->
+                  <input name="erreur" readonly="readonly" size="80" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div lang="fr">
+          <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> On peut voir que m et n sont premiers entre eux sur leurs <input type="button" value="décomposition en facteurs premiers" onclick="go('decomposition.html')" data-inline="true" />. Dans ce cas, il n'existe aucun facteur premier commun à m et à n.
+          </div>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>We can see that m and n are prime to each other on their <input type="button" value="decomposition into prime factors" onclick="go('decomposition.html')" data-inline="true">. In this case, there is no prime factor common to m and n.
+          </div>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Principaux résultats </h2> Il résulte immédiatement de la définition que: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div>
+            <ul>
+              <li> Si dans le couple (m,n) un des deux nombres est égal à 1 alors ils sont premiers entre eux. </li>
+              <li> Deux nombres premiers distincts sont toujours premiers entre eux. </li>
+              <li> Si m est un nombre quelconque et p un nombre premier ne divisant pas m alors m et p sont premiers entre eux. </li>
+              <li> Si deux nombres sont premiers entre eux alors leur <input type="button" value="PPCM" onclick="go('ppcm.html')" data-inline="true" /> est égal à leur produit, et réciproquement. </li>
+            </ul>
+          </div>
+          <p>En outre, le résultat important suivant découle de la décomposition en facteurs premiers.</p>
+          <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si k divise le produit ab et si k est premier avec a, alors k divise b.
+          </div> a et b désignant deux naturels strictement positifs, on a également les théorèmes importants suivants: <a name="peepgcd"></a>
+          <a name="th4"></a>
+          <div id="container">
+            <div id="label">théorème</div> Une condition nécessaire et suffisante pour que d soit le pgcd de a et b est qu'il existe deux entiers h et k tels que: <br />
+            <ol>
+              <li> a=kd </li>
+              <li> b=hd </li>
+              <li> k et h premiers entre eux </li>
+            </ol>
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4>
+            <p> Il est clair que pour tout diviseur commun d à a et b on a 1. et 2. Il suffit donc d'établir que d est le plus grand d'entre eux si et seulement si k et h sont premiers entre eux.</p>
+            <p> Mais k et h non premiers entre eux équivaut à k=pr et h=qr avec r&gt;1, dans ce cas dr est un diviseur commun à a et b, ce qui contredit le fait que d est le plus grand d'entre eux.</p>
+          </div>
+          <a name="th5"></a>
+          <div id="container">
+            <div id="label">théorème</div> Une condition nécessaire et suffisante pour que m soit le ppcm de a et b est qu'il existe deux entiers h et k tels que: <br />
+            <ol>
+              <li> m=ka </li>
+              <li> m=hb </li>
+              <li> k et h premiers entre eux </li>
+            </ol>
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet, les deux premières conditions équivalent au fait que m est un multiple commun à a et b, il suffit donc de voir que la troisième signifie que c'est le plus petit de ces multiples communs. Si h et k ne sont pas premiers entre eux on peut écrire h=dh' et k=dk' avec d&gt;1 donc k' donc k'&lt;k et h'&lt;h. <br /> On a alors que m' =h'a=m/d= k'b est un multiple commun plus petit que m d'où contradiction.
+          </div>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Main results </h2>It results immediately from the definition that: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>
+            <ul>
+              <li> If in the pair (m,n) one of the two numbers is equal to 1 then they are relatively prime. </li>
+              <li> Two distinct prime numbers are always coprime. </li>
+              <li>If m is any number and p a prime number not dividing m then m and p are coprime. </li>
+              <li> If two numbers are coprime then their <input type="button" value="PPCM" onclick="go('ppcm.html')" data-inline="true"> equals their product, and vice versa. </li>
+            </ul>
+          </div>
+          <p>In addition, the following important result follows from the prime factorization. </p>
+          <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If k divides the product ab and if k is coprime with a, then k divides b.
+          </div> a and b denoting two strictly positive natural numbers, we also have the following important theorems: <a name="peepgcde"></a>
+          <a name="th4e"></a>
+          <div id="container">
+            <div id="label">theorem </div>A necessary and sufficient condition for d to be the gcd of a and b is that there are two integers h and k such that: <br>
+            <ol>
+              <li> a=kd </li>
+              <li> b=hd </li>
+              <li> k and h relatively prime </li>
+            </ol>
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>
+            <p>
+            <p>It is clear that for any common divisor d to a and b we have 1. and 2. It therefore suffices to establish that d is the largest of them if and only if k and h are coprime. </p>
+            <p>But k and h no prime to each other is equivalent to k=pr and h=qr with r&gt;1, in this case dr is a common divisor of a and b, which contradicts the fact that d is the biggest of them. </p>
+          </div>
+          <a name="th5e"></a>
+          <div id="container">
+            <div id="label">theorem </div>A necessary and sufficient condition for m to be the lcm of a and b is that there are two integers h and k such that: <br>
+            <ol>
+              <li> m = ka </li>
+              <li> m=hb </li>
+              <li> k and h relatively prime </li>
+            </ol>
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed, the first two conditions are equivalent to the fact that m is a multiple common to a and b, so it suffices to see that the third means that it is the smallest of these common multiples. If h and k are not relatively prime, we can write h=dh' and k=dk' with d&gt;1 therefore k' therefore k'&lt;k and h'&lt;h. <br> We then have that m' =h'a=m/d= k'b is a common multiple smaller than m, hence the contradiction.
+          </div>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Le coin de Python </h2>
+          <p> Ce programme teste si deux nombres sont premiers entre eux. </p>
+          <object border="3" data="python/prementreux1.html" height="300" type="text/html" width="100%"></object>
+          <h2> Le coin de Julia </h2>
+          <p> Même chose avec Julia 1.6. </p>
+          <object border="3" data="julia/prementreux1.jl.html" height="220" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's corner </h2>
+          <p> This program checks if two numbers are coprime. </p>
+          <object border="3" data="python/prementreux1.html" height="300" type="text/html" width="100%"></object>
+          <h2> Julia's corner </h2>
+          <p> Same with Julia 1.6. </p>
+          <object border="3" data="julia/prementreux1.jl.html" height="220" type="text/html" width="100%"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

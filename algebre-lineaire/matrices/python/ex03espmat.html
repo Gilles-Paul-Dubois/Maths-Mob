@@ -1,0 +1,188 @@
+﻿<html>
+ <head>
+  <title>
+   ex03espmat.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># python version 3.4</span><span class="s1">
+ 
+</span><span class="s0"># ## Espaces de matrices à coefficients dans Z/pZ###</span><span class="s1"> 
+ </span><span class="s0"># ## Spaces of matrices with coefficients ins Z/pZ###</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">GenZp(p): 
+    </span><span class="s0">"""génère la classe paramétrée Z/pZ - generates parameterized class Z/pZ"""</span><span class="s1"> 
+ 
+    </span><span class="s2">class </span><span class="s1">C(object): 
+        car = p 
+ 
+        </span><span class="s2">def </span><span class="s1">__init__(self, m): 
+            </span><span class="s0">"""initialisation à partir d'un entier - constructor from an integer"""</span><span class="s1"> 
+            self.n = m % self.car 
+ 
+        </span><span class="s2">def </span><span class="s1">__str__(self): 
+            </span><span class="s0">"""représentation externe pour print etc... - conversion to string"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">str(self.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">nul(self): 
+            </span><span class="s0">"""test de nullité - nullity test"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.n == </span><span class="s3">0</span><span class="s1"> 
+ 
+        </span><span class="s0">### les opérateurs unaires - unary operators</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__neg__(self): 
+            </span><span class="s0">"""opposé -opposite"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(-self.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__invert__(self): 
+            </span><span class="s0">"""inverse"""</span><span class="s1"> 
+            </span><span class="s2">if not </span><span class="s1">self.nul(): 
+                y = </span><span class="s3">1</span><span class="s1"> 
+                </span><span class="s2">while </span><span class="s1">(self.n * y) % self.car != </span><span class="s3">1</span><span class="s1">: 
+                    y += </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(y) 
+ 
+        </span><span class="s0">### les opérations binaires - binary operators</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+            </span><span class="s0">"""addition"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n + other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__rmul__(self, other): 
+            </span><span class="s0">"""multiplication"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n * other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+            </span><span class="s0">"""soustraction - subtraction"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n - other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__div__(self, other): 
+            </span><span class="s2">return </span><span class="s1">self * ~(other) 
+ 
+        </span><span class="s2">def </span><span class="s1">__pow__(self, k): 
+            </span><span class="s0">"""puissances - powers"""</span><span class="s1"> 
+            </span><span class="s2">if </span><span class="s1">k &gt;= </span><span class="s3">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">C(self.n ** k) 
+            </span><span class="s2">else</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">~self ** (-k) 
+ 
+    </span><span class="s2">return </span><span class="s1">C 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">GenVectnZp(p, m): 
+    </span><span class="s0">"""génère l'espace Z/pZ x .... x Z/pZ (n facteurs) - generates n-th power of Z/pZ"""</span><span class="s1"> 
+ 
+    </span><span class="s2">class </span><span class="s1">Vpn: 
+        n = m 
+ 
+        </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+            Zp = GenZp(p) 
+            self.V = [Zp(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L] 
+ 
+        </span><span class="s2">def </span><span class="s1">__str__(self): 
+            L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+            </span><span class="s2">return </span><span class="s4">'(' </span><span class="s1">+ </span><span class="s4">","</span><span class="s1">.join(L) + </span><span class="s4">')'</span><span class="s1"> 
+ 
+        </span><span class="s2">def </span><span class="s1">nul(self): 
+            </span><span class="s0">"""test de nullité - nullity test"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">all([x.nul() </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+        </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+            </span><span class="s0">"""addition des vecteurs - addition of vectors"""</span><span class="s1"> 
+            L = [self.V[i].n + other.V[i].n </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)] 
+            </span><span class="s2">return </span><span class="s1">Vpn(L) 
+ 
+        </span><span class="s2">def </span><span class="s1">__neg__(self): 
+            </span><span class="s0">"""opposé d'un vecteur - opposite of a vector"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">Vpn([-x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+        </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+            </span><span class="s0">"""différence de deux vecteurs - difference of two vectors"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self + (-other) 
+ 
+        </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+            </span><span class="s0">""" produit par un scalaire - product by a scalar"""</span><span class="s1"> 
+            L = [k.n * x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+            print 
+            L 
+            </span><span class="s2">return </span><span class="s1">Vpn(L) 
+ 
+    </span><span class="s2">return </span><span class="s1">Vpn 
+ 
+ 
+</span><span class="s4">""" Objet Matrice à coefficients dans Z/pZ - Matrice object """</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Matrice(): 
+    </span><span class="s0">"""Modélisation d'une matrice à coefficients dans Z/pZ - Model for a matrice with coeffs in Z/pZ"""</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">"""constructeur à partir d'une liste de lignes - construtor from a list of rows"""</span><span class="s1"> 
+        self.coeffs = L  </span><span class="s0"># les coefficients- the coefficients</span><span class="s1"> 
+        self.lignes = len(L)  </span><span class="s0"># le nombre de lignes - the number of rows</span><span class="s1"> 
+        self.colonnes = L[</span><span class="s3">0</span><span class="s1">].n  </span><span class="s0"># le nombre de colonnes - the number of olumns</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s1">.join([str(v) </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.coeffs]) 
+ 
+    </span><span class="s2">def </span><span class="s1">GetCoef(self, i, j): 
+        </span><span class="s0">"""Obtenir un coefficient - Get one coefficient"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i].V[j] 
+ 
+    </span><span class="s2">def </span><span class="s1">SetCoef(self, i, j, v): 
+        </span><span class="s0">"""Changer un coefficient - Change one coefficient"""</span><span class="s1"> 
+        self.coeffs[i].V[j] = v 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, alpha): 
+        </span><span class="s0">""" multiplication par un scalaire - multipliation by a scalar"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Matrice([alpha * X </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">self.coeffs]) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">""" Somme de deux matrices - Addition of matrices"""</span><span class="s1"> 
+        L = [self.coeffs[i] + other.coeffs[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.lignes)] 
+        </span><span class="s2">return </span><span class="s1">Matrice(L) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    Z5 = GenZp(</span><span class="s3">5</span><span class="s1">) 
+    m = </span><span class="s3">3</span><span class="s1"> 
+    V5 = GenVectnZp(</span><span class="s3">5</span><span class="s1">, m) 
+    V1 = V5([</span><span class="s3">3</span><span class="s1">, </span><span class="s3">4</span><span class="s1">, </span><span class="s3">4</span><span class="s1">]) 
+    V2 = V5([</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">]) 
+    V3 = V5([</span><span class="s3">2</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">]) 
+    A = Matrice([V1, V2, V3]) 
+    W1 = V5([</span><span class="s3">3</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">]) 
+    W2 = V5([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">0</span><span class="s1">]) 
+    W3 = V5([</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">4</span><span class="s1">]) 
+    B = Matrice([W1, W2, W3]) 
+    deux = Z5(</span><span class="s3">2</span><span class="s1">) 
+    trois = Z5(</span><span class="s3">3</span><span class="s1">) 
+    print(A) 
+    print (</span><span class="s4">"--------------------"</span><span class="s1">) 
+    print(B) 
+    print (</span><span class="s4">"--------------------"</span><span class="s1">) 
+    print(A + B) 
+    print (</span><span class="s4">"--------------------"</span><span class="s1">) 
+    print(deux * A) 
+    print (</span><span class="s4">"--------------------"</span><span class="s1">) 
+    print(trois * B) 
+    print (</span><span class="s4">"--------------------"</span><span class="s1">) 
+    print(deux * A + trois * B) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

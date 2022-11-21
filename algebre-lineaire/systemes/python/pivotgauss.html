@@ -1,0 +1,167 @@
+﻿<html>
+ <head>
+  <title>
+   pivotgauss.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+</span><span class="s2">from </span><span class="s1">copy </span><span class="s2">import </span><span class="s1">copy 
+ 
+</span><span class="s0"># variables globales servant à générer des matrices aléatoires</span><span class="s1"> 
+</span><span class="s0"># global variables used to generate random matrices</span><span class="s1"> 
+Entiers = [Fraction(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">10</span><span class="s1">)] 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Vecteur: 
+    </span><span class="s0">"""modélisation vecteurs de dimension n à coefficients rationnels (ou autre)  par une classe python"""</span><span class="s1"> 
+    </span><span class="s0">"""Standard K<sup>n</sup> vectors K being &rationals; or other. Representation by Python class."""</span><span class="s1">     
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">"""constructeur - constructor"""</span><span class="s1"> 
+        self.n = len(L) 
+        self.coords = L 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords] 
+        </span><span class="s2">return </span><span class="s4">"(" </span><span class="s1">+ </span><span class="s4">","</span><span class="s1">.join(L) + </span><span class="s4">")"</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">"""addition de deux vecteurs - addition of vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] + other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">"""opposé d'un vecteur - opposite of a vector"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(-self.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">"""différence de deux vecteurs - difference of two vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] - other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+        </span><span class="s0">"""loi externe - external multiplication by scalars"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] * k) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">nul(self): 
+        </span><span class="s2">return </span><span class="s1">all([x == </span><span class="s3">0 </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords]) 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Systeme(): 
+    </span><span class="s0">"""Modélisation d'un système à coefficients rationnels - Model for a system with rational coefficients"""</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self,L): 
+        </span><span class="s0">"""constructeur à partir d'une liste de lignes - Constructor from a list of rows"""</span><span class="s1"> 
+        self.coeffs=L </span><span class="s0"># les coefficients - the coefficients</span><span class="s1"> 
+        self.ordre=len(L) </span><span class="s0"># l'ordre du système - order of the system</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s1">.join([str(v) </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.coeffs])         
+    </span><span class="s2">def </span><span class="s1">Ligne(self,i): 
+        </span><span class="s0">""" la i-ème ligne de la matrice - i-th row of the matrix"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">copy(self.coeffs[i]) 
+    </span><span class="s2">def </span><span class="s1">Colonne(self,j): 
+        </span><span class="s0">""" la j-ième colonne de la matrice - j-th column of the matrix"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Vecteur([Y[j] </span><span class="s2">for </span><span class="s1">Y </span><span class="s2">in </span><span class="s1">[X.coords </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">self.coeffs]]) 
+    </span><span class="s2">def </span><span class="s1">GetCoef(self,i,j): 
+        </span><span class="s0">"""Obtenir un coefficient - Get one coefficient"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i].coords[j] 
+    </span><span class="s2">def </span><span class="s1">SetCoef(self,i,j,v): 
+        </span><span class="s0">"""Changer un coefficient - Change one coefficient"""</span><span class="s1"> 
+        self.coeffs[i].coords[j]=v 
+    </span><span class="s2">def </span><span class="s1">EchLignes(self,i1,i2): 
+        </span><span class="s0">""" échange les lignes d'indices i1 et i2 - swap row i1 with row i2 """</span><span class="s1"> 
+        V1=self.Ligne(i1) 
+        V2=self.Ligne(i2) 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">0</span><span class="s1">,self.ordre+</span><span class="s3">1</span><span class="s1">): 
+            self.SetCoef(i1,j,V2.coords[j]) 
+            self.SetCoef(i2,j,V1.coords[j]) 
+    </span><span class="s2">def </span><span class="s1">Pivot(self,j): 
+        </span><span class="s0">""" calcul du pivot de Gauss de la colonne j - Computation of Gauss' pivot column j"""</span><span class="s1"> 
+        Cj=self.Colonne(j).coords 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(j,self.ordre): 
+            </span><span class="s2">if </span><span class="s1">Cj[i]!=</span><span class="s3">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">i 
+        </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1 </span><span class="s0"># ne doit jamais arriver avec un système de Cramer - should never happen with a Cramer system</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">SolLigne(self,i,L):</span><span class="s0"># juste pour vérification - Just for checking</span><span class="s1"> 
+        s=Fraction(</span><span class="s3">0</span><span class="s1">) 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,self.ordre-</span><span class="s3">1</span><span class="s1">): 
+            s=s+L[i]*self.GetCoef(i,j) 
+        </span><span class="s2">return </span><span class="s1">s==self.GetCoef(i,self.ordre) 
+    </span><span class="s2">def </span><span class="s1">Sol(self,L):</span><span class="s0"># même chose pour vérifier - again for checking</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">all([self.SolLigne(i,L) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,self.ordre)]) 
+    </span><span class="s2">def </span><span class="s1">Solve (self): 
+        </span><span class="s0">""" Résolution par la méthode de Gauss - Solving using Gauss'method"""</span><span class="s1"> 
+        Solutions=[Fraction(</span><span class="s3">0</span><span class="s1">) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">0</span><span class="s1">,self.ordre)]</span><span class="s0"># initialisation à zéros de la liste des solutions - initialization with zeros of the solutions list</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,self.ordre-</span><span class="s3">1</span><span class="s1">): 
+            p=self.Pivot(j) </span><span class="s0">#détermination du pivot - Finding the pivot</span><span class="s1"> 
+            </span><span class="s2">if </span><span class="s1">p !=j: 
+                self.EchLignes(j,p) </span><span class="s0"># échange de lignes si nécessaire - Swaping rows if needed</span><span class="s1"> 
+            c0=self.GetCoef(j,j) 
+            L=self.Ligne(j).coords 
+            </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(j+</span><span class="s3">1</span><span class="s1">,self.ordre): 
+                c=self.GetCoef(i,j) 
+                </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(j,self.ordre+</span><span class="s3">1</span><span class="s1">): 
+                    cik=self.GetCoef(i,k) 
+                    self.SetCoef(i,k,cik-L[k]*c/c0) 
+        Solutions[self.ordre -</span><span class="s3">1</span><span class="s1">]=self.GetCoef(self.ordre-</span><span class="s3">1</span><span class="s1">,self.ordre)/self.GetCoef(self.ordre-</span><span class="s3">1</span><span class="s1">,self.ordre-</span><span class="s3">1</span><span class="s1">)</span><span class="s0">#calcul dernière variable - Computation last variable</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">[self.ordre-i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">2</span><span class="s1">,self.ordre+</span><span class="s3">1</span><span class="s1">)]:</span><span class="s0">#récurrence remontante - backward induction </span><span class="s1"> 
+            s=self.GetCoef(i,self.ordre) 
+            </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(i+</span><span class="s3">1</span><span class="s1">,self.ordre): 
+                s=s-self.GetCoef(i,j)*Solutions[j] 
+            s=s/self.GetCoef(i,i) 
+            Solutions[i]=s 
+        </span><span class="s2">return </span><span class="s1">Solutions 
+</span><span class="s4">""" Fin de la classe Systeme - End of definition of the 'Systeme' class """</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    zero=Fraction(</span><span class="s3">0</span><span class="s1">) 
+    un=Fraction(</span><span class="s3">1</span><span class="s1">) 
+    deux=Fraction(</span><span class="s3">2</span><span class="s1">) 
+    trois=Fraction(</span><span class="s3">3</span><span class="s1">) 
+    quatre=Fraction(</span><span class="s3">4</span><span class="s1">) 
+    cinq=Fraction(</span><span class="s3">5</span><span class="s1">) 
+    six=Fraction(</span><span class="s3">6</span><span class="s1">) 
+    L1=Vecteur([un,un,un,un,un]) 
+    L2=Vecteur([un, trois, un, un,deux]) 
+    L3=Vecteur([un, un, trois, un,trois]) 
+    L4=Vecteur([un, un, un, trois,trois]) 
+    S=Systeme([L1,L2,L3,L4]) 
+    print (S) 
+    L=S.Solve() 
+    print ([str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L])</span><span class="s0">#affichage des solutions - display of solutions</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__==</span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Rotations vectorielles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href=".././css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/rotations/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/rotations/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> E désigne un espace vectoriel réel de dimension finie muni d'un produit scalaire (espace 'euclidien'). <h2> Définition </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> E denotes a finite dimensional real vector space equipped with a dot product ('Euclidean' space). <h2> Definition </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition</div> On appelle <strong>
+              <em>'rotation'</em>
+            </strong> tout automorphisme <input type="button" value="orthogonal" onclick="go('grouporth.html#def1')" data-inline="true" />
+            <input type="button" value="direct" onclick="go('orientation.html#def1')" data-inline="true" />
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition</div> We call <strong>
+              <em>'rotation' </em>
+            </strong> any automorphism which is <input type="button" value="orthogonal" onclick="go('grouporth.html#def1')" data-inline="true" /> and <input type="button" value="positive" onclick="go('orientation.html#def1')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Exemples simples </h2>
+          <ol>
+            <li> L'identité est une rotation. </li>
+            <li> Une <input type="button" value="symétrie orthogonale" onclick="go('grouporth.html#symorth')" data-inline="true" /> par rapport à un <input type="button" value="hyperplan" onclick="go('../espaces/dimension.html#hyperplan')" data-inline="true" /> n'est jamais une rotation. </li>
+            <li> Une <input type="button" value="symétrie centrale" onclick="go('grouporth.html#ex')" data-inline="true" /> est une rotation si la dimension de l'espace est paire. </li>
+          </ol>
+          <h2> Propriétés </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Simple examples </h2>
+          <ol>
+            <li> Identity is a rotation. </li>
+            <li> A <input type="button" value="reflection" onclick="go('grouporth.html#symorthe')" data-inline="true" /> with a <input type="button" value="hyperplan" onclick="go('../espaces/dimension.html#hyperplane')" data-inline="true" /> as a mirror is never a rotation. </li>
+            <li> A <input type="button" value="point reflection" onclick="go('grouporth.html#exe')" data-inline="true" /> is a rotation if the space dimension is even. </li>
+          </ol>
+          <h2> Properties </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété</div> La composée de deux rotations est une rotation. En particulier les rotations forment un sous-groupe du groupe orthogonal de E, noté généralement O<sup>+</sup>(E).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property</div> The compound of two rotations is a rotation. In particular the rotations form a subgroup of the group orthogonal to E, usually denoted O<sup>+</sup>(E).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour la dimension 1 il est clair qu'il existe une seule rotation et que c'est l'application identique. <br /> Nous allons maintenant caractériser les rotations dans le cas orthogonal réel (forme symétrique définie positive) pour les dimensions 2 et 3. Nous effectuerons notre classification en fonction de la <input type="button" value="dimension" onclick="go('../espaces/dimension.html#defdim')" data-inline="true" /> du <input type="button" value="sous-espace" onclick="go('../espaces/sousev.html#')" data-inline="true" /> des <input type="button" value="invariants" onclick="go('../../bases/applications/fixes.html#')" data-inline="true" /> (vecteurs identiques à leur image). <h2> Cas du plan </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> For dimension 1 it is clear that there is only one rotation and that it is the identical map. <br>We will now characterize the rotations in the case real orthogonal (positive definite symmetric form) for dimensions 2 and 3. We will make our classification according to the <input type="button" value="dimension" onclick="go('../espaces/dimension.html#defdime')" data-inline="true" /> of the <input type="button" value="subspace" onclick="go('../espaces/sousev.html#')" data-inline="true" /> formed by the <input type="button" value="invariants" onclick="go('../../bases/applications/fixes.html#')" data-inline="true" /> (vectors identical to their image). <h2> Case of the plane </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème</div> Si une rotation du plan possède un vecteur invariant alors c'est l'identité.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem</div> If a rotation of the plane has an invariant vector then it is the identity.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit u un vecteur invariant et soit D=&reals;u la droite vectorielle (invariante) engendrée par u. Soit D<sup>⊥</sup> son orthogonal qui est aussi une droite. Il est clair que l'image de tout vecteur v de D<sup>⊥</sup> est encore un vecteur de D<sup>⊥</sup> de même norme que v. Cette image est donc v ou -v, mais ce ne peut être -v car on aurait alors une symétrie orthogonale par rapport à un hyperplan. L'image de v est donc v. D<sup>⊥</sup> est invariant et tout le plan est invariant.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let u be an invariant vector and let D=ℝu be the (invariant) line spanned by u. Let D<sup>⊥</sup> its orthogonal which is also a line. It is clear that the image of any vector v of D<sup>⊥</sup> is still a vector of D<sup>⊥</sup> with the same norm as v. So this image is v or -v, but it can't be -v because we would then have an orthogonal symmetry (reflection) with respect to a hyperplane (line here). The image of v is therefore v. D<sup>⊥</sup> is invariant and the whole plane is invariant.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Donc si une rotation plane n'est pas l'identité elle ne possède aucun vecteur invariant. <br /> Soit B=(i,j) une <input type="button" value="base orthonormale" onclick="go('basorth.html#def1')" data-inline="true" /> du plan, et soit r une rotation plane. Le vecteur r(i) possède des coordonnées (a,b) vérifiant a<sup>2</sup>+b<sup>2</sup>=1. <br /> Le vecteur r(j) est orthogonal à r(i) et également de norme 1. Il en résulte que les cooordonnées de r(j) sont (-b,a) ou (b,-a). </div>
+        <!-- /fr -->
+        <div lang="en"> So if a plane rotation is not the identity it has no invariant vector. <br> Let B=(i,j) be a <input type="button" value="orthonormal basis" onclick="go('basorth.html#def1')" data-inline="true" />of the plane, and let r be a plane rotation. The vector r(i) has coordinates (a,b) verifying a<sup>2</sup>+b<sup>2</sup>=1. <br> The vector r(j) is orthogonal to r(i) and also of norm 1. It follows that the coordinates of r(j) are (-b,a) or (b,-a). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème</div> En outre les nombres a et b ne dépendent pas de la base orthonormée choisie.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem</div> Moreover the numbers a and b do not depend on the chosen orthonormal basis.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet la matrice de r relativement à une autre base orthonormée B'=(i',j') est de la forme PAP<sup>-1</sup> où P est la matrice de passage d'une base orthonormale à une autre, donc une matrice orthogonale et où A est <br> \(\begin{pmatrix} a& -b\\ b& a\\ \end{pmatrix}\) <br> Les hypothèses faites sur P donnent immédiatement PAP<sup>-1</sup>=A.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed the matrix of r relatively to another orthonormal basis B'=(i',j') is of the form PAP<sup>-1</sup> where P is the transition matrix from one orthonormal basis to another, therefore an orthogonal matrix and where A is <br> \(\begin{pmatrix} a& -b\\ b& a\\ \end{pmatrix}\) <br> The hypotheses made on P immediately give PAP<sup>-1</sup>=A.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété</div> On vérifie immédiatement, comme conséquence, que le groupe des rotations vectorielles du plan est commutatif.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property</div> One checks immediately, as a consequence, that the group of vector rotations of the plane is commutative.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Comme a<sup>2</sup>+b<sup>2</sup>=1, il existe un réel x défini à 2kπ près tel que: <ul>
+            <li> a=cos(x) </li>
+            <li> b=sin(x) </li>
+          </ul> La matrice de r par rapport à (i,j) est donc: <br /> \(\begin{pmatrix} cos(x)& -sin(x) \\ sin(x)& cos(x)\\ \end{pmatrix}\) <br> Et il n'existe aucune autre possibilité. </div>
+        <!-- /fr -->
+        <div lang="en"> As a<sup>2</sup>+b<sup>2</sup>=1, there exists a real x defined up to 2kπ such that: <ul>
+            <li> a=cos(x) </li>
+            <li> b=sin(x) </li>
+          </ul> The matrix of r with respect to (i,j) is therefore: <br> \(\begin{pmatrix} cos(x)& -sin(x) \\ sin(x)& cos(x)\\ \end{pmatrix}\) <br> And there is no other possibility. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition</div> Le nombre x s'appelle <strong>
+              <em>"l'angle"</em>
+            </strong> de la rotation
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition</div> The number x is called <strong>
+              <em>"the angle" </em>
+            </strong> of the rotation
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On peut également définir l'angle de deux vecteurs non nuls dans le plan : </div>
+        <!-- /fr -->
+        <div lang="en"> One can also define the angle of two nonzero vectors in the plane : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition</div> Si ces deux vecteurs u et v sont unitaires, on définit leur <strong>
+              <em>'angle'</em>
+            </strong> comme étant l'angle de l'unique rotation amenant u sur v. <br /> S'ils ne sont pas unitaires, on définit leur angle comme l'angle de u/||u|| avec v/||v||.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition</div> If these two vectors u and v are with norm 1, we define their <strong>
+              <em>'angle' </em>
+            </strong> as the angle of the unique rotation bringing u to v. <br>Else, we define their angle as the angle of u/||u|| with v/||v||.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette vous permettant de visualiser dans le plan une rotation d'angle quelconque. <br /> Vous pouvez fixer l'angle au moyen du curseur. <br /> Déplacez le point M avec la souris, l'application tracera le point M' image de M par la rotation d'angle α. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet allowing you to view any angle rotation in the plan. <br> You can fix the angle using the slider. <br> Move the point M with the mouse, the application will draw the point M' image of M by the rotation of angle α. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div class="jxgbox" id="box1" style="width:500px; height:500px;"></div>
+        <script src="js/rotplan1.js"></script>
+        <!-- /STOP -->
+        <div lang="fr"> Voici une autre appliquette. <br /> Vous pouvez maintenant observer l'effet d'une rotation sur une figure (un pentagone). <br /> Cette fois encore, vous pouvez fixer l'angle de la rotation et déformer le pentagone (rouge) en bougeant ses sommets. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is another applet. <br> You can now observe the effect of a rotation on a figure (a pentagon). <br> Again, you can fix the angle of the rotation and deform the pentagon (red) by moving its vertices. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div class="jxgbox" id="box2" style="width:500px; height:500px;"></div>
+        <script src="js/rotplan2.js"></script>
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Cas de l'espace à 3 dimensions </h2> Il est également facile de caractériser les rotations de l'espace au moyen de leur invariant. Tout d'abord il est impossible que la dimension de l'invariant soit égale à 2. Faute de quoi l'automorphisme serait une symétrie orthogonale par rapport à un hyperplan et serait donc négatif. La dimension de l'invariant est donc 0, 1, ou 3. <br /> Examinons tout d'abord le premier cas. <br /> La dimension de l'invariant peut-elle être nulle ? <br /> Cela signifierait que le seul vecteur v tel que r(v)= λ(v) est le vecteur nul. Mais r(v)= λ(v) équivaut à: <br /> r(v)-λv=0 <br /> v ∈ Ker(v-λId) où Id est l'application identique <br /> Donc dire que seul le vecteur nul possède cette propriété c'est dire que: <br /> ∀ λv- λ Id est injectif (donc bijectif), soit encore: dét(λv-λ)≠0 ∀ λ <br /> Mais l'équation dét(λv-λ) = 0 est une équation de degré 3 en l'inconnue λ, elle possède donc toujours au moins une racine réelle. <br /> Il existe donc toujours au moins un réel λ et un vecteur non nul v tels que: r(v)= λv <br /> Mais puisque r est orthogonale on a forcément |λ| = 1. <br /> Supposons que λ=-1. Alors l'orthogonal de la droite λ&reals; serait globalement stable par r, mais la restriction de r à cet orthogonal ne pourrait être une rotation, elle posséderait donc un vecteur fixe qui serait fixe pour r aussi. <br /> En résumé: <br />
+          <ol>
+            <li> Soit λ=1 et v est fixe </li>
+            <li> Soit λ=-1 et il existe un vecteur fixe dans l'orthogonal de v. </li>
+          </ol> Dans tous les cas il existe au moins un vecteur fixe non nul. <br /> En conséquence il ne reste que deux possibilités. La dimension de l'invariant est soit 1 soit 3. Le cas 3 correspond, bien sûr, au cas trivial de l'application identique. <br /> Pour finir le seul cas intéressant est le cas ou la dimension de l'invariant est 1.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Case of 3-dimensional space </h2>It is also easy to characterize the rotations of space by mean of their invariant. First of all, it is impossible for the dimension of the invariant to be equal to 2. Otherwise the automorphism would be a symmetry orthogonal to a hyperplane and would therefore be negative. The dimension of the invariant is therefore 0, 1, or 3. <br> Let's look at the first case first. <br> Can the dimension of the invariant be zero? <br>This would mean that the only vector v such that r(v)= λ(v) is the zero vector. But r(v)= λ(v) is equivalent to: <br> r(v)-λv=0 <br> v ∈ Ker(v-λId) where Id is the identical map <br> So to say that only the zero vector has this property is to say that: <br>∀ λv- λ Id is injective (therefore bijective), or again: det(λv-λ)≠0 ∀ λ <br>But the equation det(λv-λ) = 0 is an equation of degree 3 in the unknown λ, so it always has at least one real root. <br>So there always exists at least one real λ and one non-zero vector v such that: r(v)= λv <br>But since r is orthogonal we necessarily have |λ| = 1. <br>Suppose λ=-1. Then the orthogonal of the line λℝ would be globally stable by r, but the restriction of r to this orthogonal could not be a rotation, so it would have a fixed vector which would be fixed for r too. <br> In summary: <br>
+          <ol>
+            <li> Let λ=1 and v is fixed </li>
+            <li> Let λ=-1 and there exists a fixed vector in the orthogonal of v. </li>
+          </ol> In all cases there is at least one nonzero fixed vector. <br>As a result, there are only two possibilities left. The size of the invariant is either 1 or 3. Case 3 corresponds, of course, to the trivial case of the identity map. <br> Finally, the only interesting case is the case where the dimension of the invariant is 1.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition</div> La droite invariante s'appelle alors <b>
+              <i>"l'axe"</i>
+            </b> de la rotation.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition</div> The invariant line is then called <b>
+              <i>the "axis" </i>
+            </b>of the rotation.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela dit si P est l'orthogonal de l'axe la restriction de r à P est une rotation plane (voir donc paragraphe précédent), mais son angle n'est défini qu'au signe près parce qu'il dépend de l'orientation de P. La matrice de r par rapport à une base (u,v,w) orthonormale et telle que w soit un invariant de r est donc de la forme: <br /> \(\begin{pmatrix} cos(x)& -sin(x) & 0 \\ sin(x)& cos(x) & 0 \\ 0& 0 & 1 \\ \end{pmatrix}\) <br> Voici une autre appliquette. Il s'agit d'observer l'effet des rotations autour d'un axe. <ul>
+            <li>Choisissez votre axe, au moyen des boutons.</li>
+            <li>Choisissez l'angle au moyen du curseur.</li>
+            <li>Vous verrez alors apparaître en violet l'image de la pyramide jaune, par la rotation choisie.</li>
+            <li>L'animation peut être stoppée puis reprise à tout moment par un click sur la zone graphique.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> That being said if P is orthogonal to the axis the restriction of r to P is a plane rotation (see therefore previous paragraph), but its angle is not defined only up to the sign because it depends on the orientation of P. The matrix of r with respect to an orthonormal basis (u,v,w) and such that w is an invariant of r is therefore of the form: <br /> \(\begin{pmatrix} cos(x)& -sin(x) & 0 \\ sin(x)& cos(x) & 0 \\ 0& 0 & 1 \\ \end{pmatrix}\) <br> font style="vertical-align: inherit;">Here is another applet. This is to observe the effect of rotations around an axis. <ul>
+            <li>Choose your axis, using the buttons. </li>
+            <li>Choose the angle using the slider. </li>
+            <li>You will then see the image of the yellow pyramid appear in purple, by the chosen rotation. </li>
+            <li>The animation can be stopped then resumed at any time by clicking on the graphics area. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div>
+          <table border="2">
+            <tr>
+              <table cellpadding="8" border="1">
+                <tr>
+                  <td colspan="3">
+                    <div lang="fr">Choix de l'axe de rotation</div>
+                    <!-- /fr -->
+                    <div lang="en">Choice of rotation axis</div>
+                    <!-- /en -->
+                  </td>
+                </tr>
+                <tr>
+                  <td width="50">
+                    <input name="axe" onclick="spaceName10.handleClick(this);" type="radio" value="1" />
+                    <br> Ox
+                  </td>
+                  <td>
+                    <input name="axe" onclick="spaceName10.handleClick(this);" type="radio" value="2" />
+                    <br> Oy
+                  </td>
+                  <td>
+                    <input checked="" name="axe" onclick="spaceName10.handleClick(this);" type="radio" value="3" />
+                    <br> Oz
+                  </td>
+                </tr>
+              </table>
+            </tr>
+            <tr>
+              <td>
+                <div lang="fr">Angle de la rotation en degrés :</div>
+                <!-- /fr -->
+                <div lang="en">Angle of rotation in degrees :</div>
+                <!-- /en -->
+                <input id="myRange2" max="360" min="0" value="30" onchange="spaceName10.changeAlpha(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <canvas height="400" id="myCanvas10" style="border:1px solid #000000;" width="400"></canvas>
+              </td>
+            </tr>
+          </table>
+          <script src="js/rot3d.js"></script>
+        </div>
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

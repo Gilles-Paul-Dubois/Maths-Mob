@@ -1,0 +1,123 @@
+﻿<html>
+ <head>
+  <title>
+   vecteursZp.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># ## Espace vectoriel K^n ou K=Z/pZ</span><span class="s1">
+ 
+</span><span class="s2">def </span><span class="s1">GenZp(p): 
+    </span><span class="s0">"""génère la classe paramétrée Z/pZ"""</span><span class="s1"> 
+    </span><span class="s0">"""generates parameterized class Z/pZ"""</span><span class="s1">     
+ 
+    </span><span class="s2">class </span><span class="s1">C(object): 
+        car = p 
+ 
+        </span><span class="s2">def </span><span class="s1">__init__(self, m): 
+            </span><span class="s0">"""initialisation à partir d'un entier - constructor"""</span><span class="s1"> 
+            self.n = m % self.car 
+ 
+        </span><span class="s2">def </span><span class="s1">__str__(self): 
+            </span><span class="s0">"""représentation externe pour print etc...- converts to string"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">str(self.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">nul(self): 
+            </span><span class="s0">"""test de nullité - nullity test"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.n == </span><span class="s3">0</span><span class="s1"> 
+ 
+        </span><span class="s0">### les opérateurs unaires - unary operators</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__neg__(self): 
+            </span><span class="s0">"""opposé - opposite"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(-self.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__invert__(self): 
+            </span><span class="s0">"""inverse"""</span><span class="s1"> 
+            </span><span class="s2">if not </span><span class="s1">self.nul(): 
+                y = </span><span class="s3">1</span><span class="s1"> 
+                </span><span class="s2">while </span><span class="s1">(self.n * y) % self.car != </span><span class="s3">1</span><span class="s1">: 
+                    y += </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(y) 
+ 
+        </span><span class="s2">def </span><span class="s1">__truediv__(self, other): 
+            </span><span class="s2">return </span><span class="s1">self * ~(other) 
+ 
+        </span><span class="s0">### les opérations binaires - binary operations</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+            </span><span class="s0">"""addition"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n + other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__rmul__(self, other): 
+            </span><span class="s0">"""multiplication"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n * other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+            </span><span class="s0">"""soustraction - subtraction"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n - other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__div__(self, other): 
+            </span><span class="s2">return </span><span class="s1">self * ~(other) 
+ 
+        </span><span class="s2">def </span><span class="s1">__pow__(self, k): 
+            </span><span class="s0">"""puissances - powers"""</span><span class="s1"> 
+            </span><span class="s2">if </span><span class="s1">k &gt;= </span><span class="s3">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">C(self.n ** k) 
+            </span><span class="s2">else</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">~self ** (-k) 
+ 
+    </span><span class="s2">return </span><span class="s1">C 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">GenVectnZp(p, m): 
+    </span><span class="s0">"""génère l'espace Z/pZ x .... x Z/pZ (n facteurs)"""</span><span class="s1"> 
+    </span><span class="s0">"""generates space Z/pZ x .... x Z/pZ (n factors)"""</span><span class="s1">     
+ 
+    </span><span class="s2">class </span><span class="s1">Vpn: 
+        n = m 
+ 
+        </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+            Zp = GenZp(p) 
+            self.V = [Zp(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L] 
+ 
+        </span><span class="s2">def </span><span class="s1">__str__(self): 
+            L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+            </span><span class="s2">return </span><span class="s4">'(' </span><span class="s1">+ </span><span class="s4">","</span><span class="s1">.join(L) + </span><span class="s4">')'</span><span class="s1"> 
+ 
+        </span><span class="s2">def </span><span class="s1">nul(self): 
+            </span><span class="s0">"""test de nullité - nullity test"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">all([x.nul() </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+        </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+            </span><span class="s0">"""addition des vecteurs - addition of vectors"""</span><span class="s1"> 
+            L = [self.V[i].n + other.V[i].n </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)] 
+            </span><span class="s2">return </span><span class="s1">Vpn(L) 
+ 
+        </span><span class="s2">def </span><span class="s1">__neg__(self): 
+            </span><span class="s0">"""opposé d'un vecteur - opposite of a vector"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">Vpn([-x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+        </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+            </span><span class="s0">"""différence de deux vecteurs - difference of two vectors"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self + (-other) 
+ 
+        </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+            </span><span class="s0">""" produit par un scalaire - product by a scalar """</span><span class="s1"> 
+            L = [k.n * x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+            </span><span class="s2">return </span><span class="s1">Vpn(L) 
+ 
+    </span><span class="s2">return </span><span class="s1">Vpn 
+ 
+ 
+</span></pre>
+ </body>
+</html>

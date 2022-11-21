@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Formes hermitiennes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/hermit/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/hermit/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Involutions </h2> K désigne un corps commutatif. En pratique K sera souvent égal à &reals; ou a &complexes;. <div id="container">
+            <div id="label">définition</div> On appelle <strong>
+              <em>'involution'</em>
+            </strong> de K toute application: <br /> λ → λ<sup>*</sup> , vérifiant les propriétés suivantes: <br />
+            <ol>
+              <li> C'est un homomorphisme de corps, c'est à dire: <ul>
+                  <li> (λ+μ)<sup>*</sup>=λ<sup>*</sup>+μ<sup>*</sup>
+                  </li>
+                  <li> (λμ)<sup>*</sup>=λ<sup>*</sup>μ<sup>*</sup>
+                  </li>
+                  <li> 1<sup>*</sup>=1 </li>
+                </ul>
+              </li>
+              <li> Elle est involutive, c'est à dire: <br /> λ<sup>**</sup>=λ </li>
+            </ol>
+          </div> Tout cela revient à dire qu'une telle application est un automorphisme de K égal à son automorphisme réciproque. <br /> Les exemples les plus importants sont les suivants: <ol>
+            <li> K= &reals; ou &complexes; et λ<sup>*</sup>=λ (application identique). On appelle ce cas le cas <strong>
+                <em>'orthogonal'</em>
+              </strong> réel ou complexe </li>
+            <li> K=&complexes; et λ<sup>*</sup>= <span style="text-decoration: overline;">λ</span> (complexe conjugué). On appelle ce cas le cas <strong>
+                <em>'hermitien'</em>
+              </strong> complexe </li>
+          </ol>
+          <h2> Formes hermitiennes </h2> On suppose que E est un espace vectoriel sur le corps K et que K est muni d'une involution. <a name="sesqui"></a>
+          <div id="container">
+            <div id="label">définition</div> Une application f: E×E → K est appelée une <strong>
+              <em>'forme sesquilinéaire'</em>
+            </strong> si elle vérifie les conditions suivantes: <ul>
+              <li> f(x+x',y)=f(x,y)+f(x',y) ∀ (x,x',y) ∈ E<sup>3</sup>
+              </li>
+              <li> f(x,y+y')=f(x,y)+f(x,y') ∀ (x,y,y') ∈ E<sup>3</sup>
+              </li>
+              <li> f(λx,y)= λf(x,y) ∀ (x,y) ∈ E<sup>2</sup> et ∀ λ ∈ K </li>
+              <li> f(x,λy)=λ<sup>*</sup>f(x,y) ∀ (x,y) ∈ E<sup>2</sup> et ∀ λ ∈ K </li>
+            </ul>
+          </div>
+          <a name="herm"></a>
+          <div id="container">
+            <div id="label">définition</div> Une forme <strong>
+              <em>'hermitienne'</em>
+            </strong> est une forme sesquilinéaire vérifiant en outre: <br /> f(y,x)=f(x,y)<sup>*</sup> ∀ (x,y) ∈ E.
+          </div> Remarque: dans le cas orthogonal réel ou complexe, les formes hermitiennes sont simplement les <input type="button" value="formes bilinéaires" onclick="go('../determinants/multilat.html')" data-inline="true" /> symétriques. <h2> Exemples </h2>
+          <ol>
+            <li> Supposons K=E=&reals;. Alors l'application (x,y) → xy est hermitienne. </li>
+            <li> Supposons E=K<sup>2</sup> l'application ((x<sub>1</sub>,x<sub>2</sub>),(y<sub>1</sub>,y<sub>2</sub>)) → 2x<sub>1</sub>y<sub>1</sub>-3x<sub>2</sub>y<sub>2</sub> est hermitienne. </li>
+            <li> Supposons K=E= &complexes;. Alors l'application (x,y) → x <span style="text-decoration: overline;">y</span> est hermitienne. </li>
+            <li> Soit E= &reals;<sup>4</sup>. Pour u=(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>,x<sub>4</sub>) et v=(y<sub>1</sub>,y<sub>2</sub>,y<sub>3</sub>,y<sub>4</sub>) vecteurs de E on pose f(u,v)=x<sub>1</sub>y<sub>1</sub>+x<sub>2</sub>y<sub>2</sub>+x<sub>3</sub>y<sub>3</sub>-cx<sub>4</sub>y<sub>4</sub> où c est la vitesse de la lumière. f est une forme bilinéaire symétrique appelée la <strong>
+                <em>'forme de Lorentz'</em>
+              </strong> et utilisée en théorie de la relativité. </li>
+            <li> E désigne l'espace vectoriel des fonctions continues à valeurs complexes sur l'intervalle [0,1] <br /> L'application f définie ci-après est hermitienne. <br> \(f(u,v)=\int_{0}^{1}u(t)\overline{v(t)}dt\) </li>
+          </ol>
+          <a name="matsesqu"></a>
+          <h2> Matrice d'une forme sesquilinéaire </h2> Nous allons maintenant généraliser les exemples 1 et 2 ci dessus. On suppose maintenant E de <input type="button" value="dimension finie" onclick="go('../espaces/dimension.html#defdim')" data-inline="true" /> n et soit B=(u<sub>1</sub>,...,u<sub>n</sub>) une base de E. Soit f une forme sesquilinéaire sur E. <div id="container">
+            <div id="label">définition</div> On désigne par A=(α<sub>i,j</sub>)<sub>1≤i,j≤n</sub> la matrice définie par α<sub>i,j</sub>=f(u<sub>i</sub>,u<sub>j</sub>). A s'appelle la <strong>
+              <em>'matrice de la forme hermitienne'</em>
+            </strong> f par rapport à la base B.
+          </div> Comme dans le cas des <input type="button" value="applications linéaires" onclick="go('../applicalin/defapplin.html')" data-inline="true" />, une forme sesquilinéaire est entièrement déterminée par sa <input type="button" value="matrice" onclick="go('../matapplin/defmatapp.html')" data-inline="true" />, plus précisément : <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si x=x<sub>1</sub>u<sub>1</sub>+...+x<sub>n</sub>u<sub>n</sub> et y=y<sub>1</sub>u<sub>1</sub>+...+y<sub>n</sub>u<sub>n</sub>
+            <br /> alors <br> \(f(x,y)=\sum_{1\leqslant i,j\leqslant n}^{}x_{i}y_{j}^{\ast }\alpha _{i,j}\)
+          </div> La preuve est immédiate. <br /> Remarquons maintenant que: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> f est hermitienne si et seulement si α<sub>j,i</sub>=α<sub>i,j</sub>
+           <sup>*</sup>
+          </div> De sorte qu'en particulier dans le cas orthogonal: <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> f est symétrique si et seulement si sa matrice l'est.
+          </div> Dans le cas de la dimension finie cela nous permet donc de 'fabriquer' toutes les applications hermitiennes à partir de matrices hermitiennes. Ces formes s'organisent donc en un espace vectoriel de dimension n(n+1)/2.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Involutions </h2>K denotes a commutative field. In practice K will often be equal to ℝ or a ℂ. <div id="container">
+            <div id="label">definition </div>We call <strong>
+              <em>'involution' </em>
+            </strong> of K any application: <br>λ → λ<sup>*</sup> , verifying the following properties: <br>
+            <ol>
+              <li> It is a field homomorphism, i.e.: <ul>
+                  <li> (λ+μ)<sup>*</sup>=λ<sup>*</sup>+μ<sup>*</sup>
+                  </li>
+                  <li> (λμ)<sup>*</sup>=λ<sup>*</sup>μ<sup>*</sup>
+                  </li>
+                  <li> 1<sup>*</sup>=1 </li>
+                </ul>
+              </li>
+              <li> It is involutive, that is: <br> λ<sup>**</sup>=λ </li>
+            </ol>
+          </div> All this amounts to saying that such a map is an automorphism of K equal to its inverse automorphism. <br> The most important examples are: <ol>
+            <li>K= ℝ or ℂ and λ<sup>*</sup>=λ (identity application). This case is called the case <strong>
+                <em>'orthogonal' </em>
+              </strong> real or complex </li>
+            <li>K=ℂ and λ<sup>*</sup>= <span style="text-decoration: overline;">λ </span>(complex conjugate). This case is called the case <strong>
+                <em>'hermitian' </em>
+              </strong> complex </li>
+          </ol>
+          <h2> Hermitian forms </h2> We assume that E is a vector space over the field K and that K is endowed with an involution. <a name="sesquie"></a>
+          <div id="container">
+            <div id="label">definition </div>A map f: E×E → K is called a <strong>
+              <em>'sesquilinear form' </em>
+            </strong> if it verifies the following conditions: <ul>
+              <li> f(x+x',y)=f(x,y)+f(x',y) ∀ (x,x',y) ∈ E<sup>3</sup>
+              </li>
+              <li> f(x,y+y')=f(x,y)+f(x,y') ∀ (x,y,y') ∈ E<sup>3</sup>
+              </li>
+              <li>f(λx,y)= λf(x,y) ∀ (x,y) ∈ E<sup>2</sup> et ∀ λ ∈ K </li>
+              <li>f(x,λy)=λ<sup>*</sup>f(x,y) ∀ (x,y) ∈ E<sup>2</sup> and ∀ λ ∈ K </li>
+            </ul>
+          </div>
+          <a name="herme"></a>
+          <div id="container">
+            <div id="label">definition </div>A <strong>
+              <em>'Hermitian' </em>
+            </strong> form is a sesquilinear form further satisfying: <br> f(y,x)=f(x,y)<sup>*</sup> ∀ (x,y) ∈ E.
+          </div> Note: in the real or complex orthogonal case, the Hermitian forms are simply the symmetrical <input type="button" value="bilinear forms" onclick="go('../determinants/multilat.html')" data-inline="true">. <h2> Examples </h2>
+          <ol>
+            <li>Assume K=E=ℝ. Then the map (x,y) → xy is Hermitian. </li>
+            <li>Assume E=K<sup>2</sup> the map ((x<sub>1</sub>,x<sub>2</sub>),(y<sub>1</sub>,y<sub>2</sub>)) → 2x<sub>1</sub>y<sub>1</sub>-3x<sub>2</sub>y<sub>2</sub>is hermitian. </li>
+            <li>Assume K=E= ℂ. So the app (x,y) → x <span style="text-decoration: overline;">y</span> is Hermitian. </li>
+            <li>Let E= ℝ<sup>4</sup>. For u=(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>,x<sub>4</sub>) and v=(y<sub>1</sub>,y<sub>2</sub>,y<sub>3</sub>,y<sub>4</sub>) vectors of E we set f(u,v)=x<sub>1</sub>y<sub>1</sub>+x<sub>2</sub>y<sub>2</sub>+x<sub>3</sub>y<sub>3</sub>-cx<sub>4</sub>y<sub>4</sub>where c is the speed of light. f is a symmetric bilinear form called the <strong>
+                <em>'Lorentz form' </em>
+              </strong> and used in relativity theory. </li>
+            <li> E denotes the vector space of complex-valued continuous functions on the interval [0,1] <br> The map f defined below is hermitian. <br> \(f(u,v)=\int_{0}^{1}u(t)\overline{v(t)}dt\) </li>
+          </ol>
+          <a name="matsesque"></a>
+          <h2> Matrix of a sesquilinear form </h2>We will now generalize examples 1 and 2 above. We now suppose E of <input type="button" value="finite dimension" onclick="go('../espaces/dimension.html#defdime')" data-inline="true"> n and let B=(u<sub>1</sub>,...,u<sub>n</sub>) be a basis of E. Let f be a sesquilinear form on E. <div id="container">
+            <div id="label">definition </div>We denote by A=(α<sub>i,j</sub>)<sub>1≤i,j≤n</sub> the matrix defined by α<sub>i,j</sub>=f(u<sub>i</sub>,u<sub>j</sub>). A is called the <strong>
+              <em>'hermitian form matrix' </em>
+            </strong> f with respect to base B.
+          </div> As in the case of <input type="button" value="linear maps" onclick="go('../applicalin/defapplin.html')" data-inline="true">, a sesquilinear form is entirely determined by its <input type="button" value="matrix" onclick="go('../matapplin/defmatapp.html')" data-inline="true">, More precisely : <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If x=x<sub>1</sub>u<sub>1</sub>+...+x<sub>n</sub>u<sub>n</sub> and y=y<sub>1</sub>u<sub>1</sub>+...+y<sub>n</sub>u<sub>n</sub>
+            <br> then <br> \(f(x,y)=\sum_{1\leqslant i,j\leqslant n}^{}x_{i}y_{j}^{\ast }\alpha _{i,j}\)
+          </div> The proof is immediate. <br> Note now that: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>f is Hermitian if and only if α<sub>j,i</sub>=α<sub>i,j</sub>
+           <sup>*</sup>
+          </div> So that in particular in the orthogonal case: <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>f is symmetric if and only if its matrix is.
+          </div>In the case of finite dimension, this allows us to 'construct' all hermitian maps from hermitian matrices. These forms are therefore organized in a vector space of dimension n(n+1)/2.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

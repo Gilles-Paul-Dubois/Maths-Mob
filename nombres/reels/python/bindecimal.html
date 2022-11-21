@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>dioph.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #008080; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># version python 3.4</span>
+<span class="s0"># -*- coding: utf-8 -*-</span>
+
+<span class="s2">def </span><span class="s1">binaire(n):</span>
+    <span class="s0">&quot;&quot;&quot;conversion d'un entier décimal -&gt;binaire - converts integers dec-&gt;binary&quot;&quot;&quot;</span>
+    <span class="s2">if </span><span class="s1">n &lt;= </span><span class="s3">1</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">n</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">binaire(n // </span><span class="s3">2</span><span class="s1">) * </span><span class="s3">10 </span><span class="s1">+ n % </span><span class="s3">2</span>
+
+
+<span class="s2">def </span><span class="s1">binaire_int(n):</span>
+    <span class="s2">return </span><span class="s1">str(binaire(n))</span>
+
+
+<span class="s2">def </span><span class="s1">binaire_float(x, p):</span>
+    <span class="s1">e = int(x)</span>
+    <span class="s1">d = x - e</span>
+    <span class="s1">E = binaire_int(e)</span>
+    <span class="s1">r = [</span><span class="s3">0</span><span class="s1">] * p</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, p + </span><span class="s3">1</span><span class="s1">):</span>
+        <span class="s1">y = </span><span class="s3">1 </span><span class="s1">/ (</span><span class="s3">2 </span><span class="s1">** i)</span>
+        <span class="s2">if </span><span class="s1">d &gt;= y:</span>
+            <span class="s1">r[i - </span><span class="s3">1</span><span class="s1">] = </span><span class="s3">1</span>
+            <span class="s1">d = d - y</span>
+    <span class="s1">D = </span><span class="s4">&quot;&quot;</span>
+    <span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">r:</span>
+        <span class="s1">D += str(x)</span>
+    <span class="s1">S = E + </span><span class="s4">&quot;,&quot; </span><span class="s1">+ D</span>
+    <span class="s2">return </span><span class="s1">S</span>
+
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">print(binaire_int(</span><span class="s3">10</span><span class="s1">))</span>
+    <span class="s1">print(binaire_float(</span><span class="s3">1.800</span><span class="s1">, </span><span class="s3">3</span><span class="s1">))</span>
+    <span class="s1">print(binaire_float(</span><span class="s3">1.800</span><span class="s1">, </span><span class="s3">5</span><span class="s1">))</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
+</html>

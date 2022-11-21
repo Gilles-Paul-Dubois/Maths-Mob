@@ -1,0 +1,51 @@
+﻿<html>
+ <head>
+  <title>
+   diviseurs1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+</span><span class="s0">#lister les diviseurs d'un nombre - find all divisors of some number</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+</span><span class="s0">#version naïve (et simple) - naive and simple version</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">diviseurs1(n): 
+    </span><span class="s2">return </span><span class="s1">[i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">n%i==</span><span class="s3">0</span><span class="s1">] 
+ 
+</span><span class="s0">#plus élaborée - more elaborated</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">diviseurs2(n): 
+    r=int(math.sqrt(n))+</span><span class="s3">1 </span><span class="s0"># par sécurité +1 - for safety</span><span class="s1"> 
+    E1=[i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,r+</span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">n%i==</span><span class="s3">0</span><span class="s1">] </span><span class="s0"># les diviseurs jusqu'à la racine - divisors till square root</span><span class="s1"> 
+    E2= [n/i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">E1] </span><span class="s0"># les autres en ordre inverse - others in reverse order</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">E1[len(E1)-</span><span class="s3">1</span><span class="s1">]==E2[len(E2)-</span><span class="s3">1</span><span class="s1">]: </span><span class="s0">#cas des carrés parfaits - case of perfect squares</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">sorted(E1+E2[</span><span class="s3">0</span><span class="s1">:len(E2)-</span><span class="s3">1</span><span class="s1">]) </span><span class="s0">#élimination doublon et on trie - elimination of double and sorting</span><span class="s1"> 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">sorted(E1+E2) </span><span class="s0">#on trie - sorting in any case</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    print(diviseurs1(</span><span class="s3">60</span><span class="s1">)) 
+    print(diviseurs2(</span><span class="s3">60</span><span class="s1">)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Méthode de gauss Jordan</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+  
+  </head>	
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/gauss/menu.html')" /></li>  
+ 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/gauss/menu.html')" /></li>
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+
+<div lang="fr">
+<h2>
+   Procédé d'élimination de Gauss-Jordan
+  </h2>
+  L'idée sous-jacente est de transformer un système en un
+  <input type="button" value="système équivalent" onclick="go('defsys.html#def9')" data-inline="true" />
+  triangulaire dont la résolution est immédiate.
+Soit un
+  <input type="button" value="système de Cramer" onclick="go('cramer.html#')" data-inline="true" />
+  :
+  <br/>
+  α<sub>1,1</sub>x<sub>1</sub>+...+α<sub>1,n</sub>x<sub>n</sub>=β<sub>1</sub>
+<br/>
+  α<sub>2,1</sub>x<sub>1</sub>+...+α<sub>2,n</sub>x<sub>n</sub>=β<sub>2</sub>
+<br/>
+  ....................................
+  <br/>
+  α<sub>n,1</sub>x<sub>1</sub>+...+α<sub>n,n</sub>x<sub>n</sub>=β<sub>n</sub>
+<br/>
+  que nous pouvons encore écrire en utilisant les notations des formes linéaires:
+  <br/>
+  f<sub>1</sub>(X)=β<sub>1</sub>
+<br/>
+  f<sub>2</sub>(X)=β<sub>2</sub>
+<br/>
+  ...........
+  <br/>
+  f<sub>n</sub>(X)=β<sub>n</sub>
+<br/>
+  Pour tout système de scalaires (k<sub>2</sub>,...,k<sub>n</sub>) ∈ K<sup>n-1</sup>
+  le système est équivalent à:
+  <br/>
+  f<sub>1</sub>(X)= β<sub>1</sub>
+<br/>
+  f<sub>2</sub>(X)-k<sub>2</sub>f<sub>1</sub>(X)=β<sub>2</sub>-k<sub>2</sub>β<sub>1</sub>
+<br/>
+  ...............................
+  <br/>
+  f<sub>n</sub>(X)-k<sub>n</sub>f<sub>1</sub>(X)= β<sub>n</sub>-k<sub>n</sub>β<sub>1</sub>
+<br/>
+  Peut-on choisir les scalaires (k<sub>2</sub>,...,k<sub>n</sub>), de façon à ce que tous les coefficients de x<sub>1</sub>
+  soient nuls dans les équations autres que la première ?
+  <br/>
+  La réponse est positive pourvu que α<sub>1,1</sub>
+  soit inversible dans K.
+  <br/>
+  Il suffit de prendre:
+  <br/>
+  k<sub>2</sub>=α<sub>2,1</sub>/α<sub>1,1</sub>
+<br/>
+  ..........
+  <br/>
+  k<sub>n</sub>=α<sub>n,1</sub>/α<sub>1,1</sub>
+<br/>
+  Le système initial est alors équivalent à un système du type:
+  <br/>
+  α<sub>1,1</sub>x<sub>1</sub>+ α<sub>1,2</sub>x<sub>2</sub>+...+α<sub>1,n</sub>x<sub>n</sub>=β<sub>1</sub>
+<br/>
+  0        +γ<sub>2,2</sub>x<sub>2</sub>+...+γ<sub>2,n</sub>x<sub>n</sub>=δ<sub>2</sub>
+<br/>
+  ....................................
+  <br/>
+  0        +γ<sub>n,2</sub>x<sub>2</sub>+...+γ<sub>n,n</sub>x<sub>n</sub>=δ<sub>n</sub>
+<br/>
+  On voit donc qu'on est ramené à résoudre le système d'ordre n-1:
+  <br/>
+  γ<sub>2,2</sub>x<sub>2</sub>+...+γ<sub>2,n</sub>x<sub>n</sub>=δ<sub>2</sub>
+<br/>
+  ....................................
+  <br/>
+  γ<sub>n,2</sub>x<sub>2</sub>+...+γ<sub>n,n</sub>x<sub>n</sub>=δ<sub>n</sub>
+<br/>
+  x<sub>1</sub>
+  sera alors calculé en fonction de x<sub>2</sub>,...,x<sub>n</sub>
+  par:
+  <br/>
+  x<sub>1</sub>=(β<sub>1</sub>-(α<sub>1,2</sub>x<sub>2</sub>+...+α<sub>1,n</sub>x<sub>n</sub>))/α<sub>1,1</sub>
+<br/>
+  Supposons maintenant qu'on ait α<sub>1,1</sub>=0. Nous affirmons que forcément un des coefficients α<sub>i,1</sub>
+  pour 2≤i≤n est non nul.
+  <br/>
+  Dans le cas contraire toute la première colonne de la matrice serait
+nulle, la matrice ne serait pas de rang n et on n'aurait pas un système
+de Cramer, contrairement à l'hypothèse.
+  <br/>
+  Cela vu, dans un système toutes les lignes sont interchangeables. Il
+suffit donc de commencer par échanger la ligne 1 avec la ligne i pour
+être placé dans les conditions α<sub>1,1</sub>≠0.
+  <br/>
+  Il suffit alors d'itérer le processus, c'est à dire d'appliquer le même traitement au système:
+  <br/>
+  γ<sub>2,2</sub>x<sub>2</sub>+...+γ<sub>2,n</sub>x<sub>n</sub>=δ<sub>2</sub>
+<br/>
+  ....................................
+  <br/>
+  γ<sub>n,2</sub>x<sub>2</sub>+...+γ<sub>n,n</sub>x<sub>n</sub>= δ<sub>n</sub>
+<br/>
+  A chaque fois on fait tomber d'une unité l'ordre du système à résoudre, jusqu'à parvenir à:
+  <br/>
+  αx<sub>n</sub>=β
+  <br/>
+  dont la solution est évidente.
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Gauss-Jordan elimination process
+   </h2>triangular
+  The underlying idea is to transform a system into a triangular
+   <input data-inline="true" onclick="go('defsys.html#def9')" type="button" value=" equivalent"/> system the  resolution of which is straightforward.
+ Consider a
+   <input data-inline="true" onclick="go('cramer.html#')" type="button" value="Cramer system"/>
+  :
+   <br/>
+  α<sub>1,1</sub>x<sub>1</sub>+...+α<sub>1,n</sub>x<sub>n</sub>=β<sub>1</sub>
+<br/>
+  α<sub>2,1</sub>x<sub>1</sub>+...+α<sub>2,n</sub>x<sub>n</sub>=β<sub>2</sub>
+<br/>
+  ...................................
+   <br/>
+  α<sub>n,1</sub>x<sub>1</sub>+...+α<sub>n,n</sub>x<sub>n</sub>=β<sub>n</sub>
+<br/>
+  which we can still write using the notations of linear forms:
+   <br/>
+  f<sub>1</sub>(X)=β<sub>1</sub>
+<br/>
+  f<sub>2</sub>(X)=β<sub>2</sub>
+<br/>
+  ...........
+   <br/>
+  f<sub>n</sub>(X)=β<sub>n</sub>
+<br/>For any system of scalars (k<sub>2</sub>,...,k<sub>n</sub>) ∈ K<sup>n-1</sup>
+    the system is equivalent to: 
+   <br/>
+  f<sub>1</sub>(X)= β<sub>1</sub>
+<br/>
+  f<sub>2</sub>(X)-k<sub>2</sub>f<sub>1</sub>(X)=β<sub>2</sub>-k<sub>2</sub>β<sub>1</sub>
+<br/>
+  ...............................
+   <br/>
+  f<sub>n</sub>(X)-k<sub>n</sub>f<sub>1</sub>(X)= β<sub>n</sub>-k<sub>n</sub>β<sub>1</sub>
+<br/>Can we choose the scalars (k<sub>2</sub>,...,k<sub>n</sub>), so that all the coefficients of x<sub>1</sub>
+    are zero in the equations other than the first? 
+   <br/>The answer is positive provided that α<sub>1.1</sub>
+    is invertible in K. 
+   <br/>
+  Just take:
+   <br/>
+  k<sub>2</sub>=α<sub>2.1</sub>/α<sub>1.1</sub>
+<br/>
+  ..........
+   <br/>
+  k<sub>n</sub>=α<sub>n,1</sub>/α<sub>1,1</sub>
+<br/>
+  The initial system is then equivalent to a system of the type:
+   <br/>
+  α<sub>1,1</sub>x<sub>1</sub>+ α<sub>1,2</sub>x<sub>2</sub>+...+α<sub>1,n</sub>x<sub>n</sub>=β<sub>1</sub>
+<br/>
+  0        +γ<sub>2,2</sub>x<sub>2</sub>+...+γ<sub>2,n</sub>x<sub>n</sub>=δ<sub>2</sub>
+<br/>
+  ...................................
+   <br/>
+  0        +γ<sub>n,2</sub>x<sub>2</sub>+...+γ<sub>n,n</sub>x<sub>n</sub>=δ<sub>n</sub>
+<br/>
+  We therefore see that we are reduced to solving the system of order n-1:
+   <br/>
+  γ<sub>2,2</sub>x<sub>2</sub>+...+γ<sub>2,n</sub>x<sub>n</sub>=δ<sub>2</sub>
+<br/>
+  ...................................
+   <br/>
+  γ<sub>n,2</sub>x<sub>2</sub>+...+γ<sub>n,n</sub>x<sub>n</sub>=δ<sub>n</sub>
+<br/>x1<sub>_</sub>
+    will then be calculated as a function of x<sub>2</sub>,...,x<sub>n</sub>
+    by: 
+   <br/>
+  x<sub>1</sub>=(β<sub>1</sub>-(α<sub>1,2</sub>x<sub>2</sub>+...+α<sub>1,n</sub>x<sub>n</sub>))/α<sub>1,1</sub>
+<br/>Suppose now that we have α<sub>1,1</sub>=0.   We affirm that necessarily one of the coefficients α<sub>i,1</sub>
+    for 2≤i≤n is nonzero. 
+   <br/>Otherwise the entire first column of the matrix would be
+ zero, the matrix would not be of rank n and we would not have a system
+ of Cramer, contrary to the hypothesis.
+   <br/>This being seen, in a system all the lines are interchangeable.  It is gust enough to swap row 1 with row i to 
+  be placed under the conditions α<sub>1.1</sub>≠0. 
+   <br/>
+  We can then iterate the process, i.e. to apply the same treatment to the system:
+   <br/>
+  γ<sub>2,2</sub>x<sub>2</sub>+...+γ<sub>2,n</sub>x<sub>n</sub>=δ<sub>2</sub>
+<br/>
+  ...................................
+   <br/>
+  γ<sub>n,2</sub>x<sub>2</sub>+...+γ<sub>n,n</sub>x<sub>n</sub>= δ<sub>n</sub>
+<br/>
+  Each time we drop the order of the system to be solved by one unit, until we reach:
+   <br/>
+  αx<sub>n</sub>=b
+   <br/>
+ the solution of which is obvious.
+
+
+ 
+
+
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="def1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 1</div>
+Cet algorithme est connu sous le nom de
+   <strong>
+    <em>
+     'procédé d'élimination de Gauss-Jordan'
+    </em>
+   </strong>
+   ou encore de
+   <strong>
+    <em>
+     'pivot de Gauss'
+    </em>
+   </strong>, le 'pivot' correspondant au coefficient non nul dont nous avons besoin à chaque fois pour itérer le processus.
+  
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 1</div>
+This algorithm is known as
+    <strong>
+<em>
+       'Gauss-Jordan elimination process'
+     </em>
+</strong>
+     or even of
+    <strong>
+<em>
+       'Gaussian pivot'
+     </em>
+</strong> , the 'pivot' corresponding to the non-zero coefficient that we need each time to iterate the process.
+
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+ Mesurons maintenant l'efficacité de cet algorithme.
+  <br>
+  A la première étape nous avons n-1 divisions puis n<sup>2</sup>
+  multiplications puis n additions. Les termes en n sont négligeables devant n<sup>2</sup>
+  . Le procédé total est donc en n<sup>2</sup>+(n-1)<sup>2</sup>+...+2<sup>2</sup>+1<sup>2</sup>=n(n-1)(2n-1)/6. L'efficacité est donc en n<sup>3</sup>/3, ce qui est bien meilleur que le n! des formules de Cramer nécessitant le calcul de  déterminants.
+  <br>
+  On peut maintenant réfléchir à de possibles optimisations de ce
+procédé. Par exemple, au lieu de se borner à prendre un pivot non nul,
+on préférera, si le cas se présente, prendre un pivot égal à 1. Cela
+dit, si aucun pivot n'est égal à l'unité entre tous les pivots
+possibles, on aura intérêt à en choisir un qui ne soit ni trop petit ni
+trop grand pour ne pas avoir de problèmes d'arrondis trop importants en
+fonction de la précision des types numériques utilisés (float, double,
+etc...).
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+ Let us now measure the efficiency of this algorithm.
+   <br/>At the first stage we have n-1 divisions then n<sup>2</sup>
+    multiplications then n additions.   The terms in n are negligible in front of n<sup>2</sup>
+    .   The total process is therefore in n<sup>2</sup>+(n-1)<sup>2</sup>+...+2<sup>2</sup>+1<sup>2</sup>=n(n-1)(2n-1)/6.   The efficiency is therefore n<sup>3</sup>/3, which is much better than n!  using Cramer formulas requiring the calculation of determinants.
+   <br/>We can now think about possible optimizations of this
+ process.  For example, instead of just taking a nonzero pivot,
+ it is preferable, if the case arises, to take a pivot equal to 1. This
+ being noticed , if no pivot is equal to unity among all 
+ possible ones, it would be in your interest to choose one that is neither too small nor
+ too big not to have too big rounding problems in
+ depending on the precision of the numeric types used (float, double,
+ etc...).
+
+
+ 
+
+
+
+</div><!-- /en --> 
+
+<!-- STOP IMAGE -->
+ <img alt="" src="images/jordan.gif" width="211" height="269" border="0">
+  <br>
+  <em>
+   <font size="-1">
+    Wilhelm Jordan: http://www.et.fh-koeln.de/ia/ma/jordan.html
+   </font>
+  </em>
+<!-- /STOP IMAGE -->
+
+<div lang="fr">
+<p> Voici une appliquette permettant de voir à l’œuvre le système d'élimination de Gauss-Jordan.
+  <ul> 
+    <li>Fixer avec le curseur l'ordre du système (limitation à 3 pour les rationnels).</li>
+    <li>Fixer le corps de base (4 options).</li>
+    <li>Une matrice inversible est générée ainsi qu'un second membre aléatoire.</li>
+    <li>La matrice du système est affichée.</li>
+    <li>Le bouton 'Étape suivante' déroule le procédé de gauss-Jordan pas à pas.</li>
+    <li>La solution apparaît seulement quand le système est totalement trigonalisé.</li>
+  </ul></p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>Here is an applet allowing you to see the Gauss-Jordan elimination system at work.
+   </p><ul>
+<li>Fix with the cursor the order of the system (limitation to 3 for the rationals). </li>
+<li>Fix the base body (4 options). </li>
+<li>With the 'New example' button, an invertible matrix is ​​generated as well as a random second member. </li>
+<li>The system matrix is ​​displayed. </li>
+<li>The 'Next step' button unfolds the Gauss-Jordan process step by step. </li>
+<li>The solution appears only when the system is fully trigonalized. </li>
+</ul>
+
+
+</div><!-- /en --> 
+
+<!-- STOP  APPLET-->
+  <div>
+   <table border="2" >
+    <tbody><tr>
+     <td colspan="3">
+      <button onclick="nameSpace2.New();" type="button">
+       <div lang="fr">Nouvel exemple</div><!-- /fr --> <div lang="en">New example</div><!-- /en --> 
+      </button>
+      <button onclick="nameSpace2.Solution();" type="button">
+       <div lang="fr">Etape suivante</div><!-- /fr --> <div lang="en">Next step</div><!-- /en --> 
+      </button>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <div lang="fr">Matrice A</div><!-- /fr --> <div lang="en">Matrix A</div><!-- /en --> 
+     </td>
+     <td>
+      <div lang="fr">Second membre</div><!-- /fr --> <div lang="en">Second member</div><!-- /en --> 
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <canvas id="myCanvas4" style="border:1px solid #000000;" width="240" height="60">
+      </canvas>
+     </td>
+     <td>
+      <canvas id="myCanvas2" style="border:1px solid #000000;" width="80" height="60">
+      </canvas>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <div lang="fr">Matrice du système</div><!-- /fr --> <div lang="en">Matrix of the system</div><!-- /en --> 
+     </td>
+     <td>
+      Solution
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <canvas id="myCanvas1" style="border:1px solid #000000;" width="320" height="60">
+      </canvas>
+     </td>
+     <td>
+      <canvas id="myCanvas3" style="border:1px solid #000000;" width="80" height="60">
+      </canvas>
+     </td>
+    </tr>
+    <tr>
+<table border="1">
+<tr>
+<td width="50"><input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1"></td>
+<td>ℝ</td>
+</tr>
+<tr>
+<td><input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="2"></td>
+<td>ℚ</td>
+</tr>
+<tr>
+<td><input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="3"></td>
+<td>ℤ/5ℤ</td>
+</tr>
+<tr>
+<td> <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4"></td>
+<td>ℂ</td>
+</tr>
+</table>
+    </tr>
+    <tr>
+     <td colspan="3">
+      <div lang="fr">Ordre de la matrice carrée A&nbsp;   :</div><!-- /fr --> <div lang="en">Order of the matrix</div><!-- /en --> 
+      <input id="myRange1" max="4" min="2" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range">
+     </td>
+    </tr>
+   </tbody></table>
+  </div>
+  <script src="js/gaussjordan.js">
+  </script>
+<!-- /STOP  APPLET-->
+
+ 
+<div lang="fr">
+ <h2>
+  Le coin de Python
+  </h2>
+  Voici une implémentation de la méthode du pivot de Gauss pour la
+résolution d'un système à coefficients rationnels (calculs exacts).
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+  Python's Corner
+   </h2>Here is an implementation of the Gaussian pivot method for the
+ resolution of a system with rational coefficients (exact calculations).
+
+
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+<p>
+   <object data="python/pivotgauss.html" type="text/html" width="100%" height="400" border="3">
+   </object>
+<!-- /STOP  CODE-->
+
+<div lang="fr">
+  </p>
+  On remarquera que l'implémentation ci-dessus est 'destructrice', le
+système est altéré par le procédé de résolution. Ceci n'a aucune
+importance quand on est seulement intéressé par les solutions. En
+général les systèmes à résoudre sont (très) gros, on peut imaginer
+qu'ils sont stockés sur disque. Il est alors préférable, pour ne pas
+utiliser trop d'espace mémoire d'utiliser un procédé destructeur. La
+plupart des bibliothèques spécialisées offrent le choix.
+  <p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+Note that the above implementation is 'destructive', the
+ system is altered by the resolution process.  This has no
+ importance when one is only interested in solutions.  In
+ general the systems to be solved are (very) large, one can imagine
+ that they are stored on disk.  It is then preferable, in order not to
+ use too much memory space to use a destructive process.  The
+ most specialized libraries offer a choice.
+
+
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+ <p>
+   <object data="python/nondestruct.html" type="text/html" width="100%" height="300" border="3">
+   </object>
+  </p>
+<!-- /STOP  CODE-->
+<div lang="fr">
+ <h2>Le coin de Julia</h2>
+  <p>Méthode du Pivot de Gauss. On travaille avec des rationnels pour avoir des solutions 'exactes' exprimées sous forme de fractions.</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>Julia's corner </h2>
+<p>Gaussian pivot method.  We work with rationals to have 'exact' solutions expressed in the form of fractions. </p>
+
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+   <object data="julia/gauss3.jl.html" type="text/html" width="100%" height="300" border="3">
+   </object>
+<!-- /STOP  CODE-->
+<div lang="fr">
+<p>   Ci-après on fait appel à la résolution standard. Les données (matrice du système) sont données en entiers, les résultats sont donnés en réels (Float64).</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<p>The standard resolution is used below.  The data (matrix of the system) are given in integers, the results are given in reals (Float64). </p>
+
+</div><!-- /en -->
+<!-- STOP CODE -->
+<object data="julia/gauss1.jl.html" type="text/html" width="100%" height="140" border="3">
+   </object>
+<!-- /STOP  CODE--> 
+<div lang="fr">
+
+<p>Mais si on fournit les coefficients sous forme de fractions, le résultat est exprimé de la même manière sans qu'il n'y ait rien à faire.</p>
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<p>But if we provide the coefficients in the form of fractions, the result is expressed in the same way without anything else to do. </p>
+
+</div><!-- /en --> 
+<!-- STOP CODE -->
+      <object data="julia/gauss2.jl.html" type="text/html" width="100%" height="160" border="3">
+   </object>
+<!-- /STOP  CODE-->
+
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

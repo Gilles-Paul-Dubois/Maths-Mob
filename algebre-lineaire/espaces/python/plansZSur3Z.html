@@ -1,0 +1,196 @@
+﻿<html>
+ <head>
+  <title>
+   plansZSur3Z.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># python version 3.4</span><span class="s1">
+ 
+</span><span class="s0">### Compter tous les plans dans l'espace (Z/3Z)^3</span><span class="s1"> 
+</span><span class="s0">### Count all planes in space (Z/3Z)^3</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">GenZp(p): 
+    </span><span class="s0">"""génère la classe paramétrée Z/pZ - generates parameterized class Z/pZ"""</span><span class="s1"> 
+ 
+    </span><span class="s2">class </span><span class="s1">C(object): 
+        car = p 
+ 
+        </span><span class="s2">def </span><span class="s1">__init__(self, m): 
+            </span><span class="s0">"""initialisation à partir d'un entier - constructor"""</span><span class="s1"> 
+            self.n = m % self.car 
+ 
+        </span><span class="s2">def </span><span class="s1">__str__(self): 
+            </span><span class="s0">"""représentation externe pour print etc... - converts to string"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">str(self.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">nul(self): 
+            </span><span class="s0">"""test de nullité - nullity test"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.n == </span><span class="s3">0</span><span class="s1"> 
+ 
+        </span><span class="s0">### les opérateurs unaires - unary operators</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__neg__(self): 
+            </span><span class="s0">"""opposé - opposite"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(-self.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__invert__(self): 
+            </span><span class="s0">"""inverse"""</span><span class="s1"> 
+            </span><span class="s2">if not </span><span class="s1">self.nul(): 
+                y = </span><span class="s3">1</span><span class="s1"> 
+                </span><span class="s2">while </span><span class="s1">(self.n * y) % self.car != </span><span class="s3">1</span><span class="s1">: 
+                    y += </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(y) 
+ 
+        </span><span class="s0">### les opérations binaires - binary operators</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+            </span><span class="s0">"""addition"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n + other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__rmul__(self, other): 
+            </span><span class="s0">"""multiplication"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n * other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+            </span><span class="s0">"""soustraction - subtraction"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.n - other.n) 
+ 
+        </span><span class="s2">def </span><span class="s1">__div__(self, other): 
+            </span><span class="s2">return </span><span class="s1">self * ~(other) 
+ 
+        </span><span class="s2">def </span><span class="s1">__pow__(self, k): 
+            </span><span class="s0">"""puissances - powers"""</span><span class="s1"> 
+            </span><span class="s2">if </span><span class="s1">k &gt;= </span><span class="s3">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">C(self.n ** k) 
+            </span><span class="s2">else</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">~self ** (-k) 
+ 
+        </span><span class="s2">def </span><span class="s1">__ne__(self, other): 
+            </span><span class="s0">"""objets distincts - distinct objects"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.n != other.n 
+ 
+        </span><span class="s2">def </span><span class="s1">__eq__(self, other): 
+            </span><span class="s0">"""objets égaux - equal objects"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.n == other.n 
+ 
+    </span><span class="s2">return </span><span class="s1">C 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">GenVectnZp(p, m): 
+    </span><span class="s0">"""génère l'espace Z/pZ x .... x Z/pZ (n facteurs) - generates space"""</span><span class="s1"> 
+ 
+    </span><span class="s2">class </span><span class="s1">Vpn: 
+        n = m 
+ 
+        </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+            Zp = GenZp(p) 
+            self.V = [Zp(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L] 
+ 
+        </span><span class="s2">def </span><span class="s1">__str__(self): 
+            L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+            </span><span class="s2">return </span><span class="s4">'(' </span><span class="s1">+ </span><span class="s4">","</span><span class="s1">.join(L) + </span><span class="s4">')'</span><span class="s1"> 
+ 
+        </span><span class="s2">def </span><span class="s1">nul(self): 
+            </span><span class="s0">"""test de nullité - nullity test"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">all([x.nul() </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+        </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+            </span><span class="s0">"""addition des vecteurs - addition of vectors"""</span><span class="s1"> 
+            L = [self.V[i].n + other.V[i].n </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)] 
+            </span><span class="s2">return </span><span class="s1">Vpn(L) 
+ 
+        </span><span class="s2">def </span><span class="s1">__neg__(self): 
+            </span><span class="s0">"""opposé d'un vecteur - opposite of a vector"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">Vpn([-x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+        </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+            </span><span class="s0">"""différence de deux vecteurs - difference of two vectors"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self + (-other) 
+ 
+        </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+            </span><span class="s0">""" produit par un scalaire - product by a scalar """</span><span class="s1"> 
+            L = [k.n * x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+            </span><span class="s2">return </span><span class="s1">Vpn(L) 
+ 
+        </span><span class="s2">def </span><span class="s1">__ne__(self, other): 
+            </span><span class="s0">"""vecteurs distincts - distincts vectors"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">any([self.V[i] != other.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)]) 
+ 
+        </span><span class="s2">def </span><span class="s1">__eq__(self, other): 
+            </span><span class="s0">"""vecteurs égaux - equal vectors"""</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">all([self.V[i] == other.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)]) 
+ 
+    </span><span class="s2">return </span><span class="s1">Vpn 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">multiple(X, Y): 
+    </span><span class="s0">"""teste si un des deux vecteurs est multiple de l'autre - cheks if one vector multiple of the other"""</span><span class="s1"> 
+    </span><span class="s2">global </span><span class="s1">K 
+    </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K: 
+        U = k * X 
+        V = k * Y 
+        </span><span class="s2">if </span><span class="s1">(U == Y) </span><span class="s2">or </span><span class="s1">(X == V): 
+            </span><span class="s2">return True</span><span class="s1"> 
+    </span><span class="s2">return False</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">CombLin(V, X, Y): 
+    </span><span class="s0">"""teste si V est combinaison linéaire de X et Y - checks if V linear combination of X and Y"""</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">K: 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">K: 
+            </span><span class="s2">if </span><span class="s1">V == i * X + j * Y: 
+                </span><span class="s2">return True</span><span class="s1"> 
+    </span><span class="s2">return False</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Equiv(P1, P2): 
+    </span><span class="s0">"""Teste si les paires P1 et P2 engendrent le même plan - checks if pairs P1 and P2 span the same plane"""</span><span class="s1"> 
+    U, V = P1[</span><span class="s3">0</span><span class="s1">], P1[</span><span class="s3">1</span><span class="s1">] 
+    X, Y = P2[</span><span class="s3">0</span><span class="s1">], P2[</span><span class="s3">1</span><span class="s1">] 
+    </span><span class="s2">if </span><span class="s1">CombLin(U, X, Y) </span><span class="s2">and </span><span class="s1">CombLin(V, X, Y): 
+        </span><span class="s2">return True</span><span class="s1"> 
+    </span><span class="s2">return False</span><span class="s1"> 
+ 
+</span><span class="s0"># variables globales du programme - global variables of the program</span><span class="s1"> 
+Z3 = GenZp(</span><span class="s3">3</span><span class="s1">) 
+K = [Z3(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)]  </span><span class="s0"># le corps K à 3 éléments 0,1,2 - field with 3 elemnts</span><span class="s1"> 
+V33 = GenVectnZp(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">3</span><span class="s1">) 
+</span><span class="s0">### Tous les vecteurs de K^3 si K=Z/3Z il y en a 27 all 37  vectors of K^3</span><span class="s1"> 
+E = [V33([i, j, k]) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)]  </span><span class="s0">#l'espace E</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s2">global </span><span class="s1">Z3, K, V33, E 
+    </span><span class="s0">### Toutes les paires de vecteurs distincts de E, il y en a 35- all pairs of distinct vectors</span><span class="s1"> 
+    Paires1 = [[E[i], E[j]] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">27</span><span class="s1">) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">27</span><span class="s1">) </span><span class="s2">if </span><span class="s1">j &gt; i] 
+    print(len(Paires1)) 
+    Paires2 = [P </span><span class="s2">for </span><span class="s1">P </span><span class="s2">in </span><span class="s1">Paires1 </span><span class="s2">if not </span><span class="s1">multiple(P[</span><span class="s3">1</span><span class="s1">], P[</span><span class="s3">0</span><span class="s1">])]  </span><span class="s0"># elimine 39 paires [(1,1,1), (2,2,2)] etc...</span><span class="s1"> 
+    r = len(Paires2) 
+    Paires3 = [] 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, r): 
+        N = Paires2[i] 
+        L = [Paires2[j] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(i + </span><span class="s3">1</span><span class="s1">, r)] 
+        </span><span class="s2">if </span><span class="s1">any([Equiv(N, Q) </span><span class="s2">for </span><span class="s1">Q </span><span class="s2">in </span><span class="s1">L]): 
+            </span><span class="s2">continue</span><span class="s1"> 
+        Paires3 = Paires3 + [N] 
+    print(len(Paires3))  </span><span class="s0"># affiche le nombre de plans distincts - prints number of distinct planes (13)</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">Paires3: 
+        print(X[</span><span class="s3">0</span><span class="s1">], X[</span><span class="s3">1</span><span class="s1">])  </span><span class="s0">#affiche les systèmes générateurs pour chaque plan - prints spanning set for each plane</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main()  
+ 
+ 
+</span></pre>
+ </body>
+</html>

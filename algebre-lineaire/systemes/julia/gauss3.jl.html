@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">A=[</span><span class="s1">1</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1  1</span><span class="s0">//</span><span class="s1">1 </span><span class="s0">; </span><span class="s1">1</span><span class="s0">//</span><span class="s1">1 3</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 2</span><span class="s0">//</span><span class="s1">1</span><span class="s0">; </span><span class="s1">1</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 3</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 3</span><span class="s0">//</span><span class="s1">1</span><span class="s0">; </span><span class="s1">1</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 1</span><span class="s0">//</span><span class="s1">1 3</span><span class="s0">//</span><span class="s1">1 3</span><span class="s0">//</span><span class="s1">1</span><span class="s0">]</span>
+
+<span class="s2">function </span><span class="s0">rowexchange(M,i,j)</span><span class="s3">#echange de lignes dans la matrice du système - Swapping of rows in the system matrix</span>
+    <span class="s0">N=deepcopy(M)</span>
+    <span class="s0">L=M[i,:]</span>
+    <span class="s0">N[i,:]=M[j,:]</span>
+    <span class="s0">N[j,:]=L</span>
+    <span class="s2">return </span><span class="s0">N</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">pivot(M,i) </span><span class="s3">#pivot de Gauss - Gauss'pivot</span>
+    <span class="s0">s=size(M,</span><span class="s1">1</span><span class="s0">)</span>
+    <span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s0">i:s</span>
+        <span class="s2">if </span><span class="s0">M[k,i]!=</span><span class="s1">0</span>
+            <span class="s2">return </span><span class="s0">k,M[k,i]</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">produit(r::Rational{Int64},L::Vector{Rational{Int64}})=map(x-&gt;r*x,L) </span><span class="s3">#pour rester dans les rationnels - to stay in the rational field</span>
+
+
+<span class="s2">function </span><span class="s0">gauss(M) </span><span class="s3">#trigonalisation - trigonalization</span>
+    <span class="s0">s=size(M,</span><span class="s1">1</span><span class="s0">)</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:s-</span><span class="s1">1</span>
+        <span class="s0">p,a=pivot(M,i)</span>
+        <span class="s0">M=rowexchange(M,i,p)</span>
+        <span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s0">i+</span><span class="s1">1</span><span class="s0">:s</span>
+            <span class="s0">M[k,:]=M[k,:]-produit(inv(a)*M[k,i],M[i,:])</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">M</span>
+<span class="s2">end</span>
+    
+<span class="s2">function </span><span class="s0">solution(M) </span><span class="s3">#calcul des solutions à reculons - Computation of solutions with backward chaining</span>
+    <span class="s0">G=gauss(M)</span>
+    <span class="s0">S=copy(G[:,</span><span class="s2">end</span><span class="s0">])</span>
+    <span class="s0">n=size(G,</span><span class="s1">1</span><span class="s0">)</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">0</span><span class="s0">:n-</span><span class="s1">1</span>
+        <span class="s0">s1=reduce(+,[S[j]*G[n-i,j] </span><span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s0">(n-i+</span><span class="s1">1</span><span class="s0">):n] )</span>
+        <span class="s0">S[n-i]=(G[n-i,n+</span><span class="s1">1</span><span class="s0">]-s1)/G[n-i,n-i]</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">S</span>
+<span class="s2">end</span>
+
+<span class="s0">println(solution(A))</span>
+    </pre>
+</body>
+</html>

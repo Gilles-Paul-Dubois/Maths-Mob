@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   Untitled
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="SynEdit HTML exporter" name="generator"/>
+  <style type="text/css">
+   <!--
+body { color: #000000; background-color: #FFFFFF; }
+.cpp1-assembler { }
+.cpp1-character { }
+.cpp1-comment { color: #008000; font-style: italic; }
+.cpp1-float { color: #000080; }
+.cpp1-hexadecimal { color: #000080; }
+.cpp1-identifier { }
+.cpp1-illegalchar { }
+.cpp1-number { color: #000080; }
+.cpp1-octal { color: #0000FF; }
+.cpp1-preprocessor { }
+.cpp1-reservedword { font-weight: bold; }
+.cpp1-space { color: #008080; }
+.cpp1-string { color: #800000; }
+.cpp1-symbol { }
+-->
+  </style>
+ </head>
+ <body>
+  <pre>
+<code><span style="font: 10pt Courier New;"><span class="cpp1-preprocessor">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+
+#define max 20000000
+
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">racine=(</span><span class="cpp1-reservedword">int</span><span class="cpp1-symbol">)sqrt(max)+</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;
+
+</span><span class="cpp1-reservedword">char</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Crible[max];
+
+</span><span class="cpp1-comment">//initialisation du crible - using the sieve
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">init</span><span class="cpp1-space"> </span><span class="cpp1-symbol">()
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">for</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;max;i++)
+</span><span class="cpp1-space">        </span><span class="cpp1-identifier">Crible[i]=</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">Crible[</span><span class="cpp1-number">0</span><span class="cpp1-symbol">]=Crible[</span><span class="cpp1-number">1</span><span class="cpp1-symbol">]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+}
+
+</span><span class="cpp1-comment">// Trouve les deux plus grands premiers jumeaux avant max
+</span><span class="cpp1-comment">// Find the greatest twin primes before max
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">TrouveGrandsJumeaux()
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i,j;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">for</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(i=max-</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;i&gt;=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i--)
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-identifier">j=i-</span><span class="cpp1-number">2</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(Crible[i]&amp;&amp;Crible[j])
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">            </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"%d-%d"</span><span class="cpp1-symbol">,j,i);
+</span><span class="cpp1-space">            </span><span class="cpp1-reservedword">return</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+}
+</span><span class="cpp1-comment">// cribler - to sieve
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">go()
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">k=</span><span class="cpp1-number">2</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">j;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(k&lt;=racine)
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">for</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(j=</span><span class="cpp1-number">2</span><span class="cpp1-symbol">;j*k&lt;max;j++)
+</span><span class="cpp1-space">            </span><span class="cpp1-identifier">Crible[j*k]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-identifier">k++;
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(!</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Crible[k])
+</span><span class="cpp1-space">            </span><span class="cpp1-identifier">k++;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+}
+
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">main()
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">k;
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">init();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">go();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">TrouveGrandsJumeaux();
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">return</span><span class="cpp1-space"> </span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+}
+
+</span></span>
+</code></pre>
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var pageTracker = _gat._getTracker("UA-10793331-1");
+pageTracker._trackPageview();
+} catch(err) {}
+  </script>
+ </body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">power5(n)</span>
+    <span class="s1">d=</span><span class="s2">1</span>
+    <span class="s0">while true</span>
+        <span class="s0">if </span><span class="s1">d&gt;=n</span>
+            <span class="s0">return </span><span class="s1">d==n</span>
+        <span class="s0">end</span>
+        <span class="s1">d*=</span><span class="s2">5</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">bsup(k)=Int(floor(sqrt(k)))</span>
+
+<span class="s0">function </span><span class="s1">pgcd(m,n)</span>
+    <span class="s0">while </span><span class="s1">m%n!=</span><span class="s2">0</span>
+        <span class="s1">r=m%n</span>
+        <span class="s1">m=n</span>
+        <span class="s1">n=r</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">n</span>
+<span class="s0">end</span>
+
+<span class="s1">pardif(p,q)=p%</span><span class="s2">2</span><span class="s1">!=q%</span><span class="s2">2</span>
+
+<span class="s1">possp(q,k)=[p </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">q:bsup(k) </span><span class="s0">if </span><span class="s1">p&gt;q &amp;&amp; pardif(p,q) &amp;&amp; pgcd(p,q)==</span><span class="s2">1</span><span class="s1">] </span>
+
+<span class="s1">tppq(q,k)=sort!([[p*p-q*q,</span><span class="s2">2</span><span class="s1">*p*q,p*p+q*q] </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">possp(q,k) </span><span class="s0">if </span><span class="s1">p*p+q*q&lt;k])</span>
+
+<span class="s0">function </span><span class="s1">tpp(k)</span>
+    <span class="s1">R=[]</span>
+    <span class="s0">for </span><span class="s1">q </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:bsup(k)</span>
+        <span class="s1">append!(R,tppq(q,k))</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">R</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">L=tpp(</span><span class="s2">126</span><span class="s1">)</span>
+    <span class="s1">P=[t </span><span class="s0">for </span><span class="s1">t </span><span class="s0">in </span><span class="s1">L </span><span class="s0">if </span><span class="s1">power5(t[</span><span class="s2">3</span><span class="s1">])] </span>
+    <span class="s1">println(P)</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+
+    
+
+
+</pre>
+</body>
+</html>

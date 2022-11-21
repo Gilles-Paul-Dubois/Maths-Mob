@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Opérateurs généraux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    
+    
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="b">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="b">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Opérations'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to operations" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> Nous avons vu jusqu'à présent des <input type="button" value="lois internes" onclick="go('lois.html')" data-inline="true" /> sur un ensemble (applications de E × E dans E) et des <input type="button" value="lois externes" onclick="go('externes.html')" data-inline="true" /> (applications de F × E dans E). On peut tout aussi bien concevoir des applications où le <span style="font-weight: bold; font-style: italic;"> 'résultat' </span> (l'image d'un couple) n'est pas dans un ensemble composant le <input type="button" value="produit cartésien" onclick="go('../relations/cartesien.html')" data-inline="true" />. <p>Par exemple, le produit 'scalaire' de deux vecteurs, qui n'est pas un vecteur mais un nombre! Il s'agit encore d'une opération, mais qui n'est évidemment pas 'interne' mais qu'on ne qualifie pas non plus d'externe, compte tenu du fait que cette appellation est déjà réservée.</p>
+          <p> En outre, toutes ces opérations sont <span style="font-weight: bold; font-style: italic;"> 'binaires'</span>, c'est à dire que ce sont des applications dont l'ensemble de départ est un produit cartésien de deux ensembles. </p>
+          <p> Rien n'empêche évidemment de considérer des applications dont l'ensemble de départ est le produit cartésien de trois ensembles, nous parlerons alors 'applications <span style="font-weight: bold; font-style: italic;"> 'ternaires'</span>. Un exemple est le produit mixte de 3 vecteurs qui peut être défini comme le produit scalaire du premier par le produit vectoriel des deux autres. </p>
+          <div id="container">
+            <div id="label">définition</div> Nous définissons donc maintenant la notion générale <span style="font-weight: bold; font-style: italic;"> "d'opérateur"</span> comme une application d'un produit cartésien fini quelconque à valeur dans un ensemble F quelconque. <br /> P: E<sub>1</sub>×E<sub>2</sub>×...× E<sub>n</sub> → F <br /> P: (x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>) → P(x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>)
+          </div>
+          <p> Naturellement on peut utiliser diverses notations:
+          <ul>
+            <li> Des notations préfixées du type: <br /> P(x<sub>1</sub>,..,x<sub>n</sub>) ( à la Prolog) </li>
+            <li> (P x<sub>1</sub> x<sub>2</sub> ... x<sub>n</sub>) ( à la Lisp) </li>
+            <li> Ou bien avec opérateur(s) infixe(s) <br /> (x<sub>1</sub>|x<sub>2</sub>|x<sub>3</sub>) (produit mixte) </li>
+            <li> Ou encore plus exotique, avec plusieurs symboles distincts: <br /> p?q:r (traduction en langage C du si 'immédiat' en logique) </li>
+          </ul>
+          </p>
+          <p> Il importe donc de comprendre que toutes ces situations sont des cas particuliers <span style="font-weight: bold; font-style: italic;"> 'd'opérateurs'</span> au sens le plus général du terme. </p>
+          <div id="container">
+            <div id="label">définition</div> Une notion importante est également celle <span style="font-weight: bold; font-style: italic;"> 'd'arité'</span>. L'arité d'un opérateur est le nombre de ces <span style="font-weight: bold; font-style: italic;"> 'arguments'</span>, c'est à dire 2 pour une loi de composition interne ou un produit scalaire, 3 pour un produit mixte, etc.
+          </div>
+          <p> Il y a bien sûr des opérateurs <span style="font-weight: bold; font-style: italic;"> 'unaires'</span> qui ne prennent qu'un seul argument comme l'application qui à x associe son opposé dans un groupe par exemple. </p>
+          <p> On peut, si l'on veut, étendre cette notion d'arité au cas du nombre 0. Les opérateurs d'arité 0 seraient dans ce cas des 'constantes'.</p>
+          <h2> Quelques opérateurs du langage C </h2>
+          <p> Le langage C est un standard des langages de programmation. S'inspirent de ce langage de nombreux autres comme des langages orientés objets (C++, C#, Java), ou des langages orientés programmation web (Javascript, PHP, Perl). Souvent les langages dérivés s'inspirent de la syntaxe du langage C, en particulier ils conservent les opérateurs et leur signification, avec toutefois de légères différences possibles de l'un à l'autre.</p>
+          <div align="center">
+            <a name="39"></a>
+            <table>
+              <caption>
+                <strong> Table 1: </strong> Les principaux opérateurs arithmétiques
+              </caption>
+              <tbody>
+                <tr>
+                  <td>
+                    <div align="center">
+                      <table border="1" cellpadding="3" style="text-align: left; margin-left: auto; margin-right: auto;">
+                        <tbody>
+                          <tr>
+                            <th align="center">
+                              <span class="textbf"> Symbole </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Traduction </span>
+                            </th>
+                            <th align="center">
+                              <span class="textbf"> Exemple </span>
+                            </th>
+                            <th align="left" valign="top" width="198">
+                              <span class="textbf"> Résultat </span>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> + </code>
+                            </td>
+                            <td style="text-align: left;"> Addition </td>
+                            <td align="center">
+                              <code> x + y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> l'addition de x et y <span class="MATH"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> - </code>
+                            </td>
+                            <td align="left"> Soustraction </td>
+                            <td align="center">
+                              <code> x - y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> la soustraction de <span class="MATH"> x </span> et y <span class="MATH"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> * </code>
+                            </td>
+                            <td align="left"> Produit </td>
+                            <td align="center">
+                              <code> x * y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> la multiplication de <span class="MATH"> x </span> et <span class="MATH"> y </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> / </code>
+                            </td>
+                            <td align="left"> Division </td>
+                            <td align="center">
+                              <code> x / y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> le quotient de <span class="MATH"> x </span> et <span class="MATH"> y </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> % </code>
+                            </td>
+                            <td align="left"> Reste </td>
+                            <td align="center">
+                              <code> x % y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> Reste de la division euclidienne de <span class="MATH"> x </span> par <span class="MATH"> y </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> + </code> (unaire)
+                            </td>
+                            <td align="left"> Signe positif </td>
+                            <td align="center">
+                              <code> +x </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> la valeur de <span class="MATH"> x </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> - </code> (unaire)
+                            </td>
+                            <td align="left"> Signe négatif </td>
+                            <td align="center">
+                              <code> -x </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> l'opposé de <span class="MATH"> x </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a name="tab:operateurs_arith"></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+          <div align="center">
+            <a name="66"></a>
+            <table>
+              <caption>
+                <strong> Table 2: </strong> Les opérateurs relationnels (retournent une valeur logique)
+              </caption>
+              <tbody>
+                <tr>
+                  <td>
+                    <div align="center">
+                      <table border="1" cellpadding="3" style="text-align: left; margin-left: auto; margin-right: auto;">
+                        <tbody>
+                          <tr>
+                            <th align="center">
+                              <span class="textbf"> Symbole </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Traduction </span>
+                            </th>
+                            <th align="center">
+                              <span class="textbf"> Exemple </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Résultat </span>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &lt; </code>
+                            </td>
+                            <td align="left"> inférieur </td>
+                            <td style="text-align: center;">
+                              <code> x &lt; y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> est inférieur à <span class="MATH"> y </span>, 0 sinon </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &lt;= </code>
+                            </td>
+                            <td align="left"> inférieur ou égal </td>
+                            <td align="center">
+                              <code> x &lt;= y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> est inférieur ou égal à <span class="MATH"> y </span>, 0 sinon </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &gt; </code>
+                            </td>
+                            <td align="left"> supérieur </td>
+                            <td align="center">
+                              <code> x &gt; y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> est supérieur à <span class="MATH"> y </span>, 0 sinon </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &gt;= </code>
+                            </td>
+                            <td align="left"> supérieur ou égal </td>
+                            <td align="center">
+                              <code> x &gt;= y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> est supérieur ou égal à <span class="MATH"> y </span>, 0 sinon </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> == </code>
+                            </td>
+                            <td align="left"> égalité </td>
+                            <td align="center">
+                              <code> x == y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> est égal à <span class="MATH"> y </span>, 0 sinon </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> != </code>
+                            </td>
+                            <td align="left"> non inégalité </td>
+                            <td align="center">
+                              <code> x != y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> est différent de <span class="MATH"> y </span>, 0 sinon </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a name="tab:operateurs_relation"></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+          <div align="center">
+            <table>
+              <caption>
+                <strong> Table 3: </strong> Les opérateurs logiques
+              </caption>
+              <tbody>
+                <tr>
+                  <td>
+                    <div align="center">
+                      <table border="1" cellpadding="3" style="text-align: left; margin-left: auto; margin-right: auto;">
+                        <tbody>
+                          <tr>
+                            <th align="center">
+                              <span class="textbf"> Symbole </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Traduction </span>
+                            </th>
+                            <th align="center">
+                              <span class="textbf"> Exemple </span>
+                            </th>
+                            <th align="left" valign="top" width="198">
+                              <span class="textbf"> Résultat </span>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &amp;&amp; </code>
+                            </td>
+                            <td style="text-align: left;"> ET logique </td>
+                            <td align="center">
+                              <code> x &amp;&amp; y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> 1 si <span class="MATH"> x </span> et <span class="MATH"> y </span> sont différents de 0, 0 sinon </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> || </code>
+                            </td>
+                            <td align="left"> OU logique </td>
+                            <td align="center">
+                              <code> x || y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> 1 si <span class="MATH"> x </span> et/ou <span class="MATH"> y </span> sont différents de 0, 0 sinon </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> ! </code>
+                            </td>
+                            <td align="left"> NON logique </td>
+                            <td align="center">
+                              <code> !x </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> 1 si <span class="MATH"> x </span> est égal à 0. Dans tous les autres cas, 0 est renvoyé. </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a name="tab:operateurs_log"></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p> C'est volontairement que nous n'avons reproduit ici aucun des opérateurs dits 'd'affectation' ou 'd'affectation combinés', qui correspondent plus à des manipulations de la mémoire, donc à des instructions de processeurs qu'à des opérations mathématiques. Leur place n'est pas ici.</p>
+          <h2> Opérateurs du langage Python. </h2>
+          <p style="text-align: center;">
+            <span style="font-weight: bold;"> Table1 </span> : Voici une table des opérateurs arithmétiques les plus courants
+          </p>
+          <table border="1" style="text-align: left; margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th align="center">
+                  <b> Opération </b>
+                </th>
+                <th style="text-align: left;">
+                  <b> Résultat </b>
+                </th>
+              </tr>
+            </thead>
+            <tbody valign="baseline">
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> + <var> y </var>
+                  </code>
+                </td>
+                <td style="text-align: left;"> somme de <var> x </var> et <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> - <var> y </var>
+                  </code>
+                </td>
+                <td style="text-align: left;"> différence de <var> x </var> et <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> * <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> produit de <var> x </var> et <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> / <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> quotient de <var> x </var> et <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> % <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> reste de <code>
+                    <var> x </var> / <var> y </var>
+                  </code>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> - <var> x </var>
+                  </code>
+                </td>
+                <td align="left">
+                  <var> x </var> négatif
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> + <var> x </var>
+                  </code>
+                </td>
+                <td align="left">
+                  <var> x </var> inchangé
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> abs( <var> x </var> ) </code>
+                </td>
+                <td align="left"> valeur absolue ou magnitude de <var> x </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> int( <var> x </var> ) </code>
+                </td>
+                <td align="left"> conversion de <var> x </var> en entier </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> long( <var> x </var> ) </code>
+                </td>
+                <td align="left"> conversion de <var> x </var> en entier long </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> float( <var> x </var> ) </code>
+                </td>
+                <td align="left"> conversion de <var> x </var> en flottant </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> complex( <var> re </var> , <var> im </var> ) </code>
+                </td>
+                <td align="left"> nombre complexe avec <var> re </var> en partie réelle et <var> im </var> en partie imaginaire. <var> im </var> vaut zéro par défaut. </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> c </var> .conjugate() </code>
+                </td>
+                <td align="left"> valeur conjuguée du nombre complexe <var> c </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> divmod( <var> x </var> , <var> y </var> ) </code>
+                </td>
+                <td align="left"> la paire <code> ( <var> x </var> / <var> y </var> , <var> x </var> % <var> y </var> ) </code>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> pow( <var> x </var> , <var> y </var> ) </code>
+                </td>
+                <td align="left"> élévation de <var> x </var> à la puissance <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> ** <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> élévation de <var> x </var> à la puissance <var> y </var>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <div style="text-align: center;">
+            <span style="font-weight: bold;"> Table 2 </span> : Et voici la table des opérateurs de comparaison usuels <br />
+            <br />
+          </div>
+          <table border="1" style="border-collapse: collapse; text-align: left; margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th align="center">
+                  <b> Symbole </b>
+                </th>
+                <th style="text-align: left;">
+                  <b> Opération </b>
+                </th>
+              </tr>
+            </thead>
+            <tbody valign="baseline">
+              <tr>
+                <td style="text-align: center;">
+                  <code> &lt; </code>
+                </td>
+                <td align="left"> strictement inférieur à </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &lt;= </code>
+                </td>
+                <td align="left"> inférieur ou égal à </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &gt; </code>
+                </td>
+                <td align="left"> strictement supérieur à </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &gt;= </code>
+                </td>
+                <td align="left"> supérieur ou égal à </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> == </code>
+                </td>
+                <td align="left"> égal à </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> != </code>
+                </td>
+                <td align="left"> n'est pas égal à </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &lt;&gt; </code>
+                </td>
+                <td align="left"> n'est pas égal à </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <div style="text-align: center;">
+            <span style="font-weight: bold;"> Table 3 </span> : Et voici une table des opérateurs logiques <br />
+            <br />
+          </div>
+          <table border="1" style="border-collapse: collapse; text-align: left; margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th align="center">
+                  <b> Opération </b>
+                </th>
+                <th style="text-align: left;">
+                  <b> Résultat </b>
+                </th>
+              </tr>
+            </thead>
+            <tbody valign="baseline">
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> or <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> si <var> x </var> est faux, alors <var> y </var> , sinon <var> x </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> and <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> si <var> x </var> est faux, alors <var> 0 </var> , sinon <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> not <var> x </var>
+                  </code>
+                </td>
+                <td align="left"> si <var> x </var> est faux, alors <code> 1 </code> , sinon <code> 0 </code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2> Till now we have seen <input type="button" value="internal binary operations" onclick="go('lois.html')" data-inline="true" /> on a set E (mappings from E × E into E) and <input type="button" value="external operations" onclick="go('externes.html')" data-inline="true" /> (mappings from F × E into E). We can as well consider maps where the <span style="font-weight: bold; font-style: italic;"> 'result' </span> (image of an ordered pair) does not belong to a set which is a factor of <input type="button" value="Cartesian product" onclick="go('../relations/cartesien.html')" data-inline="true" />, acting as a domain. <p> For example, the 'scalar' product of two vectors, which is not a vector but a number. It is again an operation but not 'internal' and that we won't call 'external' either because we used already this terminology.</p>
+          <p> Furthermore, all these operations are <span style="font-weight: bold; font-style: italic;"> 'binary'</span>, which means that the domain is a Cartesian product of TWO sets. </p>
+          <p> Nothing prevents us to consider mappings the domain of which is a cross product of three set , we will speak in this case of <span style="font-weight: bold; font-style: italic;"> 'ternary operations'</span>. An example is the scalar triple product (alias mixed product or box-product) of 3D vectors which can be defined as the scalar product of the first by the cross product of the last two ones. </p>
+          <div id="container">
+            <div id="label">definition</div> We define now the general notion of <span style="font-weight: bold; font-style: italic;"> 'operator'</span> as a mapping from a finite Cartesian product and with codomain any set F <br /> P: E<sub>1</sub>×E<sub>2</sub>×...× E<sub>n</sub> → F <br /> P: (x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>) → P(x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>)
+          </div>
+          <p> Of course we can use several notations
+          <ul>
+            <li> With prefix style like : <br /> P(x<sub>1</sub>,..,x<sub>n</sub>) ( The Prolog way) </li>
+            <li> (P x<sub>1</sub> x<sub>2</sub> ... x<sub>n</sub>) ( The Lisp fashion) </li>
+            <li> Or with infix symbol(s) <br /> (x<sub>1</sub>|x<sub>2</sub>|x<sub>3</sub>) (mixed product) </li>
+            <li> Or even more exotic, with several distinct symbols <br /> p?q:r (translation in C language of the logical immediate if) </li>
+          </ul>
+          </p>
+          <p> So it is important to understand that all these situations are special cases of <span style="font-weight: bold; font-style: italic;"> 'operators'</span> in the most general sense of the term. </p>
+          <div id="container">
+            <div id="label">definition</div> An important notion too is that of <span style="font-weight: bold; font-style: italic;"> 'arity'</span>. The arity of an operator is the number of its <span style="font-weight: bold; font-style: italic;"> 'operands'</span>, that is 2 for an internal binary operation or scalar product,3 for a mixed product, etc.
+          </div>
+          <p> We have of course <span style="font-weight: bold; font-style: italic;"> 'unary'</span> operators which take only one operand just like the map which to every element of an additive group associates its opposite. </p>
+          <p> We can, just for a purpose of maximal generality, extends this arity notion to the number 0. Operators with arity 0 ( <strong>nullary</strong>) would be 'constants'. </p>
+          <h2> A few operators of C language </h2>
+          <p> The C language has a special role. It is a rather old standard and its syntax is used as a model by a lot of modern programming languages. Several object oriented languages (C++, C#, Java,...) have operators directly inspired by those of C. The same can be said about languages used in web programming (Javascript, PHP, Perl, etc...). Small differences can exist from one dialect to another but the C standard is the guide. </p>
+          <div align="center">
+            <a name="39"></a>
+            <table>
+              <caption>
+                <strong> Table 1: </strong> Main arithmetic operators
+              </caption>
+              <tbody>
+                <tr>
+                  <td>
+                    <div align="center">
+                      <table border="1" cellpadding="3" style="text-align: left; margin-left: auto; margin-right: auto;">
+                        <tbody>
+                          <tr>
+                            <th align="center">
+                              <span class="textbf"> Symbol </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Translation </span>
+                            </th>
+                            <th align="center">
+                              <span class="textbf"> Example </span>
+                            </th>
+                            <th align="left" valign="top" width="198">
+                              <span class="textbf"> Result </span>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> + </code>
+                            </td>
+                            <td style="text-align: left;"> Addition </td>
+                            <td align="center">
+                              <code> x + y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> The sum of x and y <span class="MATH"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> - </code>
+                            </td>
+                            <td align="left"> Subtraction </td>
+                            <td align="center">
+                              <code> x - y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> the difference between <span class="MATH"> x </span> and y <span class="MATH"></span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> * </code>
+                            </td>
+                            <td align="left"> Product </td>
+                            <td align="center">
+                              <code> x * y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> The product of x by y </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> / </code>
+                            </td>
+                            <td align="left"> Division </td>
+                            <td align="center">
+                              <code> x / y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> The quotient of <span class="MATH"> x </span> by <span class="MATH"> y </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> % </code>
+                            </td>
+                            <td align="left"> Remainder </td>
+                            <td align="center">
+                              <code> x % y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> Remainder of the Euclidean division of x by y </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> + </code> (unary)
+                            </td>
+                            <td align="left"> Plus sign </td>
+                            <td align="center">
+                              <code> +x </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> the value of <span class="MATH"> x </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> - </code> (unary)
+                            </td>
+                            <td align="left">Minus </td>
+                            <td align="center">
+                              <code> -x </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> the opposite of <span class="MATH"> x </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a name="tab:operateurs_arith"></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+          <div align="center">
+            <a name="66"></a>
+            <table>
+              <caption>
+                <strong> Table 2: </strong> The relational operators (returning a logical value)
+              </caption>
+              <tbody>
+                <tr>
+                  <td>
+                    <div align="center">
+                      <table border="1" cellpadding="3" style="text-align: left; margin-left: auto; margin-right: auto;">
+                        <tbody>
+                          <tr>
+                            <th align="center">
+                              <span class="textbf"> Symbol </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Translation </span>
+                            </th>
+                            <th align="center">
+                              <span class="textbf"> Example </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Result </span>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &lt; </code>
+                            </td>
+                            <td align="left"> less than </td>
+                            <td style="text-align: center;">
+                              <code> x &lt; y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> is strictly inferior to <span class="MATH"> y </span>, 0 else </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &lt;= </code>
+                            </td>
+                            <td align="left"> less or equal </td>
+                            <td align="center">
+                              <code> x &lt;= y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> is inferior or equal to <span class="MATH"> y </span>, 0 else </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &gt; </code>
+                            </td>
+                            <td align="left"> greater </td>
+                            <td align="center">
+                              <code> x &gt; y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span>is strictly greater than <span class="MATH"> y </span>, 0 else </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &gt;= </code>
+                            </td>
+                            <td align="left"> greater or equal </td>
+                            <td align="center">
+                              <code> x &gt;= y </code>
+                            </td>
+                            <td align="left"> 1 if x is greater or equal to y, 0 else </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> == </code>
+                            </td>
+                            <td align="left"> equality</td>
+                            <td align="center">
+                              <code> x == y </code>
+                            </td>
+                            <td align="left"> 1 si <span class="MATH"> x </span> is the same as <span class="MATH"> y </span>, else 0. </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> != </code>
+                            </td>
+                            <td align="left"> inequality </td>
+                            <td align="center">
+                              <code> x != y </code>
+                            </td>
+                            <td align="left"> 1 if <span class="MATH"> x </span> is different from <span class="MATH"> y </span>, else 0. </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a name="tab:operateurs_relation"></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+          <div align="center">
+            <table>
+              <caption>
+                <strong> Table 3: </strong> Logical operators
+              </caption>
+              <tbody>
+                <tr>
+                  <td>
+                    <div align="center">
+                      <table border="1" cellpadding="3" style="text-align: left; margin-left: auto; margin-right: auto;">
+                        <tbody>
+                          <tr>
+                            <th align="center">
+                              <span class="textbf"> Symbol </span>
+                            </th>
+                            <th align="left">
+                              <span class="textbf"> Translation </span>
+                            </th>
+                            <th align="center">
+                              <span class="textbf"> Example </span>
+                            </th>
+                            <th align="left" valign="top" width="198">
+                              <span class="textbf"> Result </span>
+                            </th>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> &amp;&amp; </code>
+                            </td>
+                            <td style="text-align: left;"> logical AND </td>
+                            <td align="center">
+                              <code> x &amp;&amp; y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> 1 if <span class="MATH"> x </span> and <span class="MATH"> y </span> are different from 0, else 0 </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> || </code>
+                            </td>
+                            <td align="left"> logical OR </td>
+                            <td align="center">
+                              <code> x || y </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> 1 if <span class="MATH"> x </span> and/or <span class="MATH"> y </span> are different from 0, else 0 </td>
+                          </tr>
+                          <tr>
+                            <td align="center">
+                              <code> ! </code>
+                            </td>
+                            <td align="left"> logical NOT </td>
+                            <td align="center">
+                              <code> !x </code>
+                            </td>
+                            <td align="left" valign="top" width="198"> 1 if <span class="MATH"> x </span> is null. In all other cases result is 0. </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <a name="tab:operateurs_log"></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p> It is by will that we do not reproduce here the 'assignment' or 'combined assignment' operators. Although they return a value, their main purpose is tthe attribution of a value to a variable. Actually they are more important for the action they exert on memory than for the result (value) which they return. We estimate they don't have their place in this summary. </p>
+          <h2> Operators of the Python language </h2>
+          <p style="text-align: center;">
+            <span style="font-weight: bold;"> Table1 </span> : Here is a table of the most common arithmetic operators
+          </p>
+          <table border="1" style="text-align: left; margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th align="center">
+                  <b> Operation </b>
+                </th>
+                <th style="text-align: left;">
+                  <b> Result </b>
+                </th>
+              </tr>
+            </thead>
+            <tbody valign="baseline">
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> + <var> y </var>
+                  </code>
+                </td>
+                <td style="text-align: left;"> sum of <var> x </var> and <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> - <var> y </var>
+                  </code>
+                </td>
+                <td style="text-align: left;"> difference ofe <var> x </var> and <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> * <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> product of <var> x </var> by <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> / <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> quotient of <var> x </var> by <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> % <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> remainder of <code>
+                    <var> x </var> / <var> y </var>
+                  </code>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> - <var> x </var>
+                  </code>
+                </td>
+                <td align="left">
+                  <var> x </var> negative
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> + <var> x </var>
+                  </code>
+                </td>
+                <td align="left">
+                  <var> x </var> unchanged
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> abs( <var> x </var> ) </code>
+                </td>
+                <td align="left"> absolute value of <var> x </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> int( <var> x </var> ) </code>
+                </td>
+                <td align="left"> conversion of <var> x </var> into integer </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> long( <var> x </var> ) </code>
+                </td>
+                <td align="left"> conversion of <var> x </var> in long integer </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> float( <var> x </var> ) </code>
+                </td>
+                <td align="left"> conversion of <var> x </var> into real number (float) </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> complex( <var> re </var> , <var> im </var> ) </code>
+                </td>
+                <td align="left"> complex number with <var> re </var> as real part and <var> im </var> as imaginary part. <var> im </var> is null by default. </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> c </var> .conjugate() </code>
+                </td>
+                <td align="left"> conjugate value of complex number <var> c </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> divmod( <var> x </var> , <var> y </var> ) </code>
+                </td>
+                <td align="left"> the ordered pair <code> ( <var> x </var> / <var> y </var> , <var> x </var> % <var> y </var> ) </code>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> pow( <var> x </var> , <var> y </var> ) </code>
+                </td>
+                <td align="left"> exponentiation of <var> x </var> to the power <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> ** <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> exponentiation of <var> x </var> to the power <var> y </var>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <div style="text-align: center;">
+            <span style="font-weight: bold;"> Table 2 </span> : And here is the table of usual comparison operators <br />
+            <br />
+          </div>
+          <table border="1" style="border-collapse: collapse; text-align: left; margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th align="center">
+                  <b> Symbol </b>
+                </th>
+                <th style="text-align: left;">
+                  <b> Operation </b>
+                </th>
+              </tr>
+            </thead>
+            <tbody valign="baseline">
+              <tr>
+                <td style="text-align: center;">
+                  <code> &lt; </code>
+                </td>
+                <td align="left"> strictly less than </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &lt;= </code>
+                </td>
+                <td align="left"> less or equal to </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &gt; </code>
+                </td>
+                <td align="left"> strictly greater than </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &gt;= </code>
+                </td>
+                <td align="left"> greater or equal to</td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> == </code>
+                </td>
+                <td align="left"> equal to </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> != </code>
+                </td>
+                <td align="left"> different from</td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> &lt;&gt; </code>
+                </td>
+                <td align="left"> not equal to </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <div style="text-align: center;">
+            <span style="font-weight: bold;"> Table 3 </span> : And here is a table of logical operators <br />
+            <br />
+          </div>
+          <table border="1" style="border-collapse: collapse; text-align: left; margin-left: auto; margin-right: auto;">
+            <thead>
+              <tr>
+                <th align="center">
+                  <b> Operation </b>
+                </th>
+                <th style="text-align: left;">
+                  <b> Result </b>
+                </th>
+              </tr>
+            </thead>
+            <tbody valign="baseline">
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> or <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> if <var> x </var> is false, then <var> y </var> , else <var> x </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code>
+                    <var> x </var> and <var> y </var>
+                  </code>
+                </td>
+                <td align="left"> if <var> x </var> is false, then <var> 0 </var> , else <var> y </var>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <code> not <var> x </var>
+                  </code>
+                </td>
+                <td align="left"> if <var> x </var> is false, then <code> 1 </code> , else <code> 0 </code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Opérations'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to operations" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

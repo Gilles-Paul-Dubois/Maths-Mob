@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Sous-espaces vectoriels</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+
+   
+  </head>
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/sousev/menu.html')" /></li>  
+	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/sousev/menu.html')" /></li>
+	 <li><input type="button" value="Back to Vector Spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+  <h2>
+   Définition
+  </h2>
+<p>  Quand on étudie les ensembles, on définit très rapidement les
+  <input type="button" value="sous-ensembles" onclick="go('../../bases/ensembles/parties.html')"  data-inline="true"/>
+  (ou encore 'parties') d'un ensemble. Quand on étudie les
+  <input type="button" value="groupes" onclick="go('../../bases/operations/groupe.html')"  data-inline="true"/>
+   on étudie les '<input type="button" value="sous-groupes" onclick="go('../../nombres/relatifs/ideaux.html')"  data-inline="true"/>' d'un groupe donné, qui sont les
+parties non vides,
+<input type="button" value="stables" onclick="go('../../bases/operations/loi_induite.html')"  data-inline="true"/>
+  pour la loi de groupe et qui dès qu'elles
+contiennent un élément contiennent aussi l'élément
+<input type="button" value="symétrique" onclick="go('../../bases/operations/symetrique.html')"  data-inline="true"/>
+  (opposé
+ou inverse selon qu'on utilise la
+<input type="button" value="notation additive" onclick="go('../../bases/operations/multiples.html')"  data-inline="true"/>
+  ou
+  <input type="button" value="multiplicative" onclick="go('../../bases/operations/puissances.html')"  data-inline="true"/>).
+De la même façon les
+<input type="button" value="anneaux" onclick="go('../../bases/operations/anneau.html')"  data-inline="true"/>
+ ont des
+ <input type="button" value="idéaux" onclick="go('../../nombres/relatifs/ideaux.html')"  data-inline="true"/>
+   et les
+   <input type="button" value="corps" onclick="go('../../bases/operations/corps.html')"  data-inline="true"/>
+  
+  des
+sous-corps.</p> 
+
+<p>Dans cette optique, nous allons définir les sous-espaces
+d'un espace vectoriel. De la même façon que les sous-groupes héritent
+des propriétés de leurs 'parent', (ils sont des groupes à part
+entière), tout comme les idéaux sont des anneaux et les sous-corps des
+corps, il serait bon que les sous-espaces vectoriels soient des espaces
+vectoriels de plein droit. De plus comme la notion d'espace vectoriel
+est une extension de la notion de groupe abélien additif, il serait bon
+que la structure de sous-espace vectoriel soit une extension de la
+notion de sous-groupe. Le décor est posé:</p>
+
+<div id="container">
+<div id="label">définition</div>   Soit E un
+<input type="button" value="espace vectoriel" onclick="go('defev.html')"  data-inline="true"/>
+    sur K. Un
+   <strong><em>'sous-espace vectoriel'</em></strong>
+   F de E consiste en la donnée d'un sous-groupe additif (F,+) du groupe (E,+) stable pour la loi externe, c'est à dire que:
+   <br/>
+   ∀ (λ,u) ∈ K×F on a  λu ∈ F.</div>
+ 
+  Cette définition peut être remplacée par la suivante, strictement équivalente:
+ 
+  <div id="container">
+<div id="label">définition</div> Soit E un espace vectoriel sur K. F sous-espace vectoriel de E équivaut à:
+   <br/>
+   F ≠
+   <font size="+1">
+    ∅
+   </font>
+   et 
+∀ (λ,μ) ∈ K×K , ∀ (u,v) ∈ F×F on a: 
+λu+μv ∈ F</div>
+ 
+  Il résulte immédiatement de la définition que tous les
+sous-espaces d'un espace E sont non vides et contiennent tous le
+vecteur nul.
+  <br/>
+  En outre, tout espace vectoriel admet au moins deux sous-espaces 'triviaux':
+  <ul>
+   <li>
+    le sous-espace 'nul' : {0} constitué du seul vecteur nul (attention!, ce n'est pas l'ensemble vide)
+   </li>
+   <li>
+    Le sous-espace 'plein' égal à E tout entier
+   </li>
+  </ul>
+  <h2>
+   Exemples
+  </h2>
+  <ol>
+   <li>
+    L'ensemble des multiples d'un même vecteur non nul (
+    <b><i>droite vectorielle</i></b>
+    ).
+   </li>
+   <li>
+    Considérons
+dans l'espace K×K les vecteurs dont la première coordonnée est nulle.
+Ils forment clairement un sous-espace vectoriel.
+   </li>
+   <li>
+    Considérons plus généralement dans K<sup>n</sup>, l'ensemble F<sub>i</sub>
+    des vecteurs dont la i-ième coordonnée est nulle. Chaque F<sub>i</sub>
+    est une sous-espace de K<sup>n</sup>. Nous laissons au lecteur le soin de le vérifier.
+   </li>
+   <li>
+    Dans K<sup>n</sup>, les vecteurs dont toutes les coordonnées sont égales forment un sous-espace de K<sup>n</sup>.
+   </li>
+   <li>
+    Dans K<sup>n</sup>, les vecteurs dont la somme des coordonnées est nulle forment un sous-espace de K<sup>n</sup>. Cependant les vecteurs dont la somme des coordonnées est égale à 1 n'est pas un sous-espace vectoriel.
+   </li>
+   <li>
+    Les
+suites convergentes forment un sous-espace de l'espace vectoriel de
+toutes les suites réelles, les suites convergentes vers 0 forment un
+sous-espace de ce sous-espace, les suites stationnaires (constantes) en
+forment un autre sous-espace.
+   </li>
+   <li>
+    Les suites réelles
+croissantes ne forment pas un sous-espace de l'ensemble de toutes les
+suites réelles car quand on multiplie une suite croissante par un
+scalaire négatif elle devient décroissante.
+   </li>
+   <li>
+    I étant un intervalle de &reals; Les fonctions  continues forment un sous-espace C<sup>0</sup> de l'espace de toutes les fonctions de I dans &reals;.
+Les fonctions dérivables sont à leur tour un sous-espace C<sup>1</sup> des fonctions
+continues. Les fonctions n fois continument dérivables sont un
+sous-espace C<sup>n</sup> des fonctions dérivables sur I. Les fonctions indéfiniment dérivables sont un sous-espace C<sup>&infin;</sup> de tous les sous-espaces C<sup>n</sup>.
+   </li>
+   <li>
+    Si I est un intervalle compact de &reals;
+les fonctions intégrables sur I (au sens de Riemann) forment un
+sous-espace de l'ensemble de toutes les fonctions réelles définies sur
+I. Les fonctions continues sur I forment un sous-espace de ce
+sous-espace.
+   </li>
+   <li>
+    Les fonctions réelles paires sur &reals; forment un sous-espace de l'ensemble de toutes les fonctions réelles.
+   </li>
+  </ol>
+  Le sous espace de &reals;<sup>3</sup>
+  défini par x+y+z=0 (un plan).
+  <br/>
+  Ce sous espace apparaît en jaune, la normale à ce plan est représentée en rouge.
+  <br/>
+  Cliquez n'importe où pour arrêter le mouvement ou le redémarrer.
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<h2>
+   Definition
+   </h2>
+<p>When we study the sets, we very quickly define the
+    <input type="button" value="subsets" onclick="go('../../bases/ensembles/parties.html')" data-inline="true">  of a set.  When we study the
+   <input type="button" value="groups" onclick="go('../../bases/operations/groupe.html')" data-inline="true">
+   we study the  <input type="button" value="subgroups" onclick="go('../../nombres/relatifs/ideaux.html')" data-inline="true"> of a given group, which are the
+ non-empty subsets, which are
+ <input type="button" value="closed" onclick="go('../../bases/operations/loi_induite.html')" data-inline="true">for the group operation and who as soon as they
+ contain an element also contain its
+ <input type="button" value="symmetrical" onclick="go('../../bases/operations/symetrique.html')" data-inline="true"> element (opposite
+ or inverse depending on whether we use the
+  <input type="button" value="additive" onclick="go('../../bases/operations/multiples.html')" data-inline="true">
+  or
+    <input type="button" value="multiplicative" onclick="go('../../bases/operations/puissances.html')" data-inline="true"> notation).
+ In the same way the
+ <input type="button" value="rings" onclick="go('../../bases/operations/anneau.html')" data-inline="true">
+ have some
+   <input type="button" value="ideals" onclick="go('../../nombres/relatifs/ideaux.html')" data-inline="true">
+   and the
+     <input type="button" value="fields" onclick="go('../../bases/operations/corps.html')" data-inline="true"> have subfields.
+  </p> 
+
+<p>With this in mind, we will define the subspaces
+ of a vector space.  In the same way that subgroups inherit
+ properties of their 'parent', (they are groups themselves), just as ideals are rings and sub-fields are
+ fields, it would be good if the vector subspaces were legitimate vector spaces.
+  Also like the notion of vector space
+ is an extension of the notion of additive Abelian group, it would be good
+ that the vector subspace structure is an extension of the
+ concept of subgroup.  The scene is set: </p>
+
+<div id="container">
+<div id="label">definition </div>Let E be a
+ <input type="button" value="vector space" onclick="go('defev.html')" data-inline="true"> over K. A 
+    <strong><em>' subspace' </em></strong> (or equivalently <strong><em>linear subspace</em></strong> or <strong><em>vector subspace</em></strong>)
+    F of E consists of the data of an additive subgroup (F,+) of the group (E,+) closed for the external operation, i.e.: 
+    <br>
+   ∀ (λ, u) ∈ K × F we have λu ∈ F. </div>
+ 
+  This definition can be replaced by the following, which is strictly equivalent:
+ 
+   <div id="container">
+<div id="label">definition </div>Let E be a vector space over K. F vector subspace of E is equivalent to:
+    <br>
+   F ≠
+    <font size="+1">
+    ∅
+    </font>
+    and 
+ ∀ (λ, μ) ∈ K × K, ∀ (u, v) ∈ F × F we have: 
+ λu + μv ∈ F </div>It follows immediately from the definition that all
+ subspaces of a space E are nonempty and contain the
+ null vector.
+   <br>
+  Furthermore, any vector space admits at least two 'trivial' subspaces:
+   <ul>
+   <li>
+    the 'null' subspace: {0} made up of the only null vector (be careful!, this is not the empty set)
+    </li>
+   <li>
+    The 'full' subspace equal to the entire E
+    </li>
+  </ul>
+  <h2>
+   Examples
+   </h2>
+  <ol>
+   <li>The set of multiples of the same nonzero vector ( 
+     <b><i>vector line </i></b>
+     ). 
+    </li>
+   <li>Consider
+ in the K×K space the vectors whose first coordinate is zero.
+ They clearly form a vector subspace.
+    </li>
+   <li>Consider more generally in K<sup>n</sup>, the set F<sub>i</sub>
+     vectors whose i-th coordinate is zero. Each F<sub>i</sub>
+     is a subspace of K<sup>n</sup>. We leave it to the reader to verify this. 
+    </li>
+   <li>
+    In K<sup>n</sup>, the vectors whose coordinates are all equal form a subspace of K<sup>n</sup>.
+    </li>
+   <li>In K<sup>n</sup>, the vectors whose sum of coordinates is zero form a subspace of K<sup>n</sup>. However vectors whose sum of coordinates is equal to 1 is not a vector subspace. 
+    </li>
+   <li>The
+ convergent sequences form a subspace of the vector space of
+ all real sequences, the sequences converging to 0 form a
+ subspace of this subspace, the (constant) stationary sequences in
+ form another subspace.
+    </li>
+   <li>The actual monotone
+ increasing sequences do not form a subspace of the set of all
+ real sequences because when we multiply an increasing sequence by a
+ negative scalar it becomes decreasing.
+    </li>
+   <li>I being an interval of ℝ The continuous functions form a subspace C<sup>0</sup> of the space of all real functions having I as domain.
+ The functions continuously differentiable on I form a subspace of C<sup>0</sup>  denoted C<sup>1</sup>. The n times continuously differentiable functions are a 
+ subspace C<sup>n</sup> of differentiable functions on I. The indefinitely differentiable functions are a subspace C<sup>∞</sup>of all subspaces C<sup>n</sup>. 
+    </li>
+   <li>If I is a compact interval of ℝ
+ the integrable functions on I (in the sense of Riemann) form a
+ subspace of the set of all real functions defined on
+ I. The continuous functions on I form a subspace of this
+ subspace.
+    </li>
+   <li>
+    The even real functions on ℝ form a subspace of the set of all real functions.
+    </li>
+  </ol>The subspace of ℝ<sup>3</sup>
+   defined by x+y+z=0 (a plane). 
+   <br>
+  This subspace appears in yellow, the normal to this plane is represented in red.
+   <br>
+  Click anywhere to stop the motion or restart it.
+
+
+ 
+
+</div><!-- /en --> 
+
+<div>
+   <canvas height="400" id="myCanvas" style="border:1px solid #000000;" width="400">
+   </canvas>
+   <script src="js/plan3D.js">
+   </script>
+  </div>
+  
+<div lang="fr">
+<h2>
+   Le coin de Python
+  </h2>
+  <p>
+   <object border="3" data="python/vectnumpy2.html" height="200" type="text/html" width="100%">
+   </object>
+  </p>
+    <h2>
+   Le coin de Julia
+  </h2>
+  <p>Même chose avec Julia 1.6</p>
+  <p>
+   <object border="3" data="julia/sousev1.jl.html" height="200" type="text/html" width="100%">
+   </object>
+  </p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Python's corner
+   </h2>
+  <p>
+   <object data="python/vectnumpy2.html" type="text/html" width="100%" height="200" border="3">
+   </object>
+  </p>
+    <h2>
+   Julia's corner
+   </h2>
+  <p>Same with Julia 1.6 </p>
+  <p>
+   <object data="julia/sousev1.jl.html" type="text/html" width="100%" height="200" border="3">
+   </object>
+  </p>
+
+
+</div><!-- /en -->   
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+ 	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to Vector spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

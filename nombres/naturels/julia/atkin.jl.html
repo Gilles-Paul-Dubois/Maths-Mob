@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">limite=</span><span class="s1">1000000</span>
+<span class="s0">crible=repeat([</span><span class="s2">false</span><span class="s0">],limite)</span>
+<span class="s0">racine= Int(floor(sqrt(limite)))</span>
+<span class="s0">cond1(n)= n&lt;limite &amp;&amp;(n%</span><span class="s1">12</span><span class="s0">==</span><span class="s1">5 </span><span class="s0">|| n%</span><span class="s1">12</span><span class="s0">==</span><span class="s1">1</span><span class="s0">)</span>
+<span class="s0">cond2(n)=n&lt;limite &amp;&amp; n%</span><span class="s1">12</span><span class="s0">==</span><span class="s1">7</span>
+<span class="s0">cond3(x,y,n)=x&gt;y &amp;&amp; n&lt;limite &amp;&amp; n%</span><span class="s1">12</span><span class="s0">==</span><span class="s1">1</span>
+
+<span class="s2">function </span><span class="s0">debut()</span>
+    <span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:racine</span>
+        <span class="s2">for </span><span class="s0">y </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:racine</span>
+            <span class="s0">n=</span><span class="s1">4</span><span class="s0">*x*x+y*y</span>
+            <span class="s2">if </span><span class="s0">cond1(n)</span>
+                <span class="s0">crible[n]=!crible[n]</span>
+            <span class="s2">end</span>
+            <span class="s0">n=</span><span class="s1">3</span><span class="s0">*x*x+y*y</span>
+            <span class="s2">if </span><span class="s0">cond2(n)</span>
+                <span class="s0">crible[n]=!crible[n]</span>
+            <span class="s2">end</span>
+            <span class="s0">n=</span><span class="s1">3</span><span class="s0">x*x-y*y</span>
+            <span class="s2">if </span><span class="s0">cond3(x,y,n)</span>
+                <span class="s0">crible[n]=!crible[n]</span>
+             <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">fin()</span>
+    <span class="s2">for </span><span class="s0">n </span><span class="s2">in </span><span class="s1">5</span><span class="s0">:limite</span>
+        <span class="s0">L=[k*n*n </span><span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s1">1</span><span class="s0">: limite÷(n*n)]</span>
+        <span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s0">L</span>
+            <span class="s0">crible[k]=</span><span class="s2">false</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">affiche()</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">5</span><span class="s0">:limite</span>
+        <span class="s2">if </span><span class="s0">crible[i]</span>
+            <span class="s0">print(i);print(</span><span class="s3">&quot;;&quot;</span><span class="s0">)</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">debut()</span>
+    <span class="s0">fin()</span>
+    <span class="s0">affiche()</span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span>
+
+
+
+
+</pre>
+</body>
+</html>

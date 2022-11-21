@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Développements décimaux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="js/ddi.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/ddi/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Rationnels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/ddi/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to rationals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> Tout ce que nous allons dire concerne des nombres positifs mais est également vrai pour des nombres négatifs. Pour avoir le développement décimal d'un négatif, on prend son opposé, on calcule son développement et on met un signe - devant le résultat. <br /> Nous avons donc vu que les rationnels décimaux peuvent s'écrire sous forme d'un développement décimal (fini): <br /> r=a<sub>0</sub>,a<sub>1</sub>a<sub>1</sub>...a<sub>n</sub>
+          <br /> a<sub>0</sub> est un entier et a<sub>1</sub>, a<sub>2</sub>,...,a<sub>n</sub> sont des chiffres (des entiers entre 0 et 9). <br /> Cette écriture signifie: <br /> r= a<sub>0</sub>+a<sub>1</sub>/10+a<sub>2</sub>/100+...+a<sub>n</sub>/10<sup>n</sup>
+          <br /> Examinons maintenant le cas des décimaux pouvant s'écrire: <br /> r= a<sub>n+1</sub>/10<sup>n+1</sup>+a<sub>n+2</sub>/10<sup>n+2</sup>+....+a<sub>m</sub>/10<sup>m</sup> donc avec m ≥ n et a<sub>0</sub>=a<sub>1</sub>=a<sub>2</sub>=..=a<sub>n</sub>=0 <br /> Un tel nombre vérifie forcément l'inégalité: <br /> r ≤ 9/10<sup>n+1</sup>+9/10<sup>n+2</sup>+....+9/10<sup>m</sup>=9/10<sup>n+1</sup>(1+1/10+...+ 1/10<sup>m-n-1</sup>)=9/10<sup>n+1</sup>×(1-1/10<sup>m-n</sup>)/(1-1/10) <br /> Or le nombre (1-1/10<sup>m-n</sup>)/(1-1/10) est ≤ 1/(9/10) = 10/9 <br /> On a donc l'inégalité: <br /> r ≤ (1/10<sup>n</sup>)(9/10)(10/9)=1/10<sup>n</sup>
+          <br /> En résumé nous avons établi la propriété suivante: <div id="container"> Tout nombre décimal dont la partie entière est nulle et dont les décimales sont nulles jusqu'à l'ordre n ne peut être strictement plus grand que 1/10<sup>n</sup>. </div> Cette remarque nous permet de comparer rapidement deux décimaux sur leurs développements décimaux. <br /> Reprenons maintenant l'algorithme de la division enseigné à l'école élémentaire. A tout nombre rationnel r=p/q on associe une suite (a priori infinie) <br /> a<sub>0</sub>,a<sub>1</sub>,....a<sub>n</sub>,a<sub>n+1</sub>, ....de la façon suivante: <br /> a<sub>0</sub> est le quotient de p par q <br /> a<sub>1</sub> est le quotient de la division de 10r<sub>0</sub> par q où r<sub>0</sub> est le reste de la division de p par q <br /> a<sub>2</sub> est le quotient de la division de 10r<sub>1</sub> par q où r<sub>1</sub> est le reste de la division de 10r<sub>0</sub> par q <br /> .................................................................................................................................... <br /> a<sub>n</sub> est le quotient de la division de 10r<sub>n-1</sub> par q où r<sub>n-1</sub> est le reste de la division de 10r<sub>n-2</sub> par q <br /> Faisons immédiatement une remarque concernant la suite des restes r<sub>0</sub>,r<sub>1</sub>,...r<sub>n</sub> : <br /> Ce sont des restes dans la division euclidienne par un <span style="text-decoration: underline;"> même</span> entier q, ils sont donc tous &lt;q, ils ne peuvent donc être en nombre infini. Ce qui implique en particulier que <span style="font-weight: bold;"> leur suite est cyclique </span>. <div id="container">
+            <div id="label">propriété et définition</div> Ce qui veut donc dire que si pour un rationnel quelconque on prend des développements décimaux d'ordre de plus en plus grand la même tranche de chiffres réapparaît indéfiniment, nous appellerons cette tranche de chiffres la <b>
+              <i> 'période' </i>
+            </b> du développement.
+          </div> Quelques exemples: <br /> 1/3=0,3333.. période '3' <br /> 10/7=1,42857142857142857........période '428571' <br /> Introduisons une notation particulière. <div id="container">
+            <div id="label">notation</div> Lorsque la période est détectée nous la mettons en valeur en la surmontant d'un trait comme ceci: <br /> 10/7=1,428571<span style="text-decoration: overline;">428571</span>
+          </div> Ainsi nous écrirons: <br /> 1/3=0,<span style="text-decoration: overline;">3</span>
+          <br /> 51/11=4,6<span style="text-decoration: overline;">36</span>
+          <div id="container">
+            <div id="label">définition</div> Ainsi à chaque rationnel, nous savons par l'algorithme ci-dessus associer un <b>
+              <i> 'développement décimal illimité périodique' </i>
+            </b> (ide).
+          </div> Réciproquement, on peut se poser les deux questions suivantes : <ul>
+            <li> Tous les ide correspondent ils à des rationnels? Autrement dit, à partir d'un ide donné est-il possible de retrouver le rationnel dont le développement est exactement celui là ? </li>
+            <li> Un même rationnel peut-il être représenté par plusieurs ide ? </li>
+          </ul> La réponse à la première question est positive. Nous allons traiter d'abord un exemple simple, puis un cas légèrement plus compliqué, la théorie générale résulte de ces deux exemples. <br /> Commençons par le cas de : <br /> 0,<span style="text-decoration: overline;">1233</span>
+          <br /> On cherche le rationnel r tel que r=0,1233123312331233.................... <br /> On forme immédiatement l'équation 1000r=1233+r d'où 9999r=1233 et r=1233/9999=137/1111 <br /> Voyons maintenant un cas plus compliqué: <br /> r=12,75<span style="text-decoration: overline;">1233</span>
+          <br /> Nous pouvons écrire <br /> 100r=1275,<span style="text-decoration: overline;">1233</span> donc 100r=1275+137/1111 = 1416662/1111 soit r=1416662/111100= 708331/55550 <br /> Nous pensons que le traitement de ces deux exemples suggère un algorithme permettant de traiter tous les cas possibles. <br /> La réponse à la seconde question est malheureusement négative, mais nous allons voir qu'il est extrêmement simple de décider si deux ide représentent le même nombre rationnel. Commençons par le célèbre cas: <br /> r=0,<span style="text-decoration: overline;">9</span> = 0,9999999999..... est il égal à 1 ???? <br /> La réponse est indiscutablement OUI ! <br /> La preuve est extrêmement simple. Soit r<sub>n</sub> le rationnel 0,999999....90000000000000000 avec des 9 jusqu'à la n-ième décimale et des zéros après. C'est un décimal et on a 1-r<sub>n</sub> ≤ 1/10<sup>n</sup>, compte tenu de ce que nous avons démontré auparavant. <br /> On a donc r<sub>n</sub> ≤ r ≤ 1 soit 1-r<sub>n</sub> ≤ 1-r ≤ 0 soit encore 1/10<sup>n</sup> ≤ 1-r ≤ 0 et cela ∀ n ∈ &naturals; donc 1-r=0 , il n'existe aucun nombre qui soit plus petit que TOUTES les puissances inverses de 10. <br /> De la même façon: <br /> 1,732 = 1,731999999999...=1,731<span style="text-decoration: overline;">9</span>
+          <br /> Mais en fait c'est la seule exception à la règle d'unicité. <br /> Traitons encore cela sur un exemple comparons deux rationnels r<sub>1</sub> et r<sub>2</sub> de la forme r<sub>1</sub> =0,a<sub>1</sub>a<sub>2</sub>....a<sub>i</sub>.... et r<sub>2</sub>=0,b<sub>1</sub>b<sub>2</sub>...b<sub>i</sub> ...... <br /> Soit n le premier rang où les décimales de r<sub>1</sub> et r<sub>2</sub> diffèrent et supposons que b<sub>n</sub> &lt;a<sub>n</sub> alors si l'un des b<sub>i</sub> pour i&lt;n est inférieur strictement à 9, le rationnel r<sub>2</sub> n'a aucune chance de rattraper le décimal 0,a<sub>1</sub>a<sub>2</sub>...a<sub>n</sub> lequel est plus petit que r<sub>1</sub>. Il en résulte que r<sub>1</sub> ne peut être égal à r<sub>2</sub> que si a<sub>i</sub> =0 pour i&gt;n et b<sub>i</sub> =9 pour i&gt;n <br />
+          <div id="container">
+            <div id="label">définition</div>Un ide ne comportant que 9 à partir d'un certain rang est appelé un développement décimal <span style="font-weight: bold; font-style: italic;"> 'impropre'</span>.
+          </div>
+          <span style="font-weight: bold;"> Conclusion: </span>
+          <div id="container"> Si on exclut les développements décimaux impropres le ddi d'un nombre rationnel est toujours unique.</div>
+          <a name="form"></a>
+          <p>Vous pouvez maintenant générer quelques exemples:</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions </h2>Everything we're going to say is about positive numbers but is also true for negative numbers. To have the decimal expansion of a negative, we take its opposite, we calculate its expansion and put a - sign in front of the result. <br>We have therefore seen that the decimal rationals can be written as form of a (finite) decimal expansion: <br> r=a<sub>0</sub>,a<sub>1</sub>a<sub>1</sub>...a<sub>n</sub>
+          <br>a<sub>0</sub> is an integer and a<sub>1</sub>, a<sub>2</sub>,...,a<sub>n</sub> are digits (integers between 0 and 9). <br> This writing means: <br> r= a<sub>0</sub>+a<sub>1</sub>/10+a<sub>2</sub>/100+...+a<sub>n</sub>/10<sup>n</sup>
+          <br> Let us now examine the case of decimals which can be written: <br>r= a<sub>n+1</sub>/10<sup>n+1</sup>+a<sub>n+2</sub>/10<sup>n+2</sup>+....+a<sub>m</sub>/10<sup>m</sup> so with m ≥ n and a<sub>0</sub>=a<sub>1</sub>=a<sub>2</sub>=..=a<sub>n</sub>=0 <br> Such a number necessarily satisfies the inequality: <br> r ≤ 9/10<sup>n+1</sup>+9/10<sup>n+2</sup>+....+9/10<sup>m</sup>=9/10<sup>n+1</sup>(1+1/10+...+ 1/10<sup>m-n-1</sup>)=9/10<sup>n+1</sup>×(1-1/10<sup>m-n</sup>)/(1-1/10) <br>Now the number (1-1/10<sup>m-n</sup>)/(1-1/10) is ≤ 1/(9/10) = 10/9 <br> So we have the inequality: <br> r ≤ (1/10<sup>n</sup>)(9/10)(10/9)=1/10<sup>n</sup>
+          <br> In summary we have established the following property: <div id="container">All decimal number whose integer part is zero and whose decimals are zero up to the order n cannot be strictly greater than 1/10<sup>n</sup>. </div>This remark allows us to quickly compare two decimals on their decimal expansions. <br>Let's resume now the division algorithm taught in elementary school. To any rational number r=p/q we associate a sequence (a priori infinite) <br> a<sub>0</sub>,a<sub>1</sub>,....a<sub>n</sub>,a<sub>n+1</sub>, ....as follows: <br> a<sub>0</sub> is the quotient of p by q <br>a<sub>1</sub> is the quotient of the division of 10r<sub>0</sub> by q where r<sub>0</sub> is the remainder of the division of p by q <br>a<sub>2</sub> is the quotient of the division of 10r<sub>1</sub> by q where r<sub>1</sub> is the remainder of the division of 10r<sub>0</sub> by q <br> .................................................. .................................................. ................................ <br>a<sub>n</sub> is the quotient of the division of 10r<sub>n-1</sub> by q where r<sub>n-1</sub> is the remainder of the division of 10r<sub>n-2</sub> by q <br>Let us immediately make a remark concerning the sequence of the remainders r<sub>0</sub>,r<sub>1</sub>,...,r<sub>n</sub> : <br>They are remainders in the Euclidean division by the <span style="text-decoration: underline;"> same </span> integer q, so they are all &lt;q, so they cannot be in infinite number. This implies in particular that <span style="font-weight: bold;"> their sequence is cyclic </span>. <div id="container">
+            <div id="label">property and definition </div>Which therefore means that if for any rational we take decimal expansions of higher and higher order the same slice of digits reappears indefinitely, we will call this slice of digits the <b>
+              <i> 'period' </i>
+            </b> of expansion.
+          </div> Some examples: <br> 1/3=0.3333.. period '3' <br> 10/7=1.42857142857142857........period '428571' <br>Let's introduce a particular notation. <div id="container">
+            <div id="label">notation </div>When the period is detected we highlight it by surmounting it with a line like this: <br>10/7=1.428571<span style="text-decoration: overline;">428571 </span>
+          </div>Thereby we will write: <br> 1/3=0.<span style="text-decoration: overline;">3 </span>
+          <br> 51/11=4.6<span style="text-decoration: overline;">36 </span>
+          <div id="container">
+            <div id="label">definition </div>Thus at each rational, we know by the above algorithm associate a <b>
+              <i> 'periodic unlimited decimal expansion' </i>
+            </b> (ide).
+          </div> Conversely, we can ask ourselves the following two questions: <ul>
+            <li>Do all ide's correspond to rational numbers ? Otherwise said, from a given ide is it possible to retrieve the rational whose expansion is exactly that? </li>
+            <li>Can the same rational be represented by several ide's ? ? </li>
+          </ul>The answer to the first question is yes. We will treat first a simple example, then a slightly more complicated case, the general theory results from these two examples. <br> Let's start with the case of: <br> 0.<span style="text-decoration: overline;">1233 </span>
+          <br>We seek the rational r such that r=0.1233123312331233.................... <br>We immediately form the equation 1000r=1233+r from which 9999r=1233 and r=1233/9999=137/1111 <br> Now let's look at a more complicated case: <br> r=12,75<span style="text-decoration: overline;">1233 </span>
+          <br> We can write <br>100r=1275,<span style="text-decoration: overline;">1233 </span> so 100r=1275+137/1111 = 1416662/1111 i.e. r=1416662/111100= 708331/55550 <br>We believe that the treatment of these two examples suggests a algorithm to handle all possible cases. <br>The answer to the second question is unfortunately negative, but we will see that it is extremely simple to decide if two ide's represent the same rational number. Let's start with the famous case: <br>r=0.<span style="text-decoration: overline;">9 </span> = 0.9999999999..... is it equal to 1???? <br> The answer is unquestionably YES! <br>The proof is extremely simple. Let r<sub>n</sub> the rational 0.999999....90000000000000000 with 9s to the n-th decimal point and zeros after. It's a decimal and we have 1-r<sub>n</sub> ≤ 1/10<sup>n</sup>, given what we have demonstrated before. <br>We therefore have r<sub>n</sub> ≤ r ≤ 1 i.e. 1-r<sub>n</sub> ≤ 1-r ≤ 0 or still 1/10<sup>n</sup> ≤ 1-r ≤ 0 and that ∀ n ∈ ℕ therefore 1-r=0 , there does not exist no number that is smaller than ALL the inverse powers of 10. <br> In the same way: <br> 1.732 = 1.731999999999...=1.731<span style="text-decoration: overline;">9 </span>
+          <br> But in fact this is the only exception to the uniqueness rule. <br>Let's deal with this again on an example let's compare two rationals r<sub>1</sub> and r<sub>2</sub> of the form r<sub>1</sub> =0.a<sub>1</sub>a<sub>2</sub>....a<sub>i</sub>.... and r<sub>2</sub>=0.b<sub>1</sub>b<sub>2</sub>...b<sub>i</sub>...... <br>Let n be the first rank where the decimals of r<sub>1</sub>and r<sub>2</sub>differ and suppose that b<sub>n</sub> &lt;a<sub>n</sub> then if one of the b<sub>i</sub> for i&lt;n is strictly less than 9, the rational r<sub>2</sub> has no chance of catching up decimal 0.a<sub>1</sub>a<sub>2</sub>...a<sub>n</sub> which is smaller than r<sub>1</sub>. It results that r<sub>1</sub> cannot be equal to r<sub>2</sub> that if a<sub>i</sub> =0 for i&gt;n and b<sub>i</sub> =9 for i&gt;n <br>
+          <div id="container">
+            <div id="label">definition </div>A ide with only 9 from a certain rank is called an <span style="font-weight: bold; font-style: italic;"> 'improper' </span> decimal expansion.
+          </div>
+          <span style="font-weight: bold;"> Conclusion: </span>
+          <div id="container"> Excluding improper decimal expansions, the edi of a rational number is always unique. </div>
+          <a name="forme"></a>
+          <p>You can now generate some examples: </p>
+        </div>
+        <!-- /en -->
+        <form method="get" name="pgcd">
+          <table border="1" cellpadding="2" cellspacing="2" style="text-align: left;  width: 100%;">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">
+                  <div lang="fr"> Donner deux entiers 0 &lt; m , n ≤ 100000 </div>
+                  <!-- /fr -->
+                  <div lang="en">Give two integers 0 &lt; m , n ≤ 100000</div>
+                  <!-- /en --> m: <input name="getm" /> n: <input name="getn" />
+                  <input name="Go" onclick="ClickOnGoPGCD()" type="button" value="Go!" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr"> Entre parenthèses: période du développement de m/n:</div>
+                  <!-- /fr -->
+                  <div lang="en">Between parentheses period of the expansion of m/n:</div>
+                  <!-- /en -->
+                  <textarea cols="74" name="divmn" readonly="readonly" rows="2"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr"> Message d'erreur éventuel:</div>
+                  <!-- /fr -->
+                  <div lang="en">Eventual error message:</div>
+                  <!-- /en -->
+                  <input name="erreur" readonly="readonly" size="80" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div lang="fr">
+          <h2> Le coin de Python </h2>
+          <p> Ce programme calcule la période du développement d'un rationnel </p>
+          <p>
+            <object border="3" data="python/periode.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <h2> Le coin de Julia </h2>
+          <p> Equivalent avec Julia 1.6 </p>
+          <p>
+            <object border="3" data="julia/periode.jl.html" height="400" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's Corner </h2>
+          <p> This program calculates the period of the expansion of a rational </p>
+          <p>
+            <object data="python/periode.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2>
+          <p> Equivalent with Julia 1.6 </p>
+          <p>
+            <object data="julia/periode.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Rationnels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to rationals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

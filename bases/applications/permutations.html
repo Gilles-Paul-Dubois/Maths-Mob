@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Permutations</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    
+    
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="b">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="b">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/permutations/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Applications'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/permutations/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to applications" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définitions </h2>
+          <div id="container">
+            <div id="label">définition</div> Une <span style="font-weight: bold; font-style: italic;"> 'permutation' </span> de E est tout simplement une <input type="button" value="bijection" onclick="go('bijections.html')" data-inline="true" /> de E dans E.
+          </div> Le résultat suivant est évident. <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div>Une permutation possède donc toujours une permutation réciproque.
+          </div>
+          <a name="ord"></a> Nous avons également un autre résulat important. <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Dans un ensemble fini E, pour une permutation f non identique il existe forcément des entiers d &gt; 0 tels que f<sup>d</sup> =Id. Le plus petit de ces entiers s'appelle <b>
+              <span style="font-weight: bold; font-style: italic;"> "l'ordre" </span>
+            </b> de f.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La preuve de ce résultat est simple, il suffit de reprendre l'argument de la page précédente. <br /> On a forcément f<sup>m</sup>=f<sup>p</sup> avec p&lt;m car la suite des puissances de f ne peut être infinie. <br /> On en déduit que f<sup>m-p</sup>=Id
+          </div>
+          <h2>Exemples</h2>
+          <h3> Quelques exemples de permutations </h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definitions </h2>
+          <div id="container">
+            <div id="label">definition</div> A <span style="font-weight: bold; font-style: italic;"> 'permutation' </span> of E is simply a <input type="button" value="bijection" onclick="go('bijections.html')" data-inline="true" /> from E onto E.
+          </div> The following result is obvious. <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem</div>A permutation always has an inverse permutation.
+          </div>
+          <a name="orde"></a> We also have the important following result : <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem</div> In a finite set E, for any permutation f exist naturals d &gt; 0 such that f<sup>d</sup> =Id. The smallest of these naturals is called the <b>
+              <span style="font-weight: bold; font-style: italic;"> 'order' </span>
+            </b> of f.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> The proof is simple, it's enough to repeat the argument of previous page <br /> We have necessarily f<sup>m</sup>=f<sup>p</sup> with p&lt;m because the sequence of powers of f cannot be infinite. <br /> From this we deduce that f<sup>m-p</sup>=Id
+          </div>
+          <h2>Examples</h2>
+          <h3> A few examples of permutations </h3>
+        </div>
+        <!-- /en -->
+        <div>
+          <table border="2">
+            <tr>
+              <td colspan="2">
+                <button onclick="Paint();" type="button"> Click! </button>
+                <div lang="fr">Cliquez pour voir des permutations !</div>
+                <!-- /fr -->
+                <div lang="en">Click to see permutations !</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <canvas height="200" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input id="mytext1" type="text" />
+              </td>
+            </tr>
+          </table>
+          <script src="js/newjavascript10.js"></script>
+        </div>
+        <div lang="fr">
+          <h3>
+            <a name="identique"></a> Cas particulier
+          </h3> Pour tout ensemble E l'application identique x → x de E dans E est une permutation de E. <p> Cette permutation correspond à la <a href="../relations/binaires.html#egalite " target="_self" data-role="button" data-inline="true">relation d'égalité</a>
+          </p>
+          <h2> Le coin de Python </h2>
+          <p> Voici un programme récursif qui génère toutes les permutations d'un ensemble: </p>
+          <object border="3" data="python/permrec.html" height="400" type="text/html" width="100%"></object>
+          <p> Voici un programme itératif qui génère toutes les permutations d'un ensemble: </p>
+          <object border="3" data="python/genperms.html" height="400" type="text/html" width="100%"></object <p> Voici un programme démontrant l'utilisation des outils standard des versions récentes du langage: </p>
+          <object border="3" data="python/genperms2.html" height="200" type="text/html" width="100%"></object>
+          <h2> Le coin de Julia </h2>
+          <p> Utilisation d'une bibliothèque pour générer toutes les permutations d'un ensemble. </p>
+          <object border="3" data="julia/permut1.jl.html" height="100" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>
+            <a name="identity"></a> Special case
+          </h3> For any set E the identity map x → x from E onto E is a permutation of E. <p> This permutation corresponds to the <input type="button" value="equality relation" onclick="go('../relations/binaires.html#equality')" data-inline="true" />
+          </p>
+          <h2> Python's corner </h2>
+          <p> Here is a recursive program which generates all possible permutation of a set: </p>
+          <object border="3" data="python/permrec_en.html" height="400" type="text/html" width="100%"></object>
+          <p> Here is an interative program which does the same :: </p>
+          <object border="3" data="python/genperms_en.html" height="400" type="text/html" width="100%"></object <p> This program shows how to use the standard libraries of the most recent versions : </p>
+          <object border="3" data="python/genperms2_en.html" height="200" type="text/html" width="100%"></object>
+          <h2> Julia's corner </h2>
+          <p> Illustration of the use of a special package </p>
+          <object border="3" data="julia/permut1.jl.html" height="100" type="text/html" width="100%"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Applications'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to applications" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

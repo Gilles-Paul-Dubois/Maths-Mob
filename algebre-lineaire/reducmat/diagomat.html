@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Diagonalisation des matrices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/diagomat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/diagomat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2> Tout ce qui suit concerne exclusivement les espaces vectoriels de <input type="button" value="dimension finie" onclick="go('../espaces/generateurs.html#dimfin')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2> All that follows concerns exclusively the <input type="button" value="finite dimensional" onclick="go('../espaces/generateurs.html#dimfine')" data-inline="true"> vector spaces.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition</div> Un <input type="button" value="endomorphisme" onclick="go('../applicalin/defapplin.html#defendo')" data-inline="true" /> u de E est <strong>
+              <em> 'diagonalisable' </em>
+            </strong> s'il existe une <input type="button" value="base" onclick="go('../espaces/bases.html#')" data-inline="true" /> B de E telle que M(u,B) soit une <input type="button" value="matrice diagonale" onclick="go('../matrices/matdiag.html#')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition</div> An <input type="button" value=" endomorphism" onclick="go('../applicalin/defapplin.html#defendoe')" data-inline="true"> of E is <strong>
+              <em> 'diagonalizable' </em>
+            </strong> if there is a <input type="button" value=" basis" onclick="go('../espaces/bases.html#')" data-inline="true"> B of E such that M(u,B) is a <input type="button" value=" diagonal matrix" onclick="go('../matrices/matdiag.html#')" data-inline="true">.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Caractérisation des endomorphismes diagonalisables </h2> Si u est diagonalisable alors on peut supposer que relativement à une base B et quitte à permuter les vecteurs de ladite base sa matrice est :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Characterization of diagonalizable endomorphisms </h2>If u is diagonalizable then we can suppose that relatively to a base B, up to a permutation of the vectors, its matrix is:
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV CENTRE --> \[ \begin{pmatrix} \lambda _{1}& 0& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0& . & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0& 0 & \lambda _{1} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0& 0 & 0 & \lambda _{2} & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\ 0& 0 & 0 & 0 & . & 0 & 0 & 0 & 0 & 0 & 0 \\ 0& 0 & 0 & 0 & 0& \lambda _{2} & 0 & 0 & 0 & 0 & 0 \\ 0& 0 & 0 & 0 & 0 & 0 & . & 0 & 0 & 0 & 0 \\ 0& 0 & 0 & 0 & 0 & 0 & 0 & 0 & \lambda _{p}& 0 & 0 \\ 0& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & . & 0 \\ 0& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & \lambda _{p} \\ \end{pmatrix} \]
+        <!-- /FORMULE UNIV CENTRE-->
+        <div lang="fr"> On voit alors que le polynome caractéristique de u est: <br> (x-λ<sub>1</sub>)<sup>r<sub>1</sub>
+          </sup>(x-λ<sub>2</sub>)<sup>r<sub>2</sub>
+          </sup>...(x-λ<sub>p</sub>)<sup>r<sub>p</sub>
+          </sup>
+          <br> où chaque r<sub>i</sub> est la mutiplicité de λ<sub>i</sub> comme racine du polynôme caractéristique de u. Il en résulte que:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We then see that the characteristic polynomial of u is: <br> (x-λ<sub>1</sub>)<sup>r<sub>1</sub>
+          </sup>(x-λ<sub>2</sub>)<sup>r<sub>2</sub>
+          </sup>...(x-λ<sub>p</sub>)<sup>r<sub>p</sub>
+          </sup>
+          <br>where each r<sub>i</sub> is the multiplicity of λ<sub>i</sub> as the root of the characteristic polynomial of u. It follows that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème</div> Le polynôme caractéristique de u possède toutes ses racines dans K. <br> Pour chaque valeur propre la dimension du sous-espace propre associé est égale à la multiplicité de la valeur propre comme racine du polynôme caractéristique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem</div> The characteristic polynomial of u has all its roots in K. <br>For each eigenvalue the dimension of the associated eigensubspace is equal to the multiplicity of the eigenvalue as a root of the characteristic polynomial.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème</div> En outre ces conditions nécessaires sont bien évidemment suffisantes et caractérisent donc les endomorphismes diagonalisables.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem</div> Moreover, these necessary conditions are obviously sufficient and therefore characterize the diagonalizable endomorphisms.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Un exemple traité </h2> On veut diagonaliser l'endomorphisme u de &reals;<sup>3</sup> ayant pour matrice relativement à la base canonique :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> An example treated </h2> We want to diagonalize the endomorphism u of ℝ<sup>3</sup> having as matrix relatively to the canonical basis:
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV CENTRE --> \[ \begin{pmatrix} 0& 1 & 1 \\ -1/2 & 3/2 & -1/2 \\ 3/2 & -3/2 & 1/2 \\ \end{pmatrix} \]
+        <!-- /FORMULE UNIV CENTRE-->
+        <div lang="fr"> On calcule le polynôme caractéristique et on remarque que les valeurs propres sont toutes simples: <br> valeur propre 1 : vecteur propre associé: (1,1,0) <br> valeur propre -1 : vecteur propre associé: (-1,0,1) <br> valeur propre 2 : vecteur propre associé: (0,1,-1) <br> Par rapport à la base ((1,1,0),(-1,0,1),(0,1,-1)) la matrice de u prend la forme: </div>
+        <!-- /fr -->
+        <div lang="en"> We calculate the characteristic polynomial and we notice that the eigenvalues ​​are quite simple: <br> eigenvalue 1: associated eigenvector: (1,1,0) <br> eigenvalue -1: associated eigenvector: (-1,0,1) <br> eigenvalue 2: associated eigenvector: (0,1,-1) <br> With respect to the basis ((1,1,0),(-1,0,1),(0,1,-1)) the matrix of u takes the form: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV CENTRE --> \[ \begin{pmatrix} 1& 0 & 0 \\ 0 & -1 & 0 \\ 0 & 0 & 2 \\ \end{pmatrix} \]
+        <!-- /FORMULE UNIV CENTRE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

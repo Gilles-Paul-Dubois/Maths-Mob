@@ -1,0 +1,109 @@
+﻿<html>
+ <head>
+  <title>
+   hamcayley.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">numpy </span><span class="s2">import </span><span class="s1">poly1d,matrix 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+</span><span class="s3">""" Programme qui vérifie le théoreme de Hamilton Cayley"""</span><span class="s1"> 
+ 
+</span><span class="s2">class </span><span class="s1">MatPol(object): 
+    </span><span class="s0">""" Matrice carrée à coefficients polynomiaux"""</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        self.order=len(L) 
+        self.coeffs=L 
+    </span><span class="s2">def </span><span class="s1">Ligne(self,i): 
+        </span><span class="s0">"""la ligne d'indice i"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i] 
+    </span><span class="s2">def </span><span class="s1">Coeff(self,i,j): 
+        </span><span class="s0">""" le coefficient ligne i colonne j"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i][j] 
+    </span><span class="s2">def </span><span class="s1">Mineur(self,i,j): 
+        </span><span class="s0">""" Mineur obtenu en supprimant la i-ième ligne et la j-ième colonne"""</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">delete (j,row): 
+            </span><span class="s2">return </span><span class="s1">[row[h] </span><span class="s2">for </span><span class="s1">h </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(row)) </span><span class="s2">if </span><span class="s1">h !=j] 
+        Lignes1=[ self.coeffs[k] </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.order) </span><span class="s2">if </span><span class="s1">k!=i] 
+        Lignes2= [delete(j,row) </span><span class="s2">for </span><span class="s1">row </span><span class="s2">in </span><span class="s1">Lignes1] 
+        </span><span class="s2">return </span><span class="s1">MatPol(Lignes2) 
+    </span><span class="s2">def </span><span class="s1">Det(self): 
+        </span><span class="s0">""" le déterminant"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.order==</span><span class="s4">1</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">self.Coeff(</span><span class="s4">0</span><span class="s1">,</span><span class="s4">0</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            L1=self.Ligne(</span><span class="s4">0</span><span class="s1">) 
+            Mineurs=[self.Mineur(</span><span class="s4">0</span><span class="s1">,j) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.order)] 
+            </span><span class="s2">def </span><span class="s1">alterne (j): 
+                </span><span class="s2">return </span><span class="s1">poly1d([-</span><span class="s4">1</span><span class="s1">]) </span><span class="s2">if </span><span class="s1">j%</span><span class="s4">2 </span><span class="s2">else </span><span class="s1">poly1d([</span><span class="s4">1</span><span class="s1">]) 
+            L2=[alterne(j)*L1[j] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.order)] 
+            L3=[Mineurs[i].Det()*L2[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.order)] 
+            </span><span class="s2">return </span><span class="s1">reduce((</span><span class="s2">lambda </span><span class="s1">x,y: x+y), L3) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">AmoinsXI(A): 
+    </span><span class="s0">""" transforme la matrice A en la matrice A-XI à coefficients polynomiaux"""</span><span class="s1"> 
+    Lignes=[[A[i,j] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(A))] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(A))] 
+    </span><span class="s2">def </span><span class="s1">transpol(c): 
+        </span><span class="s0">"""transforme un nombre en polynôme constant"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">poly1d([c]) 
+    </span><span class="s2">def </span><span class="s1">transpolligne(row): 
+        </span><span class="s0">""" Toute une ligne maintenant"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">[transpol(c) </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">row] 
+    LiPol=[transpolligne(ligne) </span><span class="s2">for </span><span class="s1">ligne </span><span class="s2">in </span><span class="s1">Lignes] 
+    </span><span class="s2">def </span><span class="s1">traite(row,i): 
+        </span><span class="s2">return </span><span class="s1">[ row[j] </span><span class="s2">if </span><span class="s1">j!=i </span><span class="s2">else </span><span class="s1">row[j]-poly1d([</span><span class="s4">1</span><span class="s1">,</span><span class="s4">0</span><span class="s1">]) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(row))] 
+    LiPol2=[traite(LiPol[i],i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(LiPol))] 
+    </span><span class="s2">return </span><span class="s1">MatPol(LiPol2) 
+ 
+</span><span class="s2">def </span><span class="s1">PolCar(A): 
+    </span><span class="s0">""" Calcule le polynôme caractéristique de la matrice A"""</span><span class="s1"> 
+    B=AmoinsXI(A) 
+    </span><span class="s2">return </span><span class="s1">B.Det() 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">PolValue(p,A): 
+    </span><span class="s0">"""Calcule la matrice obtenue en substituant A à l'indeterminée X dans le polynôme p"""</span><span class="s1"> 
+    print (p) </span><span class="s0"># voir le polynôme p</span><span class="s1"> 
+    L=list(p.__array__()) 
+    I=L.__reversed__() 
+    P=A**</span><span class="s4">0</span><span class="s1"> 
+    S=A*</span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">I: 
+        print (P) </span><span class="s0">#voir la puissance de A</span><span class="s1"> 
+        U=c*P 
+        print (U) </span><span class="s0"># le produit par le coefficient</span><span class="s1"> 
+        S+=U 
+        print (S) </span><span class="s0"># la somme partielle</span><span class="s1"> 
+        P=P*A 
+    </span><span class="s2">return </span><span class="s1">S 
+ 
+</span><span class="s2">def </span><span class="s1">main (): 
+    A=matrix([[</span><span class="s4">1</span><span class="s1">,</span><span class="s4">2</span><span class="s1">,</span><span class="s4">3</span><span class="s1">], [</span><span class="s4">4</span><span class="s1">,</span><span class="s4">5</span><span class="s1">,</span><span class="s4">6</span><span class="s1">],[</span><span class="s4">7</span><span class="s1">,</span><span class="s4">8</span><span class="s1">,</span><span class="s4">9</span><span class="s1">]]) 
+    p=PolCar(A) 
+    print (PolValue(p,A)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__==</span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

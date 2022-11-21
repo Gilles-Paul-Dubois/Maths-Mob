@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Portées des variables</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+
+	
+	
+
+
+</head>
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="b">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="b">
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+ 	 <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+
+	 <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+<h2>Définitions</h2>
+ Il y a un rapport entre l'utilisation des variables en logique et en
+programmation.
+  <br/>
+  En particulier les notions d'occurrences
+  <span style="font-weight: bold; font-style: italic;">
+   'libres'
+  </span>
+  et
+  <span style="font-weight: bold; font-style: italic;">
+   'liées'
+  </span>
+  existent dans les deux domaines.
+  <br/>
+  Dans un énoncé une même variable peut apparaître plusieurs fois (en
+plusieurs endroits différents), on parle alors
+  <span style="font-weight: bold; font-style: italic;">
+   "d'occurences"</span>.
+  <br/>
+  Le qualificatif 'lié' ou son contraire 'libre' s'applique à une occurrence ET à un contexte (un
+énoncé dans lequel la variable apparaît).
+<br />
+   Prenons ainsi l'énoncé:
+   <br/>
+   ∀x aime(x,y)
+   <br/>
+   Signifiant à peu près : "Tout le monde aime y".
+   <br/>
+   On remarque deux choses dans un tel énoncé:
+   <br/>
+   <ul>
+    <li>
+     Pour décider de sa  validité, il faut absolument donner une
+valeur à y
+    </li>
+    <li>
+     le symbole x peut être remplacé par tout autre symbole (sauf y, bien
+sûr, car alors le sens serait 'Tout le monde a de l'amour propre').
+    </li>
+   </ul>
+ 
+<div id="container">
+<div id="label">définition</div>   Dans un tel
+énoncé on dit que l'occurrence de x est
+   <span style="font-weight: bold; font-style: italic;">
+    liée
+   </span>
+   et que
+l'occurrence de y est
+   <span style="font-weight: bold; font-style: italic;">
+    libre
+   </span>
+   .</div>
+  
+  <br/>
+  Plus généralement, dans un
+énoncé quantifié du genre :
+ 
+<div id="container">
+<div id="label">définition</div>   ∀x E(x)
+   <br/>
+   où x désigne une variable et E(x) un énoncé contenant la variable x. E(x) s'appelle le
+   <span style="font-weight: bold; font-style: italic;">
+    'corps'
+   </span>
+   de l'énoncé (anglais: body) , un peu comme le corps d'une fonction
+qui exprime sa définition dans un langage de programmation procédural..</div>
+ 
+ 
+<div id="container">
+   Ainsi relativement  à tout
+énoncé quantifié du type 
+∀ x E(x), toute occurrence de x dans E(x) est liée.</div>
+
+  Ainsi dans l'énoncé:
+  <br/>
+  aime(x,y) (l'individu x aime l'individu y)
+  <br/>
+  x et y sont des occurrences libres
+  <br/>
+  dans
+l'énoncé :
+  <br/>
+  ∀x aime(x,y) (tout le monde aime y)
+  <br/>
+  x est lié et y est libre
+  <br/>
+  dans
+l'énoncé:
+  <br/>
+  ∀y∀x aime(x,y) (tout le monde aime tout le monde)
+  <br/>
+  x et y sont liés.
+  <br/>
+  <br/>
+  <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>
+  A l'intérieur d'une même formule, différentes occurrences d'une même variable peuvent être libres ou liées.
+  <br/>
+  Voici un exemple:
+  <br/>
+  R(x)∧∃x (¬R(x))
+  <br/>
+  Cette formule signifie que x possède la propriété R mais que cette propriété n'est pas vérifiée par tous les éléments.
+  <br/>
+  De
+fait, il y a deux variables sous-jacentes mais il advient qu'elles ont
+reçu le même nom. D'après la portée on doit savoir de laquelle il
+s'agit. En informatique nous dirions que la variable locale 'éclipse' ou 'occulte'
+la variable globale. Vu de cette manière on peut dire que les variables
+libres des énoncés correspondent aux variables globales en
+programmation.
+  <br/>
+  Compte tenu de ce que nous avons dit, la formule ci-dessus est tout à fait équivalente à:
+  <br/>
+  R(x)∧∃y (¬R(y))
+  <br/>
+  qui
+apparaît comme plus claire.
+  <br/>
+  Quel
+que soit le nombre des variables impliquées il est toujours possible de
+renommer pour parvenir à des formules où ne subsiste aucun télescopage.
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<h2>Definitions </h2>There is a relationship between the use of variables in logic and in
+ programming.
+   <br>In particular the notions of occurrences 
+   <span style="font-weight: bold; font-style: italic;">
+    'free' 
+   </span>
+   and 
+   <span style="font-weight: bold; font-style: italic;">
+    'bound' 
+   </span>
+   exist in both areas. 
+   <br>In a statement, the same variable can appear several times (in 
+ several different places), we then speak of
+   <span style="font-weight: bold; font-style: italic;">
+    'occurrences' </span>. 
+   <br>The qualifier 'bound' or its opposite 'free' applies to an occurrence AND to a context (a
+ statement in which the variable appears).
+ <br>
+   Take the statement as follows:
+    <br>
+   ∀x likes(x,y)
+    <br>
+   Meaning roughly: "Everyone likes y".
+    <br>
+   We notice two things in such a statement:
+    <br>
+   <ul>
+    <li>To decide on its validity, it is absolutely necessary to give a
+ value at y
+     </li>
+    <li>the symbol x can be replaced by any other symbol (except y, of course, because then the meaning would be 'Everyone has self-esteem').
+     </li>
+   </ul>
+ 
+<div id="container">
+<div id="label">definition </div>In such 
+ statement we say that the occurrence of x is 
+    <span style="font-weight: bold; font-style: italic;">
+     bound 
+    </span>
+    and 
+ the occurrence of y is 
+    <span style="font-weight: bold; font-style: italic;">
+     free 
+    </span>
+    . </div>
+  
+  <br>More generally, in a
+ quantified statement like:
+ 
+ <div id="container">
+<div id="label">definition </div>∀x E (x)
+    <br>where x denotes a variable and E(x) a statement containing the variable x. E(x) is called the 
+    <span style="font-weight: bold; font-style: italic;">
+     'body' 
+    </span>
+    of the statement, much like the body of a function 
+ which expresses its definition in a procedural programming language. </div>
+ 
+ 
+<div id="container">So relative to everything
+ quantified type statement 
+ ∀ x E(x), every occurrence of x in E(x) is bound. </div>
+
+  So in the statement:
+   <br>
+  likes(x,y) (individual x likes individual y)
+   <br>
+  x and y are free occurrences
+   <br>in
+ the statement:
+   <br>
+  ∀x likes(x,y) (everyone likes y)
+   <br>
+  x is bound and y is free
+   <br>in
+ the statement:
+   <br>
+  ∀y∀x likes(x,y) (everyone likes everyone)
+   <br>
+  x and y are bound.
+   <br>
+  <br>
+  <img alt="" src="../../images/attention.gif" width="40" height="40" border="0">
+  Within the same formula, different occurrences of the same variable can be free or linked.
+   <br>
+  Here is an example:
+   <br>
+  R(x)∧∃x (¬R(x))
+   <br>
+  This formula means that x has the property R but that this property is not verified by all the elements.
+   <br>Of
+ fact, there are two underlying variables but it happens that they have
+ received the same name.  According to the scope we must know from which it
+ is.  In computing we would say that the local variable 'eclipses' or 'occults' (hides)
+ the global variable.  Seen in this way we can say that free variables of 
+ statements correspond to the global variables in
+ programming.
+   <br>
+  Given what we have said, the above formula is quite equivalent to:
+   <br>
+  R(x)∧∃y (¬R(y))
+   <br>who
+ appears to be clearer.
+   <br>What
+ regardless of the number of variables involved, it is always possible to
+ rename to reach formulas where no telescoping (conflict of names) remains.
+
+</div><!-- /en --> 
+
+<div lang="fr">
+  <h2>
+   Le coin de Python
+  </h2>
+  <p>
+   Programme exemple sur la portée des variables.
+  </p>
+  <object border="3" data="python/portee.html" height="400" type="text/html" width="100%">
+  </object>
+  <p>
+   Quelques règles simples à retenir donc:
+  </p>
+  <p>
+   Si, depuis une fonction on veut accéder à une variable globale:
+  </p>
+  <ul>
+   <li>
+    Ne nommer aucun paramètre formel de la fonction avec le nom de la variable globale.
+   </li>
+   <li>
+    Ne nommer aucune variable locale de la fonction avec le nom de la variable globale.
+   </li>
+  </ul>
+  <p>
+   En outre, dans tous les cas:
+  </p>
+  <ul>
+   <li>
+    Ne jamais choisir pour nom de variable locale un paramètre formel.
+   </li>
+  </ul>
+  Le respect de ces trois règles doit vous garantir l'absence de téléscopage. On force les programmeurs travaillant en équipe sur de vastes projets à utiliser des 'espaces de noms' pour les modules qu'ils rédigent. Ainsi la variable x du programmeur lambda sera reconnue comme lambda::x ou bien lambda.x au montage.
+  <br/>
+  <h2>
+   Le coin de Julia
+  </h2>
+  <p>
+   Programme exemple sur la portée des variables. Différence avec Python, les variables locales d'une fonction, déclarées dans le corps de cette fonction ont accès aux variables locales de la fonction mère et peuvent les modifier.
+  </p>
+  <object border="3" data="julia/portvar1.jl.html" height="400" type="text/html" width="100%">
+  </object>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+ <h2>
+   Python's corner
+   </h2>
+  <p>
+   Sample program on variable scope.
+   </p>
+  <object data="python/portee_en.html" type="text/html" width="100%" height="400" border="3">
+  </object>
+  <p>
+   A few simple rules to remember:
+   </p>
+  <p>
+   If, from a function, we want to access a global variable:
+   </p>
+  <ul>
+   <li>
+    Do not name any formal parameter of the function with the name of a global variable.
+    </li>
+   <li>
+    Do not name any local variable of the function with the name of a global variable.
+    </li>
+  </ul>
+  <p>
+   In addition, in all cases:
+   </p>
+  <ul>
+   <li>
+    Never choose a formal parameter for a local variable name.
+    </li>
+  </ul>Compliance with these three rules should guarantee the absence of telescoping.  Programmers working in teams on large projects are forced to use 'namespaces' for the modules they write.  So the x variable of the lambda programmer will be recognized as lambda::x or lambda.x on mounting.
+   <br>
+  <h2>
+   Julia's corner
+   </h2>
+  <p>Sample program on variable scope.  Difference with Python, the local variables of a function, declared in the body of this function have access to the local variables of the mother function and can modify them.
+   </p>
+  <object data="julia/portvar1.jl_en.html" type="text/html" width="100%" height="400" border="3">
+  </object>
+
+
+</div><!-- /en --> 
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

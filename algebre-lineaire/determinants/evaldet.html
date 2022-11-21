@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Evaluation des déterminants</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/evaldet/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/evaldet/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Algorithme naïf </h2> Pour le calcul on peut toujours s'en tenir à la définition. Voir à ce propos le calcul fait en langage Python et donné en exemple <input type="button" value="ici" onclick="go('detmatrice.html#python')" data-inline="true" /> Toutefois, pour une matrice d'ordre n, le nombre des termes de la somme est n!. Le calcul de chaque terme nécessite n-1 multiplications. L'algorithme est donc en n!(n-1) du point de vue des multiplications, ce qui fait qu'en pratique on n'aura guère recours à lui pour des matrices de rang élevé. <h2> Développement suivant une ligne (ou une colonne) </h2>
+          <p> L'algorithme ci-après, de type récursif, est certainement un des plus faciles à mettre en oeuvre pour un calcul manuel avec des matrices de taille modeste. Il est traité ci-dessous dans un exemple python.</p>
+          <p> Commençons par la notion de 'mineur'.</p>
+          <div id="container">
+            <div id="label">définition</div> Dans un déterminant un <b>
+              <i>'mineur'</i>
+            </b> est obtenu en supprimant un certain nombre de lignes et autant de colonnes du déterminant d'origine. Un mineur d'ordre n-1 s'obtient en supprimant une ligne et une colonne exactement.
+          </div>
+          <p> Ainsi à tout déterminant D et à tout couple d'indice i,j on peut associer le mineur D<sub>i,j</sub> d'ordre n-1, obtenu à partir de D en supprimant la i-ième ligne et la j-ième colonne. </p>
+          <p> L'appliquette qui suit donne des exemples de calculs de mineurs.
+          <ul>
+            <li>Sélectionnez un coefficient de la matrice avec la souris.</li>
+            <li>La ligne et la colonne qui disparaissent s'affichent en jaune.</li>
+            <li>Le mineur correspondant est calculé et affiché au signe près avec un facteur (-1)<sup>i+j </sup>. </li>
+            <li>Vous pouvez choisir un corps entre 4 possibilités.</li>
+            <li>Vous pouvez également choisir l'ordre de la matrice.</li>
+          </ul>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Naive algorithm </h2>For the calculation one can always stick to the definition. See at this about the calculation done in Python language and given as an example <input type="button" value="here" onclick="go('detmatrice.html#pythone')" data-inline="true">. However, for a matrix of order n, the number of terms of the sum is n!. The calculation of each term requires n-1 multiplications. The algorithm is therefore in n!(n-1) from the point of view of multiplications, which means that in practice we will hardly have recourse to him for high rank matrices. <h2> Expansion along a row (or column) </h2>
+          <p>The algorithm below, of recursive type, is certainly one of the easiest to implement for a manual calculation with matrices of modest size. It is covered below in a python example. </p>
+          <p>Let's start with the notion of 'minor'. </p>
+          <div id="container">
+            <div id="label">definition </div>In a determinant a <b>
+              <i>'minor' </i>
+            </b> is obtained by deleting a certain number of rows and as many columns of the original determinant. A minor of order n-1 is obtained by removing exactly one row and one column.
+          </div>
+          <p>Thus to any determinant D and to any pair of index i,j we can associate the minor D<sub>i,j</sub> of order n-1, obtained from D by deleting the i-th row and the j-th column. </p>
+          <p>The following applet gives examples of minor calculations. </p>
+          <ul>
+            <li>Select a matrix coefficient with the mouse. </li>
+            <li>The disappearing row and column are displayed in yellow. </li>
+            <li>The corresponding minor is calculated and displayed to the nearest sign with a factor (-1)<sup>i+j </sup>. </li>
+            <li>You can choose a body between 4 possibilities. </li>
+            <li>You can also choose the order of the matrix. </li>
+          </ul>
+          <p></p>
+        </div>
+        <!-- /en -->
+        <div>
+          <table bgcolor="#FFFFFF" border="2" id="myTable">
+            <tr>
+              <td>
+                <button onclick="nameSpace2.Paint();" type="button">
+                  <div lang="fr"> Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <input id="myText1" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <table border="1">
+                <tr>
+                  <td height="30">&reals;</td>
+                  <td width="50">
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1" />
+                  </td>
+                  <td> &rationals;</td>
+                  <td width="50">
+                    <input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="2" />
+                  </td>
+                  <td>&integers;/5&integers;</td>
+                  <td width="50">
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="3" />
+                  </td>
+                  <td>&complexes;</td>
+                  <td width="50">
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4" />
+                  </td>
+                </tr>
+              </table>
+            </tr>
+            <tr>
+              <div lang="fr">Ordre de la matrice carrée A :</div>
+              <!-- /fr -->
+              <div lang="en">Order of matrix A :</div>
+              <!-- /en -->
+              <input id="myRange1" max="4" min="2" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range" />
+            </tr>
+          </table>
+        </div>
+        <script src="js/mineurs.js"></script>
+        <div lang="fr">
+          <p> Soit donc D= |α<sub>i,j</sub>| un déterminant. Le résultat suivant est intéressant: </p>
+          <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si i est un indice ligne quelconque \[D=\sum_{1\leqslant j\leqslant n}^{}(-1)^{i+j}\alpha _{i,j}D_{i,j}\]
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4>
+            <p>Donnons la démonstration pour n=3. Dans le cas général elle n'est pas plus difficile, mais les notations indicées sont assez lourdes et posent un problème essentiellement typographique. </p>
+            <p>Etant donné que le déterminant est multilinéaire :</p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& b& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& 0& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} \] <p>Etant donné qu'il est alterné :</p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} - \begin{vmatrix} b& 0& 0\\ e& d& f\\ h& g& i\\ \end{vmatrix} - \begin{vmatrix} c& 0& 0\\ f& e& d\\ i& h& g\\ \end{vmatrix} \] <p>Considérons maintenant le déterminant: </p> \[\begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix}\] <p>On s'aperçoit en le développant que tous les termes correspondant à des permutations changeant le premier indice sont nuls. Ce déterminant vaut donc: </p> \[a\begin{vmatrix} e& f \\ h& i\\ \end{vmatrix}\] <p>et il en est de même des deux autres: </p> \[b\begin{vmatrix} d& f \\ g& i\\ \end{vmatrix}\] <p>et</p> \[c\begin{vmatrix} e& d \\ h& g\\ \end{vmatrix}\] <p>La somme des 3 est donc avec nos notations: aD<sub>1,1</sub>-bD<sub>1,2</sub>-c(-D<sub>1,3</sub>)=aD<sub>1,1</sub>-bD<sub>1,2</sub>+cD<sub>1,3</sub>
+              <br> CQFD dans le cas n=3 donc.
+            </p>
+          </div>
+          <div id="container">
+            <div id="label">définition</div> Cette formule s'appelle <b>
+              <i>'le développement du déterminant suivant la i-ième ligne'</i>
+            </b>.
+          </div>
+          <p>On a évidemment l'analogue suivant la j-ième colonne.</p>
+          <p> On privilégiera donc les lignes et les colonnes comportant un maximum de zéros à chaque étape du calcul et de façon récursive.</p>
+          <p> Du point de vue de l'efficacité, cependant ce n'est guère meilleur que la méthode précédente. le nombre des multiplications reste en O(n!).</p>
+          <h2> Le pivot de Gauss </h2>
+          <p>Supposons que notre matrice A soit de la forme:</p> \[A=\begin{pmatrix} a& x & y& . & z \\ 0& & & & \\ 0& & {\huge B} & & \\ 0& & & & \\ 0& & & & \\ \end{pmatrix}\] <p>Alors en développant suivant la première colonne. Det(A)=aDet(B). Le calcul du déterminant de A se résume à un calcul de déterminant d'ordre n-1 et une multiplication.</p>
+          <p> L'idée de la méthode de Gauss est d'amener la matrice A à une forme telle que celle montrée ici, par des manipulations sur les lignes ne changeant pas la valeur du déterminant (ajout à une ligne d'une combinaison linéaire des autres lignes).</p>
+          <p> Remarquons tout d'abord que si tous les coefficients de la première colonne sont nuls alors le calcul est terminé, le déterminant est nul. Soit donc le premier indice i tel que le premier coefficient de la ligne i ne soit pas nul, coefficient que nous appelerons le 'pivot'. Quitte à changer le signe du déterminant nous pouvons par permutation des lignes, amener la ligne i en première position. Cela fait, nous soustrayons à chaque ligne i pour i &gt; 1 la ligne α<sub>i,1</sub>/α<sub>1,1</sub>L<sub>1</sub> où L<sub>1</sub> est la première ligne. Notre matrice prend la forme voulue. On peut montrer que cet algorithme est polynomial en n<sup>3</sup>, ce qui est nettement meilleur que n!. </p>
+          <p> Voici une appliquette qui montre comment fonctionne l'algorithme, étape par étape.</p>
+          <ul>
+            <li>Vous pouvez sélectionner l'ordre de la matrice l'ordre de la matrice.</li>
+            <li>Une matrice aléatoire est générée à coefficients dans un corps de votre choix.</li>
+            <li>Cliquez ensuite sur 'Etape suivante' autant de fois que nécessaire.</li>
+            <li>Vous voyez à chaque fois la transformation qui est réalisée faisant apparaître des zéros dans la colonne 1, puis la colonne 2, et ainsi de suite.</li>
+          </ul> Quand le processus est terminé, vous pouvez constater que le déterminant affiché est le produit des éléments diagonaux.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Let D= |α<sub>i,j</sub>| a determinant. The following result is interesting: </p>
+          <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If i is any row index \[D=\sum_{1\leqslant j\leqslant n}^{}(-1)^{i+j}\alpha _{i,j}D_{i,j}\]
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>
+            <p>We give the proof for n=3. In the general case it is not more difficult, but the indexed notations are quite cumbersome and cause a problem essentially typographic. </p>
+            <p>Since the determinant is multilinear: </p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& b& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& 0& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} \] <p>Since it is alternating: </p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} - \begin{vmatrix} b& 0& 0\\ e& d& f\\ h& g& i\\ \end{vmatrix} - \begin{vmatrix} c& 0& 0\\ f& e& d\\ i& h& g\\ \end{vmatrix} \] <p>Now consider the determinant: </p> \[\begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix}\] <p>One realizes by developing it that all the terms corresponding to permutations changing the first index are zero. This determinant is therefore: </p> \[a\begin{vmatrix} e& f \\ h& i\\ \end{vmatrix}\] <p>and the same goes for the other two: </p> \[b\begin{vmatrix} d& f \\ g& i\\ \end{vmatrix}\] <p>and</p> \[c\begin{vmatrix} e& d \\ h& g\\ \end{vmatrix}\] <p>The sum of the 3 is therefore with our notations: aD<sub>1.1</sub>-bD<sub>1.2</sub>-c(-D<sub>1.3</sub>)=aD<sub>1.1</sub>-bD<sub>1.2</sub>+cD<sub>1.3</sub>
+              <br> QED in the case n=3 .
+            </p>
+          </div>
+          <div id="container">
+            <div id="label">definition </div>This formula is called <b>
+              <i>'the expansion of the determinant along the i-th line' </i>
+            </b>.
+          </div>
+          <p>We obviously have the analog following the j-th column. </p>
+          <p>Rows and columns with a maximum of zeros at each stage of the calculation and recursively will therefore be preferred. </p>
+          <p>From an efficiency point of view, however it is not much better than the previous method. The number of multiplications remains in O(n!). </p>
+          <h2> Gauss' pivot </h2>
+          <p>Suppose our matrix A is of the form: </p> \[A=\begin{pmatrix} a& x & y& . & z \\ 0& & & & \\ 0& & {\huge B} & & \\ 0& & & & \\ 0& & & & \\ \end{pmatrix}\] <p>Then by expanding along the first column. Det(A)=aDet(B). The calculation of the determinant of A boils down to a calculation of determinant of order n-1 and a multiplication. </p>
+          <p>The idea of ​​Gauss's method is to bring the matrix A to a form such as the one shown here, by manipulations on the lines not changing the value of the determinant (addition to a line of a linear combination of the other lines). </p>
+          <p>Note first that if all the coefficients of the first column are null then the calculation is finished, the determinant is null. Let the first index i be such that the first coefficient of the line i is not zero, coefficient that we will call the 'pivot'. Even if it means changing the sign of the determinant, we can by permutating rows, bring row i to the first position. This done, we subtract from each line i for i &gt; 1 the line α<sub>i,1</sub>/α<sub>1,1</sub>L<sub>1</sub> where L<sub>1</sub> is the first line. Our matrix takes the desired shape. We can show that this algorithm is polynomial in n<sup>3</sup>, which is clearly better than n!. </p>
+          <p>Here is an applet that shows how the algorithm works, step by step. </p>
+          <ul>
+            <li>You can select the order of the matrix. </li>
+            <li>A random matrix is ​​generated with coefficients in a field of your choice. </li>
+            <li>Then click on 'Next step' as many times as necessary. </li>
+            <li>You see each time the transformation that is achieved by doing zeros appear in column 1, then column 2, and so on. </li>
+          </ul> When the process is completed, you can see that the determinant displayed is the product of the diagonal elements.
+        </div>
+        <!-- /en -->
+        <div>
+          <table bgcolor="#FFFFFF" border="2" id="myTable3">
+            <tr>
+              <td align="center">
+                <canvas height="200" id="spaceName3.myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <table border="1">
+                <tr>
+                  <td height="30">&reals;</td>
+                  <td width="50">
+                    <input checked="" name="corps3" onclick="nameSpace3.handleClick(this);" type="radio" value="1" />
+                  </td>
+                  <td>&rationals;</td>
+                  <td width="50">
+                    <input name="corps3" onclick="nameSpace3.handleClick(this);" type="radio" value="2" />
+                  </td>
+                  <td>&integers;/5&integers;</td>
+                  <td width="50">
+                    <input name="corps3" onclick="nameSpace3.handleClick(this);" type="radio" value="3" />
+                  </td>
+                  <td>&complexes;</td>
+                  <td width="50">
+                    <input name="corps3" onclick="nameSpace3.handleClick(this);" type="radio" value="4" />
+                  </td>
+                </tr>
+              </table>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr"> Nombre de lignes : </div>
+                <!-- /fr -->
+                <div lang="en">Number of rows :</div>
+                <!-- /en -->
+                <input id="spaceName3.myRange1" max="4" min="1" value="3" onchange="nameSpace3.changem(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input id="myText3" type="text" />
+              </td>
+            </tr>
+            <td>
+              <button onclick="nameSpace3.New();" type="button">
+                <div lang="fr">Nouvel exemple</div>
+                <!-- /fr -->
+                <div lang="en">New example</div>
+                <!-- /en -->
+              </button>
+              <button onclick="nameSpace3.nextStep();" type="button">
+                <div lang="fr"> Etape suivante</div>
+                <!-- /fr -->
+                <div lang="en">Next step</div>
+                <!-- /en -->
+              </button>
+            </td>
+          </table>
+        </div>
+        <script src="js/caldetpivot.js"></script>
+        <div lang="fr">
+        <a name="blocs"></a>
+          <h2> Calcul par blocs </h2>
+          <p> Supposons que notre matrice M soit de la forme:</p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) \] <p>où A et C sont des matrices carrées sur la diagonale, 0 désignant ici une matrice nulle et B une matrice quelconque. Dans ces conditions:</p>
+          <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Det(M)=Det(A)Det(C)
+          </div>
+          <p>La preuve résulte dans le produit:</p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) = \left( \begin{array}{c|c} I & O \\ \hline O & C \end{array} \right) \times \left( \begin{array}{c|c} A & B \\ \hline O & I \end{array} \right) \] <p>et le théorème sur le <input type="button" value="déterminant d'un produit" onclick="go('detmatrice.html#th8')" data-inline="true" />. </p>
+          <p> Cela se généralise récursivement au cas où M est 'triangulaire par blocs'.</p>
+          <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Cas particulier: Les matrices <input type="button" value="triangulaires" onclick="go('../matrices/mattri.html')" data-inline="true" />. Leur déterminant est simplement le produit des coefficients diagonaux.
+          </div>
+          <h2> Exemple avec le corps des rationnels </h2> Voici une appliquette qui vous permet de tester si vous savez calculer un déterminant d'ordre 3. <ul>
+            <li>Calculez le déterminant de la matrice proposée dont tous les coefficients sont rationnels.</li>
+            <li>Inscrire votre réponse dans les champs texte 'Numérateur' et 'Dénominateur'.</li>
+            <li>Appuyer ensuite sur le bouton 'Vérifier'.</li>
+          </ul> Si votre réponse est exacte un message 'Bonne réponse' sera envoyé.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+        <a name="blocse"></a>
+          <h2> Calculation by blocks </h2>
+          <p>Suppose our matrix M is of the form: </p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) \] <p>where A and C are square matrices on the diagonal, 0 here designating a zero matrix and B any matrix. In these conditions: </p>
+          <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>Det(M)=Det(A)Det(C)
+          </div>
+          <p>The proof results in the product: </p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) = \left( \begin{array}{c|c} I & O \\ \hline O & C \end{array} \right) \times \left( \begin{array}{c|c} A & B \\ \hline O & I \end{array} \right) \] <p>and the theorem on the <input type="button" value="determinant of a product" onclick="go('detmatrice.html#th8e')" data-inline="true">. </p>
+          <p>This generalizes recursively to the case where M is 'triangular by blocks'. </p>
+          <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>Special case: <input type="button" value="triangular" onclick="go('../matrices/mattri.html')" data-inline="true"> matrices. Their determinant is simply the product of the diagonal coefficients.
+          </div>
+          <h2> Example with the field of rationals </h2> Here is an applet that allows you to test if you know how to calculate a determinant of order 3. <ul>
+            <li>Calculate the determinant of the proposed matrix all of whose coefficients are rational. </li>
+            <li>Enter your answer in the 'Numerator' and 'Denominator' text fields. </li>
+            <li>Then press the 'Check' button. </li>
+          </ul>
+          <p>If your answer is correct, a 'Good answer' message will be sent.</p>
+        </div>
+        <!-- /en -->
+        <div>
+          <table bgcolor="#FFFFFF" border="2" id="myTable4">
+            <tr>
+              <td>
+                <button onclick="nameSpace4.Paint();" type="button">
+                  <div lang="fr">Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+                <button onclick="nameSpace4.Check();" type="button">
+                  <div lang="fr">Vérifier réponse</div>
+                  <!-- /fr -->
+                  <div lang="en">Check answer</div>
+                  <!-- /en -->
+                </button>
+                <button onclick="nameSpace4.SeeDet();" type="button">
+                  <div lang="fr">Voir résultat</div>
+                  <!-- /fr -->
+                  <div lang="en">See result</div>
+                  <!-- /en -->
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div lang="fr">Numérateur :</div>
+                <!-- /fr -->
+                <div lang="en">Numerator :</div>
+                <!-- /en -->
+                <input id="nameSpace4.num" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div lang="fr">Dénominateur :</div>
+                <!-- /fr -->
+                <div lang="en">Denominator :</div>
+                <!-- /en -->
+                <input id="nameSpace4.den" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <input id="nameSpace4.myText1" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="nameSpace4.myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/caldetrat.js"></script>
+        <div lang="fr">
+          <h2> Exemple avec les corps ℤ/pℤ </h2> Voici une appliquette qui vous permet de tester si vous savez calculer un déterminant d'ordre 3. <ul>
+            <li>Calculez le déterminant de la matrice proposée dont tous les coefficients sont dans le corps ℤ/5ℤ.</li>
+            <li>Une matrice sera générée.</li>
+            <li>Inscrire votre réponse dans le champs texte 'Résultat'.</li>
+            <li>Appuyer ensuite sur le bouton 'Vérifier'.</li>
+          </ul> Si votre réponse est exacte un message 'Bonne réponse' sera envoyé.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Example with fields ℤ/pℤ </h2> Here is an applet that allows you to test if you know how to calculate a determinant of order 3. <ul>
+            <li>Calculate the determinant of the proposed matrix all the coefficients of which are in the field ℤ/5ℤ. </li>
+            <li>A matrix will be generated. </li>
+            <li>Enter your answer in the 'Result mod 5' text field. </li>
+            <li>Then press the 'Check answer' button. </li>
+          </ul> If your answer is correct, a 'Good answer' message will be sent.
+        </div>
+        <!-- /en -->
+        <div>
+          <table bgcolor="#FFFFFF" border="2" id="myTable5">
+            <tr>
+              <td>
+                <button onclick="nameSpace5.Paint();" type="button">
+                  <div lang="fr">Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+                <button onclick="nameSpace5.Check();" type="button">
+                  <div lang="fr">Vérifier réponse</div>
+                  <!-- /fr -->
+                  <div lang="en">Check answer</div>
+                  <!-- /en -->
+                </button>
+                <button onclick="nameSpace5.SeeDet();" type="button">
+                  <div lang="fr">Voir résultat</div>
+                  <!-- /fr -->
+                  <div lang="en">See result</div>
+                  <!-- /en -->
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div lang="fr">Résultat mod 5 :</div>
+                <!-- /fr -->
+                <div lang="en">Result mod 5 :</div>
+                <!-- /en -->
+                <input id="nameSpace5.mod" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <input id="nameSpace5.myText1" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="nameSpace5.myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/caldetmod.js"></script>
+        <div lang="fr">
+          <h2> Le coin de Python </h2> Voici un programme qui utilise une librairie pour calculer un déterminant de matrice: <p>
+            <object border="3" data="python/caldetscipy1.html" height="100" type="text/html" width="100%"></object>
+          </p> Voici un programme qui utilise le développement suivant une ligne pour calculer un déterminant de matrice: <br>
+          <p>
+            <object data="python/caldetdevligne.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p> Voici un programme qui utilise la méthode de Gauss pour calculer un déterminant de matrice: <p>
+            <object data="python/caldetpivot.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2>Le coin de Julia</h2>
+          <p>Même chose avec Julia 1.6</p>
+          <p>
+            <object data="julia/detdev1.jl.html" type="text/html" width="100%" height="250" border="3"></object>
+          </p>
+          <p>
+            <object data="julia/caldetpivot.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p> Alternativement, utilisation d'une bibliothèque (LinearAlgebra) <p>
+            <object data="julia/Q_caldet2.jl.html" type="text/html" width="100%" height="80" border="3"></object>
+          </p>
+          <p>Cas des corps finis ℤ/pℤ</p>
+          <p>
+            <object data="julia/Fp_caldet.jl.html" type="text/html" width="100%" height="200" border="3"></object>
+          </p>
+          <p>Alternativement pour les corps ℤ/pℤ on peut utiliser la fonction prédéfinie det de la bibliothèque Nemo.</p>
+          <p>
+            <object data="julia/Fp_caldet2.jl.html" type="text/html" width="100%" height="120" border="3"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's Corner </h2> Here is a program that uses a library to calculate a matrix determinant: <p>
+            <object data="python/caldetscipy1.html" type="text/html" width="100%" height="100" border="3"></object>
+          </p> Here is a program that uses line expansion to calculate a matrix determinant: <br>
+          <p>
+            <object data="python/caldetdevligne.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p> Here is a program that uses Gauss's method to calculate a matrix determinant: <p>
+            <object data="python/caldetpivot.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2>Julia's corner </h2>
+          <p>Same with Julia 1.6 </p>
+          <p>
+            <object data="julia/detdev1.jl.html" type="text/html" width="100%" height="250" border="3"></object>
+          </p>
+          <p>
+            <object data="julia/caldetpivot.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p> Alternatively, using a library (LinearAlgebra) <p>
+            <object data="julia/Q_caldet2.jl.html" type="text/html" width="100%" height="80" border="3"></object>
+          </p>
+          <p>Case of finite fields ℤ/pℤ </p>
+          <p>
+            <object data="julia/Fp_caldet.jl.html" type="text/html" width="100%" height="200" border="3"></object>
+          </p>
+          <p>Alternatively for the fields ℤ/pℤ one can use the predefined function det from the Nemo library. </p>
+          <p>
+            <object data="julia/Fp_caldet2.jl.html" type="text/html" width="100%" height="120" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

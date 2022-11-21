@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 02</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+ 
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="c">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../demonstrations.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p> Une bande de 17 pirates s'est empar&#233;e d'un butin compos&#233; de pi&#232;ces d'or d'&#233;gale valeur. Ils d&#233;cident de se les partager &#233;galement et de donner le reste au cuisinier chinois. Celui-ci recevrait trois pi&#232;ces. Mais les pirates se querellent et six d'entre eux sont tu&#233;s. Le cuisinier recevrait alors 4 pi&#232;ces. Survient alors un naufrage et seuls 6 pirates, le cuisinier et le tr&#233;sor sont sauv&#233;s et le partage laisserait 5 pi&#232;ces d'or &#224; ce dernier. Quelle est alors la fortune minimale que peut esp&#233;rer ce dernier s'il d&#233;cide d'empoisonner le reste des pirates ? <br> R&#233;soudre ce probl&#232;me manuellement. <br> Ecrire un programme qui r&#233;soud le probl&#232;me g&#233;n&#233;ral (th&#233;or&#232;me chinois) et utiliser ce programme pour v&#233;rifier votre r&#233;ponse. </p>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <p>Il s'agit de trouver x positif et minimal v&#233;rifiant le syst&#232;me: <br> x &#8801; 3 [17] <br> x &#8801; 4 [11] <br> x &#8801; 5 [6] <br> Voir le <input type="button" value="cours" onclick="go('../../prementreux.html#chinois')" data-inline="true" />. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <p> D'après le théorème des restes chinois (puisque 17, 11 et 6 sont premiers entre eux deux à deux), les solutions sont de la forme : x = v<sub>1</sub>×11×6×3+v<sub>2</sub>×17×6×4 + v<sub>3</sub>×17×11×5+k×17×11×6 <br> ou encore x = 198v<sub>1</sub>+408v<sub>2</sub>+935v<sub>3</sub>+1122k. <br> Il reste à trouver les v<sub>i</sub> : <br> On a par division euclidienne : <br> 66=3×17+15 <br> 17=1×15+2 <br> 15=7×2+1 <br> On en déduit que 1 = 15-7×2 et puisque 2= 17-1×15, on a 1=15-7(17-1×15) c'est-à-dire 1=8×15-7×17. <br> Mais 15=66-3×17 d'où 1=8(66-3×17)-7×17. On obtient pour finir 1=8×66-31×17 et v<sub>1</sub>=8. <br> De la même manière, on trouve v<sub>2</sub>=4 et v<sub>3</sub>=1. <br> Donc x=198×8+408×4+935+1122k = 4151+1122k. <br> 4151 est donc une solution possible pour notre cuisinier, mais ce n'est pas la plus petite. Il suffit d'effectuer la division de 4151 par 1122 pour trouver comme reste 785 qui est le nombre minimal de pièces que peut obtenir le cuisinier. </p>
+            <p>Solution avec Python 3.4</p>
+            <p>
+              <object data="../../python/chinois.html" type="text/html" width="600" height="400" border="3"></object>
+            </p> Même chose avec Julia 1.6 <p>
+              <object data="../../julia/chinois.jl.html" type="text/html" width="600" height="400" border="3"></object>
+            </p>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../demonstrations.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>A band of 17 pirates seized a booty consisting of gold coins of equal value. They decide to share them equally and give the rest to the Chinese cook. This would receive three coins. But the pirates quarrel and six of them were killed. The cook would then receive 4 coins. Then occurs a shipwreck and alone 6 pirates, the cook and the treasure are saved and after sharing would be left 5 gold coins to the latter. What is the minimal fortune that the latter can hope for if he decides to poison the rest of pirates ? <br> Solve this problem manually. <br> Write a program that solves the general problem (Chinese theorem) and use this program to check your answer. </p>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <p>It's about finding x positive and minimum checking the system: <br> x ≡ 3 [17] <br> x ≡ 4 [11] <br> x ≡ 5 [6] <br> See this <input type="button" value="topic" onclick="go('../../prementreux.html#chinoise')" data-inline="true">. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <p>By the Chinese remainder theorem (since 17, 11 and 6 are coprime two by two), the solutions are of the form: x = v<sub>1</sub>×11×6×3+v<sub>2</sub>×17×6×4 + v<sub>3</sub>×17×11×5+k×17×11× 6 <br> or again x = 198v<sub>1</sub>+408v<sub>2</sub>+935v<sub>3</sub>+1122k. <br>It remains to find the v<sub>i</sub> : <br> We have by Euclidean division: <br> 66=3×17+15 <br> 17=1×15+2 <br> 15=7×2+1 <br> We deduce that 1 = 15-7×2 and since 2= 17-1×15, we have 1=15-7(17-1×15) i.e. 1=8×15-7× 17. <br>But 15=66-3×17 hence 1=8(66-3×17)-7×17. We finally get 1=8×66-31×17 and v<sub>1</sub>=8. <br> In the same way, we find v<sub>2</sub>=4 and v<sub>3</sub>=1. <br> So x=198×8+408×4+935+1122k = 4151+1122k. <br>4151 is therefore a possible solution for our cook, but it is not not the smallest. Just divide 4151 by 1122 to find as remainder 785 which is the minimum number of pieces that can get the cook. </p>
+            <p>Solution with Python 3.4 </p>
+            <p>
+              <object data="../../python/chinois.html" type="text/html" width="600" height="400" border="3"></object>
+            </p>Same with Julia 1.6 <p>
+              <object data="../../julia/chinois.jl.html" type="text/html" width="600" height="400" border="3"></object>
+            </p>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

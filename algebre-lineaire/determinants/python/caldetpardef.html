@@ -1,0 +1,159 @@
+﻿<html>
+ <head>
+  <title>
+   caldetpardef.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+</span><span class="s0"># fonction d'insertion - insertion function</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">ins(X,i,L): 
+    R=L[:] </span><span class="s0">#copie de L - copy of L</span><span class="s1"> 
+    R.insert(i,X) </span><span class="s0"># insertion de X à l'index i dans R - insertion of X at index i in R</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">R 
+ 
+</span><span class="s0"># fait tourner X dans L à toutes les positions - rotates X in L to all positions</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">turn (X,L): 
+    </span><span class="s2">return </span><span class="s1">[ins(X,i,L) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(L)+</span><span class="s3">1</span><span class="s1">)] 
+ 
+</span><span class="s2">def </span><span class="s1">signature (perm): 
+    </span><span class="s0">"""signature d'une permutation calculée au moyen du nombre d'inversions"""</span><span class="s1"> 
+    </span><span class="s0">"""signature of a permutation comptuted with the number of inversions"""</span><span class="s1">     
+    </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1 </span><span class="s2">if </span><span class="s1">len([(perm[i],perm[j]) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(perm)) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(perm)) </span><span class="s2">if </span><span class="s1">j&gt;i </span><span class="s2">and </span><span class="s1">perm[i]&gt;perm[j] ])%</span><span class="s3">2 </span><span class="s2">else </span><span class="s3">1</span><span class="s1"> 
+ 
+</span><span class="s0"># un générateur - a generator</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">permutations(): 
+    i,P=</span><span class="s3">0</span><span class="s1">,[[]] 
+    </span><span class="s2">yield </span><span class="s1">P </span><span class="s0"># stoppe l'exécution pour la reprendre à cet endroit précis - stops execution to restart at this special point</span><span class="s1"> 
+    </span><span class="s2">while True</span><span class="s1">: </span><span class="s0"># fait passer d'une génération à la suivante - passes from one generation to the next one</span><span class="s1"> 
+        Q=[turn(i,X) </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">P] 
+        P=reduce( </span><span class="s2">lambda </span><span class="s1">x,y:x+y,Q) </span><span class="s0"># concaténation à répétition -repeated append</span><span class="s1"> 
+        i+=</span><span class="s3">1</span><span class="s1"> 
+        </span><span class="s2">yield </span><span class="s1">P </span><span class="s0">#stoppe l'exécution pour la reprendre à cet endroit précis - stops execution to restart exactly here</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Vecteur: 
+    </span><span class="s0">"""modélisation vecteurs de dimension n à coefficients rationnels (ou autre)  par une classe python"""</span><span class="s1"> 
+    </span><span class="s0">"""Python class model for vctors of dimension n with coordinates in &rationals;"""</span><span class="s1">     
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self,  L): 
+        </span><span class="s0">"""constructeur - constructor"""</span><span class="s1"> 
+        self.n =len(L) 
+        self.coords = L 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords] 
+        </span><span class="s2">return </span><span class="s4">"(" </span><span class="s1">+ </span><span class="s4">","</span><span class="s1">.join(L) + </span><span class="s4">")"</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">"""addition de deux vecteurs - addition of vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] + other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">"""opposé d'un vecteur -opposite of a vector"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(-self.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">"""différence de deux vecteurs - Difference of two vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] - other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+        </span><span class="s0">"""loi externe - external multiplication"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] * k) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+    </span><span class="s2">def </span><span class="s1">nul(self): 
+        </span><span class="s2">return </span><span class="s1">all([x==</span><span class="s3">0 </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords]) 
+ 
+    </span><span class="s4">""" Objet Matrice à coefficients rationnels """</span><span class="s1"> 
+    </span><span class="s4">""" The matrix object with rational coefficients"""</span><span class="s1"> 
+ 
+</span><span class="s2">class </span><span class="s1">Matrice(): 
+    </span><span class="s0">"""Modélisation minimum d'une matrice à coefficients rationnels - Minimal model for such matrices"""</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self,L): 
+        </span><span class="s0">"""constructeur à partir d'une liste de lignes - constructor from a list of rows"""</span><span class="s1"> 
+        self.coeffs=L </span><span class="s0"># les coefficients - the coefficients</span><span class="s1"> 
+        self.lignes=len(L) </span><span class="s0"># le nombre de lignes - the number of rows</span><span class="s1"> 
+        self.colonnes=L[</span><span class="s3">0</span><span class="s1">].n </span><span class="s0"># le nombre de colonnes</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s1">.join([str(v) </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.coeffs]) 
+    </span><span class="s2">def </span><span class="s1">GetCoef(self,i,j): 
+        </span><span class="s0">"""Obtenir un coefficient - Get one coefficient"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i].coords[j] 
+    </span><span class="s2">def </span><span class="s1">Contrib(self,perm): 
+        </span><span class="s0">""" calcul d'un terme du développement correspondant à la permutation perm """</span><span class="s1"> 
+        </span><span class="s0">""" computation of a term corresponding to the permutation perm """</span><span class="s1">         
+        L=[self.GetCoef(i,perm[i]) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,self.lignes)] 
+        </span><span class="s2">return </span><span class="s1">reduce ( </span><span class="s2">lambda </span><span class="s1">x,y :x*y,L)*Fraction(signature(perm)) 
+    </span><span class="s2">def </span><span class="s1">Determinant(self,P): 
+        </span><span class="s0">"""P est la liste de toutes les permutations"""</span><span class="s1"> 
+        </span><span class="s0">"""P is the list of all permutations"""</span><span class="s1">         
+        L=[self.Contrib(p) </span><span class="s2">for </span><span class="s1">p </span><span class="s2">in </span><span class="s1">P] 
+        </span><span class="s2">return </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x,y:x+y,L) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    Perm=permutations() 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">5</span><span class="s1">): </span><span class="s0"># permutations d'un ensemble à 4 éléments - permutations of a set with 4 elements</span><span class="s1"> 
+        P=next(Perm) 
+    un=Fraction(</span><span class="s3">1</span><span class="s1">) 
+    deux=Fraction(</span><span class="s3">2</span><span class="s1">) 
+    trois=Fraction(</span><span class="s3">3</span><span class="s1">) 
+    quatre=Fraction(</span><span class="s3">4</span><span class="s1">) 
+    cinq=Fraction(</span><span class="s3">5</span><span class="s1">) 
+    six=Fraction(</span><span class="s3">6</span><span class="s1">) 
+    L1=Vecteur([trois,un,un,un]) 
+    L2=Vecteur([un, trois, un, un]) 
+    L3=Vecteur([un, un, trois, un]) 
+    L4=Vecteur([un, un, un, trois]) 
+    A=Matrice([L1,L2,L3,L4]) 
+    print (A.Determinant(P)) 
+    L1=Vecteur([un,deux,trois,quatre]) 
+    L2=Vecteur([deux, trois, quatre, un]) 
+    L3=Vecteur([trois, quatre, un, deux]) 
+    L4=Vecteur([quatre, un, deux, trois]) 
+    A=Matrice([L1,L2,L3,L4]) 
+    print (A.Determinant(P)) 
+    P=next(Perm) </span><span class="s0"># permutations à 5 éléments - permutations with 5 elemnts</span><span class="s1"> 
+    L1=Vecteur([deux ,un ,un ,un ,un ]) 
+    L2=Vecteur([un ,trois ,un ,un ,un ]) 
+    L3=Vecteur([un ,un ,quatre ,un ,un ]) 
+    L4=Vecteur([un ,un ,un ,cinq ,un ]) 
+    L5=Vecteur([un ,un ,un ,un ,six ]) 
+    A=Matrice([L1,L2,L3,L4,L5]) 
+    print (A.Determinant(P)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__==</span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">Romains=</span><span class="s1">&quot;IVXLCDM&quot; </span>
+
+<span class="s0">IsRomanNumeral(lettre)=lettre </span><span class="s2">in </span><span class="s0">Romains</span>
+
+<span class="s0">pos(x,s)=indexin(x,collect(s))[</span><span class="s3">1</span><span class="s0">]</span>
+
+<span class="s0">IsLessThan(lettre1,lettre2)=pos(lettre1,Romains)&lt;pos(lettre2,Romains)</span>
+
+<span class="s2">function </span><span class="s0">Value(lettre)</span>
+    <span class="s2">if </span><span class="s0">lettre==</span><span class="s1">'I'</span>
+        <span class="s2">return </span><span class="s3">1</span>
+    <span class="s2">elseif </span><span class="s0">lettre==</span><span class="s1">'V'</span>
+        <span class="s2">return </span><span class="s3">5</span>
+    <span class="s2">elseif </span><span class="s0">lettre==</span><span class="s1">'X'</span>
+        <span class="s2">return </span><span class="s3">10</span>
+    <span class="s2">elseif </span><span class="s0">lettre==</span><span class="s1">'L'</span>
+        <span class="s2">return </span><span class="s3">50</span>
+    <span class="s2">elseif </span><span class="s0">lettre==</span><span class="s1">'C'</span>
+        <span class="s2">return </span><span class="s3">100</span>
+    <span class="s2">elseif </span><span class="s0">lettre==</span><span class="s1">'D'</span>
+        <span class="s2">return </span><span class="s3">500</span>
+    <span class="s2">elseif </span><span class="s0">lettre==</span><span class="s1">'M'</span>
+        <span class="s2">return </span><span class="s3">1000</span>
+    <span class="s2">else</span>
+        <span class="s2">return </span><span class="s3">0</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">Quinqua(L)=L </span><span class="s2">in </span><span class="s1">&quot;VLD&quot;</span>
+
+<span class="s0">Previous(L)=Romains[pos(L,Romains)-</span><span class="s3">1</span><span class="s0">]</span>
+
+<span class="s2">function </span><span class="s0">Normalize(N)</span>
+    <span class="s0">M=</span><span class="s1">&quot;&quot;</span>
+    <span class="s0">n=length(N)</span>
+    <span class="s0">i=</span><span class="s3">1</span>
+    <span class="s2">while </span><span class="s0">i&lt;=n-</span><span class="s3">1</span>
+        <span class="s2">if </span><span class="s0">IsLessThan(N[i],N[i+</span><span class="s3">1</span><span class="s0">])</span>
+            <span class="s2">if </span><span class="s0">Quinqua(N[i+</span><span class="s3">1</span><span class="s0">])</span>
+                <span class="s0">NewNum=repeat(N[i],</span><span class="s3">4</span><span class="s0">)</span>
+            <span class="s2">else</span>
+                <span class="s0">NewNum=repeat(N[i],</span><span class="s3">9</span><span class="s0">)</span>
+            <span class="s2">end</span>
+            <span class="s0">M=string(M,NewNum)</span>
+            <span class="s0">i+=</span><span class="s3">2</span>
+        <span class="s2">else</span>
+            <span class="s0">M=string(M,string(N[i]))</span>
+            <span class="s0">i+=</span><span class="s3">1</span>
+            <span class="s2">if </span><span class="s0">i==n-</span><span class="s3">2</span>
+                <span class="s0">M=string(M,string(N[n]))</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">M</span>
+<span class="s2">end</span>
+
+<span class="s0">EvalNorm(N) =reduce(+,[Value(L) </span><span class="s2">for </span><span class="s0">L </span><span class="s2">in </span><span class="s0">N])</span>
+
+<span class="s0">Eval(N)=EvalNorm(Normalize(N))</span>
+
+<span class="s0">println(Eval(</span><span class="s1">&quot;MCDLIX&quot;</span><span class="s0">))    </span>
+</pre>
+</body>
+</html>

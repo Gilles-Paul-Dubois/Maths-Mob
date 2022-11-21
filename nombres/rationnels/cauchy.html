@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Suites de Cauchy de rationnels</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/cauchy/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Rationnels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/cauchy/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to rationals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2> La définition suivante peut paraitre abstraite, elle est liée à un phénomène que nous étudierons par la suite en détail et qui s'appelle la 'convergence'. Elle caractérise certaines <input type="button" value="suites" onclick="go('../naturels/suites.html')" data-inline="true" /> de rationnels dont les termes ont tendance à s'agglutiner quand n grandit. Nous aurons besoin de cette notion dès le prochain chapitre consacré aux nombres dits 'réels', mais il est tout à fait possible et même souhaitable de l'introduire dès à présent. <div id="container">
+            <div id="label">définition</div> Une suite (u <sub>n</sub>) <sub>n∈&naturals;</sub> de nombres rationnels est dite une <span style="font-weight: bold; font-style: italic;"> 'suite de Cauchy' </span> si elle satisfait au critère suivant (dit <span style="font-weight: bold; font-style: italic;"> 'critère de Cauchy' </span> ): <br /> ∀ ε ∈&rationals;, ∃ n <sub>0</sub> | m,n &gt; n <sub>0</sub> ⇒ |u <sub>m</sub> -u <sub>n</sub> | &lt; ε .
+          </div> Cela veut dire qu'aussi petit que soit ε donné à l'avance, pour n suffisamment grand <span style="text-decoration: underline;"> tous les termes</span> de la suite sont dans un <input type="button" value="intervalle" onclick="go('intervalles.html')" data-inline="true" /> de longueur 2ε. <br /> Nous allons donner deux exemples de suites assez voisins le premier satisfaisant au critère de Cauchy et le second n'y satisfaisant pas. <br /> Considérons pour commencer la suite récurrente (u <sub>n</sub>) <sub>n∈&naturals;</sub> définie par : <br />
+          <ul>
+            <li> \(u_{0}=1\) </li>
+            <li> \(u_{n}=u_{n-1}+\frac{\left ( -1 \right )^{n}}{n+1}\) </li>
+          </ul> Calculons d'abord quelques termes de cette suite: <h2>Le coin de Python</h2>
+          <br /> On peut faire ce calcul avec le module rationnels.py donné en <input type="button" value="exemple" onclick="go('machine.html#ratobj')" data-inline="true" />: <br />
+          <p>
+            <object border="3" data="python/hal.html" height="300" type="text/html" width="100%"></object>
+          </p> Voici le résultat de l'exécution, cliquez pour voir: <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2>The following definition may seem abstract, it is linked to a phenomenon that we will study later in detail and which is called 'convergence'. It characterizes some <input type="button" value="sequences" onclick="go('../naturels/suites.html')" data-inline="true"> of rationals the terms of which tend to cluster as n increases. We will have need for this notion from the next chapter devoted to so-called 'real' numbers, but it is quite possible and even desirable to introduce it now. <div id="container">
+            <div id="label">definition </div>A sequence (u <sub>n</sub>) <sub>n∈ℕ</sub> of rational numbers is said to be a <span style="font-weight: bold; font-style: italic;"> 'Cauchy sequence' </span> if it satisfies the following criterion (said <span style="font-weight: bold; font-style: italic;"> 'Cauchy's criterion' </span> ): <br>∀ ε ∈ℚ, ∃ n <sub>0</sub> | m, n&gt; n <sub>0</sub> ⇒ | u <sub>m</sub> -u <sub>n</sub> | &lt;ε.
+          </div> This means that however small s ε given in advance, for n big enough <span style="text-decoration: underline;"> all terms </span> of the suite are in a <input type="button" value="interval" onclick="go('intervalles.html')" data-inline="true"> of length 2ε. <br>We we are going to give two examples of fairly similar sequences, the first satisfying the Cauchy criterion and the second not satisfying it. <br> Consider to begin with the recurrent sequence (u <sub>n</sub>) <sub>n∈ℕ</sub>defined by: <br>
+          <ul>
+            <li> \(u_{0}=1\) </li>
+            <li> \(u_{n}=u_{n-1}+\frac{\left ( -1 \right )^{n}}{n+1}\) </li>
+          </ul> Let us first calculate some terms of this sequence: <h2>Python's corner </h2> We can do this calculation with the rationals.py module given as an <input type="button" value="example" onclick="go('machine.html#ratobje')" data-inline="true" />: <br>
+          <p>
+            <object data="python/hal.html" type="text/html" width="100%" height="300" border="3"></object>
+          </p> Here is the result, click to see: <br>
+        </div>
+        <!-- /en -->
+        <div data-role="collapsible">
+          <h4>Click !</h4>
+          <table border="2" cellpadding="0" cellspacing="0" style=" border-width: medium; border-collapse: collapse; ; width: 620px;">
+            <tbody>
+              <tr style="">
+                <td style="border-style: solid; border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 1 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 1 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.5 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 1 / 2 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.8 <span style="text-decoration: overline;"> 3 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 5 / 6 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.58 <span style="text-decoration: overline;"> 3 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 7 / 12 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.78 <span style="text-decoration: overline;"> 3 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 47 / 60 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.61 <span style="text-decoration: overline;"> 6 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 37 / 60 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.75 <span style="text-decoration: overline;"> 952380 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 319 / 420 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.63452380 <span style="text-decoration: overline;"> 952380 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 533 / 840 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.745634 <span style="text-decoration: overline;"> 920634 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 1879 / 2520 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.645 <span style="text-decoration: overline;"> 634920 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 1627 / 2520 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.7365 <span style="text-decoration: overline;"> 440115 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 20417 / 27720 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.653210 <span style="text-decoration: overline;"> 678210 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 18107 / 27720 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.730 <span style="text-decoration: overline;"> 133755 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 263111 / 360360 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.6587 <span style="text-decoration: overline;"> 051837 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; vertical-align: top; ">
+                  <p> 237371 / 360360 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.72537 <span style="text-decoration: overline;"> 185037 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 52279 / 72072 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.6628 <span style="text-decoration: overline;"> 718503 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 95549 / 144144 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.72169537978361507773272479154832096008566596801891 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 1768477 / 2450448 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.66613982422805952217716923599276540453011041246335 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 1632341 / 2450448 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.71877140317542794322980081494013382558274199141072 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 33464927 / 46558512 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt;" valign="top">
+                  <p> 0.66877140317542794322980081494013382558274199141072 </p>
+                </td>
+                <td nowrap="" style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top">
+                  <p> 155685007 / 232792560 </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div lang="fr">
+          <br> Signalons immédiatemment quelques particularités, dont la démonstration est immédiate: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div>
+            <ul>
+              <li> La suite extraite des termes d'ordre pair est décroissante u <sub>0</sub> &lt; u <sub>2</sub> &lt; u <sub>4</sub>
+              </li>
+              <li> La suite extraite des termes d'ordre impair est croissante u <sub>1</sub> &gt; u <sub>3</sub> &gt; u <sub>5</sub>
+              </li>
+              <li> Pour tout n, tous les u <sub>k</sub> pour k &gt;2n sont dans l'intervalle ]u <sub>2n+1</sub>,u <sub>2n</sub>[ de longueur 1/2(n+1) </li>
+            </ul>
+          </div> Il s'en suit que notre suite vérifie le critère de Cauchy, pour ε donné à l'avance il suffit de désigner par N le plus petit des entiers n tels que 1/2(n+1) &lt; ε puis de prendre n <sub>0</sub> =2N. <br /> Nous allons maintenant donner un exemple d'une suite qui ne satisfait pas au critère de Cauchy: <br /> Considérons pour commencer la suite récurrente (u <sub>n</sub>) <sub>n∈&naturals;</sub> définie par : <ul>
+            <li> \(u_{0}=1\) </li>
+            <li> \(u_{n}=u_{n-1}+\frac{1}{n}\) </li>
+          </ul> Commençons par calculer quelques termes <br />
+          <p>
+            <object border="3" data="python/har.html" height="250" type="text/html" width="100%"></object>
+          </p>
+          <p> Voici le résultat de l'exécution, cliquez pour voir: </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <br> Let us immediately point out a few particularities, the demonstration of which is immediate: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>
+            <ul>
+              <li>The sequence extracted from terms of even order is decreasing u <sub>0</sub> &lt; u <sub>2</sub> &lt; u <sub>4</sub>
+              </li>
+              <li>The sequence extracted from terms of odd order is increasing u <sub>1</sub> &gt; u <sub>3</sub> &gt; u <sub>5</sub>
+              </li>
+              <li>For all n, all u <sub>k</sub> for k &gt;2n are in the interval ]u <sub>2n+1</sub>,u <sub>2n</sub>[ of length 1/2(n+1) </li>
+            </ul>
+          </div>It follows that our sequence satisfies the Cauchy criterion, for ε given in advance it suffices to designate by N the smallest of the integers n such that 1/2(n+1) &lt; ε then to take n <sub>0</sub> =2N. <br>We will now give an example of a sequence which does not satisfy the Cauchy's criterion: <br> Consider to begin with the recurrent sequence (u <sub>n</sub>) <sub> n∈ℕ</sub> defined by: <ul>
+            <li> \(u_{0}=1\) </li>
+            <li> \(u_{n}=u_{n-1}+\frac{1}{n}\) </li>
+          </ul> Let's start by calculating some terms <br>
+          <p>
+            <object data="python/har.html" type="text/html" width="100%" height="250" border="3"></object>
+          </p>
+          <p> Here is the result, click to see : </p>
+        </div>
+        <!-- /en -->
+        <div data-role="collapsible">
+          <h4>Click !</h4>
+          <table border="1" cellpadding="0" cellspacing="0" style="border: medium none ; border-collapse: collapse;">
+            <tbody>
+              <tr style="">
+                <td style="border-style: solid; border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 1 </p>
+                </td>
+                <td style=" border-style: solid; border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 1 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 2 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 2 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 2.5 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 5 / 2 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 2.8 <span style="text-decoration: overline;"> 3 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 17 / 6 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3.08 <span style="text-decoration: overline;"> 3 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 37 / 12 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3.28 <span style="text-decoration: overline;"> 3 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 197 / 60 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3.45 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 69 / 20 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3.5928 <span style="text-decoration: overline;"> 571428 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 503 / 140 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3.71785714 <span style="text-decoration: overline;"> 285714 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 1041 / 280 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3.8289682 <span style="text-decoration: overline;"> 539682 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 9649 / 2520 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3.92896 <span style="text-decoration: overline;"> 825396 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 9901 / 2520 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.019 <span style="text-decoration: overline;"> 877344 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 111431 / 27720 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.1032 <span style="text-decoration: overline;"> 106782 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 113741 / 27720 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.180 <span style="text-decoration: overline;"> 133755 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 1506353 / 360360 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.2515 <span style="text-decoration: overline;"> 623265 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 1532093 / 360360 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.318 <span style="text-decoration: overline;"> 228993 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 1556117 / 360360 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.380728993 <span style="text-decoration: overline;"> 228993 </span>
+                  </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 3157279 / 720720 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.4395525226407579348755819344054638172285231108761 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 54394463 / 12252240 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.4951080781963134904311374899610193727840786664316 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 18358381 / 4084080 </p>
+                </td>
+              </tr>
+              <tr style="">
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 4.5477396571436819114837690689083877938367102453790 </p>
+                </td>
+                <td style="border-style: solid;  border-width: 1pt; padding: 4pt; " valign="top" width="307">
+                  <p> 352893319 / 77597520 </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div lang="fr"> On voit que: <br> \( u_{2^{n+1}-1}-u_{2^{n}-1}=\frac{1}{2^{n}}+\frac{1}{2^{n+1}}+ \text{ ... }+\frac{1}{2^{n}+2^{n}-1}\) Donc dans cette somme il y a 2 <sup>n</sup> termes tous supérieurs au dernier. La somme est donc supérieure à \(\frac{2^{n}}{2^{n+1}-1}=\frac{1}{2-\frac{1}{2^{n}}}\) <br> Le dénominateur est ≥ 3/2 si n ≥ 1 <br> Donc la fraction est &nbsp;≥ 2/3 pour n ≥ 1 <br> On voit donc en fait qu'on peut extraire de (u <sub>n</sub>) une <input type="button" value="sous-suite" onclick="go('../naturels/suites.html#ext')" data-inline="true" /> dont le terme général devient de plus en plus grand, la suite ne peut donc pas satisfaire au critère de Cauchy. </div>
+        <!-- /fr -->
+        <div lang="en"> We see that: <br> \( u_{2^{n+1}-1}-u_{2^{n}-1}=\frac{1}{2^{n}}+\frac{1}{2^{n+1}}+ \text{ ... }+\frac{1}{2^{n}+2^{n}-1}\) Hence in this sum there are 2 <sup>n</sup> terms all of them greater than the last one. So the sum is greater than \(\frac{2^{n}}{2^{n+1}-1}=\frac{1}{2-\frac{1}{2^{n}}}\) <br> The denominator is ≥ 3/2 if n ≥ 1 <br> So the fraction is &nbsp;≥ 2/3 pour n ≥ 1 <br> We see that actually we can extract from (u <sub>n</sub>) a <input type="button" value="subsequence" onclick="go('../naturels/suites.html#exte')" data-inline="true" /> the term of which becomes greater and greater and greater, Such a sequence cannot satisfy Cauchy's criterion. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Même chose avec Julia 1.6</p>
+          <object border="3" data="julia/cauchy1.jl.html" height="300" type="text/html" width="100%"></object>
+          <object border="3" data="julia/cauchy2.jl.html" height="300" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>Same with Julia 1.6</p>
+          <object border="3" data="julia/cauchy1.jl.html" height="300" type="text/html" width="100%"></object>
+          <object border="3" data="julia/cauchy2.jl.html" height="300" type="text/html" width="100%"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Rationnels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to rationals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

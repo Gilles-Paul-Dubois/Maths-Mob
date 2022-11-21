@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Multiplication dans R</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Réels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to reals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Nous allons maintenant définir le produit de deux réels. <br /> Nous allons voir que la chose est extrêmement simple dans le cas des <input type="button" value="suites de Cauchy" onclick="go('cauchy.html')" data-inline="true" />. beaucoup moins dans le cas des <input type="button" value="DDI" onclick="go('ddi.html')" data-inline="true" /> et des <input type="button" value="coupures de Dedekind" onclick="go('coupures.html')" data-inline="true" />. <br /> Commençons par les suites de Cauchy. <br /> Soient donc (u<sub>n</sub>)<sub>n∈&naturals;</sub> et (v<sub>n</sub>)<sub>n∈&naturals;</sub> deux suites de Cauchy de rationnels. <br /> Alors la suite produit définie par w<sub>n</sub>=u<sub>n</sub>&times;v<sub>n</sub> ∀ n ∈ &naturals; est également une suite de Cauchy. Cela se vérifie immédiatement. <br /> On vérifie aussi la <input type="button" value="compatibilité" onclick="go('../../bases/operations/quotients.html')" data-inline="true" /> de cette opération (multiplication des suites) avec la <input type="button" value="relation d'équivalence" onclick="go('../../bases/relations/equivalence.html')" data-inline="true" /> définie entre elles. Nous nous contenterons d'énoncer cette propriété: <div id="container"> Si (u<sub>n</sub>) et (U<sub>n</sub>) sont équivalentes d'une part, représentant le même réel x, et si (v<sub>n</sub>) et (V<sub>n</sub>) sont également équivalentes d'autre part, représentant le même réel y, alors (u<sub>n</sub>×v<sub>n</sub>) est équivalente à (U<sub>n</sub>×V<sub>n</sub>) elles représentent toutes deux le même réel que nous noterons xy et que nous appellerons <span style="font-weight: bold; font-style: italic;"> 'produit' </span> de x et de y. </div> Avec les coupures, nous n'entrerons pas dans le détail mais il y a de nombreux problèmes dus à la règle des signes, et au fait que la plupart du temps une au moins des deux parties G,D possède des positifs et des négatifs. Avec les DDI le problème est exactement le même que pour l'addition. <h2> Le coin de Python </h2> Ce programme illustre le produit de deux réels (suites de Cauchy). <p>
+            <object border="3" data="python/prod.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <p> Voici le résultat de son exécution. </p>
+          <p>
+            <object border="3" data="txt/prodex.txt" height="350" type="text/plain" width="700"></object>
+          </p>
+          <h2> Le coin de Julia </h2> Même chose avec Julia 1.6. <p>
+            <object border="3" data="julia/prodr1.jl.html" height="400" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition </h2>We will now define the product of two real numbers. <br> We will see that the thing is extremely simple in the case of <input type="button" value="Cauchy sequences" onclick="go('cauchy.html')" data-inline="true">. much less in case of <input type="button" value="UDEs" onclick="go('ddi.html')" data-inline="true"> and <input type="button" value="Dedekind cuts" onclick="go('coupures.html')" data-inline="true">. <br> Let's start with the Cauchy sequences. <br>Let (u<sub>n</sub>)<sub>n∈ℕ</sub> and (v<sub>n</sub>)<sub>n∈ℕ</sub> two Cauchy sequences of rationals. <br>Then the product sequence defined by w<sub>n</sub>=u<sub>n</sub>×v<sub>n</sub> ∀ n ∈ ℕ is also a sequel to Cauchy. This is verified immediately. <br> We also check the <input type="button" value="compatibility" onclick="go('../../bases/operations/quotients.html')" data-inline="true"> of this operation (multiplication of sequences) with the <input type="button" value="equivalence relation" onclick="go('../../bases/relations/equivalence.html')" data-inline="true"> defined between them. We will simply state this property: <div id="container">If (u<sub>n</sub>) and (U<sub>n</sub>) are equivalents on the one hand, representing the same real x, and if (v<sub>n</sub>) and (V<sub>n</sub>) are also equivalent else part, representing the same real y, then (u<sub>n</sub>×v<sub>n</sub>) is equivalent to (U<sub>n</sub>×V<sub>n</sub>) they both represent the same real which we will denote by xy and that we will call <span style="font-weight: bold; font-style: italic;"> 'product' </span> of x and y. </div>With the cuts, we won't go into detail but there are many problems due to the rule of signs, and the fact that most of the time at least one of the two parts L, R has positives and negatives. With the UDEs the problem is exactly the same as for the addition. <h2> Python's corner </h2> This program illustrates the product of two real numbers (Cauchy sequences). <p>
+            <object data="python/prod.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <p> Here is the result of its execution. </p>
+          <p>
+            <object data="txt/prodex.txt" type="text/plain" width="700" height="350" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2> Same with Julia 1.6. <p>
+            <object data="julia/prodr1.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to reals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

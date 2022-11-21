@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Division euclidienne</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="js/euclidienne.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/euclidienne/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/euclidienne/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> Soit n un entier naturel non nul et m un entier naturel quelconque. <br /> Les intervalles [kn, (k+1)n[, déterminés par les <input type="button" value="multiples" onclick="go('muletdiv.html')" data-inline="true" /> de n, forment une <input type="button" value="partition" onclick="go('../../bases/ensembles/partitions.html')" data-inline="true" /> de &naturals;. <br /> m est donc dans l'un d'entre eux et dans un seul, disons [qn, (q+1)n[. <br /> Autrement dit q est le plus grand des entiers k tels que kn ≤ m.. <br /> Cette remarque étant faite le nombre r=m-qn est forcément &lt;n. <div id="container">
+            <div id="label">définition</div> q s'appelle le <span style="font-weight: bold; font-style: italic;"> 'quotient' </span> et r le <span style="font-weight: bold; font-style: italic;"> 'reste' </span> de la <span style="font-weight: bold; font-style: italic;"> 'division euclidienne' </span> de m par n.
+          </div> m=nq+r q,r ∈ &naturals; r &lt; n <br /> Intuitivement q représente <span style="text-decoration: underline;"> combien de fois il va n dans m</span> , et r ce qu'il reste dans la mesure où en général m n'est pas un multiple de n. <div id="container"> (m multiple de n) ⇔ (r=0).</div> Vous pouvez maintenant générer quelques exemples: <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions </h2> Let n be a nonzero natural integer and m any natural integer. <br> The intervals [kn, (k+1)n[, determined by the <input type="button" value="multiples" onclick="go('muletdiv.html')" data-inline="true" /> of n, form a <input type="button" value="partition" onclick="go('../../bases/ensembles/partitions.html')" data-inline="true" /> of ℕ. <br> m is therefore in one of them and in only one, say [qn, (q+1)n[. <br> In other words q is the greatest of the integers k such that kn ≤ m.. <br> This remark being made, the number r=m-qn is necessarily &lt;n. <div id="container">
+            <div id="label">definition </div>q is called the <span style="font-weight: bold; font-style: italic;"> 'quotient' </span> and r the <span style="font-weight: bold; font-style: italic;"> 'remainder' </span> of the <span style="font-weight: bold; font-style: italic;"> 'Euclidean division' </span> of m by n.
+          </div> m=nq+r q,r ∈ ℕ r &lt; n <br>Intuitively q represents <span style="text-decoration: underline;"> How many times you can place n in m </span> , and r is what remains given that in general m is not a multiple of n. <div id="container"> (m multiple of n) ⇔ (r=0). </div> You can now generate some examples: <br>
+        </div>
+        <!-- /en -->
+        <form method="get" name="pgcd">
+          <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; background-color: #f6f6f6; width: 100%; ">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">
+                  <div lang="fr"> Donner deux entiers 0 &lt; m,n &lt;100000 </div>
+                  <!-- /fr -->
+                  <div lang="en">Give two naturals 0 &lt; m,n &lt;100000</div>
+                  <!-- /en --> m: <input name="getm" /> n: <input name="getn" />
+                  <input name="Go" onclick="ClickOnGoPGCD()" type="button" value="Go!" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <textarea cols="74" name="divmn" readonly="readonly" rows="2" style="overflow:auto;"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr"> Message d'erreur éventuel :</div>
+                  <!-- /fr -->
+                  <div lang="en">Eventual error message :</div>
+                  <!-- /en -->
+                  <input name="erreur" readonly="readonly" size="80" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

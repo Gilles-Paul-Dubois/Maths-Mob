@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Endomorphismes adjoints</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/adjoints/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/adjoints/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2> Soit E un espace vectoriel de dimension finie muni d'une <input type="button" value="forme sesquilinéaire" onclick="go('hermit.html#sesqui')" data-inline="true" />
+          <input type="button" value="non dégénérée" onclick="go('nondeg.html#def')" data-inline="true" /> f. Soit u un <input type="button" value="endomorphisme" onclick="go('../applicalin/defapplin.html')" data-inline="true" /> de E. Pour y donné, l'application x → f(u(x),y) est une <input type="button" value="forme linéaire" onclick="go('../applicalin/formeslin.html')" data-inline="true" /> en x. Compte tenu des résultats précédents sur les formes non-dégénérées <input type="button" value="th2-4" onclick="go('nondeg.html#th2')" data-inline="true" /> il existe un unique vecteur y' tel que f(u(x),y)=f(x,y') ∀ x ∈ E. <div id="container">
+            <div id="label">définition</div> L'application y → y' de E dans E se note u<sup>*</sup> et s'appelle <b>
+              <i>"l'adjoint"</i>
+            </b> de u relativement à la forme f.
+          </div>
+          <h2> Propriétés </h2>
+          <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> L'application u<sup>*</sup> est linéaire comme u.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet on a f(x,u*(λy))= f(u(x),λy)=λ<sup>*</sup>f(u(x),y)= λ<sup>*</sup>f(x,u<sup>*</sup>(y))=f(x, λ<sup>**</sup>u<sup>*</sup>(y))=f(x,λu<sup>*</sup>(y)). D'où u<sup>*</sup>(λy)=λu<sup>*</sup>(y). <br /> f(x, u<sup>*</sup>(y+y'))= f(u(x),y+y')=f(u(x),y)+f(u(x),y')=f(x,u<sup>*</sup>(y))+f(x,u<sup>*</sup>(y'))= f(x,u<sup>*</sup>(y)+u<sup>*</sup>(y')). D'où u<sup>*</sup>(y+y')= u<sup>*</sup>(y)+u<sup>*</sup>(y').
+          </div> Les affirmations ci-après se vérifient instantanément. <div id="container"> On a (v<font size="-2">o</font>u)<sup>*</sup>=u<sup>*</sup><font size="-2">o</font>v<sup>*</sup>
+          </div>
+          <div id="container"> (αu+βv)<sup>*</sup>=α<sup>*</sup>u<sup>*</sup>+β<sup>*</sup>v<sup>*</sup>
+          </div> La proposition qui suit est parfaitement évidente. <div id="container"> Supposons maintenant f hermitienne, on a alors u**=u</div>
+          <a name="matradj"></a>
+          <h2> Adjointe d'une matrice </h2> Parallèlement à la notion d'adoint d'une matrice on a la notion d'adjointe d'une matrice. <div id="container">
+            <div id="label">définition</div> Si A = (α<sub>i,j</sub>)<sub>1≤i,j≤n</sub> désigne une matrice, la <strong>
+              <em>'matrice adjointe'</em>
+            </strong> de A, notée A<sup>*</sup>, est la matrice obtenue en transformant la <input type="button" value="transposée" onclick="go('../matrices/mattranspo.html')" data-inline="true" /> de A par <input type="button" value="l'involution" onclick="go('hermit.html')" data-inline="true" /> de K. <br /> A<sup>*</sup>=(β<sub>i,j</sub>)<sub>1≤i,j≤n</sub> où β<sub>i,j</sub>=α<sub>j,i</sub>
+           <sup>*</sup>
+          </div> Les propriétés suivantes résultent de la définition: <div id="container">
+            <ul>
+              <li> (A+B)<sup>*</sup>=A<sup>*</sup>+B<sup>*</sup>
+              </li>
+              <li> (λA)<sup>*</sup>=λ<sup>*</sup>A<sup>*</sup>
+              </li>
+              <li> (AB)<sup>*</sup>=B<sup>*</sup>A<sup>*</sup>
+              </li>
+              <li> I<sup>*</sup>=I (I matrice unité) </li>
+              <li> (A<sup>*</sup>)<sup>*</sup>=A </li>
+            </ul>
+          </div> Voici une appliquette qui donne des exemples de matrices adjointes. <ul>
+            <li>Comme pour les transposées, vous choisissez le corps réel ou complexe.</li>
+            <li>Un exemple aléatoire est généré avec le bouton 'nouvel exemple'.</li>
+            <li>Dans le cas réel les notions d'adjointe et de transposée sont confondues.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2> Let E be a finite dimensional vector space endowed with a <input type="button" value="non degenerate" onclick="go('nondeg.html#defe')" data-inline="true">
+          <input type="button" value="sesquilinear form" onclick="go('hermit.html#sesqui')" data-inline="true"> f. Let u be an <input type="button" value="endomorphism" onclick="go('../applicalin/defapplin.html')" data-inline="true"> of E. For y given, the map x → f(u(x),y) is a <input type="button" value="linear form" onclick="go('../applicalin/formeslin.html')" data-inline="true"> in x. Given the previous results on non-degenerate forms <input type="button" value="th2-4" onclick="go('nondeg.html#th2e')" data-inline="true" /> there exists a unique vector y' such that f(u(x),y)=f(x,y') ∀ x ∈ E. <div id="container">
+            <div id="label">definition </div>The map y → y' from E to E is denoted u<sup>*</sup> and is called <b>
+              <i>"the hermitian conjugate or simply hermitian" </i>
+            </b> of u relatively to the form f.
+          </div>
+          <h2> Properties </h2>
+          <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The app u<sup>*</sup> is linear like u.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> Actually we have f(x,u*(λy))= f(u(x),λy)=λ<sup>*</sup>f(u(x),y)= λ<sup>*</sup>f(x,u<sup>*</sup>(y))=f(x, λ<sup>**</sup>u<sup>*</sup>(y))=f(x,λu<sup>*</sup>(y)). from where u<sup>*</sup>(λy)=λu<sup>*</sup>(y). <br>f(x, u<sup>*</sup>(y+y'))= f(u(x),y+y')=f(u(x),y)+f(u(x),y')=f( x,u<sup>*</sup>(y))+f(x,u<sup>*</sup>(y'))= f(x,u<sup>*</sup>(y)+u<sup>*</sup>(y')). Hence u<sup>*</sup>(y+y')= u<sup>*</sup>(y)+u<sup>*</sup>(y').
+          </div> The statements below are instantly verified. <div id="container"> We have (v<font size="-2">o</font>u)<sup>*</sup>= u<sup>*</sup><font size="-2">o</font>v<sup>*</sup>
+          </div>
+          <div id="container"> (αu+βv)<sup>*</sup>=α<sup>*</sup>u<sup>*</sup>+β<sup>*</sup>v<sup>*</sup>
+          </div> The following proposition is perfectly obvious. <div id="container"> Suppose now f hermitian, we then have u**=u </div>
+          <a name="matradje"></a>
+          <h2> Hermitian (conjugate) of a matrix </h2> Parallel to the notion of hermitian of an endomorphism, we have the notion of hermitian of a matrix. <div id="container">
+            <div id="label">definition </div>If A = (α<sub>i,j</sub>)<sub>1≤i,j≤n</sub> denotes a matrix, the <strong>
+              <em>'hermitian matrix' </em>
+            </strong> of A, denoted A<sup>*</sup>, is the matrix obtained by transforming the <input type="button" value="transpose" onclick="go('../matrices/mattranspo.html')" data-inline="true"> of A by <input type="button" value="the involution" onclick="go('hermit.html')" data-inline="true"> of K. <br>A<sup>*</sup>=(β<sub>i,j</sub>)<sub>1≤i,j≤n</sub> where β<sub>i,j</sub>=α<sub>j,i</sub>
+           <sup>*</sup>
+          </div> The following properties result from the definition: <div id="container">
+            <ul>
+              <li> (A+B)<sup>*</sup>=A<sup>*</sup>+B<sup>*</sup>
+              </li>
+              <li> (λA)<sup>*</sup>=λ<sup>*</sup>A<sup>*</sup>
+              </li>
+              <li> (AB)<sup>*</sup>=B<sup>*</sup>A<sup>*</sup>
+              </li>
+              <li> I<sup>*</sup>=I (I unit matrix) </li>
+              <li> (A<sup>*</sup>)<sup>*</sup>=A </li>
+            </ul>
+          </div> Here is an applet that gives examples of hermitian matrices. <ul>
+            <li>As for the transposes, you cn choose the real or complex field. </li>
+            <li>A random example is generated with button 'new example'. </li>
+            <li>In the real case, the notions of hermitian and transpose are confused. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div>
+          <table border="2" id="myTable">
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+              <td align="center">
+                <div lang="fr">Matrice adjointe de A</div>
+                <!-- /fr -->
+                <div lang="en">Hermitian of A</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+          </table>
+          <table border="1">
+            <tr>
+              <td width="50" height="30">
+                <input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1" />
+              </td>
+              <td>
+                <div lang="fr"> Réels</div>
+                <!-- /fr -->
+                <div lang="en">Reals</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td width="5" height="30">
+                <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4" />
+              </td>
+              <td>
+                <div lang="fr">Complexes</div>
+                <!-- /fr -->
+                <div lang="en">Complexes</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button onclick="nameSpace2.Paint();" type="button">
+                  <div lang="fr">Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/adjointes.js"></script>
+        <div lang="fr">
+          <h2> Lien entre l'adjointe d'une matrice et l'adjoint d'un endomorphisme </h2> En général si B est une base quelconque la matrice de l'adjoint d'un endomorphisme <span style="text-decoration: underline;">n'est pas</span> l'adjointe de la matrice de cet endomorphisme. On a cependant le résultat suivant quand B est une base particulière: <a id="matadj"></a>
+          <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si la matrice de f par rapport à B est l'identité, et si A est la matrice de u par rapport à B alors la matrice de u<sup>*</sup> par rapport à B est A<sup>*</sup>.
+          </div> La vérification de cette propriété est instantanée. Les bases telles que B sont les bases pour lesquelles l'expression de f est la suivante: <br> \(f(x,y)=\sum_{i=1}^{n}x_{i}y_{i}^{\ast }\) <br> De telles bases s'appellent des bases <b>
+            <i>'orthonormales'</i>
+          </b> pour f. Une <input type="button" value="page entière" onclick="go('basorth.html')" data-inline="true" /> sera consacrée à leur étude.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Link between the hermitiant of a matrix and the hermitian of an endomorphism </h2>In general if B is any base the matrix of the hermitian of an endomorphism <span style="text-decoration: underline;">is not </span> the hermitian of the matrix of this endomorphism. However, we have the following result when B is a particular base: <a id="matadj"></a>
+          <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If the matrix of f with respect to B is the identity, and if A is the matrix of u with respect to B then the matrix of u<sup>*</sup> with respect to B is A<sup>*</sup>.
+          </div>Verification of this property is instantaneous. The bases such as B are the bases for which the expression of f is: <br> \(f(x,y)=\sum_{i=1}^{n}x_{i}y_{i}^{\ast }\) <br>Such bases are called <b>
+            <i>'orthonormal' </i>
+          </b> bases for f. A <input type="button" value="whole page" onclick="go('basorth.html')" data-inline="true"> will be devoted to their study.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

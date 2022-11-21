@@ -1,0 +1,59 @@
+﻿<html>
+ <head>
+  <title>
+   premiers3.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+</span><span class="s0"># un exemple de 'generator'</span><span class="s1"> 
+</span><span class="s0"># an example of 'generator'</span><span class="s1"> 
+</span><span class="s0"># l'instruction yield equivaut à un 'return' mais l'exécution est suspendue</span><span class="s1"> 
+</span><span class="s0"># instruction yield has value of 'return' but execution is paused</span><span class="s1"> 
+</span><span class="s0"># A l'appel suivant elle redémarre exactement</span><span class="s1"> 
+</span><span class="s0"># At the next call it restarts exactly </span><span class="s1">
+</span><span class="s0"># au point où elle a été abandonnée.</span><span class="s1">
+</span><span class="s0"># at the point where it was abandoned </span><span class="s1">  
+</span><span class="s0"># l'environnement (variables locales et leurs valeurs) est conservé.</span><span class="s1"> 
+</span><span class="s0"># Environment (local variables and their values) is kept unchanged</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">premiers(): 
+    count=</span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">yield </span><span class="s1">count,</span><span class="s3">2 </span><span class="s0">#premier appel - first call</span><span class="s1"> 
+    count+=</span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">yield </span><span class="s3">2</span><span class="s1">,</span><span class="s3">3 </span><span class="s0"># second appel - second call</span><span class="s1"> 
+    P,p=[</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">],</span><span class="s3">3</span><span class="s1"> 
+    </span><span class="s2">while </span><span class="s3">1</span><span class="s1">: 
+        p+=</span><span class="s3">2 </span><span class="s0"># à partir de 3 on saute de 2 en 2 - from 3 we jump with step 2</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">all([p%x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">P]): 
+            P.append(p) 
+            count+=</span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">yield </span><span class="s1">count,p 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    P=premiers() 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">20</span><span class="s1">): </span><span class="s0"># donne les 20 premiers nombres premiers avec leur rang- gives the first 20 prime numbers together with their rank</span><span class="s1"> 
+        print(next(P)) </span><span class="s0"># C'est ainsi qu'on invoque un générateur - this is the way to call a generator</span><span class="s1"> 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

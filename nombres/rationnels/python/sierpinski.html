@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>dioph.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #008080; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># -*- coding: utf-8 -*-</span>
+<span class="s0"># version Python 3.4</span>
+
+<span class="s2">def </span><span class="s1">premiers():</span>
+    <span class="s2">yield </span><span class="s3">2  </span><span class="s0"># premier appel - first call</span>
+    <span class="s2">yield </span><span class="s3">3  </span><span class="s0"># second appel - second call</span>
+    <span class="s1">P, p = [</span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">], </span><span class="s3">3</span>
+    <span class="s2">while </span><span class="s3">1</span><span class="s1">:</span>
+        <span class="s1">p += </span><span class="s3">2  </span><span class="s0"># à partir de 3 on saute de 2 en 2 - from 3 we jump by step 2</span>
+        <span class="s2">if </span><span class="s1">all([p % x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">P]):</span>
+            <span class="s1">P.append(p)</span>
+            <span class="s2">yield </span><span class="s1">p</span>
+
+
+<span class="s1">P = premiers()</span>
+<span class="s1">Premiers = []</span>
+<span class="s2">while True</span><span class="s1">:</span>
+    <span class="s1">p = next(P)</span>
+    <span class="s2">if </span><span class="s1">p &gt;= </span><span class="s3">5000</span><span class="s1">:</span>
+        <span class="s2">break</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s1">Premiers.append(p)</span>
+
+
+<span class="s0"># teste l'hypothèse de Sierpsinski (force brute pour a,b &lt;=k)</span>
+<span class="s0"># Checks Sierpsinski's by  brute force for  a,b &lt;=k</span>
+<span class="s2">def </span><span class="s1">sierpinski2(n, k):</span>
+    <span class="s2">for </span><span class="s1">a </span><span class="s2">in </span><span class="s1">range(max(</span><span class="s3">2</span><span class="s1">, n // </span><span class="s3">5</span><span class="s1">) + </span><span class="s3">1</span><span class="s1">, k + </span><span class="s3">1</span><span class="s1">):</span>
+        <span class="s2">for </span><span class="s1">b </span><span class="s2">in </span><span class="s1">range(max(</span><span class="s3">2</span><span class="s1">, int(a * n // (</span><span class="s3">5 </span><span class="s1">* a - n))) + </span><span class="s3">1</span><span class="s1">, k + </span><span class="s3">1</span><span class="s1">):</span>
+            <span class="s2">if not </span><span class="s1">(n * a * b) % (</span><span class="s3">5 </span><span class="s1">* a * b - n * b - n * a):</span>
+                <span class="s2">return True</span>
+    <span class="s2">return False</span>
+
+
+<span class="s0"># teste l'hypothèse de Sierpinski au moyen de l'algo glouton</span>
+<span class="s0"># Checks Sierpinski by mean of greedy algorithmn</span>
+<span class="s2">def </span><span class="s1">sierpinski1(n):</span>
+    <span class="s2">return </span><span class="s1">len(egypt(</span><span class="s3">5</span><span class="s1">, n)) &lt;= </span><span class="s3">3</span>
+
+
+<span class="s2">def </span><span class="s1">egypt(x, y):</span>
+    <span class="s1">L = []</span>
+    <span class="s1">k = </span><span class="s3">1</span>
+    <span class="s2">while </span><span class="s1">x:</span>
+        <span class="s2">if </span><span class="s1">y % x == </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s1">k = y // x</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s1">k = y // x + </span><span class="s3">1</span>
+        <span class="s1">x = x * k - y</span>
+        <span class="s1">y = y * k</span>
+        <span class="s1">L.append([k])</span>
+    <span class="s2">return </span><span class="s1">L</span>
+
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s0"># on récupère les nombres premiers pour laquelle la conjecture n'est pas vérifiée par l'algo de Fibonacci</span>
+    <span class="s0"># We collect prime numbers for which Sierpinski not verified by greedy algo.</span>
+    <span class="s1">M = [n </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">Premiers </span><span class="s2">if not </span><span class="s1">sierpinski1(n)]</span>
+    <span class="s1">print(len(M))</span>
+    <span class="s0"># force brute pour tous ceux là</span>
+    <span class="s0"># brute force for all of these</span>
+    <span class="s1">N = [n </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">M </span><span class="s2">if not </span><span class="s1">sierpinski2(n, </span><span class="s3">4000</span><span class="s1">)]</span>
+    <span class="s1">print(len(N))  </span><span class="s0"># si affiche 0 c'est que tout est vérifié< - If displays 0 it means that everything is checked/span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+
+</pre>
+</body>
+</html>

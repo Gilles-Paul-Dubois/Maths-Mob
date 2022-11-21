@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 03</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="c">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../fcontinue.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p> On d&#233;signe par u<sub>n</sub> le nombre rationnel dont la d&#233;composition en fraction continue est [1;2,....,2] (n &#233;l&#233;ments)
+          <ol>
+            <li> Quelle relation y-a-t-il entre la d&#233;composition de p/q en fraction continue et celle de q/p ? </li>
+            <li> Montrer que la suite u<sub>n</sub> v&#233;rifie la relation de r&#233;currence u<sub>n-1</sub>u<sub>n</sub>=2+(u<sub>n</sub>-u<sub>n-1</sub>) </li>
+            <li> Montrer que si x est repr&#233;sent&#233; par&#160; [a<sub>0</sub>;a<sub>1</sub>,a<sub>2</sub>,....,a<sub>n</sub>] et si y est repr&#233;sent&#233; par [a<sub>0</sub>;a<sub>1</sub>,a<sub>2</sub>,....,a<sub>n</sub>,a<sub>n+1</sub>] on a |x-y| &#8804; 1/(a<sub>1</sub><sup>2</sup>a<sub>2</sub><sup>2</sup>...a<sub>n</sub><sup>2</sup>a<sub>n+1 </sub>)
+            </li>
+            <li> Ecrire un programme qui liste les termes u<sub>n</sub> pour n &#8804; 20 ainsi que des approximations d&#233;cimales de ces fractions. </li>
+            <li> Expliquer le r&#233;sultat. </li>
+          </ol>
+          </p>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <p>Remarquer que la décomposition de l'inverse d'un rationnel est presque semblable à la décomposition du rationnel lui-même. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> Si p/q est repr&#233;sent&#233; par [a<sub>0</sub>;a<sub>1</sub>,..a<sub>n</sub>] avec a<sub>0</sub>&#8800;0 alors q/p est repr&#233;sent&#233; par [0;a<sub>0</sub>,a<sub>1</sub>,..,a<sub>n</sub>] </li>
+              <li> On a donc u<sub>n</sub>-1=[0;2,2,..2]=1/[2;2,...2]=1/(1+[1;2,...2])=1/(1+u<sub>n-1</sub>) d'o&#249; la relation cherch&#233;e. </li>
+              <li> On a x-y=([0;a<sub>1</sub>,..a<sub>n+1</sub>]-[0;a<sub>1</sub>,...a<sub>n</sub>])= [a<sub>1</sub>;a<sub>2</sub>,..a<sub>n</sub>]-[a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>,a<sub>n+1</sub>]/[a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>][a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>,a<sub>n+1</sub>], il suffit alors d'appliquer la r&#233;currence en remarquant que&#160; [a<sub>1</sub>;a<sub>2</sub>,..a<sub>n</sub>][a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>,a<sub>n+1</sub>]&gt;a<sub>1</sub>
+               <sup>2</sup>
+              </li>
+              <li>
+                <p>solution Python</p>
+                <object border="3" data="../../python/fracont3.html" height="400" type="text/html" width="100%"></object>
+                <p>solution Julia</p>
+                <object border="3" data="../../julia/fracont3.jl.html" height="400" type="text/html" width="100%"></object>
+              </li>
+              <li>
+                <p> Compte tenu de la question 2, plus n est grand et plus la diff&#233;rence entre u<sub>n</sub> et u<sub>n+1</sub> est petite, on peut donc s'attendre &#224; trouver des nombres dont le carr&#233; est de plus en plus voisin de 2 (des approximations d&#233;cimales de &#8730;2 ) </p>
+                <p></p>
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../fcontinue.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p> We denote by u<sub>n</sub> the rational number, the decomposition of which as a continued fraction is [1;2,....,2] (n elements)
+          <ol>
+            <li> What is the relationship between the decomposition of p/q and that of q/p ? </li>
+            <li> Show that the sequence u<sub>n</sub> verifies the induction relation u<sub>n-1</sub>u<sub>n</sub>=2+(u<sub>n</sub>-u<sub>n-1</sub>) </li>
+            <li> Show that if is represented by [a<sub>0</sub>;a<sub>1</sub>,a<sub>2</sub>,....,a<sub>n</sub>] and if y is represented by [a<sub>0</sub>;a<sub>1</sub>,a<sub>2</sub>,....,a<sub>n</sub>,a<sub>n+1</sub>] we have |x-y| &#8804; 1/(a<sub>1</sub><sup>2</sup>a<sub>2</sub><sup>2</sup>...a<sub>n</sub><sup>2</sup>a<sub>n+1 </sub>)
+            </li>
+            <li> Write a program which lists the u<sub>n</sub> for n &#8804; 20 as well as decimal approximations of these fractions. </li>
+            <li> Explain the result. </li>
+          </ol>
+          </p>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <p>Show that the decomposition of the inverse of a rational is quite similar to the decomposition of the rational itself. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> If p/q is represented by [a<sub>0</sub>;a<sub>1</sub>,..a<sub>n</sub>] with a<sub>0</sub>&#8800;0 then q/p is represented by [0;a<sub>0</sub>,a<sub>1</sub>,..,a<sub>n</sub>] </li>
+              <li> Hence we have u<sub>n</sub>-1=[0;2,2,..2]=1/[2;2,...2]=1/(1+[1;2,...2])=1/(1+u<sub>n-1</sub>) from where we have the relation. </li>
+              <li> We have x-y=([0;a<sub>1</sub>,..a<sub>n+1</sub>]-[0;a<sub>1</sub>,...a<sub>n</sub>])= [a<sub>1</sub>;a<sub>2</sub>,..a<sub>n</sub>]-[a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>,a<sub>n+1</sub>]/[a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>][a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>,a<sub>n+1</sub>], So it's enough to apply induction noticing that [a<sub>1</sub>;a<sub>2</sub>,..a<sub>n</sub>][a<sub>1</sub>;a<sub>2</sub>,...,a<sub>n</sub>,a<sub>n+1</sub>]&gt;a<sub>1</sub>
+               <sup>2</sup>
+              </li>
+              <li>
+                <p>solution with Python</p>
+                <object border="3" data="../../python/fracont3.html" height="400" type="text/html" width="100%"></object>
+                <p>solution with Julia</p>
+                <object border="3" data="../../julia/fracont3.jl.html" height="400" type="text/html" width="100%"></object>
+              </li>
+              <li>
+                <p> According the result of question 2, the greater n and the smaller the difference between u<sub>n</sub> and u<sub>n+1</sub> So we can excpect numbers the square of which is closer and closer to 2 (decimal approximations ofe &#8730;2 ) </p>
+                <p></p>
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

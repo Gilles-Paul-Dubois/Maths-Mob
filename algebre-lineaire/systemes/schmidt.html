@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Méthode de Gram-Schmidt</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+  
+  </head>	
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/schmidt/menu.html')" /></li>  
+ 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/schmidt/menu.html')" /></li>
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+
+<div lang="fr">
+Nous avons déjà vu le
+  <input type="button" value="procédé d'orthonormalisation de Schmidt" onclick="go('../orthogonalite/basorth.html#')" data-inline="true" />.
+  <br/>
+  Soit A une matrice carrée régulière (inversible) d'ordre n.
+  <br/>
+  Désignons par BC, la base formée canonique de &reals;<sup>n</sup>.
+  <br/>
+  Soit u l'automorphisme ayant A pour matrice relativement à BC.
+  <br/>
+  Désignons par BO, la base orthonormée obtenue par le procédé de Schmidt à partir des colonnes de A.
+  <br/>
+  Alors la matrice de u par rapport à la base BC et à la base BO, soit M(u,BC,BO) est
+  <input type="button" value="triangulaire" onclick="go('../matrices/mattri.html#')" data-inline="true" />
+  d'après le procédé de Schmidt. Or M(u,BC,BC)=  M(Id,BO,BC) × M(u,BC,BO) d'après la définition du produit des matrices.
+  Donc si on note Q la matrice dont les colonnes sont M(Id,BO,BC) on a bien A=TQ.
+  Mais Q est l'inverse (donc la
+  <input type="button" value="transposée" onclick="go('../matrices/mattranspo.html#')" data-inline="true" />) de la matrice dont les colonnes sont les vecteurs obtenus à partir des vecteurs colonnes de A par le procédé de Schmidt.
+  <h2>
+   Le coin de Python
+  </h2>
+<p>Voici une implémentation de l'algorithme de factorisation QR par la méthode de Schmidt</p>
+<p></p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+We have already seen the
+   <input data-inline="true" onclick="go('../orthogonalite/basorth.html#')" type="button" value=" Schmidt orthonormalization process"/>.
+   <br/>
+  Let A be a regular (invertible) square matrix of order n.
+   <br/>
+  Let BC be the standard basis of &reals;<sup>n</sup>.
+   <br/>
+  Let u be the automorphism having A as matrix relatively to BC.
+   <br/>
+  Let BO denote the orthonormal basis obtained by Schmidt's process from the columns of A.
+   <br/>
+  Then the matrix of u with respect to the basis BC and the basis BO, i.e. M(u,BC,BO) is
+   <input data-inline="true" onclick="go('../matrices/mattri.html#')" type="button" value=" triangular"/>according to Schmidt's method.  But M(u,BC,BC)= M(Id,BO,BC) × M(u,BC,BO) according to the definition of the product of the matrices.
+   So if we note Q the matrix whose columns are M(Id,BO,BC) we have A=TQ.
+   But Q is the inverse (so the
+   <input data-inline="true" onclick="go('../matrices/mattranspo.html#')" type="button" value="transpose"/>) of the matrix the columns of which are the vectors obtained from the column vectors of A by Schmidt's method.
+   <h2>
+   Python's Corner
+   </h2>
+<p>Here is an implementation of the QR factorization algorithm by Schmidt's method </p>
+
+
+
+</div><!-- /en --> 
+<!-- STOP CODE -->
+<p>
+   <object border="3" data="python/gramschmidt2.html" height="400" type="text/html" width="100%">
+   </object>
+  </p>
+<!-- /STOP  CODE-->
+
+<div lang="fr">
+<h2>
+   Le coin de Julia
+  </h2>
+  <p>Même chose avec Julia 1.6</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Julia's corner
+   </h2>
+<p>Same with Julia 1.6 </p>
+
+
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+ <p>
+   <object border="3" data="julia/gramschmidt2.jl.html" height="400" type="text/html" width="100%">
+   </object>
+  </p>
+<!-- /STOP  CODE-->
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+﻿<html>
+ <head>
+  <title>
+   exo12.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { }
+.s2 { color: rgb(128,128,128); font-style: italic; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">from </span><span class="s1">functools </span><span class="s0">import </span><span class="s1">reduce 
+</span><span class="s2">#version python 3.4</span><span class="s1"> 
+</span><span class="s2"># -*- coding: utf-8 -*-</span><span class="s1"> 
+ 
+</span><span class="s2"># Calcul de P(racine(n)) où P est un polynome quelconque représenté par la liste de ses coefficients</span><span class="s1"> 
+</span><span class="s2"># Computation of P(&radic;n) where P is any polynomial represented by the list of its (integral) coefficients</span><span class="s1"> 
+</span><span class="s0">def </span><span class="s1">PowerRac (n,i,a): 
+    </span><span class="s2">"""puissance i-ième de racine(n) multiplié par a"""</span><span class="s1"> 
+    </span><span class="s2">"""i-th power of &radic;n multiplied by a"""</span><span class="s1">     
+    </span><span class="s0">if not </span><span class="s1">i%</span><span class="s3">2</span><span class="s1">: 
+        </span><span class="s0">return </span><span class="s1">[a*n**(i//</span><span class="s3">2</span><span class="s1">),</span><span class="s3">0</span><span class="s1">] </span><span class="s2">#pairs</span><span class="s1"> 
+    </span><span class="s0">else</span><span class="s1">: 
+        </span><span class="s0">return </span><span class="s1">[a*n**((i-</span><span class="s3">1</span><span class="s1">)//</span><span class="s3">2</span><span class="s1">),</span><span class="s3">1</span><span class="s1">] </span><span class="s2">#impairs</span><span class="s1"> 
+ 
+</span><span class="s0">def </span><span class="s1">EvalRac(P,n): 
+    </span><span class="s2">"""Evaluation de P(racine(n))-evaluation of P(&radic;n)"""</span><span class="s1"> 
+    S= [PowerRac(n,i,P[i]) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(P))] 
+    R=[ x[</span><span class="s3">0</span><span class="s1">] </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">S </span><span class="s0">if </span><span class="s1">x[</span><span class="s3">1</span><span class="s1">]==</span><span class="s3">0</span><span class="s1">] 
+    I= [ x[</span><span class="s3">0</span><span class="s1">] </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">S </span><span class="s0">if </span><span class="s1">x[</span><span class="s3">1</span><span class="s1">]==</span><span class="s3">1</span><span class="s1">] 
+    D= [reduce(</span><span class="s0">lambda </span><span class="s1">x,y:x+y,R),reduce(</span><span class="s0">lambda </span><span class="s1">x,y:x+y,I)] 
+    </span><span class="s0">return </span><span class="s1">str(D[</span><span class="s3">0</span><span class="s1">])+</span><span class="s4">"+"</span><span class="s1">+str(D[</span><span class="s3">1</span><span class="s1">])+</span><span class="s4">"rac("</span><span class="s1">+str(n)+</span><span class="s4">")"</span><span class="s1"> 
+ 
+</span><span class="s0">def </span><span class="s1">main(): 
+    P=[</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">] 
+    print(EvalRac(P,</span><span class="s3">3</span><span class="s1">)) 
+ 
+</span><span class="s0">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

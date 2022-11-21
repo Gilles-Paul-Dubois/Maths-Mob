@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>prodr1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<pre><span class="s0">using </span><span class="s1">Decimals</span>
+
+<span class="s0">function </span><span class="s1">racine(p)</span>
+    <span class="s1">Channel() </span><span class="s0">do </span><span class="s1">c</span>
+        <span class="s1">pow=</span><span class="s2">1</span>
+        <span class="s1">num=</span><span class="s2">1</span>
+        <span class="s1">den=</span><span class="s2">1</span>
+        <span class="s1">push!(c,num//den)</span>
+        <span class="s0">while true</span>
+            <span class="s1">pow=pow*</span><span class="s2">100</span>
+            <span class="s1">u=</span><span class="s2">0</span>
+            <span class="s0">while </span><span class="s1">(num*</span><span class="s2">10</span><span class="s1">+u)*(num*</span><span class="s2">10</span><span class="s1">+u)&lt;=p*pow</span>
+                <span class="s1">u+=</span><span class="s2">1</span>
+            <span class="s0">end</span>
+            <span class="s1">num=num*</span><span class="s2">10</span><span class="s1">+u-</span><span class="s2">1</span>
+            <span class="s1">den=den*</span><span class="s2">10</span>
+            <span class="s1">push!(c,num//den)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s3">#transformation en decimal d'un rationnel</span>
+<span class="s3">#transformation into decimalof a rational</span>
+<span class="s1">dec(r)= decimal(numerator(r))/decimal(denominator(r))</span>
+
+<span class="s1">RAC2=racine(</span><span class="s2">2</span><span class="s1">)</span>
+<span class="s1">RAC3=racine(</span><span class="s2">3</span><span class="s1">)</span>
+<span class="s1">RAC6=racine(</span><span class="s2">6</span><span class="s1">)</span>
+
+<span class="s1">L2=[take!(RAC2) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span><span class="s1">]</span>
+<span class="s1">L3=[take!(RAC3) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span><span class="s1">]</span>
+<span class="s1">L6=[take!(RAC6) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span><span class="s1">]</span>
+<span class="s1">PROD=[L2[i]*L3[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span><span class="s1">]</span>
+<span class="s1">FL6=map(x-&gt;dec(x),L6)</span>
+<span class="s1">FPROD=map(x-&gt;dec(x),PROD)</span>
+
+<span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span>
+    <span class="s1">print(FL6[i])</span>
+    <span class="s1">print(</span><span class="s4">&quot;---&quot;</span><span class="s1">)</span>
+    <span class="s1">print(FPROD[i])</span>
+    <span class="s1">println(</span><span class="s4">&quot; &quot;</span><span class="s1">)</span>
+<span class="s0">end</span>
+</pre>
+</body>
+</html>

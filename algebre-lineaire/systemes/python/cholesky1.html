@@ -1,0 +1,68 @@
+﻿<html>
+ <head>
+  <title>
+   cholesky1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s0">### factorisation de Cholesky forme <sup>t</sup>TDT</span><span class="s1"> 
+</span><span class="s0">###  Cholesky's factorization  form T<sup>t</sup>DT</span><span class="s1"> 
+</span><span class="s0">### version récursive- recursive version</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">numpy </span><span class="s2">import </span><span class="s1">matrix, transpose 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+</span><span class="s2">def </span><span class="s1">LC(i,j,M): 
+    </span><span class="s0">"""Coefficients de T - coefficients of T"""</span><span class="s1"> 
+    X=[LC(i,k,M)*LC(j,k,M)*DC(k,M) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,j)] 
+    S=</span><span class="s3">0 </span><span class="s2">if </span><span class="s1">len(X)==</span><span class="s3">0 </span><span class="s2">else </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x,y:x+y,X) 
+    </span><span class="s2">return  </span><span class="s1">(M[i-</span><span class="s3">1</span><span class="s1">,j-</span><span class="s3">1</span><span class="s1">]-S)/DC(j,M) 
+ 
+</span><span class="s2">def </span><span class="s1">DC(i,M): 
+    </span><span class="s0">"""coefficients positifs de la matrice diagonale D"""</span><span class="s1"> 
+    </span><span class="s0">"""positive coefficients of the diagonal matrix D"""</span><span class="s1">     
+    X=[LC(i,k,M)*LC(i,k,M)*DC(k,M) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,i)] 
+    S=</span><span class="s3">0 </span><span class="s2">if </span><span class="s1">len(X)==</span><span class="s3">0 </span><span class="s2">else </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x,y:x+y,X) 
+    </span><span class="s2">return </span><span class="s1">M[i-</span><span class="s3">1</span><span class="s1">,i-</span><span class="s3">1</span><span class="s1">]-S 
+ 
+</span><span class="s2">def </span><span class="s1">Cholesky(M): 
+    </span><span class="s0">"""Factorisation de Cholesky de la matrice M - Cholesky's factorization of M """</span><span class="s1"> 
+    n=len(M) 
+    Delta=[DC(i,M) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">)] 
+    T=[LC(i,j,M) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">i&gt;j] 
+    </span><span class="s2">return </span><span class="s1">Delta,T 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    M=matrix(</span><span class="s4">'[1 1 1 1;1 5 5 5;1 5 14 14; 1 5 14 15]'</span><span class="s1">) 
+    D,T=Cholesky(M) </span><span class="s0"># calcul des matrices triangulaires et diagonales- computation of triangular and diagonal matrices </span><span class="s1"> 
+    </span><span class="s0">#vérification des résultats - checking results </span><span class="s1"> 
+    T1=[</span><span class="s3">1</span><span class="s1">]+T[</span><span class="s3">0</span><span class="s1">:</span><span class="s3">3</span><span class="s1">] 
+    T2=[</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">]+T[</span><span class="s3">3</span><span class="s1">:</span><span class="s3">5</span><span class="s1">] 
+    T3=[</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">]+T[</span><span class="s3">5</span><span class="s1">:] 
+    T4=[</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">] 
+    MT=matrix([T1,T2,T3,T4]) 
+    TM=MT.transpose() 
+    D1=[D[</span><span class="s3">0</span><span class="s1">],</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">] 
+    D2=[</span><span class="s3">0</span><span class="s1">,D[</span><span class="s3">1</span><span class="s1">],</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">] 
+    D3=[</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,D[</span><span class="s3">2</span><span class="s1">],</span><span class="s3">0</span><span class="s1">] 
+    D4=[</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,D[</span><span class="s3">3</span><span class="s1">]] 
+    DIAG=matrix([D1,D2,D3,D4]) 
+    print (TM*DIAG*MT) </span><span class="s0">#on retrouve M - We find M back</span><span class="s1"> 
+ 
+main() 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Isomorphismes linéaires</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href=".././css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/isolin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Applications linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/isolin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear maps" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Résultats généraux </h2> Nous avons déjà vu une première caractérisation des <input type="button" value="applications linéaires" onclick="go('defapplin.html')" data-inline="true" />
+          <input type="button" value="injectives" onclick="go('../../bases/applications/injections.html')" data-inline="true" />, à savoir: <br /> f injective ⇔ <input type="button" value="Ker(f)" onclick="go('noyau.html')" data-inline="true" /> = {0} <br /> En voici maintenant une autre: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> On suppose que E est un <input type="button" value="espace vectoriel" onclick="go('../espaces/defev.html')" data-inline="true" /> de <input type="button" value="dimension finie" onclick="go('../espaces/dimension.html')" data-inline="true" /> et B=(u<sub>1</sub>,...,u<sub>n</sub>) une <input type="button" value="base" onclick="go('../espaces/bases.html')" data-inline="true" /> de E, dans ces conditions: <br /> f injective ⇔ le système (f(u<sub>1</sub>),....,f(u<sub>n</sub>)) est <input type="button" value="libre" onclick="go('../espaces/libres.html')" data-inline="true" />
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons en effet f(u)=0 avec u= λ<sub>1</sub>u<sub>1</sub>+...+ λ<sub>n</sub>u<sub>n</sub>
+            <br /> On a donc alors λ<sub>1</sub>f(u<sub>1</sub>)+...+λ<sub>n</sub>f(u <br />n) = 0. Si f(u<sub>1</sub>),....,f(u<sub>n</sub>)) est libre on a nécessairement λ<sub>1</sub>= ... =λ<sub>n</sub>=0 donc u = 0 et Ker(f)={0} donc f est injective. Inversement supposons f injective et supposons qu'on ait λ<sub>1</sub>f(u<sub>1</sub>)+...+λ<sub>n</sub>f(u<sub>n</sub>)=0, alors on aura: f(λ<sub>1</sub>u<sub>1</sub>+...+λ<sub>n</sub>u<sub>n</sub>)=0 donc λ<sub>1</sub>u<sub>1</sub>+...+λ<sub>n</sub>u<sub>n</sub>=0 donc λ<sub>1</sub>=...=λ<sub>n</sub>=0 puisque B=(u<sub>1</sub>,...,u<sub>n</sub>) est une base de E.
+          </div> Nous avons également une autre caractérisation des applications linéaires <input type="button" value="surjectives" onclick="go('../../bases/applications/surjections.html')" data-inline="true" />, à savoir: <br /> f surjective ⇔ Im(f)=F <br /> En voici une autre: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> On suppose que E est un espace vectoriel de dimension finie et B=(u<sub>1</sub>,...,u<sub>n</sub>) une base de E, dans ces conditions: <br /> f surjective ⇔ le système (f(u<sub>1</sub>),....,f(u<sub>n</sub>)) est <input type="button" value="générateur" onclick="go('../espaces/generateurs.html#gen')" data-inline="true" />
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons f surjective et soit v un vecteur quelconque de l'espace but F. Si (f(u<sub>1</sub>),....,f(u<sub>n</sub>)) est générateur alors v peut s'écrire comme combinaison linéaire des f(u<sub>i</sub>) : <br /> v= λ<sub>1</sub>f(u<sub>1</sub>)+...+λ<sub>n</sub>f(u<sub>n</sub>) <br /> Donc par linéarité: <br /> v= f(λ<sub>1</sub>u<sub>1</sub>+...+λ<sub>n</sub>u<sub>n</sub>). c'est aussi simple pour la réciproque
+          </div> En rassemblant les deux résultats précédents on a: <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si f: E → F est une application linéaire. Il y a équivalence entre: <ul>
+              <li> f est <input type="button" value="bijective" onclick="go('../../bases/applications/bijections.html')" data-inline="true" />. </li>
+              <li> L'image de toute base de E est une base de F. </li>
+            </ul>
+          </div> Et on a également: <a name="th4"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si f est une application linéaire d'un espace de dimension finie E dans un espace de dimension finie F avec dim(E)=dim(F) pour que f soit un isomorphisme, il suffit que f soit injective OU que f soit surjective.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Cela résulte du fait que dans un espace de dimension n pour que n vecteurs forment une base il suffit qu'ils forment un système libre ou qu'ils forment un système générateur.
+          </div> Le résultat précédent s'applique donc aux endomorphismes d'un espace vectoriel de dimension finie, et nous donne: <a name="th5"></a>
+          <div id="container">
+            <div id="label">théorème</div> Soit E un espace vectoriel de dimension finie et f: E → E un endomorphisme de E (application linéaire de E dans E) alors il y a équivalence entre: <ul>
+              <li> f transforme UNE base de E en UNE base de E. </li>
+              <li> f est bijective. </li>
+              <li> f est injective. </li>
+              <li> f est surjective. </li>
+              <li> f transforme TOUTE base de E en une base de E. </li>
+            </ul>
+          </div> Cela nous fournit donc autant de caractérisations des endomorphismes bijectifs (automorphismes) d'un espace vectoriel de dimension finie. 
+          <a name="grouplin"></a>
+          <h2> Groupes linéaires </h2> Commençons par une définition: <div id="container">
+            <div id="label">définition</div> Les isomorphismes de l'espace vectoriel E sur lui-même, encore appelés endomorphismes bijectifs ou automorphismes (voir cours bases des mathématiques), forment un groupe pour la composition. Ce groupe n'est pas abélien on l'appelle le <strong>
+              <em>'groupe linéaire de E'</em>
+            </strong> et il est noté GL(E). C'est donc un sous-groupe du groupe de toutes les permutations de E.
+          </div> Tout cela résulte simplement du fait que: <ul>
+            <li> La composée de deux bijections est une bijection. </li>
+            <li> La composée de deux applications linéaires est une application linéaire. </li>
+            <li> La réciproque d'une application linéaire est linéaire (immédiat). </li>
+          </ul> On voit tout de suite également que: <a name="th6"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si E et F sont isomorphes en tant qu'espaces vectoriels, GL(E) et GL(F) le sont en tant que groupes.
+          </div> Cela se vérifie ainsi si φ: E → F est un isomorphisme. L'application f → φ<font size="-2">o</font>f<font size="-2">o</font>φ<sup>-1</sup> est un isomorphisme de groupes de GL(E) sur GL(F). Un espace vectoriel de dimension n étant toujours isomorphe à K<sup>n</sup>, dans le cas de la dimension finie le seul groupe linéaire qui importe est donc GL(K<sup>n</sup>) que l'on note encore GL(n,K). Nous représenterons ce groupe dans le prochain chapitre. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> General results </h2> We have already seen a first characterization of <input type="button" value="injective" onclick="go('../../bases/applications/injections.html')" data-inline="true">
+          <input type="button" value="linearmaps" onclick="go('defapplin.html')" data-inline="true"> that is : <br> f injective ⇔ <input type="button" value="Ker(f)" onclick="go('noyau.html')" data-inline="true"> = {0} <br> Now here's another one: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>We assume that E is a <input type="button" value="finite dimensional" onclick="go('../espaces/dimension.html')" data-inline="true">
+            <input type="button" value="vector space" onclick="go('../espaces/defev.html')" data-inline="true"> and B=(u<sub>1</sub>,...,u<sub>n</sub>) a <input type="button" value="basis" onclick="go('../espaces/bases.html')" data-inline="true"> of E, under these conditions: <br> f injective ⇔ the system (f(u<sub>1</sub>),....,f(u<sub>n</sub>)) is <input type="button" value="linearly independent" onclick="go('../espaces/libres.html')" data-inline="true">
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>Suppose indeed f(u)=0 with u= λ<sub>1</sub>u<sub>1</sub>+...+ λ<sub>n</sub>u<sub>n</sub>
+            <br> We then have λ<sub>1</sub>f(u<sub>1</sub>)+...+λ<sub>n</sub>f(u <br>n) = 0. If f(u<sub>1</sub>),....,f(u<sub>n</sub>)) is linearly independent, we necessarily have λ<sub>1</sub>= ... =λ<sub>n</sub>=0 so u = 0 and Ker(f)={0} so f is injective. Conversely suppose f injective and suppose that we have λ<sub>1</sub>f(u<sub>1</sub>)+...+λ<sub>n</sub>f(u<sub>n</sub>)=0, then we will have: f(λ<sub>1</sub>u<sub>1</sub>+...+λ<sub>n</sub>u<sub>n</sub>)=0 so λ<sub>1</sub>u<sub>1</sub>+...+λ<sub>n</sub>u<sub>n</sub>=0 therefore λ<sub>1</sub>=...=λ<sub>n</sub>=0 since B=(u<sub>1</sub>,...,u<sub>n</sub>) is a basis of E.
+          </div> We also have another characterization of <input type="button" value="surjective" onclick="go('../../bases/applications/surjections.html')" data-inline="true"> linear maps, that is : <br> f surjective ⇔ Im(f)=F <br> Here is another: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>We assume that E is a finite dimensional vector space and B=(u<sub>1</sub>,...,u<sub>n</sub>) a basis of E, under these conditions: <br> surjective f ⇔ the system (f(u<sub>1</sub>),....,f(u<sub>n</sub>)) is <input type="button" value="spanning" onclick="go('../espaces/generateurs.html#gene')" data-inline="true">
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>Let f be surjective and let v be any vector in the destination space F. If (f(u<sub>1</sub>),....,f(u<sub>n</sub>)) is spanning then v can be written as a linear combination of f(u<sub>i</sub>): <br> v= λ<sub>1</sub>f(u<sub>1</sub>)+...+λ<sub>n</sub>f(u<sub>n</sub>) <br> So by linearity: <br>v= f(λ<sub>1</sub>u<sub>1</sub>+...+λ<sub>n</sub>u<sub>n</sub>). it's as simple for the converse.
+          </div> Combining the two previous results, we have: <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If f: E → F is a linear map. There is equivalence between: <ul>
+              <li> f is <input type="button" value="bijective" onclick="go('../../bases/applications/bijections.html')" data-inline="true">. </li>
+              <li> The image of any basis of E is a basis of F. </li>
+            </ul>
+          </div> And we also have: <a name="th4e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If f is a linear map of a from a finite dimensional space E to a finite dimensional space F with dim(E)=dim(F) for f to be an isomorphism, it suffices for f to be injective OR to be surjective.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> This results from the fact that in an n-dimensional space for n vectors to form a basis it suffices whether they form a free system or they form a spanning system.
+          </div> The previous result therefore applies to endomorphisms of a finite dimensional vector space, and gives us: <a name="th5e"></a>
+          <div id="container">
+            <div id="label">theorem </div>Let E be a finite dimensional vector space and f: E → E an endomorphism of E (linear map from E to E) then there is equivalence between: <ul>
+              <li> f transforms ONE basis of E into ONE basis of E. </li>
+              <li> f is bijective. </li>
+              <li> f is injective. </li>
+              <li> f is surjective. </li>
+              <li> f transforms ANY basis of E into a basis of E. </li>
+            </ul>
+          </div>This therefore provides us with as many characterizations of bijective endomorphisms (automorphisms) of a vector space of finite dimension. 
+          <a name="groupline"></a>
+          <h2> Linear groups </h2> Let's start with a definition: <div id="container">
+            <div id="label">definition </div>The isomorphisms of the vector space E on itself, also called bijective endomorphisms or automorphisms (see basic mathematics course), form a group for composition. This group is not Abelian it is called the <strong>
+              <em>'linear group of E' </em>
+            </strong> and it is denoted GL(E). It is therefore a subgroup of the group of all permutations of E.
+          </div> All this simply results from the fact that: <ul>
+            <li> The composite of two bijections is a bijection. </li>
+            <li> The composition of two linear maps is a linear map. </li>
+            <li> The inverse of a linear map is linear (immediate). </li>
+          </ul> We also immediately see that: <a name="th6"></a>
+          <div id="container">
+            <div id="label">theorem </div>If E and F are isomorphic as vector spaces, GL(E) and GL(F) are isomorphic as groups.
+          </div>This is thus verified if φ: E → F is an isomorphism. The map f → φ<font size="-2">o</font>f<font size="-2">o</font>φ<sup>-1</sup> is an isomorphism of groups from GL(E) onto GL(F). A vector space of dimension n being always isomorphic to K<sup>n</sup>, in the case of the finite dimension the only linear group which matters is therefore GL(K<sup>n </font>
+          </sup>) which we still denote by GL(n,K). We will represent this group in the next chapter. </font>
+          <br>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Applications linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear maps" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

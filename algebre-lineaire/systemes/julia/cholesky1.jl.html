@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+
+<span class="s0">function </span><span class="s1">LC(i,j,M)</span>
+    <span class="s1">X=[LC(i,k,M)*LC(j,k,M)*DC(k,M) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:j-</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s1">S=isempty(X) ? </span><span class="s2">0 </span><span class="s1">: reduce(+,X)</span>
+    <span class="s0">return </span><span class="s1">(M[i,j]-S)/DC(j,M)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">DC(i,M)</span>
+    <span class="s1">X=[LC(i,k,M)*LC(i,k,M)*DC(k,M) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:i-</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s1">S=isempty(X) ? </span><span class="s2">0 </span><span class="s1">: reduce(+,X)</span>
+    <span class="s0">return </span><span class="s1">M[i,i]-S</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Cholesky(M)</span>
+    <span class="s1">n=size(M,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">Delta=[DC(i,M) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n]</span>
+    <span class="s1">T=[LC(i,j,M) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n </span><span class="s0">if </span><span class="s1">i&gt;j]</span>
+    <span class="s0">return </span><span class="s1">Delta,T</span>
+<span class="s0">end</span>
+
+<span class="s1">A=[</span><span class="s2">1. 1. 1. 1.</span><span class="s1">;</span><span class="s2">1. 5. 5. 5.</span><span class="s1">;</span><span class="s2">1. 5. 14. 14.</span><span class="s1">; </span><span class="s2">1. 5. 14. 15.</span><span class="s1">]</span>
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">println(A)</span>
+    <span class="s1">n=size(A,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">D,T=Cholesky(A)</span>
+    <span class="s1">MT=copy(A)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n,j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s1">MT[i,j]= i==j ? </span><span class="s2">1 </span><span class="s1">: </span><span class="s2">0</span>
+    <span class="s0">end</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n-</span><span class="s2">1</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">i+</span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s1">MT[i,j]=T[j+i-</span><span class="s2">1</span><span class="s1">]</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s1">TM = transpose(MT)</span>
+    <span class="s1">DIAG=copy(A)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n ,j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s1">DIAG[i,j]=</span><span class="s2">0</span>
+    <span class="s0">end</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s1">DIAG[i,i]=D[i]</span>
+    <span class="s0">end</span>
+    <span class="s1">println(MT)</span>
+    <span class="s1">println(DIAG)</span>
+    <span class="s1">println(TM*DIAG*MT)</span>
+ 
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>mersenne1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">premier(n)</span>
+    <span class="s0">if </span><span class="s1">n </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:</span><span class="s2">3</span>
+        <span class="s0">return true</span>
+    <span class="s0">else</span>
+        <span class="s1">borne=Int(floor(sqrt(n)))+</span><span class="s2">1</span>
+        <span class="s0">if </span><span class="s1">n%</span><span class="s2">2</span><span class="s1">!=</span><span class="s2">0 </span><span class="s1">&amp;&amp; n%</span><span class="s2">3</span><span class="s1">!=</span><span class="s2">0 </span><span class="s1">&amp;&amp;!(any(n%x==</span><span class="s2">0 </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s2">3</span><span class="s1">:borne))</span>
+            <span class="s0">return true</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return false</span>
+<span class="s0">end</span>
+
+<span class="s1">premiers=[n </span><span class="s0">for </span><span class="s1">n </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:</span><span class="s2">100 </span><span class="s0">if </span><span class="s1">premier(n)]</span>
+
+<span class="s1">mersenne(n)=</span><span class="s2">2</span><span class="s1">^premiers[n]-</span><span class="s2">1</span>
+
+<span class="s1">M=[mersenne(n) </span><span class="s0">for </span><span class="s1">n </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span><span class="s1">]</span>
+<span class="s1">MP=[m </span><span class="s0">for </span><span class="s1">m </span><span class="s0">in </span><span class="s1">M </span><span class="s0">if </span><span class="s1">premier(m)]</span>
+<span class="s1">println(M)</span>
+<span class="s1">println(MP)</span>
+</pre>
+</body>
+</html>

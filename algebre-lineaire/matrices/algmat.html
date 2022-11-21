@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Algèbre de matrices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/algmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/algmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définitions </h2>
+          <div id="container">
+            <div id="label">définition</div> K étant un corps commutatif, on appelle <strong>
+              <em>'algèbre sur un corps K'</em>
+            </strong> tout <input type="button" value="espace vectoriel sur K" onclick="go('../espaces/defev.html')" data-inline="true" /> muni d'une <input type="button" value="loi multiplicative" onclick="go('../../bases/operations/puissances.html')" data-inline="true" />, <input type="button" value="associative" onclick="go('../../bases/operations/associative.html')" data-inline="true" /> et <input type="button" value="distributive" onclick="go('../../bases/operations/distributivite.html')" data-inline="true" /> à gauche et à droite par rapport à l'addition. <br /> Une algèbre est donc un espace vectoriel qui est, de plus, un <input type="button" value="anneau" onclick="go('../../bases/operations/anneau.html')" data-inline="true" />.
+          </div> Avec cette définition l'ensemble des <input type="button" value="matrices carrées" onclick="go('defmat.html')" data-inline="true" /> à n lignes et n colonnes à coefficients dans K, soit M(n,n,K), que l'on note plus simplement M(n,K) est muni d'une structure d'algèbre sur K. <div id="container"> Cette algèbre est unitaire, <input type="button" value="L'élément unité" onclick="go('../../bases/operations/puissances.html')" data-inline="true" /> étant la matrice U définie par U=(α<sub>i,j</sub>) où: <br /> α<sub>i,j</sub>= 0 si i ≠ j et 1 si i=j. Cette matrice comporte donc des 1 sur la 'diagonale' et des 0 partout ailleurs. </div> Signalons encore:
+          <a name="inv"></a> 
+          <div id="container"> L'ensemble des matrices <input type="button" value="inversibles" onclick="go('../../bases/operations/puissances.html')" data-inline="true" /> de M(n,K) forme un <input type="button" value="groupe" onclick="go('../../bases/operations/groupe.html')" data-inline="true" /> multiplicatif, non commutatif, noté GL(n,K). </div> Signalons encore un usage répandu (emprunt à la terminologie anglaise): <div id="container">
+            <div id="label">définition</div>Les matrices carrées inversibles sont qualifiées de <strong>
+              <em>'régulières'</em>
+            </strong> (regular - non singular ) et les matrices non inversibles sont qualifiées de <strong>
+              <em>'singulières'</em>
+            </strong> (non regular - singular).
+          </div>
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />
+          <br>
+          <div id="container"> Le groupe GL(n,K) n'étant pas commutatif, la formule (AB)<sup>-1</sup>=A<sup>-1</sup>B<sup>-1</sup> est (en général) fausse. La formule exacte est (AB)<sup>-1</sup>=B<sup>-1</sup>A<sup>-1</sup>. </div>
+          <p> Voici maintenant une appliquette vous permettant de visionner quelques matrices régulières . <br /> Vous pouvez sélectionner l'ordre entre 2 et 4 au moyen du curseur. <br /> Vous pouvez sélectionner le corps de base (choix entre 4 possibilités par bouton radio. <br /> La seule incompatibilité concerne l'ordre 4 avec le corps &rationals; qui risque de provoquer un plantage de javascript. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definitions </h2>
+          <div id="container">
+            <div id="label">definition </div>K being a commutative field, we call <strong>
+              <em>'algebra over the field K' </em>
+            </strong> any <input type="button" value="vector space over K" onclick="go('../espaces/defev.html')" data-inline="true"> endowed with a <input type="button" value="multiplication" onclick="go('../../bases/operations/puissances.html')" data-inline="true">, <input type="button" value="associative" onclick="go('../../bases/operations/associative.html')" data-inline="true"> and <input type="button" value="distributive" onclick="go('../../bases/operations/distributivite.html')" data-inline="true"> left and right over the addition. <br> An algebra is therefore a vector space which is, moreover, a <input type="button" value="ring" onclick="go('../../bases/operations/anneau.html')" data-inline="true">.
+          </div> With this definition all of the <input type="button" value="square matrices" onclick="go('defmat.html')" data-inline="true"> with n rows and n columns and coefficients in K, that is M(n,n,K), which we denote more simply M(n,K) is endowed with a structure of algebra over K. <div id="container"> This algebra is unitary, <input type="button" value="the unity element" onclick="go('../../bases/operations/puissances.html')" data-inline="true"> being the matrix U defined by U=(α<sub>i,j</sub>) where: <br>α<sub>i,j</sub>= 0 if i ≠ j and 1 if i=j. This matrix therefore has 1's on the 'diagonal' and 0's everywhere else. </div> Let us point out again: 
+          <a name="inve"></a>
+          <div id="container"> The set of <input type="button" value="unit matrices" onclick="go('../../bases/operations/puissances.html')" data-inline="true"> of M(n,K) is a <input type="button" value="group" onclick="go('../../bases/operations/groupe.html')" data-inline="true">
+          </div> multiplicative, non commutative, denoted GL(n,K). Let us also point out a widespread use : <div id="container">
+            <div id="label">definition </div>unit square matrices, having an inverse, are referred to as <strong>
+              <em>'regular' </em>
+            </strong> and non-regular matrices are called <strong>
+              <em>'singular' </em>
+            </strong>.
+          </div>
+          <img alt="" src="../../images/attention.gif" width="40" height="40" border="0">
+          <br>
+          <div id="container"> The group GL(n,K) being not commutative, the formula (AB)<sup>-1</sup>=A<sup>-1</sup>B<sup>-1</sup> is (generally) false. The exact formula is (AB)<sup>-1</sup>=B<sup>-1</sup>A<sup>-1</sup>. </div>
+          <p>Here is now an applet allowing you to view some regular matrices. <br> You can select the order between 2 and 4 using the slider. <br> You can select the base field (choice between 4 possibilities by radio button. <br>The only incompatibility concerns order 4 with the body ℚ which may cause a JavaScript crash due to possible overflow. We prevent this through a systematic alarm. </p>
+        </div>
+        <!-- /en -->
+        <div>
+          <table border="2" id="myTable">
+            <tr>
+              <td>
+                <button onclick="nameSpace2.Paint();" type="button">
+                  <div lang="fr">Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+              </td>
+              <td align="center">
+                <div lang="fr"> Matrice A<sup>-1</sup>
+                </div>
+                <!-- /fr -->
+                <div lang="en">Matrix A<sup>-1</sup>
+                </div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <input id="myText1" type="text" />
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+              <td align="center">
+                <div lang="fr"> Matrice A×A<sup>-1</sup>
+                </div>
+                <!-- /fr -->
+                <div lang="en">Matrix A&times;A<sup>-1</sup>
+                </div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas3" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <table border="1">
+                  <tr>
+                    <td> &reals;</td>
+                    <td width="50" height="30">
+                      <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td> &rationals;</td>
+                    <td height="30">
+                      <input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="2" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td> &integers;/5&integers;</td>
+                    <td height="30">
+                      <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="3" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td> &complexes;</td>
+                    <td height="30">
+                      <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4" />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+          <table border="1">
+            <tr>
+              <td>
+                <div lang="fr">Ordre de la matrice carrée A :</div>
+                <!-- /fr -->
+                <div lang="en">Order of the square matrix A : </div>
+                <!-- /en -->
+              </td>
+              <td width="300">
+                <input id="myRange1" max="4" min="2" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/invmat1.js"></script>
+        <div lang="fr">
+          <p> A ce stade nous n'avons guère d'autre moyen de constater qu'une matrice est régulière (inversible) que d'exhiber son inverse. Rien n'est encore vu concernant un critères d'inversibilité. nous nous pencherons sur ce problème dans un procain chapitre. <br /> De la même façon il n'est pas évident de déterminer si une matrice est singulière. On peut le voir toutefois assez facilement dans certains cas particuliers. Il est évident par exemple qu'une matrice d'ordre &gt;1 ayant tous ses coefficients égaux ne peut être inversible, car la recherche d'un inverse conduit à un système n'ayant évidemment pas de solution. Il existe évidemment de nombreux autres cas que nous mettrons en évidence dans le chapitre suivant faisant le lien entre matrices et applications linéaires.
+          <h2>
+            </p> Le coin de Python </h2>
+          <p> Nous allons maintenant écrire un programme de génération de matrices aléatoires qui vérifiera en outre l'associativité du produit.</p>
+          <p>
+            <object border="3" data="python/matrices_produit_2.html" height="400" type="text/html" width="100%"></object>
+          </p> Nous allons maintenant écrire un programme de génération de matrices aléatoires qui vérifiera en outre la distributivité du produit sur la somme. <br />
+          <p>
+            <object border="3" data="python/matrices_produit_3.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <h2>Le coin de Julia</h2>
+          <p>Même chose avec Julia 1.6</p>
+          <p>
+            <object border="3" data="julia/assocprodmat.jl.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <p>
+            <object border="3" data="julia/distprodmat.jl.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <p>Utilisation du package LinearAlgebra pour la définition de la matrice identité (unité).</p>
+          <p>
+            <object border="3" data="julia/matunit.jl.html" height="100" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>For now we have hardly any other means of ascertaining that a matrix is ​​regular than to exhibit its inverse. Nothing is yet seen concerning a regularity criteria. we will be concerned with this issue in a later chapter. <br>In the same way it is not obvious to determine if a matrix is ​​singular. It can be seen, however, quite easily in certain particular cases. It is obvious for example that a matrix of order &gt;1 having all its coefficients equal cannot be regular, because the search for an inverse leads to a system obviously having no solution. There are obviously many other cases that we will highlight in the following chapter making the link between matrices and linear applications. </p>
+          <h2>
+            <p></p> Python's Corner
+          </h2>
+          <p>We will now write a random matrix generation program which will additionally check the associativity of the product. </p>
+          <p>
+            <object data="python/matrices_produit_2.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>We will now write a matrix generation program which will further check the distributivity of the product over the sum. <br>
+          <p>
+            <object data="python/matrices_produit_3.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2>Julia's corner </h2>
+          <p>Same with Julia 1.6 </p>
+          <p>
+            <object data="julia/assocprodmat.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <p>
+            <object data="julia/distprodmat.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <p>Using the LinearAlgebra package to build the identity (unity) matrix. </p>
+          <p>
+            <object data="julia/matunit.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+      </div>
+      <!-- /en -->
+      <div lang="fr">
+        <div>
+          <ul style=list-style-type:'';>
+            <li>
+              <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+            </li>
+            <li>
+              <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+            </li>
+          </ul>
+        </div>
+        <!-- /navbar -->
+      </div>
+      <!-- /fr -->
+      <div lang="en">
+        <div>
+          <ul style=list-style-type:'';>
+            <li>
+              <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+            </li>
+            <li>
+              <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /en -->
+    </div>
+    <!-- /content -->
+    <div data-role="footer">
+      <table cellpadding="10">
+        <tr>
+          <td>
+            <div lang="fr">Création Gilles Dubois</div>
+            <div lang="en">Created by Gilles Dubois</div>
+          </td>
+          <td>
+            <div lang="fr">Janvier 2022</div>
+            <div lang="en">January 2022</div>
+          </td>
+          <td>
+            <div lang="fr">Version mobile Jquery</div>
+            <div lang="en">Mobile Jquery version</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- /footer -->
+    <ul style=list-style-type:'';>
+      <li>
+        <div lang="fr">
+          <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+        <div lang="en">
+          <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+      </li>
+      <li>
+        <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+      </li>
+    </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

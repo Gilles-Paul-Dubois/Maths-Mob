@@ -1,0 +1,227 @@
+﻿<html>
+ <head>
+  <title>
+   exo2.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+  
+</span><span class="s0"># résolution de l'équation du quatrième degré par la méthode de Ferrari  </span><span class="s1"> 
+   
+</span><span class="s2">import </span><span class="s1">math   
+   
+</span><span class="s2">class </span><span class="s1">MonComplexe ():   
+    </span><span class="s0">""" modélisation des nombres complexes """  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self,a=</span><span class="s3">0.0</span><span class="s1">,b=</span><span class="s3">0.0</span><span class="s1">):   
+        </span><span class="s0">"""le constructeur soit en cartésiennes soit en polaires"""  </span><span class="s1"> 
+        self.x=a   
+        self.y=b   
+   
+    </span><span class="s2">def </span><span class="s1">__str__(self):   
+        </span><span class="s0">""" représentation externe pour print et str """  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.x)   
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==</span><span class="s3">1</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s4">"i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==-</span><span class="s3">1</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s4">"-i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.y)+</span><span class="s4">"i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==</span><span class="s3">1</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"+i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==-</span><span class="s3">1</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"-i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y&gt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"+"</span><span class="s1">+str(self.y)+</span><span class="s4">"i"  </span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+str(self.y)+</span><span class="s4">"i"  </span><span class="s1"> 
+   
+    </span><span class="s2">def </span><span class="s1">__add__(self,other):   
+        </span><span class="s0">"""somme de deux complexes"""  </span><span class="s1"> 
+        a=self.x+other.x   
+        b=self.y+other.y   
+        </span><span class="s2">return </span><span class="s1">MonComplexe(a,b)   
+   
+    </span><span class="s2">def </span><span class="s1">__sub__(self,other):   
+        </span><span class="s0">"""différence de deux complexes"""  </span><span class="s1"> 
+        a=self.x-other.x   
+        b=self.y-other.y   
+        </span><span class="s2">return </span><span class="s1">MonComplexe(a,b)   
+   
+    </span><span class="s2">def </span><span class="s1">__neg__(self):   
+        </span><span class="s0">"""opposé d'un complexe"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">MonComplexe(-self.x,-self.y)   
+   
+    </span><span class="s2">def </span><span class="s1">null(self):   
+        </span><span class="s0">"""test de nullité"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==</span><span class="s3">0  </span><span class="s1"> 
+   
+    </span><span class="s2">def </span><span class="s1">__mul__(self,other):   
+        </span><span class="s0">"""produit de deux complexes"""  </span><span class="s1"> 
+        a=self.x*other.x-self.y*other.y   
+        b=self.x*other.y+self.y*other.x   
+        </span><span class="s2">return </span><span class="s1">MonComplexe(a,b)   
+   
+    </span><span class="s2">def </span><span class="s1">__truediv__(self,other): 
+        </span><span class="s0">"""quotient de deux complexes"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self*(~other)   
+   
+    </span><span class="s2">def </span><span class="s1">conj(self):   
+         </span><span class="s0">"""conjugué d'un complexe"""  </span><span class="s1"> 
+         </span><span class="s2">return </span><span class="s1">MonComplexe(self.x,-self.y)   
+   
+    </span><span class="s2">def </span><span class="s1">module(self):   
+        </span><span class="s0">"""module d'un complexe"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">math.sqrt(self.x*self.x+self.y*self.y)   
+    </span><span class="s2">def </span><span class="s1">argument(self):   
+        </span><span class="s0">"""argument d'un complexe"""  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s3">0  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y&gt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">math.pi/</span><span class="s3">2  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y&lt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">-math.pi/</span><span class="s3">2  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x &gt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">math.atan(self.y/self.x)   
+        </span><span class="s2">return </span><span class="s1">math.pi-math.atan(self.y/(-self.x))   
+   
+    </span><span class="s2">def </span><span class="s1">__invert__(self):   
+        </span><span class="s0">"""inverse d'un complexe"""  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.null():   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError   
+        </span><span class="s2">return </span><span class="s1">MonComplexe(self.x/(self.x*self.x+self.y*self.y),-self.y/(self.x*self.x+self.y*self.y))   
+   
+    </span><span class="s2">def </span><span class="s1">__pow__(self,n):   
+        </span><span class="s0">"""puissances d'un complexe"""  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">n&lt;=</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.null():   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError   
+        </span><span class="s2">if </span><span class="s1">n &gt;=</span><span class="s3">0</span><span class="s1">:   
+            R=MonComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+            </span><span class="s2">while </span><span class="s1">n:   
+                R=R*self   
+                n=n-</span><span class="s3">1  </span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">R   
+        </span><span class="s2">if </span><span class="s1">n&lt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">(~R)**(-n)   
+   
+    </span><span class="s2">def </span><span class="s1">racines(self,n):   
+        </span><span class="s0">"""calcule les n racines n-ièmes du nombre"""  </span><span class="s1"> 
+        </span><span class="s0"># on utilise les racines de l'unité  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">[MonComplexe(self.module()**(</span><span class="s3">1.0</span><span class="s1">/n) *math.cos((k*</span><span class="s3">2</span><span class="s1">*math.pi+self.argument())/n),self.module()**(</span><span class="s3">1.0</span><span class="s1">/n)*math.sin((k*</span><span class="s3">2</span><span class="s1">*math.pi+self.argument())/n)) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n) ]   
+   
+</span><span class="s2">def </span><span class="s1">Delta (a,b,c):   
+    </span><span class="s0">"""discriminant d'une équation"""  </span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">b*b-MonComplexe(</span><span class="s3">4</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)*a*c   
+   
+</span><span class="s2">def </span><span class="s1">Solutions2(a,b,c):   
+    </span><span class="s0">"""Calcule les deux racines de l'équation du second degré-- solving quadratics"""  </span><span class="s1"> 
+    D=Delta(a,b,c)   
+    z1=D.racines(</span><span class="s3">2</span><span class="s1">)[</span><span class="s3">0</span><span class="s1">]   
+    n1=(-b-z1)/(a*MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">))   
+    n2=(-b+z1)/(a*MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">))   
+    </span><span class="s2">return </span><span class="s1">n1,n2   
+   
+   
+</span><span class="s2">def </span><span class="s1">Cardan (a,b,c,d):   
+    </span><span class="s0">""" a, b, c, d sont les coefficients initiaux de l'équation"""  </span><span class="s1"> 
+    </span><span class="s0"># on commence par mettre sous forme canonique  </span><span class="s1"> 
+    b,c,d=b/a,c/a,d/a   
+    p=c-b*b/MonComplexe(</span><span class="s3">3.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+    q=d-b*c/MonComplexe(</span><span class="s3">3.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)-(b**</span><span class="s3">3</span><span class="s1">)/MonComplexe(</span><span class="s3">27.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)+(b**</span><span class="s3">3</span><span class="s1">)/MonComplexe(</span><span class="s3">9.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+    B,C= q,-p*p*p/MonComplexe(</span><span class="s3">27.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+    D=B*B-MonComplexe(</span><span class="s3">4.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)*C   
+    R=D.racines(</span><span class="s3">2</span><span class="s1">)   
+    U=(-B+R[</span><span class="s3">0</span><span class="s1">])/MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+    roots=U.racines(</span><span class="s3">3</span><span class="s1">)   
+    sol1=[u-p/(MonComplexe(</span><span class="s3">3.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)*u) </span><span class="s2">for </span><span class="s1">u </span><span class="s2">in </span><span class="s1">roots]   
+    sol2=[z-b/MonComplexe(</span><span class="s3">3.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">) </span><span class="s2">for </span><span class="s1">z </span><span class="s2">in </span><span class="s1">sol1]   
+    </span><span class="s2">return </span><span class="s1">sol2   
+   
+</span><span class="s2">def </span><span class="s1">Ferrari (a,b,c,d,e):   
+    </span><span class="s0">""" Méthode de Ferrari pour le quatrième degré - Ferrari's method for 4th degree"""  </span><span class="s1"> 
+    b,c,d,e=b/a,c/a,d/a,e/a   
+    p=(MonComplexe(-</span><span class="s3">3.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*b*b+MonComplexe(</span><span class="s3">8.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*c)/MonComplexe(</span><span class="s3">8.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)   
+    q=(b**</span><span class="s3">3</span><span class="s1">-MonComplexe(</span><span class="s3">4.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*b*c+MonComplexe(</span><span class="s3">8.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*d)/MonComplexe(</span><span class="s3">8.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)   
+    r=(MonComplexe(-</span><span class="s3">3.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*(b**</span><span class="s3">4</span><span class="s1">)+MonComplexe(</span><span class="s3">16.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)*c*b*b-MonComplexe(</span><span class="s3">64.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*d*b+MonComplexe(</span><span class="s3">256.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*e)/MonComplexe(</span><span class="s3">256.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)   
+    </span><span class="s0"># coefficients de la résolvante A,B,C,D - coefficients of the resolvent cubic </span><span class="s1"> 
+    A=MonComplexe(</span><span class="s3">1.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+    B=-p   
+    C=-MonComplexe(</span><span class="s3">4.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*r   
+    D=MonComplexe(</span><span class="s3">4.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*r*p-q*q   
+    U=Cardan(A,B,C,D)   
+    u=U[</span><span class="s3">0</span><span class="s1">] </span><span class="s0"># une solution au hasard de la résolvante - a random root of cubic resolvent  </span><span class="s1"> 
+    k=q/(MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)*(u-p))   
+    g=u-p   
+    t=g.racines(</span><span class="s3">2</span><span class="s1">)[</span><span class="s3">0</span><span class="s1">]   
+    A1=MonComplexe(</span><span class="s3">1.0</span><span class="s1">)   
+    B1=-t   
+    C1=u/MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)+t*k   
+    S1=Solutions2(A1,B1,C1)   
+    A2=MonComplexe(</span><span class="s3">1.0</span><span class="s1">)   
+    B2=t   
+    C2=u/MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">)-t*k   
+    S2=Solutions2(A2,B2,C2)   
+    Sol1=[S1[</span><span class="s3">0</span><span class="s1">],S1[</span><span class="s3">1</span><span class="s1">],S2[</span><span class="s3">0</span><span class="s1">],S2[</span><span class="s3">1</span><span class="s1">]]   
+    Sol2=[z-b/MonComplexe(</span><span class="s3">4.0</span><span class="s1">,</span><span class="s3">0.0</span><span class="s1">) </span><span class="s2">for </span><span class="s1">z </span><span class="s2">in </span><span class="s1">Sol1]   
+    </span><span class="s2">return </span><span class="s1">Sol2   
+   
+</span><span class="s2">def </span><span class="s1">Resolution (a,b,c,d,e):   
+    </span><span class="s0">"""Résout l'équation az^4+bz^3+cz^2+dz+e=0 - solves a genera 4th degree equation"""  </span><span class="s1"> 
+    </span><span class="s0"># les coefficients peuvent être entiers, réels ou complexes  </span><span class="s1"> 
+    </span><span class="s0">#  coefficients can be integers, reals or complexes  </span><span class="s1">     
+    </span><span class="s0"># Dans tous les cas on convertit en complexes pour commencer  </span><span class="s1"> 
+    </span><span class="s0">#In any case we convert everything into complexes to begin  </span><span class="s1">     
+    </span><span class="s2">if </span><span class="s1">isinstance(a,float) </span><span class="s2">or </span><span class="s1">isinstance(a,int):   
+        a=MonComplexe(float(a),</span><span class="s3">0</span><span class="s1">)   
+    </span><span class="s2">if </span><span class="s1">isinstance(b,float) </span><span class="s2">or </span><span class="s1">isinstance (b,int):   
+        b=MonComplexe(float(b),</span><span class="s3">0</span><span class="s1">)   
+    </span><span class="s2">if </span><span class="s1">isinstance(c,float) </span><span class="s2">or </span><span class="s1">isinstance(c,int):   
+        c=MonComplexe(float(c),</span><span class="s3">0</span><span class="s1">)   
+    </span><span class="s2">if </span><span class="s1">isinstance(d,float) </span><span class="s2">or </span><span class="s1">isinstance(d,int):   
+        d=MonComplexe(float(d),</span><span class="s3">0</span><span class="s1">)   
+    </span><span class="s2">if </span><span class="s1">isinstance(e,float) </span><span class="s2">or </span><span class="s1">isinstance(e,int):   
+        e=MonComplexe(float(e),</span><span class="s3">0</span><span class="s1">)   
+    Z= Ferrari(a,b,c,d,e)   
+    print(</span><span class="s4">"racines"</span><span class="s1">)   
+    print(Z[</span><span class="s3">0</span><span class="s1">])   
+    print(Z[</span><span class="s3">1</span><span class="s1">])   
+    print(Z[</span><span class="s3">2</span><span class="s1">])   
+    print(Z[</span><span class="s3">3</span><span class="s1">])   
+    P0=a*Z[</span><span class="s3">0</span><span class="s1">]**</span><span class="s3">4</span><span class="s1">+b*(Z[</span><span class="s3">0</span><span class="s1">]**</span><span class="s3">3</span><span class="s1">)+c*Z[</span><span class="s3">0</span><span class="s1">]*Z[</span><span class="s3">0</span><span class="s1">]+d*Z[</span><span class="s3">0</span><span class="s1">]+e   
+    P1=a*Z[</span><span class="s3">1</span><span class="s1">]**</span><span class="s3">4</span><span class="s1">+b*(Z[</span><span class="s3">1</span><span class="s1">]**</span><span class="s3">3</span><span class="s1">)+c*Z[</span><span class="s3">1</span><span class="s1">]*Z[</span><span class="s3">1</span><span class="s1">]+d*Z[</span><span class="s3">1</span><span class="s1">]+e   
+    P2=a*Z[</span><span class="s3">2</span><span class="s1">]**</span><span class="s3">4</span><span class="s1">+b*(Z[</span><span class="s3">2</span><span class="s1">]**</span><span class="s3">3</span><span class="s1">)+c*Z[</span><span class="s3">2</span><span class="s1">]*Z[</span><span class="s3">2</span><span class="s1">]+d*Z[</span><span class="s3">2</span><span class="s1">]+e   
+    P3=a*Z[</span><span class="s3">3</span><span class="s1">]**</span><span class="s3">4</span><span class="s1">+b*(Z[</span><span class="s3">3</span><span class="s1">]**</span><span class="s3">3</span><span class="s1">)+c*Z[</span><span class="s3">3</span><span class="s1">]*Z[</span><span class="s3">3</span><span class="s1">]+d*Z[</span><span class="s3">3</span><span class="s1">]+e   
+    </span><span class="s0">#vérification  </span><span class="s1"> 
+    print(</span><span class="s4">"Vérification"</span><span class="s1">)   
+    print(P0)   
+    print(P1)   
+    print(P2)   
+    print(P3)   
+   
+</span><span class="s2">def </span><span class="s1">main():   
+    </span><span class="s0">#l'exemple traité est exactement celui du cours - the example of the course precisely  </span><span class="s1"> 
+    a,b,c,d,e =</span><span class="s3">2</span><span class="s1">,-</span><span class="s3">2</span><span class="s1">,-</span><span class="s3">2</span><span class="s1">,</span><span class="s3">4</span><span class="s1">,-</span><span class="s3">3  </span><span class="s1"> 
+    Resolution(a,b,c,d,e)   
+   
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:   
+    main()   
+   
+   
+    
+ 
+</span></pre>
+ </body>
+</html>

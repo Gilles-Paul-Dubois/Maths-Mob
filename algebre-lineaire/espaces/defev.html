@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Définition des espaces vectoriels</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<link href=".././css/jsxgraph.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+	<script src="../../js/jsxgraphcore.js"></script>
+	 <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>   
+  </head>
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+        <li><input type="button" value="Exercices" onclick="go('exercices/defev/menu.html')" /></li>
+	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/defev/menu.html')" /></li>
+	 <li><input type="button" value="Back to Vector Spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+
+<div lang="fr">
+ Dans tout ce module K désigne un
+ <input type="button" value="corps commutatif" onclick="go('../../bases/operations/corps.html')"  data-inline="true"/>.
+   Le plus souvent ce
+sera &reals; ( <input type="button" value="revoir" onclick="go('../../nombres/reels/index.html')"  data-inline="true"/> ) ou &complexes; 
+(<input type="button" value="revoir" onclick="go('../../nombres/complexes/index.html')"  data-inline="true"/> ). Cependant, la plupart des résultats restent valables pour n'importe
+quel corps y compris &rationals; ( <input type="button" value="revoir" onclick="go('../../nombres/rationnels/index.html')"  data-inline="true"/> ) et les
+corps finis.. Seule la théorie des déterminants suppose un corps de
+  <input type="button" value="caractéristique" onclick="go('../../nombres/rationnels/caracteristique.html')"  data-inline="true"/>
+  distincte de 2, et la théorie de l'orthogonalité
+suppose que K est l'un des deux corps &reals;
+ou &complexes;. Les éléments de K seront
+appelés les
+  <b>
+   <i>
+    'scalaires'
+   </i>
+  </b>.
+  <br/>
+  Les vecteurs seront représentés par des lettres latines u,v,w,x,y,z,
+surmontées ou non de flèches ( \(\overrightarrow{u}\text{ , }\overrightarrow{v}\), etc).
+  <h2>
+   Approche intuitive
+  </h2>
+  Dans cette approche, le corps de base K est supposé être le corps des
+nombres réels.
+  <br/>
+  Nous exigeons au minimum qu'un ensemble de vecteurs soit pourvu d'une
+addition, lui conférant une structure de
+<input type="button" value="groupe abélien" onclick="go('../../bases/operations/groupe.html')"  data-inline="true"/>
+ <input type="button" value="additif" onclick="go('../../bases/operations/multiples.html')"  data-inline="true"/>.
+ 
+  <br/>
+  Voici comment on peut se représenter cette addition:
+  <br/>
+  L'applet qui suit vous permet de faire varier les vecteurs u et v du plan en déplaçant leurs extrêmités à la souris.
+  <br/>
+  On voit qu'une telle somme est nécessairement commutative.
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+Throughout this module K denotes a
+   <input type="button" value="commutative field" onclick="go('../../bases/operations/corps.html')" data-inline="true">.
+    Most often this
+ will be ℝ ( <input type="button" value="review" onclick="go('../../nombres/reels/index.html')" data-inline="true">) or ℂ 
+ ( <input type="button" value="review" onclick="go('../../nombres/complexes/index.html')" data-inline="true">).  However, most of the results hold for any
+ field including ℚ (  <input type="button" value="review" onclick="go('../../nombres/rationnels/index.html')" data-inline="true">) and the
+ finite fields. Only the theory of determinants supposes a field of
+   <input type="button" value="characteristic" onclick="go('../../nombres/rationnels/caracteristique.html')" data-inline="true"> distinct from 2, and the orthogonality theory 
+ suppose that K is one of the two fields ℝ 
+ or ℂ. The elements of K will be 
+ called them 
+   <b>
+   <i>
+     'scalars' 
+    </i>
+  </b>. 
+   <br>The vectors will be represented by Latin letters u,v,w,x,y,z,
+ whether or not surmounted by arrows (  \(\overrightarrow{u}\text{ , }\overrightarrow{v}\), etc).
+   <h2>
+   Intuitive approach
+   </h2>In this approach, the base field K is assumed to be the field of
+ real numbers.
+   <br>We require at a minimum that a set of vectors be provided with a
+ addition, giving it a structure of
+ 
+ <input type="button" value="additive" onclick="go('../../bases/operations/multiples.html')" data-inline="true">
+ <input type="button" value="Abelian group" onclick="go('../../bases/operations/groupe.html')" data-inline="true">.
+   <br>
+  Here is how we can represent this addition:
+   <br>
+  The following applet allows you to vary the vectors u and v of the plane by moving their ends with the mouse.
+   <br>
+  We see that such a sum is necessarily commutative.
+
+
+</div><!-- /en --> 
+<div class="jxgbox" id="box1" style="width:500px; height:500px;">
+  </div>
+  <script src="js/sumvect.js">
+  </script>
+  <div lang="fr">
+<p>Illustration de l'associativité :</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<p>Illustration of associativity :</p>
+
+</div><!-- /en --> 
+ <div class="jxgbox" id="box2" style="width:500px; height:500px;">
+  </div>
+  <script src="js/asssumvect.js">
+  </script> 
+  <div lang="fr">
+ <p>L'animation suivante permet de voir une somme de deux vecteurs dans &reals;<sup>3</sup>.</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>The following animation shows a sum of two vectors in ℝ<sup>3</sup>. </p>
+
+
+</div><!-- /en --> 
+ <div>
+   <canvas height="400" id="myCanvas" style="border:1px solid #000000;" width="400">
+   </canvas>
+   <script src="js/3Dsumvect.js">
+   </script>
+  </div>  
+<div lang="fr">
+  On devra également disposer d'une
+  <input type="button" value="loi externe" onclick="go('../../bases/operations/externes.html')"  data-inline="true"/>
+ 
+  appelée 'multiplication
+par un scalaire'. Dans le cas réel, si u désigne un vecteur et si α désigne un scalaire,
+le vecteur αu sera :
+  <ul>
+   <li>
+    de même direction que u.
+   </li>
+   <li>
+    de même sens que u si α est positif et de sens contraire si
+&alpha; est négatif.
+   </li>
+   <li>
+    De module égal à |α|×||u|| (si ||u|| désigne le module de
+u)
+   </li>
+  </ul>
+  L'applet qui suit vous permet de visualiser la multiplication d'un vecteur par un scalaire.
+  <br/>
+  Le curseur permet de faire varier le réel λ.
+  <br/>
+  Avec la souris vous pouvez également modifier le vecteur u.
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+  You should also have a
+   <input type="button" value="external operation" onclick="go('../../bases/operations/externes.html')" data-inline="true"> called 'multiplication
+ by a scalar'.  In the real case, if u denotes a vector and if α denotes a scalar,
+ the vector αu will have:
+   <ul>
+   <li>
+    The same direction as u.
+    </li>
+   <li>The same sense as u if α is positive and an opposite sense if
+ α is negative.
+    </li>
+   <li>A modulus equal to |α|×||u||  (if ||u|| denotes the absolute value of
+ u)
+    </li>
+  </ul>
+  The following applet allows you to visualize the multiplication of a vector by a scalar.
+   <br>
+  The slider is used to vary the real λ.
+   <br>
+  With the mouse you can also modify the vector u by dragging ends.
+
+
+ 
+
+
+</div><!-- /en --> 
+ <div class="jxgbox" id="box3" style="width:500px; height:500px;">
+  </div>
+  <script src="js/multscal.js">
+  </script>
+<div lang="fr">
+<p> En outre, la loi externe devra posséder intrinséquement et relativement
+à l'addition des vecteurs, certaines propriétés, en voici une: λ(u+v)=λu+λv qui est ici illustrée par le théorème de Thalès.
+  <br/>
+  L'applet suivante vous permet de faire varier les vecteurs u et v en tirant leurs extrêmités, ainsi que le scalaire λ au moyen de la réglette.</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<p><In addition, the external law will have to possess intrinsically and relatively
+ to the addition of vectors, certain properties, here is one: λ(u+v)=λu+λv which is illustrated here by Thales' theorem.
+   <br>
+  The following applet allows you to vary the vectors u and v by dragging their ends, as well as the scalar λ using the slider. </p>
+
+
+</div><!-- /en --> 
+  <div class="jxgbox" id="box4" style="width:500px; height:500px;">
+  </div>
+  <script src="js/distrib.js">
+  </script>  
+  <div lang="fr">
+  <h2>
+   Définition axiomatique
+  </h2>
+
+ <div id="container">
+<div id="label">définition</div>  <b>
+    K
+   </b>
+   étant un corps commutatif, on appelle
+   <strong>
+    <em>
+     'K-espace vectoriel'
+    </em>
+   </strong>
+   ou bien encore
+   <strong>
+    <em>
+     'espace vectoriel sur K'
+    </em>
+   </strong>,
+la donnée d'un ensemble E muni d'une loi interne notée additivement +
+et d'une loi externe :
+   <br/>
+   K × E → E , (λ, u) → λu
+   <br/>
+   vérifiant la liste d'axiomes suivants:
+   <br/>
+   <ul>
+    <li>
+     (E,+) est un groupe abélien, le neutre 0 s'appelle le
+     <strong>
+      <em>
+       'vecteur
+nul'
+      </em>
+     </strong>
+    </li>
+    <li>
+     ∀ u ∈ E 1u=u , 1 étant l'unité du corps K
+    </li>
+    <li>
+     ∀ λ ∈ K et ∀ (u,v) ∈ E×E on a: λ(u+v)= λu+λv
+    </li>
+    <li>
+     ∀ (λ,μ) ∈ K×K et ∀ u ∈ E on a : (λ+μ)u=λu+μu
+    </li>
+    <li>
+     ∀ (λ,μ) ∈ K×K et ∀ u ∈ E on a : λ(μu)=(λμ)u
+    </li>
+   </ul></div>
+
+
+  Les conséquences sont nombreuses, citons entre autres:
+  <br/>
+  <ul>
+   <li>
+    0u=0 ∀ u ∈ E
+   </li>
+   <li>
+    λ0 = 0 ∀ λ ∈ K
+   </li>
+   <li>
+    λu = 0 ⇒ λ = 0 ou u=0
+   </li>
+   <li>
+    λ(u-v)= λu-λ v
+   </li>
+   <li>
+    (λ-μ)u = λu-μu
+   </li>
+  </ul>
+  <h2>
+   Exemples
+  </h2>
+  Voici quelques exemples de cette structure d'espace vectoriel:
+  <br/>
+  <ol>
+   <li>
+    L'exemple le plus simple qu'on puisse donner est l'ensemble
+K lui-même, la loi 'externe' étant en fait la multiplication interne.
+Les différents axiomes se résument alors à la
+<input type="button" value="distributivité" onclick="go('../../bases/operations/distributivite.html')"  data-inline="true"/>
+    de × sur
++, et à
+<input type="button" value="l'associativité" onclick="go('../../bases/operations/associative.html')"  data-inline="true"/>
+    de × .
+   </li>
+   <li>
+    On peut également donner l'ensemble K<sup>2</sup>
+    = K×K des
+    <input type="button" value="couples" onclick="go('../../bases/relations/cartesien.html')"  data-inline="true"/>
+
+    (x,y) d'éléments de K, l'addition étant l'addition
+'terme à terme' (
+<input type="button" value="loi produit" onclick="go('../../bases/operations/loi_produit.html')"  data-inline="true"/>,
+ et le couple λ(x,y) étant le couple (λx,λy). Les axiomes des espaces vectoriels se vérifient aisément.
+   </li>
+ <li>
+    L'exemple précédent est un cas particulier de K<sup>n</sup>= K×K×K×...×K (produit cartésien de n exemplaires de K) où
+l'addition est définie terme à terme:
+    <br/>
+    (x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>)+(y<sub>1</sub>,y<sub>2</sub>,...,y<sub>n</sub>)=(x<sub>1</sub>+y<sub>1</sub>,x<sub>2</sub>+y<sub>2</sub>,..., x<sub>n</sub>+y<sub>n</sub>). Cette loi
+n'est donc que la loi 'produit' de n exemplaires de '+', c'est donc une
+loi de groupe avec pour vecteur nul le vecteur (0,0, ... ,0).
+    <br/>
+    La loi externe est définie comme dans le cas précédent:
+λ (x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>)=(λx<sub>1</sub>,λx<sub>2</sub>,...,λx<sub>n</sub>)
+    <br/>
+    Là encore les axiomes se vérifient instantanément.
+    </li>
+    </ol>
+    <br/>
+    Voici une applet donnant quelques calculs aléatoires dans l'espace &rationals;<sup>n</sup>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+  <h2>
+   Axiomatic definition
+   </h2>
+
+ <div id="container">
+<div id="label">definition </div>  <b>K 
+    </b>
+    being a commutative field, we call 
+    <strong>
+    <em>
+      'K-vector space' 
+     </em>
+   </strong>
+    or even 
+    <strong>
+    <em>
+      'vector space over K' 
+     </em>
+   </strong>, 
+ the data of a set E provided with a binary operation denoted additively + 
+ and an external operation : 
+    <br>
+   K × E → E, (λ, u) → λu
+    <br>
+   verifying the following list of axioms:
+    <br>
+   <ul>
+    <li>(E,+) is an Abelian group, the neutral 0 is called the 
+      <strong>
+      <em>
+        'null vector'
+ 
+       </em>
+     </strong>
+    </li>
+    <li>
+     ∀ u ∈ E 1u=u , 1 being the unit element of the field K
+     </li>
+    <li>
+     ∀ λ ∈ K et ∀ (u, v) ∈ E × E we have : λ (u + v) = λu + λv
+     </li>
+    <li>
+     ∀ (λ, μ) ∈ K × K and ∀ u ∈ E we have : (λ + μ) u = λu + μu
+     </li>
+    <li>
+     ∀ (λ, μ) ∈ K × K and ∀ u ∈ E we have : λ (μu) = (λμ) u
+     </li>
+   </ul></div>
+
+
+  The consequences are numerous, including:
+   <br>
+  <ul>
+   <li>
+    0u=0 ∀ u ∈ E
+    </li>
+   <li>
+    λ0 = 0 ∀ λ ∈ K
+    </li>
+   <li>
+    λu = 0 ⇒ λ = 0 or u = 0
+    </li>
+   <li>
+    λ (u-v) = λu-λ v
+    </li>
+   <li>
+    (λ-μ) u = λu-μu
+    </li>
+  </ul>
+  <h2>
+   Examples
+   </h2>
+  Here are some examples of this vector space structure:
+   <br>
+  <ol>
+   <li>The simplest example that can be given is the set
+ K itself, the 'external' operation being in fact the internal multiplication.
+ The different axioms then boil down to the
+ <input type="button" value="distributivity" onclick="go('../../bases/operations/distributivite.html')" data-inline="true"> of × on
+ +, and to
+ the <input type="button" value="associativity" onclick="go('../../bases/operations/associative.html')" data-inline="true">
+    of × .
+    </li>
+   <li>We can also give the set K<sup>2</sup>
+     = K×K of 
+     <input type="button" value="ordered pairs" onclick="go('../../bases/relations/cartesien.html')" data-inline="true"> (x,y) of elements of K, the addition being the addition
+ 'term to term' (
+  <input type="button" value="product law" onclick="go('../../bases/operations/loi_produit.html')" data-inline="true">),
+  and the pair λ(x,y) being the pair (λx,λy).  The axioms of vector spaces are easily verified.
+    </li>
+ <li>The previous example is a particular case of K<sup>n</sup>= K×K×K×...×K (Cartesian product of n copies of K) where 
+ addition is defined term by term: 
+     <br>(x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>)+(y<sub>1</sub>,y<sub>2</sub>,...,y<sub>n</sub>)=(x<sub>1</sub>+y<sub>1</sub>,x<sub>2</sub>+y<sub>2</sub>,..., x<sub>n</sub>+ y<sub>n</sub>). This operation
+ is therefore only the  'product' operation of n copies of '+', it is therefore a 
+ group operation with for null vector the vector (0,0, ... ,0). 
+     <br>The external multiplication is defined as in the previous case: 
+ λ (x<sub>1</sub>,x<sub>2</sub>,...,x<sub>n</sub>)=(λx<sub>1</sub>,λx<sub>2</sub>,...,λx<sub>n</sub>) 
+     <br>
+    Here again the axioms are verified instantaneously.
+     </li>
+    </ol>
+    <br>
+    Here is an applet giving some random calculations in ℚ<sup>n</sup>
+
+
+
+
+</div><!-- /en --> 
+     <div>
+     <input id="mytext1F" type="text"/>
+    </div>
+    <div>
+     <input id="mytext2F" type="text"/>
+    </div>
+    <div>
+     <input id="mytext3F" type="text"/>
+    </div>
+    <div>
+     <input id="mytext4F" type="text"/>
+    </div>
+    <div>
+     <input id="mytext5F" type="text"/>
+    </div>
+    <div>
+     <button onclick="PaintF();" type="button">
+      Click!
+     </button>
+<div lang="fr">     Cliquez pour voir des calculs dans
+	 &rationals;<sup>n</sup>
+     !</div><!-- /fr --> 
+     <div lang="en">Click to see computations in &rationals;<sup>n</sup> !</div><!-- /en --> 
+    </div>
+    <script src="js/fractions.js">
+    </script>
+   <div lang="fr">
+
+   <p>En voici une autre avec un corps fini.</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<p>Here is another one with a finite field.</p>
+
+</div><!-- /en --> 
+  <div>
+    <input id="mytext1Z" type="text"/>
+   </div>
+   <div>
+    <input id="mytext2Z" type="text"/>
+   </div>
+   <div>
+    <input id="mytext3Z" type="text"/>
+   </div>
+   <div>
+    <input id="mytext4Z" type="text"/>
+   </div>
+   <div>
+    <input id="mytext5Z" type="text"/>
+   </div>
+   <div>
+    <button onclick="PaintZ()" type="button">
+     Click!
+    </button>
+  <div lang="fr">  Cliquez pour voir des calculs dans  (&integers;/5&integers;)<sup>n</sup>
+    !</div><!-- /fr --> 
+    <div lang="en">Click to see computations in (&integers;/5&integers;)<sup>n</sup> !</div><!-- /en --> 
+   </div>
+   <script src="js/Zsur5Z.js">
+   </script>   
+   <div lang="fr">
+ <p>Encore un exemple avec l'espace
+   &complexes;<sup>n</sup>
+   considéré comme espace réel.</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>Again a new one with the space &complexes;<sup>n</sup> considered as a vector space on the reals.</p>
+
+
+</div><!-- /en --> 
+     <div>
+    <input id="mytext1C" type="text"/>
+   </div>
+   <div>
+    <input id="mytext2C" type="text"/>
+   </div>
+   <div>
+    <input id="mytext3C" type="text"/>
+   </div>
+   <div>
+    <input id="mytext4C" type="text"/>
+   </div>
+   <div>
+    <input id="mytext5C" type="text"/>
+   </div>
+   <div>
+    <button onclick="PaintC()" type="button">
+     Click!
+    </button>
+ <div lang="fr">   Cliquez pour voir des calculs dans
+    &complexes;<sup>n</sup>
+    e.v. réel !</div><!-- /fr --> 
+    <div lang="en">Click to see computations in &complexes;<sup>n</sup> considered as vector space over the reals !</div><!-- /en --> 
+   </div>
+   <script src="js/complexes.js">
+   </script>
+   <div lang="fr">
+<ol start="4">
+   <li>
+    On peut également considérer l'ensemble K<sup>&naturals;</sup>
+    de toutes les
+    <input type="button" value="suites" onclick="go('../../nombres/naturels/suites.html')"  data-inline="true"/>
+    infinies
+d'éléments de K. Là encore l'addition et la multiplication par un
+scalaire seront définies terme à terme.
+   </li>
+   <li>
+    Tous les exemples précédents sont eux-mêmes des cas
+particuliers de l'exemple suivant:
+K<sup>D</sup>
+    ensemble de toutes les
+    <input type="button" value="fonctions" onclick="go('../../bases/applications/definition.html')"  data-inline="true"/>
+    de D dans K
+(D désigne ici un ensemble tout à fait quelconque). Cet exemple est le
+plus général possible, et comme nous le verrons un peu plus tard, il
+contient en substance tous les espaces vectoriels possibles sur K.
+   </li>
+   <li>
+    Supposons maintenant qu'on ait construit un espace de
+points satisfaisant aux axiomes de la géométrie euclidienne. Un
+'bipoint' est tout simplement un
+<input type="button" value="couple ordonné" onclick="go('../../bases/relations/cartesien.html')"  data-inline="true"/>
+     (A,B) au sens de la
+théorie des ensembles. Un tel bipoint est encore appelé
+    <strong>
+     <em>
+      'vecteur
+lié'
+     </em>
+    </strong>. Sur l'ensemble des vecteurs liés
+définissons une
+<input type="button" value="relation binaire" onclick="go('../../bases/relations/binaires.html')"  data-inline="true"/>
+    : (A,B) ≡ (A',B') ⇔ (A,A',B',B) est un
+parallélogramme. Cette relation est une
+<input type="button" value="relation d'équivalence" onclick="go('../../bases/relations/equivalence.html')"  data-inline="true"/>.
+ Les
+classes d'équivalence pour cette relation sont appelés des
+    <strong>
+     <em>
+      'vecteurs
+libres'
+     </em>
+    </strong>. Sur l'ensemble des vecteurs libres
+définissons l'addition comme il est montré dans les figures ci-dessus
+(diagonale du parallélogramme), de même pour la loi externe. On peut
+vérifier qu'on a ainsi construit un espace vectoriel.
+   </li>
+  </ol>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<ol start="4">
+   <li>
+   We can as well consider the set K<sup>&naturals;</sup> of all infinite
+      <input type="button" value="sequences" onclick="go('../../nombres/naturels/suites.html')"  data-inline="true"/>
+ of elements of K. 
+This time again addition and scalar multiplication will be defined term by term 
+    </li>
+   <li>
+   All previous cases are just special cases of the following example :
+ K<sup>D</sup>
+    the set of all 
+    <input type="button" value="mappings" onclick="go('../../bases/applications/definition.html')"  data-inline="true"/>
+    from D to K
+(D denotes here any set). 
+This example is the most general and covers all possible cases of K-spaces as we will see later.
+
+   </li>
+   <li>
+   Let's suppose now that we have build, one way or another,a set of plane points satisfying the axioms of Euclidean geometry.
+ A
+'bipoint' is simply an 
+<input type="button" value="ordered pair" onclick="go('../../bases/relations/cartesien.html')"  data-inline="true"/>
+     (A,B) in the sense of set theory. Such a bipoint is also called a 
+    <strong>
+     <em>
+      'bounded vector'
+     </em>
+    </strong>. On the set of bounded vectors we define a binary relation
+<input type="button" value="relation binaire" onclick="go('../../bases/relations/binaires.html')"  data-inline="true"/>
+    : (A,B) ≡ (A',B') ⇔ (A,A',B',B) is a parallelogram. This relation is an
+
+<input type="button" value="'équivalence" onclick="go('../../bases/relations/equivalence.html')"  data-inline="true"/>.
+ The classes for this relation are called 
+    <strong>
+     <em>
+      'free vectors'
+     </em>
+    </strong>, so a free vector is a set of bounded vector linked two by two by this relation. 
+On the set of free vectors we define addition as shown in the examples above, same for the external multiplication.
+We can check that this way we have built a vector space.    
+   </li>
+  </ol>
+
+
+</div><!-- /en --> 
+
+
+<div lang="fr">
+ <h2>
+   Le coin de Python
+  </h2>
+  Voici comment on peut créer une classe pour modéliser des vecteurs du
+plan:
+  <p>
+   <object border="3" data="python/modelvect2d.html" height="400" type="text/html" width="100%">
+   </object>
+  </p>
+  Pour ne pas réinventer la roue on peut aussi utiliser des objets
+préfabriqués de type 'array' dans la librairie 'numpy'
+  <p>
+   <object border="3" data="python/vectnumpy1.html" height="100%" type="text/html" width="100%">
+   </object>
+  </p>
+  <a name="modvecrat">
+  </a>
+  Voici enfin une modélisation des vecteurs de l'espace &rationals;<sup>n</sup>
+  qui utilise le module fractions standard dans la version 3 du langage Python.
+  <p>
+   <object border="3" data="python/vecteursQn.html" height="400" type="text/html" width="100%">
+   </object>
+  </p>
+  <h2>Le coin de Julia</h2>
+  <p>Modélisation simple des vecteurs du plan</p>
+   <p>
+   <object border="3" data="julia/modelvect2d.jl.html" height="320" type="text/html" width="100%">
+   </object>
+  </p>
+    <p>Utilisation d'un type prédéfini Vector{Float64}</p>
+   <p>
+   <object border="3" data="julia/vectorfloat2d.jl.html" height="130" type="text/html" width="100%">
+   </object>
+  </p>
+ <p>Utilisation d'un type prédéfini Vector{Rational{Int64}}</p>
+    <object border="3" data="julia/ModeleEspace1.jl.html" height="120" type="text/html" width="100%"> </object>
+
+<p>Cas des corps finis &integers;/p&integers; utilisation du package GaloisFields.</p> 
+  
+       <object border="3" data="julia/ModeleEspace2.jl.html" height="250" type="text/html" width="100%">
+   </object>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Python's corner
+   </h2>Here is how we can create a class as a model for vectors of the
+ plane:
+   <p>
+   <object data="python/modelvect2d.html" type="text/html" width="100%" height="400" border="3">
+   </object>
+  </p>In order not to reinvent the wheel, we can also use native objects
+  of type 'array' in the 'numpy' library
+   <p>
+   <object data="python/vectnumpy1.html" type="text/html" width="100%" height="100%" border="3">
+   </object>
+  </p>
+  <a name="modvecrat" class="ui-link">
+  </a>Here is finally a modeling of the vectors of the space ℚ<sup>n</sup>
+   which uses the standard fractions module in version 3 of the Python language. 
+   <p>
+   <object data="python/vecteursQn.html" type="text/html" width="100%" height="400" border="3">
+   </object>
+  </p>
+  <h2>Julia's corner </h2>
+  <p>Simple modeling of plane vectors </p>
+   <p>
+   <object data="julia/modelvect2d.jl.html" type="text/html" width="100%" height="320" border="3">
+   </object>
+  </p>
+    <p>Using a Vector{Float64} predefined type </p>
+   <p>
+   <object data="julia/vectorfloat2d.jl.html" type="text/html" width="100%" height="130" border="3">
+   </object>
+  </p>
+ <p>Using a Vector{Rational{Int64}} predefined type </p>
+    <object data="julia/ModeleEspace1.jl.html" type="text/html" width="100%" height="120" border="3"> </object>
+
+<p>Case of finite fields ℤ/pℤ using the GaloisFields package. </p> 
+  
+       <object data="julia/ModeleEspace2.jl.html" type="text/html" width="100%" height="250" border="3">
+   </object>
+
+
+</div><!-- /en --> 
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+ 	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to Vector spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

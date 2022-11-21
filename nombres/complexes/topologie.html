@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Topologie sur C</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/topologie/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/topologie/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions et propriétés</h2> Nous allons refaire exactement la même chose qui a été faite pour l'ensemble &reals;, le rôle des intervalles étant joué par celui des <span style="font-weight: bold; font-style: italic;">'disques'</span>. <div id="container">
+            <div id="label">définition</div> Dans &complexes;, le <span style="font-weight: bold; font-style: italic;">'disque ouvert'</span> de centre z<sub>0</sub> et de rayon r (r réel &gt;0) est ainsi défini : <br /> D(z<sub>0</sub>,r)={ z ∈ &complexes; | | z-z<sub>0</sub> |&lt;r}.
+          </div> Graphiquement on peut voir que cet ensemble correspond exactement à un disque. <div id="container">
+            <div id="label">définition</div> De la même façon, le <span style="font-weight: bold; font-style: italic;"> 'disque fermé' </span> de centre z<sub>0</sub> et de rayon r (r réel &gt;0) est ainsi défini : <br /> D(z<sub>0</sub>,r)={ z ∈ &complexes; | | z-z<sub>0</sub> | ≤ r}.
+          </div>
+          <div id="container">
+            <div id="label">définition</div> Un ensemble est dit <span style="font-weight: bold; font-style: italic;">'ouvert'</span> dans &complexes;, si chaque fois qu'il contient un point z<sub>0</sub> il contient un disque de centre z<sub>0</sub> et de rayon r &gt;0. <br> U ouvert ⇔ ∀ z<sub>0</sub> ∈ U ∃ r &gt;0 | D(z<sub>0</sub>,r) ⊆ U.
+          </div>
+          <div id="container">
+            <div id="label">définition</div> Un ensemble est dit <span style="font-weight: bold; font-style: italic;">'fermé'</span> si son complémentaire est ouvert. <br> F fermé ⇔ &complexes;-F ouvert.
+          </div> Comme dans &reals;, les ouverts possèdent les propriétés suivantes: <div id="container">
+            <ul>
+              <li> ∅ et &complexes; sont ouverts. </li>
+              <li> Toute réunion d'ouverts est un ouvert. </li>
+              <li> Toute intersection finie d'ouverts est un ouvert. </li>
+              <li> Un disque ouvert est un ouvert. </li>
+            </ul>
+          </div> Comme dans &reals;, les fermés possèdent les propriétés suivantes: <div id="container">
+            <ul>
+              <li> ∅ et &complexes; sont fermés. </li>
+              <li> Toute réunion finie de fermés est un fermé. </li>
+              <li> Toute intersection de fermés est un fermé. </li>
+              <li> Un disque fermé est fermé. </li>
+            </ul>
+          </div> Quelques autres exemples : <ul>
+            <li> Un demi-plan ouvert ( Re(z)&gt;0 , Im(z) &lt;2, Im(z)&lt;Re(z), etc ...) est un ensemble ouvert. </li>
+            <li> Un demi plan fermé ( Re(z) ≤ 1, Im(z) ≤ 2, etc...) est un ensemble fermé. </li>
+            <li> Un point isolé est un ensemble fermé. </li>
+            <li> Une bande ouverte ( a &lt; Re(z) &lt; b ) est un ensemble ouvert. </li>
+            <li> Une bande fermée ( a ≤ Re(z) ≤ b } est un ensemble fermé. </li>
+            <li> Un rectangle ouvert (a &lt; Re(z) &lt; b et c &lt; Im(z) &lt;d) est un ensemble ouvert. </li>
+          </ul> On peut également définir l'intérieur, l'adhérence et la frontière de tout ensemble: <div id="container">
+            <div id="label">définition</div>
+            <span style="font-weight: bold; font-style: italic;">"L'intérieur"</span> de X est la réunion de tous les ouverts U inclus dans X, c'est un ouvert inclus dans X et c'est le plus grand ouvert contenu dans X.
+          </div>
+          <div id="container">
+            <div id="label">définition</div>
+            <span style="font-weight: bold; font-style: italic;">"L'adhérence"</span> de X est l'intersection de tous les fermés contenant X, c'est un fermé contenant X et c'est le plus petit d'entre eux.
+          </div>
+          <div id="container">
+            <div id="label">définition</div>
+            <span style="font-weight: bold; font-style: italic;">'La frontière' </span> de X est le complémentaire de l'intérieur de X dans l'adhérence de X.
+          </div> Exemples: Pour un disque ouvert D(z<sub>0</sub> ,r). L'intérieur de D c'est lui-même, l'adhérence de D c'est le disque fermé, la frontière de D c'est le cercle |x-z<sub>0</sub>|=r. <br /> La notion de <span style="font-weight: bold; font-style: italic;">'voisinage'</span> d'un point existe aussi. <div id="container">
+            <div id="label">définition</div> V est appelé un <span style="font-weight: bold; font-style: italic;">'voisinage'</span> de z si V contient un ouvert contenant z.
+          </div>
+          <div id="container"> Un ouvert est un voisinage de chacun de ses points. </div>
+          <div id="container"> Une intersection finie de voisinages de x est encore un voisinage de x. </div>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions and properties </h2>We're going to do exactly the same thing that was done for the set ℝ, the role of intervals being played by that of <span style="font-weight: bold; font-style: italic;">'discs' </span>. <div id="container">
+            <div id="label">definition </div>In ℂ, the <span style="font-weight: bold; font-style: italic;">'open disk' </span> of center z<sub>0</sub> and of radius r (r real &gt;0) is thus defined: <br>D(z<sub>0</sub>,r)={ z ∈ ℂ | | z-z<sub>0</sub> |&lt;r}.
+          </div>Graphically we can see that this set corresponds exactly to a disk. <div id="container">
+            <div id="label">definition </div>In the same way, the <span style="font-weight: bold; font-style: italic;"> 'closed disk' </span> of center z<sub>0</sub> and of radius r (real r &gt;0) is defined as follows: <br>D(z<sub>0</sub>,r)={ z ∈ ℂ | | z-z<sub>0</sub> | r}.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>A set is said <span style="font-weight: bold; font-style: italic;">'open' </span> in ℂ, if each time it contains a point z<sub>0</sub> it contains a disk with center z<sub>0</sub> and of radius r &gt;0. <br> U open ⇔ ∀ z<sub>0</sub> ∈ U ∃ r &gt;0 | D(z<sub>0</sub>,r) ⊆ U.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>A set is said <span style="font-weight: bold; font-style: italic;">'closed' </span> if its complement is open. <br> F closed ⇔ ℂ-F open.
+          </div> As in ℝ, the open sets have the following properties : <div id="container">
+            <ul>
+              <li> ∅ and ℂ are open. </li>
+              <li> Any union of open sets is an open. </li>
+              <li> Any finite intersection of open sets is an open set. </li>
+              <li> An open disk is open. </li>
+            </ul>
+          </div>As in ℝ, closed sets have the properties following: <div id="container">
+            <ul>
+              <li> ∅ and ℂ are closed. </li>
+              <li> Any finite union of closed is a closed. </li>
+              <li> Any intersection of closed sets is a closed set. </li>
+              <li> A closed disk is closed. </li>
+            </ul>
+          </div> Some other examples: <ul>
+            <li>An open half-plane ( Re(z)&gt;0 , Im(z) &lt;2, Im(z)&lt;Re(z), etc ...) is a open set. </li>
+            <li>A closed half-plane ( Re(z) ≤ 1, Im(z) ≤ 2, etc...) is a closed set. </li>
+            <li> An isolated point is a closed set. </li>
+            <li>An open strip ( a &lt; Re(z) &lt; b ) is a open set. </li>
+            <li>A closed strip ( a ≤ Re(z) ≤ b } is a closed set. </li>
+            <li> An open rectangle (a &lt; Re(z) &lt; b and c &lt; Im(z) &lt; d) is an open set. </li>
+          </ul> One can also define the interior, closure and boundary of any set: <div id="container">
+            <div id="label">definition </div>
+            <span style="font-weight: bold; font-style: italic;">'The interior' </span> of X is the union of all open sets U included in X, it is a open set included in X and it is the largest open set contained in X.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>
+            <span style="font-weight: bold; font-style: italic;">'The closure' </span> of X is the intersection of all the closed sets containing X, it is a closed set containing X and it is the smallest of them.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>
+            <span style="font-weight: bold; font-style: italic;">'The boundary' </span> of X is the complement of the interior of X in the closure of X.
+          </div>Examples: For an open disk D(z<sub>0</sub> ,r). The interior of D is itself, the closure of D is the closed disk, the boundary of D is the circle |xz<sub>0</sub>|=r. <br>The notion of <span style="font-weight: bold; font-style: italic;">'neighborhood' </span> of a point also exists. <div id="container">
+            <div id="label">definition </div> V is called a <span style="font-weight: bold; font-style: italic;">'neighborhood' </span>of z if V contains an open set containing z.
+          </div>
+          <div id="container"> An open set is a neighborhood of each of its points. </div>
+          <div id="container"> A finite intersection of neighborhoods of x is still a neighborhood of x. </div>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

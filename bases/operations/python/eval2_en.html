@@ -1,0 +1,147 @@
+﻿<html>
+ <head>
+  <title>
+   eval2.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># version python 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">ply.lex </span><span class="s2">as </span><span class="s1">lex 
+</span><span class="s2">import </span><span class="s1">ply.yacc </span><span class="s2">as </span><span class="s1">yacc 
+ 
+</span><span class="s3">""" Grammar recognizes
+1-Expressions which are terms or sums of terms or differences of terms 
+2-Every term can be either a factor or a product or the quotient of a term by a factor 
+3-Constants and variables are factors 
+4-A group between parentheses containing an expression is a factor 
+"""</span><span class="s1"> 
+</span><span class="s0">#List of 'tokens' forming the language. This cannot be avoided</span><span class="s1"> 
+tokens = ( 
+   </span><span class="s3">'NUMBER'</span><span class="s1">, 
+   </span><span class="s3">'PLUS'</span><span class="s1">, 
+   </span><span class="s3">'MINUS'</span><span class="s1">, 
+   </span><span class="s3">'TIMES'</span><span class="s1">, 
+   </span><span class="s3">'DIVIDE'</span><span class="s1">, 
+   </span><span class="s3">'LPAREN'</span><span class="s1">, 
+   </span><span class="s3">'RPAREN'</span><span class="s1">, 
+   </span><span class="s3">'VAR'</span><span class="s1">, 
+) 
+ 
+</span><span class="s0"># regexps (regular expressions)  for simple 'tokens' </span><span class="s1"> 
+t_PLUS    = </span><span class="s3">r'\+'</span><span class="s1"> 
+t_MINUS   = </span><span class="s3">r'-'</span><span class="s1"> 
+t_TIMES   = </span><span class="s3">r'\*'</span><span class="s1"> 
+t_DIVIDE  = </span><span class="s3">r'/'</span><span class="s1"> 
+t_LPAREN  = </span><span class="s3">r'\('</span><span class="s1"> 
+t_RPAREN  = </span><span class="s3">r'\)'</span><span class="s1"> 
+ 
+</span><span class="s0"># regexps with associated code</span><span class="s1"> 
+</span><span class="s0">#constants</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">t_NUMBER(t): 
+    </span><span class="s0">r'\d+'</span><span class="s1"> 
+    t.value = int(t.value) 
+    </span><span class="s2">return </span><span class="s1">t 
+ 
+</span><span class="s0">#variable - value is taken in current environment</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">t_VAR(t): 
+    </span><span class="s0">r'X'</span><span class="s1"> 
+    t.value = X 
+    </span><span class="s2">return </span><span class="s1">t 
+</span><span class="s0"># A string containing ignored separators (here spaces and tabs)</span><span class="s1"> 
+t_ignore  = </span><span class="s3">' \t'</span><span class="s1"> 
+ 
+</span><span class="s0"># management of errors</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">t_error(t): 
+    print (</span><span class="s3">"Illegal character '%s'" </span><span class="s1">% t.value[</span><span class="s4">0</span><span class="s1">]) 
+    t.lexer.skip(</span><span class="s4">1</span><span class="s1">) 
+ 
+</span><span class="s0">#Rules for evaluation</span><span class="s1"> 
+ 
+</span><span class="s0">#Addition - rule 1</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_plus(p): 
+    </span><span class="s0">'expression : expression PLUS term'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] + p[</span><span class="s4">3</span><span class="s1">] 
+ 
+</span><span class="s0">#subtraction - rule 1</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_minus(p): 
+    </span><span class="s0">'expression : expression MINUS term'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] - p[</span><span class="s4">3</span><span class="s1">] 
+ 
+</span><span class="s0"># rule 1 - A term is an expression</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_term(p): 
+    </span><span class="s0">'expression : term'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] 
+ 
+</span><span class="s0">#Product-rule 2</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_term_times(p): 
+    </span><span class="s0">'term : term TIMES factor'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] * p[</span><span class="s4">3</span><span class="s1">] 
+ 
+</span><span class="s0">#Quotient-rule 2 (Attention! it's about Euclidean division 3/2=1 2/3=0...)</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_term_div(p): 
+    </span><span class="s0">'term : term DIVIDE factor'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] / p[</span><span class="s4">3</span><span class="s1">] 
+ 
+</span><span class="s0">#Evaluation of a factor-rule 2</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_term_factor(p): 
+    </span><span class="s0">'term : factor'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] 
+ 
+</span><span class="s0"># lConstants -Rule 3</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_factor_num(p): 
+    </span><span class="s0">'factor : NUMBER'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] 
+ 
+</span><span class="s0">#Evaluation of the variable-Rule 3</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_factor_var(p): 
+    </span><span class="s0">'factor : VAR'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">]=p[</span><span class="s4">1</span><span class="s1">] 
+ 
+</span><span class="s0">#Evaluation of a group between parentheses -Rule 4</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_factor_expr(p): 
+    </span><span class="s0">'factor : LPAREN expression RPAREN'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">2</span><span class="s1">] 
+ 
+</span><span class="s0"># Management of syntax errors  </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_error(p): 
+    print (</span><span class="s3">"Syntax error in input!"</span><span class="s1">) 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">"""Main function"""</span><span class="s1"> 
+    </span><span class="s0"># Buiolds the scannerner</span><span class="s1"> 
+    lexer = lex.lex() 
+    </span><span class="s0"># Builds the parser</span><span class="s1"> 
+    parser = yacc.yacc() 
+    </span><span class="s2">while True</span><span class="s1">:</span><span class="s0">#Main loop</span><span class="s1"> 
+        </span><span class="s2">global </span><span class="s1">X 
+        </span><span class="s2">try</span><span class="s1">: 
+            X = int(input(</span><span class="s3">'X= '</span><span class="s1">)) 
+            </span><span class="s2">if</span><span class="s1">(X==-</span><span class="s4">1</span><span class="s1">): 
+                </span><span class="s2">break </span><span class="s0">#We decide to end input on entering value -1</span><span class="s1"> 
+        </span><span class="s2">except </span><span class="s1">ValueError:</span><span class="s0">#if something different from an integer has been entered</span><span class="s1"> 
+            print (</span><span class="s3">"Enter a natural"</span><span class="s1">) 
+            </span><span class="s2">continue</span><span class="s1"> 
+        </span><span class="s2">try</span><span class="s1">: 
+            s = input(</span><span class="s3">'calc &gt; '</span><span class="s1">) 
+        </span><span class="s2">except </span><span class="s1">EOFError: 
+            </span><span class="s2">break</span><span class="s1"> 
+        </span><span class="s2">if not </span><span class="s1">s: 
+            </span><span class="s2">continue</span><span class="s1"> 
+        result = parser.parse(s) 
+        print (result) 
+ 
+main()</span></pre>
+ </body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Combinatorics</span>
+<span class="s0">using </span><span class="s1">AbstractAlgebra</span>
+<span class="s1">P(n)=[p </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">permutations(collect(</span><span class="s2">1</span><span class="s1">:n))]</span>
+<span class="s1">A=[</span><span class="s2">3 1 1 1</span><span class="s1">;</span><span class="s2">1 3 1 1</span><span class="s1">;</span><span class="s2">1 1 3 1</span><span class="s1">; </span><span class="s2">1 1 1 3</span><span class="s1">]</span>
+<span class="s1">B=[</span><span class="s2">1 2 3 4</span><span class="s1">;</span><span class="s2">2 3 4 1</span><span class="s1">;</span><span class="s2">3 4 1 2</span><span class="s1">;</span><span class="s2">4 1 2 3</span><span class="s1">]</span>
+<span class="s1">C=[</span><span class="s2">2 1 1 1 1</span><span class="s1">;</span><span class="s2">1 3 1 1 1</span><span class="s1">;</span><span class="s2">1 1 4 1 1</span><span class="s1">;</span><span class="s2">1 1 1 5 1</span><span class="s1">;</span><span class="s2">1 1 1 1 6</span><span class="s1">]</span>
+<span class="s1">signature(p)=(-</span><span class="s2">1</span><span class="s1">)^AbstractAlgebra.parity(Perm(p))</span>
+<span class="s1">apply(p,A)=signature(p)* reduce(*,[A[i,p[i]] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:size(A,</span><span class="s2">1</span><span class="s1">)])</span>
+<span class="s1">determinant(A)=reduce(+,[apply(p,A) </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">P(size(A,</span><span class="s2">1</span><span class="s1">))])</span>
+<span class="s1">println(determinant(A))</span>
+<span class="s1">println(determinant(B))</span>
+<span class="s1">println(determinant(C))</span></pre>
+</body>
+</html>

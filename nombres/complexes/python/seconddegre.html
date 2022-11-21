@@ -1,0 +1,158 @@
+﻿<html>
+ <head>
+  <title>
+   seconddegre.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+ 
+</span><span class="s0"># Solution de l'équation du second degré</span><span class="s1"> 
+</span><span class="s0"># Solving quadratics</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+</span><span class="s2">class </span><span class="s1">MonComplexe (): 
+    </span><span class="s0">""" modélisation des nombres complexes - class to represent complex numbers """</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self,a=</span><span class="s3">0</span><span class="s1">,b=</span><span class="s3">0</span><span class="s1">): 
+        </span><span class="s0">"""le constructeur  - the constructor"""</span><span class="s1"> 
+        self.x=a 
+        self.y=b 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">""" représentation externe pour print et str - conversion to string """</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">str(self.x) 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==</span><span class="s3">1</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s4">"i"</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==-</span><span class="s3">1</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s4">"-i"</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">str(self.y)+</span><span class="s4">"i"</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==</span><span class="s3">1</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"+i"</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==-</span><span class="s3">1</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"-i"</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y&gt;</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"+"</span><span class="s1">+str(self.y)+</span><span class="s4">"i"</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">str(self.x)+str(self.y)+</span><span class="s4">"i"</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self,other): 
+        </span><span class="s0">"""somme de deux complexes - sum"""</span><span class="s1"> 
+        a=self.x+other.x 
+        b=self.y+other.y 
+        </span><span class="s2">return </span><span class="s1">MonComplexe(a,b) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self,other): 
+        </span><span class="s0">"""différence de deux complexes - difference"""</span><span class="s1"> 
+        a=self.x-other.x 
+        b=self.y-other.y 
+        </span><span class="s2">return </span><span class="s1">MonComplexe(a,b) 
+ 
+    </span><span class="s2">def </span><span class="s1">null(self): 
+        </span><span class="s0">"""test de nullité"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==</span><span class="s3">0</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self,other): 
+        </span><span class="s0">"""produit de deux complexes - product"""</span><span class="s1"> 
+        a=self.x*other.x-self.y*other.y 
+        b=self.x*other.y+self.y*other.x 
+        </span><span class="s2">return </span><span class="s1">MonComplexe(a,b) 
+ 
+    </span><span class="s2">def </span><span class="s1">__truediv__(self,other): 
+        </span><span class="s0">"""quotient de deux complexes - quotient"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self*(~other) 
+ 
+    </span><span class="s2">def </span><span class="s1">conj(self): 
+         </span><span class="s0">"""conjugué d'un complexe- conjugate"""</span><span class="s1"> 
+         </span><span class="s2">return </span><span class="s1">MonComplexe(self.x,-self.y) 
+    </span><span class="s2">def </span><span class="s1">module(self): 
+        </span><span class="s0">"""module d'un complexe - modulus"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">math.sqrt(self.x*self.x+self.y*self.y) 
+    </span><span class="s2">def </span><span class="s1">argument(self): 
+        </span><span class="s0">"""argument d'un complexe - angle"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s3">0</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y&gt;</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">math.pi/</span><span class="s3">2</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y&lt;</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">-math.pi/</span><span class="s3">2</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x &gt;</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">math.atan(self.y/self.x) 
+        </span><span class="s2">return </span><span class="s1">math.pi-math.atan(self.y/(-self.x)) 
+ 
+    </span><span class="s2">def </span><span class="s1">__invert__(self): 
+        </span><span class="s0">"""inverse d'un complexe - inverse"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.null(): 
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError 
+        </span><span class="s2">return </span><span class="s1">MonComplexe(self.x/(self.x*self.x+self.y*self.y),-self.y/(self.x*self.x+self.y*self.y)) 
+ 
+    </span><span class="s2">def </span><span class="s1">__pow__(self,n): 
+        </span><span class="s0">"""puissances d'un complexe - powers"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">n&lt;=</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.null(): 
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError 
+        </span><span class="s2">if </span><span class="s1">n &gt;=</span><span class="s3">0</span><span class="s1">: 
+            R=MonComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">) 
+            </span><span class="s2">while </span><span class="s1">n: 
+                R=R*self 
+                n=n-</span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">R 
+        </span><span class="s2">if </span><span class="s1">n&lt;</span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">(~R)**(-n) 
+ 
+    </span><span class="s2">def </span><span class="s1">racine(self): 
+        </span><span class="s0">"""racine d'un nombre complexe (une seule sur deux)- root of a complex"""</span><span class="s1"> 
+        a=self.argument() 
+        r=self.module() 
+        x=math.sqrt(r)* math.cos(a/</span><span class="s3">2.0</span><span class="s1">) 
+        y=math.sqrt(r)* math.sin(a/</span><span class="s3">2.0</span><span class="s1">) 
+        </span><span class="s2">return </span><span class="s1">MonComplexe(x,y) 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">"""opposé d'un complexe - opposite"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">MonComplexe(-self.x,-self.y) 
+ 
+</span><span class="s2">def </span><span class="s1">Delta (a,b,c): 
+    </span><span class="s0">"""discriminant d'une équation - discriminant """</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">b*b-MonComplexe(</span><span class="s3">4</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)*a*c 
+ 
+</span><span class="s2">def </span><span class="s1">Solutions(a,b,c): 
+    </span><span class="s0">"""Calcule les deux racines de l'équation du second degré - solves the quadratic"""</span><span class="s1"> 
+    D=Delta(a,b,c) 
+    z1=D.racine() 
+    n1=(-b-z1)/(a*MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)) 
+    n2=(-b+z1)/(a*MonComplexe(</span><span class="s3">2.0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)) 
+    </span><span class="s2">return </span><span class="s1">n1,n2 
+ 
+</span><span class="s0"># fonction de test - test function</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">main(): 
+    a,b,c=MonComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">),MonComplexe(</span><span class="s3">2</span><span class="s1">,</span><span class="s3">0</span><span class="s1">),MonComplexe(</span><span class="s3">3</span><span class="s1">,</span><span class="s3">0</span><span class="s1">) 
+    S1,S2= Solutions(a,b,c) 
+    print(S1) 
+    print(S2) 
+    print(a*S1*S1+b*S1+c) </span><span class="s0"># exact à 10^-16 près - acuurate 10^-16 close </span><span class="s1"> 
+    print(a*S2*S2+b*S2+c) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

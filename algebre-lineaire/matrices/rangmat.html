@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Rang d'une matrice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/rangmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/rangmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2>
+          <div id="container">
+            <div id="label">définition</div> Le <strong>
+              <em>'rang'</em>
+            </strong> d'une matrice à coefficients dans K de type (m,n) est le <input type="button" value="rang" onclick="go('../espaces/rangsyst.html')" data-inline="true" />, dans K<sup>m</sup> du système formé par ses n colonnes.
+          </div> Nous verrons un peu plus tard, dans le <input type="button" value="la page consacrée aux matrices des transposéess" onclick="go('../matapplin/transpomatappl.html')" data-inline="true" /> que : <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div>Le rang d'une matrice est égal au rang de sa transposée.
+          </div> Il en résulte que : <div id="container"> Le rang d'une matrice peut également être défini comme le rang dans K<sup>n</sup> du système formé par ses m lignes. </div>
+          <h2>Propriétés</h2>
+          <p>Les propriétés suivantes découlent immédiatement de la définition.</p>
+          <div id="container"> Le rang d'une matrice de type (m,n) est inférieur ou égal à m et à n.</div>
+          <div id="container"> Le rang d'une matrice ne change pas si on multiplie une colonne par un scalaire non nul.</div>
+          <div id="container"> Le rang d'une matrice ne change pas si on ajoute à une colonne une <input type="button" value="combinaison linéaire" onclick="go('../espaces/generateurs.html#comblin')" data-inline="true" /> des autres colonnes. </div>
+          <p>En outre, le théorème précédent entraîne que les mêmes propriétés sont valables pour les lignes.</p>
+          <h2>La méthode de calcul de Gauss</h2>
+          <p>Cherchons dans la première colonne un coefficient non nul à partir du haut. <br /> Si nous n'en trouvons aucun, nous pouvons purement et simplement éliminer cette colonne. Soit c'est le premier, soit c'est un autre. <br /> Si ce n'est pas le premier (disons que c'est le troisième, par exemple). Nous échangeons les lignes 1 et 3, ce qui ne modifie pas le rang. <br /> Par la suite nous retirons à chaque ligne autre que la première, un multiple de la première de façon à obtenir des zéros partout sur la première colonne à partir de la seconde ligne. <br /> Nous obtenons donc une matrice dont la première colonne ne comporte que des zéros sauf en première position. <br /> On voit alors que le rang de cette matrice est égal au rang du système obtenu en supprimant la première ligne et la première colonne augmenté d'une unité. <br /> Il suffit donc d'appliquer l'algorithme récursivement. <br /> Voici une appliquette qui montre comment fonctionne l'algorithme, étape par étape. </p>
+          <ul>
+            <li>Sélectionner le corps de base &reals;, &rationals;, &integers;/5&integers;, &complexes;.</li>
+            <li>Sélectionner le nombre de lignes et le nombre de colonnes de la matrice (limitation à 3 pour les rationnels).</li>
+            <li>Une matrice aléatoire est générée .</li>
+            <li>Cliquez ensuite sur 'Etape suivante' autant de fois que nécessaire.</li>
+            <li>Vous voyez à chaque fois la transformation qui est réalisée faisant apparaître des zéros dans la colonne 1, puis la colonne 2, et ainsi de suite.</li>
+            <li>Le bouton 'Nouvel exemple' permet de régénérer la matrice de départ.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition </h2>
+          <div id="container">
+            <div id="label">definition </div>the <strong>
+              <em>'rank' </em>
+            </strong> of a matrix with coefficients in K of type (m,n) is the <input type="button" value="rank" onclick="go('../espaces/rangsyst.html')" data-inline="true">, in K<sup>m</sup> of the system formed by its n columns.
+          </div> We will see a little later, in the <input type="button" value="the page about the matrix of a transpose" onclick="go('../matapplin/transpomatappl.html')" data-inline="true">that : <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The rank of a matrix is ​​equal to the rank of its transpose.
+          </div> It follows that : <div id="container"> The rank of a matrix can also be defined as the rank in K<sup>n</sup>of the system formed by its m rows. </div>
+          <h2>Properties </h2>
+          <p>The following properties follow immediately from the definition. </p>
+          <div id="container"> The rank of a matrix of type (m,n) is less than or equal to m and n. </div>
+          <div id="container"> The rank of a matrix does not change if we multiply a column by a nonzero scalar. </div>
+          <div id="container"> The rank of a matrix does not change if we add to a column a <input type="button" value="linear combination" onclick="go('../espaces/generateurs.html#combline')" data-inline="true"> of the other columns. </div>
+          <p>Furthermore, the previous theorem implies that the same properties hold for rows. </p>
+          <h2>Gauss's calculation method </h2>
+          <p>Let's look in the first column for a non-zero coefficient from the top. <br>If we don't find any, we can simply eliminate that column. If found, either it's the first or it's another one. <br>If it's not the first (let's say it's the third, for example). We swap rows 1 and 3, which does not change the rank. <br>Thereafter we remove from each row other than the first, a multiple of the first so as to obtain zeros everywhere on the first column starting from the second row. <br> We therefore obtain a matrix whose first column contains only zeros except in the first position. <br>We then see that the rank of this matrix is ​​equal to the rank of the system obtained by deleting the first row and the first column increased of a unit. <br> It is therefore sufficient to apply the algorithm recursively. <br> Here is an applet that shows how the algorithm works, step by step. </p>
+          <ul>
+            <li>Select base field ℝ, ℚ, ℤ/5ℤ, ℂ. </li>
+            <li>Select the number of rows and the number of columns of the matrix (limited to 3 for rationals). </li>
+            <li>A random matrix is ​​generated. </li>
+            <li>Then click on 'Next step' as many times as necessary to watch the full process. </li>
+            <li>You see each time the transformation that is achieved by making zeros appear in column 1, then column 2, and so on after. </li>
+            <li>The 'New example' button is used to regenerate the starting matrix. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div>
+          <table border="2" id="myTable">
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <table border="1">
+                <tr haight="30">
+                  <td>&reals;</td>
+                  <td width="50">
+                    <input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1" />
+                  </td>
+                  <td>&rationals;</td>
+                  <td width="50">
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="2" />
+                  </td>
+                  <td> &integers;/5&integers;</td>
+                  <td width="50">
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="3" />
+                  </td>
+                  <td> &complexes;</td>
+                  <td width="50">
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4" />
+                  </td>
+                </tr>
+              </table>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Nombre de lignes :</div>
+                <!-- /fr -->
+                <div lang="en">Number of rows :</div>
+                <!-- /en -->
+                <input id="myRange1" max="6" min="1" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Nombre de colonnes :</div>
+                <!-- /fr -->
+                <div lang="en">Number of columns :</div>
+                <!-- /en -->
+                <input id="myRange2" max="6" min="1" value="3" onchange="nameSpace2.changen(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+            <tr>
+              <input type="text" id="alert" value="""" size="50">
+            </tr>
+            <button onclick="nameSpace2.New();" type="button"> Nouvel exemple </button>
+            <button onclick="nameSpace2.nextStep();" type="button"> Etape suivante </button>
+          </table>
+        </div>
+        <script src="js/pivot.js"></script>
+        <div lang="fr">
+          <h2> Le coin de Python </h2> Voici un programme qui calcule le rang d'une matrice en utilisant le pivot de Gauss. <p>
+            <object border="3" data="python/calrangpivot.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <h2> Le coin de Julia </h2>
+          <p> Nous avons déjà vu un programme calculant le rang d'un système de vecteurs.</p>
+          <p>
+            <object border="3" data="julia/calrangsys.jl.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <p> Utilisation de la bibliothèque Nemo.</p>
+          <p>
+            <object border="3" data="julia/Fp_calrangmat.jl.html" height="200" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's Corner </h2> Here is a program that calculates the rank of a matrix using the Gaussian pivot method. <p>
+            <object data="python/calrangpivot.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2>
+          <p>We have already seen a program calculating the rank of a vector system. </p>
+          <p>
+            <object data="julia/calrangsys.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <p>Using the Nemo library. </p>
+          <p>
+            <object data="julia/Fp_calrangmat.jl.html" type="text/html" width="100%" height="200" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

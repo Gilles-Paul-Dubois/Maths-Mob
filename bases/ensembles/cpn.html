@@ -1,0 +1,871 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Coefficients binomiaux</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../../css/themes/myown.css" />
+      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+      <link href="../../css/myown.css" rel="stylesheet">
+      <script src="../../js/jquery-1.11.3.js"></script>
+      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+      <script src="../../js/custom.js"></script>
+ 		<script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+   </head>
+   <body style="overflow: auto; "class="fr">
+      <script> window.onload=get();</script>
+      <a name="beg"></a>
+      <div data-role="page" data-theme="b">
+         <div data-role="header">
+            <table>
+               <tr>
+                  <td>Choisissez votre langue !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+                  <td>Choose your language !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+               </tr>
+            </table>
+         </div>
+         <!-- /header -->
+         <div style="overflow: auto; "  data-role="content" data-theme="b">
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Retour au menu 'Ensembles'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Back to sets" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <h2>   Paires et triplets  </h2>
+               <div id="container">
+                  <div id="label">définition</div>
+                  Nous désignons ici par
+                  <span style="font-weight: bold; font-style: italic;">
+                  'triplet'
+                  </span>
+                  tout <input type="button" value="ensemble" onclick="go('definitions.html')"  data-inline="true"/> à 3 éléments.
+               </div>
+               <p> Le programme ci-dessous génère des ensembles et montre pour chacun d'eux toutes les paires et tous les triplets contenus.</p>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Pairs and triples</h2>
+               <div id="container">
+                  <div id="label">definition</div>
+                  We denote here by '<strong><em>triple</em></strong>' any <input type="button" value="set" onclick="go('definitions.html')"  data-inline="true"/> with 3 elements.
+               </div>
+               <p> The program just under generates sets and shows all pairs and triples among its subsets.</p>
+            </div>
+            <!-- /en --> 
+            <div>
+               <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350">
+               </canvas>
+               <br/>
+               <div lang="fr">Parties à 2 élements de E:</div>
+               <!-- /fr --> 
+               <div lang="en">Subsets of E with 2 elements.</div>
+               <!-- /en --> 
+               <input type="text" id="mytext1" style="overflow: auto; ">
+               <div lang="fr">Parties à 3 élements de E:</div>
+               <!-- /fr --> 
+               <div lang="en">Subsets of E with 3 elements.</div>
+               <!-- /en --> 
+               <input type="text" id="mytext2" style="overflow: auto; ">
+               <script src="js/newjavascript15.js"></script>
+               <button onclick="Paint();" type="button">
+               Click!
+               </button>
+            </div>
+            <div lang="fr">
+               <p>Générez  en cliquant plusieurs exemples comme ci-dessus.</p>
+               <p>
+                  \(C_{n}^{2}\)  désigne le nombre de paires d'un ensemble à n éléments et  \(C_{n}^{3}\) celui de ses triplets.
+               </p>
+               <p>   Voici deux tableaux récapitulatifs.</p>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <p>Generate several examples as above by clicking.</p>
+               <p>
+                  \(C_{n}^{2}\)
+                  denotes the number of pairs of a set with n elements and 
+                 \(C_{n}^{3}\)
+                  that of its triplets.
+               </p>
+               <p>Here are two summary tables. </p>
+            </div>
+            <!-- /en --> 
+            <table border="2">
+               <tr>
+                  <td style="padding: 10px; ">
+                     <div lang="fr">
+                        Pouvez vous prévoir
+                        <br/>
+                        la formule pour \(C_{n}^{2}\)  
+                         ?
+                        <br/>
+                     </div>
+                     <!-- /fr --> 
+                     <div lang="en">
+                        Can you guess
+                        <br/>
+                        the formula for  
+								\(C_{n}^{3}\)
+                        ?
+                        <br/>
+                     </div>
+                     <!-- /en -->      
+                  </td>
+                  <td style="padding: 10px; ">
+                     <div lang="fr">
+                        Pouvez vous prévoir
+                        <br/>
+                        la formule pour  
+									\(C_{n}^{3}\)
+                        ?
+                        <br/>
+                     </div>
+                     <!-- /fr --> 
+                     <div lang="en">
+                        Can you guess
+                        <br/>
+                        the formula for  
+									\(C_{n}^{3}\)	
+                        ?
+                        <br/>
+                     </div>
+                     <!-- /en -->          
+                  </td>
+               </tr>
+               <tr>
+                  <td align="center">
+                     <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; width: 150px; ">
+                        <tbody>
+                           <tr>
+                              <td align="center" >
+                                 n
+                              </td>
+                              <td>
+ 											\(C_{n}^{2}\)
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 0
+                              </td>
+                              <td>
+                                 0
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 1
+                              </td>
+                              <td>
+                                 0
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 2
+                              </td>
+                              <td>
+                                 1
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 3
+                              </td>
+                              <td>
+                                 3
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 4
+                              </td>
+                              <td>
+                                 6
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 5
+                              </td>
+                              <td>
+                                 10
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 6
+                              </td>
+                              <td>
+                                 15
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </td>
+                  <td align="center">
+                     <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; width: 150px; ">
+                        <tbody>
+                           <tr>
+                              <td>
+                                 n
+                              </td>
+                              <td>
+ 											\(C_{n}^{3}\)
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 0
+                              </td>
+                              <td>
+                                 0
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 1
+                              </td>
+                              <td>
+                                 0
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 2
+                              </td>
+                              <td>
+                                 0
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 3
+                              </td>
+                              <td>
+                                 1
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 4
+                              </td>
+                              <td>
+                                 4
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 5
+                              </td>
+                              <td>
+                                 10
+                              </td>
+                           </tr>
+                           <tr>
+                              <td>
+                                 6
+                              </td>
+                              <td>
+                                 20
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </td>
+               </tr>
+            </table>
+            <div lang="fr">
+               <h2>
+                  Coefficients \(C_{n}^{p}\)  
+
+               </h2>
+               <div id="container">
+                  <div id="label">définition</div>
+                  Nous notons  \(C_{n}^{p}\)
+                  le
+                  <span style="font-weight: bold; font-style: italic;">
+                  nombre de
+                  <input type="button" value="parties" onclick="go('inclusion.html')"  data-inline="true"/> à p éléments dans un ensemble E à n éléments
+                  </span>
+                  . On
+                  dit
+                  encore le
+                  <span style="font-weight: bold; font-style: italic;">
+                  nombre
+                  de combinaisons de p dans n
+                  </span>.                 .
+               </div>
+               <p>
+                  <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>
+                  En pratique au lieu de  
+ 						\(C_{n}^{p}\)			
+                  on trouve aussi 
+						\( \binom{n}{p}\)
+               </p>
+               <p>Voici quelques propriétés évidentes:</p>
+               <a name="th1"></a>
+               <div id="container">
+                  <div id="label">théorème</div>
+                  <ul style=list-style-type:'';>
+                     <li>
+                        <font size="+1">
+ 							\(C_{n}^{p}\)
+                           = 0 si p&gt;n
+                        </font>
+                     </li>
+                     <li>
+                        <font size="+1">
+ 									\(C_{n}^{0}\)
+                           =1 ∀ n
+                        </font>
+                        (une seule
+                        partie vide)
+                     </li>
+                     <li>
+                        <font size="+1">
+									\(C_{n}^{n}\)
+                           = 1 ∀ n
+                        </font>
+                        (une seule
+                        partie pleine)
+                     </li>
+                     <li>
+                        <font size="+1">
+									 \(C_{n}^{1}\)
+                           = n ∀ n
+                        </font>
+                        (n singletons)
+                     </li>
+                     <li>
+                        <font size="+1">
+ 									\(C_{n}^{p}\)
+                           =
+ 									\(C_{n}^{n-p}\)
+                           ∀ n et
+                           ∀p&lt;n
+                        </font>
+                        (le complémentaire d'une
+                        partie à p éléments est une partie à n-p éléments, il y en a donc
+                        autant de chaque sorte)
+                     </li>
+                     <li>
+                        <span style="font-size: larger;">
+  									\(\sum_{p=0}^{n}C_{n}^{p}=2^{n}\)
+                        </span>
+                        (parce que le membre de gauche donne toutes les parties de E)
+                     </li>
+                  </ul>
+               </div>
+               <a name="exrec2">
+               </a>
+               <p>  Voici maintenant une propriété moins évidente:</p>
+               <a name="th2"></a>
+               <div id="container">
+                  <div id="label">théorème</div>
+                  <span style="font-size: larger;">
+ 							\(C_{n}^{p}=C_{n-1}^{p-1}+C_{n-1}^{p}\)
+                  </span>
+                  pour n ≥ 1
+                  et  n-1 ≥ p&gt;1
+               </div>
+               <div data-role="collapsible">
+                  <h4>démonstration</h4>
+                  Il s'agit d'une relation de récurrence qui se démontre
+                  par récurrence
+                  un peu de la
+                  même manière</a>
+                  que pour la formule qui donne le nombre total de
+                  toutes
+                  les parties d'un ensemble.
+                  <br/>
+                  Soit F un ensemble
+                  à n-1 élément. Soit maintenant x un élément qui
+                  n'appartient pas à F et soit E=F ∪ {x}, de sorte que E est un ensemble
+                  à n éléments dont F est une partie.
+                  <br/>
+                  Les parties de E à p éléments  se divisent en deux catégories:
+                  <br/>
+                  <ul style=list-style-type:'';>
+                     <li>
+                        Celles qui ne contiennent pas l'élément x, qui sont donc des parties de F, leur nombre est
+                        donc 
+ 								 \(C_{n-1}^{p}\)
+                     </li>
+                     <li>
+                        Celles qui contiennent l'élément x, obtenues par adjonction
+                        de x à une partie de F à p-1 éléments, leur nombre est donc 
+								 \(C_{n-1}^{p-1}\)
+                     </li>
+                  </ul>
+                  d'où le résultat.
+               </div>
+               <p>
+                  La relation qui précède permet d'organiser les coefficients 
+ 						\(C_{n}^{p}\) 
+                  en une
+                  structure triangulaire où chaque ligne se déduit de celle qui précède,
+                  il s'agit
+                  <span style="font-weight: bold; font-style: italic;">
+                  du
+                  triangle dit 'de Pascal'
+                  </span>
+                  , connu en fait depuis le début du
+                  14° siècle par les mathématiciens chinois (Chu Shï-kié), et en occident
+                  par Petrus Apianus dès 1527.
+               </p>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+               <h2>
+                  Coefficients  
+\(C_{n}^{p}\)
+               </h2>
+               <div id="container">
+                  <div id="label">definition</div>
+                  We denote  
+   \(C_{n}^{p}\)
+                  the
+                  <span style="font-weight: bold; font-style: italic;">
+                  number of
+                  <input type="button" value="subsets" onclick="go('inclusion.html')"  data-inline="true"/> with p elements in a set E with n elements
+                  </span>
+                  . It is also said to be the
+                  <span style="font-weight: bold; font-style: italic;">
+                  number
+                  of combinations of p in n
+                  </span>
+                  .
+               </div>
+               <p>
+                  <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>
+                  Practically instead of  
+							 \(C_{n}^{p}\)
+                  you can find as well
+ 							\( \binom{n}{p}\)
+               </p>
+               <p>Here are some obvious properties:</p>
+               <a name="th1e"></a>
+               <div id="container">
+                  <div id="label">theorem</div>
+                  <ul style=list-style-type:'';>
+                     <li>
+                        <font size="+1">
+  									 \(C_{n}^{p}\)
+                           = 0 if p&gt;n
+                        </font>
+                     </li>
+                     <li>
+                        <font size="+1">
+ 									\(C_{n}^{0}\)
+                           =1 ∀ n
+                        </font>
+                        (only one empty subset)
+                     </li>
+                     <li>
+ 								\(C_{n}^{n}\)
+                           = 1 ∀ n
+                        </font>
+                        (only one full subset)
+                     </li>
+                     <li>
+                        <font size="+1">
+  									\(C_{n}^{1}\)
+                           = n ∀ n
+                        </font>
+                        (n singletons)
+                     </li>
+                     <li>
+                        <font size="+1">
+ 									\(C_{n}^{p}\)
+                           =
+ 									\(C_{n}^{n-p}\)
+                           ∀ n et
+                           ∀p&lt;n
+                        </font>
+                        (the complement of a subset with p elements is a subset with n-p elements, so there is the same number of each kind)
+                     </li>
+                     <li>
+                        <span style="font-size: larger;">
+  									\(\sum_{p=0}^{n}C_{n}^{p}=2^{n}\)
+                        </span>
+                        (because the left member gives all subsets of E)
+                     </li>
+                  </ul>
+               </div>
+               <a name="exrec2e">
+               </a>
+               <p>  Here is now something less obvious:</p>
+               <a name="th2e"></a>
+               <div id="container">
+                  <div id="label">theorem</div>
+                  <span style="font-size: larger;">
+ 							\(C_{n}^{p}=C_{n-1}^{p-1}+C_{n-1}^{p}\)
+                  </span>
+                  for n ≥ 1
+                  and  n-1 ≥ p&gt;1
+               </div>
+               <div data-role="collapsible">
+                  <h4>proof</h4>
+                  This can be proven by induction imitating the formula which gives the total number of subsets of a (finite) set
+                  <br/>
+                  Le f be a set
+                  with n-1 elements. x denotes now an element which doesn't belong to F
+                  we note E=F ∪ {x}, so that E is a set with
+                  à n elements which accepts F as a subset..
+                  <br/>
+                  Subsets of E with p elements  are of 2 kinds:
+                  <br/>
+                  <ul style=list-style-type:'';>
+                     <li>
+                        These which do not include x, which are from this fact subsets of F, so that their number is 
+								\(C_{n-1}^{p}\)
+                     </li>
+                     <li>
+                        Those which include x, obtained by joining x to a subset of f with p-1 elements
+                        , so that their number is 
+								\(C_{n'1}^{p-1}\)
+                     </li>
+                  </ul>
+                  Our result follows.
+               </div>
+               <p>
+                  The previous relationship allows to organize the coefficients 
+						\(C_{n}^{p}\) 
+                  in a triangular structure where every line can be deduced from the previous one. It is the so-called
+                  <span style="font-weight: bold; font-style: italic;">
+                  Pascal's triangle
+                  </span>
+                  , know actually from the beginning of 14th century by Chinese mathematicians
+                  (Chu Shï-kié), and in the West as well
+                  by Petrus Apianus as soon as 1527.
+               </p>
+            </div>
+            <!-- /en -->
+            <div style="text-align: center;">
+               <font size="+2">
+               <span style="font-weight: bold;">
+               1
+               </span>
+               <br style="font-weight: bold;"/>
+               <span style="font-weight: bold;">
+               1 1
+               </span>
+               <br style="font-weight: bold;"/>
+               <span style="font-weight: bold;">
+               1 2 1
+               </span>
+               <br style="font-weight: bold;"/>
+               <span style="font-weight: bold;">
+               1 3 3 1
+               </span>
+               <br style="font-weight: bold;"/>
+               <span style="font-weight: bold;">
+               1 4 6 4 1
+               </span>
+               <br style="font-weight: bold;"/>
+               <span style="font-weight: bold;">
+               1 5 10 10 5 1
+               </span>
+               </font>
+               <br/>
+            </div>
+            <div lang="fr">
+               Partant de la relation de récurrence et de la définition de factorielle
+               n
+               <br/>
+               n!= 1 si n&lt;=1
+               <br/>
+               n!=1x2x3x.....x(n-1)xn pour n ≥ 2
+               <br/>
+               on a:
+               <br/>
+               <a name="th3"></a>
+               <div id="container">
+                  <div id="label">théorème</div>
+                  <font size="+1">
+                     <a name="formule">
+                     </a>
+  								\(C_{n}^{p}=\frac{n!}{(n-p)!p!}=\frac{n(n-1)...(n-p+1)}{p!}\)
+                  </font>
+               </div>
+               Formule de fait peu adaptée au calcul pratique de ces coefficients à
+               cause de la croissance extrêmement rapide de la factorielle.
+               <br/>
+               Les 
+ 						\(C_{n}^{p}\)
+               <span style="text-decoration: underline;">
+               sont
+               des nombres très importants</span>
+               intervenant dans toutes les
+               branches des mathématiques:
+               <br/>
+               <ul style=list-style-type:'';>
+                  <li>
+                     En algèbre (coefficients du développement de (a+b)<sup>n</sup>
+                     ,
+                     entre autres).
+                  </li>
+                  <li>
+                     En calcul des probabilités.
+                  </li>
+                  <li>
+                     Et dans bien d'autres domaines.
+                  </li>
+               </ul>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+               Starting from the induction formula and the definition of factorial n!
+               <br/>
+               n!= 1 if n&lt;=1
+               <br/>
+               n!=1x2x3x.....x(n-1)xn for n ≥ 2
+               <br/>
+               we have:
+               <br/>
+               <a name="th3e"></a>
+               <div id="container">
+                  <div id="label">theorem</div>
+                  <font size="+1">
+								\(C_{n}^{p}=\frac{n!}{(n-p)!p!}=\frac{n(n-1)...(n-p+1)}{p!}\)
+                  </font>
+               </div>
+               Formula actually not very practical as to the real computation of the coefficients because of the fast growing factorial  .
+               <br/>
+               The 
+ \(C_{n}^{p}\)
+               <span style="text-decoration: underline;">
+               are very important numbers</span>
+               They appear in all branches of maths:
+               <br/>
+               <ul style=list-style-type:'';>
+                  <li>
+                     In algebra (coefficients of the expansion of (a+b)<sup>n</sup>
+                     ,
+                     (between others).
+                  </li>
+                  <li>
+                     In probability theory
+                  </li>
+                  <li>
+                     And in a lot of other domains.
+                  </li>
+               </ul>
+            </div>
+            <!-- /en -->
+            <div lang="fr">
+               <h2>
+                  Le coin de Python
+               </h2>
+               <p>
+                  Ce programme calcule toutes les parties à p éléments d'un ensemble à n
+                  éléments:
+               </p>
+               <p>
+                  <object border="3" data="python/cpn.html" height="350" type="text/html" width="100%">
+                  </object>
+               </p>
+               <p>
+                  Ce programme calcule le triangle de Pascal et les coefficients 
+							\(C_{n}^{p}\)
+                  , en faisant appel à la notion de 'générateur':
+               </p>
+               <p>
+                  <object border="3" data="python/pascal.html" height="400" type="text/html" width="100%">
+                  </object>
+               </p>
+               <p>
+                  Ce programme calcule toutes les parties à p éléments d'un ensemble à
+                  n
+                  éléments sans récursivité et sans filtrage, en faisant appel à la
+                  notion de 'générateur'. Il suppose que l'ensemble E est muni d'un ordre
+                  naturel:
+               </p>
+               <p>
+                  <object border="3" data="python/cpn2.html" height="350" type="text/html" width="100%">
+                  </object>
+               </p>
+               Les versions récentes de python proposent une fonction 'combinations' dans le module standard 'itertools'.
+               <p>
+                  <object border="3" data="python/cpn3.html" height="250" type="text/html" width="100%">
+                  </object>
+               </p>
+               <h2>
+                  Le coin de Julia
+               </h2>
+               <p>
+                  Ce programme julia 1.6 calcule toutes les parties à p éléments d'un ensemble à n
+                  éléments:
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn1.jl.html" height="350" type="text/html" width="100%">
+                  </object>
+               <p>
+                  Ce programme julia 1.6 calcule par itération le triangle de Pascal à un ordre arbitraire.
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn2.jl.html" height="350" type="text/html" width="100%">
+                  </object>
+               <p>
+                  Ce programme julia 1.6 calcule par itération les coefficients binomiaux à l'aide de la formule impliquant les factorielles.
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn3.jl.html" height="350" type="text/html" width="100%">
+                  </object>
+               </p>
+               <p>
+                  Ce programme julia 1.6 calcule par utilisation d'une bibliothèque spécialisée 'IterTools' les sous-ensembles à 3 éléments d'un ensemble à 4 éléments.
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn4.jl.html" height="100" type="text/html" width="100%">
+                  </object>
+               </p>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+               <h2>
+                  Python's corner
+               </h2>
+               <p>
+                  This program computes all subsets with p elements in a set of n elements.
+               </p>
+               <p>
+                  <object border="3" data="python/cpn_en.html" height="350" type="text/html" width="100%">
+                  </object>
+               </p>
+               <p>
+                  This program computes Pascal's triangle and coefficients   
+ 						\(C_{n}^{p}\)
+                  using python's 'generators'.
+               </p>
+               <p>
+                  <object border="3" data="python/pascal_en.html" height="400" type="text/html" width="100%">
+                  </object>
+               </p>
+               <p>
+                  This program computes all subsets with p elements in a set with n elements without recursivity and without filtering, using 'generators'. It supposes that the set is endowed with a natural order.  
+               </p>
+               <p>
+                  <object border="3" data="python/cpn2_en.html" height="350" type="text/html" width="100%">
+                  </object>
+               </p>
+               Recent versions of Python propose a 'combinations' function as a part of the 'itertools' module.
+               <p>
+                  <object border="3" data="python/cpn3.html" height="250" type="text/html" width="100%">
+                  </object>
+               </p>
+               <h2>
+                  Julia's corner
+               </h2>
+               <p>
+                  This Julia 1.6 program computes all parts with p elements in a set of n elements :
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn1.jl_en.html" height="350" type="text/html" width="100%">
+                  </object>
+               <p>
+                  This Julia program computes by iteration Pascal triangle till any arbitrary order :
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn2.jl_en.html" height="350" type="text/html" width="100%">
+                  </object>
+               <p>
+                  This Julia 1.6 program computes the binomial coefficients using formulas including factorials :
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn3.jl_en.html" height="350" type="text/html" width="100%">
+                  </object>
+               </p>
+               <p> This Julia 1.6 program computes with a special package 'IterTools' all the p-subsets of a set with n elements :
+               </p>
+               <p>
+                  <object border="3" data="julia/cpn4.jl.html" height="100" type="text/html" width="100%">
+                  </object>
+               </p>
+            </div>
+            <!-- /en -->    
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Retour au menu 'Ensembles'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Back to sets" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /en --> 
+         </div>
+         <!-- /content -->
+         <div data-role="footer">
+            <table cellpadding="10">
+               <tr>
+                  <td>
+                     <div lang="fr">Création Gilles Dubois</div>
+                     <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Janvier 2022</div>
+                     <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Version mobile Jquery</div>
+                     <div lang="en">Mobile Jquery version</div>
+                  </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>                  
+               </tr>
+            </table>
+         </div>
+         <!-- /footer -->
+         <ul style=list-style-type:'';>
+            <li>
+               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+            </li>
+            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+         </ul>
+      </div>
+      <!-- /page -->
+   </body>
+</html>
+

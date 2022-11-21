@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>tablev1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#Constanst true and false</span>
+<span class="s1">constP(f) = length(f) == </span><span class="s2">1 </span><span class="s1">&amp;&amp; f[</span><span class="s2">1</span><span class="s1">] </span><span class="s3">in </span><span class="s4">&quot;VF&quot;</span>
+<span class="s0">#variable any letter except V and F</span>
+<span class="s1">varP(f) = length(f) == </span><span class="s2">1 </span><span class="s1">&amp;&amp; f[</span><span class="s2">1</span><span class="s1">] </span><span class="s3">in </span><span class="s4">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span>
+<span class="s0">#checks for presence of parentheses</span>
+<span class="s1">inparP(f) = f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'('</span><span class="s1">&amp;&amp; f[length(f)] == </span><span class="s4">')'</span><span class="s1">&amp;&amp; !(</span><span class="s4">'(' </span><span class="s3">in </span><span class="s1">f[</span><span class="s2">2</span><span class="s1">:end])</span>
+<span class="s0">#returns expression between parentheses</span>
+<span class="s1">betweenpar(f) = f[</span><span class="s2">2</span><span class="s1">:length(f) - </span><span class="s2">1</span><span class="s1">]</span>
+
+<span class="s0">#8 possible environments for triple (A,B,C)</span>
+<span class="s1">E=(</span><span class="s4">'A'</span><span class="s1">,</span><span class="s4">'B'</span><span class="s1">,</span><span class="s4">'C'</span><span class="s1">)</span>
+<span class="s1">PowerX_n(X, n) = Iterators.product(ntuple(i-&gt;X, n)...)</span>
+<span class="s1">LV=[</span><span class="s3">true</span><span class="s1">,</span><span class="s3">false</span><span class="s1">] </span><span class="s0">#binary logic</span>
+<span class="s1">F3=collect(PowerX_n(LV,</span><span class="s2">3</span><span class="s1">)) </span><span class="s0">#power three</span>
+<span class="s1">Env(n)=Dict(E .=&gt; F3[n]) </span><span class="s0">#returns an environment as a dictionary</span>
+
+<span class="s3">function </span><span class="s1">parseP(f) </span><span class="s0">#parser</span>
+    <span class="s3">if </span><span class="s1">constP(f) </span><span class="s0"># simple constant</span>
+        <span class="s3">return </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s3">end</span>
+    <span class="s3">if </span><span class="s1">varP(f) </span><span class="s0"># simple variable</span>
+        <span class="s3">return </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s3">end</span>
+    <span class="s3">if </span><span class="s1">inparP(f) </span><span class="s0"># it is a group between parentheses</span>
+        <span class="s1">a = parseP(betweenpar(f))</span>
+        <span class="s3">if </span><span class="s1">a != nothing</span>
+            <span class="s3">return </span><span class="s1">a</span>
+        <span class="s3">end</span>
+    <span class="s3">end</span>
+    <span class="s3">if </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'!' </span><span class="s0"># a negation</span>
+        <span class="s1">a = parseP(f[</span><span class="s2">2</span><span class="s1">:end])</span>
+        <span class="s3">if </span><span class="s1">a != nothing</span>
+            <span class="s3">return </span><span class="s1">[</span><span class="s4">'!'</span><span class="s1">, a]</span>
+        <span class="s3">end</span>
+    <span class="s3">end</span>
+    <span class="s3">if </span><span class="s4">'&amp;' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># a conjunction</span>
+        <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
+            <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'&amp;'</span>
+                <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i - </span><span class="s2">1</span><span class="s1">])</span>
+                <span class="s1">b = parseP(f[i + </span><span class="s2">1</span><span class="s1">:end])</span>
+                <span class="s3">if </span><span class="s1">(a != nothing) &amp;&amp; (b != nothing)</span>
+                    <span class="s3">return </span><span class="s1">[</span><span class="s4">'&amp;'</span><span class="s1">, a, b]</span>
+                <span class="s3">end</span>
+            <span class="s3">end</span>
+        <span class="s3">end</span>
+    <span class="s3">end</span>
+    <span class="s3">if </span><span class="s4">'|' </span><span class="s3">in </span><span class="s1">f </span><span class="s0">#a disjunction</span>
+        <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
+            <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'|'</span>
+                <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i - </span><span class="s2">1</span><span class="s1">])</span>
+                <span class="s1">b = parseP(f[i + </span><span class="s2">1</span><span class="s1">:end])</span>
+                <span class="s3">if </span><span class="s1">(a != nothing) &amp;&amp; (b != nothing)</span>
+                    <span class="s3">return </span><span class="s1">[</span><span class="s4">'|'</span><span class="s1">, a, b]</span>
+                <span class="s3">end</span>
+            <span class="s3">end</span>
+        <span class="s3">end</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">nothing</span>
+<span class="s3">end</span>
+<span class="s0">#evaluating function, recursive too</span>
+<span class="s3">function </span><span class="s1">evalP(Tree, Env)</span>
+    <span class="s3">if </span><span class="s1">Tree == </span><span class="s4">'V'</span>
+        <span class="s3">return true</span>
+    <span class="s3">elseif </span><span class="s1">Tree == </span><span class="s4">'F'</span>
+        <span class="s3">return false</span>
+    <span class="s3">elseif </span><span class="s1">Tree </span><span class="s3">in </span><span class="s4">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span>
+        <span class="s3">return </span><span class="s1">Env[Tree]</span>
+    <span class="s3">elseif </span><span class="s1">Tree[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'!'</span>
+        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env) </span><span class="s0">#recursive call</span>
+        <span class="s3">return </span><span class="s1">!a</span>
+    <span class="s3">elseif </span><span class="s1">Tree[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'&amp;'</span>
+        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env) </span><span class="s0">#recursive calls</span>
+        <span class="s1">b = evalP(Tree[</span><span class="s2">3</span><span class="s1">],Env)</span>
+        <span class="s3">return </span><span class="s1">a&amp;&amp;b</span>
+    <span class="s3">elseif </span><span class="s1">Tree[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'|'</span>
+        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env)</span><span class="s0">#recursive calls</span>
+        <span class="s1">b = evalP(Tree[</span><span class="s2">3</span><span class="s1">],Env)</span>
+        <span class="s3">return </span><span class="s1">a||b</span>
+    <span class="s3">else</span>
+    <span class="s3">end</span>
+<span class="s3">end</span>
+
+<span class="s0"># main function, building truth table</span>
+<span class="s3">function </span><span class="s1">main()</span>
+   <span class="s1">Formule =parseP(</span><span class="s4">&quot;(!A)&amp;(B|C)&quot;</span><span class="s1">) </span><span class="s0">#la formule testée</span>
+   <span class="s0"># printing truth table</span>
+   <span class="s1">println(Formule)</span>
+   <span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">8</span>
+        <span class="s1">print(</span><span class="s4">&quot;For environment &quot;</span><span class="s1">)</span>
+        <span class="s1">print(Env(i))</span>
+        <span class="s1">print(</span><span class="s4">&quot; F gives &quot;</span><span class="s1">)</span>
+        <span class="s1">println(evalP(Formule,Env(i)))</span>
+    <span class="s3">end</span>
+ <span class="s3">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<html>
+<head>
+<title>main.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">constP(f) = length(f) == </span><span class="s1">1 </span><span class="s0">&amp;&amp; f[</span><span class="s1">1</span><span class="s0">] </span><span class="s2">in </span><span class="s3">&quot;VF&quot;</span>
+
+<span class="s0">varP(f) = length(f) == </span><span class="s1">1 </span><span class="s0">&amp;&amp; f[</span><span class="s1">1</span><span class="s0">] </span><span class="s2">in </span><span class="s3">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span>
+
+<span class="s0">inparP(f) = f[</span><span class="s1">1</span><span class="s0">] == </span><span class="s3">'(' </span><span class="s0">&amp;&amp; f[length(f)] == </span><span class="s3">')'</span>
+
+<span class="s0">betweenpar(f) = f[</span><span class="s1">2</span><span class="s0">:length(f)-</span><span class="s1">1</span><span class="s0">]</span>
+
+<span class="s0">vars(f) = Set(x </span><span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s0">f </span><span class="s2">if </span><span class="s0">x </span><span class="s2">in </span><span class="s3">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span><span class="s0">)</span>
+<span class="s0">nbvars(f) = length(vars(f))</span>
+
+<span class="s0">PowerX_n(X, n) = Iterators.product(ntuple(i -&gt; X, n)...)</span>
+<span class="s0">LV = [</span><span class="s2">true</span><span class="s0">, </span><span class="s2">false</span><span class="s0">]</span>
+<span class="s0">Fn(f) = collect(PowerX_n(LV, nbvars(f)))</span>
+<span class="s0">Env(f, k) = Dict(vars(f) .=&gt; Fn(f)[k])</span>
+<span class="s2">function </span><span class="s0">parseP(f)</span>
+    <span class="s2">if </span><span class="s0">constP(f)</span>
+        <span class="s2">return </span><span class="s0">f[</span><span class="s1">1</span><span class="s0">]</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s0">varP(f)</span>
+        <span class="s2">return </span><span class="s0">f[</span><span class="s1">1</span><span class="s0">]</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s0">inparP(f)</span>
+        <span class="s0">a = parseP(betweenpar(f))</span>
+        <span class="s2">if </span><span class="s0">a != nothing</span>
+            <span class="s2">return </span><span class="s0">a</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s0">f[</span><span class="s1">1</span><span class="s0">] == </span><span class="s3">'!'</span>
+        <span class="s0">a = parseP(f[</span><span class="s1">2</span><span class="s0">:end])</span>
+        <span class="s2">if </span><span class="s0">a != nothing</span>
+            <span class="s2">return </span><span class="s0">[</span><span class="s3">'!'</span><span class="s0">, a]</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s3">'&amp;' </span><span class="s2">in </span><span class="s0">f</span>
+        <span class="s2">for </span><span class="s0">i = </span><span class="s1">1</span><span class="s0">:length(f)</span>
+            <span class="s2">if </span><span class="s0">f[i] == </span><span class="s3">'&amp;'</span>
+                <span class="s0">a = parseP(f[</span><span class="s1">1</span><span class="s0">:i-</span><span class="s1">1</span><span class="s0">])</span>
+                <span class="s0">b = parseP(f[i+</span><span class="s1">1</span><span class="s0">:end])</span>
+                <span class="s2">if </span><span class="s0">(a != nothing) &amp;&amp; (b != nothing)</span>
+                    <span class="s2">return </span><span class="s0">[</span><span class="s3">'&amp;'</span><span class="s0">, a, b]</span>
+                <span class="s2">end</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s3">'|' </span><span class="s2">in </span><span class="s0">f</span>
+        <span class="s2">for </span><span class="s0">i = </span><span class="s1">1</span><span class="s0">:length(f)</span>
+            <span class="s2">if </span><span class="s0">f[i] == </span><span class="s3">'|'</span>
+                <span class="s0">a = parseP(f[</span><span class="s1">1</span><span class="s0">:i-</span><span class="s1">1</span><span class="s0">])</span>
+                <span class="s0">b = parseP(f[i+</span><span class="s1">1</span><span class="s0">:end])</span>
+                <span class="s2">if </span><span class="s0">(a != nothing) &amp;&amp; (b != nothing)</span>
+                    <span class="s2">return </span><span class="s0">[</span><span class="s3">'|'</span><span class="s0">, a, b]</span>
+                <span class="s2">end</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s3">'&gt;' </span><span class="s2">in </span><span class="s0">f</span>
+    <span class="s2">for </span><span class="s0">i = </span><span class="s1">1</span><span class="s0">:length(f)</span>
+        <span class="s2">if </span><span class="s0">f[i] == </span><span class="s3">'&gt;'</span>
+            <span class="s0">a = parseP(f[</span><span class="s1">1</span><span class="s0">:i-</span><span class="s1">1</span><span class="s0">])</span>
+            <span class="s0">b = parseP(f[i+</span><span class="s1">1</span><span class="s0">:end])</span>
+            <span class="s2">if </span><span class="s0">(a != nothing) &amp;&amp; (b != nothing)</span>
+                <span class="s2">return </span><span class="s0">[</span><span class="s3">'&gt;'</span><span class="s0">, a, b]</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s3">'#' </span><span class="s2">in </span><span class="s0">f</span>
+        <span class="s2">for </span><span class="s0">i = </span><span class="s1">1</span><span class="s0">:length(f)</span>
+            <span class="s2">if </span><span class="s0">f[i] == </span><span class="s3">'#'</span>
+                <span class="s0">a = parseP(f[</span><span class="s1">1</span><span class="s0">:i-</span><span class="s1">1</span><span class="s0">])</span>
+                <span class="s0">b = parseP(f[i+</span><span class="s1">1</span><span class="s0">:end])</span>
+                <span class="s2">if </span><span class="s0">(a != nothing) &amp;&amp; (b != nothing)</span>
+                    <span class="s2">return </span><span class="s0">[</span><span class="s3">'#'</span><span class="s0">, a, b]</span>
+                <span class="s2">end</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">nothing</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">evalP(Tree, Env)</span>
+    <span class="s2">if </span><span class="s0">Tree == </span><span class="s3">'V'</span>
+        <span class="s2">return true</span>
+    <span class="s2">elseif </span><span class="s0">Tree == </span><span class="s3">'F'</span>
+        <span class="s2">return false</span>
+    <span class="s2">elseif </span><span class="s0">Tree </span><span class="s2">in </span><span class="s3">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span>
+        <span class="s2">return </span><span class="s0">Env[Tree]</span>
+    <span class="s2">elseif </span><span class="s0">Tree[</span><span class="s1">1</span><span class="s0">] == </span><span class="s3">'!'</span>
+        <span class="s0">a = evalP(Tree[</span><span class="s1">2</span><span class="s0">], Env)</span>
+        <span class="s2">return </span><span class="s0">!a</span>
+    <span class="s2">elseif </span><span class="s0">Tree[</span><span class="s1">1</span><span class="s0">] == </span><span class="s3">'&amp;'</span>
+        <span class="s0">a = evalP(Tree[</span><span class="s1">2</span><span class="s0">], Env)</span>
+        <span class="s0">b = evalP(Tree[</span><span class="s1">3</span><span class="s0">], Env)</span>
+        <span class="s2">return </span><span class="s0">a &amp;&amp; b</span>
+    <span class="s2">elseif </span><span class="s0">Tree[</span><span class="s1">1</span><span class="s0">] == </span><span class="s3">'|'</span>
+        <span class="s0">a = evalP(Tree[</span><span class="s1">2</span><span class="s0">], Env)</span>
+        <span class="s0">b = evalP(Tree[</span><span class="s1">3</span><span class="s0">], Env)</span>
+        <span class="s2">return </span><span class="s0">a || b</span>
+    <span class="s2">elseif </span><span class="s0">Tree[</span><span class="s1">1</span><span class="s0">] == </span><span class="s3">'&gt;'</span>
+        <span class="s0">a = evalP(Tree[</span><span class="s1">2</span><span class="s0">], Env)</span>
+        <span class="s0">b = evalP(Tree[</span><span class="s1">3</span><span class="s0">], Env)</span>
+        <span class="s2">return </span><span class="s0">b||(!a)</span>
+    <span class="s2">elseif </span><span class="s0">Tree[</span><span class="s1">1</span><span class="s0">] == </span><span class="s3">'#'</span>
+        <span class="s0">a = evalP(Tree[</span><span class="s1">2</span><span class="s0">], Env)</span>
+        <span class="s0">b = evalP(Tree[</span><span class="s1">3</span><span class="s0">], Env)</span>
+        <span class="s2">return </span><span class="s0">(b||(!a))&amp;&amp;(a||(!b))</span>
+    <span class="s2">else</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">valeur(formule, k) = evalP(parseP(formule), Env(formule, k))</span>
+
+<span class="s2">function </span><span class="s0">table(f)</span>
+    <span class="s0">print(</span><span class="s3">&quot;formule: &quot;</span><span class="s0">)</span>
+    <span class="s0">println(f)</span>
+    <span class="s0">analyse = parseP(f)</span>
+    <span class="s0">print(</span><span class="s3">&quot;analysée comme :&quot;</span><span class="s0">)</span>
+    <span class="s0">println(analyse)</span>
+    <span class="s0">print(</span><span class="s3">&quot;variables de la formule: &quot;</span><span class="s0">)</span>
+    <span class="s0">println(vars(f))</span>
+    <span class="s0">print(</span><span class="s3">&quot;Nombre de ses variables : &quot;</span><span class="s0">)</span>
+    <span class="s0">println(nbvars(f))</span>
+    <span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">2</span><span class="s0">^nbvars(f)</span>
+        <span class="s0">print(Env(f,k))</span>
+        <span class="s0">print(</span><span class="s3">&quot;:&quot;</span><span class="s0">)</span>
+        <span class="s0">println(valeur(f,k))</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s0">all([valeur(f,k)==</span><span class="s2">true for </span><span class="s0">k </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">2</span><span class="s0">^nbvars(f)])</span>
+        <span class="s0">println(</span><span class="s3">&quot;Tautologie: oui&quot;</span><span class="s0">)</span>
+    <span class="s2">else</span>
+        <span class="s0">println(</span><span class="s3">&quot;Tautologie: non&quot;</span><span class="s0">)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">s = </span><span class="s3">&quot;(!A)&gt;(B|C)&quot;</span>
+    <span class="s0">table(s)</span>
+    <span class="s0">println(</span><span class="s3">&quot;*****************************&quot;</span><span class="s0">)</span>
+    <span class="s0">s = </span><span class="s3">&quot;(A|B)|((!A)&amp;(!B))&quot;</span>
+    <span class="s0">table(s)</span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span>
+</pre>
+</body>
+</html>

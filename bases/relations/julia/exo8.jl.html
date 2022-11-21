@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #0033b3;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">E = Set([</span><span class="s1">1</span><span class="s0">, </span><span class="s1">2</span><span class="s0">, </span><span class="s1">3</span><span class="s0">, </span><span class="s1">6</span><span class="s0">, </span><span class="s1">10</span><span class="s0">, </span><span class="s1">12</span><span class="s0">, </span><span class="s1">15</span><span class="s0">, </span><span class="s1">30</span><span class="s0">, </span><span class="s1">60</span><span class="s0">, </span><span class="s1">120</span><span class="s0">, </span><span class="s1">180</span><span class="s0">])  </span><span class="s2"># l'ensemble</span>
+<span class="s0">A = Set([</span><span class="s1">10</span><span class="s0">, </span><span class="s1">12</span><span class="s0">, </span><span class="s1">30</span><span class="s0">])</span>
+<span class="s0">B = Set([</span><span class="s1">2</span><span class="s0">, </span><span class="s1">3</span><span class="s0">, </span><span class="s1">6</span><span class="s0">, </span><span class="s1">10</span><span class="s0">, </span><span class="s1">30</span><span class="s0">])</span>
+<span class="s0">C = Set([</span><span class="s1">3</span><span class="s0">, </span><span class="s1">120</span><span class="s0">])</span>
+
+<span class="s0">R(x,y)=y%x==</span><span class="s1">0</span>
+
+<span class="s0">EstTransitive(Rel,E)=!any((Rel(x,y)&amp;&amp;Rel(y,z)&amp;&amp;!Rel(x,z) </span><span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s0">E </span><span class="s3">for </span><span class="s0">y </span><span class="s3">in </span><span class="s0">E </span><span class="s3">for </span><span class="s0">z </span><span class="s3">in </span><span class="s0">E))</span>
+
+<span class="s0">EstAntiSymetrique(Rel,E)= !any((Rel(x,y)&amp;&amp;Rel(y,x)&amp;&amp;x!=y </span><span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s0">E </span><span class="s3">for </span><span class="s0">y </span><span class="s3">in </span><span class="s0">E)) </span>
+
+<span class="s0">EstReflexive(Rel,E)= all((Rel(x,x) </span><span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s0">E))</span>
+
+<span class="s0">EstOrdre(Rel,E)=EstTransitive(Rel,E) &amp;&amp; EstAntiSymetrique(Rel,E) &amp;&amp; EstReflexive(Rel,E)</span>
+
+<span class="s0">EstTotal(Rel,E)=all((Rel(x,y)||Rel(y,x) </span><span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s0">E </span><span class="s3">for </span><span class="s0">y </span><span class="s3">in </span><span class="s0">E))</span>
+
+<span class="s0">EstMajorant(y,X)= all((R(x,y) </span><span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s0">X))</span>
+
+<span class="s0">Majorants(X,E)= Set([y </span><span class="s3">for </span><span class="s0">y </span><span class="s3">in </span><span class="s0">E </span><span class="s3">if </span><span class="s0">EstMajorant(y,X)])</span>
+
+<span class="s0">EstMinorant(y,X)= all((R(y,x) </span><span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s0">X))</span>
+
+<span class="s0">Minorants(X,E)=Set([y </span><span class="s3">for </span><span class="s0">y </span><span class="s3">in </span><span class="s0">E </span><span class="s3">if </span><span class="s0">EstMinorant(y,X)])</span>
+
+<span class="s3">function </span><span class="s0">PlusGrand(X,E)</span>
+    <span class="s0">M=Majorants(X,E)</span>
+    <span class="s0">I=intersect(X,M)</span>
+    <span class="s3">return </span><span class="s0">isempty(I) ? nothing : pop!(I)</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">PlusPetit(X,E)</span>
+    <span class="s0">m=Minorants(X,E)</span>
+    <span class="s0">I=intersect(X,m)</span>
+    <span class="s3">return </span><span class="s0">isempty(I) ? nothing : pop!(I)</span>
+<span class="s3">end</span>
+    
+<span class="s0">BorneSup(X,E)=PlusPetit(Majorants(X,E),E)</span>
+
+<span class="s0">BorneInf(X,E)=PlusGrand(Minorants(X,E),E)</span>
+
+<span class="s3">function </span><span class="s0">Test1()</span>
+    <span class="s0">print(</span><span class="s4">&quot;ordre:&quot;</span><span class="s0">);println(EstOrdre(R,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;total:&quot;</span><span class="s0">);println(EstTotal(R,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;majorants:&quot;</span><span class="s0">);println(Majorants(E,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;minorants:&quot;</span><span class="s0">);println(Minorants(E,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;plus grand:&quot;</span><span class="s0">);println(PlusGrand(E,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;plus petit:&quot;</span><span class="s0">);println(PlusPetit(E,E))</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">Test2(X)</span>
+    <span class="s0">print(</span><span class="s4">&quot;majorants :&quot;</span><span class="s0">); println(Majorants(X,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;minorants :&quot;</span><span class="s0">); println(Minorants(X,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;plus grand :&quot;</span><span class="s0">); println(PlusGrand(X,E))</span>
+    <span class="s0">print(</span><span class="s4">&quot;plus petit :&quot;</span><span class="s0">); println(PlusPetit(X,E))       </span>
+    <span class="s0">print(</span><span class="s4">&quot;borne supérieure :&quot;</span><span class="s0">); println(BorneSup(X,E))      </span>
+    <span class="s0">print(</span><span class="s4">&quot;borne inférieure :&quot;</span><span class="s0">); println(BorneInf(X,E))     </span>
+
+<span class="s3">end</span>
+
+<span class="s0">separator()=println(</span><span class="s4">&quot;---------------------------------&quot;</span><span class="s0">)</span>
+<span class="s3">function </span><span class="s0">main()</span>
+    <span class="s0">separator()</span>
+    <span class="s0">print(</span><span class="s4">&quot;Pour l'ensemble E =&quot;</span><span class="s0">); println(E)</span>
+    <span class="s0">Test1()</span>
+    <span class="s0">separator()</span>
+    <span class="s0">print(</span><span class="s4">&quot;Pour la partie A = &quot;</span><span class="s0">); println(A)</span>
+    <span class="s0">Test2(A)</span>
+    <span class="s0">separator()</span>
+    <span class="s0">print(</span><span class="s4">&quot;Pour la partie B = &quot;</span><span class="s0">); println(B)</span>
+    <span class="s0">Test2(B) </span>
+    <span class="s0">separator()</span>
+    <span class="s0">print(</span><span class="s4">&quot;Pour la partie C = &quot;</span><span class="s0">); println(C)</span>
+    <span class="s0">Test2(C)    </span>
+<span class="s3">end</span>
+
+<span class="s0">main()</span>
+
+</pre>
+</body>
+</html>

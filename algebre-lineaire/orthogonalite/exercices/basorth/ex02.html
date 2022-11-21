@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 02</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="d">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../basorth.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>Soit E un espace vectoriel euclidien de dimension n. <br /> Soit B=(e<sub>1</sub>,e<sub>2</sub>,...,e<sub>n</sub>) une base orthonormale de E. <br />
+          <ol>
+            <li> Montrer que pour tout vecteur x de E la coordonnée de x par rapport à e<sub>i</sub> est x.e<sub>i</sub>. </li>
+            <li> Montrer que ||x||<sup>2</sup> = (x.e<sub>1</sub>)<sup>2</sup>+(x.e<sub>2</sub>)<sup>2</sup>+... +(x.e<sub>n</sub>)<sup>2</sup>
+            </li>
+            <li> On suppose maintenant que S=(a<sub>1</sub>,...,a<sub>n</sub>) est un système tel que: <br /> ∀ x ∈E ||x||<sup>2</sup> = (x.a<sub>1</sub>)<sup>2</sup>+(x.a<sub>2</sub>)<sup>2</sup>+...+(x.a<sub>n</sub>)<sup>2</sup>
+              <br /> Montrer que (a<sub>1</sub>,..., a<sub>n</sub>) est une base orthonormale de E.
+            </li>
+          </ol>
+          </p>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <ol>
+              <li> Si les λ<sub>i</sub> sont les coordonnées de x calculer (λ<sub>1</sub>e<sub>1</sub>+...+λ<sub>n</sub>e<sub>n</sub>).e<sub>i</sub>
+              </li>
+              <li> Utiliser la première question et ||x||<sup>2</sup>=x.x </li>
+              <li> Utiliser la relation avec x=a<sub>1</sub>, x=a<sub>2</sub>, ... </li>
+            </ol>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> Supposons x=λ<sub>1</sub>e<sub>1</sub>+λ<sub>2</sub>e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub> . <br /> Alors x.e<sub>i</sub>=(λ<sub>1</sub>.e<sub>1</sub>+λ<sub>2</sub>.e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub>).e<sub>i</sub>=λ<sub>i</sub>e<sub>i</sub>.e<sub>i</sub>=λ<sub>i</sub>. </li>
+              <li> ||x||<sup>2</sup>=x.x=(λ<sub>1</sub>.e<sub>1</sub>+λ<sub>2</sub>.e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub>).(λ<sub>2</sub>.e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub>) = λ<sub>1</sub>
+               <sup>2</sup>+λ<sub>2</sub>
+               <sup>2</sup>+...+λ<sub>n</sub>
+               <sup>2</sup>=(x.e<sub>1</sub>)<sup>2</sup>+...+(x.e<sub>n</sub>)<sup>2</sup> d'après la première question.
+              </li>
+              <li> Appliquons à a<sub>1</sub>
+                <br /> il vient: a<sub>1</sub>
+               <sup>2</sup>=a<sub>1</sub>
+               <sup>2</sup>+(a<sub>1</sub>.a<sub>2</sub>)<sup>2</sup>+...+(a<sub>1</sub>.a<sub>n</sub>)<sup>2</sup>
+                <br /> Donc (a<sub>1</sub>.a<sub>2</sub>)<sup>2</sup>+...+(a<sub>1</sub>.a<sub>n</sub>)<sup>2</sup>=0 <br /> et comme il s'agit de termes tous positifs a<sub>1</sub> est orthogonal à a<sub>2</sub>, ... , a<sub>n</sub>. <br /> On a de même en appliquant à x=a<sub>2</sub> que a<sub>2</sub> est orthogonal à tous les autres a<sub>i</sub>, etc... <br /> Posons y=x-((x.a<sub>1</sub>)a<sub>1</sub>+...+(x.a<sub>n</sub>)a<sub>n</sub>) <br /> on a y<sup>2</sup>=x<sup>2</sup>+x<sup>2</sup>-2x.((x.a<sub>1</sub>)a<sub>1</sub>+...+(x.a<sub>n</sub>)a<sub>n</sub>) <br /> y<sup>2</sup>=2x<sup>2</sup>-2((x.a<sub>1</sub>)<sup>2</sup>+...+(x.a<sub>n</sub>)<sup>2</sup>)=0 <br /> Donc y=0 et x=(x.a<sub>1</sub>)a<sub>1</sub>+...+(x.a<sub>n</sub>)a<sub>n</sub>
+                <br /> Ce qui prouve que (a<sub>1</sub>,...,a<sub>n</sub>) est une famille génératrice. <br /> Comme E est de dimension n c'est une base. <br /> En outre a<sub>i</sub>=(a<sub>i</sub>.a<sub>i</sub>)a<sub>i</sub> , ce qui prouve que chaque a<sub>i</sub> est de norme 1. <br /> En résumé (a<sub>1</sub>,a<sub>2</sub>,...,a<sub>n</sub>) est une base orthonormale de E.
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../basorth.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>Let E be an n-dimensional Euclidean vector space. <br> Let B=(e<sub>1</sub>,e<sub>2</sub>,...,e<sub>n</sub>) be an orthonormal basis of E. <br>
+          </p>
+          <ol>
+            <li>Show that for any vector x of E the coordinate of x with respect to e<sub>i</sub> is x.e<sub>i</sub>. </li>
+            <li>Show that ||x||<sup>2</sup> = (x.e<sub>1</sub>)<sup>2</sup>+(x.e<sub>2</sub>)<sup>2</sup>+... +(x.e<sub>n</sub>)<sup>2</sup>
+            </li>
+            <li> We now assume that S=(a<sub>1</sub>,...,a<sub>n</sub>) is a system such that: <br> ∀ x ∈E ||x||<sup>2</sup> = (x.a<sub>1</sub>)<sup>2</sup>+(x.a<sub>2</sub>)<sup>2</sup>+...+(x.a<sub>n</sub>)<sup>2</sup>
+              <br> Show that (a<sub>1</sub>,..., a<sub>n</sub>) is an orthonormal basis of E.
+            </li>
+          </ol>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <ol>
+              <li>If the λ<sub>i</sub> are the coordinates of x calculate (λ<sub>1</sub>e<sub>1</sub>+...+λ<sub>n</sub>e<sub>n</sub>).e<sub>i</sub>
+              </li>
+              <li>Use the first question and ||x||<sup>2</sup>=x.x </li>
+              <li> Use the relation with x=a<sub>1</sub>, x=a<sub>2</sub>, ... </li>
+            </ol>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> Assume x=λ<sub>1</sub>e<sub>1</sub>+λ<sub>2</sub>e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub>. <br> Alors x.e<sub>i</sub>=(λ<sub>1</sub>.e<sub>1</sub>+λ<sub>2</sub>.e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub>).e<sub>i</sub>=λ<sub>i</sub>e<sub>i</sub>.e<sub>i</sub>=λ<sub>i</sub>. </li>
+              <li>||x||<sup>2</sup>=x.x=(λ<sub>1</sub>.e<sub>1</sub>+λ<sub>2</sub>.e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub>).(λ<sub>2</sub>.e<sub>2</sub>+...+λ<sub>n</sub>e<sub>n</sub>) = λ<sub>1</sub><sup>2</sup>+λ<sub>2</sub><sup>2</sup>+...+λ<sub>n</sub><sup>2</sup>=(x.e<sub>1</sub>)<sup>2</sup>+...+(x.e<sub>n</sub>)<sup>2</sup> according to the first question.
+              </li>
+              <li> Apply to a<sub>1</sub>
+                <br>It comes: a<sub>1</sub><sup>2</sup>=a<sub>1</sub><sup>2</sup>+(a<sub>1</sub>.a<sub>2</sub>)<sup>2</sup>+...+(a<sub>1</sub>.a<sub>n</sub>)<sup>2</sup>
+                <br> So (a<sub>1</sub>.a<sub>2</sub>)<sup>2</sup>+...+(a<sub>1</sub>.a<sub>n</sub>)<sup>2</sup>=0 <br> and since these are all positive terms a<sub>1</sub> is orthogonal to a<sub>2</sub>, ... , a<sub>n</sub>. <br>We have the same by applying to x=a<sub>2</sub> that a<sub>2</sub> is orthogonal to all other a<sub>i</sub>, etc... <br> Let y=x-((x.a<sub>1</sub>)a<sub>1</sub>+...+(x.a<sub>n</sub>)a<sub>n</sub>) <br> on a y<sup>2</sup>=x<sup>2</sup>+x<sup>2</sup>-2x.((x.a<sub>1</sub>)a<sub>1</sub>+...+(x.a<sub>n</sub>)a<sub>n</sub>) <br> y<sup>2</sup>=2x<sup>2</sup>-2((x.a<sub>1</sub>)<sup>2</sup>+...+(x.a<sub>n</sub>)<sup>2</sup>)=0 <br> So y=0 and x=(x.a<sub>1</sub>)a<sub>1</sub>+...+(x.a<sub>n</sub>)a<sub>n</sub>
+                <br> This proves that (a<sub>1</sub>,...,a<sub>n</sub>) is a spanning family. <br> As E is of dimension n it is a basis. <br>Furthermore a<sub>i</sub>=(a<sub>i</sub>.a<sub>i</sub>)a<sub>i</sub>, which proves that each a<sub>i</sub> is of norm 1. <br> In summary (a<sub>1</sub>,a<sub>2</sub>,...,a<sub>n</sub>) is an orthonormal basis of E.
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

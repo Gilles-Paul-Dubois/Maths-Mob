@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre>
+<span class="s1">reste(a,b)= a%b&gt;=</span><span class="s2">0 </span><span class="s1">? a%b : b+a%b 
+<span class="s1">quot(a,b) =(a-reste(a,b))÷b </span>
+
+<span class="s3">function </span><span class="s1">Bezout(a,b)</span>
+    <span class="s1">s,t,u,v=</span><span class="s2">1</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">1</span>
+    <span class="s3">while </span><span class="s1">b!=</span><span class="s2">0</span>
+        <span class="s1">q=quot(a,b)</span>
+        <span class="s1">a, s, t, b, u, v = b, u, v, a - q * b, s - q * u, t - q * v</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">a&gt;</span><span class="s2">0 </span><span class="s1">? (a,s,t) : (-a, -s, -t)</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s1">Diophante(a,b,c,n)</span>
+    <span class="s1">s=Bezout(a,b)</span>
+    <span class="s1">d=s[</span><span class="s2">1</span><span class="s1">] </span>
+    <span class="s3">if </span><span class="s1">c%d!=</span><span class="s2">0</span>
+        <span class="s3">return </span><span class="s1">nothing</span>
+    <span class="s3">end</span>
+    <span class="s1">sp=[s[</span><span class="s2">2</span><span class="s1">]*c÷d,s[</span><span class="s2">3</span><span class="s1">]*c÷d]</span>
+    <span class="s1">sph=[b÷d,-a÷d]</span>
+    <span class="s1">S=[(sp[</span><span class="s2">1</span><span class="s1">]+k*sph[</span><span class="s2">1</span><span class="s1">],sp[</span><span class="s2">2</span><span class="s1">]+k*sph[</span><span class="s2">2</span><span class="s1">]) </span><span class="s3">for </span><span class="s1">k </span><span class="s3">in </span><span class="s1">-n:n]</span>
+    <span class="s3">return </span><span class="s1">S</span>
+<span class="s3">end</span>
+
+
+<span class="s1">println(Diophante(</span><span class="s2">29</span><span class="s1">,-</span><span class="s2">11</span><span class="s1">,</span><span class="s2">5</span><span class="s1">,</span><span class="s2">10</span><span class="s1">))</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Matrices triangulaires</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/mattri/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/mattri/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2>
+          <p> Certaines matrices ont des formes remarquables rendant certains calculs plus faciles. Parmi elles les matrices triangulaires et les matrices diagonales.</p>
+          <p>Ces termes s'appliquent principalement aux matrices carrées.</p>
+          <div id="container">
+            <div id="label">définition</div> La <strong>
+              <em> 'diagonale' </em>
+            </strong> est l'ensemble des coefficients pour lesquels l'indice ligne est égal à l'indice colonne.
+          </div>
+          <div id="container">
+            <div id="label">définition</div> On dit qu'une matrice est <strong>
+              <em> 'triangulaire' </em>
+            </strong> si elle ne comporte que des zéros en dessous de la diagonale (triangulaire dite <strong>
+              <em> 'supérieure' </em>
+            </strong> ) ou bien au dessus de la diagonale (triangulaire dite <strong>
+              <em> 'inférieure' </em>
+            </strong> ).
+          </div>
+          <table cellpadding="10" border="2">
+            <tr>
+              <td> Une matrice triangulaire supérieure <br />(type U, anglais:Upper). </td>
+              <td>Une matrice triangulaire inférieure <br />(type L, anglais:Lower). </td>
+            </tr>
+            <tr>
+              <td> \[\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &0 &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &0 &0 &. & & &. \\ &0 &0 & &. & &\alpha _{n-2,n} \\ &0 &0 & & &\alpha _{n-1,n-1} &\alpha _{n-1,n} \\ &0 &0 &0 &0 &0 &\alpha _{n,n} \\ \end{pmatrix}\] </td>
+              <td> \[\begin{pmatrix} &\alpha _{1,1} &0 &0 &0 &. &0 \\ &\alpha _{2,1} &\alpha_{2,2} &0 &0 &0 &0 \\ &. &. &. & &0 &0 \\ &. &. & &. &0 &0 \\ &. &. & & &\alpha _{n-1,n-1} &0 \\ &\alpha_{n,1} &\alpha_{n,2} & & &\alpha _{n,n-1} &\alpha _{n,n} \\ \end{pmatrix}\] </td>
+            </tr>
+          </table>
+          <h2> Café Python </h2> Voici comment on peut fabriquer des matrices triangulaires avec numpy: <p>
+            <object border="3" data="python/triangulaires.html" height="400" type="text/html" width="100%"></object>
+          <h2> Café Julia </h2> Mêùme chose avec Julia 1.6 et le package LinearAlgebra <p>
+            <object border="3" data="julia/triang1.jl.html" height="200" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2>
+          <p>Some matrices have remarkable shapes making some calculations easier. Among them the triangular matrices and the diagonal matrices. </p>
+          <p>These terms mainly apply to square matrices. </p>
+          <div id="container">
+            <div id="label">definition </div>The <strong>
+              <em> 'diagonal' </em>
+            </strong> is the set of coefficients for which the row index is equal to the column index.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>We say that a matrix is <strong>
+              <em> 'triangular' </em>
+            </strong> if it only has zeros below the diagonal (the so-called <strong>
+              <em> 'upper' </em>
+            </strong> triangular ) or above the diagonal (called <strong>
+              <em> 'lower' </em>
+            </strong> triangular ).
+          </div>
+          <table cellpadding="10" border="2">
+            <tr>
+              <td> An upper triangular matrix <br />(type U) </td>
+              <td>A lower triangular matrix <br />(type L) </td>
+            </tr>
+            <tr>
+              <td> \[\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &0 &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &0 &0 &. & & &. \\ &0 &0 & &. & &\alpha _{n-2,n} \\ &0 &0 & & &\alpha _{n-1,n-1} &\alpha _{n-1,n} \\ &0 &0 &0 &0 &0 &\alpha _{n,n} \\ \end{pmatrix}\] </td>
+              <td> \[\begin{pmatrix} &\alpha _{1,1} &0 &0 &0 &. &0 \\ &\alpha _{2,1} &\alpha_{2,2} &0 &0 &0 &0 \\ &. &. &. & &0 &0 \\ &. &. & &. &0 &0 \\ &. &. & & &\alpha _{n-1,n-1} &0 \\ &\alpha_{n,1} &\alpha_{n,2} & & &\alpha _{n,n-1} &\alpha _{n,n} \\ \end{pmatrix}\] </td>
+            </tr>
+          </table>
+          <h2> Python's corner </h2> Here is how one can make triangular matrices with numpy: <p>
+            <object data="python/triangulaires.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2> Same thing with Julia 1.6 and the LinearAlgebra package <p>
+            <object data="julia/triang1.jl.html" type="text/html" width="100%" height="200" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

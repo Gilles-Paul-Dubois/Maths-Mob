@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Représentation en machine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/representation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/representation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> La mémoire des ordinateurs se présente comme une suite 'd'octets' (anglais 'bytes'). <div id="container">
+            <div id="label">définition</div> Un <strong>
+              <em> 'bit' </em>
+            </strong> (contraction de 'binary digit') est un chiffre binaire c'est à dire 0 ou 1.
+          </div>
+          <div id="container">
+            <div id="label">définition</div> Un <strong>
+              <em> 'octet' </em>
+            </strong> est une suite de 8 'bits'.
+          </div> Un octet se présente donc, par exemple, sous la forme: <br />
+          <table border="1" cellpadding="10" cellspacing="2" style="text-align: left;  width: 100px;">
+            <tbody>
+              <tr>
+                <td> 0 </td>
+                <td> 1 </td>
+                <td> 1 </td>
+                <td> 0 </td>
+                <td> 1 </td>
+                <td> 0 </td>
+                <td> 0 </td>
+                <td> 1 </td>
+              </tr>
+            </tbody>
+          </table> C'est donc un nombre binaire à 8 chiffres maximum. <div id="container"> La plus petite valeur possible est 0 et la plus grande 11111111=255, soit au total 2<sup>8</sup> =256 possibilités. </div> C'est évidemment trop peu pour représenter les entiers naturels. <br /> La plupart des langages de programmation (typés) proposent des types prédéfinis pour représenter les entiers naturels (ou du moins une partie d'entre eux). <br /> Le langage C, par exemple, propose les <span style="font-weight: bold;"> unsigned short int </span> (généralement sur 2 octets) et les <span style="font-weight: bold;"> unsigned long int </span> (sur 4 octets). <br /> Disons qu'un entier court peut être vu comme une suite de 16 digits ou comme un nombre à deux chiffres en base 256 au choix, et qu'un entier long peut être vu comme un nombre binaire à 32 chiffres . <br /> Le nombre total des possibilités pour les entiers courts est 2<sup>16</sup>=65536, et le plus grand entier naturel représentable est 65535. <br /> Le nombre total des possibilités pour les entiers longs est: 2<sup>32</sup>=4294967296, et le plus grand nombre représentable est 4294967295. <br /> Il peut donc y avoir des débordements, certains langages, pour ne citer que C, ne traitent pas ces situations, c'est à dire qu'ils proposent des résultats incohérents sans message d'erreur, il appartient donc au programmeur de prévoir et de gérer lui-même les cas particuliers qui peuvent se produire. <br /> Signalons encore deux particularités. <br /> La première c'est que les entiers sont écrits en mémoire à l'envers les octets sont écrits par ordre de poids croissants (un peu comme un nombre qui serait écrit de droite à gauche. <br />
+          <a name="hexa"></a> La seconde c'est que parallèlement au système binaire on utilise beaucoup le système hexadécimal (base 16) qui est une puissance de deux, ainsi chaque 'chiffre' hexa est composé de 4 chiffres binaires, et un octet se note avec seulement deux chiffres hexas. <br /> En hexa on utilise les chiffres décimaux usuels 0,1,2,.....,9 puis on complète avec des lettres: <br /> A=10,B=11, ..... F=15 <br /> Ainsi le plus grand octet est FF=255 <p> Ce programme C met en évidence la représentation en mémoire du type 'short int'. </p>
+          <object border="3" data="c/repentiers.html" height="400" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions </h2>Computer memory can be seen as as a series of 'bytes'. <div id="container">
+            <div id="label">definition </div>One <strong>
+              <em> 'bit' </em>
+            </strong> is a binary digit, i.e. 0 or 1.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>One <strong>
+              <em> 'byte' </em>
+            </strong> is a sequence of 8 'bits'.
+          </div> A byte therefore takes the form, for example: <br>
+          <table style="text-align: left;  width: 100px;" cellspacing="2" cellpadding="10" border="1">
+            <tbody>
+              <tr>
+                <td> 0 </td>
+                <td> 1 </td>
+                <td> 1 </td>
+                <td> 0 </td>
+                <td> 1 </td>
+                <td> 0 </td>
+                <td> 0 </td>
+                <td> 1 </td>
+              </tr>
+            </tbody>
+          </table> It is therefore a binary number with a maximum of 8 digits. <div id="container">The smallest possible value is 0 and the largest 11111111=255, i.e. a total of 2<sup>8</sup> =256 possibilities. </div> This is obviously not enough to represent the natural numbers. <br>Most of the (typed) programming languages ​​provide predefined data-types to represent natural integers (or at least a part of them). <br>The C language, for example, offers the <span style="font-weight: bold;"> unsigned short int </span> (usually on 2 bytes) and the <span style="font-weight: bold;"> unsigned long int </span> (on 4 bytes). <br>Let's say that a short integer can be seen as a sequence of 16 digits or as a two-digit number in base 256 as you prefer and a long integer can be seen as a 32-digit binary number. <br>The total number of possibilities for short integers is 2<sup>16</sup> =65536, and the largest representable natural number is 65535. <br>The total number of possibilities for long integers is: 2<sup>32</sup>=4294967296, and the largest representable number is 4294967295. <br>Therefore we can have overflows, certain languages, to name a few than C, do not deal with these situations, i.e. they propose inconsistent results with no error message, so it is up to the programmer to foresee and manage himself the particular cases which can occur. <br> Let us point out two more particularities. <br>The first is that the integers are written in memory backwards bytes are written in ascending order of weight (much like a number that would be written from right to left. <br>
+          <a name="hexae"></a> The second is that parallel to the binary system we use a lot the system hexadecimal (base 16) which is a power of two, so each 'digit' hex is made up of 4 binary digits, and a byte is noted with only two hex digits. <br>In hexa we use the usual decimal digits 0,1,2,....,9 then we complete with letters: <br> A=10,B=11, ..... F=15 <br> So the largest byte is FF=255 <p>This C program highlights the memory representation of the 'short int' type. </p>
+          <object data="c/repentiers.html" type="text/html" width="100%" height="400" border="3"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <a name="bignums"></a>
+          <h2> Bignums </h2> Pour ce qui concerne les très grands entiers, les langages procéduraux (type C, Pascal, etc..) obligent à utiliser des tableaux: <br /> Considérons en effet un très grand entier comme: <br /> n=71501047895621475060581235 <br /> qui dépasse la capacité des unsigned long du langage C. <br /> On peut par exemple considérer que ce nombre est écrit en base 10<sup>4</sup> =10000 (par exemple) <br /> et que ses 'chiffres' sont de droite à gauche: <br /> 1235 <br /> 581 <br /> 5060 <br /> 1475 <br /> 9562 <br /> 478 <br /> 1501 <br /> 7 <br /> On peut donc le représenter dans un tableau de 8 unsigned int. A partir de nombres ainsi représenté avec le même 'format' (tableaux de même dimension), on peut faire des opérations. <br /> Addition (avec retenues) <br /> Multiplication (avec retenues) <br /> etc... <br /> On appelle couramment ces tableaux des <span style="font-weight: bold; font-style: italic;"> 'bignums' </span>.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <a name="bignumse"></a>
+          <h2> Bignums </h2>As far as very large integers are concerned, procedural languages (type C, Pascal, etc..) require the use of arrays: <br> Consider a very large integer like: <br> n=71501047895621475060581235 <br> which exceeds the capacity of the unsigned long of the C language. <br>We can for example consider that this number is written in base 10<sup>4 </sup> =10000 (for example) <br> and that its 'digits' are from right to left: <br> 1235 <br> 581 <br> 5060 <br> 1475 <br> 9562 <br> 478 <br> 1501 <br> 7 <br>It can therefore be represented in an array of 8 unsigned int. From numbers thus represented with the same 'format' (arrays of the same dimension), one can perform operations. <br> Addition (with carry) <br> Multiplication (with carry) <br> etc... <br>These tables are commonly called <span style="font-weight: bold; font-style: italic;"> 'bignums' </span>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Le coin de Python </h2>
+          <p> Le langage Python présente une particularité (parmi d'autres). Il possède un type entier (int) prédéfini comme la plupart des autres langages, mais il gère les débordements de façon très originale. Dès que la capacité maximale est atteinte, il change de mode de représentation et passe en 'mode liste' dans lequel on n'est limité que par la taille mémoire de la machine. </p>
+          <object border="3" data="python/repentiers2.html" height="200" type="text/html" width="100%"></object>
+          <h2>Le coin de Julia</h2>
+          <p>Les types suivants représentent les entiers naturels</p>
+          <table border="2">
+            <tbody>
+              <tr>
+                <th style="text-align: left">Type</th>
+                <th style="text-align: left">Nombre de bits</th>
+                <th style="text-align: left">borne inférieure</th>
+                <th style="text-align: left">borne supérieure</th>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt8</code>
+                </td>
+                <td style="text-align: left">8</td>
+                <td style="text-align: left">0</td>
+                <td style="text-align: left"> 255</td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt16</code>
+                </td>
+                <td style="text-align: left">16</td>
+                <td style="text-align: left">0</td>
+                <td style="text-align: left">65 535</td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt32</code>
+                </td>
+                <td style="text-align: left">32</td>
+                <td style="text-align: left">0</td>
+                <td style="text-align: left"> 4 294 967 295</td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt64</code>
+                </td>
+                <td style="text-align: left">64</td>
+                <td style="text-align: left">0</td>
+                <td style="text-align: left">18 446 744 073 709 551 615</td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt128</code>
+                </td>
+                <td style="text-align: left">128</td>
+                <td style="text-align: left">0</td>
+                <td style="text-align: left">340 282 366 920 938 463 463 374 607 431 768 211 455</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>Ce programme illustre les différents types d'entiers utilisables, le forçage de type, et les erreurs de débordement (non gérées par le système).)</p>
+          <object border="3" data="julia/repr1.jl.html" height="400" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's corner </h2>
+          <p>The Python language has a particularity (among others). It has a predefined integer (int) type like most others languages, but it handles overflows in a very original way. As soon as the maximum capacity is reached, it changes mode of representation and switches to 'list mode' in which one is only limited by the memory size of the machine. </p>
+          <object data="python/repentiers2.html" type="text/html" width="100%" height="200" border="3"></object>
+          <h2>Julia's corner </h2>
+          <p>The following types represent the natural numbers </p>
+          <table border="2">
+            <tbody>
+              <tr>
+                <th style="text-align: left">Type </th>
+                <th style="text-align: left">bit name </th>
+                <th style="text-align: left">lower bound </th>
+                <th style="text-align: left">upper bound </th>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt8</code>
+                </td>
+                <td style="text-align: left">8 </td>
+                <td style="text-align: left">0 </td>
+                <td style="text-align: left">255 </td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt16</code>
+                </td>
+                <td style="text-align: left">16 </td>
+                <td style="text-align: left">0 </td>
+                <td style="text-align: left">65,535 </td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt32</code>
+                </td>
+                <td style="text-align: left">32 </td>
+                <td style="text-align: left">0 </td>
+                <td style="text-align: left">4,294,967,295 </td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt64</code>
+                </td>
+                <td style="text-align: left">64 </td>
+                <td style="text-align: left">0 </td>
+                <td style="text-align: left">18,446,744,073,709,551,615 </td>
+              </tr>
+              <tr>
+                <td style="text-align: left">
+                  <code>UInt128</code>
+                </td>
+                <td style="text-align: left">128 </td>
+                <td style="text-align: left">0 </td>
+                <td style="text-align: left">340 282 366 920 938 463 463 374 607 431 768 211 455 </td>
+              </tr>
+            </tbody>
+          </table>
+          <p>This program illustrates the different types of integers that can be used, type coercion, and overflow errors (not handled by the system). </p>
+          <object data="julia/repr1.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

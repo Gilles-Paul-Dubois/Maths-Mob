@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Plus grand commun diviseur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+    <script src="js/pgcd.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/pgcd/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/pgcd/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définitions </h2> Toutes les propositions enoncées ici seront démontrées ultérieurement dans le chapitre consacré aux entiers relatifs. <div id="container">
+            <div id="label">définition</div> Si m et n désignent deux entiers naturels, les <span style="font-weight: bold; font-style: italic;"> 'diviseurs communs' </span> à m et n sont les nombres qui divisent m et n simultanément.
+          </div> Si D(x) désigne l'ensemble des diviseurs de x. Les <input type="button" value="diviseurs" onclick="go('muletdiv.html#div')" data-inline="true" /> communs à m et n sont les éléments de <input type="button" value="l'intersection" onclick="go('../../bases/ensembles/intersection.html')" data-inline="true" /> D(m)∩D(n). <br /> Vous pouvez générer maintenant quelques exemples: <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definitions </h2> All the propositions stated here will be demonstrated later in the chapter devoted to integers. <div id="container">
+            <div id="label">definition </div>If m and n denote two natural numbers, the <span style="font-weight: bold; font-style: italic;"> 'common divisors' </span> to m and n are the numbers that divide m and n simultaneously.
+          </div>If D(x) denotes the set of divisors of x. The <input type="button" value="common divisors" onclick="go('muletdiv.html#dive')" data-inline="true" /> to m and n are the elements of <input type="button" value="the intersection" onclick="go('../../bases/ensembles/intersection.html')" data-inline="true" /> D(m)∩D(n). <br> You can now generate some examples: <br>
+        </div>
+        <!-- /en -->
+        <form method="get" name="diviseurs">
+          <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; background-color: #f6f6f6; width: 100%;">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">
+                  <div lang="fr"> Donner deux entiers 0 &lt; m,n ≤ 100000 </div>
+                  <!-- /fr -->
+                  <div lang="en">Give two naturals 0 &lt; m,n ≤ 100000</div>
+                  <!-- /en --> m: <input name="getm" /> n: <input name="getn" />
+                  <input name="Go" onclick="ClickOnGo()" type="button" value="Go!" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">Diviseurs communs à m et n:</div>
+                  <!-- /fr -->
+                  <div lang="en">Common divisors to m and n:</div>
+                  <!-- /en -->
+                  <textarea cols="74" name="divmn" readonly="readonly" rows="2"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr"> Message d'erreur éventuel:</div>
+                  <!-- /fr -->
+                  <div lang="en">Eventual error message:</div>
+                  <!-- /en -->
+                  <input name="erreur" readonly="readonly" size="80" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div lang="fr"> Cette définition engendre quelques remarques. <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div>
+            <ul>
+              <li> Le nombre 1 est toujours diviseur commun à tout couple d'entiers. </li>
+              <li> Si m divise n, alors les tous diviseurs de m sont diviseurs de n donc D(m)∩D(n)=D(m). </li>
+              <li> D(m)∩D(n) possède toujours un plus grand élément car c'est une partie finie de &naturals;. </li>
+            </ul>
+          </div>
+          <p>La dernière remarque nous permet de poser la définition suivante:</p>
+          <div id="container">
+            <div id="label">définition</div> Si m et n désignent des entiers naturels non nuls, on appelle <strong>
+              <em> 'PGCD' </em>
+            </strong> de m et n (notation pgcd(m,n)) le plus grand diviseur commun à m et n.
+          </div> Vous pouvez maintenant générer quelques exemples: <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This definition gives rise to a few remarks. <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>
+            <ul>
+              <li>The number 1 is always a common divisor for any couple of naturals. </li>
+              <li>If m divides n, then all divisors of m are divisors of n therefore D(m)∩D(n)=D(m). </li>
+              <li>D(m)∩D(n) always has a greatest element because it is a finite part of ℕ. </li>
+            </ul>
+          </div>
+          <p>The last remark allows us to pose the following definition: </p>
+          <div id="container">
+            <div id="label">definition </div>If m and n denote non-zero natural integers, we call <strong>
+              <em> 'GCD' </em>
+            </strong> of m and n (notation gcd(m,n)) the greatest common divisor of m and n.
+          </div> You can now generate some examples:
+        </div>
+        <!-- /en -->
+        <form method="get" name="pgcd">
+          <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; background-color: #f6f6f6; width: 100%;">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">
+                  <div lang="fr">Donner deux entiers 0 &lt; m,n ≤ 100000</div>
+                  <!-- /fr -->
+                  <div lang="en">Give two naturals 0 &lt; m,n ≤ 100000</div>
+                  <!-- /en --> m: <input name="getm" /> n: <input name="getn" />
+                  <input name="Go" onclick="ClickOnGoPGCD()" type="button" value="Go!" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">PGCD de m et n:</div>
+                  <!-- /fr -->
+                  <div lang="en">GCD of m and n:</div>
+                  <!-- /en -->
+                  <textarea cols="74" name="divmn" readonly="readonly" rows="2"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr"> Message d'erreur éventuel:</div>
+                  <!-- /fr -->
+                  <div lang="en">Eventual error message:</div>
+                  <!-- /en -->
+                  <input name="erreur" readonly="readonly" size="80" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div lang="fr">
+          <br /> Cette notion a de l'importance dans de nombreux problèmes d'arithmétique liés à la périodicité mais aussi pour le problème très simple de la simplification des fractions (voir <input type="button" value="ensemble &rationals;" onclick="go('../rationnels/simplification.html')" data-inline="true" /> ). <br />
+          <br /> Remarquons qu'une conséquence théorème d'unicité du paragraphe précédent consacré à la <input type="button" value="décomposition en facteurs premiers" onclick="go('decomposition.html')" data-inline="true" /> est la suivante: <a name="div"></a>
+          <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Les diviseurs de n sont exactement les nombres dont la décomposition ne fait apparaître que les facteurs premiers de n avec un exposant inférieur ou égal à celui avec lequel ils apparaissent dans la décomposition de n.
+          </div> A partir de la décomposition de n nous avons donc une caractérisation explicite de l'ensemble des diviseurs de n. <br /> Si \(n=p_{1}^{r_{1}}p_{2}^{r_{2}}...p_{k}^{r_{k}}\) Alors D(n)={ m ∈ &naturals; | ∃ (s<sub>1</sub> ,s<sub>2</sub> ,...,s<sub>k</sub> ) ∈ &naturals; <sup>k</sup> | (∀ i 0 ≤ i ≤ k 0 ≤ s<sub>i</sub> ≤ r<sub>i</sub> ) ∧ \(n=p_{1}^{s_{1}}p_{2}^{s_{2}}...p_{k}^{s_{k}}\) } <br />
+          <br /> Cette caractérisation nous donne <span style="text-decoration: underline;"> une formule permettant le calcul du PGCD </span> de deux nombres à partir de leurs décompositions respectives. <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Pour obtenir pgcd(m,n) il faut: <br />
+            <ul>
+              <li> prendre les facteurs premiers communs à m et n </li>
+              <li> affecter chacun de l'exposant minimum avec lequel il apparaît dans m et dans n. </li>
+              <li> faire le produit des résultats obtenus. </li>
+            </ul>
+          </div> Exemple: le pgcd de 2 <sup>3</sup>&times; 3 <sup>2</sup>&times; 5 <sup>4</sup>&times; 7 <sup>1</sup> et 3 <sup>3</sup>&times; 5 <sup>1</sup>&times; 11 <sup>1</sup> est 3 <sup>2</sup>&times; 5 <sup>1</sup>
+          <br />
+          <br />
+          <span style="font-weight: bold;">
+            <a name="pgcdconseq"></a> Conséquence importante: </span>
+          <a name="th4"></a>
+          <div id="container">
+            <div id="label">théorème</div> Les diviseurs communs à m et n sont exactement les diviseurs de leur PGCD.
+          </div> Et nous avons aussi: <a name="th5"></a>
+          <div id="container">
+            <div id="label">théorème</div>Si n est un multiple de m alors pgcd(m,n)=m.
+          </div>
+          <h2> Généralisation </h2> La notion de pgcd s'étend à des ensembles finis de nombres avec une propriété d'associativité. <a name="th6"></a>
+          <div id="container">
+            <div id="label">théorème</div> pgcd(m,n,r) = pgcd(m,pgcd(n,r))
+          </div>
+          <h2> Algorithme d'Euclide </h2> Signalons encore, pour trouver lePGCD de deux nombres m et n, <span style="font-weight: bold; font-style: italic;"> l'algorithme d'Euclide </span>. <br /> Cet algorithme est fondé sur le fait que si d divise m et n alors d divise aussi le reste de la division de m par n. <br /> Supposons donc que m &gt; n on a alors: <br /> pgcd(m,n)=pgcd(n,r) où r est le reste de la division de m par n. <br /> L'algorithme d'Euclide s'arrête dès qu'un des deux nombres est un multiple de l'autre, et cela arrive forcément parce que le plus petit des deux entiers forme une suite décroissante strictement, donc à la limite (si on n'a pas trouvé de couple où un nombre est un multiple de l'autre) il finira avec la valeur 1. <br />
+          <br /> Vous pouvez voir avec ce programme comment fonctionne cet algorithme. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <br>This notion is important in many arithmetic problems related to periodicity but also for the very simple problem of the simplification of fractions (see <input type="button" value="ensemble &rationals;" onclick="go('../rationnels/simplification.html')" data-inline="true" />). <br>
+          <br>Note that a consequence of the uniqueness theorem of the paragraph previous devoted to <input type="button" value="decomposition into prime factors" onclick="go('decomposition.html')" data-inline="true"> is the following : <a name="dive"></a>
+          <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The divisors of n are exactly the numbers whose decomposition does not shows anything except the prime factors of n with an exponent less than or equal to that with which they appear in the decomposition of n.
+          </div>From the decomposition of n we therefore have an explicit characterization of the set of divisors of n. <br> If \(n=p_{1}^{r_{1}}p_{2}^{r_{2}}...p_{k}^{r_{k}}\) Then D(n)={ m ∈ ℕ | ∃ (s<sub>1 </sub> ,s<sub>2 </sub> ,...,s<sub>k </sub> ) ∈ℕk <sup>_</sup> | (∀i 0 ≤ i ≤ k 0 ≤ if<sub>i </sub> ≤ r<sub>i </sub> ) ∧ \(n=p_{1}^{s_{1}}p_{2}^{s_{2}}...p_{k}^{s_{k}}\) } <br>
+          <br>This characterization gives us <span style="text-decoration: underline;"> a formula allowing the calculation of the GCD </span> of two numbers from their respective decompositions. <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>To obtain gcd(m,n) we need: <br>
+            <ul>
+              <li> take the prime factors common to m and n </li>
+              <li>assign each of the minimum exponent with which it appears in m and in n. </li>
+              <li> produce the product of the results obtained. </li>
+            </ul>
+          </div>Example: the gcd of 2 <sup>3</sup>× 3 <sup>2</sup>× 5 <sup>4</sup>× 7 <sup>1</sup> and 3 <sup>3</sup>× 5 <sup>1</sup>× 11 <sup>1</sup> is 3 <sup>2</sup>× 5 <sup>1</sup>
+          <br>
+          <br>
+          <span style="font-weight: bold;">
+            <a name="pgcdconseqe"></a> Important consequence: </span>
+          <a name="th4e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The divisors common to m and n are exactly the divisors of their GCD.
+          </div> And we also have: <a name="th5e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If n is a multiple of m then gcd(m,n)=m.
+          </div>
+          <h2> Generalization </h2>The notion of gcd extends to finite sets of numbers with a associativity property. <a name="th6e"></a>
+          <div id="container">
+            <div id="label">theorem </div> gcd(m,n,r) = gcd(m,gcd(n,r))
+          </div>
+          <h2> Euclid's algorithm </h2>Let us also point out, to find the GCD of two numbers m and n, <span style="font-weight: bold; font-style: italic;"> the algorithm of Euclid </span>. <br>This algorithm is based on the fact that if d divides m and n then d also divides the remainder of the division of m by n. <br> Suppose therefore that m &gt; n we then have: <br> gcd(m,n)=gcd(n,r) where r is the remainder of dividing m by n. <br>The algorithm of Euclid stops as soon as one of the two numbers is a multiple of the other, and this necessarily happens because the smaller of the two integers forms a strictly decreasing sequence, so in the limit (if we have not found a couple where a number is a multiple of the other) it will end with the value 1. <br>
+          <br> You can see with this program how this algorithm works. <br>
+        </div>
+        <!-- /en -->
+        <form method="get" name="euclide">
+          <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; background-color: #f6f6f6; width: 100%;">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">
+                  <div lang="fr"> Donner deux entiers 0 &lt; m,n ≤ 100000</div>
+                  <!-- /fr -->
+                  <div lang="en">Give two naturals 0 &lt; m,n ≤ 100000</div>
+                  <!-- /en --> m: <input name="getm" /> n: <input name="getn" />
+                  <input name="Go" onclick="ClickOnGoEUCLIDE()" type="button" value="Go!" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">Appels récursifs d'Euclide:</div>
+                  <!-- /fr -->
+                  <div lang="en">Recursive Euclidean calls:</div>
+                  <!-- /en -->
+                  <br />
+                  <textarea cols="74" name="divmn" readonly="readonly" rows="2"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">Message d'erreur éventuel:</div>
+                  <!-- /fr -->
+                  <div lang="en">Eventual error message:</div>
+                  <!-- /en -->
+                  <input name="erreur" readonly="readonly" size="80" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div lang="fr">
+          <h2> Le coin de Python </h2>
+          <p> Ce programme donne deux formes de l'algorithme d'Euclide. </p>
+          <object border="3" data="python/euclide1.html" height="350" type="text/html" width="100%"></object>
+          <h2> Le coin de Julia </h2>
+          <p> Même chose avec Julia 1.6. </p>
+          <object border="3" data="julia/pgcd1.jl.html" height="320" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's corner </h2>
+          <p> This program gives two variants of Euclid's algorithm. </p>
+          <object data="python/euclide1.html" type="text/html" width="100%" height="350" border="3"></object>
+          <h2> Julia's corner </h2>
+          <p> Same with Julia 1.6. </p>
+          <object data="julia/pgcd1.jl.html" type="text/html" width="100%" height="320" border="3"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>quanti1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Pkg</span>
+<span class="s1">Pkg.add(</span><span class="s2">&quot;IterTools&quot;</span><span class="s1">)</span>
+<span class="s0">using </span><span class="s1">IterTools</span>
+<span class="s3">#ensemble de toutes les parties de {1,2,3,4}- set of all subsets of {1,2,3,4}</span>
+<span class="s1">E = subsets([</span><span class="s4">1</span><span class="s1">, </span><span class="s4">2</span><span class="s1">, </span><span class="s4">3</span><span class="s1">, </span><span class="s4">4</span><span class="s1">])</span>
+<span class="s3">#propriété P : être un nombre premier - Property P : to be a prime number</span>
+<span class="s1">P(x)= length([i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s4">1</span><span class="s1">:x </span><span class="s0">if </span><span class="s1">x%i==</span><span class="s4">0</span><span class="s1">])==</span><span class="s4">2</span>
+
+<span class="s3"># Tous les éléments de X sont premiers - all elements of X are prime</span>
+<span class="s3">#proposition avec quantificateur universel - proposition with universal quantifier</span>
+<span class="s1">A(X)=all((P(x) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">X))</span>
+<span class="s3">#sa négation - its negation</span>
+<span class="s1">B(X)= any((!P(x) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">X))</span>
+
+<span class="s0">for </span><span class="s1">X </span><span class="s0">in </span><span class="s1">E</span>
+    <span class="s1">print(X)</span>
+    <span class="s1">print(</span><span class="s2">&quot; : &quot;</span><span class="s1">)</span>
+    <span class="s1">print(A(X))</span>
+    <span class="s1">print(</span><span class="s2">&quot; - &quot;</span><span class="s1">)</span>
+    <span class="s1">print(B(X))</span>
+    <span class="s1">println(</span><span class="s2">&quot;&quot;</span><span class="s1">)</span>
+<span class="s0">end</span>
+</pre>
+</body>
+</html>

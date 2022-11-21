@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Endomorphismes nilpotents</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/nilpotents/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/nilpotents/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p> Dans tout ce qui suit on se situe dans un espace vectoriel E de <input type="button" value="dimension finie" onclick="go('../espaces/generateurs.html#dimfin')" data-inline="true" /> n. </p>
+          <h2> Définition </h2> Nous avons vu que pour tout corps algébriquement clos (cas de ℂ, toute matrice était semblable à une matrice triangulaire de la forme:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>In what follows we are in a vector space E of <input type="button" value=" finite dimension" onclick="go('../espaces/generateurs.html#dimfine')" data-inline="true"> let us say n. </p>
+          <h2> Definition </h2> We have seen that for any algebraically closed field (case of ℂ), any matrix was similar to a triangular matrix of the form:
+        </div>
+        <!-- /en -->
+        <p>
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} \lambda_{1} &x &x &x &x \\ 0& \lambda _{2}& x & x & x \\ 0& 0 & . & . & . \\ 0& 0 & 0 & \lambda _{n-1} & x \\ 0& 0 & 0 & 0 & \lambda _{n} \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </p>
+        <div lang="fr"> C'est à dire qu'elle pouvait s'écrire comme somme d'une matrice diagonale et d'une autre matrice comme ceci: </div>
+        <!-- /fr -->
+        <div lang="en"> That is, it could be written as the sum of a diagonal matrix and another matrix like this: </div>
+        <!-- /en -->
+        <p>
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} \lambda_{1} &0 &0 &0 &0 \\ 0& \lambda _{2}& 0 & 0 & 0 \\ 0& 0 & . & . & . \\ 0& 0 & 0 & \lambda _{n-1} & 0 \\ 0& 0 & 0 & 0 & \lambda _{n} \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> +
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 0 &x &x &x &x \\ 0& 0& x & x & x \\ 0& 0 & . & . & . \\ 0& 0 & 0 & 0 & x \\ 0& 0 & 0 & 0 & 0 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </p>
+        <div lang="fr"> Nous allons maintenant nous pencher tout particulièrement sur les matrices N du type: </div>
+        <!-- /fr -->
+        <div lang="en"> We will now focus particularly on matrices of the type N: </div>
+        <!-- /en -->
+        <p>
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 0 &x &x &x &x \\ 0& 0& x & x & x \\ 0& 0 & . & . & . \\ 0& 0 & 0 & 0 & x \\ 0& 0 & 0 & 0 & 0 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </p>
+        <div lang="fr"> Nous pensons qu'il est clair pour tout le monde que N<sup>2</sup> sera du type: </div>
+        <!-- /fr -->
+        <div lang="en"> We think it is clear to everyone that N<sup>2</sup> will be of the type: </div>
+        <!-- /en -->
+        <p>
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 0 &0 &x &x &x \\ 0& 0& 0 & x & x \\ 0& 0 & . & . & . \\ 0& 0 & 0 & 0 & 0 \\ 0& 0 & 0 & 0 & 0 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </p>
+        <div lang="fr"> N<sup>3</sup> sera du type: </div>
+        <!-- /fr -->
+        <div lang="en"> N<sup>3</sup> will be of the type: </div>
+        <!-- /en -->
+        <p>
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 0 &0 &0 &x &x \\ 0& 0& 0 & 0 & x \\ 0& 0 & . & . & . \\ 0& 0 & 0 & 0 & 0 \\ 0& 0 & 0 & 0 & 0 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </p>
+        <div lang="fr"> et enfin N<sup>n</sup> sera: </div>
+        <!-- /fr -->
+        <div lang="en"> and finally N<sup>n</sup> will be: </div>
+        <!-- /en -->
+        <p>
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 0 &0 &0 &0 &0 \\ 0& 0& 0 & 0 & 0 \\ 0& 0 & . & . & . \\ 0& 0 & 0 & 0 & 0 \\ 0& 0 & 0 & 0 & 0 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </p>
+        <!-- STOP -->
+        <div lang="fr"> C'est à dire qu'une puissance de N sera nulle. </div>
+        <!-- /fr -->
+        <div lang="en"> Which means, a power of N will be zero. </div>
+        <!-- /en -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une matrice est dite <strong>
+              <em>'nilpotente'</em>
+            </strong> si une de ces puissances est nulle. De la même façon un endomorphisme est dite <strong>
+              <em>'nilpotent'</em>
+            </strong> si une de ses puissances (au sens de la composition des applications) est nulle.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A matrix is ​​said to be <strong>
+              <em> 'nilpotent' </em>
+            </strong> if one of its powers is null. In the same way an endomorphism is said <strong>
+              <em> 'nilpotent' </em>
+            </strong> if one of its powers (in the sense of the composition of maps) is zero.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il est clair que: </div>
+        <!-- /fr -->
+        <div lang="en"> It's clear that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Un endomorphisme est nilpotent si et seulement si on peut trouver une base telle que sa matrice par rapport à cette base soit nilpotente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> An endomorphism is nilpotent if and only if we can find a basis such that its matrix with respect to this basis is nilpotent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Exemples </h2> Nous venons de voir que les matrices <input type="button" value="triangulaires" onclick="go('../matrices/mattri.html#')" data-inline="true" /> supérieures 'strictes' (avec des zéros sur la diagonale) sont nilpotentes, mais ce cas n'est pas le seul possible. <br> On voit par exemple, par <input type="button" value="transposition" onclick="go('../matrices/mattranspo.html#')" data-inline="true" /> que c'est aussi le cas pour toutes les matrices triangulaires inférieures strictes. <br> Voici un autre exemple:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Examples </h2> We have just seen that the 'strict' upper <input type="button" value="triangular" onclick="go('../matrices/mattri.html#')" data-inline="true"> matrices (with zeros on the diagonal) are nilpotent, but this case is not the only one possible. <br> We see, for example, by <input type="button" value="transposition" onclick="go('../matrices/mattranspo.html#')" data-inline="true"> that this is also the case for all strict lower triangular matrices. <br> Here is another example:
+        </div>
+        <!-- /en -->
+        <p>
+          <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 3& 9 & -9 \\ 2 & 0 & 0 \\ 3 & 3 & -3 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </p>
+        <div lang="fr"> On peut vérifier avec le petit programme python donné en exemple que le cube de cette matrice est nul, bien qu'elle ne soit pas triangulaire. <br> Voici maintenant une appliquette qui calcule les puissances successives d'une matrice. <ul>
+            <li>L'ordre peut être choisi entre 2 et 4.</li>
+            <li>Vous pouvez choisir le type de la matrice avec les codes suivants: <ol>
+                <li> Triangulaire supérieure stricte (TSS) </li>
+                <li> Triangulaire inférieure stricte (TIS) </li>
+                <li> Diagonale (DIA) </li>
+              </ol>
+            </li>
+            <li>Une matrice aléatoire est alors générée.</li>
+            <li>Au départ, sous la matrice générée se trouve la matrice unité correspondant à sa puissance 0.</li>
+            <li>A chaque fois que vous appuyez sur le bouton 'Etape suivante', vous calculez la nouvelle puissance de la matrice de départ, qui vient se placer immédiatement en dessous.</li>
+            <li>'Nouvel exemple' permet de générer une autre matrice aléatoire correspondant au type choisi.</li>
+            <li>Observez ce qu'il se passe pour les matrices triangulaires strictes, en particulier.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> One can check with the small Python program given in example that the cube of this matrix is ​​null, although it is not triangular. <br> Here is now an applet which calculates the successive powers of a matrix. <ul>
+            <li>The order can be chosen between 2 and 4. </li>
+            <li>You can choose the type of the matrix with the following codes: <ol>
+                <li> Strict Upper Triangular (SUT) </li>
+                <li> Strict Lower Triangular (SLT) </li>
+                <li> Diagonal (DIA) </li>
+              </ol>
+            </li>
+            <li>A random matrix is ​​then generated. </li>
+            <li>Initially, under the generated matrix is ​​the unit matrix corresponding to its power 0. </li>
+            <li>Each time you press the 'Next step' button, you calculate the new power of the initial matrix, which will be placed immediately below. </li>
+            <li>'New example' generates another random matrix with the type corresponding to chosen parameters. </li>
+            <li>Observe what happens for strict triangular matrices, in particular. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div>
+          <table border="2">
+            <tbody>
+              <tr>
+                <td>
+                  <button onclick="nameSpace2.Paint();" type="button">
+                    <div lang="fr">Nouvel exemple</div>
+                    <!-- /fr -->
+                    <div lang="en">New example</div>
+                    <!-- /en -->
+                  </button>
+                  <button onclick="nameSpace2.NextStep();" type="button">
+                    <div lang="fr">Etape suivante</div>
+                    <!-- /fr -->
+                    <div lang="en">Next step</div>
+                    <!-- /en -->
+                  </button>
+                  <input id="myText1" type="text" style="width: 50px;">
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">Matrice A</div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix A</div>
+                  <!-- /en -->
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas1" style="border:1px solid #000000;" width="240" height="60"></canvas>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">Matrice A<sup>n</sup>
+                  </div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix A<sup>n</sup>
+                  </div>
+                  <!-- /en -->
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas2" style="border:1px solid #000000;" width="240" height="60"></canvas>
+                </td>
+              </tr>
+              <tr>
+                <table border="1">
+                  <tr>
+                    <td colspan="2">
+                      <div lang="fr">type de la matrice</div>
+                      <!-- /fr -->
+                      <div lang="en">Type of the matrix</div>
+                      <!-- /en -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="50">
+                      <input checked="" name="type" onclick="nameSpace2.handleClick2(this);" type="radio" value="1">
+                    </td>
+                    <td>
+                      <div lang="fr">TSS</div>
+                      <!-- /fr -->
+                      <div lang="en">SUT</div>
+                      <!-- /en -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input name="type" onclick="nameSpace2.handleClick2(this);" type="radio" value="2">
+                    </td>
+                    <td>
+                      <div lang="fr">TIS</div>
+                      <!-- /fr -->
+                      <div lang="en">SLT</div>
+                      <!-- /en -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input name="type" onclick="nameSpace2.handleClick2(this);" type="radio" value="3">
+                    </td>
+                    <td>DIA</td>
+                  </tr>
+                </table>
+              </tr>
+              <tr>
+                <table border="1">
+                  <tr>
+                    <td colspan="2">
+                      <div lang="fr">Corps de base</div>
+                      <!-- /fr -->
+                      <div lang="en">Base field</div>
+                      <!-- /en -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="50">
+                      <input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1">
+                    </td>
+                    <td>ℝ</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="3">
+                    </td>
+                    <td>ℤ/5ℤ</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4">
+                    </td>
+                    <td> ℂ</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <div lang="fr">Ordre de la matrice carrée A&nbsp; :</div>
+                      <!-- /fr -->
+                      <div lang="en">Order of the square matrix A : </div>
+                      <!-- /en -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <input id="myRange1" max="4" min="2" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range">
+                    </td>
+                  </tr>
+                </table>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <script src="js/nilpot.js"></script>
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Indice d'un endomorphisme nilpotent</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Index of a nilpotent endomorphism </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Si u désigne un endomorphisme nilpotent de E, on appelle <strong>
+              <em>'indice'</em>
+            </strong> de u le plus petit entier p tel que u<sup>p</sup>=0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> If u denotes a nilpotent endomorphism of E, we call <strong>
+              <em> 'index' </em>
+            </strong> of u the smallest integer p such that u<sup>p</sup>=0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On a le résultat suivant: </div>
+        <!-- /fr -->
+        <div lang="en"> We have the following result: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si u est nilpotent d'indice p, les sous espaces E<sub>i</sub>=Ker(u<sup>i</sup>) forment une suite strictement croissante de sous-espaces de E avec E<sub>0</sub>={0} et E<sub>p</sub>=E, et on a <br> u(E<sub>i+1</sub>) ⊆ E<sub>i</sub> pour 0≤i≤p-1
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If u is nilpotent with index p, the subspaces E<sub>i</sub>=Ker(u<sup>i</sup>) form a strictly increasing sequence of subspaces of E with E<sub>0</sub>={0} and E<sub>p</sub>=E, and we have <br>u(E<sub>i+1</sub>) ⊆ E<sub>i</sub> for 0≤i≤p-1
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La seconde partie de l'énoncé est parfaitement évidente, de même que les inclusions. Il suffit de montrer qu'on ne peut avoir l'égalité. <br> Supposons que E<sub>i</sub>=E<sub>i+1</sub> pour un certain indice i, 0 ≤i≤p. <br> Sachant qu'on a u<sup>i+1</sup>(u<sup>p-1-i</sup>(x))=0 ∀ x ∈ E, on a: <br> u<sup>p-1-i</sup>(x) ∈ E<sub>i+1</sub> ∀ x ∈ E, et si E<sub>i</sub>=E<sub>i+1</sub>
+            <br> u<sup>p-1-i</sup>(x) ∈ E<sub>i</sub> ∀ x ∈ E, ce qui signifie que: <br> u<sup>i</sup>(u<sup>p-1-i</sup>(x))=0 ∀ x ∈ E, soit: u<sup>p-1</sup>(x) = 0 ∀ x ∈ E <br> Ce qui contredit la définition de p.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The second part of the statement is perfectly obvious, as are the inclusions. Simply to show that we cannot have equality. <br>Suppose that E<sub>i</sub>=E<sub>i+1</sub> for some index i, 0 ≤i≤p. <br> Knowing that we have u<sup>i+1</sup>(u<sup>p-1-i</sup>(x))=0 ∀ x ∈ E, we have: <br>u<sup>p-1-i</sup>(x) ∈ E<sub>i+1</sub> ∀ x ∈ E, and if E<sub>i</sub>=E<sub>i+1</sub>
+            <br> u<sup>p-1-i</sup>(x) ∈ E<sub>i</sub>∀ x ∈ E, which means that: <br> u<sup>i</sup>(u<sup>p-1-i</sup>(x))=0 ∀ x ∈ E, soit: u<sup>p-1</sup>(x) = 0 ∀ x ∈ E <br> Which contradicts the definition of p.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Il en résulte que: </div>
+        <!-- /fr -->
+        <div lang="en"> It follows that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> L'indice d'un endomorphisme nilpotent est au plus égal à la dimension de l'espace.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> The index of a nilpotent endomorphism is at most equal to the dimension of the space.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Quelques propriétés remarquables des endomorphismes nilpotents</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Some remarkable properties of nilpotent endomorphisms </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Un endomorphisme nilpotent ne peut avoir que 0 comme valeur propre.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> A nilpotent endomorphism can only have 0 as an eigenvalue.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet u(x)=λx ⇒ u<sup>p</sup>(x)=λ<sup>p</sup>x si u<sup>p</sup>(x)=0 avec x ≠ 0 on a λ<sup>p</sup>=0, donc λ=0. </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed u(x)=λx ⇒ u<sup>p</sup>(x)=λ<sup>p</sup>x if u<sup>p</sup>(x)=0 with x ≠ 0 we have λ<sup>p</sup>=0, therefore λ=0. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Si u est nilpotent d'indice p alors 1-u est inversible et son inverse est: <br> 1+u+u<sup>2</sup>+...+u<sup>p-1</sup>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> If u is nilpotent of index p then 1-u is invertible and its inverse is: <br> 1+u+u<sup>2</sup>+...+u<sup>p-1</sup>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit pour le voir de développer le produit (1-u)(1+u+u<sup>2</sup>+...+ u<sup>p-1</sup>) <h2> Théorème de structure </h2> Nous allons maintenant étudier en quelque sorte une réciproque, à une similitude près, du résultat qui dit qu'une matrice triangulaire stricte est nilpotente. Ce résultat est même plus fort encore. </div>
+        <!-- /fr -->
+        <div lang="en"> It is enough to see it to expand the product (1-u)(1+u+u<sup>2</sup>+...+ u<sup>p-1</sup>) <h2> Structure theorem </h2>We are now going to study a kind of reciprocal, of the result which says that a triangular matrix strict is nilpotent. If not triangular such a matrix should be similar to a triangular one. This result is even a little stronger. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Soit u un endomorphisme nilpotent de E d'indice p. Alors il existe une base de E par rapport à laquelle la matrice de u est de la forme: <p>
+              <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 0& \nu _{1} &0 & ... & 0 & 0 \\ 0 & 0 & \nu _{2} & ... & 0 & 0\\ .& . & . & ... & . & 0 \\ 0& 0 & 0 & ... & 0 & \nu _{n} \\ 0& 0 & 0 & ... & 0 & 0 \\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> où pour chaque i 2≤i≤ n ν<sub>i</sub>=0 ou ν<sub>i</sub>=1
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> Let u be a nilpotent endomorphism of E with index p. Then there is a basis of E with respect to which the matrix of u is of the form: <p>
+              <!-- FORMULE UNIV INLINE --> \( \begin{pmatrix} 0& \nu _{1} &0 & ... & 0 & 0 \\ 0 & 0 & \nu _{2} & ... & 0 & 0\\ .& . & . & ... & . & 0 \\ 0& 0 & 0 & ... & 0 & \nu _{n} \\ 0& 0 & 0 & ... & 0 & 0 \\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> where for each i 2≤i≤ n ν<sub>i</sub>=0 or ν<sub>i</sub>=1
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Considérons les sous-espaces E<sub>i</sub>=Ker(u<sup>i</sup>) 0 ≤i≤ p , p étant l'indice de u. <br> Pour prouver notre théorème nous aurons besoin de deux résultats préliminaires: </div>
+        <!-- /fr -->
+        <div lang="en"> Consider the subspaces E<sub>i</sub>=Ker(u<sup>i</sup>) 0 ≤i≤ p , p being the index of u. <br> To prove our theorem we will need two preliminary results: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="lem1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 1</div> Soit i un entier 1 ≤i≤p-1 et F un sous-espace de E tel que F∩E<sub>i</sub>={0}; on a alors: <br> u(F)∩E<sub>i-1</sub>={0} et u induit un <input type="button" value="isomorphisme" onclick="go('../applicalin/isolin.html#')" data-inline="true" /> de F sur u(F).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 1</div> Let i be an integer 1 ≤i≤p-1 and F a subspace of E such that F∩E<sub>i</sub>={0}; we then have: <br> u(F)∩E<sub>i-1</sub>={0} and u induces an <input type="button" value="isomorphism" onclick="go('../applicalin/isolin.html#')" data-inline="true"> of F on u(F).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit x ∈ u(F)∩E<sub>i-1</sub> alors x=u(y) avec y ∈ F et u<sup>i-1</sup>(x)=0 donc u<sup>i</sup>(y)=0, donc y ∈ F∩E<sub>i</sub> donc y=0 et u(y)=x=0. <br> Supposons que u(x) =0 avec x ∈ F alors x ∈ <input type="button" value="Ker(u)" onclick="go('../applicalin/noyau.html#')" data-inline="true" /> =E<sub>1</sub> ⊆ E<sub>i</sub> pour i ≥ 1, donc x =0. <br> La restriction de u à F est donc injective, considérée comme application à valeurs dans u(F) elle est évidemment surjective, d'où la preuve intégrale du lemme 1.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let x ∈ u(F)∩E<sub>i-1</sub> then x=u(y) with y ∈ F and u<sup>i-1</sup>(x)=0 therefore u<sup>i</sup>(y)=0, therefore y ∈ F∩E<sub>i</sub> so y=0 and u(y)=x=0. <br> Suppose u(x) =0 with x ∈ F then x ∈ <input type="button" value="ker(u)" onclick="go('../applicalin/noyau.html#')" data-inline="true">=E<sub>1</sub>⊆E<sub>i</sub> for i ≥ 1, so x =0. <br>The restriction of u to F is therefore injective, considered as a map with range u(F) it is obviously surjective, hence the integral proof of lemma 1.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="lem2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 2</div> Il existe des sous-espaces vectoriels de E, F<sub>1</sub>, ..., F<sub>p</sub> qui possèdent les propriétés suivantes: <ol>
+              <li> E<sub>i</sub> est <input type="button" value="somme directe" onclick="go('../espaces/opsev.html#dirsum')" data-inline="true" /> de E<sub>i-1</sub> et de F<sub>i</sub> pour tout i 1≤i≤p </li>
+              <li> u applique injectivement F<sub>i</sub> dans F<sub>i-1</sub> pour tout i 2≤i≤p </li>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 2</div> There exist vector subspaces of E, F<sub>1</sub>, ..., F<sub>p</sub> which have the following properties: <ol>
+              <li>E<sub>i</sub> is <input type="button" value="direct sum" onclick="go('../espaces/opsev.html#dirsume')" data-inline="true"> of E<sub>i-1</sub> and F<sub>i</sub> for all i 1≤i≤p </li>
+              <li>u injectively maps F<sub>i</sub> in F<sub>i-1</sub> for all i 2≤i≤p </li>
+            </ol>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit F<sub>p</sub> un <input type="button" value="supplémentaire" onclick="go('../espaces/opsev.html#supp')" data-inline="true" /> de E<sub>p-1</sub> dans E<sub>p</sub>=E <br> Puisque u(F<sub>p</sub>) ne rencontre E<sub>p-2</sub> qu'en 0, on peut compléter u(F<sub>p</sub>) en un supplémentaire de E<sub>p-2</sub>, que nous désignerons par F<sub>p-1</sub>, et ainsi de suite par récurrence descendante.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let F<sub>p</sub> a <input type="button" value="supplementary" onclick="go('../espaces/opsev.html#suppe')" data-inline="true"> of E<sub>p-1</sub> in E<sub>p</sub>=E <br>Since u(F<sub>p</sub>) intersects E<sub>p-2</sub> only at 0, we can complete u(F<sub>p</sub>) into a supplementary of E<sub>p-2</sub>, which we will designate by F<sub>p-1</sub>, and so on by downward induction.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous pouvons maintenant passer à la démonstration du théorème lui-même. </div>
+        <!-- /fr -->
+        <div lang="en"> We can now move on to proving the theorem itself. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration du théorème 3</h4> Considérons donc une suite de sous-espaces F<sub>i</sub> 1≤i≤p comme dans le lemme 2. <br> Soit (x<sub>1,1</sub>,x<sub>1,2</sub>,...,x<sub>1,r<sub>1</sub>
+            </sub> ) une base de F<sub>p</sub> On peut donc construire une base de F<sub>p-1</sub> de la forme: <br> (x<sub>2,1</sub>,x<sub>2,2</sub>,...,x<sub>2,r<sub>1</sub>
+            </sub>,x<sub>2,r<sub>1</sub>+1 </sub>,...,x<sub>2,r<sub>2</sub>
+            </sub>) <br> où x<sub>2,1</sub>=u(x<sub>1,1</sub>),...,x<sub>2,r<sub>1</sub>
+            </sub>=u(x<sub>1,r<sub>1</sub>
+            </sub>) <br> Et ainsi de suite. <br> Cela dit il est clair que E=F<sub>p</sub>⊕F<sub>p-1</sub>⊕F<sub>p-2</sub>⊕...⊕ F<sub>1</sub>
+            <br> On obtiendra donc une base de E en réunissant les bases de F<sub>p</sub>, F<sub>p-1</sub>, ...,F<sub>1</sub> construites comme il est dit plus haut. En prenant les vecteurs de cette base en colonnes et de bas en haut, on obtient une base: <br> B=(x<sub>1</sub>,...,x<sub>n</sub>) telle que: <br> Soit u(x<sub>i</sub>)=0 soit u(x<sub>i</sub>)=x<sub>i-1</sub>
+            <br> relativement à cette base la matrice de u a la forme annoncée.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof of theorem 3</h4> Let us therefore consider a sequence of subspaces F<sub>i</sub> 1≤i≤p as in lemma 2. <br>Let (x<sub>1,1</sub>,x<sub>1,2</sub>,...,x<sub>1,r<sub>1</sub>
+            </sub> ) a basis of F<sub>p</sub> We can therefore construct a basis of F<sub>p-1</sub> of the form: <br> (x<sub>2,1</sub>,x<sub>2,2</sub>,...,x<sub>2,r<sub>1</sub>
+            </sub> ,x<sub>2,r<sub>1</sub>+1 </sub>,...,x<sub>2,r<sub>2</sub>
+            </sub> ) <br> where x<sub>2,1</sub>=u(x<sub>1,1</sub>),...,x<sub>2,r<sub>1</sub>
+            </sub> =u(x<sub>1,r<sub>1</sub>
+            </sub> ) <br> And so on. <br> That being said, it is clear that E=F<sub>p</sub>⊕F<sub>p-1</sub>⊕F<sub>p-2</sub>⊕...⊕ F<sub>1</sub>
+            <br>We will therefore obtain a basis of E by combining the bases of F<sub>p</sub>, F<sub>p-1</sub>, ..., F<sub>1</sub> built as mentioned above. Taking the vectors of this basis in columns and from bottom to top, we get a basis: <br> B=(x<sub>1</sub>,...,x<sub>n</sub>) such that: <br> Either u(x<sub>i</sub>)=0 or u(x<sub>i</sub>)=x<sub>i-1</sub>
+            <br> relatively to this basis the matrix of u has the announced form.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Le coin de Python </h2> Voici un programme qui vérifie si une matrice est nilpotente: <p>
+            <object data="python/nilpot1.html" type="text/html" width="100%" height="250" border="3"></object>
+          </p>
+          <h2> Le coin de Julia </h2>
+          <p>Même chose avec Julia 1.6</p>
+          <p>
+            <object data="julia/nilpotent.jl.html" type="text/html" width="100%" height="300" border="3"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's Corner </h2> Here is a program that checks if a matrix is ​​nilpotent: <p>
+            <object data="python/nilpot1.html" type="text/html" width="100%" height="250" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2>
+          <p>Same with Julia 1.6 </p>
+          <p>
+            <object data="julia/nilpotent.jl.html" type="text/html" width="100%" height="300" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <ul style=list-style-type:'';>
+          <li>
+            <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+          </li>
+          <li>
+            <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+          </li>
+        </ul>
+      </div>
+      <!-- /navbar -->
+    </div>
+    <!-- /fr -->
+    <div lang="en">
+      <div>
+        <ul style=list-style-type:'';>
+          <li>
+            <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+          </li>
+          <li>
+            <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /en -->
+    </div>
+    <!-- /content -->
+    <div data-role="footer">
+      <table cellpadding="10">
+        <tr>
+          <td>
+            <div lang="fr">Création Gilles Dubois</div>
+            <div lang="en">Created by Gilles Dubois</div>
+          </td>
+          <td>
+            <div lang="fr">Janvier 2022</div>
+            <div lang="en">January 2022</div>
+          </td>
+          <td>
+            <a href="https://www.mathjax.org">
+              <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- /footer -->
+    <ul style=list-style-type:'';>
+      <li>
+        <div lang="fr">
+          <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+        <div lang="en">
+          <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+      </li>
+      <li>
+        <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+      </li>
+    </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

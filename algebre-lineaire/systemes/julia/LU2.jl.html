@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+
+<span class="s1">A = [</span><span class="s2">1 2 3</span><span class="s1">; </span><span class="s2">4 5 6</span><span class="s1">;</span><span class="s2">7 8 8</span><span class="s1">]</span>
+<span class="s1">L,U,P = lu(A)</span>
+<span class="s1">println(L)</span>
+<span class="s1">println(U)</span>
+<span class="s1">LU=L*U</span>
+<span class="s1">println(LU)</span>
+<span class="s1">println(P)</span>
+<span class="s0">function </span><span class="s1">permute(M,p)</span>
+    <span class="s1">R=copy(M)</span>
+    <span class="s1">s=size(M,</span><span class="s2">2</span><span class="s1">)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:s</span>
+        <span class="s1">R[p[i],:]=M[i,:]</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">R</span>
+<span class="s0">end</span>
+<span class="s1">println(permute(LU,P))</span></pre>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+<span class="s1">A = [</span><span class="s2">1</span><span class="s1">//</span><span class="s2">1 2</span><span class="s1">//</span><span class="s2">1 3</span><span class="s1">//</span><span class="s2">1</span><span class="s1">; </span><span class="s2">4</span><span class="s1">//</span><span class="s2">1 5</span><span class="s1">//</span><span class="s2">1 6</span><span class="s1">//</span><span class="s2">1</span><span class="s1">;</span><span class="s2">7</span><span class="s1">//</span><span class="s2">1 8</span><span class="s1">//</span><span class="s2">1 8</span><span class="s1">//</span><span class="s2">1</span><span class="s1">]</span>
+
+<span class="s1">zerosQ(n)=Matrix{Rational{Int64}}(zeros(n,n))</span>
+<span class="s1">unitQ(n)=Matrix{Rational{Int64}}(Matrix(I, n, n))</span>
+
+<span class="s0">function </span><span class="s1">Perm(i,j,n)</span>
+    <span class="s1">R=unitQ(n)</span>
+    <span class="s1">L=R[i,:]</span>
+    <span class="s1">R[i,:]=R[j,:]</span>
+    <span class="s1">R[j,:]=L</span>
+    <span class="s0">return </span><span class="s1">transpose(R)</span>
+<span class="s0">end</span>
+
+
+<span class="s0">function </span><span class="s1">LU(M)</span>
+    <span class="s1">n=size(M,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">L=zerosQ(n)</span>
+    <span class="s1">U=unitQ(n)</span>
+    <span class="s1">PERM=unitQ(n)</span>
+    <span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">k:n</span>
+            <span class="s1">m=[L[i,h]*U[h,k] </span><span class="s0">for </span><span class="s1">h </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:k]</span>
+            <span class="s0">if </span><span class="s1">length(M)==</span><span class="s2">0</span>
+                <span class="s1">s=</span><span class="s2">0</span><span class="s1">//</span><span class="s2">1</span>
+            <span class="s0">else</span>
+                <span class="s1">s=reduce(+,m)</span>
+            <span class="s0">end</span>
+            <span class="s1">L[i,k]=M[i,k]-s</span>
+        <span class="s0">end</span>
+        <span class="s1">j=k</span>
+        <span class="s0">while </span><span class="s1">L[j,k]==</span><span class="s2">0</span>
+            <span class="s1">j+=</span><span class="s2">1</span>
+        <span class="s0">end</span>
+        <span class="s1">p=j</span>
+        <span class="s0">if </span><span class="s1">p != k</span>
+            <span class="s1">PERM=Perm(p,k,n)*PERM</span>
+            <span class="s1">L=M[p,:]</span>
+            <span class="s1">M[p,:]=M[k,:]</span>
+            <span class="s1">M[k,:]=L</span>
+        <span class="s0">end</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">k+</span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s1">m=[L[k,h]*U[h,j] </span><span class="s0">for </span><span class="s1">h </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:k]</span>
+            <span class="s0">if </span><span class="s1">length(m)==</span><span class="s2">0</span>
+                <span class="s1">s=</span><span class="s2">0</span><span class="s1">//</span><span class="s2">1</span>
+            <span class="s0">else</span>
+                <span class="s1">s=reduce(+,m)</span>
+            <span class="s0">end</span>
+            <span class="s1">U[k,j]=(M[k,j]-s)/L[k,k]</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">L,U,PERM</span>
+<span class="s0">end</span>
+
+<span class="s1">println(LU(A))</span>
+<span class="s1">L,U,PERM=LU(A)</span>
+<span class="s1">println(L)</span>
+<span class="s1">println(U)</span>
+<span class="s1">println(PERM)</span>
+<span class="s1">println(PERM*L*U)</span>
+</pre>
+</body>
+</html>

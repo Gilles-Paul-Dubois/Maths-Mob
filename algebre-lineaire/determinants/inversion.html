@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Inversion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/inversion/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/inversion/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Cofacteurs </h2> Soit A= (α<sub>i,j</sub>)<sub>1≤i,j≤n</sub>, une matrice carrée. <div id="container">
+            <div id="label">définition</div> On appelle <strong>
+              <em>cofacteur</em>
+            </strong> d'indice i,j de A le nombre: <br /> c<sub>i,j</sub>=(-1)<sup>i+j</sup>α<sub>i,j</sub>D<sub>i,j</sub>
+            <br /> où D<sub>i,j</sub> est le <input type="button" value="mineur" onclick="go('evaldet.html')" data-inline="true" /> de A d'ordre n-1 obtenu en supprimant la i-ième ligne et la j-ième colonne de A.
+          </div> On a alors la propriété suivante: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div>
+            <input type="button" value="l'inverse" onclick="go('../matrices/algmat.html')" data-inline="true" /> de A est égale à: Det(A)<sup>-1</sup>C où C est la transposée de la matrice des cofacteurs de A
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Il suffit de montrer que AC=Det(A)I<sub>n</sub> où I<sub>n</sub> est la matrice unité d'ordre n. Cela résulte du fait que le déterminant est alterné et du théorème du développement du déterminant suivant les éléments d'une ligne ou d'une colonne.
+          </div>
+          <h2> Exemple </h2>
+          <p>Si A est la matrice:</p> \[\begin{pmatrix} 3& 1& 1& 1\\ 1& 3& 1& 1\\ 1& 1& 3& 1\\ 1& 1& 1 & 3\\ \end{pmatrix}\] <p>La matrice des cofacteurs est:</p> \[\begin{pmatrix} 20& -4& -4& -4\\ -4& 20& -4& -4\\ -4& -4& 20& -4\\ -4& -4& -4& 20\\ \end{pmatrix}\] <p>Le déterminant est 48.</p>
+          <p>La matrice inverse de A est donc:</p> \[\begin{pmatrix} 5/12& -1/12 & -1/12 & -1/12 \\ -1/12& 5/12 & -1/12 & -1/12 \\ -1/12& -1/12 & 5/12& -1/12 \\ -1/12& -1/12 & -1/12 & 5/12 \\ \end{pmatrix}\] <br />
+          <a name="python"></a>
+          <h2> Le coin de Python </h2> Voici un programme qui calcule l'inverse d'une matrice en utilisant les cofacteurs. <p>
+            <object border="3" data="python/calinvcofac.html" height="400" type="text/html" width="100%"></object>
+          </p> Voici un programme qui utilise une librairie pour calculer une matrice inverse: <p>
+            <object border="3" data="python/calinvnumpy1.html" height="250" type="text/html" width="100%"></object>
+          </p> On remarquera encore une fois les inévitables erreurs d'arrondi commis par la fonction de la bibliothèque. <br />
+          <h2>Le coin de Julia</h2>
+          <p>Même chose avec Julia 1.6</p>
+          <object border="3" data="julia/cofact1.jl.html" height="250" type="text/html" width="100%"></object>
+          <p>Utilisation d'une bibliothèque</p>
+          <object border="3" data="julia/calinvbib.jl.html" height="100" type="text/html" width="100%"></object>
+          <p>Cas des corps &integers;/p&integers;</p>
+          <object border="3" data="julia/Fp_inv.jl.html" height="300" type="text/html" width="100%"></object>
+          <p>Alternativement, on peut utiliser la fonction inv de Nemo.</p>
+          <object border="3" data="julia/Fp_inv2.jl.html" height="100" type="text/html" width="100%"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Cofactors </h2> Let A= (α<sub>i,j</sub>)<sub>1≤i,j≤n</sub>, be a square matrix. <div id="container">
+            <div id="label">definition </div>We call <strong>
+              <em>cofactor</em>
+            </strong> of index i,j of A the number: <br> c<sub>i,j</sub>=(-1)<sup>i+j </sup>α<sub>i,j</sub>D<sub>i,j</sub>
+            <br>where D<sub>i,j</sub> is the <input type="button" value="minor" onclick="go('evaldet.html')" data-inline="true"> of A of order n-1 obtained by deleting the i-th row and the j-th column of A.
+          </div> We then have the following property: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>
+            <input type="button" value="the inverse" onclick="go('../matrices/algmat.html')" data-inline="true"> of A is equal to: Det(A)<sup>-1 </sup>C where C is the transpose of the matrix of cofactors of A
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>It suffices to show that AC=Det(A)I<sub>n</sub> where I<sub>n</sub> is the unity matrix of order n. This follows from the fact that the determinant is alternating and from the theorem of the development of the determinant along the elements of a row or a column.
+          </div>
+          <h2> Example </h2>
+          <p>If A is the matrix: </p> \[\begin{pmatrix} 3& 1& 1& 1\\ 1& 3& 1& 1\\ 1& 1& 3& 1\\ 1& 1& 1 & 3\\ \end{pmatrix}\] <p>The matrix of cofactors is: </p> \[\begin{pmatrix} 20& -4& -4& -4\\ -4& 20& -4& -4\\ -4& -4& 20& -4\\ -4& -4& -4& 20\\ \end{pmatrix}\] <p>The determinant is 48. </p>
+          <p>The inverse matrix of A is therefore: </p> \[\begin{pmatrix} 5/12& -1/12 & -1/12 & -1/12 \\ -1/12& 5/12 & -1/12 & -1/12 \\ -1/12& -1/12 & 5/12& -1/12 \\ -1/12& -1/12 & -1/12 & 5/12 \\ \end{pmatrix}\] <br />
+          <a name="python"></a>
+          <h2> Python's Corner </h2> Here is a program that calculates the inverse of a matrix using cofactors. <p>
+            <object data="python/calinvcofac.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p> Here is a program that uses a library to calculate an inverse matrix: <p>
+            <object data="python/calinvnumpy1.html" type="text/html" width="100%" height="250" border="3"></object>
+          </p> Note again the inevitable rounding errors made by the library function. <br>
+          <h2>Julia's corner </h2>
+          <p>Same with Julia 1.6 </p>
+          <object data="julia/cofact1.jl.html" type="text/html" width="100%" height="250" border="3"></object>
+          <p>Using a library </p>
+          <object data="julia/calinvbib.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+          <p>Case of fields ℤ/pℤ </p>
+          <object data="julia/Fp_inv.jl.html" type="text/html" width="100%" height="300" border="3"></object>
+          <p>Alternatively, you can use Nemo's inv function. </p>
+          <object data="julia/Fp_inv2.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

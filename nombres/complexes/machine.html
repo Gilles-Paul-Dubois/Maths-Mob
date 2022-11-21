@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Représentation en machine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/machine/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/machine/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p> Dans la mesure où les complexes sont exactement des couples de réels, leur stockage en mémoire génère exactement les mêmes problèmes que le stockage des réels (voir <input type="button" value="type float" onclick="go('../reels/machine.html')" data-inline="true" />). Il faut simplement prévoir un tableau ou une liste de deux flottants. Dans la mesure où les complexes sont des 'objets' mathématiques bien précis, avec leurs règles de formation, leurs méthodes et leurs opérations, il est tout à fait indiqué d'utiliser un langage 'orienté objet' (C++,Python, Java, etc...) dans lequel on définira une classe (voir <input type="button" value="l'exemple des rationnels" onclick="go('../rationnels/python/rationnels.html')" data-inline="true" />) avec surcharge des opérateurs. </p>
+          <h2> Le coin de Python </h2> Voici comment on peut se faire une classe 'artisanale' pour représenter les complexes: <p>
+            <object border="3" data="python/complexes1.html" height="400" type="text/html" width="100%"></object>
+          </p> Naturellement, cet exemple est donné à titre documentaire pour voir comment construire des objets avec un langage de haut niveau. De facto, le langage Python propose une librairie 'standard' pour manipuler les nombres complexes. Voici un exemple de l'utilisation de cette bibliothèque. <br /> On remarquera que les écritures du type a+bj sont reconnues où a et b sont des flottants. Par contre <u>l'interprète ne tolère aucun abus d'écriture</u> comme 1+j ou -j. La raison en est sans doute que si j est malencontreusement une variable de type flottant du programme, l'écriture 1+j devient ambiguë. <p>
+            <object border="3" data="python/complexes2.html" height="300" type="text/html" width="100%"></object>
+          </p>
+          <h2> Le coin de Julia </h2> Voici comment on peut se faire une classe 'artisanale' pour représenter les complexes avec Julia 1.6. <p>
+            <object border="3" data="julia/repmach1.jl.html" height="400" type="text/html" width="100%"></object>
+          <p>Mais comme avec Python, nous avons un type natif 'complex' avec toutes les opérations usuelles.</p>
+          <object border="3" data="julia/repmach2.jl.html" height="300" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p> Since complexes are exactly pairs of reals, storing them in memory generates exactly the same problems as storing reals (see <input type="button" value="float type" onclick="go('../reels/machine.html')" data-inline="true">). You just need to provide an array or a list of two floats. Insofar as complexes are very precise mathematical 'objects', with their rules of formation, their methods and their operations, it is quite appropriate to use an 'object-oriented' language (C++, Python, Java, etc. ...) in which we will define a class (see <input type="button" value="the example of the rationals" onclick="go('../rationnels/python/rationnels.html')" data-inline="true">) with operator overloading. </p>
+          <h2> Python's corner </h2> Here's how we can make ourselves a draft class to represent the complexes: <p>
+            <object data="python/complexes1.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>Naturally, this example is given as documentation to see how to build objects with a high level language. Actually, the Python language offers a 'standard' library for handling complex numbers. Here is an example of use of this library. <br>Note that writings like a+bj are recognized where a and b are floats. On the other hand <u>the interpreter does not tolerate any abuse of writing </u> like 1+j or -j. The reason for this is probably that if j is accidentally a variable of floating type of the program, the writing 1+j becomes ambiguous. <p>
+            <object data="python/complexes2.html" type="text/html" width="100%" height="300" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2> Here is how we can make a draft class to represent complexes with Julia 1.6. <p>
+            <object data="julia/repmach1.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <p>But as with Python, we have a native 'complex' type with all the usual operations. </p>
+          <object data="julia/repmach2.jl.html" type="text/html" width="100%" height="300" border="3"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,55 @@
+﻿<html>
+ <head>
+  <title>
+   pascal.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,0); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># -*- coding: utf_8 -*-</span><span class="s1"> 
+</span><span class="s0">#python  version 3.4</span><span class="s1"> 
+ 
+</span><span class="s0">#génération du triangle de Pascal au moyen d'un générateur</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Pascal(): 
+    n,C=</span><span class="s3">0</span><span class="s1">,[</span><span class="s3">1</span><span class="s1">] 
+    </span><span class="s2">yield </span><span class="s1">n,C </span><span class="s0"># retour du premier appel</span><span class="s1"> 
+    </span><span class="s2">while </span><span class="s1">True: </span><span class="s0"># exécution des appels suivants</span><span class="s1"> 
+        n+=</span><span class="s3">1</span><span class="s1"> 
+        D=C[:] 
+        D.insert(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">) 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,len(C)): 
+            D[i]=C[i-</span><span class="s3">1</span><span class="s1">]+C[i] </span><span class="s0"># relation de récurrence du Triangle de Pascal</span><span class="s1"> 
+        C=D 
+        </span><span class="s2">yield </span><span class="s1">n,C 
+ 
+</span><span class="s0"># coefficients Cp,n</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Cpn(p,n): 
+    TP=Pascal() 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">): 
+        L=next(TP)[</span><span class="s3">1</span><span class="s1">] 
+    </span><span class="s2">return </span><span class="s1">L[p] 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    TP=Pascal() 
+    </span><span class="s0">#voir le début du triangle de Pascal</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">11</span><span class="s1">): 
+        </span><span class="s2">print </span><span class="s1">(next(TP)) 
+    </span><span class="s0"># calculer un coefficient</span><span class="s1"> 
+    x=Cpn(</span><span class="s3">5</span><span class="s1">,</span><span class="s3">10</span><span class="s1">) 
+    </span><span class="s2">print </span><span class="s1">(x) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+</span></pre>
+ </body>
+</html>

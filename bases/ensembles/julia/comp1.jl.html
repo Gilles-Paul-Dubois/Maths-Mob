@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>comp1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#julia version 1.6</span>
+
+<span class="s0"># mapping et filtrage</span>
+<span class="s0"># visualisation</span>
+<span class="s0"># on peut ainsi définir un ensemble 'en compréhension'</span>
+<span class="s0"># ensemble des carrés des nombres impairs entre 0 et 20</span>
+
+<span class="s2">function </span><span class="s1">imprime(X) </span><span class="s0">#écriture classique des maths</span>
+  <span class="s1">println(</span><span class="s3">&quot;&quot;</span><span class="s1">)</span>
+  <span class="s1">print(</span><span class="s3">'{'</span><span class="s1">) </span><span class="s0">#début de l'écriture</span>
+  <span class="s1">n = length(X)</span>
+  <span class="s1">i = </span><span class="s4">0</span>
+  <span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">X</span>
+    <span class="s1">i = i + </span><span class="s4">1</span>
+    <span class="s1">print(x)</span>
+    <span class="s2">if </span><span class="s1">i &lt; n</span>
+      <span class="s1">print(</span><span class="s3">','</span><span class="s1">) </span><span class="s0">#seulement si ce n'est pas le dernier</span>
+    <span class="s2">end</span>
+  <span class="s2">end</span>
+  <span class="s1">println(</span><span class="s3">'}'</span><span class="s1">) </span><span class="s0">#fin de l'écriture</span>
+<span class="s2">end</span>
+
+<span class="s0">#programme principal</span>
+<span class="s2">function </span><span class="s1">main()</span>
+  <span class="s0"># les 20 premiers entiers</span>
+  <span class="s1">L = Set(</span><span class="s4">0</span><span class="s1">:</span><span class="s4">20</span><span class="s1">)</span>
+  <span class="s1">imprime(L)</span>
+  <span class="s1">I=[i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">L </span><span class="s2">if </span><span class="s1">i%</span><span class="s4">2</span><span class="s1">==</span><span class="s4">1</span><span class="s1">]</span>
+  <span class="s1">EI=Set(I)</span>
+  <span class="s1">imprime(EI)</span>
+  <span class="s1">C=map(x-&gt;x^</span><span class="s4">2</span><span class="s1">,I)</span>
+  <span class="s0">#les fonctions anonymes n'ont pas besoin du mot-clef 'lambda'</span>
+  <span class="s1">EC=Set(C)</span>
+  <span class="s1">imprime(EC)</span>
+<span class="s2">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

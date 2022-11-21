@@ -1,0 +1,68 @@
+﻿<html>
+ <head>
+  <title>
+   parfaits1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0">#Trouver les couples de nombres amicaux dont le premier est &lt;= 10000</span><span class="s1"> 
+</span><span class="s0">#Find all pairs of amicable numbers for which the first one is &lt;= 10000</span><span class="s1">
+</span><span class="s0">#programme semi-naïf</span><span class="s1"> 
+</span><span class="s0">#semi naive program</span><span class="s1">
+ 
+</span><span class="s2">import </span><span class="s1">math 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+</span><span class="s0"># teste si n possède un ami</span><span class="s1"> 
+</span><span class="s0"># checks if n can be associated to another number to form an amicable pair</span><span class="s1">
+</span><span class="s2">def </span><span class="s1">PossedeAmi(n): 
+    m=SommeAliquotes(n) 
+    </span><span class="s2">return </span><span class="s1">m &gt;n </span><span class="s2">and </span><span class="s1">SommeAliquotes(m)==n 
+ 
+</span><span class="s0">#liste des diviseurs de n</span><span class="s1"> 
+</span><span class="s0">#list of divisors of n n</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">diviseurs2(n): 
+    r=int(math.sqrt(n))+</span><span class="s3">1 </span><span class="s0"># par sécurité +1 - for security </span><span class="s1"> 
+    E1=[i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,r+</span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">n%i==</span><span class="s3">0</span><span class="s1">] </span><span class="s0"># les diviseurs jusqu'é la racine</span><span class="s1"> 
+    E2= [n/i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">E1] </span><span class="s0"># les autres en ordre inverse - others in reverse order</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">E1[len(E1)-</span><span class="s3">1</span><span class="s1">]==E2[len(E2)-</span><span class="s3">1</span><span class="s1">]: </span><span class="s0">#cas des carrés parfaits - case of perfect squares</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">sorted(E1+E2[</span><span class="s3">0</span><span class="s1">:len(E2)-</span><span class="s3">1</span><span class="s1">]) </span><span class="s0">#élimination doublon et on trie - elimination of double and sorting</span><span class="s1"> 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">sorted(E1+E2) </span><span class="s0">#on trie</span><span class="s1"> 
+ 
+</span><span class="s0"># Calcule la somme des diviseurs de n autres que n - sum of aliquots of n</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">SommeAliquotes(n): 
+    </span><span class="s2">def </span><span class="s1">add(x,y): </span><span class="s0">#fonction locale pour reduce - local function to pass as an argument of reduce </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">x+y 
+    lis=diviseurs2(n) 
+    lis=lis[</span><span class="s3">0</span><span class="s1">:len(lis)-</span><span class="s3">1</span><span class="s1">] </span><span class="s0"># enlever le dernier diviseur (n)</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">reduce( add,lis) </span><span class="s0"># ajoute tous les éléments de la liste -add all elements of the list</span><span class="s1"> 
+ 
+ 
+</span><span class="s0"># trouve les paires d'amis dont &lt; n est le premier élément - find all amicable pairs with n as first member</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">TrouveLesAmis (n): 
+    </span><span class="s2">return </span><span class="s1">[[x, SommeAliquotes(x)] </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">2</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">PossedeAmi(x)] 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    print(TrouveLesAmis(</span><span class="s3">10000</span><span class="s1">)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

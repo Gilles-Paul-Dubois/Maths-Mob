@@ -1,0 +1,180 @@
+<html>
+<head>
+<title>dioph.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #008080; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># python version 3.4</span>
+<span class="s0">### Compter toutes les bases dans l'espace (Z/3Z)^3</span>
+<span class="s0">### Count all basis in space (Z/3Z)^3</span>
+
+<span class="s2">def </span><span class="s1">GenZp(p):</span>
+    <span class="s0">&quot;&quot;&quot;génère la classe paramétrée Z/pZ - generates parameterized class&quot;&quot;&quot;</span>
+
+    <span class="s2">class </span><span class="s1">C(object):</span>
+        <span class="s1">car = p</span>
+
+        <span class="s2">def </span><span class="s1">__init__(self, m):</span>
+            <span class="s0">&quot;&quot;&quot;initialisation à partir d'un entier - constructor from an integer&quot;&quot;&quot;</span>
+            <span class="s1">self.n = m % self.car</span>
+
+        <span class="s2">def </span><span class="s1">__str__(self):</span>
+            <span class="s0">&quot;&quot;&quot;représentation externe pour print etc... - conversion to string&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">str(self.n)</span>
+
+        <span class="s2">def </span><span class="s1">nul(self):</span>
+            <span class="s0">&quot;&quot;&quot;test de nullité - nullity test&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">self.n == </span><span class="s3">0</span>
+            <span class="s0">### les opérateurs unaires - unary operators</span>
+
+        <span class="s2">def </span><span class="s1">__neg__(self):</span>
+            <span class="s0">&quot;&quot;&quot;opposé - opposite&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">C(-self.n)</span>
+
+        <span class="s2">def </span><span class="s1">__invert__(self):</span>
+            <span class="s0">&quot;&quot;&quot;inverse&quot;&quot;&quot;</span>
+            <span class="s2">if not </span><span class="s1">self.nul():</span>
+                <span class="s1">y = </span><span class="s3">1</span>
+                <span class="s2">while </span><span class="s1">(self.n * y) % self.car != </span><span class="s3">1</span><span class="s1">:</span>
+                    <span class="s1">y += </span><span class="s3">1</span>
+            <span class="s2">return </span><span class="s1">C(y)</span>
+            <span class="s0">### les opérations binaires - binary operators</span>
+
+        <span class="s2">def </span><span class="s1">__add__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;addition&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">C(self.n + other.n)</span>
+
+        <span class="s2">def </span><span class="s1">__rmul__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;multiplication&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">C(self.n * other.n)</span>
+
+        <span class="s2">def </span><span class="s1">__sub__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;soustraction - subtraction&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">C(self.n - other.n)</span>
+
+        <span class="s2">def </span><span class="s1">__div__(self, other):</span>
+            <span class="s2">return </span><span class="s1">self * ~(other)</span>
+
+        <span class="s2">def </span><span class="s1">__pow__(self, k):</span>
+            <span class="s0">&quot;&quot;&quot;puissances - powers&quot;&quot;&quot;</span>
+            <span class="s2">if </span><span class="s1">k &gt;= </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s2">return </span><span class="s1">C(self.n ** k)</span>
+            <span class="s2">else</span><span class="s1">:</span>
+                <span class="s2">return </span><span class="s1">~self ** (-k)</span>
+
+        <span class="s2">def </span><span class="s1">__ne__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;objets distincts - distinct objects&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">self.n != other.n</span>
+
+        <span class="s2">def </span><span class="s1">__eq__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;objets égaux - equal objects&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">self.n == other.n</span>
+
+    <span class="s2">return </span><span class="s1">C</span>
+
+
+<span class="s2">def </span><span class="s1">GenVectnZp(p, m):</span>
+    <span class="s0">&quot;&quot;&quot;génère l'espace Z/pZ x .... x Z/pZ (n facteurs) - generates space  Z/pZ x .... x Z/pZ (n factors)&quot;&quot;&quot;</span>
+
+    <span class="s2">class </span><span class="s1">Vpn:</span>
+        <span class="s1">n = m</span>
+
+        <span class="s2">def </span><span class="s1">__init__(self, L):</span>
+            <span class="s1">Zp = GenZp(p)</span>
+            <span class="s1">self.V = [Zp(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L]</span>
+
+        <span class="s2">def </span><span class="s1">__str__(self):</span>
+            <span class="s1">L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]</span>
+            <span class="s2">return </span><span class="s4">'(' </span><span class="s1">+ </span><span class="s4">&quot;,&quot;</span><span class="s1">.join(L) + </span><span class="s4">')'</span>
+
+        <span class="s2">def </span><span class="s1">nul(self):</span>
+            <span class="s0">&quot;&quot;&quot;test de nullité - nullity test&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">all([x.nul() </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V])</span>
+
+        <span class="s2">def </span><span class="s1">__add__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;addition des vecteurs - addition of vectors&quot;&quot;&quot;</span>
+            <span class="s1">L = [self.V[i].n + other.V[i].n </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)]</span>
+            <span class="s2">return </span><span class="s1">Vpn(L)</span>
+
+        <span class="s2">def </span><span class="s1">__neg__(self):</span>
+            <span class="s0">&quot;&quot;&quot;opposé d'un vecteur - opposite of a vector&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">Vpn([-x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V])</span>
+
+        <span class="s2">def </span><span class="s1">__sub__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;différence de deux vecteurs - difference of two vectors&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">self + (-other)</span>
+
+        <span class="s2">def </span><span class="s1">__rmul__(self, k):</span>
+            <span class="s0">&quot;&quot;&quot; produit par un scalaire - external multiplication &quot;&quot;&quot;</span>
+            <span class="s1">L = [k.n * x.n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]</span>
+            <span class="s2">return </span><span class="s1">Vpn(L)</span>
+
+        <span class="s2">def </span><span class="s1">__ne__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;vecteurs distincts - distinct vectors&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">any([self.V[i] != other.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)])</span>
+
+        <span class="s2">def </span><span class="s1">__eq__(self, other):</span>
+            <span class="s0">&quot;&quot;&quot;vecteurs égaux - equal vectors&quot;&quot;&quot;</span>
+            <span class="s2">return </span><span class="s1">all([self.V[i] == other.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)])</span>
+
+    <span class="s2">return </span><span class="s1">Vpn</span>
+
+
+<span class="s2">def </span><span class="s1">multiple(X, Y):</span>
+    <span class="s0">&quot;&quot;&quot;teste si un des deux vecteurs est multiple de l'autre - check if one vector is multiple of the other&quot;&quot;&quot;</span>
+    <span class="s2">global </span><span class="s1">K</span>
+    <span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K:</span>
+        <span class="s1">U = k * X</span>
+        <span class="s1">V = k * Y</span>
+        <span class="s2">if </span><span class="s1">(U == Y) </span><span class="s2">or </span><span class="s1">(X == V):</span>
+            <span class="s2">return True</span>
+    <span class="s2">return False</span>
+
+
+<span class="s2">def </span><span class="s1">CombLin(V, X, Y):</span>
+    <span class="s0">&quot;&quot;&quot;teste si V est combinaison linéaire de X et Y - checks if V is linear combination of X and Y&quot;&quot;&quot;</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">K:</span>
+        <span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">K:</span>
+            <span class="s2">if </span><span class="s1">V == i * X + j * Y:</span>
+                <span class="s2">return True</span>
+    <span class="s2">return False</span>
+
+
+<span class="s0"># variables globales du programme - global variables of the program</span>
+<span class="s1">Z3 = GenZp(</span><span class="s3">3</span><span class="s1">)</span>
+<span class="s1">K = [Z3(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)]  </span><span class="s0"># le corps K à 3 éléments 0,1,2</span>
+<span class="s1">V33 = GenVectnZp(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)</span>
+<span class="s0">### Tous les vecteurs de K^3 si K=Z/3Z il y en a 27 - all 27 vectors of (Z/3Z)^3</span>
+<span class="s1">E = [V33([i, j, k]) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)]  </span><span class="s0"># l'espace E</span>
+<span class="s0"># Tous les systèmes de 3 vecteurs de E - all systems with 3 vectors</span>
+<span class="s1">S = [[E[i], E[j], E[k]] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">27</span><span class="s1">) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">27</span><span class="s1">) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">27</span><span class="s1">)]</span>
+
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s2">global </span><span class="s1">Z3, K, V33, E, S</span>
+    <span class="s0">### Tous les triplets de vecteurs distincts de E, il y en a 19683 - all triples of distinct vectors</span>
+    <span class="s1">print(len(S))</span>
+    <span class="s1">Bases = [X </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">S </span><span class="s2">if not </span><span class="s1">(multiple(X[</span><span class="s3">1</span><span class="s1">], X[</span><span class="s3">0</span><span class="s1">])) </span><span class="s2">and not </span><span class="s1">CombLin(X[</span><span class="s3">2</span><span class="s1">], X[</span><span class="s3">0</span><span class="s1">], X[</span><span class="s3">1</span><span class="s1">])]</span>
+    <span class="s0"># le nombre de bases (il y en a 11232) - number of basis (11232)</span>
+    <span class="s1">print(len(Bases))</span>
+    <span class="s0"># Voir les 10 premières - show the first ten</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">10</span><span class="s1">):</span>
+        <span class="s1">print(</span><span class="s4">&quot;---------------------&quot;</span><span class="s1">)</span>
+        <span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">3</span><span class="s1">):</span>
+            <span class="s1">print(Bases[i][j])</span>
+        <span class="s1">print(</span><span class="s4">&quot;---------------------&quot;</span><span class="s1">)</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
+</html>

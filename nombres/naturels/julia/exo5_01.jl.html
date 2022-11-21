@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+.s4 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">premier(n)</span>
+    <span class="s0">if </span><span class="s1">n </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:</span><span class="s2">3</span>
+        <span class="s0">return true</span>
+    <span class="s0">else</span>
+        <span class="s1">borne=Int(floor(sqrt(n)))+</span><span class="s2">1</span>
+        <span class="s0">if </span><span class="s1">n%</span><span class="s2">2</span><span class="s1">!=</span><span class="s2">0 </span><span class="s1">&amp;&amp; n%</span><span class="s2">3</span><span class="s1">!=</span><span class="s2">0 </span><span class="s1">&amp;&amp;!(any(n%x==</span><span class="s2">0 </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s2">3</span><span class="s1">:borne))</span>
+            <span class="s0">return true</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return false</span>
+<span class="s0">end</span>
+
+<span class="s1">Premiers()=(p </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:</span><span class="s2">65635 </span><span class="s0">if </span><span class="s1">premier(p))</span>
+
+<span class="s0">function </span><span class="s1">Sauve(L)</span>
+    <span class="s1">open(</span><span class="s3">&quot;premiers.txt&quot;</span><span class="s1">,</span><span class="s3">&quot;w&quot;</span><span class="s1">) </span><span class="s0">do </span><span class="s1">io</span>
+        <span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">L</span>
+            <span class="s1">write(io, string(p))</span>
+            <span class="s1">write(io,</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">Sauve(Premiers())</span>
+</pre>
+</body>
+</html>

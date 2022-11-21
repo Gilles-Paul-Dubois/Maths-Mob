@@ -1,0 +1,92 @@
+﻿<html>
+ <head>
+  <title>
+   vases.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+</span><span class="s0">#opérations licites</span><span class="s1"> 
+</span><span class="s0">#authorized operations</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">ViderA(N): 
+    </span><span class="s2">return </span><span class="s1">[</span><span class="s3">0</span><span class="s1">,N[</span><span class="s3">1</span><span class="s1">]] 
+ 
+</span><span class="s2">def </span><span class="s1">ViderB(N): 
+    </span><span class="s2">return </span><span class="s1">[N[</span><span class="s3">0</span><span class="s1">],</span><span class="s3">0</span><span class="s1">] 
+ 
+</span><span class="s2">def </span><span class="s1">RemplirA(N): 
+    </span><span class="s2">return </span><span class="s1">[</span><span class="s3">13</span><span class="s1">,N[</span><span class="s3">1</span><span class="s1">]] 
+ 
+</span><span class="s2">def </span><span class="s1">RemplirB(N): 
+    </span><span class="s2">return </span><span class="s1">[N[</span><span class="s3">0</span><span class="s1">],</span><span class="s3">31</span><span class="s1">] 
+ 
+</span><span class="s2">def </span><span class="s1">TransvaserAdansB(N): 
+    </span><span class="s2">if </span><span class="s1">N[</span><span class="s3">0</span><span class="s1">]+N[</span><span class="s3">1</span><span class="s1">]&lt;=</span><span class="s3">31</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[</span><span class="s3">0</span><span class="s1">,N[</span><span class="s3">1</span><span class="s1">]+N[</span><span class="s3">0</span><span class="s1">]] 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[N[</span><span class="s3">0</span><span class="s1">]-(</span><span class="s3">31</span><span class="s1">-N[</span><span class="s3">1</span><span class="s1">]),</span><span class="s3">31</span><span class="s1">] 
+ 
+</span><span class="s2">def </span><span class="s1">TransvaserBdansA(N): 
+    </span><span class="s2">if </span><span class="s1">N[</span><span class="s3">0</span><span class="s1">]+N[</span><span class="s3">1</span><span class="s1">]&lt;=</span><span class="s3">13</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[N[</span><span class="s3">1</span><span class="s1">]+N[</span><span class="s3">0</span><span class="s1">],</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[</span><span class="s3">13</span><span class="s1">,N[</span><span class="s3">1</span><span class="s1">]-(</span><span class="s3">13</span><span class="s1">-N[</span><span class="s3">0</span><span class="s1">])] 
+ 
+</span><span class="s0">#états possibles suivant N en appliquant les opérations ci-dessus</span><span class="s1"> 
+</span><span class="s0">#possible sates following N applying the above operations</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">next (N): 
+    Result=[ViderA(N),ViderB(N),RemplirA(N),RemplirB(N),TransvaserAdansB(N),TransvaserBdansA(N)] 
+    </span><span class="s2">return </span><span class="s1">[x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">Result </span><span class="s2">if </span><span class="s1">x !=N] 
+ 
+</span><span class="s0">#états possibles après n opérations élémentaires</span><span class="s1"> 
+</span><span class="s0">#possible states after n elementary operations</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">step(n,N): 
+    </span><span class="s2">if </span><span class="s1">n==</span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">next(N) 
+    Result=[] 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">step(n-</span><span class="s3">1</span><span class="s1">,N): 
+        </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">next(x): 
+            </span><span class="s2">if </span><span class="s1">y </span><span class="s2">not in </span><span class="s1">Result: 
+                Result.append(y) 
+    </span><span class="s2">return </span><span class="s1">Result 
+ 
+</span><span class="s0">#état gagnant</span><span class="s1"> 
+</span><span class="s0">#winning state</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">winsN(N): 
+    </span><span class="s2">return </span><span class="s1">N[</span><span class="s3">0</span><span class="s1">]==</span><span class="s3">1 </span><span class="s2">or </span><span class="s1">N[</span><span class="s3">1</span><span class="s1">]==</span><span class="s3">1</span><span class="s1"> 
+</span><span class="s0">#liste gagnante:</span><span class="s1"> 
+</span><span class="s0">#winning list:</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">winsL(L): 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L: 
+        </span><span class="s2">if </span><span class="s1">winsN(x): 
+            </span><span class="s2">return True</span><span class="s1"> 
+    </span><span class="s2">return False</span><span class="s1"> 
+ 
+</span><span class="s0"># preuve qu'on ne peut parvenir au résultat avec moins de 32 manipulations.</span><span class="s1"> 
+</span><span class="s0"># Proof that you cannot reach the result with less than 32 operations.</span><span class="s1">
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">33</span><span class="s1">): 
+        </span><span class="s2">if </span><span class="s1">winsL(step(n,[</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">])): 
+            print(n) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

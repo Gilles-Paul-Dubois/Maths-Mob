@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">periode(p,q)</span>
+    <span class="s1">e=p÷q</span>
+    <span class="s1">p=p%q</span>
+    <span class="s1">R,Q,r,x=[p],[],p,</span><span class="s2">0</span>
+    <span class="s0">while true</span>
+        <span class="s1">d=(</span><span class="s2">10</span><span class="s1">*r)÷q</span>
+        <span class="s1">r=(</span><span class="s2">10</span><span class="s1">*r)%q</span>
+        <span class="s0">if </span><span class="s1">r </span><span class="s0">in </span><span class="s1">R</span>
+            <span class="s1">x=indexin(r,R)[</span><span class="s2">1</span><span class="s1">]</span>
+            <span class="s1">push!(Q,d)</span>
+            <span class="s0">break</span>
+        <span class="s0">else</span>
+            <span class="s1">push!(R,r)</span>
+            <span class="s1">push!(Q,d)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s1">S=string(string(e),</span><span class="s3">&quot;.&quot;</span><span class="s1">)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">Q</span>
+        <span class="s1">S=string(S,string(i))</span>
+    <span class="s0">end</span>
+    <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">Q[x:end]</span>
+        <span class="s1">S=string(S,string(j))</span>
+    <span class="s0">end</span>
+    <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s1">x:length(Q)</span>
+        <span class="s1">S=string(S,</span><span class="s3">&quot;-&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">S</span>
+<span class="s0">end</span>
+
+<span class="s1">println(periode(</span><span class="s2">17125</span><span class="s1">,</span><span class="s2">9990</span><span class="s1">))</span>
+</pre>
+</body>
+</html>

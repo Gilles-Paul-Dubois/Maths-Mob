@@ -1,0 +1,204 @@
+﻿<html>
+ <head>
+  <title>
+   rationnels.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+</span><span class="s2">from </span><span class="s1">math </span><span class="s2">import </span><span class="s1">*   
+</span><span class="s2">from </span><span class="s1">decimal </span><span class="s2">import </span><span class="s1">*   
+</span><span class="s2">import </span><span class="s1">os   
+   
+</span><span class="s0"># un module de modélisation des nombres rationnels  </span><span class="s1"> 
+</span><span class="s0"># A class to represent rational numbers   </span><span class="s1"> 
+   
+</span><span class="s0"># pgcd de deux entiers positifs - gcd of 2 integers  </span><span class="s1"> 
+</span><span class="s0">#suivant l'algorithme d'Euclide - using Euclidean algorithm  </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">pgcd(x,y):   
+    </span><span class="s2">if</span><span class="s1">(x==</span><span class="s3">0 </span><span class="s2">or </span><span class="s1">y==</span><span class="s3">0</span><span class="s1">):   
+        </span><span class="s2">return </span><span class="s3">1  </span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">(y%x==</span><span class="s3">0</span><span class="s1">):   
+        </span><span class="s2">return </span><span class="s1">x   
+    </span><span class="s2">else</span><span class="s1">:   
+        </span><span class="s2">return </span><span class="s1">pgcd(y%x,x)   
+    </span><span class="s2">return  </span><span class="s1"> 
+   
+</span><span class="s0">#*****************classe Rationnel-class = Python's object*********************************  </span><span class="s1"> 
+</span><span class="s2">class </span><span class="s1">Rationnel:   
+   
+    </span><span class="s0">#simplification des fractions - reducing of fractions  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">normalise(self):   
+        g = pgcd(abs(self.num), abs(self.den))   
+        self.num = self.num / g   
+        self.den = self.den / g   
+        </span><span class="s2">if</span><span class="s1">(self.num*self.den&lt;</span><span class="s3">0</span><span class="s1">):   
+            </span><span class="s2">if </span><span class="s1">self.den&lt;</span><span class="s3">0</span><span class="s1">:   
+                self.den=-self.den   
+                self.num=-self.num   
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">if </span><span class="s1">self.den &lt;</span><span class="s3">0</span><span class="s1">:   
+                self.den=-self.den   
+                self.num=-self.num   
+        </span><span class="s2">return  </span><span class="s1"> 
+   
+    </span><span class="s2">def </span><span class="s1">__init__(self, num, den = </span><span class="s3">1</span><span class="s1">):  </span><span class="s0"># Constructeur - constructor  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">den == </span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'denominateur nul'</span><span class="s1">)   
+        </span><span class="s2">else</span><span class="s1">:   
+            self.num=num   
+            self.den=den   
+            self.normalise()   
+        </span><span class="s2">return  </span><span class="s1"> 
+    </span><span class="s0">#teste si la fraction est entière - checks if fraction is an integer </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">entier(self):   
+        </span><span class="s2">return </span><span class="s1">self.num%self.den==</span><span class="s3">0  </span><span class="s1"> 
+    </span><span class="s0">#teste si nulle - checks if null </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">nul (self):   
+        </span><span class="s2">return </span><span class="s1">self.num==</span><span class="s3">0  </span><span class="s1"> 
+    </span><span class="s4">""" conversion"""  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">dec (self):   
+        </span><span class="s2">return </span><span class="s1">Decimal(self.num)/Decimal(self.den)   
+   
+    </span><span class="s4">"""Les opérations binaires - binary operations"""  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): </span><span class="s0">#addition  </span><span class="s1"> 
+        n=self.num*other.den+other.num*self.den   
+        d=self.den*other.den   
+        </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+    </span><span class="s2">def </span><span class="s1">__mul__(self,other): </span><span class="s0">#multiplication  </span><span class="s1"> 
+        n=self.num*other.num   
+        d=self.den*other.den   
+        </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): </span><span class="s0">#soustraction - subtraction  </span><span class="s1"> 
+        n=self.num*other.den-other.num*self.den   
+        d=self.den*other.den   
+        </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+    </span><span class="s2">def </span><span class="s1">__truediv__(self,other): </span><span class="s0">#division</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">other.nul():   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'diviseur nul - null divisor'</span><span class="s1">)   
+        </span><span class="s2">else</span><span class="s1">:   
+            n=self.num*other.den   
+            d=self.den*other.num   
+            </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+        </span><span class="s2">return  </span><span class="s1"> 
+    </span><span class="s4">"""opérateurs unaires - unary operators"""  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): </span><span class="s0">#opposé - opposite  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Rationnel(-self.num,self.den)   
+    </span><span class="s2">def </span><span class="s1">__invert__(self):   
+        </span><span class="s2">if </span><span class="s1">self.nul(): </span><span class="s0">#inverse  </span><span class="s1"> 
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'diviseur nul'</span><span class="s1">)   
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">Rationnel (self.den,self.num)   
+        </span><span class="s2">return  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__pow__(self,n):   
+        </span><span class="s2">if </span><span class="s1">n==</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">Rationnel(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">1</span><span class="s1">)   
+        </span><span class="s2">elif </span><span class="s1">n&gt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">Rationnel (self.num**n,self.den**n)   
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">if </span><span class="s1">self.nul():   
+                </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'puissance negative d</span><span class="s2">\'</span><span class="s4"> nul'</span><span class="s1">)   
+            </span><span class="s2">else</span><span class="s1">:   
+                </span><span class="s2">return </span><span class="s1">Rationnel(self.den**(-n),self.num**(-n))   
+        </span><span class="s2">return  </span><span class="s1"> 
+   
+    </span><span class="s4">"""Les comparaisons - comparisons """  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__eq__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den==self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__lt__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&lt;self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__le__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&lt;=self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__gt__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&gt;self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__ge__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&gt;=self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__ne__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den!=self.den*other.num   
+   
+    </span><span class="s0"># pour voir une fraction sur la console appelée par print - to display a fraction </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__str__(self):   
+        </span><span class="s2">if </span><span class="s1">self.entier():   
+            </span><span class="s2">return </span><span class="s1">str(int(self.num)) 
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(int(self.num))+</span><span class="s4">'/'</span><span class="s1">+str(int(self.den)) 
+</span><span class="s0">#************************fin de la définition- end of definition**********************  </span><span class="s1"> 
+   
+</span><span class="s2">def </span><span class="s1">testop(): </span><span class="s0"># test des opérateurs binaires et unaires - test of operators </span><span class="s1"> 
+    r1=Rationnel(</span><span class="s3">6</span><span class="s1">,-</span><span class="s3">4</span><span class="s1">)   
+    r2=Rationnel(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">)   
+    print(r1)   
+    print((r1+r2))   
+    print((r1-r2))   
+    print((r1*r2))   
+    print((r1/r2))   
+    print((-r1))   
+    print((~r2))   
+    print((r1**</span><span class="s3">2</span><span class="s1">))   
+    print((r2**(-</span><span class="s3">2</span><span class="s1">)))   
+    print((r2**</span><span class="s3">0</span><span class="s1">))   
+    </span><span class="s2">return  </span><span class="s1"> 
+   
+</span><span class="s2">def </span><span class="s1">testcmp(): </span><span class="s0"># test des relations de comparaison - checking order relations </span><span class="s1"> 
+    r1=Rationnel(</span><span class="s3">6</span><span class="s1">,-</span><span class="s3">4</span><span class="s1">)   
+    r2=Rationnel(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">)   
+    print((r1==r2))   
+    print((r1==-(-r1)))   
+    print((r1&lt;r2))   
+    print((r1&gt;r2))   
+    print((r2&lt;r1))   
+    print((r1!=r2))   
+    print((r1&lt;=(~(~r1))))   
+    </span><span class="s2">return  </span><span class="s1"> 
+   
+</span><span class="s0">#calcule le nombre e comme somme de la série des inverses factorielles - computation of Euler's number as beginning of a series  </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">calcule_euler (n):   
+    h=</span><span class="s3">1  </span><span class="s1"> 
+    b=</span><span class="s3">1  </span><span class="s1"> 
+    e=Rationnel(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">)   
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">1</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">):   
+        u=Rationnel(h,b)   
+        e=e+u   
+        b*=i   
+    getcontext().prec=</span><span class="s3">50 </span><span class="s0">#fixe la précision - defines precision  </span><span class="s1"> 
+    print((e.dec()))   
+    </span><span class="s2">return  </span><span class="s1"> 
+   
+</span><span class="s0">#programme principal - main function  </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">main(): 
+    testop() 
+    testcmp() 
+    calcule_euler(</span><span class="s3">40</span><span class="s1">) </span><span class="s0"># 48 décimales exactes - 40 exact decimals</span><span class="s1"> 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+   
+</span><span class="s4">"""   
+e = 2,7182818284 5904523536 0287471352 6624977572 47093699959574966967 
+6277240766 3035354759 4571382178 5251664274…   
+"""  </span><span class="s1"> 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+ 
+</span></pre>
+ </body>
+</html>

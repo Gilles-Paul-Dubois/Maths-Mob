@@ -1,0 +1,55 @@
+﻿<html>
+ <head>
+  <title>
+   eratosthene1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+n=</span><span class="s3">10000</span><span class="s1"> 
+premiers=[</span><span class="s2">True</span><span class="s1">]*n </span><span class="s0">#a priori tous premiers - give a chance to everybody to start</span><span class="s1"> 
+premiers[</span><span class="s3">0</span><span class="s1">]=</span><span class="s2">False </span><span class="s0">#0 n'est pas premier - 0 not prime </span><span class="s1"> 
+premiers[</span><span class="s3">1</span><span class="s1">]=</span><span class="s2">False </span><span class="s0"># 1 non plus - neither 1</span><span class="s1"> 
+racine=math.sqrt(n) </span><span class="s0">#la borne pour les tests- bound for tests</span><span class="s1"> 
+ 
+</span><span class="s0"># la méthode du crible - the sieve method</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">eratosthene (): 
+    i=</span><span class="s3">2</span><span class="s1"> 
+    </span><span class="s2">while </span><span class="s1">i &lt;= racine: 
+        k=</span><span class="s3">2</span><span class="s1"> 
+        h=(n-</span><span class="s3">1</span><span class="s1">)/i </span><span class="s0">#pour ne pas recalculer un produit à chaque tour de boucle - not to compute a product for every pass in the loop</span><span class="s1"> 
+        </span><span class="s2">while </span><span class="s1">k&lt;=h: 
+            premiers[k*i]=</span><span class="s2">False</span><span class="s1"> 
+            k+=</span><span class="s3">1</span><span class="s1"> 
+        j=i+</span><span class="s3">1 </span><span class="s2">if </span><span class="s1">i&lt;</span><span class="s3">3 </span><span class="s2">else </span><span class="s1">i+</span><span class="s3">2 </span><span class="s0">#après 2 et 3 plus de premiers consécutifs - after (2,3) no couple of consecutive primes</span><span class="s1"> 
+        </span><span class="s2">while not </span><span class="s1">premiers[j]: 
+            j+=</span><span class="s3">1</span><span class="s1"> 
+        i=j 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    eratosthene() 
+    print([i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n) </span><span class="s2">if </span><span class="s1">premiers[i]])</span><span class="s0">#affiche les premiers entre 1 et n - displays primes between 1 and n</span><span class="s1"> 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

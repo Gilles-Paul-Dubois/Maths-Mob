@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Réduction des matrices orthogonales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/redortho/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/redortho/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p> Dans toute cette page E désigne un espace vectoriel complexe (x,y) → x.y un produit scalaire sur E. <br /> Nous nous proposons de montrer que tout <input type="button" value="endomorphisme orthogonal" onclick="go('../orthogonalite/grouporth.html#')" data-inline="true" /> pour ce <input type="button" value="produit scalaire" onclick="go('../orthogonalite/basorth.html#def5')" data-inline="true" /> est diagonalisable. <br /> Plus précisément: </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p> Throughout this page E denotes a complex vector space (x,y) → x.y a dot product on E. <br /> We propose to show that all <input data-inline="true" onclick="go('../orthogonalite/grouporth.html#')" type="button" value=" orthogonal endomorphism" /> for this <input data-inline="true" onclick="go('../orthogonalite/basorth.html#def5e')" type="button" value=" scalar product" /> is diagonalizable. <br /> More precisely: </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Dans les conditions ci-dessus, si u est orthogonal, il existe une <input type="button" value="base orthonormale" onclick="go('../orthogonalite/basorth.html#')" data-inline="true" /> formée de <input type="button" value="vecteurs propres" onclick="go('valvecprop.html#')" data-inline="true" /> de u.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Under the above conditions, if u is orthogonal, there is an <input data-inline="true" onclick="go('../orthogonalite/basorth.html#')" type="button" value=" orthonormal basis" /> formed of <input data-inline="true" onclick="go('valvecprop.html#')" type="button" value=" eigenvectors" /> of u.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <p>Nous aurons besoin de quelques résultats préliminaires:</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>We will need some preliminary results: </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="lem1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 1</div> Si u est orthogonal, toute valeur propre de u est de module 1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 1</div> If u is orthogonal, any eigenvalue of u has modulus 1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet supposons u(x)=λx avec x ≠ 0. <br /> Alors u(x).u(x)=x.x=(λx).(λx)=λ <span style="text-decoration: overline;">λ</span>x.x <br /> D'où nous tirons λ <span style="text-decoration: overline;">λ</span>=1 puisque x.x ≠ 0.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed suppose u(x)=λx with x ≠ 0. <br /> Then u(x).u(x)=x.x=(λx).(λx)=λ <span style="text-decoration: overline;">λ</span>x.x <br /> From where we derive λ <span style="text-decoration: overline;">λ</span> =1 since x.x ≠ 0.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="lem2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 2</div> Si u est orthogonal et si λ est une valeur propre de u alors <span style="text-decoration: overline;">λ</span> est valeur propre de u<sup>*</sup> et u(x)=λx ⇔ u<sup>*</sup>(x)= <span style="text-decoration: overline;">λ</span>x
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 2</div> If u is orthogonal and if λ is an eigenvalue of u then <span style="text-decoration: overline;">λ</span> is eigenvalue of u<sup>*</sup> and u(x)=λx ⇔ u<sup>*</sup>(x)= <span style="text-decoration: overline;">λ</span> x
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet partons de u(x)=λx et appliquons u<sup>*</sup> aux deux membres <br /> u<sup>*</sup>(u(x))=u<sup>*</sup>(λx) <br /> Comme u<sup>*</sup> est linéaire et u<sup>*</sup>=u<sup>-1</sup>, il vient : <br /> x= λu<sup>*</sup>(x) <br /> Multiplions les deux membres par <span style="text-decoration: overline;">λ</span>
+            <br />
+            <span style="text-decoration: overline;">λ</span>x= <span style="text-decoration: overline;">λ</span>λu<sup>*</sup>(x) <br /> Et comme en vertu du lemme précédent <span style="text-decoration: overline;">λ</span>λ=1, il vient: <br />
+            <span style="text-decoration: overline;">λ</span>x= u<sup>*</sup>(x)
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed let's start from u(x)=λx and apply u<sup>*</sup> to both members <br /> u<sup>*</sup>(u(x))=u<sup>*</sup>(λx) <br />Like u<sup>*</sup> is linear and u<sup>*</sup>=u<sup>-1</sup>, it comes: <br /> x= λu<sup>*</sup>(x) <br />Multiply both sides by <span style="text-decoration: overline;">λ</span>
+            <br />
+            <span style="text-decoration: overline;">λ</span>x= <span style="text-decoration: overline;">λ</span>λu<sup>*</sup>(x) <br />And as by the previous lemma <span style="text-decoration: overline;">λ</span> λ=1, it comes: <br />
+            <span style="text-decoration: overline;">λ</span>x= u<sup>*</sup>(x)
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="lem3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 3</div> Soient E<sub>1</sub>, E<sub>2</sub>, ...,E<sub>p</sub> les <input type="button" value="sous-espaces propres" onclick="go('valvecprop.html#')" data-inline="true" /> associés aux valeurs propres λ<sub>1</sub>, ..., λ<sub>p</sub>. Les sous-espaces E<sub>i</sub> sont deux à deux orthogonaux.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 3</div> Let E<sub>1</sub>, E<sub>2</sub>, ...,E<sub>p</sub> the <input data-inline="true" onclick="go('valvecprop.html#')" type="button" value="eigen subspaces" />associated with the eigenvalues ​​λ<sub>1</sub>, ..., λ<sub>p</sub>. The subspaces E<sub>i</sub> are pairwise orthogonal.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soient x ∈ E<sub>i</sub> et y ∈ E<sub>j</sub>
+            <br /> λ<sub>i</sub>x.y= u(x).y = x.u<sup>*</sup>(y)=x. <span style="text-decoration: overline;">λ</span>
+           <sub>j</sub> y=λ<sub>j</sub>x.y d'après le lemme précédent donc comme λ<sub>i</sub>≠λ<sub>j</sub> x.y=0.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let x ∈ E<sub>i</sub> and y ∈ E<sub>j</sub>
+            <br />λ<sub>i</sub>x.y= u(x).y = x.u<sup>*</sup>(y)=x. <span style="text-decoration: overline;">λ</span>
+           <sub>j</sub> y=λ<sub>j</sub>x.y according to the previous lemma therefore as λ<sub>i</sub>≠λ<sub>j</sub> x.y=0.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="lem4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 4</div> Soit F un sous-espace de E stable par u et u<sup>*</sup>, alors F<sup>⊥</sup> est également stable par u et u<sup>*</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 4</div> Let F be a subspace of E stable by u and u<sup>*</sup>, then F<sup>⊥</sup> is also stable by u and u<sup>*</sup>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet soit x ∈ F<sup>⊥</sup> alors si y ∈ F <br /> u(x).y=x.u(y)=0 puisque F est stable par u, donc u(x) ∈ F<sup>⊥</sup>. <br /> u<sup>*</sup>(x).y=x.u(y)=0 puisque F stable par u. Donc F<sup>⊥</sup> est stable par u<sup>*</sup>. <br /> On démontre de la même façon que F est stable par u<sup>*</sup>.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed let x ∈ F<sup>⊥</sup> then if y ∈ F <br /> u(x).y=xu(y)=0 since F is stable by u, so u(x) ∈ F<sup>⊥</sup>. <br />u<sup>*</sup>(x).y=x.u(y)=0 since F stable by u. So F<sup>⊥</sup>is stable by u<sup>*</sup>. <br /> We prove in the same way that F is stable by u<sup>*</sup>.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <p>Nous pouvons maintenant passer à la démonstration du théorème: </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>We can now move on to the proof of the theorem: </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration du théorème</h4> Soit F=E<sub>1</sub>+...+E<sub>p</sub> le sous-espace somme des sous-espaces propres attachés aux diverses valeurs propres de u. D'après le lemme précédent F est stable par u et u<sup>*</sup>, il en est donc de même de F<sup>⊥</sup>. Si l'on avait F<sup>⊥</sup>≠{0} u aurait au moins un vecteur propre dans F<sup>⊥</sup> on aurait donc F∩F<sup>⊥</sup>≠{0} donc f ne serait pas définie positive. Donc F<sup>⊥</sup>={0} et F=E. Donc E est somme des sous-espaces E<sub>i</sub> et même somme directe en vertu du fait que des vecteurs propres attachés à des valeurs propres distinctes sont nécessairement indépendants. <br /> Cela dit, une base de E peut être obtenue en réunissant des bases des E<sub>i</sub>. Comme chaque E<sub>i</sub> est stable par u. Si u<sub>i</sub> désigne la restriction de u à E<sub>i</sub>, la matrice de u<sub>i</sub> par rapport à toute base étant diagonale, il suffit de prendre dans chaque E<sub>i</sub> une base orthonormale, et de réunir ces bases pour obtenir une base (orthonormale) de E relativement à laquelle u a une matrice diagonale.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof of the theorem</h4> Let F=E<sub>1</sub>+...+E<sub>p</sub> the subspace sum of the eigen subspaces attached to the various eigenvalues ​​of u. According to the previous lemma F is stable by u and u<sup>*</sup>, so it is the same for F<sup>⊥</sup>. If we had F<sup>⊥</sup>≠{0} we would have at least one eigenvector in F<sup>⊥</sup> we would therefore have F∩F<sup>⊥</sup>≠{0} so f would not be positive definite. So F<sup>⊥</sup>={0} and F=E. So E is sum of the subspaces E<sub>i</sub> and even direct sum by virtue of the fact that eigenvectors attached to distinct eigenvalues ​​are necessarily independent. <br />That being said, a basis of E can be obtained by joining bases of E<sub>i</sub>. Like every E<sub>i</sub> is stable by u. If u<sub>i</sub> denotes the restriction of u to E<sub>i</sub>, the matrix of u<sub>i</sub> with respect to any basis being diagonal, it suffices to take in each E<sub>i</sub> an orthonormal basis, and to combine these bases to obtain an (orthonormal) basis of E relatively to which u has a diagonal matrix.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

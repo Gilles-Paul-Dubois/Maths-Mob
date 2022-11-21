@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Espaces de matrices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Toutes les matrices dont il est question ici sont supposées avoir leur coefficients dans un <strong>même</strong> corps K. </p>
+          <h2>Somme de deux matrices</h2>
+          <div id="container">
+            <div id="label">définition</div> Soit A une matrice : \[A=\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &\alpha _{2,1} &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\alpha_{m,1} &\alpha_{m,2} & & & &\alpha _{m,n} \\ \end{pmatrix}\] et B une matrice <strong>de même type</strong> : \[B=\begin{pmatrix} &\beta _{1,1} &\beta_{1,2} &. &. &. &\beta_{1,n} \\ &\beta _{2,1} &\beta_{2,2} &. &. &. &\beta_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\beta_{m,1} &\beta_{m,2} & & & &\beta _{m,n} \\ \end{pmatrix}\] Alors la somme de A et B est la matrice : \[A+B=\begin{pmatrix} &\gamma _{1,1} &\gamma_{1,2} &. &. &. &\gamma_{1,n} \\ &\gamma _{2,1} &\gamma_{2,2} &. &. &. &\gamma_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\gamma_{m,1} &\gamma_{m,2} & & & &\gamma _{m,n} \\ \end{pmatrix}\] <p> où ∀ (i,j) ∈ {1,...,m}×{1,...,n} γ<sub>i,j</sub>=α<sub>i,j</sub>+β<sub>i,j</sub>
+            </p>
+          </div>
+          <h3> Exemple:</h3> \[\begin{pmatrix} 1& 2& 5\\ -4& 0& 7\\ \end{pmatrix} + \begin{pmatrix} -2& 6& 0\\ -3& 1& 8\\ \end{pmatrix} = \begin{pmatrix} -1& 8& 5\\ -7& 1 & 15 \\ \end{pmatrix} \] <p> Voici une appliquette qui donne des exemples de sommes de matrices. <br /> Comme au paragraphe précédent, vous fixez le nombre de lignes, le nombre de colonnes et un corps parmi un choix restreint. <br /> Un exemple aléatoire est généré. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>All matrices we are talking about here are supposed to have their coefficients in <strong> a same field</strong> K. </p>
+          <h2>Addition of two matrices</h2>
+          <div id="container">
+            <div id="label">définition</div> Let A be a matrix : \[A=\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &\alpha _{2,1} &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\alpha_{m,1} &\alpha_{m,2} & & & &\alpha _{m,n} \\ \end{pmatrix}\] and B a matrix <strong>of the same type</strong> : \[B=\begin{pmatrix} &\beta _{1,1} &\beta_{1,2} &. &. &. &\beta_{1,n} \\ &\beta _{2,1} &\beta_{2,2} &. &. &. &\beta_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\beta_{m,1} &\beta_{m,2} & & & &\beta _{m,n} \\ \end{pmatrix}\] Then the sum of A and B is the matrix : \[A+B=\begin{pmatrix} &\gamma _{1,1} &\gamma_{1,2} &. &. &. &\gamma_{1,n} \\ &\gamma _{2,1} &\gamma_{2,2} &. &. &. &\gamma_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\gamma_{m,1} &\gamma_{m,2} & & & &\gamma _{m,n} \\ \end{pmatrix}\] <p> where ∀ (i,j) ∈ {1,...,m}×{1,...,n} γ<sub>i,j</sub>=α<sub>i,j</sub>+β<sub>i,j</sub>
+            </p>
+          </div>
+          <h3> Example:</h3> \[\begin{pmatrix} 1& 2& 5\\ -4& 0& 7\\ \end{pmatrix} + \begin{pmatrix} -2& 6& 0\\ -3& 1& 8\\ \end{pmatrix} = \begin{pmatrix} -1& 8& 5\\ -7& 1 & 15 \\ \end{pmatrix} \] <p> Here is an applet which gives examples of sums of matrices. <br /> Just like in the previous page, you choose a number of rows, a number of columns and a field with some restrictions. <br /> A random sample is generated. </p>
+        </div>
+        <!-- /en -->
+        <div>
+          <table border="2">
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice B</div>
+                <!-- /fr -->
+                <div lang="en">Matrix B</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A+B</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A+B</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas3" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <table border="1">
+                  <tr>
+                    <td width="50" height="30"> &reals; </td>
+                    <td width="50">
+                      <input checked="" name="corps1" onclick="nameSpace1.handleClick(this);" type="radio" value="1" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30"> &rationals;</td>
+                    <td>
+                      <input name="corps1" onclick="nameSpace1.handleClick(this);" type="radio" value="2" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30"> &integers;/5&integers;</td>
+                    <td>
+                      <input name="corps1" onclick="nameSpace1.handleClick(this);" type="radio" value="3" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30">&complexes;</td>
+                    <td>
+                      <input name="corps1" onclick="nameSpace1.handleClick(this);" type="radio" value="4" />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Nombre de lignes: </div>
+                <!-- /fr -->
+                <div lang="en">Number of rows</div>
+                <!-- /en -->
+                <input id="myRange1" max="6" min="1" value="3" onchange="nameSpace1.changem(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Nombre de colonnes :</div>
+                <!-- /fr -->
+                <div lang="en">Number of columns</div>
+                <!-- /en -->
+                <input id="myRange2" max="6" min="1" value="3" onchange="nameSpace1.changen(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/addmat1.js"></script>
+        <div lang="fr">
+          <h2>Produit par un scalaire</h2>
+          <div id="container">
+            <div id="label">définition</div> Soit A une matrice à coefficients dans un corps K : \[A=\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &\alpha _{2,1} &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\alpha_{m,1} &\alpha_{m,2} & & & &\alpha _{m,n} \\ \end{pmatrix}\] <p>et &lambda; un scalaire <strong>du même corps</strong> K. </p>
+            <p>Alors la matrice produit de A par le scalaire &lambda; est définie par :</p> \[\lambda A=\begin{pmatrix} &\lambda \alpha _{1,1} &\lambda \alpha_{1,2} &. &. &. &\lambda \alpha_{1,n} \\ &\lambda \alpha _{2,1} &\lambda \alpha_{2,2} &. &. &. &\lambda \alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\lambda \alpha_{m,1} &\lambda \alpha_{m,2} & & & &\lambda \alpha _{m,n} \\ \end{pmatrix}\]
+          </div>
+          <h3>Exemple:</h3> \[2\begin{pmatrix} 1& 2& 5\\ -4& 0& 7\\ \end{pmatrix} =\begin{pmatrix} 2& 4& 10\\ -8& 0& 14\\ \end{pmatrix}\] <p> Voici une appliquette qui donne des exemples de produits de matrices par des scalaires. <br /> Comme précédemment, vous fixez le nombre de lignes, le nombre de colonnes et un corps parmi un choix restreint. <br /> Un exemple aléatoire est généré. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Product by a scalar</h2>
+          <div id="container">
+            <div id="label">definition</div> Le A be a matrix with coefficients in some field K : \[A=\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &\alpha _{2,1} &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\alpha_{m,1} &\alpha_{m,2} & & & &\alpha _{m,n} \\ \end{pmatrix}\] <p>and &lambda; a scalar <strong>from the same field</strong> K. </p>
+            <p>The the matrix product of A by the scalar &lambda; is defined by :</p> \[\lambda A=\begin{pmatrix} &\lambda \alpha _{1,1} &\lambda \alpha_{1,2} &. &. &. &\lambda \alpha_{1,n} \\ &\lambda \alpha _{2,1} &\lambda \alpha_{2,2} &. &. &. &\lambda \alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\lambda \alpha_{m,1} &\lambda \alpha_{m,2} & & & &\lambda \alpha _{m,n} \\ \end{pmatrix}\]
+          </div>
+          <h3>Example:</h3> \[2\begin{pmatrix} 1& 2& 5\\ -4& 0& 7\\ \end{pmatrix} =\begin{pmatrix} 2& 4& 10\\ -8& 0& 14\\ \end{pmatrix}\] <p> Here is an applet which gives examples of products of matrices by scalars. <br /> Just like before you decide the number of rows, the number of columms, and some field among a restricted choice. <br /> A random sample is generated. </p>
+        </div>
+        <!-- /en -->
+        <div>
+          <table border="2">
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas4" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <input id="myText" type="text" />
+                <div lang="fr">Matrice λA</div>
+                <!-- /fr -->
+                <div lang="en">Matrix λA</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas5" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <table border="1">
+                  <tr>
+                    <td width="50" height="30"> &reals; </td>
+                    <td width="50">
+                      <input checked="" name="corps2" onclick="nameSpace2.handleClick(this);" type="radio" value="1" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30"> &rationals;</td>
+                    <td>
+                      <input name="corps2" onclick="nameSpace2.handleClick(this);" type="radio" value="2" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30"> &integers;/5&integers;</td>
+                    <td>
+                      <input name="corps2" onclick="nameSpace2.handleClick(this);" type="radio" value="3" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td height="30">&complexes;</td>
+                    <td>
+                      <input name="corps2" onclick="nameSpace2.handleClick(this);" type="radio" value="4" />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Nombre de lignes :</div>
+                <!-- /fr -->
+                <div lang="en">Number of rows :</div>
+                <!-- /en -->
+                <input id="myRange3" max="6" min="1" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Nombre de colonnes :</div>
+                <!-- /fr -->
+                <div lang="en">Number of columns</div>
+                <!-- /en -->
+                <input id="myRange4" max="6" min="1" value="3" onchange="nameSpace2.changen(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/matmultscal1.js"></script>
+        <div lang="fr">
+          <h2> Espace M(m,n,K) </h2>
+          <div id="container"> Nous reconnaissons que l'addition et la loi externe définies plus haut sur l'ensemble M(m,n,K) correspond exactement à l'addition et à la loi externe sur l'espace K <sup>m×n</sup>. M(m,n,K) devient donc avec ces opérations un <input type="button" value="K-espace vectoriel" onclick="go('../espaces/defev.html')" data-inline="true" />. </div> En particulier: <div id="container"> Une <input type="button" value="base" onclick="go('../espaces/bases.html')" data-inline="true" /> de M(m,n,K) est obtenue en prenant les matrices: <br /> A<sub>i,j</sub>= (α<sub>k,h</sub>) où α<sub>k,h</sub>=0 sauf si k=i et h=j auquel cas α<sub>i,j</sub>=1 </div>
+          <div id="container">
+            <div id="label">définition</div> La base ci-dessus s'appelle la <b>
+              <i>'base canonique'</i>
+            </b> de M(m,n,K).
+          </div>
+          <h2> Le coin de Python </h2> Voici comment on peut utiliser une bibliothèque (numpy) pour additionner des matrices, les multiplier par des scalaires: <p>
+            <object border="3" data="python/matrices_basics_2.html" height="300" type="text/html" width="100%"></object>
+          </p>
+          <a name="julia"></a>
+          <h2> Le coin de Julia </h2>
+          <p>On utilise ici Julia pour calculer des combinaisons linéaires de matrices à coefficients rationnels.</p>
+          <p>
+            <object border="3" data="julia/Rat_esp_mat.jl.html" height="70" type="text/html" width="100%"></object>
+          </p>
+          <p>Voici comment on peut utiliser une bibliothèque Nemo pour créer les corps finis &integers;/p&integers; pour p premier. On peut ensuite déclarer des matrices à coefficients dans ces corps et calculer des combinaisons linéaires.</p>
+          <p>
+            <object border="3" data="julia/Fp_esp_mat.jl.html" height="100" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Space M(m,n,K) </h2>
+          <div id="container"> We recognize that the addition and the external product defined above correspond exactly to the addition and the external multiplication on the space K <sup>m×n</sup>. Therefore M(m,n,K) becomes with these operations a <input type="button" value="K-vector space" onclick="go('../espaces/defev.html')" data-inline="true" />. </div> Specially : <div id="container"> A <input type="button" value="basis" onclick="go('../espaces/bases.html')" data-inline="true" /> of M(m,n,K) is obtained by taking the matrices <br /> A<sub>i,j</sub>= (α<sub>k,h</sub>) where α<sub>k,h</sub>=0 except if k=i et h=j in which case α<sub>i,j</sub>=1 </div>
+          <div id="container">
+            <div id="label">definition</div> The basis aboveis named <b>
+              <i>'canonical basis'</i>
+            </b> of M(m,n,K).
+          </div>
+          <h2> Python's corner </h2> Here is how one can use a library (numpy) to add matrices and multiply them by scalars : <p>
+            <object border="3" data="python/matrices_basics_2.html" height="300" type="text/html" width="100%"></object>
+          </p>
+          <a name="julia"></a>
+          <h2> Julia's corner </h2>
+          <p> We use here Julia to compute linear combinations of matrices with coefficients in &rationals;. </p>
+          <p>
+            <object border="3" data="julia/Rat_esp_mat.jl.html" height="70" type="text/html" width="100%"></object>
+          </p>
+          <p> Here is how one can use a package (Nemo) to create finite fields &integers;/p&integers; with prime p. We can then declare matrices with coefficients in such fields and compute linear combinations. </p>
+          <p>
+            <object border="3" data="julia/Fp_esp_mat.jl.html" height="100" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,140 @@
+﻿<html>
+ <head>
+  <title>
+   polynomes.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+ 
+</span><span class="s0"># classe de polynomes à coefficients complexes</span><span class="s1"> 
+</span><span class="s0"># class of polynomials with complex coefficients</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">string 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">normaliser(L): 
+    </span><span class="s0">"""enlever les zéros de queue sauf le premier """</span><span class="s1"> 
+    </span><span class="s0">"""Remove zeros of the tail except first one """</span><span class="s1">     
+    </span><span class="s2">if </span><span class="s1">len(L) == </span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">L 
+    </span><span class="s2">if not </span><span class="s1">L[-</span><span class="s3">1</span><span class="s1">]: 
+        </span><span class="s2">return </span><span class="s1">normaliser(L[</span><span class="s3">0</span><span class="s1">:-</span><span class="s3">1</span><span class="s1">]) 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">L 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Polynome: 
+    </span><span class="s0">""" Implémentation d'un objet polynôme à coefficients complexes - class definition"""</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">"""Constructeur - constructor"""</span><span class="s1"> 
+        </span><span class="s2">if not </span><span class="s1">isinstance(L, list):  </span><span class="s0">#il faut initialiser avec une liste - initialize with a list</span><span class="s1"> 
+            </span><span class="s2">raise </span><span class="s1">Exception(</span><span class="s4">"Une liste please !"</span><span class="s1">) 
+        </span><span class="s2">if </span><span class="s1">L == []:  </span><span class="s0"># elle doit être non vide - should not be empty</span><span class="s1"> 
+            </span><span class="s2">raise </span><span class="s1">Exception(</span><span class="s4">"Pas vide de préférence"</span><span class="s1">) 
+        </span><span class="s2">if not </span><span class="s1">all([isinstance(x, complex) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L]): 
+            </span><span class="s2">raise </span><span class="s1">Exception(</span><span class="s4">"Les coefficients doivent être des nombres complexes - coeffs must be complex"</span><span class="s1">) 
+        L = normaliser(L)  </span><span class="s0"># cas où il y aurait des zéros en queue. sait on jamais ? - case where tailing zeros would appear</span><span class="s1"> 
+        self.coeffs = L 
+        </span><span class="s2">if </span><span class="s1">L == [</span><span class="s3">0</span><span class="s1">]: 
+            self.degre = -</span><span class="s3">1  </span><span class="s0">#en fait -infini !!! actually -&infin;</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            self.degre = len(L) - </span><span class="s3">1  </span><span class="s0"># affectation du degré - fixing the degree</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe pour print - conversion to string"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.coeffs[</span><span class="s3">0</span><span class="s1">]: 
+            s = str(self.coeffs[</span><span class="s3">0</span><span class="s1">]) 
+        </span><span class="s2">else</span><span class="s1">: 
+            s = </span><span class="s4">""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.degre &gt;= </span><span class="s3">1</span><span class="s1">: 
+            </span><span class="s2">if </span><span class="s1">self.coeffs[</span><span class="s3">1</span><span class="s1">]: 
+                s = s + </span><span class="s4">"+" </span><span class="s1">+ str(self.coeffs[</span><span class="s3">1</span><span class="s1">]) + </span><span class="s4">"Z"</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.degre &gt;= </span><span class="s3">2</span><span class="s1">: 
+            </span><span class="s2">if </span><span class="s1">s != </span><span class="s4">""</span><span class="s1">: 
+                s = s + </span><span class="s4">"+"</span><span class="s1"> 
+            L = [str(self.coeffs[i]) + </span><span class="s4">"Z^" </span><span class="s1">+ str(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">2</span><span class="s1">, self.degre + </span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">self.coeffs[i]] 
+            s = s + </span><span class="s4">"+"</span><span class="s1">.join(L) 
+        </span><span class="s2">return </span><span class="s1">s 
+ 
+ 
+    </span><span class="s2">def </span><span class="s1">coefficient(self, i): 
+        </span><span class="s0">""" le coefficient d'ordre i du polynôme - i-th coeff of the polynomial"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s3">0 </span><span class="s1">&lt;= i &lt;= self.degre: 
+            </span><span class="s2">return </span><span class="s1">self.coeffs[i] 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s3">0</span><span class="s1"> 
+ 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">""" addition de deux polynômes - addition of polynomials"""</span><span class="s1"> 
+        s = max(self.degre, other.degre) 
+        L1 = [self.coefficient(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, s + </span><span class="s3">1</span><span class="s1">)] 
+        L2 = [other.coefficient(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, s + </span><span class="s3">1</span><span class="s1">)] 
+        L3 = [L1[i] + L2[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, s + </span><span class="s3">1</span><span class="s1">)] 
+        L3 = normaliser(L3) 
+        </span><span class="s2">return </span><span class="s1">Polynome(L3) 
+ 
+ 
+    </span><span class="s2">def </span><span class="s1">prod(self, a, n): 
+        </span><span class="s0">"""produit du polynôme par le monome aZ^n - product by a monomial """</span><span class="s1"> 
+        L = self.coeffs 
+        </span><span class="s2">if </span><span class="s1">n &gt; </span><span class="s3">0</span><span class="s1">: 
+            L = [</span><span class="s3">0 </span><span class="s1">+ </span><span class="s3">0j</span><span class="s1">] * n + L 
+        L = [a * x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L] 
+        </span><span class="s2">return </span><span class="s1">Polynome(L) 
+ 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self, other): 
+        </span><span class="s0">""" Produit de deux polynômes - product of two polynomials"""</span><span class="s1"> 
+        L = [self.prod(other.coefficient(i), i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, other.degre + </span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">other.coefficient(i)] 
+        </span><span class="s2">return </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">P, Q: P + Q, L) 
+ 
+ 
+    </span><span class="s2">def </span><span class="s1">__pow__(self, n): 
+        P = Polynome([</span><span class="s3">1 </span><span class="s1">+ </span><span class="s3">0j</span><span class="s1">]) 
+        </span><span class="s2">if </span><span class="s1">n == </span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">P 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n): 
+                P = P * self 
+        </span><span class="s2">return </span><span class="s1">P 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">""" fonction de test des méthodes - test of class functions"""</span><span class="s1"> 
+    L = [</span><span class="s3">1 </span><span class="s1">+ </span><span class="s3">0j</span><span class="s1">, </span><span class="s3">0 </span><span class="s1">+ </span><span class="s3">1j</span><span class="s1">, </span><span class="s3">1 </span><span class="s1">+ </span><span class="s3">2j</span><span class="s1">, </span><span class="s3">0 </span><span class="s1">+ </span><span class="s3">1j</span><span class="s1">] 
+    M = [</span><span class="s3">2 </span><span class="s1">+ </span><span class="s3">2j</span><span class="s1">, </span><span class="s3">4 </span><span class="s1">+ </span><span class="s3">5j</span><span class="s1">, </span><span class="s3">0 </span><span class="s1">+ </span><span class="s3">0j</span><span class="s1">, </span><span class="s3">0 </span><span class="s1">- </span><span class="s3">1j</span><span class="s1">] 
+    P = Polynome(L) 
+    Q = Polynome(M) 
+    print(P) 
+    print(Q) 
+    print(P + Q) 
+    print(P.prod(</span><span class="s3">1 </span><span class="s1">+ </span><span class="s3">1j</span><span class="s1">, </span><span class="s3">2</span><span class="s1">)) 
+    print(P * Q) 
+    print(P ** </span><span class="s3">0</span><span class="s1">) 
+    print(P ** </span><span class="s3">1</span><span class="s1">) 
+    print(P ** </span><span class="s3">2</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

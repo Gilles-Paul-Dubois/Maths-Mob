@@ -1,0 +1,272 @@
+﻿<html>
+ <head>
+  <title>
+   ratiocomplexe.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">math   
+</span><span class="s2">import </span><span class="s1">os   
+   
+</span><span class="s0"># un module de modélisation de Q[i]  </span><span class="s1"> 
+</span><span class="s0"># modelization of Q[i]  </span><span class="s1">
+   
+</span><span class="s0"># pgcd de deux entiers positifs  </span><span class="s1"> 
+</span><span class="s0"># gcd of two positive integers </span><span class="s1"> 
+</span><span class="s0">#suivant l'algorithme d'Euclide  </span><span class="s1"> 
+</span><span class="s0">#accrding Euclidean algorithm  </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">pgcd(x,y):   
+    </span><span class="s2">if</span><span class="s1">(x==</span><span class="s3">0 </span><span class="s2">or </span><span class="s1">y==</span><span class="s3">0</span><span class="s1">):   
+        </span><span class="s2">return </span><span class="s3">1  </span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">(y%x==</span><span class="s3">0</span><span class="s1">):   
+        </span><span class="s2">return </span><span class="s1">x   
+    </span><span class="s2">else</span><span class="s1">:   
+        </span><span class="s2">return </span><span class="s1">pgcd(y%x,x)   
+    </span><span class="s2">return  </span><span class="s1"> 
+   
+</span><span class="s0">#*****************classe Rationnel- definition of class*******************  </span><span class="s1"> 
+</span><span class="s2">class </span><span class="s1">Rationnel:   
+   
+    </span><span class="s0">#simplification des fractions - reduction of fractions  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">normalise(self):   
+        g = pgcd(abs(self.num), abs(self.den))   
+        self.num = self.num // g 
+        self.den = self.den // g 
+        </span><span class="s2">if</span><span class="s1">(self.num*self.den&lt;</span><span class="s3">0</span><span class="s1">):   
+            </span><span class="s2">if </span><span class="s1">self.den&lt;</span><span class="s3">0</span><span class="s1">:   
+                self.den=-self.den   
+                self.num=-self.num   
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">if </span><span class="s1">self.den &lt;</span><span class="s3">0</span><span class="s1">:   
+                self.den=-self.den   
+                self.num=-self.num   
+        </span><span class="s2">return  </span><span class="s1"> 
+   
+    </span><span class="s2">def </span><span class="s1">__init__(self, num, den = </span><span class="s3">1</span><span class="s1">):  </span><span class="s0"># Constructeur - constructor  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">den == </span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'denominateur nul'</span><span class="s1">)   
+        </span><span class="s2">else</span><span class="s1">:   
+            self.num=num   
+            self.den=den   
+            self.normalise()   
+        </span><span class="s2">return  </span><span class="s1"> 
+    </span><span class="s0">#teste si la fraction est entière - checks if fraction is an integer </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">entier(self):   
+        </span><span class="s2">return </span><span class="s1">self.num%self.den==</span><span class="s3">0  </span><span class="s1"> 
+    </span><span class="s0">#teste si nulle - nullity test </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">nul (self):   
+        </span><span class="s2">return </span><span class="s1">self.num==</span><span class="s3">0  </span><span class="s1"> 
+   
+    </span><span class="s4">"""Les opérations binaires - binary operations"""  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): </span><span class="s0">#addition  </span><span class="s1"> 
+        n=self.num*other.den+other.num*self.den   
+        d=self.den*other.den   
+        </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+    </span><span class="s2">def </span><span class="s1">__mul__(self,other): </span><span class="s0">#multiplication  </span><span class="s1"> 
+        n=self.num*other.num   
+        d=self.den*other.den   
+        </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): </span><span class="s0">#soustraction - subtraction </span><span class="s1"> 
+        n=self.num*other.den-other.num*self.den   
+        d=self.den*other.den   
+        </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+    </span><span class="s2">def </span><span class="s1">__truediv__(self,other): </span><span class="s0">#division</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">other.nul():   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'diviseur nul'</span><span class="s1">)   
+        </span><span class="s2">else</span><span class="s1">:   
+            n=self.num*other.den   
+            d=self.den*other.num   
+            </span><span class="s2">return </span><span class="s1">Rationnel(n,d)   
+        </span><span class="s2">return  </span><span class="s1"> 
+    </span><span class="s4">"""opérateurs unaires - unary operators"""  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): </span><span class="s0">#opposé - opposite  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Rationnel(-self.num,self.den)   
+    </span><span class="s2">def </span><span class="s1">__invert__(self):   
+        </span><span class="s2">if </span><span class="s1">self.nul(): </span><span class="s0">#inverse  </span><span class="s1"> 
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'diviseur nul'</span><span class="s1">)   
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">Rationnel (self.den,self.num)   
+        </span><span class="s2">return  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__pow__(self,n):   
+        </span><span class="s2">if </span><span class="s1">n==</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">Rationnel(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">1</span><span class="s1">)   
+        </span><span class="s2">elif </span><span class="s1">n&gt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">Rationnel (self.num**n,self.den**n)   
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">if </span><span class="s1">self.nul():   
+                </span><span class="s2">raise </span><span class="s1">ZeroDivisionError(</span><span class="s4">'puissance negative d</span><span class="s2">\'</span><span class="s4"> nul'</span><span class="s1">)   
+            </span><span class="s2">else</span><span class="s1">:   
+                </span><span class="s2">return </span><span class="s1">Rationnel(self.den**(-n),self.num**(-n))   
+        </span><span class="s2">return  </span><span class="s1"> 
+   
+    </span><span class="s4">"""Les comparaisons - comparisons """  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__eq__(self,other):   
+       </span><span class="s2">return </span><span class="s1">self.num*other.den==self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__lt__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&lt;self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__le__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&lt;=self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__gt__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&gt;self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__ge__(self,other):   
+        </span><span class="s2">return </span><span class="s1">self.num*other.den&gt;=self.den*other.num   
+    </span><span class="s2">def </span><span class="s1">__ne__(self,other):   
+       </span><span class="s2">return </span><span class="s1">self.num*other.den!=self.den*other.num   
+   
+    </span><span class="s0"># pour voir une fraction sur la console appelée par print - converts to string  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__str__(self):   
+        </span><span class="s2">if </span><span class="s1">self.entier():   
+            </span><span class="s2">return </span><span class="s1">str(self.num)   
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.num)+</span><span class="s4">'/'</span><span class="s1">+str(self.den)   
+</span><span class="s0">#************************fin de la définition - end of class def*****************  </span><span class="s1"> 
+   
+   
+</span><span class="s0">#************************Classe des complexes à parties réelles et imaginaires rationnelles**********************  </span><span class="s1">
+</span><span class="s0">#************************Class of complexes with rational real and imaginary parts**********************  </span><span class="s1">  
+</span><span class="s2">class </span><span class="s1">RatioComplexe ():   
+    </span><span class="s0">""" modélisation des nombres complexes - modelization  of complex numbers"""  </span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self,a=</span><span class="s3">0</span><span class="s1">,b=</span><span class="s3">0</span><span class="s1">):   
+        </span><span class="s0">"""le constructeur - the constructor"""  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">isinstance(a,int):   
+            a=Rationnel(a)   
+        </span><span class="s2">if </span><span class="s1">isinstance(b,int):   
+            b=Rationnel(b)   
+        self.x=a   
+        self.y=b   
+   
+    </span><span class="s2">def </span><span class="s1">__str__(self):   
+        </span><span class="s0">""" représentation externe pour print et str - converts to string """  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==Rationnel(</span><span class="s3">0</span><span class="s1">):   
+            </span><span class="s2">return </span><span class="s1">str(self.x)   
+        </span><span class="s2">if </span><span class="s1">self.x==Rationnel(</span><span class="s3">0</span><span class="s1">) </span><span class="s2">and </span><span class="s1">self.y==Rationnel(</span><span class="s3">1</span><span class="s1">):   
+            </span><span class="s2">return </span><span class="s4">"i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==Rationnel(</span><span class="s3">0</span><span class="s1">) </span><span class="s2">and </span><span class="s1">self.y==Rationnel(-</span><span class="s3">1</span><span class="s1">):   
+            </span><span class="s2">return </span><span class="s4">"-i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==Rationnel(</span><span class="s3">0</span><span class="s1">):   
+            </span><span class="s2">return </span><span class="s1">str(self.y)+</span><span class="s4">"i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==Rationnel(</span><span class="s3">1</span><span class="s1">):   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"+i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y==Rationnel(-</span><span class="s3">1</span><span class="s1">):   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"-i"  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.y&gt;Rationnel(</span><span class="s3">0</span><span class="s1">):   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+</span><span class="s4">"+"</span><span class="s1">+str(self.y)+</span><span class="s4">"i"  </span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">str(self.x)+str(self.y)+</span><span class="s4">"i"  </span><span class="s1"> 
+   
+    </span><span class="s2">def </span><span class="s1">__add__(self,other):   
+        </span><span class="s0">"""somme de deux complexes - sum"""  </span><span class="s1"> 
+        a=self.x+other.x   
+        b=self.y+other.y   
+        </span><span class="s2">return </span><span class="s1">RatioComplexe(a,b)   
+   
+    </span><span class="s2">def </span><span class="s1">__sub__(self,other):   
+        </span><span class="s0">"""différence de deux complexes - difference"""  </span><span class="s1"> 
+        a=self.x-other.x   
+        b=self.y-other.y   
+        </span><span class="s2">return </span><span class="s1">RatioComplexe(a,b)   
+   
+    </span><span class="s2">def </span><span class="s1">__neg__(self):   
+        </span><span class="s0">"""opposé d'un complexe - opposite"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">RatioComplexe(-self.x,-self.y)   
+   
+    </span><span class="s2">def </span><span class="s1">null(self):   
+        </span><span class="s0">"""test de nullité - nullity test"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.x==Rationnel(</span><span class="s3">0</span><span class="s1">) </span><span class="s2">and </span><span class="s1">self.y==Rationnel(</span><span class="s3">0</span><span class="s1">)   
+   
+    </span><span class="s2">def </span><span class="s1">__mul__(self,other):   
+        </span><span class="s0">"""produit de deux complexes - product"""  </span><span class="s1"> 
+        a=self.x*other.x-self.y*other.y   
+        b=self.x*other.y+self.y*other.x   
+        </span><span class="s2">return </span><span class="s1">RatioComplexe(a,b)   
+   
+    </span><span class="s2">def </span><span class="s1">__truediv__(self,other): 
+        </span><span class="s0">"""quotient de deux complexes - quotient"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self*(~other)   
+   
+    </span><span class="s2">def </span><span class="s1">conj(self):   
+         </span><span class="s0">"""conjugué d'un complexe - conjugate"""  </span><span class="s1"> 
+         </span><span class="s2">return </span><span class="s1">RatioComplexe(self.x,-self.y)   
+   
+    </span><span class="s2">def </span><span class="s1">module(self):   
+        </span><span class="s0">"""module d'un complexe - modulus"""  </span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">math.sqrt(self.x*self.x+self.y*self.y)   
+    </span><span class="s2">def </span><span class="s1">argument(self):   
+        </span><span class="s0">"""argument d'un complexe - argument or angle"""  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y==</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s3">0  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y&gt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">math.pi/</span><span class="s3">2  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x==</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.y&lt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">-math.pi/</span><span class="s3">2  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.x &gt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">math.atan(self.y/self.x)   
+        </span><span class="s2">return </span><span class="s1">math.pi-math.atan(self.y/(-self.x))   
+   
+    </span><span class="s2">def </span><span class="s1">__invert__(self):   
+        </span><span class="s0">"""inverse d'un complexe - inverse"""  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.null():   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError   
+        </span><span class="s2">return </span><span class="s1">RatioComplexe(self.x/(self.x*self.x+self.y*self.y),-self.y/(self.x*self.x+self.y*self.y))   
+   
+    </span><span class="s2">def </span><span class="s1">__pow__(self,n):   
+        </span><span class="s0">"""puissances d'un complexe - powers"""  </span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">n&lt;=</span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.null():   
+            </span><span class="s2">raise </span><span class="s1">ZeroDivisionError   
+        </span><span class="s2">if </span><span class="s1">n &gt;=</span><span class="s3">0</span><span class="s1">:   
+            R=RatioComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+            </span><span class="s2">while </span><span class="s1">n:   
+                R=R*self   
+                n=n-</span><span class="s3">1  </span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">R   
+        </span><span class="s2">if </span><span class="s1">n&lt;</span><span class="s3">0</span><span class="s1">:   
+            </span><span class="s2">return </span><span class="s1">(~R)**(-n)   
+</span><span class="s0">#*********************fin de la définition - end of definition****************  </span><span class="s1"> 
+   
+</span><span class="s0"># fonction de test - test function  </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">main():   
+    z1=RatioComplexe(Rationnel(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">3</span><span class="s1">),Rationnel(</span><span class="s3">2</span><span class="s1">,</span><span class="s3">7</span><span class="s1">))   
+    z2=RatioComplexe(Rationnel(</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">),Rationnel(-</span><span class="s3">2</span><span class="s1">,</span><span class="s3">7</span><span class="s1">))   
+    z3=RatioComplexe(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">)   
+    z4=RatioComplexe(</span><span class="s3">2</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)   
+    z5=RatioComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">1</span><span class="s1">)   
+    print(z1)   
+    print(z2)   
+    print(z3)   
+    print(z4)   
+    print(z5)   
+    print(z1+z2)   
+    print(z1*z2)   
+    print(~z1)   
+    print(z1**</span><span class="s3">3</span><span class="s1">)   
+    print(z3**</span><span class="s3">3</span><span class="s1">)   
+    print(z5**</span><span class="s3">25</span><span class="s1">)      
+   
+   
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:   
+    main()   
+   
+   
+   
+   
+   
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

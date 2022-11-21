@@ -1,0 +1,88 @@
+﻿<html>
+ <head>
+  <title>
+   vecteursQn.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+</span><span class="s0">#python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction 
+ 
+</span><span class="s2">class </span><span class="s1">VectornD: 
+    </span><span class="s0">"""modélisation vecteurs de dimension n à coefficients rationnels  par une classe python"""</span><span class="s1"> 
+    </span><span class="s0">"""Modeling vectors of n dimensions with rational coefficients by a Python class"""</span><span class="s1">     
+    </span><span class="s2">def </span><span class="s1">__init__(self, m, L): 
+        </span><span class="s0">"""constructeur - constructor"""</span><span class="s1"> 
+        self.n=m 
+        self.coeffs=L 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        L=[str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coeffs] 
+        </span><span class="s2">return </span><span class="s3">"("</span><span class="s1">+</span><span class="s3">","</span><span class="s1">.join(L)+</span><span class="s3">")"</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self,other): 
+        </span><span class="s0">"""addition de deux vecteurs - addition"""</span><span class="s1"> 
+        L=[] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.n): 
+            L.append(self.coeffs[i]+other.coeffs[i]) 
+        </span><span class="s2">return </span><span class="s1">VectornD(self.n,L) 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">"""opposé d'un vecteur - opposite"""</span><span class="s1"> 
+        L=[] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.n): 
+            L.append(-self.coeffs[i]) 
+        </span><span class="s2">return </span><span class="s1">VectornD(self.n,L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">"""différence de deux vecteurs - difference"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n): 
+            L.append(self.coeffs[i] - other.coeffs[i]) 
+        </span><span class="s2">return </span><span class="s1">VectornD(self.n, L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self,k): 
+        </span><span class="s0">"""loi externe - external multiplication"""</span><span class="s1"> 
+        L=[] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.n): 
+            L.append(self.coeffs[i]*k) 
+        </span><span class="s2">return </span><span class="s1">VectornD(self.n,L) 
+ 
+     
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">"""fonction principale - main function"""</span><span class="s1"> 
+    </span><span class="s0">#exemples avec la dimension 2 - example with dimension 2 plane</span><span class="s1"> 
+    f1=Fraction(</span><span class="s4">1</span><span class="s1">,</span><span class="s4">2</span><span class="s1">) 
+    f2=Fraction (</span><span class="s4">2</span><span class="s1">,</span><span class="s4">3</span><span class="s1">) 
+    f3=Fraction(-</span><span class="s4">2</span><span class="s1">,</span><span class="s4">5</span><span class="s1">) 
+    f4=Fraction (</span><span class="s4">7</span><span class="s1">,-</span><span class="s4">3</span><span class="s1">) 
+    u=VectornD(</span><span class="s4">2</span><span class="s1">,[f1,f2]) 
+    v=VectornD(</span><span class="s4">2</span><span class="s1">,[f3,f4]) 
+    print (u+v) 
+    print (u-v) 
+    print (-u) 
+    print (</span><span class="s4">2</span><span class="s1">*u) 
+    </span><span class="s0">#exemple avec la dimension 3 - exemple with dimension 3, 3D space</span><span class="s1"> 
+    w=VectornD(</span><span class="s4">3</span><span class="s1">,[f1,f2,f3]) 
+    print(</span><span class="s4">2</span><span class="s1">*w) 
+     
+</span><span class="s2">if </span><span class="s1">__name__==</span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">ComplexeZeroDiv &lt;: Exception</span>
+    <span class="s1">msg::String</span>
+<span class="s0">end</span>
+
+<span class="s0">mutable struct </span><span class="s1">RatioComplexe</span>
+    <span class="s1">x::Rational</span>
+    <span class="s1">y::Rational</span>
+<span class="s0">end</span>
+<span class="s2"># représentation externe sous forme de chaîne - converts to string</span>
+<span class="s0">function </span><span class="s1">Base.string(z::RatioComplexe)</span>
+    <span class="s0">if </span><span class="s1">z.y==</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">string(z.x)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.x==</span><span class="s3">0 </span><span class="s1">&amp;&amp; z.y==</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s4">&quot;i&quot;</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.x==</span><span class="s3">0 </span><span class="s1">&amp;&amp; z.y==-</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s4">&quot;-i&quot;</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.x==</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">string(</span><span class="s4">&quot;(&quot;</span><span class="s1">,z.y,</span><span class="s4">&quot;)&quot;</span><span class="s1">,</span><span class="s4">&quot;i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.y==</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">string(z.x,</span><span class="s4">&quot;+i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.y==-</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">string(z.x,</span><span class="s4">&quot;-i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.y&gt;</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">string(z.x,</span><span class="s4">&quot;+(&quot;</span><span class="s1">,z.y,</span><span class="s4">&quot;)i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">string(z.x,</span><span class="s4">&quot;-(&quot;</span><span class="s1">,-z.y,</span><span class="s4">&quot;)i&quot;</span><span class="s1">)</span>
+<span class="s0">end</span>
+
+<span class="s1">null(z1::RatioComplexe)=z1.x==</span><span class="s3">0 </span><span class="s1">&amp;&amp;z1.y==</span><span class="s3">0 </span><span class="s2">#test de nullité</span>
+<span class="s2">#surcharge d'opérateurs usuels - overloading of usual operators</span>
+<span class="s1">Base.:+(z1::RatioComplexe,z2::RatioComplexe) = RatioComplexe(z1.x+z2.x,z1.y+z2.y) </span><span class="s2">#somme</span>
+<span class="s1">Base.:-(z1::RatioComplexe) = RatioComplexe(-z1.x,-z1.y) </span><span class="s2">#opposé</span>
+<span class="s1">Base.:-(z1::RatioComplexe,z2::RatioComplexe) = RatioComplexe(z1.x-z2.x,z1.y-z2.y) </span><span class="s2">#soustraction</span>
+<span class="s1">Base.:*(z1::RatioComplexe,z2::RatioComplexe) = RatioComplexe(z1.x*z2.x-z1.y*z2.y,z1.x*z2.y+z1.y*z2.x) </span><span class="s2">#produit</span>
+<span class="s1">Base.conj(z1::RatioComplexe)= RatioComplexe(z1.x,-z1.y)</span>
+<span class="s1">Base.real(z1::RatioComplexe) = z1.x </span><span class="s2">#partie réelle</span>
+<span class="s1">Base.imag(z1::RatioComplexe) = z1.y </span><span class="s2">#partie imaginaire</span>
+<span class="s0">function </span><span class="s1">Base.:inv(z1::RatioComplexe)</span>
+    <span class="s0">if </span><span class="s1">null(z1)</span>
+        <span class="s1">throw(ComplexeZeroDiv(</span><span class="s4">&quot;Erreur division par zéro&quot;</span><span class="s1">))</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">RatioComplexe(z1.x/(z1.x*z1.x+z1.y*z1.y),-z1.y/(z1.x*z1.x+z1.y*z1.y)) </span><span class="s2">#inverse</span>
+<span class="s0">end</span>
+<span class="s1">Base.:/(z1::RatioComplexe,z2::RatioComplexe) = z1*(inv(z2)) </span><span class="s2">#quotient</span>
+<span class="s0">function </span><span class="s1">Base.:^(z1::RatioComplexe, n::Int) </span><span class="s2">#exponentiation-puissances</span>
+    <span class="s0">if </span><span class="s1">n==</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">RatioComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">n&gt;</span><span class="s3">0</span>
+        <span class="s1">result=RatioComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n</span>
+            <span class="s1">result=result*z1</span>
+        <span class="s0">end</span>
+        <span class="s0">return </span><span class="s1">result</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">n==-</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">inv(z1)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">n&lt;</span><span class="s3">0</span>
+        <span class="s1">z2=inv(z1)</span>
+        <span class="s0">return </span><span class="s1">z2^(-n)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">modu(z1::RatioComplexe)=sqrt(z1.x*z1.x+z1.y*z1.y) </span><span class="s2">#module</span>
+
+<span class="s0">function </span><span class="s1">argu(z1::RatioComplexe)</span>
+    <span class="s0">if </span><span class="s1">z1.x == </span><span class="s3">0 </span><span class="s1">&amp;&amp; z1.y == </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s3">0</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z1.x == </span><span class="s3">0 </span><span class="s1">&amp;&amp; z1.y &gt; </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">pi / </span><span class="s3">2</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z1.x == </span><span class="s3">0 </span><span class="s1">&amp;&amp; z1.y &lt; </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">pi / </span><span class="s3">2</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z1.x &gt; </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">atan(z1.y / z1.x)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">pi - atan(z1.y / (-z1.x))</span>
+<span class="s0">end</span>
+
+<span class="s2"># test d'impression - test for display</span>
+<span class="s0">function </span><span class="s1">test()</span>
+    <span class="s1">L = [</span>
+        <span class="s1">(</span><span class="s3">1</span><span class="s1">//</span><span class="s3">2</span><span class="s1">, </span><span class="s3">0</span><span class="s1">),</span>
+        <span class="s1">(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">//</span><span class="s3">3</span><span class="s1">),</span>
+        <span class="s1">(</span><span class="s3">0</span><span class="s1">, -</span><span class="s3">1</span><span class="s1">),</span>
+        <span class="s1">(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">2</span><span class="s1">),</span>
+        <span class="s1">(</span><span class="s3">0</span><span class="s1">, -</span><span class="s3">3</span><span class="s1">),</span>
+        <span class="s1">(</span><span class="s3">2</span><span class="s1">//</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">//</span><span class="s3">5</span><span class="s1">),</span>
+        <span class="s1">(-</span><span class="s3">1</span><span class="s1">, -</span><span class="s3">1</span><span class="s1">),</span>
+        <span class="s1">(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">),</span>
+        <span class="s1">(</span><span class="s3">2</span><span class="s1">, -</span><span class="s3">3</span><span class="s1">),</span>
+    <span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">L</span>
+        <span class="s1">println(string(RatioComplexe(i[</span><span class="s3">1</span><span class="s1">], i[</span><span class="s3">2</span><span class="s1">])))</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+<span class="s2">#fonction principale - main function</span>
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s0">try</span>
+        <span class="s1">test()</span>
+        <span class="s1">z1 = RatioComplexe(</span><span class="s3">2</span><span class="s1">//</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">//</span><span class="s3">2</span><span class="s1">)</span>
+        <span class="s1">z2 = RatioComplexe(</span><span class="s3">3</span><span class="s1">, -</span><span class="s3">1</span><span class="s1">//</span><span class="s3">4</span><span class="s1">)</span>
+        <span class="s1">println(null(z1))</span>
+        <span class="s1">println(string(z1 + z2)) </span><span class="s2">#test d'addition- test for sum</span>
+        <span class="s1">println(string(-z1)) </span><span class="s2">#opposé - opposite</span>
+        <span class="s1">println(string(z1 - z2)) </span><span class="s2">#test de soustraction - subtraction</span>
+        <span class="s1">println(string(z1 * z2)) </span><span class="s2">#test de multiplication - multiplication test</span>
+        <span class="s1">println(string(RatioComplexe(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)^</span><span class="s3">0</span><span class="s1">)) </span><span class="s2">#puissance zéro - zeroth power</span>
+        <span class="s1">println(string(RatioComplexe(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)^</span><span class="s3">1</span><span class="s1">)) </span><span class="s2">#puissance 1 - first power</span>
+        <span class="s1">println(string(RatioComplexe(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)^</span><span class="s3">2</span><span class="s1">)) </span><span class="s2">#carré - square</span>
+        <span class="s1">println(string(inv(RatioComplexe(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)))) </span><span class="s2">#inverse</span>
+        <span class="s1">println(string(RatioComplexe(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)^(-</span><span class="s3">1</span><span class="s1">))) </span><span class="s2">#inverse encore - inverse again</span>
+        <span class="s1">println(string(RatioComplexe(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)^(-</span><span class="s3">2</span><span class="s1">))) </span><span class="s2">#puissances négatives - negative powers</span>
+        <span class="s1">println(string(z1 / z2)) </span><span class="s2">#test de division - division test</span>
+        <span class="s1">println(modu(z1)) </span><span class="s2">#module - ùmodulus</span>
+        <span class="s1">println(argu(z1)) </span><span class="s2">#argument</span>
+        <span class="s1">println(string(conj(z1))) </span><span class="s2">#conjugué - conjugate</span>
+        <span class="s1">println(real(z1))</span>
+        <span class="s1">println(imag(z1))</span>
+        <span class="s1">println(inv(RatioComplexe(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">))) </span><span class="s2">#provoque une erreur</span>
+        <span class="s1">println(z1 / RatioComplexe(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">)) </span><span class="s2">#provoque une erreur</span>
+    <span class="s0">catch </span><span class="s1">err</span>
+        <span class="s0">if isa</span><span class="s1">(err, ComplexeZeroDiv)</span>
+            <span class="s1">println(err.msg)</span>
+        <span class="s0">end</span>
+    <span class="s0">finally</span>
+        <span class="s1">println(</span><span class="s4">&quot;Désolé&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

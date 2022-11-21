@@ -1,0 +1,606 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Tables de vérité</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../../css/themes/myown.css" />
+      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+      <link href="../../css/myown.css" rel="stylesheet">
+      <script src="../../js/jquery-1.11.3.js"></script>
+      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+      <script src="../../js/custom.js"></script>
+      
+      
+   </head>
+   <body style="overflow: auto; "class="fr">
+      <script> window.onload=get();</script>
+      <a name="beg"></a>
+      <div data-role="page" data-theme="b">
+         <div data-role="header">
+            <table>
+               <tr>
+                  <td>Choisissez votre langue !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+                  <td>Choose your language !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+               </tr>
+            </table>
+         </div>
+         <!-- /header -->
+         <div style="overflow: auto; "  data-role="content" data-theme="b">
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/tables/menu.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/tables/menu.html')" /></li>
+                     <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <h2>Définitions</h2>
+               <p>  La valeur de vérité d'une formule dépend évidemment de ses composants
+                  et des propriétés des connecteurs
+                  <span style="font-weight: bold; font-style: italic;">
+                  vérifonctionnels
+                  </span>
+                  ¬ , ∧ , ∨ .
+               </p>
+               <p>  Ainsi si P  est vraie , Q fausse et R vraie alors:
+                  <br/>
+                  (P∨Q)∧(¬ R) est fausse car ¬R est fausse.
+               </p>
+               <p>  De fait, la formule de notre exemple contient 3 variables atomiques
+                  chacune pouvant avoir deux valeurs de vérité, le nombre total des
+                  possibilités est donc de 2<sup>3</sup>
+                  =8
+               </p>
+               <p> Nous pouvons résumer dans un tableau les différentes possibilités et
+                  les valeurs de l'expression correspondante.
+               </p>
+               <table border="1" cellpadding="10" cellspacing="2" style="text-align: left;  width: 100px;">
+                  <tbody>
+                     <tr>
+                        <td style="text-align: center;">
+                           P
+                        </td>
+                        <td style="text-align: center;">
+                           Q
+                        </td>
+                        <td style="text-align: center;">
+                           R
+                        </td>
+                        <td style="white-space: nowrap; text-align: center;">
+                           P∨Q
+                        </td>
+                        <td style="white-space: nowrap; text-align: center;">
+                           ¬
+                           R
+                        </td>
+                        <td style="white-space: nowrap; text-align: center;">
+                           (P∨Q)∧(¬ R)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           V
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div id="container">
+                  <div id="label">définition</div>
+                  Un tel tableau récapitulatif s'appelle une
+                  <span style="font-weight: bold; font-style: italic;">
+                  'table de
+                  vérité'</span>.
+               </div>
+               <div id="container">
+                  <div id="label">propriété</div>
+                  Si une formule contient n composants atomiques, la table de vérité
+                  correspondante aura 2<sup>n</sup>
+                  lignes.
+               </div>
+               <p>  Les tables de vérité constituent un algorithme naïf pour l'évaluation
+                  des formules. Nous verrons qu'il en existe d'autres.
+               </p>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Definitions </h2>
+               <p>The truth value of a formula obviously depends on its components. 
+                  and properties of connectors 
+                  not, and, or, with symbols 
+                  ¬, ∧, ∨. 
+               </p>
+               <p>So if P is true, Q is false and R is true then:
+                  <br>
+                  (P∨Q)∧(¬R) is false because ¬R is false. 
+               </p>
+               <p>In fact, the formula of our example contains 3 atomic variables 
+                  each of which can have two truth values, the total number of 
+                  possibilities is therefore 2<sup>3 </sup>
+                  =8 
+               </p>
+               <p>We can summarize in a table the different possibilities and
+                  the values ​​of the corresponding expression. 
+               </p>
+               <table style="text-align: left;  width: 100px;" cellspacing="2" cellpadding="10" border="1">
+                  <tbody>
+                     <tr>
+                        <td style="text-align: center;">
+                           P
+                        </td>
+                        <td style="text-align: center;">
+                           Q
+                        </td>
+                        <td style="text-align: center;">
+                           R
+                        </td>
+                        <td style="white-space: nowrap; text-align: center;">
+                           P∨Q
+                        </td>
+                        <td style="white-space: nowrap; text-align: center;">
+                           ¬
+                           R
+                        </td>
+                        <td style="white-space: nowrap; text-align: center;">
+                           (P∨Q)∧(¬ R)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                     <tr>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                        <td style="text-align: center;">
+                           T
+                        </td>
+                        <td style="text-align: center;">
+                           F
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+               <div id="container">
+                  <div id="label">definition </div>
+                  Such a summary table is called a 
+                  <span style="font-weight: bold; font-style: italic;">
+                  'truth table' </span>. 
+               </div>
+               <div id="container">
+                  <div id="label">property </div>
+                  If a formula contains n atomic components, the truth table 
+                  corresponding will have 2<sup>n </sup>
+                  lines. 
+               </div>
+               <p>Truth tables are a naive algorithm for evaluation
+                  formulas.  We will see that there are others. 
+               </p>
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <h2>
+                  Le coin de Python
+               </h2>
+               <p>
+                  Voici un programme qui calcule la table de vérité de n'importe quelle formule.
+                  Il utilise l'analyseur syntaxique, l'évaluateur vus juste avant, ainsi qu'un
+                  <input type="button" value="générateur de fonctions" onclick="go('../applications/python/genapps.html')"  data-inline="true"/>
+                  vu dans un exercice.
+               </p>
+               <object border="3" data="python/tablever.html" height="400" type="text/html" width="100%">
+               </object>
+               <h2>
+                  Le coin de Julia
+               </h2>
+               <p>
+                  Voici un programme qui calcule la table de vérité de n'importe quelle formule.
+                  Il utilise l'analyseur syntaxique, l'évaluateur vus juste avant. L'usage des dictionnaires et des produits cartésiens a été vu dans les <input type="button" value="exemples précédents" onclick="go('../relations/julia/prodcart2.jl.html')"  data-inline="true"/>.
+               </p>
+               <object border="3" data="julia/tablev1.jl.html" height="400" type="text/html" width="100%">
+               </object>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>
+                  Python's corner
+               </h2>
+               <p>Notice to English readers : <br />
+                  Examples programs or exercises solutions, either in Python or in Julia have the SAME original code, <strong>only comments are translated</strong>. That's why the logical constant with true value is denoted 'V' (for French 'vrai') instead of 'T' for English 'true'. You can easily change that.
+               </p>
+               <p>Here is a program that calculates the truth table of any formula.
+                  It uses the syntactic analyzer, the evaluator seen just before, as well as a
+                  <input type="button" value="function generator" onclick="go('../applications/python/genapps.html')"  data-inline="true"/>
+                  seen in an exercise.
+               </p>
+               <object data="python/tablever_en.html" type="text/html" width="100%" height="400" border="3">
+               </object>
+               <h2>
+                  Julia's corner
+               </h2>
+               <p>Here is a program that calculates the truth table of any formula.
+                  It uses the parser, the evaluator seen just before.  The use of dictionaries and Cartesian products has been seen in <input type="button" value="previous examples" onclick="go('../relations/julia/prodcart2.jl.html')"  data-inline="true"/>.
+               </p>
+               <object data="julia/tablev1.jl_en.html" type="text/html" width="100%" height="400" border="3">
+               </object>
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /en --> 
+         </div>
+         <!-- /content -->
+         <div data-role="footer">
+            <table cellpadding="10">
+               <tr>
+                  <td>
+                     <div lang="fr">Création Gilles Dubois</div>
+                     <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Janvier 2022</div>
+                     <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Version mobile Jquery</div>
+                     <div lang="en">Mobile Jquery version</div>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <!-- /footer -->
+         <ul style=list-style-type:'';>
+            <li>
+               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+            </li>
+            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+         </ul>
+      </div>
+      <!-- /page -->
+   </body>
+</html>
+

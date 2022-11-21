@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #dd6718;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#classe paramétrée pour représenter tous les corps Z/pZ - parameterized class to represent all Z/pZ fields</span>
+
+<span class="s2">macro </span><span class="s1">Z(p)</span>
+    <span class="s2">quote</span>
+        <span class="s2">struct </span><span class="s1">F_p</span>
+            <span class="s1">x::Int</span>
+            <span class="s2">function </span><span class="s1">F_p(n::Int)</span><span class="s0">#constructeur interne - internal constructor</span>
+                <span class="s1">r=n % $p</span>
+                <span class="s2">if </span><span class="s1">r&gt;= </span><span class="s3">0</span>
+                    <span class="s2">return </span><span class="s1">new(r) </span><span class="s0"># appel à new possible unqiuement dans le constructeur 'interne' - new can be used only in internal constructor</span>
+                <span class="s2">else</span>
+                    <span class="s2">return </span><span class="s1">new($p+r) </span><span class="s0"># à cause de la définition du reste en julia ..- because of Julia's definition of remainder.</span>
+                <span class="s2">end</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s4">@Z </span><span class="s3">5 </span><span class="s0"># appel de la macro avec paramètre 5, construction de F_5=Z/5Z - call of the macro</span>
+
+<span class="s0">#surcharge des opérateurs - overloading of operators</span>
+<span class="s1">Base.:+(k::F_p,h::F_p) = F_p(k.x+h.x)</span>
+<span class="s1">Base.:*(k::F_p,h::F_p) = F_p(k.x*h.x)</span>
+<span class="s1">Base.:-(k::F_p)=F_p(-k.x)</span>
+<span class="s1">Base.:-(k::F_p,h::F_p)=F_p(k.x-h.x)</span>
+<span class="s0"># fin de la définition - end of the definition</span></pre>
+</body>
+</html>

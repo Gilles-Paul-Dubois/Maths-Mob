@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Systèmes de Cramer</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+	 <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+  </head>	
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/cramer/menu.html')" /></li>  
+ 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/cramer/menu.html')" /></li>
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+
+ <h2>Portrait de Gabriel Cramer (Suisse-1704-1752)</h2>
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<h2>Portrait of Gabriel Cramer (Switzerland-1704-1752)</h2>
+
+</div><!-- /en --> 
+
+<!-- STOP -->
+<p>
+<img alt="" border="0" height="300" src="images/Gabriel_Cramer_2.jpg" width="300"/>
+</p>
+<!-- /STOP -->
+
+<div lang="fr">
+
+<h2>Définition</h2>
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<h2>Definition </h2>
+
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="def1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 1</div>
+  Un
+   <strong>
+    <em>
+     'système de Cramer'
+    </em>
+   </strong>
+   est un système de n équations linéaires à n inconnues de rang n.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 1</div>
+A 
+    <strong>
+<em>
+       'Cramer's system' 
+     </em>
+</strong>
+     is a system of n linear equations with n unknowns of rank n. 
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+<div lang="fr">
+Il résulte de la définition qu'un tel système s'écrit sous forme matricielle
+  
+  AX=B où A est une matrice carrée d'ordre n et de rang n, donc
+  <input type="button" value="inversible" onclick="go('../matrices/algmat.html#')" data-inline="true" />.
+  <br/>
+  De là nous pouvons conclure:
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+It follows from the definition that such a system is written in matrix form
+  
+  AX=B where A is a square matrix of order n and rank n, so
+   <input data-inline="true" onclick="go('../matrices/algmat.html#')" type="button" value="invertible"/>.
+   <br/>
+  From this we can conclude:
+
+
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="thm1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">théorème 1</div>
+ Tout système de Cramer possède une solution unique donnée par X=A<sup>-1</sup>B.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">theorem 1</div>
+Every Cramer system has a unique solution given by X=A<sup>-1</sup>B.
+ &lt;
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+<div lang="fr">
+<h2>
+   Formules de Cramer
+  </h2>
+  La forme de la solution donnée plus haut suppose qu'on aie déjà calculé
+l'inverse de la matrice du système. Or il advient que le calcul de
+l'inverse est un problème à n<sup>2</sup>
+  inconnues (les coefficients de A). Donc pour avoir l'expression de la
+solution en fonction de la matrice inverse il faut déjà calculer cette
+matrice inverse, ce qui est un problème plus difficile que le problème
+initial. Cependant le préambule a un interêt, il montre clairement
+l'existence et l'unicité de la solution dans les conditions de l'énoncé.
+  <br/>
+  Cela dit nous avons des formules explicites pour la solution exprimées au moyen de
+  <input type="button" value="déterminants" onclick="go('../determinants/detmatrice.html#')" data-inline="true" />
+  ,
+que nous allons donner maintenant. Ces formules sont tout à fait
+applicables dans le cas de systèmes d'ordre petit, elles deviennent
+pratiquement inutilisables pour le systèmes d'ordre élevé, c'est
+pourquoi nous verrons de nombreuses autres méthodes de résolution.
+Nous énonçons maintenant la règle de Cramer:
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Cramer's formulas
+   </h2>The form of the solution given above assumes that we have already calculated 
+  the inverse of the system matrix.   But it happens that the calculation of 
+  the inverse is a problem with n<sup>2</sup>
+    unknowns (the coefficients of A).   So to have the expression of the 
+  solution according to the inverse matrix it is already necessary to calculate this 
+  inverse matrix, which is a more difficult problem than the initial problem.
+   However the preamble has an interest, it clearly shows 
+  the existence and uniqueness of the solution under the conditions of the statement. 
+   <br/>
+  That being said we have explicit formulas for the solution expressed by means of
+   <input data-inline="true" onclick="go('../determinants/detmatrice.html#')" type="button" value="determinants"/>,
+ which we are going to give now.  These formulas are quite
+ applicable in the case of small order systems, they become
+ practically unusable for high-order systems, it is
+ why we will see many other methods of resolution.
+ We now state Cramer's rule:
+
+
+</div><!-- /en --> 
+<!-- STOP -->
+<a name="thm2"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">théorème 2</div>
+  Soit AX=B un système de Cramer. X=(x<sub>1</sub>,...,x<sub>n</sub>) étant le vecteur inconnu.
+   <br/>
+   Les x<sub>i</sub>
+   sont donnés par:
+   <p>
+   <!-- FORMULE UNIV INLINE -->
+\(
+x_{i}=\frac{Dét \left ( A_{i} \right )}{Dét\left ( A \right )} \text{ pour }1\leqslant i\leqslant n
+\)
+<!-- /FORMULE UNIV INLINE-->
+   </p>
+   
+      où A<sub>i</sub> est la matrice obtenue en substituant le vecteur colonne B à la i-ième colonne de A.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">theorem 2</div>
+Let AX=B be a Cramer system.   X=(x<sub>1</sub>,...,x<sub>n</sub>) being the unknown vector. 
+    <br/>The x<sub>i</sub>
+     are given by: 
+    <p>
+   <!-- FORMULE UNIV INLINE -->
+\(
+x_{i}=\frac{Dét \left ( A_{i} \right )}{Dét\left ( A \right )} \text{ for }1\leqslant i\leqslant n
+\)
+<!-- /FORMULE UNIV INLINE-->
+   </p>
+   where A<sub>i</sub> is the matrix obtained by substituting the column vector B for the i-th column of A.
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+La
+démonstration repose sur le calcul de l'inverse au moyen de la
+comatrice (transposée de la matrice des cofacteurs - ( voir <input type="button" value="cette page" onclick="go('../determinants/inversion.html#')"  data-inline="true"/>), et sur la formule X=A<sup>-1</sup>B
+  <br>
+  Voyons tout de suite ce que donnent ces formules à l'ordre 2, pour le système:
+  <br>
+  ax+by=e
+  <br>
+  cx+dy=f
+  <br>
+  Les solutions sont:
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+The
+ demonstration is based on the calculation of the inverse by means of the
+ comatrix (transposed from the matrix of cofactors - ( see <input data-inline="true" onclick="go('../determinants/inversion.html#')" type="button" value="this page"/>), and on the formula X=A<sup>-1</sup>B
+   <br/>
+  Let us see immediately what these formulas give to order 2, for the system:
+   <br/>
+  ax+by=e
+   <br/>
+  cx+dy=f
+   <br/>
+  The solutions are:
+
+
+</div><!-- /en --> 
+
+<p><!-- STOP -->
+<img alt="" src="images/cramerx.png" width="185" height="104" border="0">
+<!-- /STOP --></p>
+<p><!-- STOP -->
+<img alt="" src="images/cramery.png" width="185" height="104" border="0">
+<!-- /STOP --></p>
+
+<div lang="fr">
+ <ul>  
+    <li>Voici maintenant une appliquette qui vous permet de générer des systèmes de Cramer.</li>
+    <li>Vous pouvez choisir le corps de base parmi 4 possibilités.</li>
+    <li>Choisissez l'ordre de la matrice de 2 à 4 avec le curseur (limitation à 3 pour les rationnels).</li>
+    <li>Un système est généré avec matrice A et second membre B.</li>
+    <li>Vous pouvez chercher à le résoudre sur papier.</li>
+    <li>Cliquez sur le bouton 'Solution' pour voir la solution.</li>
+  </ul>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<ul>
+<li>Here is now an applet that allows you to generate Cramer systems. </li>
+<li>You can choose the base body from 4 possibilities. </li>
+<li>Choose the order of the matrix from 2 to 4 with the cursor (limited to 3 for rationals). </li>
+<li>A system is generated with matrix A and second member B. </li>
+<li>You can try to solve it on paper. </li>
+<li>Click on the 'Solution' button to see the solution. </li>
+</ul>
+
+
+</div><!-- /en --> 
+
+<!-- STOP -->
+ <div>
+   <table border="2" >
+    <tbody><tr>
+     <td colspan="3">
+      <button onclick="nameSpace2.Paint();" type="button">
+       <div lang="fr">Nouvel exemple</div><!-- /fr --> <div lang="en">New example</div><!-- /en --> 
+      </button>
+      <button onclick="nameSpace2.Solution();" type="button">
+       <div lang="fr">Solution</div><!-- /fr --> <div lang="en">Solution</div><!-- /en --> 
+      </button>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <div lang="fr">Matrice du système</div><!-- /fr --> <div lang="en">Sstem matrix</div><!-- /en --> 
+     </td>
+     <td>
+      Second
+      <br>
+      <div lang="fr">membre</div><!-- /fr --><div lang="en">member</div><!-- /en -->  
+     </td>
+     <td>
+      <div lang="fr">Résultat</div><!-- /fr --> <div lang="en">Result</div><!-- /en --> 
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <canvas id="myCanvas1" style="border:1px solid #000000;" width="240" height="60">
+      </canvas>
+     </td>
+     <td>
+      <canvas id="myCanvas2" style="border:1px solid #000000;" width="80" height="60">
+      </canvas>
+     </td>
+     <td>
+      <canvas id="myCanvas3" style="border:1px solid #000000;" width="80" height="60">
+      </canvas>
+     </td>
+    </tr>
+  <tr>
+  <table border="1">
+<tr>
+<td width="50"><input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1"></td>
+<td> ℝ</td>
+</tr>
+<tr>
+<td><input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="2"></td>
+<td>ℚ</td>
+</tr>
+<tr>
+<td><input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="3"></td>
+<td>ℤ/5ℤ</td>
+</tr>
+<tr>
+<td><input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4"></td>
+<td>ℂ</td>
+</tr>
+</table>
+  
+  </tr>
+    <tr>
+     <td colspan="3">
+      <div lang="fr">Ordre de la matrice carrée A&nbsp;   :</div><!-- /fr --> <div lang="en">Order of matrix A</div><!-- /en --> 
+      <input id="myRange1" max="4" min="2" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range">
+     </td>
+    </tr>
+   </tbody></table>
+  </div>
+  <script src="js/cramer.js">
+  </script>
+<!-- /STOP -->
+
+  
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>	
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #067d17;}
+.s4 { color: #dd6718;}
+.s5 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">IncorrectVector &lt;: Exception</span>
+    <span class="s1">msg::String</span>
+<span class="s0">end</span>
+
+<span class="s2">#macro pour construire l'espace vectoriel puissance n d'un corps quelconque, Z/pZ, Q, R, C, etc..</span>
+<span class="s2">#macro to buid nth- power of any field , Z/pZ, Q, R, C, etc..</span>
+<span class="s2"># n détermine la dimension et T le corps via le type</span>
+span class="s2"># n will be the dimension and T the field  via  type</span>
+
+<span class="s0">macro </span><span class="s1">E(n, T)</span>
+    <span class="s0">quote</span>
+        <span class="s0">struct </span><span class="s1">V</span>
+            <span class="s1">C::Vector{$T} </span><span class="s2">#unique donnée membre un tableau à une dimension - single data one array with one dimension</span>
+            <span class="s0">function </span><span class="s1">V(W) </span><span class="s2">#constructeur 'interne' - internal constructor</span>
+                <span class="s0">if </span><span class="s1">length(W) != $n </span><span class="s2">#le paramètre du constructeur doit avoir la longueur voulue - parameter n should have the desired length</span>
+                    <span class="s1">throw(IncorrectVector(</span><span class="s3">&quot;dimension du tableau incorrecte&quot;</span><span class="s1">))</span>
+                <span class="s0">end</span>
+                <span class="s2">#Voyons si le transtypage est possible - check if transtyping is possible</span>
+                <span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">W</span>
+                    <span class="s0">if </span><span class="s1">typeof(x)!=$T</span>
+                        <span class="s0">try</span>
+                            <span class="s1">y=$T(x)</span>
+                        <span class="s0">catch </span><span class="s1">err</span>
+                            <span class="s1">throw(IncorrectVector(</span><span class="s3">&quot;Type non convertible&quot;</span><span class="s1">))</span>
+                        <span class="s0">end</span>
+                     <span class="s0">end</span>
+                <span class="s0">end</span>
+                <span class="s1">k(x)= typeof(x)==$T ? x : $T(x)</span><span class="s2">#transtyper si besoin est - change type if needed</span>
+                <span class="s1">W=[k(x) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">W]</span>
+                <span class="s0">return </span><span class="s1">new(W) </span><span class="s2">#appel à new possible depuis le constructeur interne - possible call to 'new' inside internal constructor</span>
+            <span class="s0">end</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s4">@E </span><span class="s5">3 </span><span class="s1">Rational </span><span class="s2"># espace Q ^3</span>
+
+<span class="s1">Base.getindex(v::V,i::Int64)= v.C[i] </span><span class="s2">#surcharge des crochets - overloading of brackets</span>
+<span class="s1">Base.:+(v1::V,v2::V)=V(map(+,v1.C,v2.C)) </span><span class="s2">#addition des vecteurs - addition of vectors</span>
+<span class="s1">Base.:-(v::V)=V([-x </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">v.C]) </span><span class="s2">#opposé - opposite</span>
+<span class="s1">Base.:-(v1::V,v2::V)=V(map(-,v1.C,v2.C)) </span><span class="s2">#différence - difference</span>
+<span class="s0">function </span><span class="s1">Base.:*(λ,v::V) </span><span class="s2">#loi externe -produit d'un vecteur par un scalaire - external operation</span>
+    <span class="s1">T=typeof(v[</span><span class="s5">1</span><span class="s1">])</span>
+    <span class="s0">try </span><span class="s2">#test si transtypage possible - checks if transtyping possible</span>
+        <span class="s0">if </span><span class="s1">typeof(λ)!=T</span>
+            <span class="s1">λ=T(λ)</span>
+        <span class="s0">end</span>
+    <span class="s0">catch </span><span class="s1">err</span>
+        <span class="s1">throw(IncorrectVector(</span><span class="s3">&quot;Type non convertible&quot;</span><span class="s1">))</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">V(map(x-&gt;λ*x,v.C))</span>
+<span class="s0">end</span>
+<span class="s1">nul(v::V)=all((v[i]==</span><span class="s5">0 </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s5">1</span><span class="s1">:length(v.C))) </span><span class="s2">#test de nullité - nullity test</span>
+<span class="s0">function </span><span class="s1">exchange(v::V,i,j)</span>
+    <span class="s1">L=v.C</span>
+    <span class="s1">M=deepcopy(L)</span>
+    <span class="s1">M[i]=L[j]</span>
+    <span class="s1">M[j]=L[i]</span>
+    <span class="s0">return </span><span class="s1">V(M)</span>
+<span class="s0">end</span>
+
+<span class="s1">alea()=V([rand(-</span><span class="s5">9</span><span class="s1">:</span><span class="s5">9</span><span class="s1">),rand(-</span><span class="s5">9</span><span class="s1">:</span><span class="s5">9</span><span class="s1">), rand(-</span><span class="s5">9</span><span class="s1">:</span><span class="s5">9</span><span class="s1">)])</span><span class="s2"># vecteur aléatoire à coordonnées entières - random vector with integral coordinates</span>
+
+<span class="s0">struct </span><span class="s1">System </span><span class="s2">#modélisation des systèmes de vecteurs - model for systems of vectors</span>
+    <span class="s1">Vecteurs::Vector{V}</span>
+    <span class="s1">taille:: Int64</span>
+    <span class="s0">function </span><span class="s1">System(L::Vector{V})</span>
+        <span class="s0">return </span><span class="s1">new(L,length(L))</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s2">#manipulations des systèmes -management of systems</span>
+<span class="s1">colonne(S::System,i)=[x[i] </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">S.Vecteurs]</span>
+<span class="s1">sysalea(n)= System([alea() </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s5">1</span><span class="s1">:n]) </span><span class="s2">#génération d'un système de n vecteurs aléatoires entiers  dans Q^3 - genration of n random vectors in Q^3</span>
+<span class="s1">allnul(S::System,i)= all((x==</span><span class="s5">0 </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">colonne(S,i))) </span><span class="s2">#nullité de la colonne i - nullity of column i</span>
+<span class="s0">function </span><span class="s1">exchange(S::System,i,j)</span>
+    <span class="s1">L=S.Vecteurs</span>
+    <span class="s1">M=[exchange(x,i,j) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">L]</span>
+    <span class="s0">return </span><span class="s1">System(M)</span>
+<span class="s0">end</span>
+<span class="s0">function </span><span class="s1">move_i_first(S::System, i::Int64)</span>
+    <span class="s1">L=S.Vecteurs</span>
+    <span class="s1">M=deepcopy(L)</span>
+    <span class="s1">M[</span><span class="s5">1</span><span class="s1">]=L[i]</span>
+    <span class="s1">M[i]=L[</span><span class="s5">1</span><span class="s1">]</span>
+    <span class="s0">return </span><span class="s1">System(M)</span>
+<span class="s0">end</span>
+<span class="s1">Base.getindex(S::System,i)=S.Vecteurs[i]</span>
+<span class="s1">Base.getindex(S::System,i,j) = (S.Vecteurs[i])[j]</span>
+<span class="s0">function </span><span class="s1">trouve_col(S::System)</span>
+    <span class="s1">l=length(S[</span><span class="s5">1</span><span class="s1">].C)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s5">1</span><span class="s1">:l</span>
+        <span class="s0">if </span><span class="s1">S[</span><span class="s5">1</span><span class="s1">][i]!=</span><span class="s5">0</span>
+            <span class="s0">return </span><span class="s1">i,inv(S[</span><span class="s5">1</span><span class="s1">][i])</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">libre(S::System)</span>
+    <span class="s0">if </span><span class="s1">S.taille==</span><span class="s5">1 </span><span class="s1">&amp;&amp; !(nul(S[</span><span class="s5">1</span><span class="s1">])) </span><span class="s2">#s'il y n'y a qu'un seul vecteur dans le système il suffit qu'il soit non nul - if only one vector it's enough not to be null</span>
+        <span class="s0">return true</span>
+    <span class="s0">elseif </span><span class="s1">any((nul(v) </span><span class="s0">for </span><span class="s1">v </span><span class="s0">in </span><span class="s1">S.Vecteurs))</span><span class="s2"># si un seul vecteur est nul c'est perdu - if only one vector is zero failure</span>
+        <span class="s0">return false</span>
+    <span class="s0">else</span>
+        <span class="s1">(i,x)=trouve_col(S) </span><span class="s2">#recherche du pivot - looking for the pivot</span>
+        <span class="s1">M=deepcopy(S.Vecteurs)</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s5">2</span><span class="s1">:S.taille</span>
+            <span class="s1">k=S[j][i]</span>
+            <span class="s1">M[j]=S[j]-(k*x)*S[</span><span class="s5">1</span><span class="s1">]</span>
+        <span class="s0">end</span>
+        <span class="s1">NS=System(M[</span><span class="s5">2</span><span class="s1">:end]) </span><span class="s2">#on élimine la première ligne - we remove the first libne</span>
+        <span class="s0">return </span><span class="s1">libre(NS) </span><span class="s2"># et on étudie le nouveau système and study the new system</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">v1=V([</span><span class="s5">0</span><span class="s1">,</span><span class="s5">2</span><span class="s1">,</span><span class="s5">0</span><span class="s1">])</span>
+<span class="s1">v2=V([</span><span class="s5">1</span><span class="s1">,</span><span class="s5">0</span><span class="s1">,</span><span class="s5">0</span><span class="s1">])</span>
+<span class="s1">v3=V([</span><span class="s5">1</span><span class="s1">,</span><span class="s5">2</span><span class="s1">,</span><span class="s5">3</span><span class="s1">])</span>
+<span class="s1">S1=System([v1,v2,v3])</span>
+
+
+<span class="s1">w1=V([</span><span class="s5">0</span><span class="s1">,</span><span class="s5">2</span><span class="s1">,</span><span class="s5">0</span><span class="s1">])</span>
+<span class="s1">w2=V([</span><span class="s5">1</span><span class="s1">,</span><span class="s5">0</span><span class="s1">,</span><span class="s5">0</span><span class="s1">])</span>
+<span class="s1">w3=V([</span><span class="s5">1</span><span class="s1">,</span><span class="s5">2</span><span class="s1">,</span><span class="s5">0</span><span class="s1">])</span>
+<span class="s1">S2=System([w1,w2,w3])</span>
+<span class="s1">S3=sysalea(</span><span class="s5">4</span><span class="s1">)</span>
+<span class="s1">S4=sysalea(</span><span class="s5">2</span><span class="s1">)</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">println(libre(S1))</span>
+    <span class="s1">println(libre(S2))</span>
+    <span class="s1">println(libre(S3)) </span><span class="s2">#faux à coup sûr - false for sur !</span>
+    <span class="s1">println(libre(S4)) </span><span class="s2"># très forte probabilité de true - very high probability of true</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+
+
+
+</pre>
+</body>
+</html>

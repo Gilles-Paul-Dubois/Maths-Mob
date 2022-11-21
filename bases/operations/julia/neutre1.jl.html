@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>neutre1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #0033b3;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre>
+<span class="s0">n=</span><span class="s1">4</span>
+<span class="s0">E=collect(</span><span class="s1">0</span><span class="s0">:n)</span>
+<span class="s0">E2=Set(collect(Base.product(E,E)))</span>
+
+<span class="s2">#génération d'une'loi aléatoire-generating a random operation</span>
+<span class="s3">function </span><span class="s0">genere1()</span>
+    <span class="s0">Table=Dict()</span>
+    <span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s0">E2</span>
+       <span class="s0">Table[i]=rand(E)</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s0">Table</span>
+<span class="s3">end</span>
+
+<span class="s2">#-génération d'une loi avec neutre - generating an operation with neutral</span>
+<span class="s3">function </span><span class="s0">genere2()</span>
+    <span class="s0">Table=Dict()</span>
+    <span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n</span>
+        <span class="s3">for </span><span class="s0">j </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n</span>
+            <span class="s0">Table[(i,j)]=(i+j)%(n+</span><span class="s1">1</span><span class="s0">)</span>
+        <span class="s3">end</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s0">Table</span>
+<span class="s3">end</span>
+<span class="s0">Table1=genere1()</span>
+<span class="s0">Table2=genere2()</span>
+
+<span class="s0">neutre(x,T)= all([T[(x,i)]==i &amp;&amp; T[(i,x)]==i </span><span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n])</span>
+
+<span class="s3">function </span><span class="s0">TrouveNeutre(T)</span>
+    <span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n</span>
+        <span class="s3">if </span><span class="s0">neutre(x,T)</span>
+            <span class="s0">println(x)</span>
+         <span class="s3">end</span>
+     <span class="s3">end</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">main()</span>
+    <span class="s0">println(</span><span class="s4">&quot;Neutre de Table1&quot;</span><span class="s0">)</span>
+    <span class="s0">TrouveNeutre(Table1)</span>
+    <span class="s0">println(</span><span class="s4">&quot;Neutre de Table2&quot;</span><span class="s0">)</span>
+    <span class="s0">TrouveNeutre(Table2)</span>
+<span class="s3">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

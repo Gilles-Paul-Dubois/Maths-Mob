@@ -1,0 +1,205 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># Python version 3.4</span>
+<span class="s0"># Programme de vérification d'équivalences</span>
+
+<span class="s0"># analyseur syntaxique - parser</span>
+<span class="s2">def </span><span class="s1">ConstantP(X):</span>
+    <span class="s2">return </span><span class="s1">X == </span><span class="s3">'0' </span><span class="s2">or </span><span class="s1">X == </span><span class="s3">'1'</span>
+
+<span class="s2">def </span><span class="s1">VariableP(X):</span>
+    <span class="s2">return </span><span class="s1">len(X) == </span><span class="s4">1 </span><span class="s2">and </span><span class="s3">'A' </span><span class="s1">&lt;= X &lt;= </span><span class="s3">'Z'</span>
+
+<span class="s2">def </span><span class="s1">AtomP(X):</span>
+    <span class="s2">return </span><span class="s1">ConstantP(X) </span><span class="s2">or </span><span class="s1">VariableP(X)</span>
+
+<span class="s2">def </span><span class="s1">ProP(X):</span>
+    <span class="s2">if </span><span class="s1">AtomP(X):</span>
+        <span class="s2">return True</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:</span>
+        <span class="s1">n = </span><span class="s4">1</span>
+        <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, len(X)):</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'('</span><span class="s1">:</span>
+                <span class="s1">n = n + </span><span class="s4">1</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">')'</span><span class="s1">:</span>
+                <span class="s1">n = n - </span><span class="s4">1</span>
+                <span class="s2">if </span><span class="s1">n == </span><span class="s4">0</span><span class="s1">:</span>
+                    <span class="s2">return </span><span class="s1">ProP(</span><span class="s3">&quot;1&quot; </span><span class="s1">+ X[i + </span><span class="s4">1</span><span class="s1">:])</span>
+        <span class="s2">return False</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]):</span>
+        <span class="s2">return True</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return True</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return True</span>
+  <span class="s0">#end of parser</span>
+
+<span class="s0"># evaluateur- evaluator</span>
+<span class="s2">def </span><span class="s1">Eval_Constant(X):</span>
+    <span class="s2">if </span><span class="s1">X == </span><span class="s3">'0'</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s4">0</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s4">1</span>
+
+<span class="s2">def </span><span class="s1">Eval_Variable(X, Env):</span>
+    <span class="s2">return </span><span class="s1">Env[X]</span>
+
+<span class="s2">def </span><span class="s1">Eval_Atom(X, Env):</span>
+    <span class="s2">if </span><span class="s1">ConstantP(X):</span>
+        <span class="s2">return </span><span class="s1">Eval_Constant(X)</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">Eval_Variable(X, Env)</span>
+
+<span class="s2">def </span><span class="s1">Eval_Pro(X, Env):</span>
+    <span class="s2">if </span><span class="s1">AtomP(X):</span>
+        <span class="s2">return </span><span class="s1">Eval_Atom(X, Env)</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:</span>
+        <span class="s1">n = </span><span class="s4">1</span>
+        <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, len(X)):</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'('</span><span class="s1">:</span>
+                <span class="s1">n = n + </span><span class="s4">1</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">')'</span><span class="s1">:</span>
+                <span class="s1">n = n - </span><span class="s4">1</span>
+                <span class="s2">if </span><span class="s1">n == </span><span class="s4">0</span><span class="s1">:</span>
+                    <span class="s2">return </span><span class="s1">Eval_Pro(str(Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:i], Env)) + X[i + </span><span class="s4">1</span><span class="s1">:], Env)</span>
+        <span class="s2">return False</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'(' </span><span class="s2">and </span><span class="s1">X[len(X) - </span><span class="s4">1</span><span class="s1">] == </span><span class="s3">')'</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:len(X) - </span><span class="s4">1</span><span class="s1">], Env)</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]):</span>
+        <span class="s2">if </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:], Env) == </span><span class="s4">0</span><span class="s1">:</span>
+            <span class="s2">return </span><span class="s4">1</span>
+        <span class="s2">if </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:], Env) == </span><span class="s4">1</span><span class="s1">:</span>
+            <span class="s2">return </span><span class="s4">0</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return </span><span class="s1">Eval_Pro(X[</span><span class="s4">0</span><span class="s1">:i], Env) * Eval_Pro(X[i + </span><span class="s4">1</span><span class="s1">:], Env)</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return </span><span class="s1">max(Eval_Pro(X[</span><span class="s4">0</span><span class="s1">:i], Env), Eval_Pro(X[i + </span><span class="s4">1</span><span class="s1">:], Env))</span>
+   <span class="s0"># fin de l'evaluateur - end of evaluator</span>
+
+<span class="s0"># constituants de F - components of F</span>
+<span class="s2">def </span><span class="s1">VariablesDans(F):</span>
+    <span class="s2">if </span><span class="s1">ConstantP(F):</span>
+        <span class="s2">return </span><span class="s1">set([])</span>
+    <span class="s2">if </span><span class="s1">VariableP(F):</span>
+        <span class="s2">return </span><span class="s1">set([F[</span><span class="s4">0</span><span class="s1">]])</span>
+    <span class="s2">if </span><span class="s1">F[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'(' </span><span class="s2">and </span><span class="s1">F[len(F) - </span><span class="s4">1</span><span class="s1">] == </span><span class="s3">')' </span><span class="s2">and </span><span class="s1">ProP(F[</span><span class="s4">1</span><span class="s1">:len(F) - </span><span class="s4">1</span><span class="s1">]):</span>
+        <span class="s2">return </span><span class="s1">VariablesDans(F[</span><span class="s4">1</span><span class="s1">:len(F) - </span><span class="s4">1</span><span class="s1">])</span>
+    <span class="s2">if </span><span class="s1">F[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(F[</span><span class="s4">1</span><span class="s1">:]):</span>
+        <span class="s2">return </span><span class="s1">VariablesDans(F[</span><span class="s4">1</span><span class="s1">:])</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(F)):</span>
+        <span class="s2">if </span><span class="s1">F[i] == </span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(F[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(F[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return </span><span class="s1">VariablesDans(F[</span><span class="s4">0</span><span class="s1">:i]) | VariablesDans(F[i + </span><span class="s4">1</span><span class="s1">:])</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(F)):</span>
+        <span class="s2">if </span><span class="s1">F[i] == </span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(F[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(F[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return </span><span class="s1">VariablesDans(F[</span><span class="s4">0</span><span class="s1">:i]) | VariablesDans(F[i + </span><span class="s4">1</span><span class="s1">:])</span>
+
+<span class="s0">#variables communes à F et G - common variables to F and G</span>
+<span class="s2">def </span><span class="s1">VariablesCommunes(F, G):</span>
+    <span class="s1">VF = VariablesDans(F)</span>
+    <span class="s1">VG = VariablesDans(G)</span>
+    <span class="s2">return </span><span class="s1">VF | VG</span>
+
+<span class="s0"># les deux fonctions suivantes ont pour but de lister tous les environnements possibles</span>
+<span class="s0"># list all possible environments for components of F</span>
+<span class="s2">def </span><span class="s1">power(n, F):</span>
+    <span class="s1">G = [[x] </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">F]</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, n - </span><span class="s4">1</span><span class="s1">):</span>
+        <span class="s1">G = [y + [x] </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">G </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">F]</span>
+    <span class="s2">return </span><span class="s1">G</span>
+
+<span class="s2">def </span><span class="s1">ListEnv(S):</span>
+    <span class="s1">R = []</span>
+    <span class="s1">K = list(S)</span>
+    <span class="s1">V = power(len(S), [</span><span class="s4">0</span><span class="s1">, </span><span class="s4">1</span><span class="s1">])</span>
+    <span class="s2">for </span><span class="s1">LV </span><span class="s2">in </span><span class="s1">V:</span>
+        <span class="s1">A = dict()</span>
+        <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(S)):</span>
+            <span class="s1">A[K[i]] = LV[i]</span>
+        <span class="s1">R.append(A)</span>
+    <span class="s2">return </span><span class="s1">R</span>
+
+<span class="s0"># donne la table de vérité de la formule F et de la formule G</span>
+<span class="s0"># Gives truth tables for F and G</span>
+<span class="s2">def </span><span class="s1">TableCommune(F, G):</span>
+    <span class="s1">S = VariablesCommunes(F, G)</span>
+    <span class="s1">ENVS = ListEnv(S)</span>
+    <span class="s2">return </span><span class="s1">[[E, Eval_Pro(F, E), Eval_Pro(G, E)] </span><span class="s2">for </span><span class="s1">E </span><span class="s2">in </span><span class="s1">ENVS]</span>
+
+<span class="s0"># Décide si deux formules sont équivalentes</span>
+<span class="s0"># decides if both formulas are equivalent</span>
+<span class="s2">def </span><span class="s1">Equivalentes(F, G):</span>
+    <span class="s1">T = TableCommune(F, G)</span>
+    <span class="s2">for </span><span class="s1">V </span><span class="s2">in </span><span class="s1">T:</span>
+        <span class="s2">if </span><span class="s1">V[</span><span class="s4">1</span><span class="s1">] != V[</span><span class="s4">2</span><span class="s1">]:</span>
+            <span class="s2">return False</span>
+    <span class="s2">return True</span>
+
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">F = </span><span class="s3">&quot;((-B)&amp;A)|(C&amp;B)&amp;0&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;(A|B)|((-A)&amp;(-D))&quot;</span>
+    <span class="s1">print(VariablesCommunes(F, G))</span>
+    <span class="s1">print(TableCommune(F, G))</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de la distributivité de &amp; sur |</span>
+    <span class="s0">#distributivity of &amp; over |</span>
+    <span class="s1">F = </span><span class="s3">&quot;P&amp;(Q|R)&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;(P&amp;Q)|(P&amp;R)&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de la distributivité de | sur &amp;</span>
+    <span class="s0">#distributivity of | over &amp;</span>
+    <span class="s1">F = </span><span class="s3">&quot;P|(Q&amp;R)&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;(P|Q)&amp;(P|R)&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de de Morgan 1</span>
+    <span class="s0"># law of De Morgan 1</span>
+    <span class="s1">F = </span><span class="s3">&quot;-(P|Q)&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;(-P)&amp;(-Q)&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de de Morgan 2</span>
+    <span class="s0">#law of De Mrgan 2</span>
+    <span class="s1">F = </span><span class="s3">&quot;-(P&amp;Q)&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;(-P)|(-Q)&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de l'associativité de &amp;</span>
+    <span class="s0">#associativity of &amp;</span>
+    <span class="s1">F = </span><span class="s3">&quot;(P&amp;Q)&amp;R&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;P&amp;(Q&amp;R)&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de l'associativité de |</span>
+    <span class="s0"># associativity of |</span>
+    <span class="s1">F = </span><span class="s3">&quot;(P|Q)|R&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;P|(Q|R)&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de la commutativité de &amp;</span>
+    <span class="s0">#commutativity of &amp;</span>
+    <span class="s1">F = </span><span class="s3">&quot;P&amp;Q&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;Q&amp;P&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+    <span class="s0"># démonstration de la commutativité de |</span>
+    <span class="s0">#commutativity of |</span>
+    <span class="s1">F = </span><span class="s3">&quot;P|Q&quot;</span>
+    <span class="s1">G = </span><span class="s3">&quot;Q|P&quot;</span>
+    <span class="s1">print(Equivalentes(F, G))</span>
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
+</html>

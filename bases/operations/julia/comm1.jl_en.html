@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>comm1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#Creating a random operation on [1,2,3,4,5]</span>
+<span class="s1">n=</span><span class="s2">5</span>
+<span class="s1">E=collect(</span><span class="s2">1</span><span class="s1">:n)</span>
+<span class="s1">E2=Set(collect(Base.product(E,E)))</span>
+
+<span class="s0">#generating a random operation</span>
+<span class="s3">function </span><span class="s1">genere1()</span>
+    <span class="s1">Table=Dict()</span>
+    <span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s1">E2</span>
+       <span class="s1">Table[i]=rand(E)</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">Table</span>
+<span class="s3">end</span>
+
+<span class="s0">#generating a commutative operation</span>
+<span class="s3">function </span><span class="s1">genere2()</span>
+    <span class="s1">Table=Dict()</span>
+    <span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s3">for </span><span class="s1">j </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s3">if </span><span class="s1">i&lt;=j</span>
+                <span class="s1">Table[(i,j)]= rand(E)</span>
+             <span class="s3">else</span>
+                 <span class="s1">Table[(i,j)]=Table[(j,i)]</span>
+             <span class="s3">end</span>
+        <span class="s3">end</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">Table</span>
+<span class="s3">end</span>
+<span class="s1">Table1=genere1()</span>
+<span class="s1">Table2=genere2()</span>
+
+<span class="s1">commutative(T)= all((T[(i,j)]==T[(j,i)] </span><span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n </span><span class="s3">for </span><span class="s1">j </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n))</span>
+
+<span class="s1">println(commutative(Table1))</span>
+<span class="s1">println(commutative(Table2))</span></pre>
+</body>
+</html>

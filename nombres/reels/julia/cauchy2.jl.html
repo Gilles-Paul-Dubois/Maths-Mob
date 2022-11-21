@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>cauchy2.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Decimals</span>
+<span class="s0">function </span><span class="s1">cauchy()</span>
+    <span class="s1">Channel() </span><span class="s0">do </span><span class="s1">c</span>
+        <span class="s1">R=decimal(</span><span class="s2">&quot;1&quot;</span><span class="s1">)</span>
+        <span class="s1">push!(c,R)</span>
+        <span class="s0">while true</span>
+            <span class="s1">N=R*R+</span><span class="s3">2</span>
+            <span class="s1">D=R*decimal(</span><span class="s2">&quot;2&quot;</span><span class="s1">)</span>
+            <span class="s1">R=N/D</span>
+            <span class="s1">push!(c,R)</span>
+        <span class="s0">end</span>
+
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">RAC2=cauchy()</span>
+
+<span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:</span><span class="s3">10</span>
+    <span class="s1">println(take!(RAC2))</span>
+<span class="s0">end</span>
+<span class="s1">println(sqrt(</span><span class="s3">2</span><span class="s1">))</span>
+</pre>
+</body>
+</html>

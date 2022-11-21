@@ -1,0 +1,73 @@
+﻿<html>
+ <head>
+  <title>
+   spirale.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">squarodd(k): 
+    </span><span class="s2">return </span><span class="s1">(</span><span class="s3">2</span><span class="s1">*k+</span><span class="s3">1</span><span class="s1">)*(</span><span class="s3">2</span><span class="s1">*k+</span><span class="s3">1</span><span class="s1">) 
+ 
+</span><span class="s0">#détermine sur quel carré le point d'indice n se trouve</span><span class="s1"> 
+</span><span class="s0">#determines on which square point of index n is located </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Trouve_k(n): 
+    i=</span><span class="s3">0</span><span class="s1"> 
+    </span><span class="s2">while </span><span class="s1">squarodd(i) &lt;=n: 
+        i+=</span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">i 
+ 
+</span><span class="s0">#détermine l'abscisse absolue sur le carré à partir du coin inférieur gauche</span><span class="s1"> 
+</span><span class="s0">#determines absolute abscissa on the square starting from left lower corner</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Trouve_h(n): 
+    k=Trouve_k(n) 
+    </span><span class="s2">return </span><span class="s1">(</span><span class="s3">8</span><span class="s1">*k+n-squarodd(k)+</span><span class="s3">1</span><span class="s1">)%(</span><span class="s3">8</span><span class="s1">*k) 
+ 
+</span><span class="s0"># calcule le décalage par rapport à ce même point</span><span class="s1"> 
+</span><span class="s0"># computes offset relative to this same point</span><span class="s1">
+</span><span class="s2">def </span><span class="s1">Offset(k,h): 
+    q=h//</span><span class="s3">2</span><span class="s1">*k 
+    r=h-q*</span><span class="s3">2</span><span class="s1">*k 
+    </span><span class="s2">if </span><span class="s1">q==</span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[</span><span class="s3">0</span><span class="s1">,r] 
+    </span><span class="s2">if </span><span class="s1">q==</span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[r,</span><span class="s3">2</span><span class="s1">*k] 
+    </span><span class="s2">if </span><span class="s1">q==</span><span class="s3">2</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[</span><span class="s3">2</span><span class="s1">*k, </span><span class="s3">2</span><span class="s1">*k-r] 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">[</span><span class="s3">2</span><span class="s1">*k-r,</span><span class="s3">0</span><span class="s1">] 
+</span>
+<span class="s0"># Calcule les coordonnées du point P d'indice n de la spirale</span>
+<span class="s0"># computes coordinates of point P with index n on the spiral</span>
+<span class="s2">def </span><span class="s1">P(n): 
+    k,h=Trouve_k(n),Trouve_h(n) 
+    O=Offset(k,h) 
+    </span><span class="s2">return </span><span class="s1">[-k+O[</span><span class="s3">0</span><span class="s1">],-k+O[</span><span class="s3">1</span><span class="s1">]] 
+ 
+</span><span class="s0">#fonction principale - main function</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">25</span><span class="s1">): 
+        print(P(n)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,167 @@
+<html>
+<head>
+<title>second1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">MauvaisDegre &lt;: Exception</span>
+    <span class="s1">msg::String</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">normaliser(L)</span>
+    <span class="s0">if </span><span class="s1">length(L)==</span><span class="s2">1</span>
+        <span class="s0">return </span><span class="s1">L</span>
+    <span class="s0">elseif </span><span class="s1">L[</span><span class="s0">end</span><span class="s1">]==</span><span class="s2">0</span>
+        <span class="s0">return </span><span class="s1">normaliser(L[</span><span class="s2">1</span><span class="s1">:end-</span><span class="s2">1</span><span class="s1">])</span>
+    <span class="s0">else</span>
+        <span class="s0">return </span><span class="s1">L</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s3">#ajoute des 0 à la queue de L pour atteindre la longueur n si nécessaire</span>
+<span class="s3">#adds tailing 0's to reach legnth n if necessary</span>
+<span class="s3">#utilitaire pour l'ajout de polynômes de degrés différents</span>
+<span class="s3">#utility to add polynomials of distinct degrees</span>
+<span class="s0">function </span><span class="s1">allonge(L,n)</span>
+    <span class="s1">l=length(L)</span>
+    <span class="s0">if </span><span class="s1">l&gt;=n</span>
+        <span class="s0">return</span>
+    <span class="s0">else</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">l+</span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s1">push!(L,</span><span class="s2">0</span><span class="s1">)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">mutable struct </span><span class="s1">PolComplex</span>
+    <span class="s1">C::Vector{ComplexF64} </span><span class="s3"># la liste des coefficients par ordre des puissances croissantes</span>
+    <span class="s0">function </span><span class="s1">PolComplex(L)</span>
+        <span class="s1">L=normaliser(L)</span>
+        <span class="s0">return </span><span class="s1">new(L)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">degre(P::PolComplex) = length(P.C)-</span><span class="s2">1 </span><span class="s3">#le degré d'un polynôme - the degrree</span>
+
+<span class="s1">coefficient(P::PolComplex,n)=P.C[n+</span><span class="s2">1</span><span class="s1">]</span><span class="s3"># coeff de la puissance n-ième de l'inconnue</span>
+
+<span class="s3"># surcharge des opérateurs - overloading operators</span>
+<span class="s0">function </span><span class="s1">Base.string(P::PolComplex) </span><span class="s3"># représentation externe - converts to string</span>
+    <span class="s1">Result=string(</span><span class="s4">&quot;(&quot;</span><span class="s1">,P.C[</span><span class="s2">1</span><span class="s1">],</span><span class="s4">&quot;)&quot;</span><span class="s1">)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:length(P.C)</span>
+        <span class="s1">Result=string(Result,</span><span class="s4">&quot;+&quot;</span><span class="s1">,</span><span class="s4">&quot;(&quot;</span><span class="s1">,P.C[i],</span><span class="s4">&quot;)&quot;</span><span class="s1">,</span><span class="s4">&quot;X^&quot;</span><span class="s1">,i-</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Result</span>
+<span class="s0">end</span>
+<span class="s0">function </span><span class="s1">Base.:+(P1::PolComplex,P2::PolComplex)</span><span class="s3">#somme de deux polynomes</span>
+    <span class="s1">l1=length(P1.C)</span>
+    <span class="s1">l2=length(P2.C)</span>
+    <span class="s1">l=max(l1,l2)</span>
+    <span class="s1">L1=deepcopy(P1.C) </span><span class="s3">#pour ne pas modifier les coefficients de P1 - to protect P1's coeffs</span>
+    <span class="s1">L2=deepcopy(P2.C) </span><span class="s3">#idem - same for P2</span>
+    <span class="s1">allonge(L1,l)</span>
+    <span class="s1">allonge(L2,l)</span>
+    <span class="s1">L=[L1[i]+L2[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:l]</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:-(P1::PolComplex) </span><span class="s3">#l'opposé< - the opposite/span>
+    <span class="s1">L=[-c </span><span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">P1.C]</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s1">Base.:-(P1::PolComplex,P2::PolComplex)=P1+(-P2)</span><span class="s3"># la différence - diference</span>
+
+<span class="s0">function </span><span class="s1">Base.:*(z,P1::PolComplex) </span><span class="s3">#produit par un complexe - product by a complex</span>
+    <span class="s1">L=[z*c </span><span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">P1.C]</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:*(P1::PolComplex,P2::PolComplex)</span><span class="s3">#sproduit de deux polynomes - product of two pol.</span>
+    <span class="s1">d1=degre(P1)</span>
+    <span class="s1">d2=degre(P2)</span>
+    <span class="s1">d=d1+d2+</span><span class="s2">1</span>
+    <span class="s1">L=zeros(Complex,d)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:d</span>
+      <span class="s1">T=[P1.C[j]*P2.C[k] </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:(d1+</span><span class="s2">1</span><span class="s1">) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:(d2+</span><span class="s2">1</span><span class="s1">) </span><span class="s0">if </span><span class="s1">j+k==i+</span><span class="s2">1</span><span class="s1">]</span>
+      <span class="s1">L[i]=reduce(+,T)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:^(P::PolComplex,n) </span><span class="s3">#positive powers</span>
+    <span class="s1">R=PolComplex([</span><span class="s2">1</span><span class="s1">])</span>
+    <span class="s0">if </span><span class="s1">n==</span><span class="s2">0</span>
+        <span class="s0">return </span><span class="s1">R</span>
+    <span class="s0">else</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s1">R=R*P</span>
+        <span class="s0">end</span>
+        <span class="s0">return </span><span class="s1">R</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">valeur(P::PolComplex,a)</span>
+    <span class="s1">Result=P.C[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:degre(P)+</span><span class="s2">1</span>
+        <span class="s1">Result+=P.C[i]*a^(i-</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Result</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">discriminant(P::PolComplex)</span>
+    <span class="s0">if </span><span class="s1">degre(P) !=</span><span class="s2">2</span>
+        <span class="s1">throw(MauvaisDegre(</span><span class="s4">&quot;Le polynôme doit être de degré 2&quot;</span><span class="s1">))</span>
+    <span class="s0">else</span>
+        <span class="s0">return </span><span class="s1">P.C[</span><span class="s2">2</span><span class="s1">]*P.C[</span><span class="s2">2</span><span class="s1">] - </span><span class="s2">4</span><span class="s1">*P.C[</span><span class="s2">1</span><span class="s1">]*P.C[</span><span class="s2">3</span><span class="s1">]</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">racines_carrees(z::Complex)</span><span class="s3"># finds out square roots passing to polar form</span>
+    <span class="s1">rho=abs(z)</span>
+    <span class="s1">theta=angle(z)</span>
+    <span class="s1">r=sqrt(rho)</span>
+    <span class="s1">phi=theta/</span><span class="s2">2</span>
+    <span class="s1">r1=r*cos(phi)+r*sin(phi)im</span>
+    <span class="s0">return </span><span class="s1">r1,-r1</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">resolution(P::PolComplex) </span><span class="s3"># second degré uniquement - quadratics only</span>
+    <span class="s1">c=P.C[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s1">b=P.C[</span><span class="s2">2</span><span class="s1">]</span>
+    <span class="s1">a=P.C[</span><span class="s2">3</span><span class="s1">]</span>
+    <span class="s1">delta=discriminant(P)</span>
+    <span class="s1">r1,r2=racines_carrees(delta)</span>
+    <span class="s1">s1=(-b+r1)/(</span><span class="s2">2</span><span class="s1">*a)</span>
+    <span class="s1">s2=(-b+r2)/(</span><span class="s2">2</span><span class="s1">*a)</span>
+    <span class="s0">return </span><span class="s1">s1,s2</span>
+<span class="s0">end</span>
+
+
+<span class="s0">function </span><span class="s1">verification() </span><span class="s3">#pour tester le tout </span>
+    <span class="s1">P=PolComplex([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">])</span>
+    <span class="s1">r1,r2=resolution(P)</span>
+    <span class="s1">println(valeur(P,r1))</span>
+    <span class="s1">println(valeur(P,r2))</span>
+    <span class="s0">try</span>
+        <span class="s1">Q=PolComplex([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">1</span><span class="s1">,</span><span class="s2">1</span><span class="s1">,</span><span class="s2">1</span><span class="s1">])</span>
+        <span class="s1">resolution(Q)</span>
+    <span class="s0">catch </span><span class="s1">err</span>
+        <span class="s0">if isa</span><span class="s1">(err, MauvaisDegre)</span>
+            <span class="s1">println(err.msg)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">verification() </span><span class="s3"># les valeurs sont nulles à epsilon près 10^-16 ..- values are null 10^-16 close.</span>
+</pre>
+</body>
+</html>

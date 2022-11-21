@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Bases d'un espace vectoriel</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+  
+  </head>
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+      <li><input type="button" value="Exercices" onclick="go('exercices/bases/menu.html')" /></li>
+	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/bases/menu.html')" /></li>
+	 <li><input type="button" value="Back to Vector Spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+  <h2>
+   Définition
+  </h2>
+  
+ <div id="container">
+<div id="label">définition</div>  Un système de vecteurs est appelé une
+   <strong><em>'base'</em></strong>
+   (de l'espace vectoriel E
+   <u>supposé non nul</u>)
+si c'est à la fois un
+<input type="button" value="système générateur" onclick="go('generateurs.html')"  data-inline="true"/>
+ 
+   (de l'espace vectoriel E) et
+un
+<input type="button" value="système libre" onclick="go('libres.html')"  data-inline="true"/>.
+ La notion de base existe donc aussi pour tous les
+ <input type="button" value="sous-espaces" onclick="go('sousev.html')"  data-inline="true"/>.
+ </div>
+ 
+  Voici maintenant une propriété importante:
+ 
+<a name="th1"></a><div id="container">
+<div id="label">théorème</div>   Une condition nécessaire et suffisante pour qu'un système 
+   B=(u<sub>1</sub>,u<sub>2</sub>,....,u<sub>n</sub>) de vecteurs de E soit une base de E est que tout vecteur v ∈ E puisse s'écrire, de
+   <strong>manière unique</strong>
+   :
+   <br/>
+   v=λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+...+λ<sub>n</sub>u<sub>n</sub>
+   <br/>
+   Les nombres λ<sub>1</sub>, λ<sub>2</sub>, ... ,λ<sub>n</sub>
+   s'appellent les
+   <strong><em>'coordonnées'</em></strong>
+   de v par rapport à la base B.</div>
+ 
+
+<div data-role="collapsible">
+<h4>démonstration</h4>   Puisque B est un système générateur 
+   les nombres λ<sub>1</sub>, λ<sub>2</sub>, ... , λ<sub>n</sub>
+   existent toujours. A partir de deux écritures distinctes du type:
+   <br/>
+   v=λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+...+λ<sub>n</sub>u<sub>n</sub>
+   <br/>
+   On pourrait former une relation linéaire entre les u<sub>i</sub>, ce qui est impossible puisqu'ils forment un système libre.</div>
+ 
+  En voici une autre, également très importante:
+ 
+<a name="th2"></a><div id="container">
+<div id="label">théorème</div>   Soit L un système libre et G un système
+générateur fini de E. On suppose également que L ⊂ G. Dans ces
+conditions, on peut affirmer qu'il existe une base B de E vérifiant L ⊂
+B ⊂ G.</div>
+
+ 
+<div data-role="collapsible">
+<h4>démonstration</h4>   G étant un ensemble fini, les sous-systèmes libres de G contenant L
+sont en nombre fini. Soit B un tel sous-système dont le nombre
+d'éléments est maximal. Alors B est forcément une base. En effet tout
+élément de G qui n'est pas dans B peut s'exprimer comme combinaison
+linéaire d'éléments de B, sinon B ne serait pas maximal. Comme tout
+élément de E est combinaison linéaire d'éléments de G et que tout
+élément de G est combinaison linéaire d'éléments de B, il en résulte
+que B est générateur. Comme c'est un système libre par construction
+même, c'est donc une base.</div>
+ 
+  Ce théorème admet deux corollaires très importants:
+
+ <a name="th3"></a><div id="container">
+<div id="label">théorème dit 'de la base incomplete'</div>   Dans un
+espace vectoriel E de
+<input type="button" value="dimension finie" onclick="go('generateurs.html')"  data-inline="true"/>,
+ tout système libre fini peut
+être complété en une base.</div>
+ 
+ 
+<div data-role="collapsible">
+<h4>démonstration</h4>   Soit G un système générateur fini, alors G ∪ L est générateur. Il existe donc une base entre L et G ∪ L .</div>
+ 
+  
+<a name="th4"></a><div id="container">
+<div id="label">théorème</div>   Dans un espace vectoriel E de dimension finie, de tout système générateur fini on peut extraire une base.</div>
+  
+
+<div data-role="collapsible">
+<h4>démonstration</h4>   Soit u un vecteur non nul de G, L = (u) est libre. Il existe une base contenant (u) et contenue dans G.</div>
+
+  <h2>
+   Autres conséquences
+  </h2>
+  Les propriétés suivantes découlent des définitions et des résultats précédents:
+  <br/>
+  <ul>
+   <li>
+    Tout sous-espace de E possède au moins un
+    <input type="button" value="supplémentaire" onclick="go('opsev.html')"  data-inline="true"/>
+    dans E.
+   </li>
+   <li>
+    Si E=F⊕G alors la réunion d'une base de F et d'une base de G donne une base de E
+   </li>
+  </ul>
+  <h2>
+   Exemples
+  </h2>
+  <ol>
+   <li>
+    Si E= K le système à un seul vecteur S=(1) est une base
+   </li>
+   <li>
+    Si E= K×K le système S=((1,0),(0,1)) est une base
+   </li>
+   <a name="canonique">
+   </a>
+   <li>
+    Si E= K<sup>n</sup>
+    le système S=((1,0,...,0), (0,1,...,0), ... , (0,0,...,0,1,0), (0,...,0,1)) est une base de n vecteurs appelée
+    <strong><em>'la base canonique'</em></strong>
+    de K<sup>n</sup>.
+    <br/>
+    Voici une appliquette qui montre la décomposition d'un vecteur de &reals;<sup>3</sup>
+    suivant la base canonique (i,j,k) de cet espace.
+    <br/>
+    Vous pouvez arrêter et redémarrer l'animation à tout moment en cliquant sur la zone graphique.
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+ <h2>
+   Definition
+   </h2>
+  
+ <div id="container">
+<div id="label">definition </div>A  system of vectors is called a 
+    <strong><em>'basis' </em></strong>
+    (of the vector space E 
+    <u>assumed to be non-zero </u>) 
+ if it is both a 
+ <input type="button" value="spanning system" onclick="go('generateurs.html')" data-inline="true">(of the vector space E) and
+ a
+  <input type="button" value="linearly independent system" onclick="go('libres.html')" data-inline="true">.
+  The concept therefore also exists for all
+  <input type="button" value="subspaces" onclick="go('sousev.html')" data-inline="true">.
+  </div>
+ 
+  Now here is an important property:
+ 
+ <a name="th1e" ></a><div id="container">
+<div id="label">theorem </div>A necessary and sufficient condition for a system  
+    B=(u<sub>1</sub>,u<sub>2</sub>,....,u<sub>n</sub>) of vectors of E to be a basis of E is that any vector v ∈ E can be written, in an 
+    <strong>unique way </strong>
+    : 
+    <br>
+   v=λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+...+λ<sub>n</sub>u<sub>n</sub>
+   <br>The numbers λ<sub>1</sub>, λ<sub>2</sub>, ... ,λ<sub>n</sub>
+    are called the 
+    <strong><em>'coordinates' </em></strong>
+    of v with respect to the basis B. </div>
+ 
+
+<div data-role="collapsible">
+<h4>proof</h4>
+Since B is a spanning system  
+    the numbers λ<sub>1</sub>, λ<sub>2</sub>, ... , λ<sub>n</sub>
+    always exist. From two distinct writings of the type: 
+    <br>
+   v=λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+...+λ<sub>n</sub>u<sub>n</sub>
+   <br>
+   One could form a linear relation between the u<sub>i</sub>, which is impossible since they form a linearly independent system. </div>
+ 
+  Here is another one, also very important:
+ 
+ <a name="th2e" ></a><div id="container">
+<div id="label">theorem </div>Let L be a linearly independent system and G a finite spanning system
+  of E. We also suppose that L ⊂ G. In these
+ conditions, we can assert that there exists a basis B of E satisfying L ⊂
+ B ⊂ G. </div>
+
+ 
+<div data-role="collapsible" ><h4>proof</h4>
+ G being a finite set, the linearly independent subsystems of G containing L
+ are finite in number.  Let B be such a subsystem whose number
+ of elements is maximum.  Then B is necessarily a basis.  In fact everything
+ element of G which is not in B can be expressed as a combination
+ linear of elements of B, otherwise B would not be maximal.  Like everything
+ element of E is a linear combination of elements of G and that any
+ element of G is linear combination of elements of B, it follows
+ that B is spanning.  As it is a linearly independent system by construction
+ same, so it's a basis.</div>
+ 
+  This theorem admits two very important corollaries:
+
+  <a name="th3e" ></a><div id="container">
+<div id="label">theorem called 'the incomplete basis' </div>In a
+ vector space E of
+ <input type="button" value="finite dimension" onclick="go('generateurs.html')" data-inline="true">,
+  any finite linearly independent system can
+ be completed in a basis. </div>
+ 
+ 
+<div data-role="collapsible" ><h4>proof</h4>
+ Let G be a finite spanning system, then G ∪ L is spanning.  So there is a basis between L and G ∪ L .</div>
+ 
+  
+<a name="th4e" ></a><div id="container">
+<div id="label">theorem </div>In a finite dimensional vector space E, from any finite spanning system one can extract a basis. </div>
+  
+
+<div data-role="collapsible" ><h4>proof</h4>
+  Let u be a nonzero vector of G, L = (u) is linearly independent.  There exists a basis containing (u) and contained in G. </div>
+
+  <h2>
+   Other consequences
+   </h2>
+  The following properties follow from the previous definitions and results:
+   <br>
+  <ul>
+   <li>
+    Every subspace of E has at least one
+     <input type="button" value="supplementary" onclick="go('opsev.html')" data-inline="true">
+    subspace.
+    </li>
+   <li>
+    If E=F⊕G then the union of a basis of F and a basis of G gives a basis of E
+    </li>
+  </ul>
+  <h2>
+   Examples
+   </h2>
+  <ol>
+   <li>
+    If E= K the one-vector system S=(1) is a basis
+    </li>
+   <li>
+    If E= K×K the system S=((1,0),(0,1)) is a basis
+    </li>
+   <a name="canoniquee" >
+   </a>
+   <li>If E= K<sup>n</sup>
+     the system S=((1,0,...,0), (0,1,...,0), ... , (0,0,...,0,1,0), ( 0,...,0,1)) is a basis of n vectors called 
+     <strong><em>'the canonical basis' </em></strong>
+     of K<sup>n</sup>. 
+     <br>Here is an applet that shows the decomposition of a vector of ℝ<sup>3</sup>
+     according to the canonical basis (i,j,k) of this space. 
+     <br>
+    You can stop and restart the animation at any time by clicking on the graphics area.
+
+
+ </li></ol>
+
+
+</div><!-- /en --> 
+  <div>
+     <canvas height="400" id="myCanvas" style="border:1px solid #000000;" width="400">
+     </canvas>
+
+     <button onclick="onButton2();" type="button">
+      <div lang="fr">Changement de vecteur</div><!-- /fr --> <div lang="en">Change vectors</div><!-- /en --> 
+     </button>
+
+     <input id="mytext1" type="text"/>
+
+     <input id="mytext2" type="text"/>
+     <script src="js/coords3D.js">
+     </script>
+    </div>
+    </li>
+  </ol>  
+ <div lang="fr">
+
+<ol start=4>
+   <li>
+    Si E est l'espace vectoriel des polynômes de degré au plus égal à n, le système 
+    S=(1,x,x<sup>2</sup>,...,x<sup>n</sup>) est une base à n+1 vecteurs.
+   </li>
+  </ol>
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<ol start=4>
+   <li>
+    If E is the vector space of all polynomials with degree &le; n, the system 
+    S=(1,x,x<sup>2</sup>,...,x<sup>n</sup>) is a basis with n+1 vectors.
+   </li>
+  </ol>
+
+</div><!-- /en --> 
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+ 	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to Vector spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@linearly independent.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

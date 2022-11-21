@@ -1,0 +1,198 @@
+﻿<html>
+ <head>
+  <title>
+   libres.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># -*- coding: utf-8 -*- </span><span class="s1"> 
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction 
+</span><span class="s2">from </span><span class="s1">random </span><span class="s2">import </span><span class="s1">randint 
+</span><span class="s2">import </span><span class="s1">copy 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Vecteur: 
+    </span><span class="s0">"""modélisation vecteurs de dimension n à coefficients rationnels (ou autre)  par une classe python"""</span><span class="s1"> 
+    </span><span class="s0">"""modelization of vectors with n dimensions with rational coefficients (or other)  by a python class"""</span><span class="s1">  
+    </span><span class="s2">def </span><span class="s1">__init__(self,  L): 
+        </span><span class="s0">"""constructeur- constructor"""</span><span class="s1"> 
+        self.n =len(L) 
+        self.coords = L 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - converts to string"""</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords] 
+        </span><span class="s2">return </span><span class="s3">"(" </span><span class="s1">+ </span><span class="s3">","</span><span class="s1">.join(L) + </span><span class="s3">")"</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">"""addition de deux vecteurs - addition of two vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] + other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">"""opposé d'un vecteur - opposite of a vector"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n): 
+            L.append(-self.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">"""différence de deux vecteurs - difference of two vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] - other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+        </span><span class="s0">"""loi externe - external multiplication"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] * k) 
+        </span><span class="s2">return </span><span class="s1">Vecteur( L) 
+    </span><span class="s2">def </span><span class="s1">nul(self): 
+        </span><span class="s2">return </span><span class="s1">all([x==</span><span class="s4">0 </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords]) 
+ 
+</span><span class="s2">class </span><span class="s1">Systeme(): 
+    </span><span class="s0">"""Modélisation d'un système de vecteurs de rationnels - Model for a system of (rational) vectors"""</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self,L): 
+        </span><span class="s0">"""constructeur - constructor"""</span><span class="s1"> 
+        self.vecteurs=L 
+        self.taille=len(L) 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s3">'['</span><span class="s1">+</span><span class="s3">','</span><span class="s1">.join([str(v) </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.vecteurs])+</span><span class="s3">']'</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">AllNull(self,i): 
+        </span><span class="s0">"""teste la nullité de la colonne i - nullity of column i"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">all([self.vecteurs[i]==</span><span class="s4">0</span><span class="s1">]) 
+    </span><span class="s2">def </span><span class="s1">Colonne(self,i): 
+        </span><span class="s0">""" la i-ième colonne du système - i-th row of the system"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Vecteur([self.vecteurs[j].coords[i] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.taille)]) 
+ 
+    </span><span class="s2">def </span><span class="s1">RemoveCol0(self): 
+        </span><span class="s0">""" Supprime la première colonne du système - remove first column of the system"""</span><span class="s1"> 
+        L1=self.vecteurs 
+        L2=[x.coords </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L1] 
+        L3=[y[</span><span class="s4">1</span><span class="s1">:] </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">L2] 
+        L4=[Vecteur(z) </span><span class="s2">for </span><span class="s1">z </span><span class="s2">in </span><span class="s1">L3] 
+        self.vecteurs=copy.deepcopy(L4) 
+ 
+    </span><span class="s2">def </span><span class="s1">RemoveRow0(self): 
+        </span><span class="s0">""" Supprime la première ligne du système - removes first row"""</span><span class="s1"> 
+        self.vecteurs=self.vecteurs[</span><span class="s4">1</span><span class="s1">:] 
+        self.taille-=</span><span class="s4">1</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">Permute0(self,i): 
+        </span><span class="s0">"""permute la ligne i avec la ligne 0 - exchange row i with row 0"""</span><span class="s1"> 
+        L1=self.vecteurs 
+        L2= [L1[i]]+[L1[j] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.taille) </span><span class="s2">if </span><span class="s1">j !=i] 
+        self.vecteurs=L2 
+ 
+    </span><span class="s2">def </span><span class="s1">Substract0(self,alpha,j): 
+        </span><span class="s0">""" retranche alpha*Ligne[0] à la ligne j  - subtracts alpha*row[0] from row j """</span><span class="s1"> 
+        L1=self.vecteurs 
+        L2=L1[</span><span class="s4">1</span><span class="s1">:] 
+        L3=[] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.taille-</span><span class="s4">1</span><span class="s1">): 
+            </span><span class="s2">if </span><span class="s1">i+</span><span class="s4">1</span><span class="s1">!=j: 
+                L3.append(L2[i]) 
+            </span><span class="s2">else</span><span class="s1">: 
+                V=alpha*L1[</span><span class="s4">0</span><span class="s1">] 
+                L3.append(L2[i]-V) 
+        L4=[L1[</span><span class="s4">0</span><span class="s1">]]+L3 
+        self.vecteurs=copy.deepcopy(L4) 
+ 
+    </span><span class="s2">def </span><span class="s1">FirstRowNotNull(self): 
+        </span><span class="s0">""" Trouve l'indice de la première ligne ayant une première coordonnée non nulle"""</span><span class="s1"> 
+        </span><span class="s0">""" Finds index of first row having non zero first coordinate """</span><span class="s1">         
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,self.taille): 
+            </span><span class="s2">if not </span><span class="s1">(self.vecteurs[i]).coords[</span><span class="s4">0</span><span class="s1">]==</span><span class="s4">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">i 
+        </span><span class="s2">return </span><span class="s1">-</span><span class="s4">1 </span><span class="s0"># cas improbable dans les conditions d'utilisation</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">Libre(self): 
+        </span><span class="s0">""" Test si le système est libre - Checks if the system is linearly independent"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">any([v.nul() </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.vecteurs]): 
+            </span><span class="s2">return False </span><span class="s0"># pas libre si un seul vecteur nul</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.taille==</span><span class="s4">1</span><span class="s1">:</span><span class="s0"># si le système comporte un seul vecteur</span><span class="s1"> 
+            </span><span class="s2">return not </span><span class="s1">self.vecteurs[</span><span class="s4">0</span><span class="s1">].nul() </span><span class="s0"># il suffit qu'il soit non nul</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.AllNull(</span><span class="s4">0</span><span class="s1">): </span><span class="s0"># si toutes les premières coordonnées sont nulles</span><span class="s1"> 
+            self.RemoveCol0() 
+            </span><span class="s2">return </span><span class="s1">self.Libre() 
+        </span><span class="s2">else</span><span class="s1">: 
+            j=self.FirstRowNotNull() </span><span class="s0"># trouver la première ligne avec la première coordonnée non nulle - find first row with non zero first coordinate</span><span class="s1"> 
+            self.Permute0(j) </span><span class="s0"># la permuter avec la première - exchange with first one</span><span class="s1"> 
+            L1=copy.deepcopy(self.vecteurs) 
+            a=Fraction(</span><span class="s4">1</span><span class="s1">)/(L1[</span><span class="s4">0</span><span class="s1">].coords[</span><span class="s4">0</span><span class="s1">]) 
+            </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">,self.taille):</span><span class="s0"># retrancher à chaque ligne autre que la première- subtract to every row except first one</span><span class="s1"> 
+                b=L1[j].coords[</span><span class="s4">0</span><span class="s1">] </span><span class="s0"># un multiple de la première de façon à annuler la première coordonnée - a multiple of the first row to ca,cel first coordinate</span><span class="s1"> 
+                alpha=a*b 
+                self.Substract0(alpha,j) 
+            self.RemoveRow0() </span><span class="s0"># enlever la première ligne - remove first row</span><span class="s1"> 
+            self.RemoveCol0() </span><span class="s0"># enlever la première colonne - remove first column</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.Libre() </span><span class="s0"># appel récursif - recursive call</span><span class="s1"> 
+        </span><span class="s2">return</span><span class="s1"> 
+         
+ 
+</span><span class="s0">#variables globales servant à générer des systèmes aléatoires - global variables used to generate random systems</span><span class="s1"> 
+Entiers=[Fraction(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,</span><span class="s4">10</span><span class="s1">)] 
+Inverses=[</span><span class="s4">0</span><span class="s1">]+[Fraction(</span><span class="s4">1</span><span class="s1">,i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">,</span><span class="s4">10</span><span class="s1">)] 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">CreateSystemInt(m, n): 
+    </span><span class="s0">""" Crée un système aléatoire de m vecteurs à n coordonnées entières"""</span><span class="s1"> 
+    </span><span class="s0">""" Creates a random system with m vectors each of them with integral coordinates"""</span><span class="s1">     
+    </span><span class="s2">global </span><span class="s1">Entiers, Inverses 
+    S=[] 
+    </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,m): 
+        L= [Entiers[randint(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">9</span><span class="s1">)] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, n)] 
+        V=Vecteur(L) 
+        S.append(V) 
+    </span><span class="s2">return </span><span class="s1">Systeme(S) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    S=CreateSystemInt(</span><span class="s4">4</span><span class="s1">,</span><span class="s4">3</span><span class="s1">) 
+    print (S) 
+    print (S.Libre()) </span><span class="s0"># doit donner toujours faux - should always show false</span><span class="s1"> 
+    </span><span class="s0"># système avec un dernier vecteur nul - system with a last null vector</span><span class="s1"> 
+    S=CreateSystemInt(</span><span class="s4">2</span><span class="s1">,</span><span class="s4">3</span><span class="s1">) 
+    VecteurNul=Vecteur([Fraction(</span><span class="s4">0</span><span class="s1">), Fraction(</span><span class="s4">0</span><span class="s1">),Fraction(</span><span class="s4">0</span><span class="s1">)]) 
+    S.vecteurs.append(VecteurNul) 
+    S.taille+=</span><span class="s4">1</span><span class="s1"> 
+    print (S) 
+    print (S.Libre()) </span><span class="s0"># doit donner toujours faux - should always give false</span><span class="s1"> 
+    S=CreateSystemInt(</span><span class="s4">2</span><span class="s1">,</span><span class="s4">3</span><span class="s1">) 
+    Somme=S.vecteurs[</span><span class="s4">0</span><span class="s1">]+S.vecteurs[</span><span class="s4">1</span><span class="s1">] 
+    S.vecteurs.append(Somme) 
+    S.taille+=</span><span class="s4">1</span><span class="s1"> 
+    print (S) 
+    print (S.Libre()) </span><span class="s0"># doit donner toujours faux -should always show false</span><span class="s1"> 
+    </span><span class="s0">#totalement aléatoire 4 vecteurs à 4 composantes grande probabilité d'obtenir vrai</span><span class="s1"> 
+    </span><span class="s0">#totally random system of 4 vectors with 4 coordinates high probability to obtain true</span><span class="s1">     
+    S=CreateSystemInt(</span><span class="s4">4</span><span class="s1">,</span><span class="s4">4</span><span class="s1">) 
+    print (S) 
+    print (S.Libre()) </span><span class="s0"># doit presque toujours donner True - should almost always give true</span><span class="s1"> 
+ 
+ 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__==</span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+</span></pre>
+ </body>
+</html>

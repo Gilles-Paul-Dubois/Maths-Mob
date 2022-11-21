@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>prime5.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#évaluation paresseuse, un exemple</span>
+<span class="s0">#an example of lazy evaluation</span>
+<span class="s0">#générateur de nombres premiers</span>
+<span class="s0">#prime numbers generator</span>
+<span class="s0"># Pour produire tout nouveau nombre premier</span>
+<span class="s0"># To generate every new prime number </span>
+<span class="s0"># on utilise ceux qui précèdent</span>
+<span class="s0"># we use all primes before it</span>
+<span class="s0"># le 'channel' est l'équivalent Julia du générateur Python.</span>
+<span class="s0">#The 'channel' is julia's equivalent for python's generator</span>
+
+<span class="s2">function </span><span class="s1">prime_producer(c::Channel)</span>
+    <span class="s1">put!(c,</span><span class="s3">2</span><span class="s1">) </span><span class="s0">#équivalent à yield - same as python's 'yield'</span>
+    <span class="s1">put!(c,</span><span class="s3">3</span><span class="s1">)</span>
+    <span class="s1">P, p = [</span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">], </span><span class="s3">3</span>
+    <span class="s2">while true</span>
+        <span class="s1">p += </span><span class="s3">2 </span><span class="s0">#inutile de tester les nombres pairs - no need to check even numbers</span>
+        <span class="s2">if </span><span class="s1">all((p % x != </span><span class="s3">0 </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">P))</span>
+            <span class="s1">push!(P, p) </span><span class="s0">#il y a quand même consommation de mémoire car P grandit à chaque push - There is memory consumption because of the growing of P</span>
+            <span class="s1">put!(c,p) </span><span class="s0"># l'exécution est suspendue en l'attente d'un take! - execution suspended waiting for new take!</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s1">Premiers = Channel(prime_producer)</span>
+
+<span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:</span><span class="s3">20</span>
+    <span class="s1">println(take!(Premiers))</span>
+<span class="s2">end</span></pre>
+</body>
+</html>

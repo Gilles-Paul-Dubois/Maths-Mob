@@ -1,0 +1,57 @@
+﻿<html>
+ <head>
+  <title>
+   genperms.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># version python 3.4</span><span class="s1"> 
+ 
+</span><span class="s0"># generation of permutations of a finite set</span><span class="s1"> 
+</span><span class="s0"># by an iterative process using the generators of Python</span><span class="s1"> 
+</span><span class="s0"># insertion function</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+</span><span class="s2">def </span><span class="s1">ins(X,i,L): 
+    R=L[:] </span><span class="s0">#copy of L</span><span class="s1"> 
+    R.insert(i,X) </span><span class="s0"># insertion of X at index i in R</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">R 
+ 
+</span><span class="s0"># rotate X in L at all possible positions</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">turn (X,L): 
+    </span><span class="s2">return </span><span class="s1">[ins(X,i,L) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(L)+</span><span class="s3">1</span><span class="s1">)] 
+ 
+</span><span class="s0"># a generator</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">permutations(): 
+    i,P=</span><span class="s3">0</span><span class="s1">,[[]] 
+    </span><span class="s2">yield </span><span class="s1">P </span><span class="s0"># stop execution to restart at this precise pôint</span><span class="s1"> 
+    </span><span class="s2">while True</span><span class="s1">: </span><span class="s0"># pass from one generation to the next one</span><span class="s1"> 
+        i=i+</span><span class="s3">1</span><span class="s1"> 
+        Q=[turn(i,X) </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">P] 
+        P=reduce( </span><span class="s2">lambda </span><span class="s1">x,y:x+y,Q) </span><span class="s0"># repeated appending </span><span class="s1"> 
+        </span><span class="s2">yield </span><span class="s1">P </span><span class="s0">#stop execution to restart at this precise point</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    Perm=permutations() 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">6</span><span class="s1">): </span><span class="s0"># permutations of a set with 5 elements</span><span class="s1"> 
+        X=next(Perm) 
+    print (len(X)) 
+    print (X) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+</span></pre>
+ </body>
+</html>

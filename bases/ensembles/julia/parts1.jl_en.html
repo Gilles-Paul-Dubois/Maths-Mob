@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>parts1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#julia 1.6</span>
+<span class="s0"># computes the set of all subsets of  E  if E is given as a list without any repetition</span>
+
+<span class="s2">function </span><span class="s1">partsof(E)</span>
+    <span class="s1">P = [[]]</span>
+    <span class="s2">while </span><span class="s1">!isempty(E)</span>
+        <span class="s1">R = deepcopy(P)</span>
+        <span class="s1">a = pop!(E)</span>
+        <span class="s1">Q = [push!(x, a) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">P]</span>
+        <span class="s1">P = append!(R, Q)</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s1">P</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s1">main()</span>
+    <span class="s1">println(partsof([]))</span>
+    <span class="s1">println(partsof([</span><span class="s3">1</span><span class="s1">]))</span>
+    <span class="s1">println(partsof([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">]))</span>
+    <span class="s1">println(partsof([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">]))</span>
+<span class="s2">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

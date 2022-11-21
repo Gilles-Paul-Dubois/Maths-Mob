@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Le théorème de Hamilton-Cayley</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/hamcayley/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/hamcayley/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>L'énoncé du théorème</h2> K désigne un corps commutatif. E un espace vectoriel de <input type="button" value="dimension finie" onclick="go('../espaces/generateurs.html#dimfin')" data-inline="true" /> sur K. <br> On rappelle que pour tout <input type="button" value="endomorphisme" onclick="go('../applicalin/defapplin.html#defendo')" data-inline="true" /> u de E, le polynôme caractéristique de u est le polynôme à une indéterminée X à coefficients dans K: <br> p<sub>u</sub>(X)=Dét(u-Xi) où i désigne l'application identique de E dans E. <br> Ou encore: <br> p<sub>u</sub>(X)=Dét(A-XI<sub>n</sub>) où A est la <input type="button" value="matrice" onclick="go('../matapplin/defmatapp.html#')" data-inline="true" /> de u par rapport à une base quelconque et I<sub>n</sub> désigne la matrice identité d'ordre n. <br> Cela dit, pour tout polynôme p(X) à coefficients dans K et tout anneau L contenant K comme sous-corps (on dit une extension de K) et tout élément V de L l'expression p(V) obtenue en subsituant V à l'indeterminée X a un sens. <br> Le théorème de Hamilton Cayley peut s'exprimer ainsi :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The theorem statement </h2>K denotes a commutative field. E a <input type="button" value=" finite dimensional" onclick="go('../espaces/generateurs.html#dimfine')" data-inline="true"> vector space on K. <br> We recall that for all <input type="button" value=" endomorphism" onclick="go('../applicalin/defapplin.html#defendoe')" data-inline="true"> u of E, the characteristic polynomial of u is the polynomial in one indeterminate X with coefficients in K: <br> p<sub>u</sub> (X)=Dét(u-Xi) where i denotes the identity map of E. <br> Or: <br> p<sub>u</sub> (X)=Det(A-XI<sub>n</sub> ) where A is the <input type="button" value=" matrix" onclick="go('../matapplin/defmatapp.html#')" data-inline="true"> of u with respect to any basis and I<sub>n</sub> denotes the identity matrix of order n. <br>That being said, for any polynomial p(X) with coefficients in K and any ring L containing K as a subfield (we say an extension of K) and any element V of L the expression p(V) obtained by substituting V for the indeterminate X has a meaning. <br> Hamilton Cayley's theorem can be expressed as:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème</div> p<sub>u</sub>(u)=0 (égalité dans L(E)) <br> ou encore : <br> Pour toute matrice A représentant u p<sub>u</sub>(A)=0 (égalité dans M(n,K))
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem</div> p<sub>u</sub>(u)=0 (equality in L(E)) <br> or : <br> For any matrix A representing u p<sub>u</sub>(A)=0 (equality in M(n,K))
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <p> Il existe une bonne trentaine de démonstrations valides de ce théorème, et aussi quelques autres non valides. Le lecteur interessé est renvoyé à la page de liens. Nous allons en donner une, mais avant de commencer, montrons sur un exemple, la signification de ce théorème.</p>
+          <p>Prenons</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>There are about thirty valid proofs of this theorem, and also some other invalid ones. The interested reader is referred on the links page. We'll give one, but before we start, Let us show on an example the meaning of this theorem. </p>
+          <p>Let's take </p>
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( A= \begin{pmatrix} 1& 2 & 3 \\ 4 & 5 & 6 \\ 7 & 8 & 9 \\ \end{pmatrix} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> alors </div>
+        <!-- /fr -->
+        <div lang="en"> then </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( A^{2}= \begin{pmatrix} 30& 36 & 42 \\ 66 & 81 & 96 \\ 102 & 126 & 150 \\ \end{pmatrix} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> et </div>
+        <!-- /fr -->
+        <div lang="en"> and </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( A^{3}= \begin{pmatrix} 468 & 576 & 684 \\ 1062 & 1305 & 1548 \\ 1656 & 2034 & 2412 \\ \end{pmatrix} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr">
+          <p>Polynôme caractéristique de A: <br> -X<sup>3</sup>+15X<sup>2</sup>+18X <br> On peut vérifier que: <br>-A<sup>3</sup>+15A<sup>2</sup>+18A=0 </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Characteristic polynomial of A: <br> -X<sup>3 </sup>+15X<sup>2 </sup>+18X <br> We can verify that: <br>-A<sup> 3 </sup>+15A<sup>2</sup>+18A=0 </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Nous étudions d'abord le cas où u est trigonalisable, c'est à dire qu'il existe une base B=(x<sub>1</sub>,..., x<sub>p</sub>) de E, telle que la matrice de u par rapport à B soit triangulaire supérieure. Considérons alors les sous espaces: <br> F<sub>1</sub> engendré par (x<sub>1</sub>) <br> F<sub>2</sub> engendré par (x<sub>1</sub>,x<sub>2</sub>) <br> ........ <br> F<sub>i</sub> engendré par (x<sub>1</sub>, ... ,x<sub>i</sub>) <br> ........ <br> F<sub>n</sub> =E engendré par (x<sub>1</sub>,...,x<sub>n</sub>)=B <br> Désignons maintenant par λ<sub>1</sub>, λ<sub>2</sub>, ... , λ<sub>n</sub> les éléments diagonaux de la matrice triangulaire de u. <br> p<sub>u</sub>(u)=(u- λ<sub>1</sub>i) <font size="-1">o</font>(u- λ<sub>2</sub>i) <font size="-1">o</font>... <font size="-1">o</font>(u-λ<sub>n</sub>i) où i est l'identité. <br> Posant u-λ<sub>p</sub>i=u<sub>p</sub>
+            <br> Il s'agit de démontrer que: <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub><font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub>=0 <br> Donc que u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub>(E)={0} <br> Soit encore: <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub>(F<sub>n</sub>)={0} <br> Mais on a évidemment u<sub>p</sub>(F<sub>p</sub>) ⊆ F<sub>p-1</sub> pour tout p. <br> Donc, <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub>(F<sub>n</sub>) ⊆ u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n-1</sub>(F<sub>n-1</sub>) <br> Et de proche en proche: <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub>(F<sub>n</sub>) ⊆ u<sub>1</sub>(F<sub>1</sub>)={0} <br> CQFD. <br> Le résultat est donc établi pour tout corps K dans lequel les endomorphismes sont trigonalisables, donc en particulier pour le corps ℂ des nombres complexes. <br> Supposons maintenant qu'on soit dans le cas où K=ℝ, alors on peut trigonaliser u dans ℂ, et écrire que la matrice A de u est de la forme A=B=PBP<sup>-1</sup> où les trois matrices P, B, P<sup>-1</sup> sont à coefficients complexes et B est triangulaire. <br> On a alors p<sub>u</sub>(A)=p<sub>u</sub>(PBP<sup>-1</sup>)=Pp<sub>u</sub>(B)P<sup>-1</sup>=P0P<sup>-1</sup>=0 <br> Le résultat est donc établi pour toute matrice à coefficients réels, donc en particulier à coefficients entiers relatifs. <br> Regardons maintenant un peu ce qui se passe quand A est d'ordre 2. <p>
+              <!-- FORMULE UNIV INLINE --> \( A= \begin{pmatrix} a & b \\ c & d \\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> Le polynôme caractéristique de A est: X<sup>2</sup>-(a+d)X+(ad-bc) <p>
+              <!-- FORMULE UNIV INLINE --> \( A^{2}= \begin{pmatrix} a^{2}+bc & ab+bd \\ ac+dc & bc+d^{2}\\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p>
+            <p>
+              <!-- FORMULE UNIV INLINE --> \( (a+d)A= \begin{pmatrix} a^{2}+ad & ab+bd \\ ac+dc& ad+d^{2}\\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> Donc p<sub>A</sub>(A) est une matrice dont les coefficients s'expriment comme des polynômes p<sub>i,j</sub>(a,b,c,d) à 4 variables 1≤i,j≤n. <br> Ceci est vrai non seulement pour l'ordre 2 mais pour tout n. <br> p<sub>A</sub>A) est une matrice dont les n<sup>2</sup> coefficients s'expriment sous la forme: <br> p<sub>i,j</sub>(α<sub>1,1</sub>,α<sub>1,2</sub>,...,α<sub>n,n</sub>) <br> où les p<sub>i,j</sub> sont des polynômes à n<sup>2</sup> variables à coefficients entiers rationnels (dans ℤ). La démonstration du théorème d'Hamilton Cayley en toute généralité revient donc à démontrer que ces polynômes sont identiquement nuls. Mais pour que cela soit il suffit qu'il en soit ainsi pour toute matrice à coefficients dans ℤ, ce qui est le cas puisque ℤ ⊆ ℝ
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> We first study the case where u is trigonalizable, i.e. there exists a basis B=(x<sub>1</sub> ,..., x<sub>p</sub> ) of E, such that the matrix of u with respect to B is upper triangular. Consider then the subspaces: <br>F<sub>1</sub> generated by (x<sub>1</sub> ) <br> F<sub>2</sub> generated by (x<sub>1</sub> ,x<sub>2</sub> ) <br> ........ <br> F<sub>i</sub> generated by (x<sub>1</sub> , ... ,x<sub>i</sub> ) <br> ........ <br>F<sub>n</sub> =E generated by (x<sub>1</sub> ,...,x<sub>n</sub> )=B <br>Let us now denote by λ<sub>1</sub> , λ<sub>2</sub> , ... , λ<sub>n</sub> the diagonal elements of the triangular matrix of u. <br> p<sub>u</sub>(u)= (u- λ<sub>1</sub>i) <font size="-1">o</font>(u- λ<sub>2</sub>i) <font size="-1">o</font>... <font size="-1">o</font>(u-λ<sub>n</sub>i) where i is the identity. <br> Posing u-λ<sub>p</sub>i=u<sub>p</sub>
+            <br> It must be demonstrated that that: <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub> =0 <br> so that u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub> (E) = {0} <br> Or again: <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub> (F<sub>n</sub> )={0} <br> But we obviously have u<sub>p</sub>(F<sub>p</sub>) ⊆ F<sub>p-1</sub> for all p. <br> So, <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub>(F<sub>n</sub>) ⊆ u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n-1</sub>(F<sub>n-1</sub>) <br> And step by step: <br> u<sub>1</sub>
+            <font size="-1">o</font>u<sub>2</sub>
+            <font size="-1">o</font>... <font size="-1">o</font>u<sub>n</sub>(F<sub>n</sub>) ⊆ u<sub>1</sub>(F<sub>1</sub>)={0} <br> QED. <br>The result is thus established for any field K in which the endomorphisms are trigonalizable, so especially for the field ℂ of complex numbers. <br>Suppose now that we are in the case where K=ℝ, then we can trigonalize u in ℂ, and write that the matrix A of u has the form A=B=PBP<sup>-1</sup> where the three matrices P, B, P<sup>-1</sup> have complex coefficients and B is triangular. <br> We then have p<sub>u</sub>(A)=p<sub>u</sub>(PBP<sup>-1</sup>)=Pp<sub>u</sub>(B)P<sup>-1</sup>=P0P<sup>-1</sup>=0 <br> The result is thus established for any matrix with real coefficients, therefore in particular with relative integer coefficients. <br> Now let's take a look at what happens when A is of order 2. <p>
+              <!-- FORMULE UNIV INLINE --> \( A= \begin{pmatrix} a & b \\ c & d \\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> The characteristic polynomial of A is : X<sup>2</sup>-(a+d)X+(ad-bc) <p>
+              <!-- FORMULE UNIV INLINE --> \( A^{2}= \begin{pmatrix} a^{2}+bc & ab+bd \\ ac+dc & bc+d^{2}\\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p>
+            <p>
+              <!-- FORMULE UNIV INLINE --> \( (a+d)A= \begin{pmatrix} a^{2}+ad & ab+bd \\ ac+dc& ad+d^{2}\\ \end{pmatrix} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> So p<sub>A</sub>(A) is a matrix whose coefficients are expressed as polynomials p<sub>i,j</sub>(a,b,c,d) with 4 variables 1≤i,j≤n. <br> This is true not only for order 2 but for all n. <br>p<sub>A</sub>A) is a matrix the n<sup>2</sup> coefficients of which are expressed in the form: <br> p<sub>i,j</sub>(α<sub>1,1</sub>,α<sub>1,2</sub>,...,α<sub>n,n</sub>) <br>where the p<sub>i,j</sub> polynomials have n<sup>2</sup> variables and rational integer coefficients (in ℤ). Proof of Hamilton Cayley's theorem in general therefore amounts to demonstrating that these polynomials are identically zero. But for this to be true it is enough that it is so for all matrix with coefficients in ℤ, which is the case since ℤ ⊆ ℝ
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Le coin de Python </h2> Voici un programme qui vérifie le théorème de Hamilton Cayley: <p>
+            <object data="python/hamcayley.html" type="text/html" width="100%" height="500" border="3"></object>
+          </p>
+          <h2> Le coin de Julia </h2>
+          <p>Même chose avec Julia 1.6</p>
+          <p>
+            <object data="julia/HamCayley.jl.html" type="text/html" width="100%" height="220" border="3"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réduction des matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Reduction of matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

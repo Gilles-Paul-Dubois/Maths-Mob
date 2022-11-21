@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="d">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../imapplin.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p> Soit E un espace vectoriel de dimension finie. <br /> Une application linéaire p: E → E est appelée un <strong>
+              <em> 'projecteur' </em>
+            </strong> si elle vérifie p<sup>2</sup>=p. <br /> i désigne l'application identique de E dans E (i est linéaire). <br /> Montrer que:
+          <ol>
+            <li> p projecteur ⇔ (i-p) projecteur </li>
+            <li> p projecteur ⇒ Im(i-p)=Ker(p) et Ker(i-p)=Im(p) </li>
+            <li> p projecteur ⇒ E=Im(p)⊕Ker(p) </li>
+            <li> p projecteur ⇔ p est le projecteur sur Im(p) parallèlement à Ker(p) ( <input type="button" value="au sens du cours" onclick="go('../../defapplin.html#proj')" data-inline="true" /> ). </li>
+            <li> Soit p un projecteur et u un endomorphisme de E. <br /> Montrer que : <br /> p<font size="-1">o</font>u=u<font size="-1">o</font>p ⇔ u(Ker(p)) ⊆ Ker(p) et u(Im(p)) ⊆ Im(p). </li>
+          </ol>
+          </p>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <p> Revoir la définition de l'image. <br> Revoir la définition du noyau. <br> Revoir la déinition d'un projecteur. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> (i-p)<font size="-1">o</font>(i-p)=i-2p+p<sup>2</sup> de sorte que p=p<sup>2</sup> ⇔ (i-p)=(i-p)<sup>2</sup>
+              </li>
+              <li> Supposons que p soit un projecteur alors x ∈ Im(i-p) ⇔ x=y-p(y) avec y ∈ E. <br /> Mais x=y-p(y) ⇒ p(x)=p(y)- p<sup>2</sup>(y)=p(y)-p(y)=0, donc x ∈ Ker(p). <br /> Remarquons maintenant que si q=i-p Ker(p) est l'ensemble des invariant de i-q et vice-versa. <br /> Donc p(x)=0 ⇔ (i-p)(x)=x ⇔ x=x-p(x). Pour le reste il suffit d'échanger les rôles de p et i-p. </li>
+              <li> Si x ∈ Im(p)∩Ker(p) alors x=p(y) avec y ∈ E, mais p<sup>2</sup>(y)=p(x)=p(y)=0, donc x=0 et Im(p) et Ker(p) sont en somme directe. <br /> Par ailleurs ∀ x ∈ E on a x=x-p(x)+p(x) qui prouve que tout x peut s'écrire comme somme d'un élément de Ker(p) à savoir x-p(x) avec un élément de Im(p) à savoir p(x). <br /> On a donc bien E = Ker(p)⊕Im(p). </li>
+              <li> Ecrivons x sous la forme y+z avec y ∈ Im(p) et z ∈ Ker(p). Alors p(x)=p(y) or p(y)=y-(y-p(y)) ∈ Im(p) et y-p(y) ∈ Ker(p), donc y-p(y)=0. </li>
+              <li> Supposons d'abord que u et p commutent. <br /> Soit x ∈ Ker(p) alors u(p(x))=p(u(x))=0 donc u(x) ∈ Ker(p). Si maintenant x=p(y) on a u(p(y))=p(u(y)) ∈ Im(p). <br /> Si maintenant on a les deux inclusions u(Ker(p)) ⊆ Ker(p) et u(Im(p)) ⊆ Im(p), alors on a : <br /> p<font size="-1">o</font>u(x)=u<font size="-1">o</font>p(x) pour tout x ∈ Ker(p) d'une part. <br /> p<font size="-1">o</font>u(x)=u<font size="-1">o</font>p(x) pour tout x ∈ Im(p) d'autre part. <br /> Donc p<font size="-1">o</font>u(x)=u<font size="-1">o</font>p(x) pour tout x ∈ E par linéarité. <br />
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../imapplin.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>Let E be a finite dimensional vector space. <br>A linear map p: E → E is called a <strong>
+              <em> 'projector' </em>
+            </strong> if it verifies p<sup>2</sup>=p. <br> i denotes the identical map from E to E (i is linear). <br> Show that : </p>
+          <ol>
+            <li> p projector ⇔ (i-p) projector </li>
+            <li> p projector ⇒ Im(i-p)=Ker(p) and Ker(i-p)=Im(p) </li>
+            <li> p projector ⇒ E=Im(p)⊕Ker(p) </li>
+            <li> p projector ⇔ p is the projector on Im(p) parallel to Ker(p) ( <input type="button" value="in the sense of the course" onclick="go('../../defapplin.html#proj')" data-inline="true"> ). </li>
+            <li> Let p be a projector and u an endomorphism of E. <br> Show that : <br> p<font size="-1">o</font>u=u<font size="-1">o</font>p ⇔ u(Ker(p)) ⊆ Ker(p) and u(Im(p)) ⊆ Im(p). </li>
+          </ol>
+          <p></p>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <p> Review the definition of the image. <br> Review the definition of the kernel. <br> Review the definition of a projector. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> (i-p)<font size="-1">o</font>(i-p) = i-2p + p<sup>2</sup> so that p=p<sup>2</sup> ⇔ (i-p)=(i-p)<sup>2</sup>
+              </li>
+              <li>Suppose p is a projector then x ∈ Im(i-p) ⇔ x=y-p(y) with y ∈ E. <br>But x=y-p(y) ⇒ p(x)=p(y)-p<sup>2</sup>(y)=p(y)-p(y)=0, so x ∈ Ker(p). <br>Notice now that if q=i-p Ker(p) is the set of invariants of i-q and vice versa. <br>So p(x)=0 ⇔ (i-p)(x)=x ⇔ x=x-p(x). For the rest just exchange the roles of p and i-p. </li>
+              <li>If x ∈ Im(p)∩Ker(p) then x=p(y) with y ∈ E, but p<sup>2</sup>(y)=p(x)=p(y)=0, so x=0 and Im(p) and Ker(p) are in direct sum. <br>Moreover ∀ x ∈ E we have x=x-p(x)+p(x) which proves that any x can be written as the sum of an element of Ker(p) namely x-p(x) with a element of Im(p) namely p(x). <br> We therefore have E = Ker(p)⊕Im(p). </li>
+              <li>Write x in the form y+z with y ∈ Im(p) and z ∈ Ker(p). Then p(x)=p(y) but p(y)=y-(y-p(y)) ∈ Im(p) and y-p(y) ∈ Ker(p), so y-p(y)=0. </li>
+              <li> Suppose first that u and p commute. <br>Let x ∈ Ker(p) then u(p(x))=p(u(x))=0 so u(x) ∈ Ker(p). If now x=p(y) we have u(p(y))=p(u(y)) ∈ Im(p). <br>If now we have the two inclusions u(Ker(p)) ⊆ Ker(p) and u(Im(p)) ⊆ Im(p), then we have: <br> p<font size="-1">o</font>u(x)=u<font size="-1">o</font>p(x) for all x ∈ Ker(p) on one hand. <br> p<font size="-1">o</font>u(x)=u<font size="-1">o</font>p(x) for all x ∈ Im(p) on the other hand. <br> So p<font size="-1">o</font>u(x)=u<font size="-1">o</font>p(x) for all x ∈ E by linearity. <br>
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

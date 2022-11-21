@@ -1,0 +1,82 @@
+﻿<html>
+ <head>
+  <title>
+   restitue.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+</span><span class="s0"># Ce programme restitue une fraction à partir de son développement décimal périodique</span><span class="s1"> 
+</span><span class="s0"># This program finds a fraction starting from its decimal expansion</span><span class="s1"> 
+ 
+ 
+</span><span class="s0"># calcule le pgcd de deux nombres</span><span class="s1"> 
+</span><span class="s0"># computes the gcd of two integers</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">pgcd (m,n): 
+    </span><span class="s2">while </span><span class="s1">(m%n): 
+        t=m 
+        m=n 
+        n=t%n 
+    </span><span class="s2">return </span><span class="s1">n 
+ 
+</span><span class="s0"># nombres de chiffres de n en base 10</span><span class="s1"> 
+</span><span class="s0"># number of digits of n using base 10</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">nbc(n): 
+    </span><span class="s2">if </span><span class="s1">n&lt;</span><span class="s3">10</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">1</span><span class="s1">+nbc(n//</span><span class="s3">10</span><span class="s1">) 
+ 
+</span><span class="s0">#restitue la fraction ayant le développement e,(p)</span><span class="s1"> 
+</span><span class="s0">#rebuilds the fraction with expansion e,(p)</span><span class="s1">
+</span><span class="s0"># e partie entière</span><span class="s1"> 
+</span><span class="s0"># e integral part</span><span class="s1"> 
+</span><span class="s0"># (p) période</span><span class="s1"> 
+</span><span class="s0"># (p) period</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">restitue1(e, p): 
+    b = nbc(p) 
+    m = e * (</span><span class="s3">10 </span><span class="s1">** b - </span><span class="s3">1</span><span class="s1">) + p 
+    n = (</span><span class="s3">10 </span><span class="s1">** b - </span><span class="s3">1</span><span class="s1">) 
+    D = pgcd(m, n) 
+    </span><span class="s2">return </span><span class="s1">[m//D, n//D] 
+ 
+ 
+</span><span class="s0"># restitue la fraction ayant le dévelopement e,d(p)</span><span class="s1">
+</span><span class="s0"># rebuilds the fraction with expansion e,d(p)</span><span class="s1"> 
+</span><span class="s0">#e partie entière - integral part </span><span class="s1"> 
+</span><span class="s0"># d : décimales avant la période - decimals before period</span><span class="s1"> 
+</span><span class="s0">#(p) période - period</span><span class="s1"> 
+</span><span class="s0">#exemple 2,78141414  e=2 d=78 p=14</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">restitue2(e,d,p): 
+    a=nbc(d) 
+    b=nbc(p) 
+    m=e*(</span><span class="s3">10</span><span class="s1">**(</span><span class="s3">2</span><span class="s1">*a))*(</span><span class="s3">10</span><span class="s1">**b-</span><span class="s3">1</span><span class="s1">)+d*(</span><span class="s3">10</span><span class="s1">**b-</span><span class="s3">1</span><span class="s1">)*(</span><span class="s3">10</span><span class="s1">**a)+p*(</span><span class="s3">10</span><span class="s1">**a) 
+    n=(</span><span class="s3">10</span><span class="s1">**(</span><span class="s3">2</span><span class="s1">*a))*(</span><span class="s3">10</span><span class="s1">**b-</span><span class="s3">1</span><span class="s1">) 
+    D=pgcd(m,n) 
+    </span><span class="s2">return</span><span class="s1">[m//D,n//D] 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    print(restitue1(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">1234</span><span class="s1">)) 
+    print(restitue2(</span><span class="s3">2</span><span class="s1">,</span><span class="s3">27</span><span class="s1">,</span><span class="s3">45</span><span class="s1">)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,110 @@
+﻿<html>
+ <head>
+  <title>
+   romains1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,128,128); font-weight: bold; }
+.s3 { color: rgb(0,0,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span>
+<span class="s1"></span><span class="s0"># les caractères qui correspondent à des chiffres</span><span class="s1"> 
+<span class="s1"></span><span class="s0"># Characters used as numerical symbols</span><span class="s1"> 
+Romains=</span><span class="s2">"IVXLCDM"</span><span class="s1"> 
+ 
+</span><span class="s0"># teste si un caractère est un chiffre romain</span><span class="s1"> 
+</span><span class="s0"># Checks if a letter is a numerical symbol</span><span class="s1"> 
+</span><span class="s3">def </span><span class="s1">IsRomanNumeral(lettre): 
+    </span><span class="s3">return </span><span class="s1">lettre </span><span class="s3">in </span><span class="s2">"IVXLCDM"</span><span class="s1"> 
+ 
+</span><span class="s0"># compare deux chiffres</span><span class="s1"> 
+</span><span class="s0"># compares two symbols</span><span class="s1"> 
+</span><span class="s3">def </span><span class="s1">IsLessThan(lettre1,lettre2): 
+    i1=Romains.index(lettre1) 
+    i2=Romains.index(lettre2) 
+    </span><span class="s3">return </span><span class="s1">i1&lt;i2 
+ 
+</span><span class="s0"># definit la valeur d'un chiffre</span><span class="s1"> 
+</span><span class="s0"># defines the value of a symbol</span><span class="s1"> 
+</span><span class="s3">def </span><span class="s1">Value(lettre): 
+    </span><span class="s3">if </span><span class="s1">lettre==</span><span class="s2">'I'</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">1</span><span class="s1"> 
+    </span><span class="s3">elif </span><span class="s1">lettre==</span><span class="s2">'V'</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">5</span><span class="s1"> 
+    </span><span class="s3">elif </span><span class="s1">lettre==</span><span class="s2">'X'</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">10</span><span class="s1"> 
+    </span><span class="s3">elif </span><span class="s1">lettre==</span><span class="s2">'L'</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">50</span><span class="s1"> 
+    </span><span class="s3">elif </span><span class="s1">lettre==</span><span class="s2">'C'</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">100</span><span class="s1"> 
+    </span><span class="s3">elif </span><span class="s1">lettre==</span><span class="s2">'D'</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">500</span><span class="s1"> 
+    </span><span class="s3">elif </span><span class="s1">lettre==</span><span class="s2">'M'</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">1000</span><span class="s1"> 
+    </span><span class="s3">else</span><span class="s1">: 
+        </span><span class="s3">return </span><span class="s4">0</span><span class="s1"> 
+ 
+</span><span class="s0"># romains non puissances de 10</span><span class="s1">
+</span><span class="s0"># romans which are not powers of 10</span><span class="s1">  
+</span><span class="s3">def </span><span class="s1">Quinqua(X): 
+    </span><span class="s3">return </span><span class="s1">X </span><span class="s3">in </span><span class="s2">"VLD"</span><span class="s1"> 
+ 
+</span><span class="s0">#chiffre précédent</span><span class="s1"> 
+</span><span class="s0">#previous digit</span><span class="s1"> 
+</span><span class="s3">def </span><span class="s1">Previous(C): 
+    i=Romains.index(C) 
+    </span><span class="s3">return </span><span class="s1">Romains[i-</span><span class="s4">1</span><span class="s1">] 
+ 
+</span><span class="s0"># met une expression sous forme nomale sans soustraction</span><span class="s1"> 
+</span><span class="s0">#puts an expression under 'normal' form without subtraction</span><span class="s1">
+</span><span class="s3">def </span><span class="s1">Normalize(N): 
+    M=</span><span class="s2">""</span><span class="s1"> 
+    </span><span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(N)-</span><span class="s4">1</span><span class="s1">): 
+        </span><span class="s3">if </span><span class="s1">IsLessThan(N[i],N[i+</span><span class="s4">1</span><span class="s1">]): 
+            </span><span class="s3">if </span><span class="s1">Quinqua(N[i+</span><span class="s4">1</span><span class="s1">]): 
+                NewNum=</span><span class="s4">4</span><span class="s1">*N[i] 
+            </span><span class="s3">else</span><span class="s1">: 
+                NewNum=Previous(N[i+</span><span class="s4">1</span><span class="s1">])+</span><span class="s4">4</span><span class="s1">*N[i] 
+            M+=NewNum 
+        </span><span class="s3">else</span><span class="s1">: 
+            M+=N[i] 
+            </span><span class="s3">if </span><span class="s1">i==len(N)-</span><span class="s4">2</span><span class="s1">: 
+                M+=N[i+</span><span class="s4">1</span><span class="s1">] 
+    </span><span class="s3">return </span><span class="s1">M 
+ 
+</span><span class="s0"># évaluation d'un nombre sous forme normale</span><span class="s1"> 
+</span><span class="s0"># evaluation of a number under normal form</span><span class="s1">
+</span><span class="s3">def </span><span class="s1">EvalNorm(N): 
+    s=</span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">N: 
+        s+=Value(x) 
+    </span><span class="s3">return </span><span class="s1">s 
+ 
+</span><span class="s0">#évaluation d'un numéral romain</span><span class="s1"> 
+</span><span class="s0">#évaluation of a roman numeral</span><span class="s1">
+</span><span class="s3">def </span><span class="s1">Eval(N): 
+    </span><span class="s3">return </span><span class="s1">EvalNorm(Normalize(N)) 
+ 
+</span><span class="s0">#fonction principale</span><span class="s1"> 
+</span><span class="s0">#main function</span><span class="s1"> 
+</span><span class="s3">def </span><span class="s1">main(): 
+    print(Eval(</span><span class="s2">"MCDLIX"</span><span class="s1">)) 
+ 
+</span><span class="s3">if </span><span class="s1">__name__ == </span><span class="s2">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

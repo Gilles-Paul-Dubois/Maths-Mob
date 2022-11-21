@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Implication</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+
+	
+	
+
+
+</head>
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="b">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="b">
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/implication/menu.html')" /></li>    
+ 	 <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/implication/menu.html')" /></li>
+	 <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+<h2>
+   Définitions
+  </h2>
+  
+<div id="container">
+<div id="label">définition</div>   On dit qu'une proposition P
+   <span style="font-weight: bold; font-style: italic;">
+    'implique'
+   </span>
+   (synonymes:
+'force', 'entraîne') une proposition Q si et seulement si Q est vraie
+chaque fois que P est vraie.</div>
+ 
+  Exemple:
+  <br/>
+  P: 1=2
+  <br/>
+  Q: 2=3
+  <br/>
+  Si P est vraie alors 1+1=2+1 donc Q.
+  <br/>
+  Cela revient à dire qu'il est impossible qu'on ait P vraie sans avoir Q
+vraie également.
+  <br/>
+  Autrement dit, il est impossible d'avoir P sans avoir Q.
+  <br/>
+  Autrement dit encore, P∧(¬Q) est une <input type="button" value="contradiction" onclick="go('tautologies.html#contra')"  data-inline="true"/>, ou bien ¬(P∧(¬Q)) est une <input type="button" value="tautologie" onclick="go('tautologies.html')"  data-inline="true"/>.
+  <br/>
+  Mais en utilisant les équivalences usuelles, cela revient à:
+  <br/>
+  (¬P)∨(¬(¬Q)) tautologie
+  <br/>
+  Soit encore (¬P)∨Q  tautologie.
+  <br/>
+  ou finalement, ce qui est encore équivalent Q∨(¬ P) tautologie.
+   <br/>
+  Cela nous conduit à poser la définition suivante:
+  
+ <div id="container">
+<div id="label">définition</div>  Nous noterons P⇒Q la formule Q∨(¬ P)
+   <br/>
+   Nous définissons ainsi un nouvel opérateur ⇒ sur l'ensemble des
+formules du calcul propositionnel.</div>
+  
+  Notons les propriétés suivantes, qui résultent de la
+définition:
+ 
+<div id="container">
+<div id="label">propriétés</div>   <ul>
+    <li>
+     Si P est fausse alors P⇒Q est toujours vraie quelle que
+soit la
+proposition Q.
+    </li>
+    <li>
+     Si Q est vraie alors P⇒Q est toujours vraie quelle que
+soit la
+proposition P.
+    </li>
+   </ul></div>
+
+<p>
+  C'est en application de cette première propriété qu'on démontre par
+exemple que
+  <font size="+2">
+   ∅
+  </font>
+  ⊆ E pour tout
+ensemble E.</p>
+ 
+<div id="container">
+<div id="label">définition</div>   Si P⇒Q est une implication l'implication Q⇒P s'appelle
+l'implication
+   <span style="font-weight: bold; font-style: italic;">
+    'réciproque'</span>.</div>
+ 
+  
+  <div id="container">
+ L'implication directe peut être vraie sans que sa réciproque soit vraie.</div>
+  
+  Exemple ( x désigne un nombre entier
+  <span style="text-decoration: underline;">
+   différent de 2
+  </span>
+  ):
+  <br/>
+  P: x  est premier
+  <br/>
+  Q : x est impair
+  <br/>
+  On a  bien P⇒Q mais on n'a pas Q⇒P
+  
+<div id="container">
+<div id="label">définition</div>   Notons maintenant P⇔Q la relation (P⇒Q)∧(Q⇒P)
+(double implication).
+On dit encore dans ce cas que P et Q sont
+   <span style="font-weight: bold; font-style: italic;">
+    'équivalentes'</span>.</div>
+  
+  La terminologie laisse à penser qu'il peut y avoir risque de confusion
+entre P⇔Q et P≡Q <input type="button" value="au sens précédent" onclick="go('equivalence.html')"  data-inline="true"/>. De fait il n'en est rien si on remarque que:
+ 
+ <div id="container">
+  P≡Q si et seulement si P⇔Q est une tautologie.</div>
+ 
+ 
+<div id="container">
+<div id="label">définition</div>   Si P⇒Q est une implication l'implication  ¬Q⇒¬P
+s'appelle
+l'implication
+   <span style="font-weight: bold; font-style: italic;">
+    'contraposée'</span>.</div>
+  
+  
+ <div id="container">
+ Toute implication est
+logiquement équivalente à sa contraposée.</div>
+
+  <br/>
+  En effet ¬Q⇒¬ P signifie  (¬P)∨(¬(¬Q)) et est
+équivalente à (¬P)∨Q soit encore à Q∨(¬ P)
+  <br/>
+  Voici une liste de tautologies d'usage courant, correspondant compte
+tenu de la remarque précédente à
+<input type="button" value="des equivalences déjà vues" onclick="go('equivalence.html#equivus')"  data-inline="true"/>  :
+  <br/>
+  <table border="1" cellpadding="10" cellspacing="2" style="text-align: left; width: 100px;">
+   <tbody>
+    <tr>
+     <td style="white-space: nowrap;">
+      <dl>
+       <dt>
+        idempotence de
+        <tt>
+         ¬
+        </tt>
+        :
+       </dt>
+       <dd>
+        <tt>
+         ¬(¬P) ⇔ P
+         </tt>
+       </dd>
+       <dt>
+        idempotence de
+        <tt>
+         ∧
+        </tt>
+        et
+        <tt>
+         ∨
+        </tt>
+        :
+       </dt>
+       <dd>
+        <tt>
+         P ∧ P ⇔ P
+        </tt>
+       </dd>
+       <dd>
+        <tt>
+         P ∨ P ⇔ P
+        </tt>
+       </dd>
+       <dt>
+        associativité de
+        <tt>
+         ∧
+        </tt>
+        et
+        <tt>
+         ∨
+        </tt>
+        :
+       </dt>
+       <dd>
+        <tt>
+         P ∧ (Q ∧ R) ⇔
+(P ∧ Q) ∧ R
+        </tt>
+       </dd>
+       <dd>
+        <tt>
+         P ∨ (Q ∨ R) ⇔ (P ∨ Q) ∨ R
+        </tt>
+       </dd>
+       <dt>
+        commutativité de
+        <tt>
+         ∧
+        </tt>
+        et
+        <tt>
+         ∨
+        </tt>
+        :
+       </dt>
+       <dd>
+        <tt>
+         P ∧ Q ⇔ Q ∧ P
+        </tt>
+       </dd>
+       <dd>
+        <tt>
+         P ∨ Q ⇔ Q ∨ P
+        </tt>
+       </dd>
+       <dt>
+        distributivité  :
+       </dt>
+       <dd>
+        <tt>
+         (P ∨ Q) ∧ P ⇔ (P ∧ P) ∨ (Q ∧ R)
+        </tt>
+       </dd>
+       <dd>
+        <tt>
+         (P ∧ Q) ∨ R ⇔ (P ∨ R) ∧ (Q ∨ R)
+        </tt>
+       </dd>
+       <dt>
+        De Morgan:
+       </dt>
+       <dd>
+		   <tt>
+        ¬(P ∨ Q) ⇔ (¬ P) ∧ (¬ Q)
+        </tt>
+       </dd>
+       <dt><dd><tt>
+        ¬(P ∧ Q) ⇔ (¬ P) ∨ (¬ Q)
+        </tt></dd>
+       </dt>
+      </dl>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Definitions
+   </h2>
+  
+<div id="container">
+<div id="label">definition </div>We say that a proposition P 
+    <span style="font-weight: bold; font-style: italic;">
+     'implies' 
+    </span>
+    (synonym: 
+ 'forces', 'causes') a proposition Q if and only if Q is true 
+ whenever P is true. </div>
+ 
+  Example:
+   <br>
+  P: 1=2
+   <br>
+  Q: 2=3
+   <br>
+  If P is true then 1+1=2+1 so Q.
+   <br>This amounts to saying that it is impossible that we have P true without having Q
+ also true.
+   <br>
+  In other words, it is impossible to have P without having Q.
+   <br>
+  In other words again,  P∧(¬Q) is a <input type="button" value="contradiction" onclick="go('tautologies.html#contrae')"  data-inline="true"/>, or ¬(P∧(¬Q)) is a <input type="button" value="tautology" onclick="go('tautologies.html')"  data-inline="true"/>.
+   <br>
+  But using the usual equivalences, this amounts to:
+   <br>
+  (¬P) ∨ (¬ (¬Q)) is a tautology
+   <br>
+  or (¬P)∨Q is a tautology.
+   <br>
+  or finally, which is still equivalent Q∨(¬P) is a tautology.
+    <br>
+  This leads us to pose the following definition:
+  
+  <div id="container">
+<div id="label">definition </div>We will denote by P⇒Q the formula Q∨(¬ P)
+    <br>We thus define a new operator ⇒ on the set of
+ propositional formulas. </div>
+ 
+ Note the following properties, which result from the
+ definition:
+ 
+ <div id="container">
+<div id="label">properties </div>   <ul>
+    <li>If P is false then P⇒Q is always true whatever
+ the
+proposition Q.
+     </li>
+    <li>If Q is true then P⇒Q is always true regardless of
+ the
+ proposition P.
+     </li>
+   </ul></div>
+
+<p>It is by applying this first property that we prove by
+ example that
+   <font size="+2">
+   ∅
+   </font>
+   ⊆ E for any set E. </p>
+ 
+<div id="container">
+<div id="label">definition </div>If P⇒Q ​​is an implication the implication Q⇒P is called 
+ 
+    <span style="font-weight: bold; font-style: italic;">
+     'reciprocal' or 'converse' </span> implication. </div>
+ 
+  
+  <div id="container">
+ The direct implication can be true without its converse being true. </div>Example ( x denotes an integer 
+   <span style="text-decoration: underline;">
+    different from 2 
+   </span>
+   ): 
+   <br>
+  P: x is prime
+   <br>
+  Q: x is odd
+   <br>
+  We have P⇒Q but we don't have Q⇒P
+  
+ <div id="container">
+<div id="label">definition </div>Let us now denote by P⇔Q the relation (P⇒Q)∧(Q⇒P) 
+ (double implication). 
+ We still say in this case that P and Q are 
+    <span style="font-weight: bold; font-style: italic;">
+     'equivalent' </span>. </div>The terminology suggests that there may be a risk of confusion
+ between P⇔Q and P≡Q <input type="button" value="in the preceding sense" onclick="go('equivalence.html')"  data-inline="true"/>.  In fact it is not so if we notice that:
+ 
+  <div id="container">
+  P≡Q if and only if P⇔Q is a tautology. </div>
+ 
+ 
+<div id="container">
+<div id="label">definition </div>If P⇒Q ​​is an implication the implication ¬Q⇒¬P 
+ named 
+     <span style="font-weight: bold; font-style: italic;">
+     'contrapositive' </span> implication. </div>
+  
+  
+ <div id="container">Any implication is
+ logically equivalent to its contrapositive. </div>
+
+  <br>Indeed ¬Q⇒¬ P means (¬P)∨(¬(¬Q)) and is
+ equivalent to (¬P)∨Q or still to Q∨(¬P)
+   <br>The following is a list of tautologies in common use, 
+ taking into account <input type="button" value="already seen equivalences" onclick="go('equivalence.html#equivuse')"  data-inline="true"/>  :
+   <br>
+  <table style="text-align: left; width: 100px;" cellspacing="2" cellpadding="10" border="1">
+   <tbody>
+    <tr>
+     <td style="white-space: nowrap;">
+      <dl>
+       <dt>idempotence of 
+         <tt>
+          ¬ 
+         </tt>
+         : 
+        </dt>
+       <dd>
+        <tt>
+         ¬(¬P) ⇔ P
+          </tt>
+       </dd>
+       <dt>idempotence of 
+         <tt>
+          ∧ 
+         </tt>
+         and 
+         <tt>
+          ∨ 
+         </tt>
+         : 
+        </dt>
+       <dd>
+        <tt>
+         P ∧ P ⇔ P
+         </tt>
+       </dd>
+       <dd>
+        <tt>
+         P ∨ P ⇔ P
+         </tt>
+       </dd>
+       <dt>associativity of 
+         <tt>
+          ∧ 
+         </tt>
+         and 
+         <tt>
+          ∨ 
+         </tt>
+         : 
+        </dt>
+       <dd>
+        <tt>
+         P ∧ (Q ∧ R) ⇔
+(P ∧ Q) ∧ R
+         </tt>
+       </dd>
+       <dd>
+        <tt>
+         P ∨ (Q ∨ R) ⇔ (P ∨ Q) ∨ R
+         </tt>
+       </dd>
+       <dt>commutativity of 
+         <tt>
+          ∧ 
+         </tt>
+         and 
+         <tt>
+          ∨ 
+         </tt>
+         : 
+        </dt>
+       <dd>
+        <tt>
+         P ∧ Q ⇔ Q ∧ P
+         </tt>
+       </dd>
+       <dd>
+        <tt>
+         P ∨ Q ⇔ Q ∨ P
+         </tt>
+       </dd>
+       <dt>
+        distributivity:
+        </dt>
+       <dd>
+        <tt>
+         (P ∨ Q) ∧ P ⇔ (P ∧ P) ∨ (Q ∧ R)
+         </tt>
+       </dd>
+       <dd>
+        <tt>
+         (P ∧ Q) ∨ R ⇔ (P ∨ R) ∧ (Q ∨ R)
+         </tt>
+       </dd>
+       <dt>
+        De Morgan:
+        </dt>
+       <dd>
+		   <tt>
+        ¬(P ∨ Q) ⇔ (¬ P) ∧ (¬ Q)
+         </tt>
+       </dd>
+       <dt></dt><dd><tt>
+        ¬(P ∧ Q) ⇔ (¬ P) ∨ (¬ Q)
+         </tt></dd>
+       
+      </dl>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+
+
+</div><!-- /en --> 
+
+<div lang="fr">
+<h2>
+   Terminologie (langage courant)
+  </h2>
+
+<div id="container">
+<div id="label">définition</div>   Pour exprimer que P⇒Q on dit parfois que
+   <span style="font-weight: bold; font-style: italic;">
+    'P est une
+condition suffisante pour Q'
+   </span>
+   ou bien que
+   <span style="font-weight: bold; font-style: italic;">
+    'Q est une
+condition nécessaire pour P'
+   </span>
+   .</div>
+  
+ <a name="cns"></a> 
+ <div id="container">
+<div id="label">définition</div>  P⇔Q peut donc aussi s'exprimer par:
+   <span style="font-weight: bold; font-style: italic;">
+    'P est une
+condition
+nécessaire et suffisante pour Q'
+   </span>
+   ; on dit aussi dans ce cas
+'P est vrai
+   <span style="font-weight: bold; font-style: italic;">
+    si
+et seulement si
+   </span>
+   Q est vrai'.</div>
+ 
+  <br/>
+  Les phrases suivantes ont le même sens, elles permettent de varier un
+peu le discours mathématique:
+  <br/>
+  <ul>
+   <li>
+    Si P, alors Q
+   </li>
+   <li>
+    Puisque P, donc Q
+   </li>
+   <li>
+    Il suffit de P pour Q
+   </li>
+   <li>
+    P est suffisante pour Q
+   </li>
+   <li>
+    Q est nécessaire pour P
+   </li>
+   <li>
+    Il faut Q pour P
+   </li>
+  </ul>
+  
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<h2>
+   Terminology (everyday's language)
+   </h2>
+
+<div id="container">
+<div id="label">definition </div>To express that P⇒Q we sometimes say that 
+    <span style="font-weight: bold; font-style: italic;">
+     'P is a 
+ sufficient condition for Q' 
+    </span>
+    or that 
+    <span style="font-weight: bold; font-style: italic;">
+     'Q is a 
+ necessary condition for P' 
+    </span>
+    . </div>
+  
+  <a name="cnse"></a>
+ <div id="container">
+<div id="label">definition </div>P⇔Q can therefore also be expressed by: 
+    <span style="font-weight: bold; font-style: italic;">
+     'P is a 
+  necessary and sufficient condition for Q' 
+    </span>
+    ; we also say in this case 
+ 'P is true 
+    <span style="font-weight: bold; font-style: italic;">
+     if 
+ and only if 
+    </span>
+    Q is true'. </div>
+ 
+  <br>The following sentences have the same meaning, they allow you to vary a
+ little mathematical discourse:
+   <br>
+  <ul>
+   <li>
+    If P, then Q
+    </li>
+   <li>
+    Since P, therefore Q
+    </li>
+   <li>
+    P insures Q
+    </li>
+   <li>
+    P is sufficient for Q
+    </li>
+   <li>
+    Q is needed for P
+    </li>
+   <li>
+    We need Q for P
+    </li>
+  </ul>
+  
+
+
+
+</div><!-- /en --> 
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

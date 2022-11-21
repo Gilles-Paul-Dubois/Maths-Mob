@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">premier(n)</span>
+    <span class="s0">if </span><span class="s1">n </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:</span><span class="s2">3</span>
+        <span class="s0">return true</span>
+    <span class="s0">else</span>
+        <span class="s1">borne=Int(floor(sqrt(n)))+</span><span class="s2">1</span>
+        <span class="s0">if </span><span class="s1">n%</span><span class="s2">2</span><span class="s1">!=</span><span class="s2">0 </span><span class="s1">&amp;&amp; n%</span><span class="s2">3</span><span class="s1">!=</span><span class="s2">0 </span><span class="s1">&amp;&amp;!(any(n%x==</span><span class="s2">0 </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s2">3</span><span class="s1">:borne))</span>
+            <span class="s0">return true</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return false</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">compte(m)</span>
+    <span class="s1">result=</span><span class="s2">0</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:m</span>
+        <span class="s0">if </span><span class="s1">premier(i)</span>
+            <span class="s1">result+=</span><span class="s2">1</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">result,m</span>
+<span class="s0">end</span>
+
+
+<span class="s0">for </span><span class="s1">n </span><span class="s0">in </span><span class="s1">[</span><span class="s2">100</span><span class="s1">, </span><span class="s2">1000</span><span class="s1">, </span><span class="s2">10000</span><span class="s1">,</span><span class="s2">100000</span><span class="s1">,</span><span class="s2">1000000</span><span class="s1">,</span><span class="s2">10000000</span><span class="s1">]</span>
+    <span class="s1">x=</span><span class="s2">1</span><span class="s1">/log(n)</span>
+    <span class="s1">y= compte(n)[</span><span class="s2">1</span><span class="s1">]/compte(n)[</span><span class="s2">2</span><span class="s1">]</span>
+    <span class="s1">println(x/y)</span>
+<span class="s0">end    </span></pre>
+</body>
+</html>

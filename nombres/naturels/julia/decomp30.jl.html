@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">partitions(n)</span>
+    <span class="s1">a=repeat([</span><span class="s2">1</span><span class="s1">],n)</span>
+    <span class="s1">L=[a]</span>
+    <span class="s1">k=n</span>
+    <span class="s0">while </span><span class="s1">k&gt;</span><span class="s2">1</span>
+        <span class="s1">y=a[k]-</span><span class="s2">1</span>
+        <span class="s1">x=a[k-</span><span class="s2">1</span><span class="s1">]+</span><span class="s2">1</span>
+        <span class="s1">q,r= y÷x,y%x</span>
+        <span class="s1">a=append!(a[</span><span class="s2">1</span><span class="s1">:k-</span><span class="s2">2</span><span class="s1">],repeat([x],q))</span>
+        <span class="s1">push!(a,x+r)</span>
+        <span class="s1">k+=(q-</span><span class="s2">1</span><span class="s1">)</span>
+        <span class="s1">push!(L,a)</span>
+     <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">L</span>
+<span class="s0">end</span>
+
+<span class="s1">println(partitions(</span><span class="s2">30</span><span class="s1">))   </span></pre>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>muldiv1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">diviseurs1(n)</span>
+    <span class="s0">return </span><span class="s1">[i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n </span><span class="s0">if </span><span class="s1">n%i==</span><span class="s2">0</span><span class="s1">]</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">diviseurs2(n)</span>
+    <span class="s1">r=round(Int32,sqrt(n))</span>
+    <span class="s1">E1=[i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:r </span><span class="s0">if </span><span class="s1">n%i==</span><span class="s2">0</span><span class="s1">]</span>
+    <span class="s1">E2=[n÷i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">E1]</span>
+    <span class="s0">if </span><span class="s1">E1[</span><span class="s0">end</span><span class="s1">]==E2[</span><span class="s0">end</span><span class="s1">]</span>
+        <span class="s0">return </span><span class="s1">sort(append!(E1[</span><span class="s2">1</span><span class="s1">:end-</span><span class="s2">1</span><span class="s1">],E2))</span>
+    <span class="s0">else</span>
+        <span class="s0">return </span><span class="s1">sort(append!(E1,E2))</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">println(diviseurs1(</span><span class="s2">12</span><span class="s1">))</span>
+    <span class="s1">println(diviseurs2(</span><span class="s2">12</span><span class="s1">))</span>
+    <span class="s1">println(diviseurs1(</span><span class="s2">16</span><span class="s1">))</span>
+    <span class="s1">println(diviseurs2(</span><span class="s2">16</span><span class="s1">))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

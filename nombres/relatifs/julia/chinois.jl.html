@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">bezout(a,b)</span>
+    <span class="s1">s,t,u,v=</span><span class="s2">1</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">1</span>
+    <span class="s0">while </span><span class="s1">b!=</span><span class="s2">0</span>
+        <span class="s1">q=a÷b</span>
+        <span class="s1">a, s, t, b, u, v = b, u, v, a - q * b, s - q * u, t - q * v</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">a&gt;</span><span class="s2">0 </span><span class="s1">? (a,s,t) : (-a, -s, -t)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">solution(Restes,Modulos)</span>
+    <span class="s1">N=reduce(*, Modulos)</span>
+    <span class="s1">M=[N÷n </span><span class="s0">for </span><span class="s1">n </span><span class="s0">in </span><span class="s1">Modulos]</span>
+    <span class="s1">B=[bezout(Modulos[i],M[i]) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:length(Modulos)]</span>
+    <span class="s1">V=[s[</span><span class="s2">3</span><span class="s1">] </span><span class="s0">for </span><span class="s1">s </span><span class="s0">in </span><span class="s1">B]</span>
+    <span class="s1">E=[V[i]*M[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:length(Modulos)]</span>
+    <span class="s1">P=[Restes[i]*E[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:length(Modulos)]</span>
+    <span class="s1">x=reduce(+,P)</span>
+    <span class="s0">if </span><span class="s1">x&lt;</span><span class="s2">0</span>
+        <span class="s0">while </span><span class="s1">x&lt;</span><span class="s2">0</span>
+            <span class="s1">x+=N</span>
+        <span class="s0">end</span>
+        <span class="s0">return </span><span class="s1">x-N</span>
+    <span class="s0">else</span>
+        <span class="s0">while </span><span class="s1">x&gt;</span><span class="s2">0</span>
+            <span class="s1">x-=N</span>
+        <span class="s0">end</span>
+        <span class="s0">return </span><span class="s1">x+N</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">println(solution([</span><span class="s2">3</span><span class="s1">,</span><span class="s2">4</span><span class="s1">,</span><span class="s2">5</span><span class="s1">],[</span><span class="s2">17</span><span class="s1">,</span><span class="s2">11</span><span class="s1">,</span><span class="s2">6</span><span class="s1">])) </span></pre>
+</body>
+</html>

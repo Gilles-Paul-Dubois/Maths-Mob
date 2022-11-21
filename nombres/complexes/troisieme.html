@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Le troisième degré</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/troisieme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/troisieme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Forme canonique </h2> Considérons l'équation générale du troisième degré à coefficients complexes. <br /> aZ<sup>3</sup>+bZ<sup>2</sup>+cZ+d=0 (a ≠ 0) <br /> En divisant tout par a on peut supposer que a=1, et que l'équation est: <br /> Z<sup>3</sup>+bZ<sup>2</sup>+cZ+d=0 soit <br /> Z<sup>3</sup>+3(b/3)Z<sup>2</sup>+cZ+d=0 <br /> Soit encore (Z+b/3)<sup>3</sup>-3(b²/9)Z-b<sup>3</sup>/27+cZ+d=0 <br /> (Z+b/3)<sup>3</sup>+Z(c-3(b²/9))+d=0 <br /> (Z+b/3)<sup>3</sup>+(Z+b/3-b/3)(c-3(b²/9))+d=0 <br /> En posant Z' = Z+b/3 et en développant on arrive à : <br /> Z'<sup>3</sup>+pZ'+q = 0 où on pourra calculer les coefficient p et q en fonction de b,c et d. <div id="container"> En définitive, après quelques transformations simples, toute équation complexe du troisième degré peut se ramener à la forme 'canonique': <br /> Z<sup>3</sup>+pZ+q=0 où les coefficients p et q sont des nombres complexes. <span style="text-decoration: underline;">On peut supposer en outre que p ≠ 0 car sinon la résolution est évidente</span>. </div>
+          <h2> L'algorithme </h2> La <span style="font-weight: bold; font-style: italic;">'méthode de Cardan'</span> repose sur l'astuce suivante: <br /> On pose Z=u+v transformant ainsi l'unique inconnue de l'équation en deux inconnues mais avec un degré de liberté (si (u,v) est une solution (u+k,v-k) en est une autre) . <br /> Réécrivons l'équation: <br /> (u+v)<sup>3</sup>+p(u+v)+q=0 <br /> u<sup>3</sup>+v<sup>3</sup>+3u<sup>2</sup>v+3uv<sup>2</sup>+p(u+v)+q=0 <br /> u<sup>3</sup>+v<sup>3</sup>+(u+v)(3uv+p)+q=0 <br /> Supposons maintenant que u et v soient choisis de telle sorte que 3uv+p=0 <br /> l'équation se transforme en le système: <br /> u<sup>3</sup>+v<sup>3</sup>=-q <br /> uv=-p/3 <br /> Soit en posant U=u<sup>3</sup> et V= v<sup>3</sup>
+          <br /> U+V=-q <br /> UV=-p<sup>3</sup>/27 <br /> Tout revient à trouver deux nombres connaissant leur somme et leur produit, mais cela revient à résoudre une équation du second degré: <br /> W<sup>2</sup>+qW-p<sup>3</sup>/27=0 <br /> Nous avons donc ramené le problème de la résolution d'une équation du troisième degré à celui de la résolution d'une équation de degré strictement inférieur. <br /> Ayant U= u<sup>3</sup> il est facile d'extraire de U les trois racines cubiques complexes : <br /> [ρ, θ]<sup>3</sup> =[r,t] ⇔ ρ = r<sup>1/3</sup> et θ = t/3+ 2kπ/3 , k ∈ &integers; et pour chaque valeur de u trouvée calculer la valeur de v correspondante -p/3u. <br /> Voir les exercices corrigés pour des résolutions pratiques. <br /> Le cas particulier où les coefficients p,q sont en fait tous deux réels sera également traité en exercice. <h2> Galerie des portraits </h2>
+          <span style="font-weight: bold;">Le troisième degré</span> : un vrai 'polar' de la renaissance italienne avec pour acteurs principaux Niccolo Tartaglia, Jerôme Cardan, Scipione del Ferro
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Canonical form </h2>Consider the general equation of the third degree with complex coefficients. <br> aZ<sup>3</sup>+bZ<sup>2</sup>+cZ+d=0 (a ≠ 0) <br> By dividing everything by a we can assume that a=1, and the equation is: <br>Z<sup>3</sup>+bZ<sup>2</sup>+cZ+d=0 that is <br> Z<sup>3</sup>+3(b/3)Z<sup>2</sup>+cZ+d=0 <br> Let (Z+b/3)<sup>3</sup>-3(b²/9)Zb<sup>3</sup>/27+cZ+d=0 <br> (Z+b/3)<sup>3</sup>+Z(c-3(b²/9))+d=0 <br> (Z+b/3)<sup>3</sup>+(Z+b/3-b/3)(c-3(b²/9))+d=0 <br> By setting Z' = Z+b/3 and expanding we arrive at: <br>Z'<sup>3</sup>+pZ'+q = 0 where we can calculate the coefficient p and q as a function of b,c and d. <div id="container">Finally, after a few simple transformations, any third degree complex algebraic equation can be reduced to the 'canonical' form: <br>Z<sup>3</sup>+pZ+q=0 where the coefficients p and q are complex numbers. <span style="text-decoration: underline;">One can further assume that p ≠ 0 because otherwise the resolution is obvious </span>. </div>
+          <h2> The algorithm </h2>The <span style="font-weight: bold; font-style: italic;">'Cardan method' </span> relies on the following trick: <br>We set Z=u+v thus transforming the unique unknown of the equation into two unknowns but with one degree of freedom (if (u,v) is a solution (u+k,v-k) is another). <br> Let's rewrite the equation: <br> (u+v)<sup>3</sup>+p(u+v)+q=0 <br> u<sup>3</sup>+ v<sup>3</sup>+ 3u<sup>2</sup>v + 3uv<sup>2</sup>+ p (u + v) + q = 0 <br> u<sup>3</sup>+ v<sup>3</sup>+ (u + v) (3uv + p) + q = 0 <br>Now suppose that u and v are chosen such that 3uv+p=0 <br> the equation turns into the system: <br> u<sup>3</sup>+ v<sup>3</sup>= -q <br> uv=-p/3 <br>Or by setting U=u<sup>3</sup> and V=v<sup>3</sup>
+          <br> U+V=-q <br> UV=-p<sup>3</sup>/27 <br>It all boils down to finding two numbers knowing their sum and their product, but this amounts to solving a quadratic equation: <br> W<sup>2</sup>+qW-p<sup>3</sup>/27=0 <br>We have therefore reduced the problem of solving an equation of the third degree to that of solving a degree equation strictly lower. <br>Having U= u<sup>3</sup> it is easy to extract from U the three complex cubic roots: <br>[ρ, θ]<sup>3</sup> =[r,t] ⇔ ρ = r<sup>1/3</sup> and θ = t/3+2kπ/3 , k ∈ ℤ and for each value of u found calculate the corresponding value of v-p/3u. <br> See the corrected exercises for practical resolutions. <br>The particular case where the coefficients p,q are in fact both real will also be treated as an exercise. <h2> Portrait gallery </h2>
+          <span style="font-weight: bold;">The third degree </span> : a true 'thriller' of the Italian renaissance with Niccolo Tartaglia, Jerôme Cardan, Scipione del Ferro starring
+        </div>
+        <!-- /en -->
+        <p>
+        <table bgcolor="#000000" border="1" cellpadding="2" cellspacing="2" style="text-align: left; width: 100px;">
+          <tbody>
+            <tr>
+              <td style="text-align: center;">
+                <font color="#FFFFFF"> Cardan <br /> (1501/1576-IT) </font>
+              </td>
+              <td style="text-align: center;">
+                <font color="#FFFFFF"> Tartaglia <br /> (1499/1557-IT) </font>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img alt="" src="images/180px-Cardano.jpg" style="width: 180px; height: 219px;" />
+              </td>
+              <td>
+                <img alt="" src="images/tartaglia.jpg" style="width: 180px; height: 210px;" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        </p>
+        <div lang="fr">
+          <h2> Le coin de Python </h2> Voici un programme qui résout les équations du troisième degré à coefficients complexes, en utilisant la méthode de Cardan: <p>
+            <object border="3" data="python/cardan.html" height="400" type="text/html" width="100%"></object>
+          <h2> Le coin de Julia </h2> Même chose avec julia 1.6 : <p>
+            <object border="3" data="julia/trois1.jl.html" height="400" type="text/html" width="100%"></object>
+          </p> Avec une bibliothèque, inutile de réinventer la roue : <p>
+            <object border="3" data="julia/trois2.jl.html" height="100" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's corner </h2> Here is a program that solves third degree equations with complex coefficients, using Cardan's method: <p>
+            <object data="python/cardan.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <p>Note to English speaking readers : <br> The above program rests on <input type="button" value="the basic one" onclick="go('python/complexes1.html')" data-inline="true" />
+            <br> Only three functions have been added 'racines', 'Cardan' ans 'Resolution'. This is why French comments have been translated only for these three. Anyone who wants to have English comments for the rest should check the original program (see link above). <br> Thank you !
+          </p>
+          <h2> Julia's corner </h2> Same thing with julia 1.6: <p>
+            <object data="julia/trois1.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p> With a library, there is no need to reinvent the wheel: <p>
+            <object data="julia/trois2.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+          </p>
+          <p> Same note is valid for Julia version. Please eventually refer to <input type="button" value="the basic one" onclick="go('julia/repmach1.jl.html')" data-inline="true" /> for English comments. </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

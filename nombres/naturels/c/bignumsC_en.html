@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   Untitled
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="SynEdit HTML exporter" name="generator"/>
+  <style type="text/css">
+   <!--
+body { color: #000000; background-color: #FFFFFF; }
+.cpp1-assembler { }
+.cpp1-character { }
+.cpp1-comment { color: #008000; font-style: italic; }
+.cpp1-float { color: #000080; }
+.cpp1-hexadecimal { color: #000080; }
+.cpp1-identifier { }
+.cpp1-illegalchar { }
+.cpp1-number { color: #000080; }
+.cpp1-octal { color: #0000FF; }
+.cpp1-preprocessor { }
+.cpp1-reservedword { font-weight: bold; }
+.cpp1-space { color: #008080; }
+.cpp1-string { color: #800000; }
+.cpp1-symbol { }
+-->
+  </style>
+ </head>
+ <body>
+  <pre>
+<code><span style="font: 10pt Courier New;"><span class="cpp1-preprocessor">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+
+</span><span class="cpp1-reservedword">typedef</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-symbol">[</span><span class="cpp1-number">100</span><span class="cpp1-symbol">];</span><span class="cpp1-space"> </span><span class="cpp1-comment">// Custom data-type 'bignum'
+
+
+
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Saisir</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A)
+{</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">char</span><span class="cpp1-space"> </span><span class="cpp1-identifier">s[</span><span class="cpp1-number">401</span><span class="cpp1-symbol">];</span><span class="cpp1-space"> </span><span class="cpp1-comment">//to enter digits as a string
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">static</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">char</span><span class="cpp1-space"> </span><span class="cpp1-identifier">CA[</span><span class="cpp1-number">100</span><span class="cpp1-symbol">][</span><span class="cpp1-number">5</span><span class="cpp1-symbol">];</span><span class="cpp1-space"> </span><span class="cpp1-comment">// to create slices of 4 digits
+</span><span class="cpp1-space">  </span><span class="cpp1-comment">// NB we end with a NULL (C language convention)
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i,j,k,ls;</span><span class="cpp1-space"> </span><span class="cpp1-comment">// local variables
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;i++)</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(j=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;j&lt;</span><span class="cpp1-number">5</span><span class="cpp1-symbol">;j++)</span><span class="cpp1-space"> </span><span class="cpp1-identifier">CA[i][j]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-comment">// initialisation à 0
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"Five a Bignum: "</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">gets(s);</span><span class="cpp1-space"> </span><span class="cpp1-comment">// enter the number
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">ls=strlen(s);</span><span class="cpp1-space"> </span><span class="cpp1-comment">// picking up length of the string
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(j=ls-</span><span class="cpp1-number">4</span><span class="cpp1-symbol">,k=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;j&gt;=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;j=j-</span><span class="cpp1-number">4</span><span class="cpp1-symbol">,k++)</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">4</span><span class="cpp1-symbol">;i++)CA[k][i]=s[i+j];
+</span><span class="cpp1-space">  </span><span class="cpp1-comment">// picking up all slices beginning by the end
+</span><span class="cpp1-space">  </span><span class="cpp1-comment">// To finish : last slice, 'digit' with strongest weight
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">j=j+</span><span class="cpp1-number">4</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;j;i++)</span><span class="cpp1-space"> </span><span class="cpp1-identifier">CA[k][i]=s[i];
+</span><span class="cpp1-space">  </span><span class="cpp1-comment">// Finally conversion of slice in integer type
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;i++)</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A[i]=atoi(CA[i]);</span><span class="cpp1-space"> </span><span class="cpp1-comment">// done !
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">  
+ </span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Afficher</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A)
+</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i=</span><span class="cpp1-number">99</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(A[i]==</span><span class="cpp1-number">0</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i--;</span><span class="cpp1-space"> </span><span class="cpp1-comment">// we go directly to the digit with biggest weight
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"\n"</span><span class="cpp1-symbol">);</span><span class="cpp1-space"> </span><span class="cpp1-comment">// line-feed to begin
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"%d"</span><span class="cpp1-symbol">,A[i]);</span><span class="cpp1-space"> </span><span class="cpp1-comment">// we display 'as is'
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">i--;
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">while</span><span class="cpp1-symbol">(i&gt;=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">{printf(</span><span class="cpp1-string">"%04d"</span><span class="cpp1-symbol">,A[i]);i--;}
+</span><span class="cpp1-space">   </span><span class="cpp1-comment">// For other we eventually add zeros in front as needed
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> 
+  
+</span><span class="cpp1-comment">// The process of 'carry'
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">report(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A)
+{</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i,q,r;
+</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">99</span><span class="cpp1-symbol">;i++)
+</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{q=A[i]/</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">r=A[i]%</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">A[i]=r;
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">A[i+</span><span class="cpp1-number">1</span><span class="cpp1-symbol">]+=q;
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space"> </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> 
+ </span><span class="cpp1-comment">// addition
+</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Ajouter(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">B,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">C)
+</span><span class="cpp1-space"> </span><span class="cpp1-symbol">{</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i;
+</span><span class="cpp1-space">   </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;i++)</span><span class="cpp1-space"> </span><span class="cpp1-identifier">C[i]=A[i]+B[i];</span><span class="cpp1-space"> </span><span class="cpp1-comment">// addition digit by digit
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">report(C);
+</span><span class="cpp1-space"> </span><span class="cpp1-comment">// result is in C
+</span><span class="cpp1-space"> </span><span class="cpp1-symbol">}
+
+</span><span class="cpp1-comment">// left-shift one digit
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Decaler</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A,</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n)
+{</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i,j;
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(n==</span><span class="cpp1-number">0</span><span class="cpp1-symbol">)</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">return</span><span class="cpp1-space"> </span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i&lt;=n;</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i++)
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">{</span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(j=</span><span class="cpp1-number">99</span><span class="cpp1-symbol">;j&gt;</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;j--)
+</span><span class="cpp1-space">   </span><span class="cpp1-identifier">A[j]=A[j-</span><span class="cpp1-number">1</span><span class="cpp1-symbol">];</span><span class="cpp1-space"> 
+     </span><span class="cpp1-identifier">A[</span><span class="cpp1-number">0</span><span class="cpp1-symbol">]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">     </span><span class="cpp1-symbol">}
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}</span><span class="cpp1-space">  
+</span><span class="cpp1-comment">// Multiplication
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Multiplier(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">B,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">C)
+{</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">j;Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">D;
+</span><span class="cpp1-space">   </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;i++)</span><span class="cpp1-space"> </span><span class="cpp1-identifier">C[i]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-comment">// initialization with 0
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;i++)
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">{</span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(j=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;j&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;j++)
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">D[j]=A[i]*B[j];
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">report(D);</span><span class="cpp1-space"> </span><span class="cpp1-comment">// partial product
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">Decaler(D,i);</span><span class="cpp1-space"> </span><span class="cpp1-comment">// shift according factor
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">Ajouter(D,C,C);</span><span class="cpp1-comment">// add to C
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+}</span><span class="cpp1-space">  
+</span><span class="cpp1-comment">// To check multiplication
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">test2()
+{</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">M,N,P;
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Saisir(M);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Saisir(N);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Multiplier(M,N,P);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Afficher(P);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"\n"</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}</span><span class="cpp1-space"> 
+  
+</span><span class="cpp1-comment">// To check addition
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">test()
+{</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">M,N;
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Saisir(M);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Saisir(N);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Ajouter(M,N,M);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Afficher(M);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"\n"</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}
+
+
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">init</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A,</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n)
+{</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i;
+</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;i++)</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A[i]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-comment">// initialization with 0
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A[</span><span class="cpp1-number">0</span><span class="cpp1-symbol">]=n%</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n=n/</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A[</span><span class="cpp1-number">1</span><span class="cpp1-symbol">]=n%</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n=n/</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A[</span><span class="cpp1-number">2</span><span class="cpp1-symbol">]=n%</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n=n/</span><span class="cpp1-number">10000</span><span class="cpp1-symbol">;
+}
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">test4</span><span class="cpp1-space"> </span><span class="cpp1-symbol">()</span><span class="cpp1-space"> </span><span class="cpp1-comment">// test initialization 
+</span><span class="cpp1-symbol">{</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A;
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">init</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(A,</span><span class="cpp1-number">1234567899</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Afficher</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(A);
+}
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">MultInt(Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A,</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">B)
+{</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i;
+</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;</span><span class="cpp1-number">100</span><span class="cpp1-symbol">;i++)
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">B[i]=A[i]*n;
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">report(B);
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">test5</span><span class="cpp1-space"> </span><span class="cpp1-symbol">()
+{</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">A,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">B;</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n;
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Saisir(A);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">scanf(</span><span class="cpp1-string">"%d"</span><span class="cpp1-symbol">,&amp;n);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">MultInt(A,n,B);
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">Afficher(B);
+</span><span class="cpp1-space">  </span><span class="cpp1-symbol">}
+
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Factorielle</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">n,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">F)</span><span class="cpp1-space"> </span><span class="cpp1-comment">// puts n! into F
+</span><span class="cpp1-symbol">{</span><span class="cpp1-space">  </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i;
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">init(F,</span><span class="cpp1-number">1</span><span class="cpp1-symbol">);</span><span class="cpp1-space">   
+   </span><span class="cpp1-reservedword">for</span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;i&lt;=n;i++)
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">MultInt(F,i,F);
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+</span><span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">test6()
+{Bignum</span><span class="cpp1-space"> </span><span class="cpp1-identifier">F;
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Factorielle(</span><span class="cpp1-number">100</span><span class="cpp1-symbol">,F);
+</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Afficher(F);
+</span><span class="cpp1-space"> </span><span class="cpp1-symbol">}
+
+
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">main(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">argc,</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">char</span><span class="cpp1-space"> </span><span class="cpp1-symbol">*argv[])
+{
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">test6();
+</span><span class="cpp1-space">  </span><span class="cpp1-identifier">system(</span><span class="cpp1-string">"PAUSE"</span><span class="cpp1-symbol">);</span><span class="cpp1-space">	
+  </span><span class="cpp1-reservedword">return</span><span class="cpp1-space"> </span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+}
+
+</span></span>
+</code></pre>
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var pageTracker = _gat._getTracker("UA-10793331-1");
+pageTracker._trackPageview();
+} catch(err) {}
+  </script>
+ </body>
+</html>

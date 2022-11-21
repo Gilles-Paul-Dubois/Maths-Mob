@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Raisonnement par récurrence</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../../css/themes/myown.css" />
+      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+      <link href="../../css/myown.css" rel="stylesheet">
+      <script src="../../js/jquery-1.11.3.js"></script>
+      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+      <script src="../../js/custom.js"></script>
+      
+      
+   </head>
+   <body style="overflow: auto; "class="fr">
+      <script> window.onload=get();</script>
+      <a name="beg"></a>
+      <div data-role="page" data-theme="b">
+         <div data-role="header">
+            <table>
+               <tr>
+                  <td>Choisissez votre langue !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+                  <td>Choose your language !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+               </tr>
+            </table>
+         </div>
+         <!-- /header -->
+         <div style="overflow: auto; "  data-role="content" data-theme="b">
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/recurrence/menu.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/recurrence/menu.html')" /></li>
+                     <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <h2>Définitions</h2>
+               Soit P un prédicat concernant un paramètre entier n.
+               <br/>
+               P(n) vrai  signifie donc : "n possède la propriété P".
+               <br/>
+               <div id="container">
+                  <div id="label">définition</div>
+                  On suppose que:
+                  <br/>
+                  <ul>
+                     <li>
+                        P(0) est vrai
+                     </li>
+                     <li>
+                        et que de plus  ∀n P(n) ⇒
+                        P(n+1), c'est à dire que P(n+1) est vrai dès que P(n) est vrai.
+                     </li>
+                  </ul>
+                  Il s'en suit que:
+                  <br/>
+                  <ul>
+                     <li>
+                        P(1) est vrai puisque P(0) l'est
+                     </li>
+                     <li>
+                        que P(2) est vrai puisque P(1) l'est
+                     </li>
+                     <li>
+                        et ainsi de suite de proche en proche.
+                     </li>
+                  </ul>
+                  On en conclut que P(n) est vrai  ∀ n ∈
+                  &naturals;.
+                  <br/>
+                  C'est le principe même du
+                  <span style="font-weight: bold; font-style: italic;">
+                  'raisonnement
+                  par récurrence'
+                  </span>
+                  sous sa forme la
+                  plus simple.
+               </div>
+               Il y a, bien sûr quelques variantes:
+               <br/>
+               Evidemment si au lieu de P(0) vrai on sait seulement que P(n<sub>0</sub>)
+               est vrai on a seulement:
+               <br/>
+               P(n) vrai pour n ≥ n<sub>0</sub>.
+               <br/>
+               Si on sait que P(0) est vrai et que ∀n P(n) ⇒
+               P(n+2), on en conclut que P(n) est vrai pour n pair
+               <br/>
+               Si on sait que P(1) est vrai et que ∀n P(n) ⇒
+               P(n+2), on en conclut que P(n) est vrai pour n impair
+               <br/>
+               Si on sait que P(0) et P(1) sont  vrais et que ∀n P(n) ⇒
+               P(n+2), on en conclut que P(n) est vrai pour tout  n .
+               <br/>
+               On peut aussi faire une récurrence sur
+               &integers;.
+               <br/>
+               Si P(0) est vrai, si ∀n P(n) ⇒
+               P(n+1) et ∀n P(n) ⇒
+               P(n-1), on en conclut que P(n) est vrai  ∀  n ∈ &integers;.
+               <br/>
+               <div id="container">
+                  <div id="label">définition</div>
+                  On a aussi des formes de
+                  <span style="font-weight: bold; font-style: italic;">
+                  'récurrence
+                  multiple'</span>.
+                  <br/>
+                  <div style="margin-left: 40px;">
+                     Soit au niveau de l'hypothèse de récurrence:
+                  </div>
+                  <ul style="margin-left: 40px;">
+                     <li>
+                        Supposons que P(0) et P(1) soient vrais
+                     </li>
+                     <li>
+                        et que  ∀ n P(n)∧P(n-1) ⇒ P(n+1)
+                     </li>
+                  </ul>
+                  Alors ∀ n P(n) est vrai.
+                  <br/>
+                  <br/>
+                  <div style="margin-left: 40px;">
+                     Soit au niveau du nombre des variables:
+                     <br/>
+                  </div>
+                  <ul style="margin-left: 40px;">
+                     <li>
+                        Supposons que cette fois P(m,n) soit une propriété des
+                        couples d'entiers
+                     </li>
+                     <li>
+                        Supposons que P(0,0) soit vrai
+                     </li>
+                     <li>
+                        Supposons que ∀ m,n  P(n,m) ⇒ P(n+1,m)
+                     </li>
+                     <li>
+                        Supposons que ∀ m,n  P(n,m) ⇒ P(n,m+1)
+                     </li>
+                  </ul>
+                  Alors P(m,n) est vrai ∀ (m,n) ∈
+                  &naturals;×&naturals;
+               </div>
+               <a name="forte"></a>
+               <div id="container">
+                  <div id="label">définition</div>
+                  On a enfin la
+                  <span style="font-weight: bold; font-style: italic;">
+                  'récurrence
+                  forte'</span>
+                  <ul>
+                     <li>
+                        Supposons que P(0) soit vrai
+                     </li>
+                     <li>
+                        Supposons que si( ∀ p ≤ n P(n))  ⇒
+                        P(n+1)
+                     </li>
+                  </ul>
+                  Alors P(n) est vrai ∀ n.
+               </div>
+               Voir les exercices de ce paragraphe pour des exemples.
+               <br/>
+               Nous avons déjà vu des exemples de raisonnement par récurrence:
+               <br/>
+               <input type="button" value="Nombre de parties d'un ensemble" onclick="go('../ensembles/parties.html#th2')"  data-inline="true"/>
+               <input type="button" value=" Relation
+                  entre
+                  les coefficients binomiaux" onclick="go('../ensembles/cpn.html#exrec2')"  data-inline="true"/>
+               <br/>
+               Le point faible de toutes les formes de raisonnement par récurrence
+               est qu'ils vérifient des propriétés, mais qu'ils ne les établissent pas
+               directement. On ne peut pas trouver par récurrence un résultat dont on
+               n'a a priori aucune idée. Ce qui fait qu'en pratique on est obligé,
+               quand on ne connaît pas le résultat de traiter 'manuellement' un grand
+               nombre de petites valeurs  de la variable pour avoir une idée de
+               la loi. C'est seulement après ce travail, disons d'intuition, que le
+               raisonnement par récurrence viendra conforter le chercheur dans sa
+               conviction.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Definitions </h2>
+               Let P be a predicate concerning an integer parameter n.
+               <br>
+               P(n) true therefore means: "n has the property P".
+               <br>
+               <div id="container">
+                  <div id="label">definition </div>
+                  We suppose that:
+                  <br>
+                  <ul>
+                     <li>
+                        P(0) is true
+                     </li>
+                     <li>and that moreover ∀n P(n) ⇒
+                        P(n+1), that is to say that P(n+1) is true as soon as P(n) is true.
+                     </li>
+                  </ul>
+                  It follows that:
+                  <br>
+                  <ul>
+                     <li>
+                        P(1) is true since P(0) is
+                     </li>
+                     <li>
+                        that P(2) is true since P(1) is
+                     </li>
+                     <li>
+                        and so on step by step.
+                     </li>
+                  </ul>
+                  We conclude that P(n) is true ∀ n ∈
+                  ℕ.
+                  <br>It is the very principle of 
+                  <span style="font-weight: bold; font-style: italic;">
+                  'reasoning 
+                  by induction' 
+                  </span>
+                  in its simplest form. 
+               </div>
+               There are, of course, some variations:
+               <br>Obviously if instead of P(0) true we only know that P(n<sub>0 </sub>) 
+               is true, we only have: 
+               <br>
+               P(n) true for n ≥ n<sub>0 </sub>.
+               <br>If we know that P(0) is true and that ∀n P(n) ⇒
+               P(n+2), we conclude that P(n) is true for n even
+               <br>If we know that P(1) is true and that ∀n P(n) ⇒
+               P(n+2), we conclude that P(n) is true for n odd
+               <br>If we know that P(0) and P(1) are true and that ∀n P(n) ⇒
+               P(n+2), we conclude that P(n) is true for all n .
+               <br>We can also do an induction on
+               ℤ.
+               <br>If P(0) is true, if ∀n P(n) ⇒
+               P(n+1) and ∀n P(n) ⇒
+               P(n-1), we conclude that P(n) is true ∀ n ∈ ℤ.
+               <br>
+               <div id="container">
+                  <div id="label">definition </div>
+                  We also have forms of 
+                  <span style="font-weight: bold; font-style: italic;">
+                  'multiple induction' </span>. 
+                  <br>
+                  <div style="margin-left: 40px;">
+                     Either at the level of the induction hypothesis:
+                  </div>
+                  <ul style="margin-left: 40px;">
+                     <li>
+                        Suppose P(0) and P(1) are true
+                     </li>
+                     <li>
+                        and that ∀ n P(n)∧P(n-1) ⇒ P(n+1)
+                     </li>
+                  </ul>
+                  Then ∀ n P(n) is true.
+                  <br>
+                  <br>
+                  <div style="margin-left: 40px;">
+                     Either at the level of the number of variables:
+                     <br>
+                  </div>
+                  <ul style="margin-left: 40px;">
+                     <li>Suppose that this time P(m,n) is a property of
+                        pairs of integers
+                     </li>
+                     <li>
+                        Suppose P(0,0) is true
+                     </li>
+                     <li>
+                        Suppose that ∀ m,n P(n,m) ⇒ P(n+1,m)
+                     </li>
+                     <li>
+                        Suppose that ∀ m,n P(n,m) ⇒ P(n,m+1)
+                     </li>
+                  </ul>
+                  Then P(m,n) is true ∀ (m,n) ∈
+                  ℕ×ℕ 
+               </div>
+               <a name="fortee"></a>
+               <div id="container">
+                  <div id="label">definition </div>
+                  We finally have the 
+                  <span style="font-weight: bold; font-style: italic;">
+                  'strong induction' </span>
+                  <ul>
+                     <li>
+                        Suppose P(0) is true
+                     </li>
+                     <li>Suppose that if (∀ p ≤ n P (n)) ⇒
+                        P (n + 1)
+                     </li>
+                  </ul>
+                  Then P(n) is true ∀ n. 
+               </div>
+               See the exercises in this paragraph for examples.
+               <br>
+               We have already seen examples of induction reasoning:
+               <br>
+               <input type="button" value="Number of subsets of a set" onclick="go('../ensembles/parties.html#th2e')"  data-inline="true"/>
+               <input type="button" value="Relationship between binomial coefficients" onclick="go('../ensembles/cpn.html#exrec2e')"  data-inline="true"/>
+               <br>The weak point of all forms of recursive reasoning
+               is that they verify properties, but do not establish them
+               directly.  We cannot find by induction a result whose
+               a priori has no idea.  This means that in practice we are obliged,
+               when you don't know the result of 'manually' processing a large
+               number of small values ​​of the variable to get an idea of
+               the law.  It is only after this work, let us say of intuition, that the
+               reasoning by recurrence will come to reinforce the researcher in his
+               conviction.
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Retour au menu 'Logique'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Back to logic" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /en --> 
+         </div>
+         <!-- /content -->
+         <div data-role="footer">
+            <table cellpadding="10">
+               <tr>
+                  <td>
+                     <div lang="fr">Création Gilles Dubois</div>
+                     <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Janvier 2022</div>
+                     <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Version mobile Jquery</div>
+                     <div lang="en">Mobile Jquery version</div>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <!-- /footer -->
+         <ul style=list-style-type:'';>
+            <li>
+               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+            </li>
+            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+         </ul>
+      </div>
+      <!-- /page -->
+   </body>
+</html>
+

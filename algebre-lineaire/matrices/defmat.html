@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Définition des matrices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition formelle </h2>
+          <div id="container">
+            <div id="label">définition</div> On appelle <strong>
+              <em> 'matrice </em>
+            </strong> ' à m lignes et à n colonnes, ou encore matrice de type (m,n) à coefficients dans K (corps commutatif) une application de {1,2, ..., m} × {1,2, ...,n} dans K. <br /> L'image du couple (i,j) se note avec des indices α<sub>i,j</sub>  1 ≤ i ≤ m s'appelle <strong>
+              <em> 'l'indice ligne' </em>
+            </strong> et 1 ≤ j ≤ n s'appelle <strong>
+              <em> 'l'indice colonne' </em>
+            </strong>
+          </div> . <h2> Notations usuelles </h2>
+          <p> Une matrice se note souvent sous forme de tableau entouré de parenthèses, comme ceci :</p> \[\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &\alpha _{2,1} &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\alpha_{m,1} &\alpha_{m,2} & & & &\alpha _{m,n} \\ \end{pmatrix}\] <p>De fait une matrice peut être assimilée à un vecteur de K <sup>m×n</sup>. </p>
+          <p>Simplement les coordonnées sont groupées par blocs de m (les lignes). Cette vision des choses est particulièrement importante pour les informaticiens qui doivent savoir que, de façon interne, les matrices sont toujours représentées par des vecteurs unidimensionnels. En outre l'usage diffère sensiblement en mathématique et en informatique où l'usage consiste plutôt à démarrer la numérotation à l'ordre 0 que 1.</p>
+          <a name="carr"></a>
+          <div id="container">
+            <div id="label">définition</div> Lorsque le nombre de lignes est égal au nombre de colonnes on dit que la matrice est <strong>
+              <em> 'carrée' </em>
+            </strong>
+          </div>
+          <h2> Exemples </h2> Voici une matrice de type 2,3 à coefficients dans &rationals;, ou bien &reals; ou bien &complexes; <br /> \(\begin{pmatrix} 1& 2 & 5 \\ -4& 0 & 7 \\ \end{pmatrix}\) <br> Voici une matrice carrée d'ordre 2 à coefficients dans &reals; ou bien &complexes; <br /> \(\begin{pmatrix} 1,33& 2 \\ 0& 7,5 \\ \end{pmatrix}\) <br> Voici une matrice de type 3,2 à coefficients dans &reals; ou bien &complexes; <br> \(\begin{pmatrix} 1,33& 2 \\ 0& 7,5\\ 2,5& -0,6\\ \end{pmatrix}\) <br> Voici une matrice carrée d'ordre 2 à coefficients dans &complexes; <br /> \(\begin{pmatrix} 1+i& 1-i\\ 2i& 0 \\ \end{pmatrix}\) <p> Voici maintenant une appliquette qui fabrique des matrices aléatoires. <br /> Sélectionner d'abord le corps des coefficients dans la liste proposée (réels, rationnels,complexes, &integers;/5&integers;). <br /> Sélectionnez ensuite le nombre de lignes, puis le nombre de colonnes, dans les limites permises (de 1 à 6). <br /> Sélectionnez un coefficient dans cette table avec la souris, la ligne et la colonne du coefficient seront affichées. <br /> Vous pouvez ensuite faire varier tous les paramètres. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Formal definition </h2>
+          <div id="container">
+            <div id="label">definition </div>We call <strong>
+              <em> 'matrix </em>
+            </strong> ' with m rows and n columns, or alternatively matrix of type (m,n) with coefficients in K (commutative field) a mapping of {1,2, ..., m} × {1,2, ...,n} in K. <br>The image of the couple (i,j) is noted with indices α<sub>i,j</sub> 1 ≤ i ≤ m is called <strong>
+              <em> 'row index' </em>
+            </strong> and 1 ≤ j ≤ n is called <strong>
+              <em> 'column index' </em>
+            </strong>
+          </div> . <h2> Usual notations </h2>
+          <p>A matrix is ​​often noted in the form of a table surrounded by parentheses, like this: </p> \[\begin{pmatrix} &\alpha _{1,1} &\alpha_{1,2} &. &. &. &\alpha_{1,n} \\ &\alpha _{2,1} &\alpha_{2,2} &. &. &. &\alpha_{2,n} \\ &. &. &. & & &. \\ &. &. & &. & &. \\ &. &. & & &. &. \\ &\alpha_{m,1} &\alpha_{m,2} & & & &\alpha _{m,n} \\ \end{pmatrix}\] <p>In fact a matrix can be considered as a vector of K <sup>m×n</sup>. </p>
+          <p>Simply, coordinates are grouped by blocks of m (lines). This view of things is particularly important for computer scientists who must know that, internally, the matrices are always represented by one-dimensional vectors. In addition usage differs significantly in mathematics and computer science where the practice consists rather in starting the numbering at the order 0 than 1 5C, Python, etc...). Although Julia complies with standard rules. </p>
+          <a name="carre"></a>
+          <div id="container">
+            <div id="label">definition </div>When the number of rows is equal to the number of columns the matrix is ​​said to be <strong>
+              <em> 'square' </em>
+            </strong>
+          </div>
+          <h2> Examples </h2>Here is a matrix of type 2,3 with coefficients in ℚ, or else ℝ or else ℂ <br> \(\begin{pmatrix} 1& 2 & 5 \\ -4& 0 & 7 \\ \end{pmatrix}\) <br> Here is a square matrix of order 2 with coefficients in ℝ or else ℂ <br> \(\begin{pmatrix} 1.33& 2 \\ 0& 7.5 \\ \end{pmatrix}\) <br> Here is a matrix of type 3,2 with coefficients in ℝ or else ℂ <br> \(\begin{pmatrix} 1.33& 2 \\ 0& 7.5\\ 2.5& -0.6\\ \end{pmatrix}\) <br> Here is a square matrix of order 2 with coefficients in ℂ <br> \(\begin{pmatrix} 1+i& 1-i\\ 2i& 0 \\ \end{pmatrix}\) <p>Here is now an applet that produces random matrices. <br> First select the field of coefficients from the proposed list (real, rational, complex, ℤ/5ℤ). <br> Then select the number of rows, then the number of columns, within the allowed limits (from 1 to 6). <br> Select a coefficient in this table with the mouse, the line and the column of the coefficient will be displayed. <br> You can then vary all the parameters. </p>
+        </div>
+        <!-- /en -->
+        <div>
+          <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+          <table border="1" width="200" cellspacing="0" cellpadding="0">
+            <tr height="50">
+              <td width="50" style="text-align:center">&reals;</td>
+              <td width="50" style="text-align:center">&rationals;</td>
+              <td width="50" style="text-align:center">&integers;</td>
+              <td width="50" style="text-align:center">&complexes;</td>
+            </tr>
+            <tr height="50">
+              <td style="text-align:center">
+                <input checked="" name="corps" onclick="handleClick(this);" type="radio" value="1" />
+              </td>
+              <td style="text-align:center">
+                <input name="corps" onclick="handleClick(this);" type="radio" value="2" />
+              </td>
+              <td style="text-align:center">
+                <input name="corps" onclick="handleClick(this);" type="radio" value="3" />
+              </td>
+              <td style="text-align:center">
+                <input name="corps" onclick="handleClick(this);" type="radio" value="4" />
+              </td>
+            </tr>
+          </table>
+          <table border="1">
+            <tr>
+              <td width="200" style="text-align:center">
+                <div lang="fr">Nombre de lignes</div>
+                <!-- /fr -->
+                <div lang="en">Number of rows</div>
+                <!-- /en -->
+              </td>
+              <td width="200" style="text-align:center">
+                <div lang="fr">Nombre de colonnes</div>
+                <!-- /fr -->
+                <div lang="en">Number of columns</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <input id="myRange1" max="6" min="1" value="3" onchange="changem(this.value)" step="1" type="range" />
+              </td>
+              <td>
+                <input id="myRange2" max="6" min="1" value="3" onchange="changen(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+          </table>
+          <div lang="fr">Elément sélectionné :</div>
+          <!-- /fr -->
+          <div lang="en">Selected element</div>
+          <!-- /en -->
+          <input id="myText1" type="text" />
+        </div>
+        <script src="js/defmat.js"></script>
+        <div lang="fr">
+          <h2> Le coin de Python </h2>
+          <p>Voici comment on peut utiliser une bibliothèque (numpy) pour traiter des objets de type 'matrice':</p>
+          <p>
+            <object border="3" data="python/matrices_basics_1.html" height="350" type="text/html" width="100%"></object>
+          </p>
+          <h2> Le coin de Julia </h2>
+          <p>Utilisation des types standards pour définir des tableaux à deux dimensions</p>
+          <p>
+            <object border="3" data="julia/defmat1.jl.html" height="400" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's Corner </h2>
+          <p>Here is how one can use a library (numpy) to deal with 'matrix' objects: </p>
+          <p>
+            <object data="python/matrices_basics_1.html" type="text/html" width="100%" height="350" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2>
+          <p>Using standard types to define two-dimensional arrays </p>
+          <p>
+            <object data="julia/defmat1.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>prime3.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">n = </span><span class="s1">10000</span>
+<span class="s0">premiers = repeat([</span><span class="s2">true</span><span class="s0">], n)</span>
+<span class="s0">racine = Int(floor(sqrt(n)))</span>
+<span class="s0">premiers[</span><span class="s1">1</span><span class="s0">] = </span><span class="s2">false</span>
+
+<span class="s2">function </span><span class="s0">eratosthene()</span>
+    <span class="s0">i = </span><span class="s1">2</span>
+    <span class="s2">while </span><span class="s0">i &lt;= racine</span>
+        <span class="s0">h = (n - </span><span class="s1">1</span><span class="s0">) / i</span>
+        <span class="s0">k = </span><span class="s1">2</span>
+        <span class="s2">while </span><span class="s0">k &lt; h</span>
+            <span class="s3">#println(k*i)</span>
+            <span class="s0">premiers[k*i] = </span><span class="s2">false</span>
+            <span class="s0">k += </span><span class="s1">1</span>
+        <span class="s2">end</span>
+        <span class="s0">j = (i &lt; </span><span class="s1">3</span><span class="s0">) ? i + </span><span class="s1">1 </span><span class="s0">: i + </span><span class="s1">2</span>
+        <span class="s2">if </span><span class="s0">j &gt; n</span>
+            <span class="s2">return</span>
+        <span class="s2">end</span>
+        <span class="s2">while </span><span class="s0">!(premiers[j])</span>
+            <span class="s0">j += </span><span class="s1">1</span>
+        <span class="s2">end</span>
+        <span class="s0">i = j</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">eratosthene()</span>
+    <span class="s0">println([i </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">100 </span><span class="s2">if </span><span class="s0">premiers[i]])</span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>entgauss1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">norme(z::Complex)=real(z)*real(z)+imag(z)*imag(z)</span>
+
+<span class="s1">function </span><span class="s0">fourcorners(z1::Complex,z2::Complex)</span>
+    <span class="s0">q=z1/z2</span>
+    <span class="s0">x=real(q)</span>
+    <span class="s0">y=imag(q)</span>
+    <span class="s0">n=Int(floor(x))</span>
+    <span class="s0">m=Int(floor(y))</span>
+    <span class="s1">return </span><span class="s0">n+m*im,n+</span><span class="s2">1</span><span class="s0">+m*im, n+(m+</span><span class="s2">1</span><span class="s0">)*im,(n+</span><span class="s2">1</span><span class="s0">)+(m+</span><span class="s2">1</span><span class="s0">)*im</span>
+<span class="s1">end</span>
+
+<span class="s1">function </span><span class="s0">diveuc(z1::Complex, z2::Complex)</span>
+    <span class="s0">L=fourcorners(z1,z2)</span>
+    <span class="s0">S=[z </span><span class="s1">for </span><span class="s0">z </span><span class="s1">in </span><span class="s0">L </span><span class="s1">if </span><span class="s0">norme(z)&lt;norme(z2)]</span>
+    <span class="s1">return </span><span class="s0">S</span>
+<span class="s1">end</span>
+
+<span class="s1">function </span><span class="s0">main() </span><span class="s3">#fonction principale</span>
+    <span class="s0">z1=</span><span class="s2">36</span><span class="s0">+</span><span class="s2">242</span><span class="s0">im</span>
+    <span class="s0">z2=</span><span class="s2">20</span><span class="s0">+</span><span class="s2">30</span><span class="s0">im</span>
+    <span class="s0">println(diveuc(z1,z2))</span>
+<span class="s1">end</span>
+
+<span class="s0">main() </span><span class="s3">#appel de main</span>
+</pre>
+</body>
+</html>

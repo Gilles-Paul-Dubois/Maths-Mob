@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">E=</span><span class="s1">&quot;eabxyz&quot;</span>
+<span class="s0">R1=[</span><span class="s1">&quot;eabxyz&quot;</span><span class="s0">,</span><span class="s1">&quot;abezxy&quot;</span><span class="s0">,</span><span class="s1">&quot;beayzx&quot;</span><span class="s0">,</span><span class="s1">&quot;xyzeba&quot;</span><span class="s0">,</span><span class="s1">&quot;yzxbae&quot;</span><span class="s0">,</span><span class="s1">&quot;zxyaeb&quot;</span><span class="s0">]</span>
+<span class="s0">R2=[</span><span class="s1">&quot;eabxyz&quot;</span><span class="s0">,</span><span class="s1">&quot;abezxy&quot;</span><span class="s0">,</span><span class="s1">&quot;beayzx&quot;</span><span class="s0">,</span><span class="s1">&quot;xyzbea&quot;</span><span class="s0">,</span><span class="s1">&quot;yzxeab&quot;</span><span class="s0">,</span><span class="s1">&quot;zxyabe&quot;</span><span class="s0">]</span>
+<span class="s0">R3=[</span><span class="s1">&quot;eabxyz&quot;</span><span class="s0">,</span><span class="s1">&quot;abezxy&quot;</span><span class="s0">,</span><span class="s1">&quot;beayzx&quot;</span><span class="s0">,</span><span class="s1">&quot;xyzeab&quot;</span><span class="s0">,</span><span class="s1">&quot;yzxbea&quot;</span><span class="s0">,</span><span class="s1">&quot;zxyabe&quot;</span><span class="s0">]</span>
+<span class="s0">Map1,Map2,Map3=Dict(),Dict(),Dict()</span>
+<span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:</span><span class="s3">6</span>
+    <span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:</span><span class="s3">6</span>
+        <span class="s0">Map1[(E[i],E[j])]=(R1[i])[j]</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+<span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:</span><span class="s3">6</span>
+    <span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:</span><span class="s3">6</span>
+        <span class="s0">Map2[(E[i],E[j])]=(R2[i])[j]</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+<span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:</span><span class="s3">6</span>
+    <span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:</span><span class="s3">6</span>
+        <span class="s0">Map3[(E[i],E[j])]=(R3[i])[j]</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+<span class="s0">fonc1(x,y)=Map1[(x,y)]</span>
+<span class="s0">fonc2(x,y)=Map2[(x,y)]</span>
+<span class="s0">fonc3(x,y)=Map3[(x,y)]</span>
+<span class="s0">associative(f)=all((f(x,f(y,z))==f(f(x,y),z) </span><span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s0">E </span><span class="s2">for </span><span class="s0">y </span><span class="s2">in </span><span class="s0">E </span><span class="s2">for </span><span class="s0">z </span><span class="s2">in </span><span class="s0">E))</span>
+<span class="s0">commutative(f)=all((f(x,y)==f(y,x) </span><span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s0">E </span><span class="s2">for </span><span class="s0">y </span><span class="s2">in </span><span class="s0">E))</span>
+
+<span class="s0">println(associative(fonc1))</span>
+<span class="s0">println(associative(fonc2))</span>
+<span class="s0">println(associative(fonc3))</span>
+<span class="s0">println(commutative(fonc3))</span></pre>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿<html>
+ <head>
+  <title>
+   involution.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,128,128); font-weight: bold; }
+.s3 { color: rgb(0,0,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># version python 3.4</span><span class="s1"> 
+ 
+</span><span class="s0"># involution test</span><span class="s1"> 
+ 
+assoc={ </span><span class="s2">'a'</span><span class="s1">:</span><span class="s2">'b'</span><span class="s1">, </span><span class="s2">'b'</span><span class="s1">:</span><span class="s2">'a'</span><span class="s1">, </span><span class="s2">'c'</span><span class="s1">:</span><span class="s2">'d'</span><span class="s1">,</span><span class="s2">'d'</span><span class="s1">:</span><span class="s2">'c'</span><span class="s1">} 
+ 
+</span><span class="s3">def </span><span class="s1">f(c): 
+    </span><span class="s3">return </span><span class="s1">assoc.get(c) 
+ 
+</span><span class="s0"># The inverse of f</span><span class="s1"> 
+</span><span class="s3">def </span><span class="s1">rec(f): 
+    </span><span class="s3">def </span><span class="s1">fonrec(x): 
+        L=[k </span><span class="s3">for </span><span class="s1">k </span><span class="s3">in </span><span class="s1">assoc.keys() </span><span class="s3">if </span><span class="s1">assoc.get(k)==x]</span><span class="s0"># list of preimages of x</span><span class="s1"> 
+        </span><span class="s3">return </span><span class="s1">L[</span><span class="s4">0</span><span class="s1">] </span><span class="s0"># the first one because there(s only one</span><span class="s1"> 
+    </span><span class="s3">return </span><span class="s1">fonrec 
+ 
+</span><span class="s3">def </span><span class="s1">EstInvolutive (f): 
+    </span><span class="s3">for </span><span class="s1">k </span><span class="s3">in </span><span class="s1">assoc.keys(): 
+        </span><span class="s3">if </span><span class="s1">f(k)!=rec(f)(k): </span><span class="s0"># Are the images by f and f^-1 the same ?</span><span class="s1"> 
+            </span><span class="s3">return False </span><span class="s0"># if not failure !</span><span class="s1"> 
+    </span><span class="s3">return True </span><span class="s0"># success !</span><span class="s1"> 
+ 
+</span><span class="s3">def </span><span class="s1">main(): 
+    print (EstInvolutive(f)) </span><span class="s0"># will print True in this case</span><span class="s1"> 
+ 
+ 
+</span><span class="s3">if </span><span class="s1">__name__ == </span><span class="s2">'__main__'</span><span class="s1">: 
+    main()</span></pre>
+ </body>
+</html>

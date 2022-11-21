@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Propriétés des applications linéaires</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/propapplin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Applications linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/propapplin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear maps" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Propriétés élémentaires </h2> Toutes les propriétés suivantes se vérifient instantanément. <br /> La première est sans doute qu'une application linéaire conserve les combinaisons linéaires: <div id="container"> f: E → F linéaire ⇔ ∀ S=(u<sub>1</sub>,u<sub>2</sub>,....,u<sub>n</sub>) ∧ ∀ (λ<sub>1</sub>,λ<sub>2</sub>,..., λ<sub>n</sub>) ∈ K <sup>n</sup> on a: <br /> f(λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+... +λ<sub>n</sub>u<sub>n</sub>) = λ<sub>1</sub>f(u<sub>1</sub>)+λ<sub>2</sub>f(u<sub>2</sub>)+... +λ<sub>n</sub>f(u<sub>n</sub>) </div> La seconde est que les images directes des sous-espaces vectoriels sont des sous-espaces vectoriels. <div id="container"> Si f: E → F est linéaire, alors si E<sub>1</sub> est un sous-espace de E alors f(E<sub>1</sub>) est un sous-espace de F. </div> La troisième est que les images réciproques des sous-espaces du but sont des sous-espaces de la source: <div id="container"> Si f: E → F est linéaire, alors si F<sub>1</sub> est un sous-espace de F alors f <sup>-1</sup>(F<sub>1</sub>) est un sous-espace de E. </div> La propriété qui suit est fondamentale: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Une application linéaire est entièrement déterminée par les images des vecteurs d'une base. Plus précisément: <br /> Si B=(u<sub>1</sub>,u<sub>2</sub>,....,u<sub>n</sub>) est une base de E, et si S=(v<sub>1</sub>,v<sub>2</sub>,....,v<sub>n</sub>) est un système quelconque d'éléments de F, alors il existe une et une seule application linéaire f: E → F telle que f(a<sub>i</sub>)=b<sub>i</sub> ∀ i ∈ E.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit u un vecteur de E. u s'écrit de manière unique: u=λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+...+λ<sub>n</sub>u<sub>n</sub>
+            <br /> Si f est linéaire on a forcément: f(u)=λ<sub>1</sub>v<sub>1</sub>+λ<sub>2</sub>v<sub>2</sub>+...+λ<sub>n</sub>v<sub>n</sub>. Ce qui prouve qu'il y a au plus une application linéaire vérifiant notre condition. <br /> Considérons maintenant l'application : u → λ<sub>1</sub>v<sub>1</sub>+λ<sub>2</sub>v<sub>2</sub>+...+λ<sub>n</sub>v<sub>n</sub>. Il est immédiat de vérifier que cette application est linéaire. D'où notre affirmation.
+          </div>
+          <h2> Espaces L(E,F) </h2> La somme de deux applications linéaires ayant même source et même but, ainsi que le produit par un scalaire sont définis de manière évidente: <div id="container">
+            <div id="label">définition</div>
+            <ul>
+              <li> (f+g)(u) = f(u)+g(u) ∀ (u,v) ∈ E×E. </li>
+              <li> (λf)(u) = λf(u) ∀ (λ,u) ∈ K×E. </li>
+            </ul>
+          </div> On vérifie immédiatement que: <div id="container"> L'ensemble L(E,F) de toutes les applications linéaires de E dans F , muni des deux lois ci-dessus, est lui-même un espace vectoriel.</div>
+          <div id="container"> La composée de deux applications linéaires est encore une application linéaire. Plus précisément: <br /> Si f: E → F et g : F → G sont deux applications linéaires. L'application g <font size="-2">o</font>f: E → G est encore une application linéaire. </div> Concernant les dimensions, nous avons: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> si E et F sont de dimensions finies L(E,F) est de dimension finie et <br /> dim(L(E,F))=dim(E)×dim(F).
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit B=(u<sub>1</sub>,...,u<sub>n</sub>) une base de E et B'=(v<sub>1</sub>,...,v<sub>m</sub>) une base de F. Soit f<sub>i,j</sub> l'application linéaire définie par f<sub>i,j</sub>(u<sub>k</sub>)=0 si k ≠ i et f<sub>i,j</sub>(u<sub>i</sub>)=v<sub>j</sub>. On vérifie que les m×n applications linéaires f<sub>i,j</sub> forment une base de L(E,F).
+          </div>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Elementary properties </h2> All of the following properties hold instantaneously. <br> The first is certainly that a linear map preserves linear combinations: <div id="container">f: E → F linear ⇔ ∀ S = (u<sub>1</sub>, u<sub>2</sub>, ...., u<sub>n</sub>) ∧ ∀ (λ<sub>1</sub>, λ<sub>2</sub>, ..., λ<sub>n</sub>) ∈ K <sup>n</sup> we have: <br>f(λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+... +λ<sub>n</sub>u<sub>n</sub>) = λ<sub>1</sub>f(u<sub>1</sub>)+λ<sub>2</sub>f(u<sub>2</sub>)+... +λ<sub>n</sub>f(u<sub>n</sub>) </div> The second is that the direct images of vector subspaces are vector subspaces. <div id="container">If f: E → F is linear, then if E<sub>1</sub> is a subspace of E then f(E<sub>1</sub>) is a subspace of F. </div> The third is that the preimages of subspaces of the destination space are subspaces of the source: <div id="container">If f: E → F is linear, then if F<sub>1</sub> is a subspace of F then f <sup>-1</sup>(F<sub>1</sub>) is a subspace of E. </div> The following property is fundamental: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>A linear map is entirely determined by the vector images of a basis. More precisely: <br>If B=(u<sub>1</sub>,u<sub>2</sub>,....,u<sub>n</sub>) is a basis of E, and if S=(v<sub>1</sub>,v<sub>2</sub>,....,v<sub>n</sub>) is any system of elements of F, then there exists one and only one linear map f: E → F such that f(a<sub>i</sub>)=b<sub>i</sub>∀ i ∈ E.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>Let u be a vector of E. u can be written uniquely: u=λ<sub>1</sub>u<sub>1</sub>+λ<sub>2</sub>u<sub>2</sub>+...+λ<sub>n</sub>u<sub>n</sub>
+            <br>If f is linear, we have: f(u)=λ<sub>1</sub>v<sub>1</sub>+λ<sub>2</sub>v<sub>2</sub>+...+λ<sub>n</sub>v<sub>n</sub>. Which proves that there is at most one linear map satisfying our condition. <br>Now consider the application: u → λ<sub>1</sub>v<sub>1</sub>+λ<sub>2</sub>v<sub>2</sub>+...+λ<sub>n</sub>v<sub>n</sub>. It is immediate to verify that this map is linear. Hence our assertion.
+          </div>
+          <h2> Spaces L (E, F) </h2>The sum of two linear maps having the same departure (domain)) and the same destination (codomain) , as well as the product by a scalar are defined in an obvious way: <div id="container">
+            <div id="label">definition </div>
+            <ul>
+              <li> (f+g)(u) = f(u)+g(u) ∀ (u,v) ∈ E×E. </li>
+              <li> (λf)(u) = λf(u) ∀ (λ,u) ∈ K×E. </li>
+            </ul>
+          </div> We immediately check that: <div id="container">The set L(E,F) of all linear maps from E to F , endowed with the two above operations, is itself a vector space. </div>
+          <div id="container">The composition of two linear maps is still a linear map. More precisely: <br>If f: E → F and g: F → G are two linear maps. The map g<font size="-2">o</font>f: E → G is still a linear map. </div> Regarding the dimensions, we have: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>if E and F are finite dimensional L(E,F) is finite dimensional and <br> dim(L(E,F))=dim(E)×dim(F).
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>Let B=(u<sub>1</sub>,...,u<sub>n</sub>) be a basis of E and B'=(v<sub>1</sub>,...,v<sub>m</sub>) a basis of F. Let f<sub>i,j</sub> the linear map defined by f<sub>i,j</sub>(u<sub>k</sub>)=0 if k ≠ i and f<sub>i,j</sub>(u<sub>i</sub>)=v<sub>j</sub>. We verify that the m×n linear maps f<sub>i,j</sub>form a basis of L(E,F).
+          </div>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Applications linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear maps" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

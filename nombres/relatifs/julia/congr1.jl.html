@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>congr1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">somme(x,y,n)=(x+y)%n</span>
+<span class="s0">produit(x,y,n)=(x*y)%n</span>
+
+<span class="s1">function </span><span class="s0">TableSomme(n)</span>
+    <span class="s0">T=zeros(Int,n,n)</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s2">0</span><span class="s0">:n-</span><span class="s2">1</span>
+        <span class="s1">for </span><span class="s0">j </span><span class="s1">in </span><span class="s2">0</span><span class="s0">:n-</span><span class="s2">1</span>
+            <span class="s0">T[i+</span><span class="s2">1</span><span class="s0">,j+</span><span class="s2">1</span><span class="s0">]=somme(i,j,n)</span>
+        <span class="s1">end</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">T</span>
+<span class="s1">end</span>
+
+<span class="s1">function </span><span class="s0">TableProduit(n)</span>
+    <span class="s0">T=zeros(Int,n,n)</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s2">0</span><span class="s0">:n-</span><span class="s2">1</span>
+        <span class="s1">for </span><span class="s0">j </span><span class="s1">in </span><span class="s2">0</span><span class="s0">:n-</span><span class="s2">1</span>
+            <span class="s0">T[i+</span><span class="s2">1</span><span class="s0">,j+</span><span class="s2">1</span><span class="s0">]=produit(i,j,n)</span>
+        <span class="s1">end</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">T</span>
+<span class="s1">end</span>
+
+<span class="s0">inversible(x,n)=any((produit(x,y,n)==</span><span class="s2">1 </span><span class="s1">for </span><span class="s0">y </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:n-</span><span class="s2">1</span><span class="s0">))</span>
+
+<span class="s0">corps(n)=all((inversible(x,n) </span><span class="s1">for </span><span class="s0">x </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:n-</span><span class="s2">1</span><span class="s0">))</span>
+
+<span class="s0">println( [n </span><span class="s1">for </span><span class="s0">n </span><span class="s1">in </span><span class="s2">2</span><span class="s0">:</span><span class="s2">20 </span><span class="s1">if </span><span class="s0">corps(n)])</span>
+</pre>
+</body>
+</html>

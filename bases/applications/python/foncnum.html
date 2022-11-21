@@ -1,0 +1,57 @@
+﻿<html>
+ <head>
+  <title>
+   foncnum.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># version python 3.4</span><span class="s1"> 
+ 
+</span><span class="s0"># fonctions numériques d'une variable entière et à valeurs réelles</span><span class="s1"> 
+</span><span class="s0"># Deux façons de coder Stirling(n) =(n^n*e^-n*racine(2*pi*n))/n!</span><span class="s1"> 
+</span><span class="s0"># on utilise les fonctions et les constantes de la bibliothèque (module math)</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">math 
+pi=math.pi 
+e=math.e 
+ 
+</span><span class="s0">#provoque rapidement un débordement</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Factorielle (n): 
+    r=</span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">1</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">): 
+        r*=i 
+    </span><span class="s2">return </span><span class="s1">r 
+ 
+</span><span class="s0">#Même chose encore plus vite</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Stirling1(n): 
+    </span><span class="s2">return </span><span class="s1">(n**n)*math.exp(-n)*math.sqrt(</span><span class="s3">2</span><span class="s1">*pi*n)/Factorielle(n) 
+ 
+</span><span class="s0">#ne provoque pas de débordement</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Stirling2 (n): 
+    r=math.sqrt(</span><span class="s3">2</span><span class="s1">*pi*n) 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,n+</span><span class="s3">1</span><span class="s1">): 
+        r*=n/(e*i) 
+    </span><span class="s2">return </span><span class="s1">r 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    print (Stirling2(</span><span class="s3">100</span><span class="s1">)) 
+    print (Stirling1(</span><span class="s3">100</span><span class="s1">)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+ </body>
+</html>

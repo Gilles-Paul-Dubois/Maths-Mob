@@ -1,0 +1,91 @@
+﻿<html>
+ <head>
+  <title>
+   tpp1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+</span><span class="s0">#recherche de triplets pythagoriciens primitifs</span><span class="s1"> 
+</span><span class="s0">#searching for primitive Pythagorean triples</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+</span><span class="s0"># calcul de tpp</span><span class="s1"> 
+</span><span class="s0"># computation of ppt</span><span class="s1">
+ 
+</span><span class="s0"># borne supérieure de p et q pour z &lt;k</span><span class="s1"> 
+</span><span class="s0"># upper bound for p and q for z &lt;k</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">bsup (k): 
+    </span><span class="s2">return </span><span class="s1">int(math.sqrt(k))+</span><span class="s3">1</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">pgcd(m,n): 
+    </span><span class="s2">while </span><span class="s1">m%n: 
+        r=m%n 
+        m=n 
+        n=r 
+    </span><span class="s2">return </span><span class="s1">n 
+ 
+</span><span class="s0">#vérifie si un triplet est pythagoricien</span><span class="s1"> 
+</span><span class="s0">#checks if a triple is Pythagorean</span><span class="s1">
+</span><span class="s2">def </span><span class="s1">pythagoricien(t): 
+    </span><span class="s2">return </span><span class="s1">t[</span><span class="s3">2</span><span class="s1">]*t[</span><span class="s3">2</span><span class="s1">]==t[</span><span class="s3">0</span><span class="s1">]*t[</span><span class="s3">0</span><span class="s1">]+t[</span><span class="s3">1</span><span class="s1">]*t[</span><span class="s3">1</span><span class="s1">] 
+ 
+</span><span class="s0"># vérifie que tous les triplets d'une liste sont pythagoriciens</span><span class="s1"> 
+</span><span class="s0"># checks that all triple in a list are Pythagorean</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">tousOK(L): 
+    </span><span class="s2">for </span><span class="s1">t </span><span class="s2">in </span><span class="s1">L: 
+        </span><span class="s2">if not</span><span class="s1">(pythagoricien(t)): 
+            </span><span class="s2">return False</span><span class="s1"> 
+    </span><span class="s2">return True</span><span class="s1"> 
+ 
+</span><span class="s0"># postulat de parité différente</span><span class="s1"> 
+</span><span class="s0"># different parity postulate</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">pardif(p,q): 
+    </span><span class="s2">return </span><span class="s1">p%</span><span class="s3">2 </span><span class="s1">!= q%</span><span class="s3">2</span><span class="s1"> 
+ 
+</span><span class="s0">#liste des p admissibles pour q donné avec z &lt;k</span><span class="s1"> 
+</span><span class="s0">#list of possible p's for given q with z &lt;k</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">possp(q,k): 
+    </span><span class="s2">return </span><span class="s1">[p </span><span class="s2">for </span><span class="s1">p </span><span class="s2">in </span><span class="s1">range(q,bsup(k)) </span><span class="s2">if </span><span class="s1">p&gt;q </span><span class="s2">and </span><span class="s1">pardif(p,q) </span><span class="s2">and </span><span class="s1">pgcd(p,q)==</span><span class="s3">1</span><span class="s1">] 
+ 
+</span><span class="s0"># donne tous les tpp possibles pour q donné avec z &lt;k</span><span class="s1"> 
+</span><span class="s0"># gives all possible ppt for given q with z &lt;k</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">tppq(q,k): 
+    S= [[p*p-q*q, </span><span class="s3">2</span><span class="s1">*p*q,p*p+q*q] </span><span class="s2">for </span><span class="s1">p </span><span class="s2">in </span><span class="s1">possp(q,k) </span><span class="s2">if </span><span class="s1">p*p+q*q&lt;k] 
+    U=[sorted(t) </span><span class="s2">for </span><span class="s1">t </span><span class="s2">in </span><span class="s1">S] 
+    </span><span class="s2">return </span><span class="s1">U 
+ 
+</span><span class="s0"># donne tous les tpp possibles  avec z &lt;k</span><span class="s1"> 
+</span><span class="s0"># gives all ppt with z &lt;k</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">tpp(k): 
+    R=[] 
+    </span><span class="s2">for </span><span class="s1">q </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">1</span><span class="s1">,bsup(k)): 
+        R=R+tppq(q,k) 
+    </span><span class="s2">return </span><span class="s1">R 
+ 
+</span><span class="s0"># fonction principale</span><span class="s1"> 
+</span><span class="s0"># main function</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">main(): 
+    L = tpp (</span><span class="s3">200</span><span class="s1">) 
+    print(L) </span><span class="s0"># liste les résultats - displays results</span><span class="s1"> 
+    print(tousOK(L)) </span><span class="s0">#vérifie qu'ils sont tous des tpp - checks that all of them ppt</span><span class="s1"> 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Matrices bandes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2> Une matrice 'bande' est une <input type="button" value="matrice creuse" onclick="go('creuses.html')" data-inline="true" /> particulière dont les coefficients non nuls se regroupent autour de la diagonale. Formellement: <div id="container">
+            <div id="label">définition</div> Une matrice carrée A=(a<sub>i,j</sub>) d'ordre n est appelée <strong>
+              <em>'matrice bande'</em>
+            </strong> si tous les coefficients a<sub>i,j</sub> non nuls sont situés dans une bande délimitée par des parallèles à la diagonale principale. <br /> Une telle bande est déterminée par deux entiers k<sub>1</sub> et k<sub>2</sub> positifs ou nuls, tels que: <br /> a<sub>i,j</sub>=0 si j&lt;i-k<sub>1</sub> ou j&gt;i+k<sub>2</sub>
+          </div>
+          <h2> Exemples </h2>
+          <ol>
+            <li> \(\begin{pmatrix} 1& 2& 3& 0 & 0 \\ 4& 5& 6& 7& 0\\ 0& 8 & 9& 10& 11\\ 0& 0 & 12& 13& 14\\ 0& 0& 0& 15& 16\\ \end{pmatrix}\) </li>
+            <li> Les matrices diagonales sont des matrices bandes. </li>
+            <li> Les matrices triangulaires supérieures et inférieures sont des matrices bandes. </li>
+            <li> Les matrices 'tridiagonales' avec une diagonale non nulle au dessus et en dessous de la diagonale principale. </li>
+          </ol>
+          <h2> Stockage en mémoire </h2> De fait les matrices bandes seront stockées comme des matrices rectangulaires en omettant tous les coefficients nuls. <br /> La matrice: \(\begin{pmatrix} 1& 0& 0& 0 & 0 \\ 4& 5& 0& 0& 0\\ 0& 8 & 9& 0& 0\\ 0& 0 & 12& 13& 0\\ 0& 0& 0& 15& 16\\ \end{pmatrix}\) <br /> sera stockée comme: \(\begin{pmatrix} 0& 1 \\ 4& 5\\ 8& 9\\ 12& 13\\ 15& 16\\ \end{pmatrix}\) <br /> Ce qui est évident sur la forme c'est le rang n et k<sub>1</sub>+k<sub>2</sub> mais il faut conserver en plus une des données k<sub>1</sub> ou k<sub>2</sub> pour pouvoir rétablir la matrice d'origine.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2>A 'band' matrix is ​​a special <input type="button" value="sparse matrix" onclick="go('creuses.html')" data-inline="true" /> the nonzero coefficients of which cluster around the diagonal. Formally: <div id="container">
+            <div id="label">definition </div>A square matrix A=(a<sub>i,j</sub>) of order n is called <strong>
+              <em>'band matrix' </em>
+            </strong> if all the non-zero coefficients a<sub>i,j</sub> are located in a band delimited by parallels to the main diagonal. <br>Such a band is determined by two integers k<sub>1</sub> and k<sub>2</sub> positive or zero, such as: <br>a<sub>i,j</sub>=0 if j&lt;i-k<sub>1</sub> or j&gt;i+k<sub>2</sub>
+          </div>
+          <h2> Examples </h2>
+          <ol>
+            <li> \(\begin{pmatrix} 1& 2& 3& 0 & 0 \\ 4& 5& 6& 7& 0\\ 0& 8 & 9& 10& 11\\ 0& 0 & 12& 13& 14\\ 0& 0& 0& 15& 16\\ \end{pmatrix}\) </li>
+            <li> Diagonal matrices are strip matrices. </li>
+            <li> The upper and lower triangular matrices are band matrices. </li>
+            <li> 'Tridiagonal' matrices with a nonzero diagonal above and below the main diagonal. </li>
+          </ol>
+          <h2> Memory storage </h2> In fact the strip matrices will be stored as rectangular matrices by omitting all zero coefficients. <br> The matrix: \(\begin{pmatrix} 1& 0& 0& 0 & 0 \\ 4& 5& 0& 0& 0\\ 0& 8 & 9& 0& 0\\ 0& 0 & 12& 13& 0\\ 0& 0& 0& 15& 16\\ \end{pmatrix}\) <br /> will be stored as : \(\begin{pmatrix} 0& 1 \\ 4& 5\\ 8& 9\\ 12& 13\\ 15& 16\\ \end{pmatrix}\) <br />
+          <br>What is obvious on the form is the order n and k<sub>1</sub>+k<sub>2</sub> but it is necessary to keep in addition one of the data k<sub>1</sub> or k<sub>2</sub> to be able to restore the original matrix.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Matrices" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

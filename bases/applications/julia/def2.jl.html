@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>def2.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre>
+<span class="s1">function </span><span class="s0">power(x,n)</span>
+    <span class="s0">r=big(</span><span class="s2">1</span><span class="s0">) </span><span class="s3">#pour éviter les débordements forçage de type</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:n</span>
+        <span class="s0">r*=x </span><span class="s3">#les claculs sont faits dans les bignums</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">r</span>
+<span class="s1">end</span>
+
+<span class="s3">#version naïve utilisant la formule mathématique</span>
+<span class="s1">function </span><span class="s0">factorielle(n)</span>
+    <span class="s0">r=big(</span><span class="s2">1</span><span class="s0">) </span><span class="s3">#on travaille avec de très grands nombres</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s2">2</span><span class="s0">:n</span>
+        <span class="s0">r*=i</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">r</span>
+<span class="s1">end</span>
+<span class="s3">#la formule de Stirling</span>
+<span class="s0">stirling1(n)=(power(n,n)/factorielle(n))*exp(-n)*sqrt(</span><span class="s2">2</span><span class="s0">*pi*n)</span>
+
+<span class="s3">#autre version n'utilisant pas les entiers longs'</span>
+<span class="s1">function </span><span class="s0">stirling2(n)</span>
+    <span class="s0">e=exp(</span><span class="s2">1</span><span class="s0">)</span>
+    <span class="s0">p(i)=n/(i*e)</span>
+    <span class="s0">r=</span><span class="s2">1</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:n</span>
+        <span class="s0">r*=p(i)</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">r*sqrt(</span><span class="s2">2</span><span class="s0">*pi*n)</span>
+<span class="s1">end</span>
+
+<span class="s0">println(stirling1(</span><span class="s2">100</span><span class="s0">))</span>
+<span class="s0">println(stirling2(</span><span class="s2">100</span><span class="s0">))</span>
+
+</pre>
+</body>
+</html>

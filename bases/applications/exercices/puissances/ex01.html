@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+ 	 <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="b">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="b">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../puissances.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          Cet exercice suppose connue la notion de <input type="button" value="point fixe" onclick="go('../../fixes.html')"  data-inline="true"/>.
+          <br /> Soit f une application de E dans E. (E ensemble à n éléments) <br />
+          <ol>
+            <li> Montrer que f idempotente ⇔ l'ensemble des points fixes de f est égal à f(E) </li>
+            <li> Combien d'applications idempotentes n'ont aucun point fixe ? </li>
+            <li> Combien d'applications idempotentes ont 1 point fixe exactement ? </li>
+            <li> Combien d'applications idempotentes ont 2 points fixes exactement ? </li>
+            <li> Combien d'applications idempotentes ont exactement p points fixes ? </li>
+            <li> Combien y a-t-il d'applications idempotentes de E dans E ? </li>
+          </ol>
+          <div data-role="collapsible">
+            <h4>aide</h4> Montrer que f(x) = x ⇔ ∃ y | &nbsp;f(y)=x
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> Si y=f(x) alors f(y)=f(f(x))=f(x)=y, donc y est fixe pour f. Il en résulte que tout point de f(E) est fixe pour f. Il est évident en outre que tout point fixe appartient à f(E). </li>
+              <li> Si f est idempotente avec 0 point fixe équivaut à f(E)=∅. Cela n'est possible que si E=∅, l'unique application de E dans E est alors l'unique application idempotente de E dans E. Dans le cas contraire (si E est non vide), il n'existe aucune application idempotente de E dans E n'ayant aucun point fixe. </li>
+              <li> La seule application ayant y pour unique point fixe est la constante x → y. Il s'en suit que le nombre d'applications idempotentes ayant exactement un point fixe est égale à n=Card(E). </li>
+              <li> Soit P= {a,b} une partie à 2 éléments de E. On cherche les applications idempotentes admettant exactement les points de P pour points fixes. D'après la première question, pour une telle application on a f(a)=a, f(b)=b et pour tout c de E-P f(c)=a ou f(c)=b. Le nombre des applications idempotentes admettant a et b pour points fixes correspond donc exactement au nombre des applications de E-P dans {a,b}, ce nombre est donc 2 <sup> n-2 </sup> . Donc pour avoir le nombre total des applications idempotentes admettant exactement 2 points fixes il faut multiplier ce nombre par \(C_{n}^{2}=\frac{n(n-1)}{2}\), nombre de paires dans un ensemble à n éléments. Réponse finale \(C_{n}^{2}\times 2^{n-2}\)
+              </li>
+              <li> En raisonnant comme dans la question précédente avec p au lieu de 2 on trouve: \(C_{n}^{p}\times p^{n-p}\)
+              </li>
+              <li> Lorsque n est différent de 0 pour obtenir le nombre des applications idempotentes de E dans E, il suffit d'ajouter le nombre des applications idempotentes ayant 1 point fixe avec celles ayant deux points fixes, puis trois points fixes, etc... On trouve donc pour formule: <br />
+\(C_{n}^{1}+C_{n}^{2}\times 2^{n-2}+C_{n}^{3}\times 3^{n-3}+...+C_{n}^{n-1}\times (n-1)+1\)
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../puissances.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar --> 
+          This exercise suppose known the notion of <input type="button" value="fixed point" onclick="go('../../fixes.html')"  data-inline="true"/>.
+          <br />Let f be a map from E to E. (E set with n elements) <br />
+          <ol>
+            <li>Show that f idempotent ⇔ the set of fixed points of f is equal to f(E) </li>
+            <li> How many idempotent maps have no fixed point? </li>
+            <li> How many idempotent maps have exactly 1 fixed point? </li>
+            <li> How many idempotent maps have exactly 2 fixed points? </li>
+            <li> How many idempotent maps have exactly p fixed points? </li>
+            <li> How many idempotent maps are there from E to E? </li>
+          </ol>
+          <div data-role="collapsible">
+            <h4>hint</h4> Show that f(x) = x ⇔ ∃ y | f(y)=x
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> If y=f(x) then f(y)=f(f(x))=f(x)=y, so y is fixed for f. It follows that every point of f(E) is fixed for f. It is also obvious that every fixed point belongs to f(E). </li>
+              <li> If f is idempotent with 0 fixed point is equivalent to f(E)=∅. This is only possible if E=∅, then the unique map from E to E is the unique idempotent map from E to E. Otherwise (if E is non-empty), there is no idempotent map from E into E having no fixed point. </li>
+              <li> The only map having y as unique fixed point is the constant x → y. It follows that the number of idempotent maps having exactly one fixed point is equal to n=Card(E). </li>
+              <li> Let P= {a,b} a subset with 2 elements of E. We are looking for idempotent mappings having exactly points of P for fixed points. From the first question for such mapping f we have, f(a)=a, f(b)=b and for every c of E-P f(c)=a or f(c)=b. The number of idempotent mappings having a and b for fixed points corresponds exactly to the number of maps from E-P to {a,b}, this number is such 2 <sup> n-2 </sup> . So to get the total number of maps having exactly two fixed points we must multiply this number by \(C_{n}^{2}=\frac{n(n-1)}{2}\), number of pairs in a set with n elements. Final answer \(C_{n}^{2}\times 2^{n-2}\)
+              </li>
+              <li> Reasoning like previously with p instead of 2 we find : \(C_{n}^{p}\times p^{n-p}\)
+              </li>
+              <li> When n is not null to get the number of idempotent functions from E to E, we must add the number of maps having one fixed point with the number of those have 2 fixed points, and so on. So we find the formula : <br />
+\(C_{n}^{1}+C_{n}^{2}\times 2^{n-2}+C_{n}^{3}\times 3^{n-3}+...+C_{n}^{n-1}\times (n-1)+1\)
+              </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+ 
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Déterminant d'une matrice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/detmatrice/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/detmatrice/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2>
+          <div id="container">
+            <div id="label">définition</div> Soit A =(α<sub>i,j</sub>) 1 ≤ i,j ≤ n une matrice carrée d'ordre n à coefficients dans K. On pose: \[Det(A)=\sum_{\sigma \in S_{n}}^{}sgn(\sigma )\alpha _{1,\sigma (1)}\alpha _{2,\sigma (2)}...\alpha _{n,\sigma (n)}\] et on appelle ce nombre le <strong>
+              <em>'déterminant'</em>
+            </strong> de la matrice A.
+          </div>
+          <h2> Notations </h2> Le déterminant d'une matrice se note avec des barres verticales, comme ceci: \[\begin{vmatrix} \alpha _{1,1}& \alpha _{1,2} & . & . & . & \alpha _{1,n} \\ \alpha _{2,1} & \alpha _{2,2} & . & . & . & \alpha _{2,n} \\ .&. & . & & & .\\ .& .& & .& & .\\ .& .& & & .& .\\ \alpha _{n,1} & \alpha _{n,1} & . & .& .& \alpha _{n,n} \\ \end{vmatrix}\] <h2>Exemples</h2> Voici une appliquette générant des matrices carrées d'ordre 2, 3 ou 4 à coefficients dans un corps que vous pouvez choisir. <br /> Leur déterminant s'affiche à chaque nouveau choix.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2>
+          <div id="container">
+            <div id="label">definition </div>Let A =(α<sub>i,j</sub>) 1 ≤ i,j ≤ n be a square matrix of order n with coefficients in K. We set: \[Det(A)=\sum_{\sigma \in S_{n}}^{}sgn(\sigma )\alpha _{1,\sigma (1)}\alpha _{2,\sigma (2)}...\alpha _{n,\sigma (n)}\] and we call this number the <strong>
+              <em>'determinant' </em>
+            </strong> of the matrix A.
+          </div>
+          <h2> Notations </h2> The determinant of a matrix is noted with vertical bars, like this: \[\begin{vmatrix} \alpha _{1,1}& \alpha _{1,2} & . & . & . & \alpha _{1,n} \\ \alpha _{2,1} & \alpha _{2,2} & . & . & . & \alpha _{2,n} \\ .&. & . & & & .\\ .& .& & .& & .\\ .& .& & & .& .\\ \alpha _{n,1} & \alpha _{n,1} & . & .& .& \alpha _{n,n} \\ \end{vmatrix}\] <h2>Examples </h2> Here is an applet generating square matrices of order 2, 3 or 4 with coefficients in a field that you can choose. <br> Their determinant is displayed with every new choice.
+        </div>
+        <!-- /en -->
+        <div>
+          <table bgcolor="#FFFFFF" border="2" id="myTable">
+            <tr>
+              <td>
+                <button onclick="nameSpace2.Paint();" type="button">
+                  <div lang="fr">Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <input id="myText1" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <table border="1">
+                <tr>
+                  <td height="30">&reals;</td>
+                  <td width="50">
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="1" />
+                  </td>
+                </tr>
+                <tr>
+                  <td height="30">&rationals;</td>
+                  <td>
+                    <input checked="" name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="2" />
+                  </td>
+                </tr>
+                <tr>
+                  <td height="30">&integers;/5&integers;</td>
+                  <td>
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="3" />
+                  </td>
+                </tr>
+                <tr>
+                  <td height="30">&complexes;</td>
+                  <td>
+                    <input name="corps" onclick="nameSpace2.handleClick(this);" type="radio" value="4" />
+                  </td>
+                </tr>
+              </table>
+              <div lang="fr">Ordre de la matrice carrée A :</div>
+              <!-- /fr -->
+              <div lang="en">Order of square matrix A :</div>
+              <!-- /en -->
+              <input id="myRange1" max="4" min="2" value="3" onchange="nameSpace2.changem(this.value)" step="1" type="range" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/detmat1.js"></script>
+        <div lang="fr">
+          <h2> Principales propriétés </h2> Le lien avec les déterminants d'un système de vecteurs est immédiat. <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Le déterminant d'une matrice est le <input type="button" value="déterminant par rapport à la base canonique" onclick="go('detsysvec.html#th3')" data-inline="true" /> de K<sup>n</sup> du système de n vecteurs formés par ses n lignes. <br /> Le déterminant d'une matrice est donc une fonction <input type="button" value="multilinéaire alternée" onclick="go('multilat.html#multilinalt')" data-inline="true" /> de ses lignes. En conséquence on ne change pas le déterminant d'une matrice en ajoutant à une ligne une combinaison linéaire des autres lignes. Si on permute les lignes d'une matrice, le déterminant est multiplié par la signature de la permutation.
+          </div>
+          <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Det(A) ≠ 0 est un critère <input type="button" value="d'indépendance linéaire" onclick="go('../espaces/libres.html#syslibre')" data-inline="true" /> des lignes de A.
+          </div> Voici un autre résultat intéressant: <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Le déterminant d'une matrice est égal au déterminant de sa <input type="button" value="transposée" onclick="go('../matrices/mattranspo.html')" data-inline="true" />. <br /> Det(<sup>t</sup>A)=Det(A)
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Dans le développement du déterminant de A le terme pour lequel les indices colonnes sont 1, 2, ... ,n dans cet ordre est: sgn(σ<sup>-1</sup>)α<sub>σ<sup>-1</sup> (1),1 </sub>...α<sub>σ<sup>-1</sup>(n),n </sub>
+            <br /> Ce qui fait que le déterminant de A peut aussi bien être donné par la formule: \[Det(A)=\sum_{\sigma \in S_{n}}^{}sgn(\sigma ^{-1})\alpha _{\sigma ^{-1}(1),1}...\alpha _{\sigma ^{-1}(n),n}\] Mais comme sgn(σ)=sgn(σ<sup>-1</sup>) et que l'application σ → σ<sup>-1</sup> est une bijection de S<sub>n</sub> sur lui-même. La formule proposée s'en suit immédiatement.
+          </div> D'où nous concluons tout de suite: <a name="th4"></a>
+          <div id="container">
+            <div id="label">théorème</div> Le déterminant d'une matrice est le déterminant par rapport à la base canonique de K<sup>n</sup> du système de n vecteurs formés par ses n colonnes. <br /> Le déterminant d'une matrice est donc une fonction multilinéaire alternée de ses colonnes. En conséquence on ne change pas le déterminant d'une matrice en ajoutant à une colonne une <input type="button" value="combinaison linéaire" onclick="go('../espaces/generateurs.html#comblin')" data-inline="true" /> des autres colonnes. Si on permute les colonnes d'une matrice, le déterminant est multiplié par la signature de la permutation.
+          </div>
+          <a name="th5"></a>
+          <div id="container">
+            <div id="label">théorème</div> Det(A) ≠ 0 est un critère d'indépendance linéaire des colonnes de A.
+          </div>
+          <a name="th6"></a>
+          <div id="container">
+            <div id="label">théorème</div>Det(A) ≠ 0 ⇔ A inversible
+          </div>
+          <a name="th7"></a>
+          <div id="container">
+            <div id="label">théorème</div> Le déterminant d'une <input type="button" value="matrice triangulaire" onclick="go('../matrices/mattri.html')" data-inline="true" /> est égal au produit de ses éléments diagonaux. En particulier, le déterminant de la matrice unité est égal à 1.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Dans le développement en somme tous les termes sont nuls sauf un correspondant à σ = Id, et ce terme est égal au produit de tous les élements diagonaux.
+          </div>
+          <h2> Déterminant d'un produit </h2> Le résultat qui suit est capital: <a name="th8"></a>
+          <div id="container">
+            <div id="label">théorème</div> L'application A → Det(A) de M(n,K) dans K est un homomorphisme de (M(n,K),×) dans (K,×), c'est à dire que: <br /> Det(AB)=Det(A)Det(B)
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> On désigne par D le déterminant par rapport à la base canonique de K<sup>n</sup>. Soit f l'endomorphisme de K<sup>n</sup> → K<sup>n</sup> associé à la matrice A. Soit B la base canonique de K<sup>n</sup> . Considérons l'application D<sub>f</sub> : (x<sub>1</sub>,...,x<sub>n</sub>) → Det((f(x1), ... ,f(xn)),B). <br /> D<sub>f</sub> est manifestement une forme n-linéaire alternée. Donc D<sub>f</sub>=kD en vertu d'un théorème précédent. En appliquant cela à la base canonique de K<sup>n</sup> soit (a<sub>1</sub>,...,a<sub>n</sub>), il vient k=D<sub>f</sub>(a<sub>1</sub>,...,a<sub>n</sub>). <br /> Donc D<sub>f</sub>(x<sub>1</sub>,...,x<sub>n</sub>)=D<sub>f</sub>(a<sub>1</sub>,...,a<sub>n</sub>)D(x<sub>1</sub>,...,x<sub>n</sub>). <br /> On voit de suite sur la définition que: <br /> D<sub>f</sub>(a<sub>1</sub>,...,a<sub>n</sub>)=Det(A) donc: <br /> D(f(x<sub>1</sub>),...,f(x<sub>n</sub>))=Det(A)D(x<sub>1</sub>,...,x<sub>n</sub>). <br /> Par conséquent si g est associé à B comme f à A. <br /> D(g(x<sub>1</sub>),...,g(x<sub>n</sub>))=Det(B)D(x<sub>1</sub>,...,x<sub>n</sub>). <br /> Posons maintenant h=f <font size="-2">o</font>g, on a alors: <br /> D(h(x<sub>1</sub>),...,h(x<sub>n</sub>))=Det(AB)D(x<sub>1</sub>,...,x<sub>n</sub>). <br /> Mais aussi: <br /> D(h(x<sub>1</sub>),...,h(x<sub>n</sub>))=D(f(g(x<sub>1</sub>)),...,f(g(x<sub>n</sub>)))= Det(A)D(f(x<sub>1</sub>),...,f(x<sub>n</sub>))=Det(A)Det(B)D(x<sub>1</sub>,...,x<sub>n</sub>) d'où l'égalité cherchée.
+          </div> Ce résultat admet le corollaire suivant: <a name="th9"></a>
+          <div id="container">
+            <div id="label">théorème</div> Pour toute matrice A <input type="button" value="inversible" onclick="go('../matrices/algmat.html')" data-inline="true" />
+            <br> Det(A<sup>-1</sup>)=Det(A)<sup>-1</sup>.
+          </div>
+          <a name="python"></a>
+          <h2> Le coin de Python </h2> Voici un programme qui calcule le déterminant d'une matrice en utilisant la définition. <p>
+            <object border="3" data="python/caldetpardef.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <h2> Le coin de Julia </h2> Même chose avec Julia 1.6 <p>
+            <object border="3" data="julia/detdef.jl.html" height="200" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Main properties </h2> The link with the determinants of a system of vectors is immediate. <a name="th1"></a>
+          <div id="container">
+            <div id="label">theorem </div>The determinant of a matrix is ​​the <input type="button" value="determinant with respect to the canonical basis" onclick="go('detsysvec.html#th3e')" data-inline="true">of K<sup>n</sup> of the system of n vectors formed by its n rows. <br> The determinant of a matrix is ​​therefore an <input type="button" value="alternating multilinear" onclick="go('multilat.html#multilinalte')" data-inline="true"> function of its rows. Consequently, we do not change the determinant of a matrix by adding to a row a linear combination of the others rows. If we permute the rows of a matrix, the determinant is multiplied by the signature of the permutation.
+          </div>
+          <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem</div>Det(A) ≠ 0 is a criterion of <input type="button" value="linear independence" onclick="go('../espaces/libres.html#syslibree')" data-inline="true"> for the rows of A.
+          </div> Here is another interesting result: <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The determinant of a matrix is ​​equal to the determinant of its <input type="button" value="transpose" onclick="go('../matrices/mattranspo.html')" data-inline="true">. Det(A<sup>T</sup>)=Det(A)
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>In the expansion of the determinant of A the term for which the column indices are 1, 2, ... ,n in this order is: sgn(σ<sup>-1</sup>)α<sub>σ<sup>-1</sup>(1),1 </sub>...α<sub>σ<sup>-1</sup>(n),n </sub>
+            <br> This means that the determinant of A can also be given by the formula: \[Det(A)=\sum_{\sigma \in S_{n}}^{}sgn(\sigma ^{-1})\alpha _{\sigma ^{-1}(1),1}...\alpha _{\sigma ^{-1}(n),n}\] But since sgn(σ)=sgn(σ<sup>-1</sup>) and the map σ → σ<sup>-1</sup>is a bijection of S<sub>n</sub> on itself. The proposed formula follows immediately.
+          </div> From which we immediately conclude: <a name="th4e"></a>
+          <div id="container">
+            <div id="label">theorem</div>The determinant of a matrix is ​​the determinant with respect to the canonical basis of K<sup>n</sup> of the system of n vectors formed by its n columns. <br>The determinant of a matrix is ​​therefore an alternating multilinear function of its columns. Consequently we do not change the determinant of a matrix by adding to a column a <input type="button" value="linear combination" onclick="go('../espaces/generateurs.html#comblin')" data-inline="true">of the other columns. If we permute the columns of a matrix, the determinant is multiplied by the signature of the permutation.
+          </div>
+          <a name="th5e"></a>
+          <div id="container">
+            <div id="label">theorem</div>Det(A) ≠ 0 is a criterion linear independence columns of A.
+          </div>
+          <a name="th6e"></a>
+          <div id="container">
+            <div id="label">theorem</div>Det(A) ≠ 0 ⇔ A invertible
+          </div>
+          <a name="th7e"></a>
+          <div id="container">
+            <div id="label">theorem</div>The determinant of a <input type="button" value="triangular matrix" onclick="go('../matrices/mattri.html')" data-inline="true"> is equal to the product of its diagonal elements. In particular, the determinant of the unit matrix is ​​equal to 1.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> In expansion as a sum all the terms are zero except one corresponding to σ = Id, and this term is equal to the product of all the diagonal elements.
+          </div>
+          <h2> Determinant of a product </h2> The following result is crucial: <a name="th8e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The map A → Det(A) from M(n,K) to K is a homomorphism from (M(n,K),×) to (K,×), i.e.: <br> Det(AB)=Det(A)Det(B)
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> We denote by D the determinant with respect to the canonical basis of K<sup>n</sup>. Let f be the endomorphism of K<sup>n</sup> → K<sup>n</sup> associated with the matrix A. Let B be the canonical basis of K<sup>n</sup> . Consider the map D<sub>f</sub> : (x<sub>1</sub>,...,x<sub>n</sub>) → Det((f(x1), ... ,f(xn)),B). <br>D<sub>f</sub> is obviously an alternating n-linear form. So D<sub>f</sub>=kD by virtue of a previous theorem. Applying this to the canonical basis of K<sup>n</sup> let (a<sub>1</sub>,...,a<sub>n</sub>), it comes k=D<sub>f</sub>(a<sub>1</sub>,...,a<sub>n</sub>). <br> So D<sub>f</sub>(x<sub>1</sub>,...,x<sub>n</sub>)=D<sub>f</sub>(a<sub>1</sub>,...,a<sub>n</sub>)D(x<sub>1</sub>,...,x<sub>n</sub>). <br> We see immediately from the definition that: <br> D<sub>f</sub>(a<sub>1</sub>,...,a<sub>n</sub>)=Det(A) so: <br> D(f(x<sub>1</sub>),...,f(x<sub>n</sub>))=Det(A)D(x<sub>1</sub>,...,x<sub>n</sub>). <br> Therefore if g is associated with B as f with A. <br> D(g(x<sub>1</sub>),...,g(x<sub>n</sub>))=Det(B)D(x<sub>1</sub>,...,x<sub>n</sub>). <br> Let us now set h=f <font size="-2">o</font>g, we then have: <br> D(h(x<sub>1</sub>),...,h(x<sub>n</sub>))=Det(AB)D(x<sub>1</sub>,...,x<sub>n</sub>). <br> But also: <br> D(h(x<sub>1</sub>),...,h(x<sub>n</sub>))=D(f(g(x<sub>1</sub>)),...,f(g(x<sub>n</sub>)))= Det(A)D( f(x<sub>1</sub>),...,f(x<sub>n</sub>))=Det(A)Det(B)D(x<sub>1</sub>,...,x<sub>n</sub>) hence the desired equality.
+          </div> This result admits the following corollary: <a name="th9e"></a>
+          <div id="container">
+            <div id="label">theorem </div>For any <input type="button" value="invertible" onclick="go('../matrices/algmat.html')" data-inline="true"> matrix A <br> Det(A<sup>-1</sup>)=Det(A)<sup>-1</sup>.
+          </div>
+          <a name="pythone"></a>
+          <h2> Python's Corner </h2> Here is a program that calculates the determinant of a matrix using the definition. <p>
+            <object data="python/caldetpardef.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2> Same with Julia 1.6 <p>
+            <object data="julia/detdef.jl.html" type="text/html" width="100%" height="200" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

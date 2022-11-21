@@ -1,0 +1,39 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">binaire(n)=(n&lt;=</span><span class="s1">1</span><span class="s0">) ? n : binaire(n÷2)*</span><span class="s1">10</span><span class="s0">+n%</span><span class="s1">2</span>
+<span class="s0">binaire_int(n)=string(binaire(n))</span>
+
+<span class="s2">function </span><span class="s0">binaire_float(x,p)</span>
+    <span class="s0">e=Int(floor(x))</span>
+    <span class="s0">E=binaire_int(e)</span>
+    <span class="s0">d=x-e</span>
+    <span class="s0">r=repeat([</span><span class="s1">0</span><span class="s0">],p)</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:p</span>
+        <span class="s0">y=</span><span class="s1">1</span><span class="s0">/(</span><span class="s1">2</span><span class="s0">^i)</span>
+        <span class="s2">if </span><span class="s0">d&gt;=y</span>
+            <span class="s0">r[i]=</span><span class="s1">1</span>
+            <span class="s0">d=d-y</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s0">D=</span><span class="s3">&quot;&quot;</span>
+    <span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s0">r</span>
+        <span class="s0">D=string(D,x)</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">string(E,string(</span><span class="s3">&quot;,&quot;</span><span class="s0">),D)</span>
+<span class="s2">end</span>
+
+<span class="s0">println(binaire_float(</span><span class="s1">1.8</span><span class="s0">,</span><span class="s1">3</span><span class="s0">))</span>
+<span class="s0">println(binaire_float(</span><span class="s1">1.8</span><span class="s0">,</span><span class="s1">5</span><span class="s0">))</span></pre>
+</body>
+</html>

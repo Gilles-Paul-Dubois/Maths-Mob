@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>repr1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #1750eb;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<pre><span class="s0">function </span><span class="s1">factorielle1(n)</span>
+    <span class="s1">print(</span><span class="s2">&quot;début de l'exécution de factorielle1 avec le paramètre :&quot;</span><span class="s1">)</span>
+    <span class="s1">println(n)</span>
+    <span class="s1">result = </span><span class="s3">1</span>
+    <span class="s1">println(typeof(result)) </span><span class="s4"># le type des entiers par défaut Int64 - default type for integers</span>
+    <span class="s0">for </span><span class="s1">i = </span><span class="s3">1</span><span class="s1">:n</span>
+        <span class="s1">result *= i</span>
+    <span class="s0">end</span>
+    <span class="s1">print(</span><span class="s2">&quot;fin de l'exécution de factorielle1 : &quot;</span><span class="s1">)</span>
+    <span class="s0">return </span><span class="s1">result</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">factorielle2(n)</span>
+    <span class="s1">print(</span><span class="s2">&quot;début de l'exécution de factorielle2 avec le paramètre :&quot;</span><span class="s1">)</span>
+    <span class="s1">println(n)</span>
+    <span class="s1">result::UInt128 = </span><span class="s3">1</span>
+    <span class="s1">println(typeof(result)) </span><span class="s4"># affiche le type forcé - displays forced type</span>
+    <span class="s0">for </span><span class="s1">i = </span><span class="s3">1</span><span class="s1">:n</span>
+        <span class="s1">result *= i</span>
+    <span class="s0">end</span>
+    <span class="s1">print(</span><span class="s2">&quot;fin de l'exécution de factorielle2 : &quot;</span><span class="s1">)</span>
+    <span class="s0">return </span><span class="s1">result</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">factorielle3(n)</span>
+    <span class="s1">print(</span><span class="s2">&quot;début de l'exécution de factorielle3 avec le paramètre :&quot;</span><span class="s1">)</span>
+    <span class="s1">println(n)</span>
+    <span class="s1">result = big(</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s1">println(typeof(result)) </span><span class="s4"># affiche le type forcé - displays forced type</span>
+    <span class="s0">for </span><span class="s1">i = </span><span class="s3">1</span><span class="s1">:n</span>
+        <span class="s1">result *= i</span>
+    <span class="s0">end</span>
+    <span class="s1">print(</span><span class="s2">&quot;fin de l'exécution de factorielle3 : &quot;</span><span class="s1">)</span>
+    <span class="s0">return </span><span class="s1">result</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">println(factorielle1(</span><span class="s3">20</span><span class="s1">)) </span><span class="s4">#OK pas de débordement - OK no overflow</span>
+    <span class="s1">println(factorielle1(</span><span class="s3">30</span><span class="s1">)) </span><span class="s4"># débordement pas de message d'erreurs mais résultat négatif !!! - overflow without error message but negative result</span>
+    <span class="s1">println(factorielle2(</span><span class="s3">30</span><span class="s1">)) </span><span class="s4">#OK borne sup pas atteinte - upper bound not reached</span>
+    <span class="s1">println(factorielle3(</span><span class="s3">30</span><span class="s1">)) </span><span class="s4">#OK borne sup pas atteinte - upperbound not reached</span>
+    <span class="s1">println(factorielle3(</span><span class="s3">100</span><span class="s1">)) </span><span class="s4">#pas de limite - sauf mémoire ordinateure - no limit except computer's memory size</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

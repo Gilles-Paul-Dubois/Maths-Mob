@@ -1,0 +1,64 @@
+﻿<html>
+ <head>
+  <title>
+   periode.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+ 
+</span><span class="s0"># écriture des fractions (positives) comme développements décimaux périodiques</span><span class="s1"> 
+</span><span class="s0"># Expression of positive fractions as periodical decimal expansion</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">os 
+ 
+</span><span class="s2">def </span><span class="s1">periode (p,q): 
+    e=p//q </span><span class="s0"># partie entière - integral part</span><span class="s1"> 
+    p=p%q 
+    R=[p] </span><span class="s0"># on ajoute le premier reste - we add the first remainder</span><span class="s1"> 
+    Q=[] 
+    r=p 
+    </span><span class="s2">while </span><span class="s1">(</span><span class="s2">True</span><span class="s1">): </span><span class="s0"># boucle interrompue par 'break'-Infinite loop with interruption by 'break'</span><span class="s1"> 
+        d=(</span><span class="s3">10</span><span class="s1">*r)//q 
+        r=(</span><span class="s3">10</span><span class="s1">*r)%q 
+        </span><span class="s2">if </span><span class="s1">(r </span><span class="s2">in </span><span class="s1">R): </span><span class="s0"># si le reste est déja apparu - If the remainder already appeared </span><span class="s1"> 
+            x=R.index(r) </span><span class="s0"># on repère à quel endroit - we check in which position</span><span class="s1"> 
+            Q.append(d) </span><span class="s0"># on ajoute le dernier diviseur -we add the last divisor</span><span class="s1"> 
+            </span><span class="s2">break </span><span class="s0"># on s'arrête -we stop</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            R.append(r) </span><span class="s0"># on ajoute le nouveau reste - we add the new remainder</span><span class="s1"> 
+            Q.append(d) </span><span class="s0"># idem pour le nouveau quotient - same for the new quotient</span><span class="s1"> 
+    </span><span class="s0"># on fabique maintenant la chaîne formatée - we now build the formatted string</span><span class="s1"> 
+    S=str(e)+</span><span class="s4">'.' </span><span class="s0"># partie entière - integral part</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">Q: </span><span class="s0"># début du développement décimal- beginning of the decimal expanson</span><span class="s1"> 
+        S=S+str(i) 
+    </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">Q[x:]:</span><span class="s0"># on répète une fois la période - we repeat the period one time</span><span class="s1"> 
+        S=S+str(j) 
+    </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(x,len(Q)): </span><span class="s0"># répétition de la période à l'infini - Infinite repetition of the period</span><span class="s1"> 
+        S=S+</span><span class="s4">'-'       </span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">S 
+ 
+</span><span class="s0">#programme principal - main function</span><span class="s1"> 
+</span><span class="s0"># développement décimal périodique du rationnel 17125/9990 - periodical decimal expansion of 17125/9990</span><span class="s1"> 
+print(periode(</span><span class="s3">17125</span><span class="s1">,</span><span class="s3">9990</span><span class="s1">)) 
+ 
+         
+     
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #dd6718;}
+.s5 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+
+<span class="s0">struct </span><span class="s1">IncorrectVector &lt;: Exception</span>
+    <span class="s1">msg::String</span>
+<span class="s0">end</span>
+
+<span class="s2">#classe paramétrée pour représenter tous les corps Z/pZ - parameterized class to model Z/pZ</span>
+
+<span class="s0">macro </span><span class="s1">Z(p)</span>
+    <span class="s0">quote</span>
+        <span class="s0">struct </span><span class="s1">F_p</span>
+            <span class="s1">x::Int</span>
+            <span class="s0">function </span><span class="s1">F_p(n::Int)</span><span class="s2">#constructeur interne - internal constructor</span>
+                <span class="s1">r=n % $p</span>
+                <span class="s0">if </span><span class="s1">r&gt;= </span><span class="s3">0</span>
+                    <span class="s0">return </span><span class="s1">new(r) </span><span class="s2"># appel à new possible unqiuement dans le constructeur 'interne'- call to new only possible in internal constructor</span>
+                <span class="s0">else</span>
+                    <span class="s0">return </span><span class="s1">new($p+r) </span><span class="s2"># à cause de la définition du reste en julia ..- because of julia's definition of remainder.</span>
+                <span class="s0">end</span>
+            <span class="s0">end</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s4">@Z </span><span class="s3">3 </span><span class="s2"># appel de la macro avec paramètre 3, construction de F_p=Z/3Z- call of the macro builds Z/3Z</span>
+
+<span class="s1">K=[F_p(i) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">2</span><span class="s1">] </span><span class="s2">#le corps entier - the full field</span>
+<span class="s2">#surcharge des opérateurs - overloading of operators</span>
+<span class="s1">Base.:+(k::F_p,h::F_p) = F_p(k.x+h.x)</span>
+<span class="s1">Base.:*(k::F_p,h::F_p) = F_p(k.x*h.x)</span>
+<span class="s1">Base.:-(k::F_p)=F_p(-k.x)</span>
+<span class="s1">Base.:-(k::F_p,h::F_p)=F_p(k.x-h.x)</span>
+<span class="s1">Base.string(k::F_p)=string(k.x)</span>
+<span class="s1">nul(k::F_p)=k.x==</span><span class="s3">0</span>
+<span class="s2"># fin de la définition - end of definition</span>
+
+<span class="s2">#macro pour construire l'espace vectoriel puissance n d'un corps quelconque, Z/pZ, Q, R, C, etc..- macro to build power n of Z/pZ</span>
+<span class="s2"># n détermine la dimension et T le corps via le type - determines dimension and the field according type</span>
+<span class="s0">macro </span><span class="s1">E(n, T)</span>
+    <span class="s0">quote</span>
+        <span class="s0">struct </span><span class="s1">V</span>
+            <span class="s1">C::Vector{$T} </span><span class="s2">#unique donnée membre un tableau à une dimension</span>
+            <span class="s0">function </span><span class="s1">V(W) </span><span class="s2">#constructeur 'interne'</span>
+                <span class="s0">if </span><span class="s1">length(W) != $n </span><span class="s2">#le paramètre du constructeur doit avoir la longueur voulue</span>
+                    <span class="s1">throw(IncorrectVector(</span><span class="s5">&quot;dimension du tableau incorrecte&quot;</span><span class="s1">))</span>
+                <span class="s0">end</span>
+                <span class="s2">#Voyons si le transtypage est possible - Is trans-typing possible ?</span>
+                <span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">W</span>
+                    <span class="s0">if </span><span class="s1">typeof(x)!=$T</span>
+                        <span class="s0">try</span>
+                            <span class="s1">y=$T(x)</span>
+                        <span class="s0">catch </span><span class="s1">err</span>
+                            <span class="s1">throw(IncorrectVector(</span><span class="s5">&quot;Type non convertible&quot;</span><span class="s1">))</span>
+                        <span class="s0">end</span>
+                     <span class="s0">end</span>
+                <span class="s0">end</span>
+                <span class="s1">k(x)= typeof(x)==$T ? x : $T(x)</span><span class="s2">#transtyper si besoin est - convert type if needed</span>
+                <span class="s1">W=[k(x) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">W]</span>
+                <span class="s0">return </span><span class="s1">new(W) </span><span class="s2">#appel à new possible depuis le constructeur interne - call to new from internal constructor</span>
+            <span class="s0">end</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s4">@E </span><span class="s3">3 </span><span class="s1">F_p </span><span class="s2"># espace vectoriel (Z/3Z)^3 - vector space Z/3Z^3</span>
+
+<span class="s1">K3=[V([i,j,k]) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">2 </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">2 </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">2</span><span class="s1">] </span><span class="s2">#l'espace entier</span>
+
+<span class="s1">Base.getindex(v::V,i::Int64)= v.C[i] </span><span class="s2">#surcharge des crochets - overloading brackets</span>
+<span class="s1">Base.:+(v1::V,v2::V)=V(map(+,v1.C,v2.C)) </span><span class="s2">#addition des vecteurs - addition of vectors</span>
+<span class="s1">Base.:-(v::V)=V([-x </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">v.C]) </span><span class="s2">#opposé</span>
+<span class="s1">Base.:-(v1::V,v2::V)=V(map(-,v1.C,v2.C)) </span><span class="s2">#différence - difference</span>
+<span class="s0">function </span><span class="s1">Base.:*(λ,v::V) </span><span class="s2">#loi externe -produit d'un vecteur par un scalaire - external law</span>
+    <span class="s1">T=typeof(v[</span><span class="s3">1</span><span class="s1">])</span>
+    <span class="s0">try</span>
+        <span class="s0">if </span><span class="s1">typeof(λ)!=T</span>
+            <span class="s1">λ=T(λ)</span>
+        <span class="s0">end</span>
+    <span class="s0">catch </span><span class="s1">err</span>
+        <span class="s1">throw(IncorrectVector(</span><span class="s5">&quot;Type non convertible&quot;</span><span class="s1">))</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">V(map(x-&gt;λ*x,v.C))</span>
+<span class="s0">end</span>
+<span class="s1">Base.string(v::V)=map(y-&gt;y.x,v.C)</span>
+<span class="s1">nul(v::V)= all((nul(c) </span><span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">v.C))</span>
+<span class="s1">multiple(v2,v1)= any((eq(v2,k*v1) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s1">K))</span>
+<span class="s1">eq(v1::V,v2::V)=all((v1.C[i]==v2.C[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:</span><span class="s3">3</span><span class="s1">))</span>
+
+<span class="s1">libre(v1::V,v2::V)=!nul(v1) &amp;&amp; !multiple(v2,v1)</span>
+
+<span class="s1">L= [(v1,v2) </span><span class="s0">for </span><span class="s1">v1 </span><span class="s0">in </span><span class="s1">K3 </span><span class="s0">for </span><span class="s1">v2 </span><span class="s0">in </span><span class="s1">K3 </span><span class="s0">if </span><span class="s1">libre(v1,v2)]</span>
+<span class="s1">combinaison(v3::V, v1::V, v2::V)=any((eq(v3,w1+w2) </span><span class="s0">for </span><span class="s1">w1 </span><span class="s0">in </span><span class="s1">K3 </span><span class="s0">for </span><span class="s1">w2 </span><span class="s0">in </span><span class="s1">K3 </span><span class="s0">if </span><span class="s1">multiple(w1,v1) &amp;&amp; multiple(w2,v2)))</span>
+<span class="s1">memeplan(Y,Z)=combinaison(Z[</span><span class="s3">1</span><span class="s1">],Y[</span><span class="s3">1</span><span class="s1">],Y[</span><span class="s3">2</span><span class="s1">])&amp;&amp;combinaison(Z[</span><span class="s3">2</span><span class="s1">],Y[</span><span class="s3">1</span><span class="s1">],Y[</span><span class="s3">2</span><span class="s1">])</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">R=[]</span>
+    <span class="s0">for </span><span class="s1">C </span><span class="s0">in </span><span class="s1">L</span>
+        <span class="s0">if </span><span class="s1">! any((memeplan(C,X) </span><span class="s0">for </span><span class="s1">X </span><span class="s0">in </span><span class="s1">R))</span>
+            <span class="s1">push!(R,C)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s1">println(length(R))</span>
+    <span class="s0">for </span><span class="s1">X </span><span class="s0">in </span><span class="s1">R</span>
+        <span class="s1">println(string(X[</span><span class="s3">1</span><span class="s1">]),string(X[</span><span class="s3">2</span><span class="s1">]))</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

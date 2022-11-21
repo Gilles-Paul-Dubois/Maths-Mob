@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">fracontinue(p,q)</span>
+    <span class="s1">sol,p0,p1=[],p,q</span>
+    <span class="s0">while </span><span class="s1">p1!=</span><span class="s2">0</span>
+        <span class="s1">a=p0÷p1</span>
+        <span class="s1">push!(sol,a)</span>
+        <span class="s1">p=p1</span>
+        <span class="s1">p1=p0-a*p1</span>
+        <span class="s1">p0=p</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">sol</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">restitue(L)</span>
+    <span class="s0">if </span><span class="s1">length(L)==</span><span class="s2">1</span>
+        <span class="s0">return</span><span class="s1">[L[</span><span class="s2">1</span><span class="s1">],</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s0">end</span>
+    <span class="s1">f=restitue(L[</span><span class="s2">2</span><span class="s1">:end])</span>
+    <span class="s1">g=[f[</span><span class="s2">2</span><span class="s1">],f[</span><span class="s2">1</span><span class="s1">]]</span>
+    <span class="s0">return </span><span class="s1">[L[</span><span class="s2">1</span><span class="s1">]*g[</span><span class="s2">2</span><span class="s1">]+g[</span><span class="s2">1</span><span class="s1">],g[</span><span class="s2">2</span><span class="s1">]]</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">p,q=</span><span class="s2">18</span><span class="s1">,</span><span class="s2">31</span>
+    <span class="s1">L=fracontinue(p,q)</span>
+    <span class="s1">println(L)</span>
+    <span class="s1">println(restitue(L))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

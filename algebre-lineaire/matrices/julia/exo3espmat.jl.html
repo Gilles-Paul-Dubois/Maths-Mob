@@ -1,0 +1,141 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #dd6718;}
+.s5 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+
+<span class="s0">struct </span><span class="s1">IncorrectVector &lt;: Exception</span>
+    <span class="s1">msg::String</span>
+<span class="s0">end</span>
+
+<span class="s2">#classe paramétrée pour représenter tous les corps Z/pZ</span>
+<span class="s2">#parameterized class to represent all fields Z/pZ</span>
+
+<span class="s0">macro </span><span class="s1">Z(p)</span>
+    <span class="s0">quote</span>
+        <span class="s0">struct </span><span class="s1">F_p</span>'
+            <span class="s1">x::Int</span>
+            <span class="s0">function </span><span class="s1">F_p(n::Int)</span><span class="s2">#constructeur interne - internal costructor</span>
+                <span class="s1">r=n % $p</span>
+                <span class="s0">if </span><span class="s1">r&gt;= </span><span class="s3">0</span>
+                    <span class="s0">return </span><span class="s1">new(r) </span><span class="s2"># appel à new possible unqiuement dans le constructeur 'interne'- call to new</span>
+                <span class="s0">else</span>
+                    <span class="s0">return </span><span class="s1">new($p+r) </span><span class="s2"># à cause de la définition du reste en julia ...- because of remainder def in Julia</span>
+                <span class="s0">end</span>
+            <span class="s0">end</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s4">@Z </span><span class="s3">5 </span><span class="s2"># appel de la macro avec paramètre 5, construction de F_p=Z/5Z - call to the macro with parameter 5 results in building Z/5Z</span>
+
+<span class="s1">K=[F_p(i) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">4</span><span class="s1">] </span><span class="s2">#le corps entier - the whole field</span>
+<span class="s2">#surcharge des opérateurs - overloading operators</span>
+<span class="s1">Base.:+(k::F_p,h::F_p) = F_p(k.x+h.x)</span>
+<span class="s1">Base.:*(k::F_p,h::F_p) = F_p(k.x*h.x)</span>
+<span class="s1">Base.:-(k::F_p)=F_p(-k.x)</span>
+<span class="s1">Base.:-(k::F_p,h::F_p)=F_p(k.x-h.x)</span>
+<span class="s1">Base.string(k::F_p)=string(k.x)</span>
+<span class="s1">nul(k::F_p)=k.x==</span><span class="s3">0</span>
+<span class="s2"># fin de la définition - end of definition</span>
+
+<span class="s2">#macro pour construire l'espace vectoriel puissance n d'un corps quelconque, Z/pZ, Q, R, C, etc..</span>
+<span class="s2">#macro to build nth-power of any field Z/pZ, Q, R, C, etc..</span>
+<span class="s2"># n détermine la dimension et T le corps via le type - n fixes the dimension and T the field via the type</span>
+<span class="s0">macro </span><span class="s1">E(n, T)</span>
+    <span class="s0">quote</span>
+        <span class="s0">struct </span><span class="s1">V</span>
+            <span class="s1">C::Vector{$T} </span><span class="s2">#unique donnée membre un tableau à une dimension - signe memebr data one dimensional array</span>
+            <span class="s0">function </span><span class="s1">V(W) </span><span class="s2">#constructeur 'interne' - internal constructor</span>
+                <span class="s0">if </span><span class="s1">length(W) != $n </span><span class="s2">#le paramètre du constructeur doit avoir la longueur voulue - the parameter of the constructor should have the desired length</span>
+                    <span class="s1">throw(IncorrectVector(</span><span class="s5">&quot;dimension du tableau incorrecte&quot;</span><span class="s1">))</span>
+                <span class="s0">end</span>
+                <span class="s2">#Voyons si le transtypage est possible - Let's see if trans-typing is possible</span>
+                <span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">W</span>
+                    <span class="s0">if </span><span class="s1">typeof(x)!=$T</span>
+                        <span class="s0">try</span>
+                            <span class="s1">y=$T(x)</span>
+                        <span class="s0">catch </span><span class="s1">err</span>
+                            <span class="s1">throw(IncorrectVector(</span><span class="s5">&quot;Type non convertible&quot;</span><span class="s1">))</span>
+                        <span class="s0">end</span>
+                     <span class="s0">end</span>
+                <span class="s0">end</span>
+                <span class="s1">k(x)= typeof(x)==$T ? x : $T(x)</span><span class="s2">#transtyper si besoin est - change type if needed</span>
+                <span class="s1">W=[k(x) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">W]</span>
+                <span class="s0">return </span><span class="s1">new(W) </span><span class="s2">#appel à new possible depuis le constructeur interne - call to new possible from this place</span>
+            <span class="s0">end</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s4">@E </span><span class="s3">3 </span><span class="s1">F_p </span><span class="s2"># espace vectoriel (Z/5Z)^3 - vector space (Z/5Z)^3</span>
+
+<span class="s1">K3=[V([i,j,k]) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">2 </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">2 </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">2</span><span class="s1">] </span><span class="s2">#l'espace entier - the whole space all vectors</span>
+
+<span class="s1">Base.getindex(v::V,i::Int64)= v.C[i] </span><span class="s2">#surcharge des crochets- overloading brackets</span>
+<span class="s1">Base.:+(v1::V,v2::V)=V(map(+,v1.C,v2.C)) </span><span class="s2">#addition des vecteurs - addition of vectors</span>
+<span class="s1">Base.:-(v::V)=V([-x </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">v.C]) </span><span class="s2">#opposé - opposite</span>
+<span class="s1">Base.:-(v1::V,v2::V)=V(map(-,v1.C,v2.C)) </span><span class="s2">#différence - difference</span>
+<span class="s0">function </span><span class="s1">Base.:*(λ,v::V) </span><span class="s2">#loi externe -produit d'un vecteur par un scalaire - external multiplication</span>
+    <span class="s1">T=typeof(v[</span><span class="s3">1</span><span class="s1">])</span>
+    <span class="s0">try</span>
+        <span class="s0">if </span><span class="s1">typeof(λ)!=T</span>
+            <span class="s1">λ=T(λ)</span>
+        <span class="s0">end</span>
+    <span class="s0">catch </span><span class="s1">err</span>
+        <span class="s1">throw(IncorrectVector(</span><span class="s5">&quot;Type non convertible&quot;</span><span class="s1">))</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">V(map(x-&gt;λ*x,v.C))</span>
+<span class="s0">end</span>
+<span class="s1">Base.string(v::V)=map(y-&gt;y.x,v.C)</span>
+<span class="s1">nul(v::V)= all((nul(c) </span><span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">v.C))</span>
+
+<span class="s0">function </span><span class="s1">Base.:*(λ::F_p,M::Matrix{F_p})</span><span class="s2">#produit d'une matrice par un scalaire- product of a matrix by a scalar</span>
+    <span class="s1">m,n=size(M,</span><span class="s3">1</span><span class="s1">),size(M,</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">R=copy(M)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:m,j </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n</span>
+        <span class="s1">R[i,j]=λ*M[i,j]</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">R</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">printsimplif(M::Matrix{F_p})</span>
+    <span class="s1">m,n=size(M,</span><span class="s3">1</span><span class="s1">),size(M,</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:m</span>
+        <span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n</span>
+            <span class="s1">print(M[i,j].x);print(</span><span class="s5">&quot; &quot;</span><span class="s1">)</span>
+        <span class="s0">end</span>
+        <span class="s1">println(</span><span class="s5">&quot;&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s1">println(</span><span class="s5">&quot;--------------&quot;</span><span class="s1">)    </span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">A=[F_p(</span><span class="s3">3</span><span class="s1">) F_p(</span><span class="s3">4</span><span class="s1">) F_p(</span><span class="s3">4</span><span class="s1">); F_p(</span><span class="s3">0</span><span class="s1">) F_p(</span><span class="s3">1</span><span class="s1">) F_p(</span><span class="s3">0</span><span class="s1">);F_p(</span><span class="s3">2</span><span class="s1">) F_p(</span><span class="s3">2</span><span class="s1">) F_p(</span><span class="s3">3</span><span class="s1">)]</span>
+    <span class="s1">B=[F_p(</span><span class="s3">3</span><span class="s1">) F_p(</span><span class="s3">2</span><span class="s1">) F_p(</span><span class="s3">1</span><span class="s1">); F_p(</span><span class="s3">1</span><span class="s1">) F_p(</span><span class="s3">2</span><span class="s1">) F_p(</span><span class="s3">0</span><span class="s1">);F_p(</span><span class="s3">3</span><span class="s1">) F_p(</span><span class="s3">1</span><span class="s1">) F_p(</span><span class="s3">4</span><span class="s1">)]</span>
+    <span class="s1">println(typeof(A))</span>
+    <span class="s1">printsimplif(A)</span>
+    <span class="s1">printsimplif(B)</span>
+    <span class="s1">printsimplif(A+B)</span>
+    <span class="s1">printsimplif(F_p(</span><span class="s3">2</span><span class="s1">)A)</span>
+    <span class="s1">printsimplif(F_p(</span><span class="s3">3</span><span class="s1">)B)</span>
+    <span class="s1">printsimplif(F_p(</span><span class="s3">2</span><span class="s1">)A+F_p(</span><span class="s3">3</span><span class="s1">)B)</span>
+    
+
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

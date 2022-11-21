@@ -1,0 +1,84 @@
+﻿<html>
+ <head>
+  <title>
+   ZsurnZ.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+</span><span class="s0">#anneau Z/nZ</span><span class="s1"> 
+</span><span class="s0">#ring Z/nZ</span><span class="s1"> 
+ 
+</span><span class="s0"># addition dans Z/nZ</span><span class="s1"> 
+</span><span class="s0"># addition ins Z/nZ</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">somme(x,y,n): 
+    </span><span class="s2">return </span><span class="s1">(x+y)%n 
+</span><span class="s0">#multiplication dans Z/nZ</span><span class="s1"> 
+</span><span class="s0">#multiplication in Z/nZ</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">produit(x,y,n): 
+    </span><span class="s2">return </span><span class="s1">(x*y)%n 
+ 
+</span><span class="s0"># ligne de x dans la table d'addition de Z/nZ</span><span class="s1"> 
+</span><span class="s0"># Row of x in the addition table of Z/nZ</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">addligne(x,n): 
+    </span><span class="s2">return </span><span class="s1">[somme(x,y,n) </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n)] 
+ 
+</span><span class="s0"># ligne de x dans la table de multiplication de Z/nZ</span><span class="s1"> 
+</span><span class="s0"># row of x in the multiplication table of Z/nZ</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">multligne(x,n): 
+    </span><span class="s2">return </span><span class="s1">[produit(x,y,n) </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n)] 
+ 
+</span><span class="s0"># affiche la table d'addition de Z/nZ</span><span class="s1"> 
+</span><span class="s0"># Displays the addition table of Z/nZ</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">tableadd(n): 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n): 
+        print(addligne(x,n)) 
+ 
+</span><span class="s0"># affiche la table de multiplication de Z/nZ</span><span class="s1"> 
+</span><span class="s0"># Displays the multiplication table of Z/nZ</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">tablemult(n): 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n): 
+        print(multligne(x,n)) 
+ 
+</span><span class="s0"># teste si x est inversible dans l'anneau Z/nZ</span><span class="s1"> 
+</span><span class="s0"># checks if x is a unit in the ring Z/nZ</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">inversible(x,n): 
+    </span><span class="s2">return </span><span class="s3">1 </span><span class="s2">in </span><span class="s1">multligne(x,n) 
+ 
+</span><span class="s0"># checks if Z/nZ is a field</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">corps(n): 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,n): 
+        </span><span class="s2">if not </span><span class="s1">inversible(x,n): 
+            </span><span class="s2">return False</span><span class="s1"> 
+    </span><span class="s2">return True</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    tableadd(</span><span class="s3">7</span><span class="s1">) 
+    print(</span><span class="s4">"-"</span><span class="s1">*</span><span class="s3">20</span><span class="s1">) 
+    tablemult(</span><span class="s3">7</span><span class="s1">) 
+    print(</span><span class="s4">"-"</span><span class="s1">*</span><span class="s3">20</span><span class="s1">) 
+    print(inversible(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">7</span><span class="s1">)) 
+    print(inversible(</span><span class="s3">4</span><span class="s1">,</span><span class="s3">7</span><span class="s1">)) 
+    </span><span class="s0">#vérification du théorème du cours</span><span class="s1"> 
+    print([n </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">2</span><span class="s1">,</span><span class="s3">10</span><span class="s1">) </span><span class="s2">if </span><span class="s1">corps(n)]) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

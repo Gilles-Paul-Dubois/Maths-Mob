@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Corps</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    
+    
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="b">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="b">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/corps/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Opérations'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/corps/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to operations" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2>
+          <div id="container">
+            <div id="label">définition</div> Un <span style="font-weight: bold; font-style: italic;"> 'corps' </span> est un <input type="button" value="anneau" onclick="go('anneau.html')" data-inline="true" /> dont tous les éléments non nuls sont <input type="button" value="inversibles" onclick="go('puissances.html')" data-inline="true" />
+            <br /> Si l'anneau est commutatif, le corps lui-même est dit commutatif.
+          </div>
+          <h2> Quelques exemples: </h2>
+          <ul>
+            <li> &rationals;, &reals;, &complexes; sont des corps commutatifs. </li>
+            <li> &integers; est un anneau commutatif qui n'est pas un corps (seuls -1 et +1 sont inversibles). </li>
+            <li> L'ensemble H des quaternions (voir définition) est un corps infini qui n'est pas commutatif. </li>
+          </ul>
+          <h2> Quelques exemples de corps finis commutatifs: </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2>
+          <div id="container">
+            <div id="label">definition</div> A <span style="font-weight: bold; font-style: italic;"> 'field' </span> is a <input type="button" value="ring" onclick="go('anneau.html')" data-inline="true" /> the non zero elements of which all have <input type="button" value="inverses" onclick="go('puissances.html')" data-inline="true" />
+            <br /> If the ring is commutative, the field itself is said commutative.
+          </div>
+          <h2> A few examples : </h2>
+          <ul>
+            <li> &rationals;, &reals;, &complexes; are commutative fields. </li>
+            <li> &integers; is a commutative ring which is not a field (only -1 and +1 have inverses). </li>
+            <li> The set H of Hamilton's quaternions (see definition) is an infinite field which is not commutative. </li>
+          </ul>
+          <h2> A few examples of commutative finite fields : </h2>
+        </div>
+        <!-- /en -->
+        <div>
+          <table>
+            <tr>
+              <td colspan="2">
+                <button onclick="Paint();" type="button"> Click! </button>
+                <div lang="fr">Cliquez pour voir un corps commutatif !</div>
+                <!-- /fr -->
+                <div lang="en">Click to see a commutative field !</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td>
+                <canvas height="200" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td colspan="2">
+                <div lang="fr">Distributivité de × sur +</div>
+                <!-- /fr -->
+                <div lang="en">Distributivity of &times; over +</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input id="mytext1" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div lang="fr">Associativité des deux lois</div>
+                <!-- /fr -->
+                <div lang="en">Associativity of both operations</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input id="mytext2" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <div lang="fr">Commutativité des deux lois</div>
+                <!-- /fr -->
+                <div lang="en">Commutativity of both operations</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input id="mytext6" type="text" />
+              </td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td colspan="2">
+                <div lang="fr">Eléments neutres</div>
+                <!-- /fr -->
+                <div lang="en">Neutral elements</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <td colspan="2">
+              <input id="mytext3" type="text" />
+            </td>
+            <tr>
+              <td colspan="2">
+                <div lang="fr">Paires d'éléments opposés</div>
+                <!-- /fr -->
+                <div lang="en">Pairs of opposites</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input id="mytext4" type="text" />
+              </td>
+            </tr>
+            <tr></tr>
+            <tr>
+              <td colspan="2">
+                <div lang="fr">Paires d'éléments inverses</div>
+                <!-- /fr -->
+                <div lang="en">Pairs of inverses</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <input id="mytext5" type="text" />
+              </td>
+            </tr>
+            <td colspan="2">
+              <button onclick="Paint2();" type="button"> Click! </button>
+              <div lang="fr">Cliquez pour voir des exemples de calcul !</div>
+              <!-- /fr -->
+              <div lang="en">Click to see some examples of computations !</div>
+              <!-- /en -->
+            </td>
+          </table>
+          <script src="js/newjavascript11.js"></script>
+        </div>
+        <div lang="fr">
+          <h2>Propriété importante</h2>
+          <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Il n'existe pas de corps fini non commutatif (théorème de Wedderburn 1905)
+          </div>
+          <p> Ce résultat, dû à Wedderburn, est ici donné à titre indicatif sans démonstration.</p>
+          <table bgcolor="#000000" border="2" cellpadding="10" cellspacing="0">
+            <tr>
+              <td>
+                <font color="#FFFFFF"> Joseph Wedderburn - (1882/1948-UK) </font>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <img alt="Photo de Wedderburn" src="images/200px-Wedderburn.jpeg" style="width: 200px; height: 244px;" title="Photo de Wedderburn" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Important property</h2>
+          <a name="th1"></a>
+          <div id="container">
+            <div id="label">theorem</div> Non commutative finite fields do not exist (theorem of Wedderburn 1905)
+          </div>
+          <p> This result is given here for memory without any proof.</p>
+          <table bgcolor="#000000" border="2" cellpadding="10" cellspacing="0">
+            <tr>
+              <td>
+                <font color="#FFFFFF"> Joseph Wedderburn - (1882/1948-UK) </font>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <img alt="Photo de Wedderburn" src="images/200px-Wedderburn.jpeg" style="width: 200px; height: 244px;" title="Photo de Wedderburn" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Opérations'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to operations" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Déterminant d'un système de vecteurs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href=".././css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/detsysvec/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/detsysvec/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Dans tout ce qui suit E designe un espace vectoriel de dimension finie n sur un corps K de caractéristique ≠ 2. B=(u<sub>1</sub>,...,u<sub>n</sub>) désigne une base de E. Le lecteur est supposé familiarisé avec les groupes de <input type="button" value="permutations" onclick="go('../../bases/applications/permutations.html')" data-inline="true" />. </p>
+          <h2> Applications antisymétriques </h2>
+          <div id="container">
+            <div id="label">définition</div> Une application f: E<sup>n</sup> → K est dite <strong>
+              <em>'antisymétrique'</em>
+            </strong> si elle vérifie: <br /> f(x<sub>τ(1)</sub>,...,x<sub>τ(n)</sub>)=-f(x<sub>1</sub>,...,x<sub>n</sub>) <br /> pour toute <input type="button" value="transposition" onclick="go('../../bases/applications/transpositions.html')" data-inline="true" /> τ des entiers {1,...,n}
+          </div> La propriété suivante résulte de la définition: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si f est antisymétrique si et seulement si pour toute permutation σ de {1, ..., n} on a: f(x<sub>σ(1)</sub>,...,x<sub>σ(n)</sub>)= sgn(σ)f(x<sub>1</sub>,...,x<sub>n</sub>) <br /> où sgn(σ) désigne la <input type="button" value="signature" onclick="go('../../bases/applications/exercices/permutations/ex01.html')" data-inline="true" /> de la permutation σ.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La propriété est évidemment vraie si σ est une transposition. Inversement cela résulte de la <input type="button" value="décomposition d'une permutation en
+transpositions" onclick="go('../../bases/applications/transpositions.html#th1')" data-inline="true" /> et de la définition de la signature.
+          </div> La vérification de la propriété suivante est immédiate: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si K est de caractéristique ≠ 2 et si f est une forme multilinéaire sur E, alors il y a équivalence entre: <ul>
+              <li> f est alternée </li>
+              <li> f est antisymétrique </li>
+            </ul>
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Montrons le pour une forme bilinéaire. <br /> On a toujours: f(x+y,x+y)=f(x,x)+f(x,y)+f(y,x)+f(y,y). <br /> Si f est alternée il vient 0=0+f(x,y)+f(y,x)+0, soit f(x,y)=-f(y,x) <br /> Supposons réciproquement f antisymétrique alors f(x,x)=-f(x,x) en échangeant les deux variables; <br /> d'où 2f(x,x)=0 et f(x,x)=0. <br />
+          </div> Fabriquer des applications antisymétriques n'est pas difficile. Prenons une application f quelconque de E<sup>n</sup> dans F. Soit Af :E<sup>n</sup> → F définie par: <br /> \(Af\left ( x_{1},...,x_{n} \right )=\sum_{\sigma \in S_{n}}^{}sgn(\sigma)f\left ( x_{\sigma (1)},...,x_{\sigma (n)} \right )\) <br> La somme étant étendue à toutes les permutations de {1,...,n} formant le groupe symétrique S<sub>n</sub>. <br /> Af est antisymétrique parce que si τ est une transposition sgn(τ <font size="-2">o</font>σ)=sgn(τ)×sgn(σ)=-sgn(σ), et que σ → τ <font size="-2">o</font>σ est une bijection de S<sub>n</sub> sur lui-même. <div id="container">
+            <div id="label">définition</div> Af s'appelle <strong>
+              <em>"l'antisymétrisée"</em>
+            </strong> de f
+          </div>
+          <h2> Déterminant d'un système de vecteurs relativement à B </h2> La propriété suivante est extrêmement importante: <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> L'espace des formes n-linéaires alternées sur E<sup>n</sup> est de dimension 1. Autrement dit, il existe une et une seule application n-linéaire alternée sur E<sup>n</sup> vérifiant: <br /> f(u<sub>1</sub>,u<sub>2</sub>,...,u<sub>n</sub>)=1 <br /> Cette application se nomme le <strong>
+              <em>'déterminant de base B'</em>
+            </strong>.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Nous donnons la démonstration dans le cas n=3. <br /> La démonstration en toute généralité n'est pas plus difficile mais les notations (sommations multiples sur indices multiples) sont très lourdes. <br /> Prenons donc 3 vecteurs décomposés sur la base B: <br /> x<sub>1</sub>=au<sub>1</sub>+bu<sub>2</sub>+cu<sub>3</sub>
+            <br /> x<sub>2</sub>=du<sub>1</sub>+eu<sub>2</sub>+fu<sub>3</sub>
+            <br /> x<sub>3</sub>=gu<sub>1</sub>+hu<sub>2</sub>+iu<sub>3</sub>
+            <br /> Soit φ une forme trilinéaire alternée sur E. Calculons φ(x1,x2,x3)=φ(au<sub>1</sub>+bu<sub>2</sub>+cu<sub>3</sub>,du<sub>1</sub>+eu<sub>2</sub>+fu<sub>3</sub>,du<sub>1</sub>+eu<sub>2</sub>+fu<sub>3</sub>) <br /> En développant par linéarité nous aurons une somme de 27 termes sous la forme de coefficients précédant des constantes φ(u<sub>i</sub>,u<sub>j</sub>,u<sub>k</sub>). Or ces constantes sont nulles chaque fois que deux indices sont égaux dans le triplet (i,j,k) puisque φ est alternée. En définitive il restera donc 6 termes correspondant aux permutations de (1,2,3). On a donc: <br /> φ(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>)=aeiφ(u<sub>1</sub>,u<sub>2</sub>,u<sub>3</sub>)+afhφ(u<sub>1</sub>,u<sub>3</sub>,u<sub>2</sub>)+bdiφ(u<sub>2</sub>,u<sub>1</sub>,u<sub>3</sub>)+bfgφ(u<sub>2</sub>,u<sub>3</sub>,u<sub>1</sub>)+cdhφ(u<sub>3</sub>,u<sub>1</sub>,u<sub>2</sub>)+cegφ(u<sub>3</sub>,u<sub>2</sub>,u<sub>1</sub>) <br /> Soit encore puisque φ est antisymétrique en posant k=φ(u<sub>1</sub>,u<sub>3</sub>,u<sub>2</sub>) <br /> φ(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>)= aeik-afhk-bdik+bfgk+cdhk-cegk <br /> Donc φ(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>)=k(aei-afh-bdi+bfg+cdh-ceg) <br /> Or l'application (x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>) → (aei-afh-bdi+bfg+cdh-ceg) est antisymétrique alternée, car c'est l'antisymétrisée du produit des 3 formes coordonnées par rapport à la base (u<sub>1</sub>,u<sub>2</sub>,u<sub>3</sub>). Ceci démontre donc notre affirmation.
+          </div>
+          <div id="container">
+            <div id="label">définition</div> Donc si on a un système S de n vecteurs: <br /> x<sub>i</sub>= λ<sub>i,1</sub>u<sub>1</sub>+λ<sub>i,2</sub>u<sub>2</sub>+...+λ<sub>i,n</sub>u<sub>n</sub> pour 1 ≤ i ≤ n <br /> Leur déterminant par rapport à B est défini par: <br> \(Det(S,B)=\sum_{\sigma \in S_{n}}^{}sgn(\sigma )\lambda _{1,\sigma(1)}...\lambda _{n,\sigma (n)}\) <br> C'est l'unique forme f n-linéaire alternée sur E<sup>n</sup> telle que f(u<sub>1</sub>,...,u<sub>n</sub>)=1
+          </div> Les propriétés suivantes résultent de la définition (une base est supposée fixée dans E): <a name="th4"></a>
+          <div id="container">
+            <div id="label">théorème</div> Le déterminant d'un système ne change pas quand on ajoute à un vecteur une <input type="button" value="combinaison linéaire" onclick="go('../espaces/generateurs.html#comblin')" data-inline="true" /> des <u>autres</u> vecteurs.
+          </div>
+          <a name="th5"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si on fait subir aux vecteurs du système une permutation, le déterminant du nouveau système est égal à l'ancien multiplié par la signature de la permutation (+1 ou -1).
+          </div>
+          <a name="th6"></a>
+          <div id="container">
+            <div id="label">théorème</div> Le déterminant est un critère <input type="button" value="d'indépendance linéaire" onclick="go('../espaces/libres.html')" data-inline="true" />. <br> S libre ⇔ S base ⇔ Dét(S,B) ≠ 0.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Il est évident que s'il existe une relation linéaire entre les x<sub>i</sub> leur déterminant est nul. Supposons maintenant qu'ils forment un système libre, donc une base puisqu'on est en dimension n. Alors si D est le déterminant par rapport à B et D' le déterminant par rapport à (x<sub>1</sub>,...,x<sub>n</sub>) on a D=kD' avec k ≠ 0 puisque D'(x<sub>1</sub>,...,x<sub>n</sub>)=1 par définition. On a donc D(x<sub>1</sub>,...,x<sub>n</sub>) ≠ 0.
+          </div>
+          <h2> Visualisation dans le plan </h2>
+          <ul>
+            <li>L'appliquette ci-dessous présente un vecteur u et un vecteur v verts.</li>
+            <li>Vous pouvez les faire varier en tirant leurs extrêmités avec la souris.</li>
+            <li>Le déterminant du système qu'ils forment s'affiche en haut et à gauche interactivement.</li>
+            <li>Observez que le déterminant est nul quand les vecteurs sont alignés.</li>
+            <li>Le déterminant est la surface du parallélogramme construit sur les deux vecteurs et affiché en mode transparent.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>In what follows E denotes a vector space of finite dimension n over a field K of characteristic ≠ 2. B=(u<sub>1</sub>,...,u<sub>n</sub>) denotes a basis of E. The reader is assumed to be familiar with the groups of <input type="button" value="permutations" onclick="go('../../bases/applications/permutations.html')" data-inline="true">. </p>
+          <p>As in previous chapters we name 'system of vectors' any n-tuple of vectors, or equivalently any finite indexed family of vectors or any map of {1,2,..,n} into a vector space, such a system is denoted (u<sub>1</sub>,u<sub>2</sub>,...,u<sub>n</sub>). </p>
+          <h2> Antisymmetric applications </h2>
+          <div id="container">
+            <div id="label">definition </div>A map f: E<sup>n</sup>→ K is said to be <strong>
+              <em>'antisymmetric' </em>
+            </strong> if it checks: <br> f(x<sub>τ(1)</sub>,...,x<sub>τ(n)</sub>)=-f(x<sub>1</sub>,...,x<sub>n</sub>) <br> for all <input type="button" value="transposition" onclick="go('../../bases/applications/transpositions.html')" data-inline="true"> τ of integers {1,...,n}
+          </div> The following property results from the definition: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If f is antisymmetric if and only if for any permutation σ of {1, ..., n} we have: f(x<sub>σ(1)</sub>,...,x<sub>σ(n)</sub>)= sgn(σ)f(x<sub>1</sub>,...,x<sub>n</sub>) <br> where sgn(σ) denotes the <input type="button" value="signature" onclick="go('../../bases/applications/exercices/permutations/ex01.html')" data-inline="true"> of the permutation σ.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>The property is obviously true if σ is a transposition. Conversely, this results from and the definition of the signature. The property is obviously true if σ is a transposition. Conversely, this results from <input type="button" value="decomposition of a permutation into
+ transpositions" onclick="go('../../bases/applications/transpositions.html#th1e')" data-inline="true"> and the definition of the signature.
+          </div> Verification of the following property is immediate: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If K has characteristic ≠ 2 and if f is a multilinear form on E, then there is equivalence between: <ul>
+              <li> f is alternating </li>
+              <li> f is antisymmetric </li>
+            </ul>
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>Let us show it for a bilinear form. <br> We always have: f(x+y,x+y)=f(x,x)+f(x,y)+f(y,x)+f(y,y). <br> If f is alternating it comes 0=0+f(x,y)+f(y,x)+0, i.e. f(x,y)=-f(y,x) <br> Assume conversely f antisymmetric then f(x,x)=-f(x,x) exchanging the two variables; <br> hence 2f(x,x)=0 and f(x,x)=0.
+          </div> Making antisymmetric applications is not difficult. Take any map f from E<sup>n</sup> to F. Let Af :E<sup>n</sup> → F defined by: <br> \(Af\left ( x_{1},...,x_{n} \right )=\sum_{\sigma \in S_{n}}^{}sgn(\sigma)f\left ( x_{\sigma (1)},...,x_{\sigma (n)} \right )\) <br> The sum being extended to all the permutations of {1,...,n} forming the symmetric group S<sub>n</sub>. <br> Af is antisymmetric because if τ is a transposition sgn(τ <font size="-2">o</font>σ)=sgn(τ)×sgn(σ)=-sgn(σ), and that σ → τ <font size="-2">o</font>σ is a bijection of S<sub>n</sub> on itself. <div id="container">
+            <div id="label">definition </div>Af is named <strong>
+              <em>"the antisymmetrized" </em>
+            </strong> of f
+          </div>
+          <h2> Determinant of a system of vectors relatively to B </h2> The following property is extremely important: <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The space of alternating n-linear forms on E<sup>n</sup> is of dimension 1. In other words, there exists one and only one alternating n-linear map on E<sup>n</sup> verifying: <br> f(u<sub>1</sub>,u<sub>2</sub>,...,u<sub>n</sub>)=1 <br>This app is called the <strong>
+              <em>'determinant relative to B' </em>
+            </strong>.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>We give the proof in the case n=3. <br>The demonstration in all generality is not more difficult but the notations (multiple sums over multiple indices) are very heavy. <br> So let's take 3 vectors decomposed on the basis B: <br> x<sub>1</sub>=au<sub>1</sub>+bu<sub>2</sub>+cu<sub>3</sub>
+            <br> x<sub>2</sub>= du<sub>1</sub>+eu<sub>2</sub>+fu<sub>3</sub>
+            <br> x<sub>3</sub>= gu<sub>1</sub>+hu<sub>2</sub>+iu<sub>3</sub>
+            <br>Let φ be an alternating trilinear form on E. Calculate φ(x1,x2,x3)=φ(au<sub>1</sub>+bu<sub>2</sub>+cu<sub>3</sub>,du<sub>1</sub>+eu<sub>2</sub>+fu<sub>3</sub>,du<sub>1</sub>+eu<sub>2</sub>+fu<sub>3</sub>) <br>By expanding by linearity we will have a sum of 27 terms in the form of coefficients preceding constants φ(u<sub>i</sub>,u<sub>j</sub>,u<sub>k</sub>). But these constants are zero whenever two indices are equal in the triple (i,j,k) since φ is alternating. Ultimately it will remain only 6 terms corresponding to the permutations of (1,2,3). We have so: <br> φ(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>)=aeiφ(u<sub>1</sub>,u<sub>2</sub>,u<sub>3</sub>)+afhφ(u<sub>1</sub>,u<sub>3</sub>,u<sub>2</sub>)+bdiφ(u<sub>2</sub>,u<sub>1</sub>,u<sub>3</sub>)+bfgφ( u<sub>2</sub>,u<sub>3</sub>,u<sub>1</sub>)+cdhφ(u<sub>3</sub>,u<sub>1</sub>,u<sub>2</sub>)+cegφ(u<sub>3</sub>,u<sub>2</sub>,u<sub>1</sub>) <br> Consider again since φ is antisymmetric by setting k=φ(u<sub>1</sub>,u<sub>3</sub>,u<sub>2</sub>) <br> φ(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>)= aeik-afhk-bdik+bfgk+cdhk-cegk <br> So φ(x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>)=k(aei-afh-bdi+bfg+cdh-ceg) <br>Now the map (x<sub>1</sub>,x<sub>2</sub>,x<sub>3</sub>) → (aei-afh-bdi+bfg+cdh-ceg) is alternating antisymmetric, because it is the antisymmetric of the product of the 3 forms coordinated with respect to the base (u<sub>1</sub>,u<sub>2</sub>,u<sub>3</sub>). This proves our assertion.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>So if we have a system S of n vectors: <br>x<sub>i</sub>= λ<sub>i,1</sub>u<sub>1</sub>+λ<sub>i,2</sub>u<sub>2</sub>+...+λ<sub>i,n</sub>u<sub>n</sub> for 1 ≤ i ≤ n <br> Their determinant with respect to B is defined by: <br> \(Det(S,B)=\sum_{\sigma \in S_{n}}^{}sgn(\sigma )\lambda _{1,\sigma(1)}...\lambda _{n,\sigma (n)}\) <br>It is the unique alternating f n-linear form on E<sup>n</sup> such that f(u<sub>1</sub>,...,u<sub>n</sub>)=1
+          </div> The following properties result from the definition (a basis is assumed to be fixed in E): <a name="th4e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The determinant of a system does not change when we add to a vector a <input type="button" value="linear combination" onclick="go('../espaces/generateurs.html#combline')" data-inline="true"> of the <u>other</u> vectors.
+          </div>
+          <a name="th5e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If the vectors of the system are subjected to a permutation, the determinant of the new system is equal to the old one multiplied by the signature of the permutation (+1 or -1).
+          </div>
+          <a name="th6e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The determinant is a criterion <input type="button" value="linear independence" onclick="go('../espaces/libres.html')" data-inline="true">. <br> S linearly independent ⇔ S base ⇔ Det(S,B) ≠ 0.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>It is obvious that if there is a linear relationship between the x<sub>i</sub> their determinant is zero. Now suppose they form a linearly independent system, therefore a basis since we are in dimension n. So if D is the determinant with respect to B and D' the determinant with respect to (x<sub>1</sub>,...,x<sub>n</sub>) we have D=kD' with k ≠ 0 since D'(x<sub>1</sub>,...,x<sub>n</sub>) =1 by definition. We therefore have D(x<sub>1</sub>,...,x<sub>n</sub>) ≠ 0.
+          </div>
+          <h2> Visualization in the plane </h2>
+          <ul>
+            <li>The applet below shows a green vector u and a green vector v. </li>
+            <li>You can vary them by dragging their ends with the mouse. </li>
+            <li>The determinant of the system they form is displayed at the top left interactively. </li>
+            <li>Observe that the determinant is zero when the vectors are aligned. </li>
+            <li>The determinant is the area of ​​the parallelogram built on the two vectors and displayed in transparent mode. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div class="jxgbox" id="box" style="width:500px; height:500px;"></div>
+        <script src="js/detsys1.js"></script>
+        <div lang="fr">
+          <h2> Visualisation dans l'espace </h2>
+          <ul>
+            <li>L'appliquette ci-dessous présente un vecteur u (turquoise), un vecteur v (jaune) et un vecteur w (rose).</li>
+            <li>Les coordonnées des trois vecteurs apparaissent en bas ainsi que leur déterminant.</li>
+            <li>La valeur absolue du déterminant est le volume du parallélotope construit sur les trois vecteurs et affiché en mode transparent.</li>
+            <li>Cliquez sur le bouton pour générer des exemples.</li>
+            <li>Vous pouvez arrêter le mouvement et le redémarrer en cliquant n'importe où sur la zone graphique.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Visualization in space </h2>
+          <ul>
+            <li>The applet below shows a vector u (cyan), a vector v (yellow) and a vector w (pink). </li>
+            <li>The coordinates of the three vectors appear at the bottom as well as their determinant. </li>
+            <li>The absolute value of the determinant is the volume of the parallelotope built on the three vectors and displayed in transparent mode. </li>
+            <li>Click the button to generate examples. </li>
+            <li>You can stop the motion and restart it by clicking anywhere on the graphics area. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div>
+          <canvas height="400" id="myCanvas" style="border:1px solid #000000;" width="400"></canvas>
+          <br />
+          <button onclick="onButton2();" type="button">
+            <div lang="fr">Changement de vecteurs</div>
+            <!-- /fr -->
+            <div lang="en">Change vectors</div>
+            <!-- /en -->
+          </button>
+          <input id="mytext1" type="text" />
+          <input id="mytext2" type="text" />
+          <script src="js/detsys3d.js"></script>
+        </div>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@linearly independent.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

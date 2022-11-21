@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Première construction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Relatifs'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to integers" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p> Imaginons maintenant qu'au lieu de vouloir compter des objets on veuille compter des pas. Plus précisémment il s'agit de repérer la position d'un marcheur sur un axe orienté (gauche → droite dans notre cas).</p>
+          <div id="container">
+            <div id="label">définition</div> Ainsi un <span style="font-weight: bold;"> 'entier relatif' </span> correspond à un déplacement d'un certain nombre entier de pas sur l'axe, si le déplacement est de 3 pas dans le sens de l'axe, nous notons le déplacement +3, si le déplacement est de 2 pas dans le sens contraire (sens négatif) nous le notons -2.
+          </div>
+          <div id="container">
+            <div id="label">définition</div> Le nombre 0 correspond à l'immobilité au déplacement nul. Ainsi +0=-0 (ne pas bouger dans un sens ou ne pas bouger dans l'autre c'est rester en place).
+          </div>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Now imagine that instead of wanting to count objects we want to count steps. More precisely, it is a question of identifying the position of a walker on an oriented axis (left → right in our case). </p>
+          <div id="container">
+            <div id="label">definition </div>So an <span style="font-weight: bold;"> 'integer' </span> corresponds to a displacement of a certain natural number of steps on the axis, if the displacement is 3 steps in the direction of the axis, we denote the displacement +3, if the displacement is 2 steps in the opposite direction (negative direction) we denote it -2.
+          </div>
+          <div id="container">
+            <div id="label">definition </div>The number 0 corresponds to immobility, a nul displacement. So +0=-0 (not moving in one direction or not moving in the other is to stay in place).
+          </div>
+        </div>
+        <!-- /en -->
+        <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; width: 100px;">
+          <tbody>
+            <tr>
+              <td style="text-align: center; font-weight: bold;">
+                <div lang="fr">Marche positive</div>
+                <!-- /fr -->
+                <div lang="en">Positive walk</div>
+                <!-- /en -->
+              </td>
+              <td style="text-align: center; color: rgb(204, 0, 0); font-weight: bold;">
+                <div lang="fr">Marche négative</div>
+                <!-- /fr -->
+                <div lang="en">Negative walk</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">
+                <img alt="" src="images/stickman1.gif" style="width: 158px; height: 183px;" />
+              </td>
+              <td style="text-align: center;">
+                <img alt="" src="images/stickman2.gif" style="width: 158px; height: 183px;" />
+              </td>
+            </tr>
+            <tr align="center">
+              <td colspan="2" rowspan="1">
+                <img alt="" src="images/axe.JPG" style="width: 372px; height: 70px;" />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div lang="fr">
+          <br />
+          <span style="font-weight: bold;"> Remarque: </span> comme +0=-0 on note simplement cet élément 0 (sans signe). <br /> Voyons tout de suite comment définir <span style="font-weight: bold;"> l'addition </span> de 2 entiers relatif m et n. <br /> si m et n sont deux déplacements, nous notons m+n le déplacement <span style="text-decoration: underline;"> résultant </span> du déplacement m <span style="text-decoration: underline;"> suivi </span> du déplacement n. <br /> Avec cette définition on voit tout de suite que: <br /> (+3)+(+2) = +5 <br /> (-3)+(-2)= -5 <br /> (+3)+(-2)=+1 <br /> (-3)+(+2)=-1 <br /> On voit aussi que : <br /> 0+n=n+0 = n ∀ n <br /> que tout entier relatif possède un opposé pour l'addition, etc.. etc.. <br />
+          <span style="font-weight: bold;"> Remarque: </span> Cette façon de faire est simple, intuitive. C'est certainement celle qu'il faut recommander pour enseigner les entiers signés à des élèves de collège. <br /> Cependant, elle a deux inconvénients. <br />
+          <ul>
+            <li> Elle est peu rigoureuse du strict point de vue de la théorie des ensembles (elle présuppose la définition d'un axe, d'une orientation, etc..) </li>
+            <li> Elle n'est guère généralisable, elle est 'faite pour &naturals;'. </li>
+          </ul> Si l'on veut formaliser cette définition pour pallier au premier inconvénient, c'est assez simple: <br /> Il suffit de considérer la <input type="button" value="paire" onclick="go('../../bases/ensembles/paires.html')" data-inline="true" /> S={+,-} puis ensuite le <input type="button" value="produit cartésien" onclick="go('../../bases/relations/cartesien.html')" data-inline="true" /> S×&naturals; <br /> Sur ce produit cartésien on introduit la <input type="button" value="relation d'équivalence" onclick="go('../../bases/relations/equivalence.html')" data-inline="true" /> ≡ &nbsp;suivante: <br /> Tout couple est relié à lui-même et à lui-même seulement sauf (+,0) qui est relié à (-,0). On voit donc que les <input type="button" value="classes d'équivalence" onclick="go('../../bases/relations/quotients.html')" data-inline="true" /> sont toutes des singletons à l'exception de la paire { (-,0),(+,0) } <br /> Pour finir on convient de changer les notations (+,3) sera noté simplement +3. <br /> Cela fait on désigne par &integers; le quotient du produit cartésien S×&naturals; par la relation d'équivalence ≡. <br /> Notre construction n'utilise que des opérations qui, partant d'ensembles, conduisent à des ensembles. <br /> Par contre, il est plus difficile, par ce moyen de généraliser cette construction, nous voulons dire symétriser une <input type="button" value="loi de composition" onclick="go('../../bases/operations/lois.html')" data-inline="true" />
+          <input type="button" value="associative" onclick="go('../../bases/operations/associative.html')" data-inline="true" /> avec <input type="button" value="élément neutre" onclick="go('../../bases/operations/neutre.html')" data-inline="true" />. C'est pourquoi nous allons définir dans la page suivante, un procédé moins intuitif mais plus général.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <br>
+          <span style="font-weight: bold;">Remark: </span> Since +0=-0 we simply denote this element 0 (without sign). <br>Let us now see how to define <span style="font-weight: bold;"> the sum </span> of 2 integers m and n. <br>if m and n are two displacements, we note m+n the displacement <span style="text-decoration: underline;"> resulting </span> of the displacement <span style="text-decoration: underline;"> followed </span> by the displacement n. <br> With this definition we immediately see that: <br> (+3)+(+2) = +5 <br> (-3)+(-2)= -5 <br> (+3)+(-2)=+1 <br> (-3)+(+2)=-1 <br> We also see that: <br> 0+n=n+0 = n ∀n <br> that every relative integer has an opposite for addition, etc.. etc.. <br>
+          <span style="font-weight: bold;">Remark: </span> This way of doing things is simple, intuitive. It is certainly the one recommended for teaching signed integers to students of secondary schools. <br> However, it has two drawbacks. <br>
+          <ul>
+            <li>It is not very rigorous from the strict point of view of set theory (it presupposes the definition of an axis, a direction, etc.) </li>
+            <li> It is hardly generalizable, it is 'made for ℕ'. </li>
+          </ul>If we want to formalize this definition to overcome the first drawback, it's quite simple: <br> Just consider the <input type="button" value="pair" onclick="go('../../bases/ensembles/paires.html')" data-inline="true"> S={+,-} then the <input type="button" value="Cartesian product" onclick="go('../../bases/relations/cartesien.html')" data-inline="true"> S×ℕ <br> On this Cartesian product we introduce the <input type="button" value="equivalence relation" onclick="go('../../bases/relations/equivalence.html')" data-inline="true"> ≡ next: <br>Every couple is linked to itself and to itself only except (+,0) which is connected to (-,0). We therefore see that the <input type="button" value="equivalence classes" onclick="go('../../bases/relations/quotients.html')" data-inline="true"> are all singletons except the pair { (-,0),(+,0) } <br>Finally we agree to change the notations ; (+,3) will be noted simply +3. <br>This being done, we denote by ℤ the quotient of the product Cartesian S×ℕ by the relation of equivalence ≡. <br>Our construction uses only set operations which, therefore lead to sets. <br>However, it is more difficult, by this way, to generalize this construction, we mean to mirror an <input type="button" value="associative" onclick="go('../../bases/operations/associative.html')" data-inline="true">
+          <input type="button" value="operation" onclick="go('../../bases/operations/lois.html')" data-inline="true"> with <input type="button" value="neutral element" onclick="go('../../bases/operations/neutre.html')" data-inline="true">. Therefore we are going to define on the next page, a less intuitive but more general procedure.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Relatifs'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to integers" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

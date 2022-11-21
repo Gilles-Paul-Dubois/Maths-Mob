@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>subset.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#sous-ensembles et sur-ensembles</span>
+<span class="s0">#vider un ensemble</span>
+<span class="s0"># faire une copie d'un ensemble</span>
+<span class="s0"># Tester l'égalité de deux ensembles</span>
+
+
+
+<span class="s0"># ensemble de nombres</span>
+<span class="s1">V=Set([])</span>
+<span class="s1">E=Set([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">,</span><span class="s2">3</span><span class="s1">,</span><span class="s2">4</span><span class="s1">])</span>
+<span class="s1">F=Set([</span><span class="s2">2</span><span class="s1">,</span><span class="s2">3</span><span class="s1">])</span>
+<span class="s1">G=Set([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">,</span><span class="s2">3</span><span class="s1">,</span><span class="s2">4</span><span class="s1">,</span><span class="s2">5</span><span class="s1">,</span><span class="s2">5</span><span class="s1">,</span><span class="s2">7</span><span class="s1">])</span>
+
+<span class="s3">function </span><span class="s1">imprime(X) </span><span class="s0">#écriture classique des maths</span>
+  <span class="s1">println(</span><span class="s4">&quot;&quot;</span><span class="s1">)</span>
+  <span class="s1">print(</span><span class="s4">'{'</span><span class="s1">) </span><span class="s0">#début de l'écriture</span>
+  <span class="s1">n = length(X)</span>
+  <span class="s1">i = </span><span class="s2">0</span>
+  <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">X</span>
+    <span class="s1">i = i + </span><span class="s2">1</span>
+    <span class="s1">print(x)</span>
+    <span class="s3">if </span><span class="s1">i &lt; n</span>
+      <span class="s1">print(</span><span class="s4">','</span><span class="s1">) </span><span class="s0">#seulement si ce n'est pas le dernier</span>
+    <span class="s3">end</span>
+  <span class="s3">end</span>
+  <span class="s1">println(</span><span class="s4">'}'</span><span class="s1">) </span><span class="s0">#fin de l'écriture</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s1">isstrictsubset(X,Y)</span>
+  <span class="s3">return </span><span class="s1">issubset(X,Y) &amp;&amp; length(X)&lt;length(Y)</span>
+<span class="s3">end</span>
+
+
+<span class="s3">function </span><span class="s1">test1()</span>
+  <span class="s1">println(issubset(V,E)) </span><span class="s0">#le vide est contenu dans tout</span>
+  <span class="s1">println(issubset(F,E))</span>
+  <span class="s1">println(issubset(E,E))</span>
+  <span class="s1">println(isstrictsubset(E,E))</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s1">clear(X) </span><span class="s0">#vide la collection</span>
+  <span class="s3">while </span><span class="s1">!isempty(X)</span>
+    <span class="s1">pop!(X)</span>
+  <span class="s3">end</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s1">test2()</span>
+  <span class="s1">H=copy(E)</span>
+  <span class="s1">imprime(E)</span>
+  <span class="s1">imprime(H)</span>
+  <span class="s1">println(H==E)</span>
+  <span class="s1">println(E==F)</span>
+  <span class="s1">clear(H)</span>
+  <span class="s1">imprime(H)</span>
+<span class="s3">end</span>
+
+
+
+<span class="s3">function </span><span class="s1">main()</span>
+  <span class="s1">imprime(G) </span><span class="s0">#le doublon 5 est éliminé</span>
+  <span class="s1">test1()</span>
+  <span class="s1">test2()</span>
+<span class="s3">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

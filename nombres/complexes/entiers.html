@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Entiers de Gauss</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définitions et principaux résultats </h2>
+          <div id="container">
+            <div id="label">définition</div> Les entiers de Gauss sont les nombres complexes de la forme a+bi avec a, b ∈ &integers;.
+          </div>
+          <div id="container"> Clairement les entiers de Gauss forment un <input type="button" value="anneau" onclick="go('../../bases/operations/anneau.html')" data-inline="true" /> contenant &integers; et i, et c'est le plus petit sous-anneau de &complexes; possédant ces propriétés. </div>
+          <div id="container">
+            <div id="label">définition</div> Nous appellerons <span style="font-weight: bold; font-style: italic;"> 'norme' </span> d'un entier de Gauss a+bi, le nombre entier a²+b² (attention ce n'est pas la norme euclidienne, il n'y a pas de racine carrée). Si z=a+bi nous noterons cette norme N(z).
+          </div> On a alors les formules: <div id="container"> N(z)=|z|² <br /> N(zz')=N(z)N(z') <br /> N(1)=1 </div> Ceci montre que la norme des entiers de Gauss inversibles doit être égale à 1. <br /> Il n'y a donc que 4 possibilités z=1, z=-1, z=i, z=-i. Il existe un résultat similaire à la division euclidienne dans les entiers. <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si u et v sont des entiers de Gauss avec v non nul. On peut toujours trouver des couples d'entiers de Gauss q et r tels que: <br /> u=qv+r et N(r) &lt; N(v)
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En divisant par v le résultat équivaut à l'existence d'un entier de Gauss tel que: <br /> |u/v -q| &lt;1. <br /> De fait les solutions à l'inéquation ci-dessus existent toujours et leur nombre peut être compris entre 1 et 4. Il suffit de constater que les entiers de Gauss forment un quadrillage du plan et que tout complexe tombe dans un carré de ce quadrillage, les solutions possibles correspondent donc aux quatre coins de ce carré.
+          </div>
+          <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Comme dans le cas de &integers; la conséquence est que les entiers de Gauss forment un anneau <span style="font-weight: bold; font-style: italic;"> 'principal' </span> en ce sens que tout <input type="button" value="idéal" onclick="go('../relatifs/ideaux.html')" data-inline="true" /> est formé des multiples d'un seul et même élément.
+          </div>
+          <h2> Le coin de Python </h2> Voici un programme effectuant une division euclidienne dans les entiers de Gauss : <p>
+            <object border="3" data="python/entiers.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <h2> Le coin de Julia </h2> Même chose avec Julia 1.6. <p>
+            <object border="3" data="julia/entgauss1.jl.html" height="400" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definitions and main results </h2>
+          <div id="container">
+            <div id="label">definition </div>Gaussian integers are complex numbers of the form a+bi with a, b ∈ ℤ.
+          </div>
+          <div id="container"> Clearly the Gaussian integers form a <input type="button" value="ring" onclick="go('../../bases/operations/anneau.html')" data-inline="true"> containing ℤ and i, and it is the smallest subring of ℂ possessing these properties. </div>
+          <div id="container">
+            <div id="label">definition </div>We will call <span style="font-weight: bold; font-style: italic;"> 'norm' </span> of a Gaussian integer a+bi, the whole number a²+b² (note this is not not the Euclidean norm, there is no square root). If z=a+bi we will denote this norm N(z).
+          </div> We then have the formulas: <div id="container"> N(z)=|z|² <br> N (zz ') = N (z) N (z') <br> N(1)=1 </div>This shows that the norm of invertible Gaussian integers must be equal to 1. <br>There are therefore only 4 possibilities z=1, z=-1, z=i, z=-i. There is a result quite similar to Euclidean division. <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If u and v are Gaussian integers with v not zero. We can always find pairs of Gaussian integers q and r such that: <br> u=qv+r et N(r) &lt; N(v)
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> Dividing byr v the result is equivalent to the existence of a Gauss integer such that <br /> |u/v -q| &lt;1. <br /> Actually the solutions of this inequation always exist and their number is between 1 and 4. Just consider the fact that Gauss integers form a kind of net in the plane and any complex number falls down inside one of the squares of this net. Possible solutions correspond to the four corners of this square.
+          </div>
+          <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>As in the case of ℤ the consequence is that the Gaussian integers form a <span style="font-weight: bold; font-style: italic;"> 'principal ideal domain' </span> in the sense that every <input type="button" value="ideal" onclick="go('../relatifs/ideaux.html')" data-inline="true"> is made up of multiples of one and only one element.
+          </div>
+          <h2> Python's corner </h2>Here is a program performing an Euclidean division in the Gauss integers : f <p>
+            <object data="python/entiers.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2> Julia's corner </h2> Same with Julia 1.6. <p>
+            <object data="julia/entgauss1.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

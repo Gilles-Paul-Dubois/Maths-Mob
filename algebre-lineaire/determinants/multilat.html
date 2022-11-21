@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Applications multilinéaires alternées</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/multilat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/multilat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Applications bilinéaires </h2>
+          <p> Tous les espaces vectoriels sont supposés sur le même corps commutatif de base K. Nous supposons en outre que ce corps n'est pas de caractéristique 2, c'est à dire que 1+1 ≠ 0 (comme dans le cas du corps &integers;/2&integers;.</p>
+          <p> Soit f une application défine sur un produit d'espaces vectoriels E<sub>1</sub>×E<sub>2</sub> et à valeur dans un espace vectoriel F. </p>
+          <div id="container">
+            <div id="label">définition</div> On dit que f est <strong>
+              <em>'bilinéaire'</em>
+            </strong> si: <ul>
+              <li> f(u<sub>1</sub>+u'<sub>1</sub>,u<sub>2</sub>)=f(u<sub>1</sub>,u<sub>2</sub>)+f(u'<sub>1</sub>,u<sub>2</sub>) ∀ (u<sub>1</sub>,u'<sub>1</sub>,u<sub>2</sub>) ∈ E<sub>1</sub>× E<sub>1</sub>×E<sub>2</sub>
+              </li>
+              <li> f(λu<sub>1</sub>,u<sub>2</sub>)=λf(u<sub>1</sub>,u<sub>2</sub>) ∀ (λ,u<sub>1</sub>,u<sub>2</sub>) ∈ K×E<sub>1</sub>×E<sub>2</sub>
+              </li>
+              <li> f(u<sub>1</sub>,u<sub>2</sub>+u'<sub>2</sub>)=f(u<sub>1</sub>,u<sub>2</sub>)+f(u<sub>1</sub>,u'<sub>2</sub>) ∀ (u<sub>1</sub>,u<sub>2</sub>,u'<sub>2</sub>) ∈ E<sub>1</sub>×E<sub>2</sub>×E<sub>2</sub>
+              </li>
+              <li> f(u<sub>1</sub>,λu<sub>2</sub>)=λf(u<sub>1</sub>,u<sub>2</sub>) ∀ (λ,u<sub>1</sub>,u<sub>2</sub>) ∈ K×E<sub>1</sub>×E<sub>2</sub>
+              </li>
+            </ul>
+          </div> Il résulte immédiatement de la définition que: <div id="container">
+            <ul>
+              <li> La somme de deux applications bilinéaires est encore bilinéaire. </li>
+              <li> Le produit d'une application bilinéaire par un scalaire est encore bilinéaire. </li>
+              <li> L'ensemble des applications bilinéaires de E<sub>1</sub>×E<sub>2</sub> dans F est muni d'une structure d'espace vectoriel. </li>
+            </ul>
+          </div>
+          <h3>Exemples d'applications bilinéaires</h3>
+          <ol>
+            <li> Chacune des n<sup>2</sup> applications de K<sup>n</sup>×K<sup>n</sup> → K ((x<sub>1</sub>,...,x<sub>n</sub>),(y<sub>1</sub>,...,y<sub>n</sub>)) → x<sub>k</sub>y<sub>h</sub> est bilinéaire. </li>
+            <li> Toute <input type="button" value="combinaison linéaire" onclick="go('../espaces/generateurs.html#comblin')" data-inline="true" /> des précédentes est bilinéaire, en particulier ((x<sub>1</sub>,...,x<sub>n</sub>),(y<sub>1</sub>,...,y<sub>n</sub>)) → x<sub>1</sub>y<sub>1</sub>+...+x<sub>n</sub>y<sub>n</sub>, le produit scalaire usuel dans le cas de &reals;<sup>n</sup>
+            </li>
+            <li> Si E est l'espace de toutes les suites de nombres réels. L'application ((x<sub>n</sub>)<sub>n∈&naturals;</sub>,(y<sub>n</sub>)<sub>n∈&naturals;</sub>) → (x<sub>n</sub>y<sub>n</sub>)<sub>n∈&naturals;</sub> est bilinéaire. </li>
+            <li> Si f et g désignent des applications indéfiniment dérivables d'un intervalle I ⊆ &reals;, l'application (f,g) → (fg)' est bilinéaire. </li>
+          </ol>
+          <h2> Applications multilinéaires </h2> Soient des espaces vectoriels E<sub>1</sub>, E<sub>2</sub>,..., E<sub>n</sub> et F. <div id="container">
+            <div id="label">définition</div> On dit qu'une application f: E<sub>1</sub>×E<sub>2</sub>×E<sub>n</sub> → F est <strong>
+              <em>'multilinéaire'</em>
+            </strong> ssi: <br /> Quand on fixe n'importe lesquelles des n-1 variables (u<sub>1</sub>,...,u<sub>i-1</sub>,u<sub>i+1</sub>,...,u<sub>n</sub>) <br /> L'application f<sub>i</sub> : u<sub>i</sub> → f(u<sub>1</sub>,...,u<sub>n</sub>) est <input type="button" value="linéaire" onclick="go('../applicalin/defapplin.html')" data-inline="true" />.
+          </div> Comme précédemment: <div id="container"> Les applications multilinéaires de E<sub>1</sub>×...× E<sub>n</sub> → F ont une structure de K-espace vectoriel. </div>
+          <h3>Exemples:</h3> Tous les exemples ci-dessus illustrant la bilinéarité sont généralisables au cas de 3 espaces (applications trilinéaires) ou de n espaces. <h2> Formes multilinéaires </h2>
+          <div id="container">
+            <div id="label">définition</div> Tout comme dans le cas des applications linéaires, si le but est le corps K lui-même on dit <strong>
+              <em>'formes multilinéaires'</em>
+            </strong> au lieu 'd'applications multilinéaires'. Il s'agit donc d'une précision supplémentaire.
+          </div>
+          <h3>Exemples</h3>
+          <ol>
+            <li> Les exemples 1 et 2 donnés précédemment correspondent à des formes multilinéaires. </li>
+            <li> Si E est l'espace des applications d'un intervalle I dans &reals; et si t est un point de I l'application (f,g) → f(t)g(t) est une forme bilinéaire sur E. </li>
+            <li> Le produit de deux formes linéaires est une forme bilinéaire. Plus généralement, le produit de p formes linéaires est une forme p-linéaire. Cet exemple est important. </li>
+          </ol>
+          <h2> Applications alternées </h2> Soient E<sub>1</sub>,...,E<sub>n</sub> n ensembles quelconques (pas forcément des espaces vectoriels) et F un groupe additif. <div id="container">
+            <div id="label">définition</div> Une application f: E<sub>1</sub>×...×E<sub>n</sub> → F est dite <strong>
+              <em>'alternée'</em>
+            </strong> ssi: <br /> f(x<sub>1</sub>,...,x<sub>n</sub>) = 0 chaque fois que deux au moins des x<sub>i</sub> sont égaux.
+          </div>
+          <a name="multilinalt"></a>
+          <div id="container">
+            <div id="label">définition</div> Cela s'applique naturellement aux applications multilinéaires. On définit donc tout naturellement les <strong>
+              <em>'applications multilinéaires alternées'</em>
+            </strong> et les <strong>
+              <em>'formes multilinéaires alternées'</em>
+            </strong>.
+          </div>
+          <h3>Exemples:</h3>
+          <ol>
+            <li> Le produit vectoriel classique de l'espace des vecteurs libres de &reals;<sup>3</sup> est bilinéaire alterné. </li>
+            <li> L'application de &reals;<sup>2</sup>×&reals;<sup>2</sup> dans &reals; donnée par: <br /> ((a,b),(c,d)) → ad-bc est une forme bilinéaire alternée. </li>
+            <li> L'application (u,v,w) → (u|v|w) (produit mixte= u.(v ∧ w)) est une forme trilinéaire alternée sur &reals;<sup>3</sup>
+            </li>
+          </ol>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Bilinear maps </h2>
+          <p>All vector spaces are assumed over the same commutative field K. We further assume that this field is not of characteristic 2, i.e. 1+1 ≠ 0 (as in the case of the field ℤ/2ℤ. </p>
+          <p>Let f be a map with domain a product of vector spaces E<sub>1</sub>×E<sub>2</sub> and codomain a vector space F. </p>
+          <div id="container">
+            <div id="label">definition </div>We say that f is <strong>
+              <em>'bilinear' </em>
+            </strong> if: <ul>
+              <li> f(u<sub>1</sub>+u'<sub>1</sub>,u<sub>2</sub>)=f(u<sub>1</sub>,u<sub>2</sub>)+f(u'<sub>1</sub>,u<sub>2</sub>) ∀ (u<sub>1</sub>,u'<sub>1</sub>,u<sub>2</sub>) ∈ E<sub>1</sub>× E<sub>1</sub>× And<sub>2</sub>
+              </li>
+              <li> f(λu<sub>1</sub>,u<sub>2</sub>)=λf(u<sub>1</sub>,u<sub>2</sub>) ∀ (λ,u<sub>1</sub>,u<sub>2</sub>) ∈ K×E<sub>1</sub>×E<sub>2</sub>
+              </li>
+              <li> f(u<sub>1</sub>,u<sub>2</sub>+u'<sub>2</sub>)=f(u<sub>1</sub>,u<sub>2</sub>)+f(u<sub>1</sub>,u'<sub>2</sub>) ∀ (u<sub>1</sub>,u<sub>2</sub>,u'<sub>2</sub>) ∈ E<sub>1</sub>×E<sub>2</sub>× And<sub>2</sub>
+              </li>
+              <li> f(u<sub>1</sub>,λu<sub>2</sub>)=λf(u<sub>1</sub>,u<sub>2</sub>) ∀ (λ,u<sub>1</sub>,u<sub>2</sub>) ∈ K×E<sub>1</sub>×E<sub>2</sub>
+              </li>
+            </ul>
+          </div> It follows immediately from the definition that: <div id="container">
+            <ul>
+              <li> The sum of two bilinear maps is still bilinear. </li>
+              <li> The product of a bilinear map by a scalar is still bilinear. </li>
+              <li>The set of bilinear maps of E<sub>1</sub>×E<sub>2</sub> in F is endowed with a vector space structure. </li>
+            </ul>
+          </div>
+          <h3>Examples of bilinear maps </h3>
+          <ol>
+            <li>Each of the n<sup>2</sup> applications of K<sup>n</sup>×K<sup>n</sup> → K ((x<sub>1</sub>,...,x<sub>n</sub>),(y<sub>1</sub>,...,y<sub>n</sub>)) → x<sub>k</sub>y<sub>h</sub> is bilinear. </li>
+            <li> All <input type="button" value="linear combination" onclick="go('../espaces/generateurs.html#combline')" data-inline="true"> of the previous ones is bilinear, in particular ((x<sub>1</sub>,...,x<sub>n</sub>),(y<sub>1</sub>,...,y<sub>n</sub>)) → x<sub>1</sub>y<sub>1</sub>+...+x<sub>n</sub>y<sub>n</sub>, the usual scalar product in the case of ℝ<sup>n</sup>
+            </li>
+            <li>If E is the space of all sequences of real numbers. The map ((x<sub>n</sub>)<sub>n∈ℕ</sub>,(y<sub>n</sub>)<sub>n∈ℕ</sub>) → (x<sub>n</sub>y<sub>n</sub>)<sub>n∈ℕ</sub>is bilinear. </li>
+            <li> If f and g denote indefinitely differentiable maps of an interval I ⊆ ℝ, the map (f,g) → (fg)' is bilinear. </li>
+          </ol>
+          <h2> Multilinear maps </h2>be vector spaces<sub>1</sub>, E<sub>2</sub>,..., E<sub>n</sub> and F. <div id="container">
+            <div id="label">definition </div>We say that a map f: E<sub>1</sub>×E<sub>2</sub>×E<sub>n</sub>→ F is <strong>
+              <em>'multilinear' </em>
+            </strong> iif : <br>When we fix any of the n-1 variables (u<sub>1</sub>,...,u<sub>i-1</sub>,u<sub>i+1</sub>,...,u<sub>n</sub>) <br> The map f<sub>i</sub>: u<sub>i</sub>→ f(u<sub>1</sub>,...,u<sub>n</sub>) is <input type="button" value="linear" onclick="go('../applicalin/defapplin.html')" data-inline="true">.
+          </div> Like before: <div id="container"> The multilinear maps of E<sub>1</sub>×...×E<sub>n</sub>→ F have a K-vector space structure. </div>
+          <h3>Examples: </h3> All the examples above illustrating bilinearity can be generalized to the case of 3 spaces (trilinear maps) or of n spaces. <h2> Multilinear forms </h2>
+          <div id="container">
+            <div id="label">definition </div>Just as in the case of linear maps, if the codomain is the field K itself we say <strong>
+              <em>'multilinear forms' </em>
+            </strong> instead of 'multilinear maps'. This is therefore an additional clarification.
+          </div>
+          <h3>Examples </h3>
+          <ol>
+            <li> Examples 1 and 2 given previously correspond to multilinear forms. </li>
+            <li> If E is the space of maps of an interval I in ℝ and if t is a point of I the map (f,g) → f(t)g(t) is a bilinear form on E. </li>
+            <li>the product of two linear forms is a bilinear form. More usually the product of p linear forms is a p-linear form. This example is important. </li>
+          </ol>
+          <h2> Alternating applications </h2>Let E<sub>1</sub>,...,E<sub>n</sub> n arbitrary sets (not necessarily vector spaces) and F an additive group. <div id="container">
+            <div id="label">definition </div>A map f: E<sub>1</sub>×...×E<sub>n</sub> → F is said <strong>
+              <em>'alternating' </em>
+            </strong> iff: <br>f(x<sub>1</sub>,...,x<sub>n</sub>) = 0 whenever at least two of the x<sub>i</sub>'s are equal.
+          </div>
+          <a name="multilinalte"></a>
+          <div id="container">
+            <div id="label">definition </div>This naturally applies to multilinear applications. We therefore naturally define the <strong>
+              <em>'alternating multilinear maps' </em>
+            </strong> and the <strong>
+              <em>'alternating multilinear forms' </em>
+            </strong>.
+          </div>
+          <h3>Examples: </h3>
+          <ol>
+            <li>The classical vector product of the free vector space of ℝ<sup>3</sup> is alternating bilinear. </li>
+            <li>The application from ℝ<sup>2</sup>×ℝ<sup>2</sup> to ℝ given by: <br> ((a,b),(c,d)) → ad-bc is an alternating bilinear form. </li>
+            <li> The map (u,v,w) → (u|v|w) (mixed product= u.(v ∧ w)) is an alternating trilinear form on ℝ<sup>3</sup>
+            </li>
+          </ol>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Déterminants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Determinants'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

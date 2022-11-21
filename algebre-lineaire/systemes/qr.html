@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Décomposition QR</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+  
+  </head>	
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/qr/menu.html')" /></li>  
+ 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/qr/menu.html')" /></li>
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+
+<div lang="fr">
+<h2>
+   Terminologie
+  </h2>
+  Nous vous invitons maintenant à revoir la terminologie concernant les
+  <input type="button" value="matrices triangulaires" onclick="go('../matrices/mattri.html#')" data-inline="true" />.
+Nous vous invitons également à revoir les endomorphismes
+  <input type="button" value="orthogonaux" onclick="go('../orthogonalite/grouporth.html#')" data-inline="true" />
+  et les matrices associées.
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Terminology
+   </h2>
+  We now invite you to review the terminology concerning the
+   <input data-inline="true" onclick="go('../matrices/mattri.html#')" type="button" value=" triangular matrices"/>.
+ We also invite you to review the 
+   <input data-inline="true" onclick="go('../orthogonalite/grouporth.html#')" type="button" value="orthogonal"/> endomorphisms
+  and associated matrices.
+
+
+</div><!-- /en --> 
+<!-- STOP -->
+<a name="def1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 1</div>
+  On dit qu'une matrice A carrée est décomposée
+(factorisée) sous la forme QR, s'il existe une matrice Q orthogonale et
+une matrice R triangulaire supérieure telle que A=QR
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 1</div>
+A square matrix A is said to be decomposed
+ (factored) in the QR form, if there is an orthogonal Q matrix and
+ an upper triangular matrix R such that A=QR
+ 
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+<div lang="fr">
+ <h2>
+   Intérêt pour la résolution de systèmes
+  </h2>
+  Soit à résoudre un système linéaire:
+  <br/>
+  AX=B
+Supposons que nous disposions d'une factorisation de A de type QR.
+  <br/>
+  Le système s'écrit:
+  <br/>
+  QRX=B
+  <br/>
+  Posant Y=RX, la résolution se fera en deux étapes:
+  <br/>
+  Résolution de QY=B
+  <br/>
+  Résolution de RX=Y
+  <br/>
+  Le second système est triangulaire, donc sa résolution est immédiate.
+  <br/>
+  Pour le premier système la solution est Y=Q<sup>-1</sup>B. Mais Q étant orthogonale le calcul de Q<sup>-1</sup>
+  est tout fait Q<sup>-1</sup>=<sup>t</sup>Q
+Il existe trois méthodes 'classiques' de factorisation QR:
+  <br/>
+<ul>
+<li>
+    La méthode d'orthonormalisation de
+    <input type="button" value="Gram-Schmidt" onclick="go('schmidt.html#')" data-inline="true" />
+</li>
+<li>
+    La méthode des réflexions de
+    <input type="button" value="Householder" onclick="go('householder.html#')" data-inline="true" />
+</li>
+<li>
+    La méthode des rotations de
+    <input type="button" value="Givens" onclick="go('givens.html#')" data-inline="true" />
+</li>
+</ul>
+  Chacune a ses mérites et ses inconvénients. Nous allons les examiner tour à tour dans les pages suivantes.
+  <br/>
+  Voici maintenant une appliquette qui vous permettra de visualiser des
+factorisations QR pour des matrices d'ordre 4 à coefficients réels.
+  <br/>
+  Appuyer seulement sur le bouton "Nouvel exemple".
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+ <h2>
+   Interest in solving systems
+   </h2>
+  Either to solve a linear system:
+   <br/>AX=B
+ Suppose that we have a factorization of A of type QR.
+   <br/>
+  The system is written:
+   <br/>
+  QRX=B
+   <br/>
+  Setting Y=RX, the resolution will be done in two steps:
+   <br/>
+  Resolution of QY=B
+   <br/>
+  Resolution of RX=Y
+   <br/>
+  The second system is triangular, so its resolution is immediate.
+   <br/>For the first system the solution is Y=Q<sup>-1</sup>B. But Q being orthogonal the calculation of Q<sup>-1</sup>
+    is quite Q<sup>-1</sup>=<sup>t</sup>Q
+  There are three 'classic' methods of QR factorization:
+   <br/>
+<ul>
+<li>
+    The orthonormalization method of
+     <input data-inline="true" onclick="go('schmidt.html#')" type="button" value="Gram-Schmidt"/>
+</li>
+<li>
+    The reflection method of
+     <input data-inline="true" onclick="go('householder.html#')" type="button" value="Householder"/>
+</li>
+<li>
+    The method of rotations of
+     <input data-inline="true" onclick="go('givens.html#')" type="button" value="Givens"/>
+</li>
+</ul>Each has its merits and drawbacks.  We will examine them in turn in the following pages.
+   <br/>Here is now an applet that will allow you to visualize
+ QR factorizations for matrices of order 4 with real coefficients.
+   <br/>
+  Just press the "New example" button.
+
+
+ 
+
+
+
+</div><!-- /en --> 
+
+<!-- STOP  APPLET-->
+  <div>
+   <table id="myTable" border="2">
+    <tbody><tr>
+     <td>
+      <button onclick="nameSpace2.Paint();" type="button">
+       <div lang="fr">Nouvel exemple</div><!-- /fr --> <div lang="en">New example</div><!-- /en --> 
+      </button>
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+     <div lang="fr"> Matrice A</div><!-- /fr --> <div lang="en">Matrix A</div><!-- /en --> 
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <canvas id="myCanvas1" style="border:1px solid #000000;" width="320" height="80">
+      </canvas>
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <div lang="fr">Matrice Q</div><!-- /fr --> <div lang="en">Matrix Q</div><!-- /en --> 
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <canvas id="myCanvas2" style="border:1px solid #000000;" width="320" height="80">
+      </canvas>
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <div lang="fr">Matrice R</div><!-- /fr --> <div lang="en">Matrix R</div><!-- /en --> 
+     </td>
+    </tr>
+    <tr>
+     <td align="center">
+      <canvas id="myCanvas3" style="border:1px solid #000000;" width="320" height="80">
+      </canvas>
+     </td>
+    </tr>
+   </tbody></table>
+  </div>
+  <script src="js/qr.js">
+  </script>
+<!-- /STOP  APPLET-->
+
+<div lang="fr">
+ <h2>
+   Le coin de Python
+  </h2>
+  Voici un exemple de réduction QR au moyen de la librairie scipy
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+
+<h2>
+   Python's Corner
+   </h2>
+  Here is an example of QR reduction using the scipy library
+
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+ <p>
+   <object data="python/qr1.html" type="text/html" width="100%" height="200" border="3">
+   </object>
+  </p>
+<!-- /STOP  CODE-->
+
+<div lang="fr">
+<h2>
+   Le coin de Julia
+  </h2>
+  <p>Même chose avec Julia 1.6 et le package LinearAlgebra.</p>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>
+   Julia's corner
+   </h2>
+<p>Same thing with Julia 1.6 and the LinearAlgebra package. </p>
+
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+<p>
+   <object data="julia/QR2.jl.html" type="text/html" width="100%" height="250" border="3">
+   </object>
+  </p>
+
+<!-- /STOP  CODE-->
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿<html>
+ <head>
+  <title>
+   operpol.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+ 
+</span><span class="s0"># opérations avec les polynômes</span><span class="s1"> 
+</span><span class="s0"># operations with polynomials</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">ProduitParA (P,A): 
+    </span><span class="s0">""" produit du polynome P par le nombre A"""</span><span class="s1"> 
+    </span><span class="s0">""" prodct of polynomial P by number A"""</span><span class="s1">     
+    </span><span class="s2">return </span><span class="s1">[x*A </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">P] 
+ 
+</span><span class="s2">def </span><span class="s1">ProduitParXn(P,n): 
+    </span><span class="s0">"""produit du polynome P par X puissance n"""</span><span class="s1"> 
+    </span><span class="s0">"""product of polynomial P by n-th power of X"""</span><span class="s1">     
+    </span><span class="s2">return </span><span class="s1">[</span><span class="s3">0 </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n)]+P 
+ 
+</span><span class="s2">def </span><span class="s1">Somme(P,Q): 
+    </span><span class="s0">"""Somme de deux polynomes"""</span><span class="s1"> 
+    </span><span class="s0">"""Sum of two polynomials"""</span><span class="s1">     
+    </span><span class="s2">def </span><span class="s1">coeff (S,i): 
+        </span><span class="s0">"""coefficient d'orde i"""</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">i &gt;= len(S): 
+            </span><span class="s2">return </span><span class="s3">0</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">S[i] 
+    </span><span class="s2">return </span><span class="s1">[coeff(P,i)+coeff(Q,i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,max(len(P),len(Q)))] 
+ 
+</span><span class="s2">def </span><span class="s1">Produit (P,Q): 
+    </span><span class="s0">""" Produit de deux polynomes """</span><span class="s1"> 
+    </span><span class="s0">""" Product of two polynomials """</span><span class="s1">    
+    n=len(Q) 
+    R=[] 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">0</span><span class="s1">,n): 
+        S=ProduitParXn(P,i) 
+        R=Somme(R,ProduitParA(S,Q[i])) 
+    </span><span class="s2">return </span><span class="s1">R 
+ 
+</span><span class="s2">def </span><span class="s1">Puissance (P,n): 
+    </span><span class="s0">"""Puissance n-ième du polynôme P"""</span><span class="s1"> 
+    </span><span class="s0">"""n-th power of polynomial P"""</span><span class="s1">     
+    R=[</span><span class="s3">1</span><span class="s1">] 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n): 
+        R=Produit(R,P) 
+    </span><span class="s2">return </span><span class="s1">R 
+ 
+</span><span class="s2">def </span><span class="s1">Compose (P,Q): 
+    </span><span class="s0">"""Composé de P et Q"""</span><span class="s1"> 
+    </span><span class="s0">"""Composite of P and Q"""</span><span class="s1">     
+    R=[</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(P)): 
+        T=Puissance(Q,i) 
+        T=ProduitParA(T,P[i]) 
+        R=Somme(R,T) 
+    </span><span class="s2">return </span><span class="s1">R 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    P=[</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">] 
+    Q=[</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">] 
+    print(Somme(P,Q)) 
+    print(Produit(P,Q)) 
+    print(Puissance(P,</span><span class="s3">2</span><span class="s1">)) 
+    print(Compose (Q,P)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

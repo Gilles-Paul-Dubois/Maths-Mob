@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>trip1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<pre><span class="s0">bsup(k)=Int(floor(sqrt(k)))</span>
+
+<span class="s1">function </span><span class="s0">pgcd(m,n)</span>
+    <span class="s1">while </span><span class="s0">m%n !=</span><span class="s2">0</span>
+        <span class="s0">r=m%n</span>
+        <span class="s0">m=n</span>
+        <span class="s0">n=r</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">n</span>
+<span class="s1">end</span>
+
+<span class="s0">pythagoricien(t)=t[</span><span class="s2">3</span><span class="s0">]*t[</span><span class="s2">3</span><span class="s0">]==t[</span><span class="s2">1</span><span class="s0">]*t[</span><span class="s2">1</span><span class="s0">]+t[</span><span class="s2">2</span><span class="s0">]*t[</span><span class="s2">2</span><span class="s0">]</span>
+
+<span class="s0">TousOK(L)=all((pythagoricien(t) </span><span class="s1">for </span><span class="s0">t </span><span class="s1">in </span><span class="s0">L))</span>
+
+<span class="s0">pardif(p,q)=p%</span><span class="s2">2</span><span class="s0">!=q%</span><span class="s2">2</span>
+
+<span class="s0">possp(q,k)=[p </span><span class="s1">for </span><span class="s0">p </span><span class="s1">in </span><span class="s0">q:bsup(k) </span><span class="s1">if </span><span class="s0">p&gt;q &amp;&amp; pardif(p,q) &amp;&amp; pgcd(p,q)==</span><span class="s2">1</span><span class="s0">]</span>
+
+<span class="s0">tppq(q,k)=sort([[p*p-q*q, </span><span class="s2">2</span><span class="s0">*p*q,p*p+q*q] </span><span class="s1">for </span><span class="s0">p </span><span class="s1">in </span><span class="s0">possp(q,k) </span><span class="s1">if </span><span class="s0">p*p+q*q&lt;k])</span>
+
+<span class="s1">function </span><span class="s0">tpp(k)</span>
+    <span class="s0">R=[]</span>
+    <span class="s1">for </span><span class="s0">q </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:bsup(k)</span>
+        <span class="s0">append!(R,tppq(q,k))</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">R</span>
+<span class="s1">end</span>
+
+<span class="s0">L=tpp(</span><span class="s2">200</span><span class="s0">)</span>
+<span class="s0">println(L)</span>
+<span class="s0">println(TousOK(L))</span>
+</pre>
+</body>
+</html>

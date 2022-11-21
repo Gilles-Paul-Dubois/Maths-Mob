@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #dd6718;}
+.s3 { color: #1750eb;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Base.Iterators</span>
+<span class="s0">using </span><span class="s1">GaloisFields</span>
+<span class="s0">const </span><span class="s1">F = </span><span class="s2">@GaloisField </span><span class="s3">5 </span><span class="s4">#corps ℤ/5ℤ</span>
+<span class="s1">PowerX_n(X, n) = Iterators.product(ntuple(i-&gt;X, n)...)</span>
+<span class="s1">n=</span><span class="s3">3 </span><span class="s4">#puissance - power</span>
+<span class="s1">P=PowerX_n(F,n) </span><span class="s4">#ensemble de 3-uples - set of triples</span>
+<span class="s1">convert(t)=F[t[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n]</span>
+<span class="s0">const </span><span class="s1">E=[convert(t) </span><span class="s0">for </span><span class="s1">t </span><span class="s0">in </span><span class="s1">P] </span><span class="s4">#ℤ/5ℤ^3</span>
+
+<span class="s1">V1=F[</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">]</span>
+<span class="s1">V2=F[</span><span class="s3">4</span><span class="s1">,</span><span class="s3">1</span><span class="s1">,</span><span class="s3">3</span><span class="s1">]</span>
+
+<span class="s1">println(V1 </span><span class="s0">in </span><span class="s1">E)</span>
+<span class="s1">println(F(</span><span class="s3">2</span><span class="s1">)*V2)</span>
+<span class="s1">println(V1+V2)</span>
+</pre>
+</body>
+</html>

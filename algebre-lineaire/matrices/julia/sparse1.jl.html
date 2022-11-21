@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">SparseArrays</span>
+<span class="s0">using </span><span class="s1">LinearAlgebra</span>
+<span class="s1">A = sparse([</span><span class="s2">1</span><span class="s1">, </span><span class="s2">1</span><span class="s1">, </span><span class="s2">2</span><span class="s1">, </span><span class="s2">3</span><span class="s1">], [</span><span class="s2">1</span><span class="s1">, </span><span class="s2">3</span><span class="s1">, </span><span class="s2">2</span><span class="s1">, </span><span class="s2">3</span><span class="s1">], [</span><span class="s2">0</span><span class="s1">, </span><span class="s2">1</span><span class="s1">, </span><span class="s2">2</span><span class="s1">, </span><span class="s2">0</span><span class="s1">])</span>
+<span class="s1">println(A)</span>
+<span class="s3">#les valeurs manquantes sont supposées nulles - missing values supposed to be null</span>
+<span class="s3">#s'il en reste on peut encore purger - If there are some left we can continue to purge</span>
+<span class="s1">B=dropzeros(A)</span>
+<span class="s1">println(B)</span>
+<span class="s3">#retrouver les paramètres du constructeur (positions et valeurs) - retrieve parameters of the constructor (positions and values)</span>
+<span class="s1">println(findnz(B))</span>
+<span class="s3">#positions des nuls - positions of the zeros</span>
+<span class="s1">println(findall(iszero, B))</span>
+<span class="s3">#l'unité de R^5 - unity matrix of &reals;<sup>5</sup></span>
+<span class="s1">I5=Matrix(</span><span class="s2">1.0</span><span class="s1">I, </span><span class="s2">5</span><span class="s1">, </span><span class="s2">5</span><span class="s1">)</span>
+<span class="s3">#affichage pour contrôle - display for checking</span>
+<span class="s1">println(I5)</span>
+<span class="s3">#que nous 'raréfions' - which we 'rarify"</span>
+<span class="s1">I5P=sparse(I5)</span>
+<span class="s3">#on affiche - display</span>
+<span class="s1">println(I5P)</span>
+</pre>
+</body>
+</html>

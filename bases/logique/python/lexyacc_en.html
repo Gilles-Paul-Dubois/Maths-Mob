@@ -1,0 +1,170 @@
+﻿<html>
+ <head>
+  <title>
+   lexyacc.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># Python version 3.4</span><span class="s1"> 
+</span><span class="s0"># example lex/yacc</span><span class="s1"> 
+</span><span class="s0"># Evaluation in propositional logice</span><span class="s1"> 
+</span><span class="s0">#use of ply module from David M. Beazley</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">ply.lex </span><span class="s2">as </span><span class="s1">lex 
+</span><span class="s2">import </span><span class="s1">ply.yacc </span><span class="s2">as </span><span class="s1">yacc 
+ 
+</span><span class="s3">""" 
+lexical elements
+constant true: V 
+constant false: F 
+variables P,Q,R,S,T,U 
+parentheses (--) 
+negation: ! 
+conjunction: &amp; 
+disjunction: | 
+grammar recognizes: 
+propositions 
+A constant is a proposition 'V'=True 'F'=False
+A variable is a proposition 
+If P is a proposition so is (P) est une proposition (grouping)
+If P is a proposition so is !P (negation) 
+If P and Q are propositions so is P&amp;Q  (conjunction) 
+If P and Q are propositions so is P|Q  (disjunction) 
+"""</span><span class="s1"> 
+ 
+</span><span class="s2">global </span><span class="s1">P,Q 
+ 
+ 
+</span><span class="s0"># List of lexical tokens.</span><span class="s1"> 
+tokens = ( 
+   </span><span class="s3">'CONST'</span><span class="s1">, 
+   </span><span class="s3">'VAR'</span><span class="s1">, 
+   </span><span class="s3">'NEG'</span><span class="s1">, 
+   </span><span class="s3">'AND'</span><span class="s1">, 
+   </span><span class="s3">'OR'</span><span class="s1">, 
+   </span><span class="s3">'LPAREN'</span><span class="s1">, 
+   </span><span class="s3">'RPAREN'</span><span class="s1">, 
+) 
+ 
+</span><span class="s0"># Regular expressions for simple expressions</span><span class="s1"> 
+t_NEG    = </span><span class="s3">r'\!'</span><span class="s1"> 
+t_AND   = </span><span class="s3">r'\&amp;'</span><span class="s1"> 
+t_OR   = </span><span class="s3">r'\|'</span><span class="s1"> 
+t_LPAREN  = </span><span class="s3">r'\('</span><span class="s1"> 
+t_RPAREN  = </span><span class="s3">r'\)'</span><span class="s1"> 
+ 
+</span><span class="s0"># Translation of constants</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">t_CONST(t): 
+    </span><span class="s0">r'V|F'</span><span class="s1"> 
+    t.value = </span><span class="s2">True if </span><span class="s1">t.value==</span><span class="s3">'V' </span><span class="s2">else False  </span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">t 
+ 
+</span><span class="s0"># Access to truth values of variables</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">t_VAR(t): 
+    </span><span class="s0">r'[P-U]'</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">t.value </span><span class="s2">in </span><span class="s1">globals().keys(): 
+        t.value = globals()[t.value] 
+    </span><span class="s2">return </span><span class="s1">t 
+ 
+ 
+</span><span class="s0"># characters ignored by scanner (spaces, tabs, line-feeds)</span><span class="s1"> 
+t_ignore  = </span><span class="s3">' \t\n'</span><span class="s1"> 
+ 
+</span><span class="s0"># Management of scanner errors</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">t_error(t): 
+    print (</span><span class="s3">"Illegal character '%s'" </span><span class="s1">% t.value[</span><span class="s4">0</span><span class="s1">]) 
+    t.lexer.skip(</span><span class="s4">1</span><span class="s1">) 
+ 
+</span><span class="s0">#evaluation rules</span><span class="s1"> 
+ 
+</span><span class="s0">#constants - rule 1</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_const(p):  
+    </span><span class="s0">'expression : CONST'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">]=p[</span><span class="s4">1</span><span class="s1">] 
+     
+</span><span class="s0">#variables - rule 2</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_var(p): 
+    </span><span class="s0">'expression : VAR'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">]=p[</span><span class="s4">1</span><span class="s1">] 
+ 
+</span><span class="s0">#evaluation of group between parentheses - rule 3</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_par_expr(p): 
+    </span><span class="s0">'expression : LPAREN expression RPAREN'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">2</span><span class="s1">] 
+ 
+</span><span class="s0">#negation - rule 4</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_neg(p): 
+    </span><span class="s0">'expression : NEG expression'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = </span><span class="s2">not </span><span class="s1">p[</span><span class="s4">2</span><span class="s1">] 
+ 
+</span><span class="s0">#conjunction - rule 5</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_and(p): 
+    </span><span class="s0">'expression : expression AND expression'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] </span><span class="s2">and </span><span class="s1">p[</span><span class="s4">3</span><span class="s1">] 
+ 
+</span><span class="s0"># disjunction - rule 6</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_expression_or(p): 
+    </span><span class="s0">'expression : expression OR expression'</span><span class="s1"> 
+    p[</span><span class="s4">0</span><span class="s1">] = p[</span><span class="s4">1</span><span class="s1">] </span><span class="s2">or </span><span class="s1">P[</span><span class="s4">3</span><span class="s1">] 
+ 
+ 
+</span><span class="s0"># Management of syntax errors</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">p_error(p): 
+    print (</span><span class="s3">"Syntax error in input !"</span><span class="s1">) 
+ 
+</span><span class="s2">def </span><span class="s1">SaisirPetQ():</span><span class="s0">#means take P and Q</span><span class="s1"> 
+    </span><span class="s2">global </span><span class="s1">P,Q 
+    </span><span class="s2">while True</span><span class="s1">:</span><span class="s0">#loop input of P</span><span class="s1"> 
+        print (</span><span class="s3">"Enter truth value of P (V or F)"</span><span class="s1">) 
+        P = input(</span><span class="s3">'P= '</span><span class="s1">) 
+        </span><span class="s2">if </span><span class="s1">P </span><span class="s2">not in </span><span class="s3">"VF"</span><span class="s1">: 
+            print (</span><span class="s3">"enter V or F only"</span><span class="s1">) 
+            </span><span class="s2">continue</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">P==</span><span class="s3">'V'</span><span class="s1">: 
+            P=</span><span class="s2">True</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            P=</span><span class="s2">False</span><span class="s1"> 
+        </span><span class="s2">break</span><span class="s1"> 
+    </span><span class="s2">while True</span><span class="s1">:</span><span class="s0">#loop for input of Q</span><span class="s1"> 
+        print (</span><span class="s3">"Give truth value of Q (V or F)"</span><span class="s1">) 
+        Q = input(</span><span class="s3">'Q= '</span><span class="s1">) 
+        </span><span class="s2">if </span><span class="s1">Q </span><span class="s2">not in </span><span class="s3">"VF"</span><span class="s1">: 
+            print (</span><span class="s3">"enter V or F only"</span><span class="s1">) 
+            </span><span class="s2">continue</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">Q==</span><span class="s3">'V'</span><span class="s1">: 
+            Q=</span><span class="s2">True</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            Q=</span><span class="s2">False</span><span class="s1"> 
+        </span><span class="s2">break</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">"""Main function test with two variables variables P and Q"""</span><span class="s1"> 
+    </span><span class="s0"># Builds the scanner</span><span class="s1"> 
+    lexer = lex.lex() 
+    </span><span class="s0"># Builds the parser</span><span class="s1"> 
+    parser = yacc.yacc() 
+    SaisirPetQ() 
+    </span><span class="s2">while True</span><span class="s1">:</span><span class="s0">#main loop</span><span class="s1"> 
+        </span><span class="s2">try</span><span class="s1">: 
+            s = input(</span><span class="s3">'calc &gt; '</span><span class="s1">) 
+        </span><span class="s2">except </span><span class="s1">EOFError: 
+            </span><span class="s2">break</span><span class="s1"> 
+        </span><span class="s2">if not </span><span class="s1">s:  
+            </span><span class="s2">continue</span><span class="s1"> 
+        result = parser.parse(s) 
+        print (result) 
+ 
+main()</span></pre>
+ </body>
+</html>

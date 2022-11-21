@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Matrices</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Définitions" onclick="go('defmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Espaces de matrices" onclick="go('espmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Produit de matrices" onclick="go('promat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Algèbres de matrices" onclick="go('algmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Matrices triangulaires" onclick="go('mattri.html')" />
+              </li>
+              <li>
+                <input type="button" value="Matrices diagonales" onclick="go('matdiag.html')" />
+              </li>
+              <li>
+                <input type="button" value="Transposition" onclick="go('mattranspo.html')" />
+              </li>
+              <li>
+                <input type="button" value="Rang d'une matrice" onclick="go('rangmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Matrices creuses" onclick="go('creuses.html')" />
+              </li>
+              <li>
+                <input type="button" value="Matrices bandes" onclick="go('bandes.html')" />
+              </li>
+              <li>
+                <input type="button" value="Liens externes" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p> On réserve le nom de matrice à une structure de données tabulaire à deux dimensions. Une matrice a donc des lignes et des colonnes. A l'intersection de chaque ligne et de chaque colonne on trouve un coefficient. Ce coefficient doit appartenir à un corps de nombres K. Les données en ligne doivent avoir une certaine signification, il en est de même pour les colonnes. Voici ici un exemple d'une matrice comportant 12 lignes et 11 colonnes où sont stockées des températures maximales d'une certaine ville. Dans une même colonne on retrouve les données d'une année, dans une ligne les données d'un même mois. Les en-têtes de lignes et de colonnes sont là pour donner du sens pour l'interprétation des données visualisées, mais ces indications nommées 'étiquettes' ne font pas partie à proprement parler de la matrice.</p>
+        </div>
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Definitions" onclick="go('defmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Matrices as a vector space over the base field" onclick="go('espmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Product of matrices" onclick="go('promat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Matrices as an algebra over the base field" onclick="go('algmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Triangular matrices" onclick="go('mattri.html')" />
+              </li>
+              <li>
+                <input type="button" value="Diagonal matrices" onclick="go('matdiag.html')" />
+              </li>
+              <li>
+                <input type="button" value="Transpose of a matrix" onclick="go('mattranspo.html')" />
+              </li>
+              <li>
+                <input type="button" value="Rank of a matrix" onclick="go('rangmat.html')" />
+              </li>
+              <li>
+                <input type="button" value="Sparse matrices" onclick="go('creuses.html')" />
+              </li>
+              <li>
+                <input type="button" value="Band matrices" onclick="go('bandes.html')" />
+              </li>
+              <li>
+                <input type="button" value="External links" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>We reserve the matrix name for a data structure corresponding to a two-dimensional table. A matrix therefore has rows and columns. At the intersection of each row and each column, we find a coefficient. This coefficient must belong to a field K of numbers. Data on the same line should have some meaning, the same is true for the columns. Here is a example of a matrix with 12 rows and 11 columns where are stored maximum temperatures of a certain city. In a same column we find the data of a year, in a line the data of the same month. The row and column headers are there to make sense for the interpretation of the visualized data, but these indications named 'labels' are not strictly speaking part of of the matrix. </p>
+        </div>
+        <table cellspacing="0" border="1" frame="border" rules="none" cols="12">
+          <tbody>
+            <tr>
+              <td align="center" colspan="12" height="19" style="border: 1px solid rgb(0, 0, 0);" width="668">
+                <b>
+                  <div lang="fr">Températures maximales de Exempleville</div>
+                  <!-- /fr -->
+                  <div lang="en">Maximal temperatures of Examplecity</div>
+                  <!-- /en -->
+                </b>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <div lang="fr"> Année</div>
+                <!-- /fr -->
+                <div lang="en">Year</div>
+                <!-- /en -->
+              </td>
+              <td align="center" sdnum="1036;" sdval="1990" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1990 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1991" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1991 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1992" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1992 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1993" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1993 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1994" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1994 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1995" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1995 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1996" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1996 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1997" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1997 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1998" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1998 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="1999" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 1999 </b>
+              </td>
+              <td align="center" sdnum="1036;" sdval="2000" style="border: 1px solid rgb(0, 0, 0);">
+                <b> 2000 </b>
+              </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr">Janvier</div>
+                  <!-- /fr -->
+                  <div lang="en">January</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 14.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 10.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 9.9 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 9.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 8.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 12.9 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 9.8 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr">Février</div>
+                  <!-- /fr -->
+                  <div lang="en">February</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 12.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 6.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 12.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 12.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 10.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.1 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr"> Mars</div>
+                  <!-- /fr -->
+                  <div lang="en">March</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 18.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 15.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 18.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 18.7 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 15.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 16.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 21.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 15.8 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr">Avril</div>
+                  <!-- /fr -->
+                  <div lang="en">April</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 21.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 19.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 20.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 26.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 25.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 21.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 24.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 20.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 21.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 22.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 24.4 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr">Mai</div>
+                  <!-- /fr -->
+                  <div lang="en">May</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 26.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 25.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.7 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 23.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 27.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 27.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 27.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 30.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.3 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr">Juin</div>
+                  <!-- /fr -->
+                  <div lang="en">June</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 29.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 22.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 27.7 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 29.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 30.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 31.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 32.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 30.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 32.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 33.1 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr">Juillet</div>
+                  <!-- /fr -->
+                  <div lang="en">July</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 31.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 33.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 32.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 29.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 34.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 35.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 32.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 30.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 27.2 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr"> Août</div>
+                  <!-- /fr -->
+                  <div lang="en">August</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 33.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 30.9 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 33.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 34.7 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 31.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 29.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 32.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 37.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 30.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 30.0 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr"> Septembre</div>
+                  <!-- /fr -->
+                  <div lang="en">September</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 20.9 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 24.3 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 22.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 23.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 20.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 23.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 28.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 22.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 29.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 24.8 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr"> Octobre</div>
+                  <!-- /fr -->
+                  <div lang="en">October</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 21.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 19.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 18.7 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 21.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 19.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 22.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.9 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 17.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 16.6 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr">Novembre</div>
+                  <!-- /fr -->
+                  <div lang="en">November</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.9 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 12.9 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 16.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 15.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.2 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 12.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 14.6 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.0 </td>
+            </tr>
+            <tr>
+              <td align="left" height="19" style="border: 1px solid rgb(0, 0, 0);">
+                <b>
+                  <div lang="fr"> Décembre</div>
+                  <!-- /fr -->
+                  <div lang="en">December</div>
+                  <!-- /en -->
+                </b>
+              </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 10.7 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.0 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.7 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 10.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 8.4 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 12.5 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 11.8 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 10.1 </td>
+              <td align="left" style="border: 1px solid rgb(0, 0, 0);"> 13.5 </td>
+            </tr>
+          </tbody>
+        </table>
+        <div lang="fr">
+          <p>Les matrices sont de plus en plus utilisées en informatique pour le traitement de l'image. Une image digitale (pixelisée) peut en effet être vue comme une matrice, chaque coefficient correspondant à un code de couleur. Les opérations algébriques que nous définirons (produit par un scalaire) pouvant avoir une signification au niveau du traitement (variation de la luminosité par exemple). <br /> Nous avons choisi, dans cet exposé, de présenter les matrices 'pour elles mêmes' indépendamment des applications linéaires. Cela présente de nombreux avantages; les matrices apparaissent comme des objets avec un comportement propre assez simple. Il y a cependant un inconvénient, le produit des matrices semblera dans un premier temps une opération mystérieuse dont la motivation n'est pas évidente. On corrigera le tir par la suite. </p>
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Matrices are increasingly used in computer science for image processing. A digital (pixelated) image can indeed be seen as a matrix, each coefficient corresponding to a code of color. The algebraic operations that we will define (produced by a scalar) that may have processing significance (variation of brightness for example). <br>We have chosen, in this presentation, to introduce matrices 'for themselves' independently of linear maps. This presents many advantages; matrices appear as objects with quite simple behavior. However, there is a downside, the product of the matrices will initially seem like a mysterious operation the motivation of which is not obvious. We will fix this point later afterwards. </p>
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

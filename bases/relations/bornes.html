@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Bornes</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../../css/themes/myown.css" />
+      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+      <link href="../../css/myown.css" rel="stylesheet">
+      <script src="../../js/jquery-1.11.3.js"></script>
+      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+      <script src="../../js/custom.js"></script>
+      
+      
+   </head>
+   <body style="overflow: auto; "class="fr">
+      <script> window.onload=get();</script>
+      <a name="beg"></a>
+      <div data-role="page" data-theme="b">
+         <div data-role="header">
+            <table>
+               <tr>
+                  <td>Choisissez votre langue !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+                  <td>Choose your language !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+               </tr>
+            </table>
+         </div>
+         <!-- /header -->
+         <div style="overflow: auto; "  data-role="content" data-theme="b">
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li> <input type="button" value="Exercices" onclick="go('exercices/ordre/menu.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Relations'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li> <input type="button" value="Exercises" onclick="go('exercices/ordre/menu.html')" /></li>
+                     <li><input type="button" value="Back to relations" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <h2>
+                  Définitions
+               </h2>
+               Il peut arriver qu'un ensemble possède des <input type="button" value="majorants" onclick="go('majorants.html')"  data-inline="true"/> sans pour autant
+               posséder de <input type="button" value="plus grand élément" onclick="go('plusgrand.html')"  data-inline="true"/>.
+               <br/>
+               Nous considérons sur
+               &reals;
+               la relation xRy: x ≤ y.
+               <br/>
+               Prenons pour partie X, par exemple, l'intervalle [0,1[ de
+               &reals;
+               c'est à dire
+               <br/>
+               X={x ∈
+               &reals;
+               | x ≥ 0 ∧ x &lt; 1}
+               <br/>
+               Alors X a des majorants. 1 est majorant et tout nombre y ≥ 1 est
+               également un majorant de façon évidente.
+               <br/>
+               Peut-il exister un majorant de X dans X?
+               <br/>
+               Supposons qu'un tel majorant a existe, alors forcément a&lt;1, donc
+               (1+a)/2 est &gt; a et est &lt; 1 donc ∈ X, ce qui contredit
+               que a est un majorant de X.
+               <br/>
+               Donc X possède des majorants, mais pas de plus grand élément.
+               <br/>
+               Par contre, l'ensemble des majorants de X est M=[1, + ∞ [, donc M
+               possède un plus petit élément.
+               <div id="container">
+                  <div id="label">définition</div>
+                  Un tel élément s'appelle une 
+                  <span style="font-weight: bold; font-style: italic;">
+                  'borne
+                  supérieure'
+                  </span>
+                  pour X.
+               </div>
+               <div id="container">
+                  Donc la borne supérieure, si elle existe, est le plus petit élément de
+                  l'ensemble des majorants.
+               </div>
+               <div id="container">
+                  <div id="label">définition</div>
+                  De la même façon la '<strong><em>borne inférieure</em></strong>' est le plus grand élément de
+                  l'ensemble des minorants (s'il existe).
+               </div>
+               <div id="container">
+                  <div id="label">définition</div>
+                  On dit qu'un ensemble est 
+                  <span style="font-weight: bold; font-style: italic;">
+                  'borné
+                  supérieurement'
+                  </span>
+                  (resp. inférieurement) s'il possède au moins
+                  un majorant (resp. au moins un minorant).
+               </div>
+               Nous venons de donner un exemple de partie ne possédant pas de plus
+               grand élément, mais possédant une borne supérieure.
+               <a name="th1"></a>
+               <div id="container">
+                  <div id="label">théorème</div>
+                  Il existe des parties ne possédant ni l'un ni l'autre (par exemple des
+                  parties non bornées (comme [1, + ∞ [, dans
+                  &reals;.
+               </div>
+               La question est de savoir si pour une partie bornée supérieurement, il
+               existe forcément une borne supérieure.
+               <br/>
+               La réponse est négative:
+               <a name="th2"></a>
+               <div id="container">
+                  <div id="label">théorème</div>
+                  Il existe des parties bornées supérieurement
+                  ne possédant ni plus grand élément, ni borne supérieure.
+               </div>
+               <div data-role="collapsible">
+                  <h4>démonstration</h4>
+                  Nous prendrons pour acquis (c'est connu depuis la plus haute antiquité,
+                  et nous le démontrerons par la suite, qu'il n'existe aucun nombre
+                  rationnel dont le carré est égal à 2.
+                  <br/>
+                  L'équation x<sup>2</sup>=2 ne possède aucune solution dans
+                  &rationals;.
+                  <br/>
+                  Prenons pour ensemble E=&rationals;
+                  et pour partie X={x∈&rationals;|x<sup>2</sup>&lt;2∧x&gt;0}.
+                  <br/>
+                  Alors X admet clairement des majorants dans
+                  &rationals;, par exemple 1,5 ou bien 2 etc...
+                  <br/>
+                  Mais l'ensemble M des majorants de X ne peut pas posséder de plus petit
+                  élément dans
+                  &rationals;.
+                  <br/>
+                  Supposons en effet que a∈&rationals;
+                  vérifie a<sup>2</sup>&gt;2 (soit un majorant de X).
+                  <br/>
+                  Alors nous allons montrer qu'il existe un autre majorant de X de la
+                  forme a-h avec h &gt;0 et h∈&rationals;.
+                  <br/>
+                  Il faut donc montrer qu'on peut résoudre en h rationnel le système:
+                  <br/>
+                  h &gt;0
+                  <br/>
+                  (a-h)<sup>2</sup>&gt;2
+                  <br/>
+                  a-h&gt;0
+                  <br/>
+                  la seconde équation peut s'écrire:
+                  <br/>
+                  a<sup>2</sup>-2ah+h<sup>2</sup>&gt;2
+                  <br/>
+                  Soit:
+                  <br/>
+                  2ah-h<sup>2</sup>&lt;a<sup>2</sup>-2
+                  <br/>
+                  Posons d=a<sup>2</sup>-2 donc d&gt;0
+                  <br/>
+                  L'inéquation peut encore s'écrire:
+                  <br/>
+                  h<sup>2</sup>-2ah+d&gt;0
+                  <br/>
+                  C'est une inéquation du second degré ayant pour discriminant réduit a<sup>2</sup>-d.
+                  <br/>
+                  Soit a<sup>2</sup>-d est négatif auquel cas tout h
+                  rationnel est solution, soit il est positif.
+                  <br/>
+                  Dans ce dernier cas une des deux racines (réelles) est h<sub>1</sub>=a+√(a<sup>2</sup>-d) qui est un nombre positif l'autre racine
+                  étant h<sub>2</sub>=a-√(a<sup>2</sup>-d) qui
+                  est positive aussi.
+                  <br/>
+                  Il suffit donc de prendre h rationnel entre 0 et h<sub>2</sub>
+                  (on utilise ici le fait que tout intervalle réel contient des
+                  rationnels. Nous reviendrons sur ce point ultérieurement).
+                  <br/>
+               </div>
+               Donc, même dans le cas d'ensemble majorés, il est possible qu'il n'y
+               ait ni plus grand élément ni borne supérieure.
+               <br/>
+               Cependant, l'ensemble
+               &reals;
+               possède une propriété
+               fondamentale (que nous démontrerons par la suite, mais qu'il est bon de
+               retenir dès maintenant):
+               <h2>
+                  Propriété importante
+               </h2>
+               Le résultat qui suit est un des théorèmes les plus importants de
+               l'analyse réelle. Sa démonstration n'a pas sa place ici.
+               <a name="th3"></a>
+               <div id="container">
+                  <div id="label">théorème</div>
+                  Dans
+                  &reals;
+                  tout ensemble majoré (resp. minoré) admet
+                  une borne supérieure (resp. une borne inférieure).
+               </div>
+               Le contre-exemple que nous avons pu construire était donc bien lié au
+               fait que nous travaillions dans l'ensemble
+               &rationals;
+               et non dans l'ensemble
+               &reals;
+               !
+               <br/>
+               Cela
+               dit, il est clair que:
+               <a name="th4"></a>
+               <div id="container">
+                  <div id="label">théorème</div>
+                  Si un ensemble possède un plus grand élément
+                  (resp. un plus petit élément), alors il possède une borne supérieure
+                  (resp. inférieure) et les deux coïncident.
+               </div>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>
+                  Definitions
+               </h2>
+               It can happen that a poset has <input type="button" value="majorants" onclick="go('majorants.html')"  data-inline="true"/> without
+               possessing a <input type="button" value="greater element" onclick="go('plusgrand.html')"  data-inline="true"/>.
+               <br>We consider on
+               ℝ
+               the relation xRy: x ≤ y.
+               <br>Take for part X, for example, the interval [0,1 [of
+               ℝ
+               that is to say
+               <br>
+               X={x ∈
+               ℝ
+               | x ≥ 0 ∧ x &lt; 1}
+               <br>Then X has upper limits.  1 is a majorant and any number y ≥ 1 is
+               also a majorant obviously.
+               <br>
+               Can there exist a majorant  of X in X?
+               <br>Suppose that such an upper bound a exists, then necessarily a &lt;1, so
+               (1 + a) / 2 is&gt; a and is &lt;1 therefore ∈ X, which contradicts
+               that a is a majorant of X.
+               <br>
+               So X has majorants, but no larger element.
+               <br>On the other hand, the set of majorants of X is M = [1, + ∞ [, so M
+               has a smaller element.
+               <div id="container">
+                  <div id="label">definition</div>
+                  Such an element is called a  
+                  <span style="font-weight: bold; font-style: italic;">
+                  'supremum ' 
+                  </span>
+                  for X. 
+               </div>
+               <div id="container">
+                  So the supremum, if it exists, is the smallest element of
+                  the set of upper bound.
+               </div>
+               <div id="container">
+                  <div id="label">definition</div>
+                  Likewise the '<strong><em>infimum</em></strong>' is the largest element of
+                  the set of minorants (if it exists).
+               </div>
+               <div id="container">
+                  <div id="label">definition</div>
+                  We say that a set is  
+                  <span style="font-weight: bold; font-style: italic;">
+                  'upper bounded ' 
+                  </span>
+                  (resp. lower) if he has at least 
+                  a majorant (resp. at least one minorant).
+               </div>
+               We have just given an example of a part not having any
+               largest element, but having a supremum.
+               <div id="container">
+                  There are parts that do not have either (for example,
+                  unbounded parts (like [1, + ∞ [, in
+                  ℝ.
+               </div>
+               The question is whether for an upper bounded part, it
+               there is necessarily a supremum.
+               <br>
+               The answer is no:
+               <a name="th1e"></a>
+               <div id="container">
+                  <div id="label">theorem</div>
+                  There are superiorly bounded parts
+                  having neither greater element, nor upper bound.
+               </div>
+               <div data-role="collapsible">
+                  <h4>proof</h4>
+                  We will take for granted (it has been known since ancient times,
+                  and we will demonstrate it later, that there is no number
+                  rational whose square is equal to 2.
+                  <br>The equation x<sup>2</sup>= 2 has no solution in 
+                  ℚ. 
+                  <br>Let us take for set E = ℚ 
+                  and partly X = {x∈ℚ | x<sup>2</sup>&lt;2∧x&gt; 0}. 
+                  <br>Then X clearly admits majorants in
+                  ℚ, for example 1.5 or 2 etc ...
+                  <br>But the set M of the upper limits of X cannot have a smaller
+                  element in
+                  ℚ.
+                  <br>Suppose indeed that a∈ℚ 
+                  satisfies a<sup>2</sup>&gt; 2 (i.e. a majorant of X). 
+                  <br>Then we will show that there exists another majorant of X of the
+                  form a-h with h&gt; 0 and h∈ℚ.
+                  <br>
+                  We must therefore show that we can solve the system in rational h:
+                  <br>
+                  h &gt;0
+                  <br>
+                  (a-h)<sup>2</sup>&gt;2
+                  <br>
+                  a-h&gt;0
+                  <br>
+                  the second equation can be written:
+                  <br>
+                  a<sup>2</sup>-2ah + h<sup>2</sup>&gt; 2
+                  <br>
+                  That is:
+                  <br>
+                  2ah-h<sup>2</sup>&lt;a<sup>2</sup>-2
+                  <br>
+                  Let d = a<sup>2</sup>-2 therefore d&gt; 0
+                  <br>
+                  The inequality can still be written:
+                  <br>
+                  h<sup>2</sup>-2ah + d&gt; 0
+                  <br>
+                  It is a second-degree inequality having for discriminant reduced a<sup>2</sup>-d.
+                  <br>Let a<sup>2</sup>-d be negative in which case all h 
+                  rational is solution, or it is positive. 
+                  <br>In the latter case one of the two (real) roots is h<sub>1</sub>= a + √ (a<sup>2</sup>-d) which is a positive number the other root 
+                  being h<sub>2</sub>= a-√ (a<sup>2</sup>-d) which 
+                  is positive too. 
+                  <br>It is therefore sufficient to take rational h between 0 and h<sub>2</sub>
+                  (we use here the fact that any real interval contains 
+                  rational. We will come back to this point later). 
+               </div>
+               So, even in the case of upper bounded sets, it is possible that they
+               have neither greater element nor supremum.
+               <br>However, the whole
+               ℝ
+               owns a property
+               fundamental (which we will demonstrate later, but that it is good to
+               remember now):
+               <h2>
+                  Important property
+               </h2>
+               The following result is one of the most important theorems of
+               basic real calculus.  Its proof cannot take place  place here.
+               <a name="th2e"></a>
+               <div id="container">
+                  <div id="label">theorem</div>
+                  In
+                  ℝ
+                  any set upper bounded (resp. lower bounded) admits
+                  a supremum (resp. an infimum).
+               </div>
+               The counterexample that we were able to construct was therefore well linked to the
+               fact that we we working with the set
+               ℚ
+               and not overall
+               ℝ
+               !
+               <br>That being
+               said, it is clear that:
+               <a name="th3e"></a>
+               <div id="container">
+                  <div id="label">theorem</div>
+                  If a set has a larger element
+                  (resp. a smaller element), then it has a supremum
+                  (resp. an infimum) and the two coincide.
+               </div>
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Retour au menu 'Relations'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Back to relations" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to bases" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /en --> 
+         </div>
+         <!-- /content -->
+         <div data-role="footer">
+            <table cellpadding="10">
+               <tr>
+                  <td>
+                     <div lang="fr">Création Gilles Dubois</div>
+                     <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Janvier 2022</div>
+                     <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Version mobile Jquery</div>
+                     <div lang="en">Mobile Jquery version</div>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <!-- /footer -->
+         <ul style=list-style-type:'';>
+            <li>
+               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+            </li>
+            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+         </ul>
+      </div>
+      <!-- /page -->
+   </body>
+</html>
+

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Représentation des réels en machine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Réels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to reals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Norme IEEE 754 </h2> Les flottants sont des représentations en mémoire d'une partie des nombres rationnels ; il est évidemment impossible de représenter des nombres réels quelconques, car un irrationnel contient une quantité infinie d'information. Seuls les rationnels dont la forme irréductible est , n/2<sup>q</sup>, peuvent avoir une représentation exacte ; les autres ont nécessairement une représentation approchée (par exemple, le nombre décimal 1/10 a 0,00011 <span style="text-decoration: overline;">0011</span> ..... comme représentation en base 2, la partie soulignée étant la période répétée indéfiniment). Cette représentation fait l'objet de la norme IEEE 754, proposée par William Kahan (Turing Award 1989), publiée en 1985 et adoptée par la plupart des fabricants d'ordinateurs. Cette norme distingue deux niveaux de précision : simple (sur 4 octets) et double (sur 8 octets). <p> Prenons l'exemple des flottants en simple précision ; les 32 bits (b<sub>i</sub> ) sont répartis en : </p>
+          <ul>
+            <li>1 bit de signe, b<sub>31</sub>
+            </li>
+            <li>8 bits d'exposant, b<sub>30</sub>....b<sub>23</sub>
+            </li>
+            <li>23 bits de mantisse, b<sub>22</sub>... b<sub>0</sub>
+              <p>
+                <img src="images/img191.gif" style="border: 0px solid ; width: 394px; height: 95px;">
+              </p>
+            </li>
+          </ul> La valeur d'un flottant <b> ' <i> normalisé' </i>
+          </b> est (-1)<sup>s</sup> × m × 2<sup>e</sup> , où <ul>
+            <li> s=b<sub>31</sub>
+            </li>
+            <li> e= b<sub>30</sub>2<sup>7</sup>+b<sub>29</sub>2<sup>6</sup>+...+b<sub>24</sub>2<sup>1</sup>+b<sub>23</sub>-127 </li>
+            <li> m= 1+b<sub>22</sub>2<sup>-1</sup>+b<sub>21</sub>2<sup>-2</sup>+...+b<sub>0</sub>2<sup>-23</sup>
+            </li>
+          </ul>
+          <p> Voici une comparaison entre la représentation simple précision et la représentation double précision. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> IEEE 754 standard </h2>Floating points are in-memory representations of a subset of rational numbers; it is obviously impossible to represent any real number, because any irrational contain an infinite quantity of information. Only the rational whose irreducible form is , n/2<sup>q </sup> , can have a accurate representation; the others necessarily have an approximate representation (for example, the decimal number 1/10 has 0.00011 <span style="text-decoration: overline;">0011</span> ..... as a representation in base 2, the underlined part being the period repeated indefinitely). This representation made the object of the IEEE 754 standard, proposed by William Kahan (Turing Award 1989), published in 1985 and adopted by most manufacturers of computers. This standard distinguishes two levels of precision: single (on 4 bytes) and double (on 8 bytes). <p>Let's take the example of single-precision floats; the 32 bits (b<sub>i </sub> ) are divided into: </p>
+          <ul>
+            <li>1 sign bit, b<sub>31</sub>
+            </li>
+            <li>8 exponent bits, b<sub>30</sub>....b<sub>23</sub>
+            </li>
+            <li>23 bits of mantissa, b<sub>22</sub>... b<sub>0</sub>
+              <p>
+                <img src="images/img191.gif" style="border: 0px solid ; width: 394px; height: 95px;">
+              </p>
+            </li>
+          </ul>The value of a float <b> ' <i> standardized' </i>
+          </b> is (-1)<sup>s </sup> × m × 2<sup>e </sup> , where <ul>
+            <li> s=b<sub>31</sub>
+            </li>
+            <li> e= b<sub>30</sub>2<sup>7</sup>+b<sub>29</sub>2<sup>6</sup>+...+b<sub>24</sub>2<sup>1</sup>+b<sub>23</sub>-127 </li>
+            <li> m= 1+b<sub>22</sub>2<sup>-1</sup>+b<sub>21</sub>2<sup>2</sup>+...+b<sub>0</sub>2<sup>-23</sup>
+            </li>
+          </ul>
+          <p> Here is a comparison between the single precision representation and the double precision representation. </p>
+        </div>
+        <!-- /en -->
+        <table border="2" cellpadding="10" cellspacing="0">
+          <tbody>
+            <tr>
+              <th></th>
+              <th>
+                <div lang="fr">Signe</div>
+                <!-- /fr -->
+                <div lang="en">sign</div>
+                <!-- /en -->
+              </th>
+              <th>
+                <div lang="fr">Exposant</div>
+                <!-- /fr -->
+                <div lang="en">Exponent</div>
+                <!-- /en -->
+              </th>
+              <th>
+                <div lang="fr">Mantisse</div>
+                <!-- /fr -->
+                <div lang="en">Mantisssa</div>
+                <!-- /en -->
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <div lang="fr">Simple Précision</div>
+                <!-- /fr -->
+                <div lang="en">Simple precision</div>
+                <!-- /en -->
+              </th>
+              <td align="center"> 1 [31] </td>
+              <td align="center"> 8 [30-23] </td>
+              <td align="center"> 23 [22-00] </td>
+            </tr>
+            <tr>
+              <th>
+                <div lang="fr">Double Précision</div>
+                <!-- /fr -->
+                <div lang="en">Double precision</div>
+                <!-- /en -->
+              </th>
+              <td align="center"> 1 [63] </td>
+              <td align="center"> 11 [62-52] </td>
+              <td align="center"> 52 [51-00] </td>
+            </tr>
+          </tbody>
+        </table>
+        <div lang="fr">
+          <h3>
+            <span class="mw-headline"> Exceptions </span>
+          </h3>
+          <p> Le bit de poids fort de la mantisse est déterminé par la valeur de l'exposant. Si l'exposant est différent de 0 et de <span> 2<sup>
+                <i> e </i>
+              </sup> − 1 </span> , le bit de poids fort de la mantisse est 1, et le nombre est dit <b>
+              <i> 'normalisé' </i>
+            </b> . Si l'exposant est nul, le bit de poids fort de la mantisse est nul, et le nombre est <b>
+              <i> 'dénormalisé' </i>
+            </b> . Il y a quatre cas particuliers : </p>
+          <ol>
+            <li> si l'exposant et la mantisse sont tous deux nuls, le nombre est ±0 (selon le bit de signe) </li>
+            <li> si l'exposant est nul et la mantisse non nulle dans ce cas l'exposant est supposé égal à -126 pour la simple précision, et la mantisse n'est pas supposée précédée de la partie entière 1. Il s'agit de la représentation des petits nombres. </li>
+            <li> si l'exposant est égal à <span> 2<sup>
+                  <i> e </i>
+                </sup> − 1 </span> , et si la mantisse est nulle, le nombre est ± ∞ (selon le bit de signe) </li>
+            <li> si l'exposant est égal à <span> 2<sup>
+                  <i> e </i>
+                </sup> − 1 </span> , mais que la mantisse n'est pas nulle, le nombre est NaN (Not a Number: pas un nombre) </li>
+          </ol>
+          <p> Nous pouvons résumer les exceptions ainsi: </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>
+            <span class="mw-headline"> Exceptions </span>
+          </h3>
+          <p>The most significant bit of the mantissa is determined by the value of the exponent. If the exponent is different from 0 and from <span> 2<sup>
+                <i> e </i>
+              </sup> −1 </span> , the most significant bit of the mantissa is 1, and the number is said <b>
+              <i> 'normalized' </i>
+            </b> . If the exponent is zero, the most significant bit of the mantissa is zero, and the number is <b>
+              <i> 'denormalized' </i>
+            </b> . There are four special cases : </p>
+          <ol>
+            <li> if both exponent and mantissa are zero, the number is ±0 (depending on the sign bit) </li>
+            <li>if the exponent is zero and the mantissa non-zero in this case the exponent is assumed equal to -126 for single precision, and the mantissa is not assumed preceded by the integer part 1. This is the representation of small numbers. </li>
+            <li>if the exponent is equal to <span> 2<sup><i>e</i></sup> −1 </span> , and if the mantissa is zero, the number is ± ∞ (depending on sign bit) </li>
+            <li>if the exponent is equal to span> 2<sup><i>e</i></sup> −1 </span> , but the mantissa is not zero, the number is NaN (Not a Number: not a number) </li>
+          </ol>
+          <p> We can summarize the exceptions like this: </p>
+        </div>
+        <!-- /en -->
+        <table border="1" cellpadding="10" cellspacing="0">
+          <tbody>
+            <tr>
+              <th> Type </th>
+              <th>
+                <div lang="fr">Exposant</div>
+                <!-- /fr -->
+                <div lang="en">Exponent</div>
+                <!-- /en -->
+              </th>
+              <th>
+                <div lang="fr">Mantisse</div>
+                <!-- /fr -->
+                <div lang="en">Mantissa</div>
+                <!-- /en -->
+              </th>
+            </tr>
+            <tr>
+              <td> Zeros </td>
+              <td> 0 </td>
+              <td> 0 </td>
+            </tr>
+            <tr>
+              <td>
+                <div lang="fr">Nombres dénormalisés</div>
+                <!-- /fr -->
+                <div lang="en">Denormalized numbers</div>
+                <!-- /en -->
+              </td>
+              <td> 0 </td>
+              <td>
+                <div lang="fr">différente de 0</div>
+                <!-- /fr -->
+                <div lang="en">distinct from 0</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div lang="fr">Nombres normalisés</div>
+                <!-- /fr -->
+                <div lang="en">Normalized numbers</div>
+                <!-- /en -->
+              </td>
+              <td>
+                <span> 1 </span> à <span> 2<sup>
+                    <i> e </i>
+                  </sup> − 2 </span>
+              </td>
+              <td>
+                <div lang="fr">quelconque</div>
+                <!-- /fr -->
+                <div lang="en">any</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div lang="fr">Infinis</div>
+                <!-- /fr -->
+                <div lang="en">Infinite</div>
+                <!-- /en -->
+              </td>
+              <td>
+                <span> 2<sup>
+                    <i> e</i>
+                  </sup> − 1 </span>
+              </td>
+              <td> 0 </td>
+            </tr>
+            <tr>
+              <td> NaNs </td>
+              <td>
+                <span> 2<sup>
+                    <i> e</i>
+                  </sup> − 1 </span>
+              </td>
+              <td>
+                <div lang="fr">différente de 0</div>
+                <!-- /fr -->
+                <div lang="en">Distinct from 0</div>
+                <!-- /en -->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div lang="fr">
+          <h2> Le coin du C </h2>
+          <p> Ce programme illustre la représentation en machine des flottants simple précision normalisés. </p>
+          <p>
+            <object border="3" data="c/ieee754.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <p></p>
+          <p></p>
+          <h2> Le coin de Python </h2>
+          <p> A l'instar des entiers long, Python propose un type pour représenter les flottants grande précision, il s'agit du type décimal. L'utilisation de ce type permet de s'affranchir de la mauvaise représentation des réels par le type flottant standard, qu'il soit sur 4 ou 8 octets. Voici un exemple pour illustrer cela: </p>
+          <p>
+            <object border="3" data="python/typedec.html" height="300" type="text/html" width="100%"></object>
+          </p>
+          <p> Le résultat de l'exécution: </p>
+          <p> 0.66666666666666663000 <br /> 0.6666666666666666666666666667 </p>
+          <h2>Le coin de Jula</h2>
+          <h3>Valeurs spéciales des flottants</h3>
+          <p>Il y a 3 valeurs spéciales de flottants qui ne correspondent à aucun nombre réel</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> The corner of C </h2>
+          <p>This program illustrates the machine representation of normalized single-precision floating-points. </p>
+          <p>
+            <object data="c/ieee754_en.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <p></p>
+          <p></p>
+          <h2> Python's corner </h2>
+          <p>Like long integers, Python offers a type to represent high-precision floating points, it is the decimal type. The use of this type makes it possible to overcome the bad representation of the reals by the standard floating type, whether it is on 4 or 8 bytes. Here is an example to illustrate this: </p>
+          <p>
+            <object data="python/typedec.html" type="text/html" width="100%" height="300" border="3"></object>
+          </p>
+          <p> The result of running: </p>
+          <p> 0.66666666666666663000 <br> 0.6666666666666666666666666667 </p>
+          <h2>Jula's corner </h2>
+          <h3>Special float values </h3>
+          <p>There are 3 special values ​​of floats which do not correspond to any real number </p>
+        </div>
+        <!-- /en -->
+        <table cellpadding="2" cellspacing="2" border="2" width="0">
+          <tbody>
+            <tr>
+              <th>
+                <code>Float16</code>
+              </th>
+              <th>
+                <code>Float32</code>
+              </th>
+              <th>
+                <code>Float64</code>
+              </th>
+              <th>
+                <div lang="fr">Nom</div>
+                <!-- /fr -->
+                <div lang="en">Name</div>
+                <!-- /en -->
+              </th>
+              <th>Description</th>
+            </tr>
+            <tr>
+              <td>
+                <code>Inf16</code>
+              </td>
+              <td>
+                <code>Inf32</code>
+              </td>
+              <td>
+                <code>Inf</code>
+              </td>
+              <td>
+                <div lang="fr">Infini positif</div>
+                <!-- /fr -->
+                <div lang="en">Positive infinite</div>
+                <!-- /en -->
+              </td>
+              <td>
+                <div lang="fr">Une valeur plus grande que tous les flottants</div>
+                <!-- /fr -->
+                <div lang="en">A value greater than all floats</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>-Inf16</code>
+              </td>
+              <td>
+                <code>-Inf32</code>
+              </td>
+              <td>
+                <code>-Inf</code>
+              </td>
+              <td>
+                <div lang="fr">Infini négatif</div>
+                <!-- /fr -->
+                <div lang="en">Negative infinite</div>
+                <!-- /en -->
+              </td>
+              <td>
+                <div lang="fr">une valeur plus petite que tous les flottants</div>
+                <!-- /fr -->
+                <div lang="en">a value smaller than all floats</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>NaN16</code>
+              </td>
+              <td>
+                <code>NaN32</code>
+              </td>
+              <td>
+                <code>NaN</code>
+              </td>
+              <td>Not a number</td>
+              <td>A value distinct from any float even from itself</td>
+            </tr>
+          </tbody>
+        </table>
+        <div lang="fr">
+          <h3>e-psilon-machine</h3>
+          <p>La plupart des nombres réels ne peuvent pas être représentés de façon exacte par un flottant, et pour de nombreuses raisons il peut être utile de connaître la précision, c'est à dire la distance entre deux réels représentables, ce nombre étant connu comme "l'epsilon-machine"</p>
+          <p>Le langage fournit la fonction eps qui donne cette valeur.</p>
+          <p>Programme de démonstration :</p>
+          <p>
+            <object border="3" data="julia/machine1.jl.html" height="120" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>e-psilon-machine </h3>
+          <p>Most real numbers cannot be represented exactly by a float, and for many reasons it can be useful to know the precision, i.e. the distance between two representable reals, this number being known as "l 'epsilon-machine' </p>
+          <p>The language provides the eps function which gives this value. </p>
+          <p>Demo program: </p>
+          <p>
+            <object data="julia/machine1.jl.html" type="text/html" width="100%" height="120" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Réels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to reals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

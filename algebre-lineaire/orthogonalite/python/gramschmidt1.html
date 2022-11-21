@@ -1,0 +1,64 @@
+﻿<html>
+ <head>
+  <title>
+   gramschmidt1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">numpy </span><span class="s2">as </span><span class="s1">np 
+</span><span class="s2">from </span><span class="s1">scipy.linalg </span><span class="s2">import </span><span class="s1">norm 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">PS(V1, V2): 
+    </span><span class="s0">"""Produit scalaire usuel - usual dot product"""</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">np.add.reduce(V1 * V2) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">GramSchmidt(L): 
+    </span><span class="s0">"""Procédé d'orthonormalisation de Gram-Schmidt - Gram-Schmidt process"""</span><span class="s1"> 
+    n = </span><span class="s3">0</span><span class="s1"> 
+    k = </span><span class="s3">1 </span><span class="s1">/ norm(L[</span><span class="s3">0</span><span class="s1">]) 
+    c = k * L[</span><span class="s3">0</span><span class="s1">] 
+    S = [c] 
+    </span><span class="s2">yield </span><span class="s1">c 
+    </span><span class="s2">while </span><span class="s1">n &lt;= len(L): 
+        n = n + </span><span class="s3">1</span><span class="s1"> 
+        V = L[n] 
+        proj = reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, [PS(V, c) * c </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">S]) 
+        V = V - proj 
+        c = (</span><span class="s3">1 </span><span class="s1">/ norm(V)) * V 
+        S = S + [c] 
+        </span><span class="s2">yield </span><span class="s1">c 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">"""fonction de test - test function"""</span><span class="s1"> 
+    GS = GramSchmidt([np.array([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">]), np.array([</span><span class="s3">3</span><span class="s1">, </span><span class="s3">4</span><span class="s1">])]) 
+    U = next(GS) 
+    V = next(GS) 
+    print(U) 
+    print(V) 
+    print(PS(U, U)) 
+    print(PS(V, V)) 
+    print(PS(U, V)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+</span></pre>
+ </body>
+</html>

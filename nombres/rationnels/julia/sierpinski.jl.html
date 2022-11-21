@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">egypt(x,y)</span>
+    <span class="s1">k,L=</span><span class="s2">1</span><span class="s1">,[]</span>
+    <span class="s0">while </span><span class="s1">x!=</span><span class="s2">0</span>
+        <span class="s0">if </span><span class="s1">y%x==</span><span class="s2">0</span>
+            <span class="s1">k=big(y÷x)</span>
+        <span class="s0">else</span>
+            <span class="s1">k=big(y÷x+</span><span class="s2">1</span><span class="s1">)</span>
+        <span class="s0">end</span>
+        <span class="s1">x=x*k-y</span>
+        <span class="s1">y=y*k</span>
+        <span class="s1">push!(L,k)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">L</span>
+<span class="s0">end</span>
+
+<span class="s3"># le 'channel' est l'équivalent Julia du générateur Python.</span>
+<span class="s3"># The 'channel'is Julia's equivalent of Python's generator.</span>
+<span class="s0">function </span><span class="s1">prime_producer(c::Channel)</span>
+    <span class="s1">put!(c,</span><span class="s2">2</span><span class="s1">) </span><span class="s3">#équivalent à yield - equivalent of Python's 'yield'</span>
+    <span class="s1">put!(c,</span><span class="s2">3</span><span class="s1">)</span>
+    <span class="s1">P, p = [</span><span class="s2">2</span><span class="s1">, </span><span class="s2">3</span><span class="s1">], </span><span class="s2">3</span>
+    <span class="s0">while true</span>
+        <span class="s1">p += </span><span class="s2">2 </span><span class="s3">#inutile de tester les nombres pairs - not useful to check even numbers</span>
+        <span class="s0">if </span><span class="s1">all((p % x != </span><span class="s2">0 </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">P))</span>
+            <span class="s1">push!(P, p) </span><span class="s3">#il y a quand même consommation de mémoire car P grnadit à chaque push- memory consumption here</span>
+            <span class="s1">put!(c,p) </span><span class="s3"># l'exécution est suspendue en l'attente d'un catch - execution suspended waitin,g for next catch</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">sierpinski1(n)=length(egypt(</span><span class="s2">5</span><span class="s1">,n))&lt;=</span><span class="s2">3</span>
+
+<span class="s0">function </span><span class="s1">sierpinski2(n,k)</span>
+    <span class="s1">h=max(</span><span class="s2">2</span><span class="s1">,n÷5)+</span><span class="s2">1</span>
+    <span class="s0">for </span><span class="s1">a </span><span class="s0">in </span><span class="s1">h:k</span>
+        <span class="s1">j=max(</span><span class="s2">2</span><span class="s1">,a*n÷(</span><span class="s2">5</span><span class="s1">a-n))+</span><span class="s2">1</span>
+        <span class="s0">for </span><span class="s1">b </span><span class="s0">in </span><span class="s1">j:k</span>
+            <span class="s0">if </span><span class="s1">(n*a*b)%(</span><span class="s2">5</span><span class="s1">a*b-n*b-n*a)==</span><span class="s2">0</span>
+                <span class="s0">return true</span>
+            <span class="s0">end</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return false</span>
+<span class="s0">end</span>
+
+<span class="s1">P = Channel(prime_producer)</span>
+
+<span class="s1">Premiers=[]</span>
+
+<span class="s0">function </span><span class="s1">fillPremiers()</span>
+    <span class="s0">while true</span>
+        <span class="s1">x=take!(P)</span>
+        <span class="s0">if </span><span class="s1">x&lt;</span><span class="s2">5000</span>
+            <span class="s1">push!(Premiers,x)</span>
+        <span class="s0">else</span>
+            <span class="s0">break</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">fillPremiers()</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">M=[n </span><span class="s0">for </span><span class="s1">n </span><span class="s0">in </span><span class="s1">Premiers </span><span class="s0">if </span><span class="s1">sierpinski1(n)==</span><span class="s0">false</span><span class="s1">]</span>
+    <span class="s1">println(length(M))</span>
+     <span class="s1">N=[n </span><span class="s0">for </span><span class="s1">n </span><span class="s0">in </span><span class="s1">M </span><span class="s0">if </span><span class="s1">sierpinski2(n,</span><span class="s2">4000</span><span class="s1">)==</span><span class="s0">false</span><span class="s1">]</span>
+    <span class="s1">println(length(N))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

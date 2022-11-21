@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Groupe orthogonal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href=".././css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/grouporth/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/grouporth/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définition </h2>
+          <p> Dans tout ce paragraphe nous considérons un espace vectoriel E de dimension finie n, et une forme sesquilinéaire définie positive appelée (suivant <input type="button" value="notre convention précédente" onclick="go('basorth.html#')" data-inline="true" />) 'produit-scalaire' et notée (x,y) → x.y </p>
+          <a name="def1"></a>
+          <div id="container">
+            <div id="label">définition</div> Un automorphisme u de E est dit <strong>
+              <em>'orthogonal'</em>
+            </strong> s'il conserve le produit scalaire, au sens suivant: <br> u(x).u(y)=x.y ∀ (x,y) ∈ E × E
+          </div> On peut immédiatement donner une autre définition équivalente des automorphismes orthogonaux. <a name="prop1"></a>
+          <div id="container">
+            <div id="label">propriété</div> Sachant que u(x).y=x.u<sup>*</sup>(y) et donc u(x).u(y)=x.u<sup>*</sup>(u(y)), on voit que les automorphismes orthogonaux sont exactement ceux qui vérifient: <br> u*=u<sup>-1</sup>
+          </div> La propriété suivante se vérifie simplement. <a name="prop2"></a>
+          <div id="container">
+            <div id="label">propriété</div> Les automorphismes orthogonaux forment un sous-groupe O(E) du groupe linéaire GL(E).
+          </div> Il résulte immédiatement de la définition que: <a name="prop3"></a>
+          <div id="container">
+            <div id="label">propriété</div> Tout automorphisme orthogonal transforme une base orthonormale en une autre base orthonormale.
+          </div> Ce résultat admet une réciproque, plus précisément: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Soit u un endomorphisme de E transformant une base orthonormale B=(x<sub>1</sub>,...,x<sub>n</sub>) en une autre base orthonormale B'=(y<sub>1</sub>,...,y<sub>n</sub>). Alors u est un automorphisme orthogonal.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet supposons a=a<sub>1</sub>x<sub>1</sub>+...+a<sub>n</sub>x<sub>n</sub> et b=b<sub>1</sub>x<sub>1</sub>+...+b<sub>n</sub>x<sub>n</sub> alors <br> \(a.b=\sum_{i=1}^{n}a_{i}\overline{b_{i}}\) <br> puisque B est orthonormée <br> Mais on a: <br> \(u(a).u(b)=\left ( \sum_{i=1}^{n}a_{i}y_{i} \right ).\left ( \sum_{i=1}^{n} b_{i}y_{i}\right )=\sum_{i=1}^{n}a_{i}\overline{b_{i}}\) <br> puisque B' est également orthonormée.
+          </div> Mais nous avons aussi: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Soient B<sub>1</sub> et B<sub>2</sub> , deux bases orthonormales de E. Il existe un et un seul automorphisme orthogonal u transformant B<sub>1</sub> en B<sub>2</sub>.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet, il existe une et une seule application linéaire transformant B<sub>1</sub> en B<sub>2</sub>. Puisque B<sub>1</sub> et B<sub>2</sub> sont des bases c'est un automorphisme. Puisque B<sub>1</sub> et B<sub>2</sub> sont orthonormales il est orthogonal.
+          </div> Signalons enfin dans l'espace euclidien ℝ<sup>n</sup> : <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Un automorphisme orthogonal conserve les angles (au signe près).
+          </div> Cela résulte de la définition du produit scalaire au moyen du cosinus. <a name="ex"></a>
+          <h3> Exemples </h3> Dans tous les exemples qui suivent les points sont identifiés aux vecteurs par \(M\rightarrow \overrightarrow{OM}\). <ol>
+            <li> L'identité est un automorphisme orthogonal. </li>
+            <li> L'application x → -x (symétrie centrale) est orthogonale. <br> Voici une appliquette vous permettant de visualiser dans le plan une symétrie centrale. <br> Chaque point du plan correspond à un vecteur. <br> Déplacez le point M, l'application tracera le point M' image de M par la symétrie centrale.
+          </ol>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definition </h2>
+          <p>Throughout this paragraph we consider a vector space E of finite dimension n, and a positive definite sesquilinear form called (according <input type="button" value="our previous agreement" onclick="go('basorth.html#')" data-inline="true">) 'scalar-product' and denoted (x,y) → x.y </p>
+          <a name="def1e"></a>
+          <div id="container">
+            <div id="label">definition </div>An automorphism u of E is said <strong>
+              <em>'orthogonal' </em>
+            </strong> if it preserves the scalar product, in the following sense: <br> u(x).u(y)=x.y ∀ (x,y) ∈ E × E
+          </div> We can immediately give another equivalent definition of an orthogonal automorphisms. <a name="prop1e"></a>
+          <div id="container">
+            <div id="label">property </div>Knowing that u(x).y=x.u<sup>*</sup>(y) and therefore u(x).u(y)=x.u<sup>*</sup>(u(y)), we see that the orthogonal automorphisms are exactly those which satisfy: <br> u*=u<sup>-1</sup>
+          </div> The following property simply holds. <a name="prop2e"></a>
+          <div id="container">
+            <div id="label">property </div>The orthogonal automorphisms form a subgroup O(E) of the linear group GL(E).
+          </div> It follows immediately from the definition that: <a name="prop3e"></a>
+          <div id="container">
+            <div id="label">property </div>Any orthogonal automorphism transforms an orthonormal basis into another orthonormal basis.
+          </div> This result admits a reciprocal, more precisely: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>Let u be an endomorphism of E transforming an orthonormal basis B=(x<sub>1</sub>,...,x<sub>n</sub>) into another orthonormal basis B'=(y<sub>1</sub>,...,y<sub>n</sub>). Then u is an orthogonal automorphism.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>Indeed suppose a=a<sub>1</sub>x<sub>1</sub>+...+a<sub>n</sub>x<sub>n</sub> and b=b<sub>1</sub>x<sub>1</sub>+...+b<sub>n</sub>x<sub>n</sub> then <br> \(a.b=\sum_{i=1}^{n}a_{i}\overline{b_{i}}\) <br> since B is orthonormal <br> But we have : <br> \(u(a).u(b)=\left ( \sum_{i=1}^{n}a_{i}y_{i} \right ).\left ( \sum_{i=1}^{n} b_{i}y_{i}\right )=\sum_{i=1}^{n}a_{i}\overline{b_{i}}\) <br> since B' is orthonormal as well.
+          </div>
+          <!-- /proof --> But we also have: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>Let B<sub>1</sub> and B<sub>2</sub> , two orthonormal bases of E. There exists one and only one orthogonal automorphism u transforming B<sub>1</sub> into B<sub>2</sub>.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>Indeed, there exists one and only one linear map transforming B<sub>1</sub> into B<sub>2</sub>. Since B<sub>1</sub> and B<sub>2</sub> are bases it is an automorphism. Since B<sub>1</sub> and B<sub>2</sub> are orthonormal it is orthogonal.
+          </div>
+          <!-- /proof -->
+          <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>An orthogonal automorphism preserves the angles (maybe except for the sign sign).
+          </div> This results from the definition of the scalar product by means of the cosine. <a name="exe"></a>
+          <h3> Examples </h3>In all the following examples the points are identified with the vectors by \(M\rightarrow \overrightarrow{OM}\). <ol>
+            <li> The identity is an orthogonal automorphism. </li>
+            <li> The map x → -x (central symmetry - or point reflection - or point inversion) is orthogonal. <br> Here is an applet allowing you to visualize a central symmetry in the plan. <br> Each point of the plane corresponds to a vector. <br> Move the point M, the application will draw the point M' image of M by the central symmetry. </li>
+          </ol>
+        </div>
+        <!-- /en -->
+        <div class="jxgbox" id="box1" style="width:500px; height:500px;"></div>
+        <script src="js/symcentrale1.js"></script>
+        <div lang="fr">
+          <p> Voici une autre appliquette. <br> Elle montre un polygone (rouge) et son image (bleue) par la symétrie centrale plane. <br> Vous pouvez déplacer les sommets du polygone (rouge) </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here is another applet. <br> It shows a polygon (red) and its image (blue) by the plane central symmetry. <br> You can move the vertices of the polygon (red) </p>
+        </div>
+        <!-- /en -->
+        <div class="jxgbox" id="box2" style="width:500px; height:500px;"></div>
+        <script src="js/symcentrale2.js"></script>
+        <div lang="fr">
+          <a name="symorth"></a>
+          <ol start="3">
+            <li> De fait les deux exemples précédents sont des cas particuliers du suivant. <br> Soit F un sous espace de E. La symétrie orthogonale s par rapport à F est ainsi définie. Si u est un vecteur de E soit u=v+w sa décomposition unique en une somme d'un vecteur de F et d'un vecteur de F<sup>⊥</sup>, alors s(u) est défini par s(u)=v-w. s est orthogonale. Cela se voit en prenant une base orthogonale de E réunion d'une base orthogonale de F avec une base orthogonale de F<sup>⊥</sup>
+              <br>. Voici une appliquette vous permettant de visualiser dans le plan une symétrie orthogonale sur une droite (vecteur directeur vert). <ul>
+                <li>Chaque point du plan correspond à un vecteur.</li>
+                <li> Déplacez le point M , l'application représentera alors l'image M' de M par la symétrie orthogonale relativement à la droite vectorielle (OA).</li>
+                <li>Vous pouvez également faire varier la droite (OA) en déplaçant le point A.</li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <a name="symorthe"></a>
+          <ol start="3">
+            <li>In fact, the two previous examples are particular cases of the following one. <br>Let F be a subspace of E. The orthogonal symmetry s with respect to F is thus defined. If u is a vector of E let u=v+w its decomposition unique in a sum of a vector of F and a vector of F<sup>⊥</sup>, then s(u) is defined by s(u)=vw. s is orthogonal. This is seen in taking an orthogonal basis of E union of an orthogonal basis of F with an orthogonal basis of F<sup>⊥</sup>
+              <br>. Here is an applet allowing to visualize in the plan an orthogonal symmetry on a right (green director vector). <ul>
+                <li>Each point of the plane corresponds to a vector. </li>
+                <li>Move the point M , the application will then represent the image M' of M by the orthogonal symmetry relatively to the vector line (OA). </li>
+                <li>You can also vary the line (OA) by moving point A. </li>
+              </ul>
+            </li>
+          </ol>
+        </div>
+        <!-- /en -->
+        <div class="jxgbox" id="box3" style="width:500px; height:500px;"></div>
+        <script src="js/symorth1.js"></script>
+        <div lang="fr">
+          <p> Voici une autre appliquette représentant un polygone ABCDE (rouge) et son image dans la symétrie orthogonale par rapport à une droite. <br> Vous pouvez faire varier chaque sommet du polygone, mais aussi la droite elle-même. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here is another applet representing a polygon ABCDE (red) and its image in orthogonal symmetry with mirror line. <br> You can vary each vertex of the polygon, but also the mirror line itself. </p>
+        </div>
+        <!-- /en -->
+        <div class="jxgbox" id="box4" style="width:500px; height:500px;"></div>
+        <script src="js/symorth2.js"></script>
+        <div lang="fr">
+          <p> Voici maintenant une appliquette illustrant les symétries orthogonales dans l'espace à 3 dimensions.
+          <ul>
+            <li>On a une base orthonormale(u,v,w) de l'espace.</li>
+            <li>Vect(u,v) désigne le plan engendré par les vecteurs u et v parfois noté xOy.</li>
+            <li>Vect(w) désigne la droite engendrée par le vecteur w (axe Oz).</li>
+            <li>En violet vous voyez l'image de la pyramide jaune.</li>
+            <li>L'animation peut être arrêtée et redémarrée à tout moment en cliquant sur la zone graphique.</li>
+          </ul>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here is now an applet illustrating orthogonal symmetries in 3-dimensional space. </p>
+          <ul>
+            <li>We have an orthonormal basis (u,v,w) of the space. </li>
+            <li>Vect(u,v) designates the plane spanned by the vectors u and v sometimes denoted xOy. </li>
+            <li>Vect(w) designates the straight line spanned by the vector w (axis Oz). </li>
+            <li>In purple you see the image of the yellow pyramid. </li>
+            <li>The animation can be stopped and restarted at any time by clicking on the graphics area. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div>
+          <canvas height="400" id="myCanvas10" style="border:1px solid #000000;" width="400"></canvas>
+          <script src="js/symorth3d.js"></script>
+        </div>
+        <div lang="fr">
+          <h2> Matrices orthogonales </h2>
+          <a name="def2"></a>
+          <div id="container">
+            <div id="label">définition</div> Une matrice est dite orthogonale si elle est inversible et vérifie : <br> A<sup>*</sup>=A<sup>-1</sup>
+          </div> On vérifie immédiatement que: <a name="prop4"></a>
+          <div id="container">
+            <div id="label">propriété</div>Les matrices orthogonales forment un sous-groupe de GL(n,K).
+          </div> Le lien entre les automorphismes orthogonaux et les matrices orthogonales résultent de ce que nous avons vu à <input type="button" value="la fin de la page sur les endomorphismes adjoints" onclick="go('adjoints.html#matradj')" data-inline="true" />
+          <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si B est une base orthonormale et u un automorphisme de E. Il y a équivalence entre: <br>
+            <ul>
+              <li> u est orthogonal. </li>
+              <li> La matrice de u par rapport à B est orthogonale. </li>
+            </ul>
+          </div>
+          <h3> Exemples </h3>
+          <ol>
+            <li> Les matrices carrées réelles d'ordre 2 du type: <br> \(\begin{pmatrix} cos(x)& -sin(x) \\ sin(x)& cos(x) \\ \end{pmatrix}\) <br> sont orthogonales. </li>
+            <li> Les matrices diagonales avec seulement des 1 ou des -1 sur la diagonale sont orthogonales. </li>
+          </ol>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Orthogonal matrices </h2>
+          <a name="def2e"></a>
+          <div id="container">
+            <div id="label">definition </div>A matrix is ​​said to be orthogonal if it is invertible and verifies: <br> A<sup>*</sup>=A<sup>-1</sup>
+          </div> We immediately check that: <a name="prop4e"></a>
+          <div id="container">
+            <div id="label">property </div>The orthogonal matrices form a subgroup of GL(n,K).
+          </div> The link between orthogonal automorphisms and orthogonal matrices results from what we have seen at <input type="button" value="the end of the page on the adjoint endomorphisms" onclick="go('adjoints.html#matradje')" data-inline="true">. <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If B is an orthonormal basis and u an automorphism of E. There is equivalence between: <br>
+            <ul>
+              <li> u is orthogonal. </li>
+              <li> The matrix of u with respect to B is orthogonal. </li>
+            </ul>
+          </div>
+          <h3> Examples </h3>
+          <ol>
+            <li> The real square matrices of order 2 of the type: <br> \(\begin{pmatrix} cos(x)& -sin(x) \\ sin(x)& cos(x) \\ \end{pmatrix}\) <br> are orthogonal. </li>
+            <li> The diagonal matrices with only 1's ou -1's on the diagonal are orthogonal. </li>
+          </ol>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

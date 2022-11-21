@@ -1,0 +1,260 @@
+﻿<html>
+ <head>
+  <title>
+   caldetpivot.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+</span><span class="s2">from </span><span class="s1">copy </span><span class="s2">import </span><span class="s1">copy 
+ 
+</span><span class="s0"># variables globales servant à générer des matrices aléatoires</span><span class="s1"> 
+</span><span class="s0"># global variables used to generate random matrices</span><span class="s1"> 
+Entiers = [Fraction(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">10</span><span class="s1">)] 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Vecteur: 
+    </span><span class="s0">"""modélisation vecteurs de dimension n à coefficients rationnels (ou autre)  par une classe python"""</span><span class="s1"> 
+    </span><span class="s0">"""Python class model for n-dimensional vectors with rational (or other) coefficients"""</span><span class="s1">     
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">"""constructeur - constructor"""</span><span class="s1"> 
+        self.n = len(L) 
+        self.coords = L 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords] 
+        </span><span class="s2">return </span><span class="s4">"(" </span><span class="s1">+ </span><span class="s4">","</span><span class="s1">.join(L) + </span><span class="s4">")"</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">"""addition de deux vecteurs - addition of vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] + other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">"""opposé d'un vecteur - opposite of a vector"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(-self.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">"""différence de deux vecteurs - difference of two vectors"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] - other.coords[i]) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+        </span><span class="s0">"""loi externe - external multiplication"""</span><span class="s1"> 
+        L = [] 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            L.append(self.coords[i] * k) 
+        </span><span class="s2">return </span><span class="s1">Vecteur(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">nul(self): 
+        </span><span class="s2">return </span><span class="s1">all([x == </span><span class="s3">0 </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.coords]) 
+ 
+ 
+</span><span class="s4">""" Objet Matrice à coefficients rationnels """</span><span class="s1"> 
+</span><span class="s4">""" The matrix object with rational coefficients"""</span><span class="s1">  
+ 
+</span><span class="s2">class </span><span class="s1">Matrice(): 
+    </span><span class="s0">"""Modélisation d'une matrice à coefficients rationnels"""</span><span class="s1">
+    </span><span class="s0">"""Model for such matrix"""</span><span class="s1">      
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">"""constructeur à partir d'une liste de lignes"""</span><span class="s1"> 
+        </span><span class="s0">"""constructor from a list of rows"""</span><span class="s1">         
+        self.coeffs = L  </span><span class="s0"># les coefficients - the coefficients</span><span class="s1"> 
+        self.lignes = len(L)  </span><span class="s0"># le nombre de lignes - the number of rows</span><span class="s1"> 
+        self.colonnes = L[</span><span class="s3">0</span><span class="s1">].n  </span><span class="s0"># le nombre de colonnes - the number of columns</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">"""représentation externe - conversion to string"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s1">.join([str(v) </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.coeffs]) 
+ 
+    </span><span class="s2">def </span><span class="s1">Ligne(self, i): 
+        </span><span class="s0">""" la i-ème ligne - row number i """</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">copy(self.coeffs[i]) 
+ 
+    </span><span class="s2">def </span><span class="s1">Colonne(self, j): 
+        </span><span class="s0">""" la j-ième colonne du système - column number j"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Vecteur([Y[j] </span><span class="s2">for </span><span class="s1">Y </span><span class="s2">in </span><span class="s1">[X.coords </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">self.coeffs]]) 
+ 
+    </span><span class="s2">def </span><span class="s1">GetCoef(self, i, j): 
+        </span><span class="s0">"""Obtenir un coefficient - get one coefficient"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i].coords[j] 
+ 
+    </span><span class="s2">def </span><span class="s1">SetCoef(self, i, j, v): 
+        </span><span class="s0">"""Changer un coefficient - change one coefficient"""</span><span class="s1"> 
+        self.coeffs[i].coords[j] = v 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, alpha): 
+        </span><span class="s0">""" multiplication par un scalaire - external multiplication"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Matrice([alpha * X </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">self.coeffs]) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">""" Somme de deux matrices - addition of matrices"""</span><span class="s1"> 
+        L = [self.coeffs[i] + other.coeffs[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.lignes)] 
+        </span><span class="s2">return </span><span class="s1">Matrice(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">DelRow(self, i): 
+        </span><span class="s0">""" Suppression de la ligne i - delete row i"""</span><span class="s1"> 
+        L = self.coeffs[</span><span class="s3">0</span><span class="s1">:i] + self.coeffs[i + </span><span class="s3">1</span><span class="s1">:] 
+        </span><span class="s2">return </span><span class="s1">Matrice(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">DelCol(self, j): 
+        </span><span class="s0">""" Suppression de la colonne j - delete column j"""</span><span class="s1"> 
+        L = [X.coords </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">self.coeffs] 
+        M = [X[</span><span class="s3">0</span><span class="s1">:j] + X[j + </span><span class="s3">1</span><span class="s1">:] </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">L] 
+        N = [Vecteur(X) </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">M] 
+        </span><span class="s2">return </span><span class="s1">Matrice(N) 
+ 
+    </span><span class="s2">def </span><span class="s1">EchLignes(self, i1, i2): 
+        </span><span class="s0">""" échange les lignes d'indices i1 et i2 - exchange rows with indexes i1 and i2 """</span><span class="s1"> 
+        C = copy(self.coeffs) 
+        C[i2] = copy(self.Ligne(i1)) 
+        C[i1] = copy(self.Ligne(i2)) 
+        </span><span class="s2">return </span><span class="s1">Matrice(C) 
+ 
+    </span><span class="s2">def </span><span class="s1">Transpose(self): 
+        </span><span class="s0">"""Transposition d'un matrice - transpose of a matrix"""</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Matrice([self.Colonne(j) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.colonnes)]) 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self, other): 
+        </span><span class="s0">""" Produit d'une matrice par une autre - product of matrices """</span><span class="s1"> 
+        m, n, p = self.lignes, self.colonnes, other.colonnes 
+        Resultat = MatriceNulle(self.lignes, other.colonnes) 
+        </span><span class="s2">for </span><span class="s1">u </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, m): 
+            </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, p): 
+                s = Fraction(</span><span class="s3">0</span><span class="s1">) 
+                </span><span class="s2">for </span><span class="s1">w </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n): 
+                    s = s + (self.GetCoef(u, w) * other.GetCoef(w, v)) 
+                Resultat.SetCoef(u, v, s) 
+        </span><span class="s2">return </span><span class="s1">Resultat 
+ 
+    </span><span class="s2">def </span><span class="s1">Pivot(self): 
+        </span><span class="s0">""" calcul du Pivot de Gauss - Gauss'pivot computation """</span><span class="s1"> 
+        C0 = self.Colonne(</span><span class="s3">0</span><span class="s1">).coords 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.lignes): 
+            </span><span class="s2">if not </span><span class="s1">C0[i]==</span><span class="s3">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">i 
+        </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">U0(self): 
+        </span><span class="s0">"""Matrice U0 telle que le produit U0*self a sa première colonne nulle 
+        sauf le premier coeff """</span><span class="s1"> 
+        </span><span class="s0">"""Matrix U0 such that the U0*self has null first column except first coeff """</span><span class="s1">         
+        p = self.Pivot() 
+        m = self.lignes 
+        U = Id(m) 
+        </span><span class="s2">if </span><span class="s1">p &lt; </span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">U 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">if </span><span class="s1">p != </span><span class="s3">0</span><span class="s1">: 
+                U = Perm(</span><span class="s3">0</span><span class="s1">, p, m) 
+            C = self.EchLignes(</span><span class="s3">0</span><span class="s1">, p) 
+            </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, m): 
+                B = AjLigne(i, </span><span class="s3">0</span><span class="s1">, m, -C.GetCoef(i, </span><span class="s3">0</span><span class="s1">) / C.GetCoef(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">)) 
+                U = B * U 
+        </span><span class="s2">return </span><span class="s1">U 
+ 
+    </span><span class="s2">def </span><span class="s1">Det(self): 
+        </span><span class="s2">if </span><span class="s1">self.lignes == </span><span class="s3">1</span><span class="s1">:  </span><span class="s0"># cas ordre 1</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.GetCoef(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">if </span><span class="s1">self.Pivot() &lt; </span><span class="s3">0</span><span class="s1">:  </span><span class="s0"># pivot non trouvé</span><span class="s1"> 
+                </span><span class="s2">return </span><span class="s1">Fraction(</span><span class="s3">0</span><span class="s1">) 
+            </span><span class="s2">else</span><span class="s1">: 
+                M = self.U0() * self  </span><span class="s0"># appel récursif - recursive call</span><span class="s1"> 
+                N = M.DelRow(</span><span class="s3">0</span><span class="s1">).DelCol(</span><span class="s3">0</span><span class="s1">) 
+                </span><span class="s2">return </span><span class="s1">-M.GetCoef(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">) * N.Det() </span><span class="s2">if </span><span class="s1">self.Pivot() % </span><span class="s3">2 </span><span class="s2">else  </span><span class="s1">M.GetCoef(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">) * N.Det() 
+ 
+ 
+</span><span class="s4">""" Fin de la classe Matrice - end of class definition """</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Can(i, n): 
+    </span><span class="s0">""" i-ième vecteur canonique de la base de Q^n - vector i of canonical basis of Q^n"""</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">Vecteur([Entiers[</span><span class="s3">1</span><span class="s1">] </span><span class="s2">if </span><span class="s1">i == j </span><span class="s2">else </span><span class="s1">Entiers[</span><span class="s3">0</span><span class="s1">] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Id(n): 
+    </span><span class="s0">""" Matrice identité d'ordre n - Identity matrix of order n"""</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">Matrice([Can(i, n) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">AjLigne(i, j, n, alpha):  </span><span class="s0"># alpha désigne un rationnel- alpha stands for a rational !!!</span><span class="s1"> 
+    </span><span class="s0">"""Matrice d'ordre n qui, par produit à gauche ajoute  alpha fois la ligne j à la ligne i"""</span><span class="s1"> 
+    </span><span class="s0">"""Matrix of ordzer n which, by left product adds   alpha times row j to row i"""</span><span class="s1">    
+    A = Id(n) 
+    A.SetCoef(i, j, alpha) 
+    </span><span class="s2">return </span><span class="s1">A 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">VecteurNul(n): 
+    </span><span class="s2">return </span><span class="s1">Vecteur([Fraction(</span><span class="s3">0</span><span class="s1">)] * n) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">MatriceNulle(m, n): 
+    </span><span class="s2">return </span><span class="s1">Matrice([VecteurNul(n) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, m)]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Perm(i, j, n): 
+    </span><span class="s0">"""Matrice d'ordre n qui par produit à gauche permute les lignes i et j"""</span><span class="s1"> 
+    </span><span class="s0">"""Matrix of order n which, by left product, exchanges rows i and j"""</span><span class="s1">     
+    </span><span class="s2">return </span><span class="s1">Id(n).EchLignes(i, j).Transpose() 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    un = Fraction(</span><span class="s3">1</span><span class="s1">) 
+    deux = Fraction(</span><span class="s3">2</span><span class="s1">) 
+    trois = Fraction(</span><span class="s3">3</span><span class="s1">) 
+    quatre = Fraction(</span><span class="s3">4</span><span class="s1">) 
+    cinq = Fraction(</span><span class="s3">5</span><span class="s1">) 
+    six = Fraction(</span><span class="s3">6</span><span class="s1">) 
+    L1 = Vecteur([trois, un, un, un]) 
+    L2 = Vecteur([un, trois, un, un]) 
+    L3 = Vecteur([un, un, trois, un]) 
+    L4 = Vecteur([un, un, un, trois]) 
+    A = Matrice([L1, L2, L3, L4]) 
+    print(A.Det()) 
+    L1 = Vecteur([un, deux, trois, quatre]) 
+    L2 = Vecteur([deux, trois, quatre, un]) 
+    L3 = Vecteur([trois, quatre, un, deux]) 
+    L4 = Vecteur([quatre, un, deux, trois]) 
+    A = Matrice([L1, L2, L3, L4]) 
+    print(A.Det()) 
+    L1 = Vecteur([deux, un, un, un, un]) 
+    L2 = Vecteur([un, trois, un, un, un]) 
+    L3 = Vecteur([un, un, quatre, un, un]) 
+    L4 = Vecteur([un, un, un, cinq, un]) 
+    L5 = Vecteur([un, un, un, un, six]) 
+    A = Matrice([L1, L2, L3, L4, L5]) 
+    print(A.Det()) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+ </body>
+</html>

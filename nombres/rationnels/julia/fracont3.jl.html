@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">suite(n)=append!([</span><span class="s1">1</span><span class="s0">],repeat([</span><span class="s1">2</span><span class="s0">],n-</span><span class="s1">1</span><span class="s0">))</span>
+
+<span class="s2">function </span><span class="s0">fracontinue(p,q)</span>
+    <span class="s0">sol,p0,p1=[],p,q</span>
+    <span class="s2">while </span><span class="s0">p1!=</span><span class="s1">0</span>
+        <span class="s0">a=p0÷p1</span>
+        <span class="s0">push!(sol,a)</span>
+        <span class="s0">p=p1</span>
+        <span class="s0">p1=p0-a*p1</span>
+        <span class="s0">p0=p</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">sol</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">restitue(L)</span>
+    <span class="s2">if </span><span class="s0">length(L)==</span><span class="s1">1</span>
+        <span class="s2">return</span><span class="s0">[L[</span><span class="s1">1</span><span class="s0">],</span><span class="s1">1</span><span class="s0">]</span>
+    <span class="s2">end</span>
+    <span class="s0">f=restitue(L[</span><span class="s1">2</span><span class="s0">:end])</span>
+    <span class="s0">g=[f[</span><span class="s1">2</span><span class="s0">],f[</span><span class="s1">1</span><span class="s0">]]</span>
+    <span class="s2">return </span><span class="s0">[L[</span><span class="s1">1</span><span class="s0">]*g[</span><span class="s1">2</span><span class="s0">]+g[</span><span class="s1">1</span><span class="s0">],g[</span><span class="s1">2</span><span class="s0">]]</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">2</span><span class="s0">:</span><span class="s1">20</span>
+        <span class="s0">f=restitue(suite(i))</span>
+        <span class="s0">x=float(f[</span><span class="s1">1</span><span class="s0">])</span>
+        <span class="s0">y=float(f[</span><span class="s1">2</span><span class="s0">])</span>
+        <span class="s0">println(f,x/y)</span>
+    <span class="s2">end</span>
+    <span class="s0">println(sqrt(</span><span class="s1">2</span><span class="s0">))</span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

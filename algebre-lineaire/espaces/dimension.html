@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Dimension d'un espace vectoriel</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<link href=".././css/jsxgraph.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+	<script src="../../js/jsxgraphcore.js"></script>
+ 
+  </head>
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+
+<div data-role="page" data-theme="d">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="d">
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/dimension/menu.html')" /></li>  
+	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/dimension/menu.html')" /></li>
+	 <li><input type="button" value="Back to Vector Spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+ Pour le moment nous avons parlé d'espaces vectoriels de
+ <input type="button" value="dimension finie" onclick="go('generateurs.html')"  data-inline="true"/>
+
+  <u>sans préciser ce qu'est la dimension</u>
+  d'un tel
+espace. Le temps est venu de combler cette lacune.
+  <br/>
+  Supposons d'abord que E possède une
+  <input type="button" value="base" onclick="go('bases.html')"  data-inline="true"/>
+  à un seul vecteur B=(u). Alors
+il est facile de prouver que toute base de E aura un seul vecteur, ce
+vecteur étant un multiple non nul de u. En effet si 
+S=(v<sub>1</sub>,v<sub>2</sub>),
+on peut écrire v<sub>1</sub>= αu et v<sub>2</sub>=βu. Si α et β ne sont pas tout deux nuls, supposons par exemple α ≠ 0,
+on a alors v<sub>2</sub>=βα<sup>-1</sup>v<sub>1</sub>
+  qui est une
+ <input type="button" value="relation linéaire" onclick="go('libres.html')"  data-inline="true"/>
+  entre v<sub>1</sub>
+  et v<sub>2</sub>.
+On dit qu'un tel espace est de dimension 1 (une droite vectorielle).
+Nous allons généraliser ce résultat.
+ 
+  <h2>
+   Théorème fondamental
+  </h2>
+
+<a name="th1"></a><div id="container">
+<div id="label">théorème</div>   Si E possède une
+<input type="button" value="base" onclick="go('bases.html')"  data-inline="true"/>
+
+   formée de n
+vecteurs, alors n+1 vecteurs sont forcément
+<input type="button" value="liés" onclick="go('libres.html')"  data-inline="true"/>.
+</div>
+  
+ 
+ <div data-role="collapsible">
+<h4>démonstration</h4>  Nous venons de démontrer juste au dessus le théorème dans le cas où
+n=1. Nous allons procéder par récurrence sur n.
+   <br/>
+   Soit donc la base B=(u<sub>1</sub>,....,u<sub>n</sub>)
+et soit S=(v<sub>1</sub>,...,v<sub>n+1</sub>)
+   <br/>
+   On décompose les vecteurs de S sur la base B
+   <br/>
+   v<sub>j</sub>=α<sub>j,1</sub>u<sub>1</sub>+α<sub>j,2</sub>u<sub>2</sub>+...+α<sub>j,n</sub>u<sub>n</sub>
+   <br/>
+   Si tous les α<sub>j,n</sub>
+   étaient nuls pour 1 ≤ j ≤ n,
+alors de fait les n+1 vecteurs v<sub>j</sub>
+   seraient
+combinaisons linéaires des vecteurs u<sub>1</sub>, ..., u<sub>n-1
+  </sub>
+   qui sont une base d'une sous-espace F de E, les vecteurs v<sub>j</sub>
+   seraient donc tous dans F, et en appliquant l'hypothèse de récurrence,
+tout sous-système de S à n élément serait lié, donc S serait lui-même
+lié.
+   <br/>
+   On peut donc supposer que tous les α<sub>j,n</sub>
+   ne sont
+pas nuls. Quitte à changer l'ordre des vecteurs du système S on peut
+supposer que α<sub>n+1,n</sub>≠0. Ceci nous permet
+d'exprimer u<sub>n</sub> en fonction de v<sub>n+1</sub> et des u<sub>i</sub>  pour 1 ≤ i ≤ n-1:
+   <br/>
+   u<sub>n</sub>=(α<sub>n+1,n</sub>)<sup>-1</sup>(v<sub>n+1</sub>-α<sub>n+1,1</sub>u<sub>1</sub>-α<sub>n+1,2</sub>u<sub>2</sub>-...-α<sub>n+1,n-1</sub>u<sub>n-1</sub>)
+   <br/>
+   Nous allons maintenant reporter l'expression de u<sub>n</sub>
+   dans
+chacune des n premières équations pour obtenir:
+   <br/>
+   v<sub>j</sub>=α<sub>j,1</sub>u<sub>1</sub>+α<sub>j,2</sub>u<sub>2</sub>+...+α<sub>j,n</sub>(α<sub>n+1,n</sub>)<sup>-1</sup>(v<sub>n+1</sub>-α<sub>n+1,1</sub>u<sub>1</sub>-α<sub>n+1,2</sub>u<sub>2</sub>-...-α<sub>n+1,n-1</sub>u<sub>n-1</sub>)
+   <br/>
+   Donc les n vecteurs v<sub>j</sub>-α<sub>j,n</sub>(α<sub>n+1,n</sub>)<sup>-1</sup>v<sub>n+1</sub>
+   appartiennent tous au sous-espace F ayant pour base (u<sub>1</sub>,...,u<sub>n-1</sub>). On peut donc leur appliquer l'hypothèse de récurrence et conclure à
+l'existence d'une relation linéaire entre eux, qui nous fournira une
+relation linéaire pour le système S=(v<sub>1</sub>,...,v<sub>n+1</sub>)
+ </div>
+ 
+ 
+  La conséquence immédiate de ce résultat est la suivante:
+  
+<a name="th2"></a><div id="container">
+<div id="label">théorème</div>   Dans un espace vectoriel de
+dimension finie, toutes les bases ont le même nombre d'éléments.</div>
+ 
+
+<div data-role="collapsible">
+<h4>démonstration</h4>   Soient B<sub>1</sub> et B<sub>2</sub> deux
+bases d'un même espace vectoriel de dimension finie E. D'après le
+théorème précédent puisque B<sub>1</sub> est une base B<sub>2</sub> ne peut pas avoir plus d'éléments que B<sub>1</sub>, sans
+cela ce serait un système lié. Mais puisque B<sub>2</sub>
+   est une base aussi la réciproque est vraie. En définitive, B<sub>1</sub> et B<sub>2</sub> ont nécessairement le même nombre
+d'éléments.</div>
+ 
+  <h2>
+   Définitions
+  </h2>
+  <a name="defdim"></a>
+<div id="container">
+<div id="label">définition</div>   Dans un espace de dimension finie,
+le nombre d'éléments commun à toutes les bases, s'appelle la
+   <strong><em>'dimension'</em></strong> de l'espace.</div>
+
+  Il résulte de ce qui précède que:
+ 
+<a name="th3"></a><div id="container">
+<div id="label">théorème</div>   Tout
+<input type="button" value="sous-espace" onclick="go('sousev.html')"  data-inline="true"/>
+   d'un espace de
+dimension finie
+est lui-même de dimension finie et que sa dimension est inférieure ou
+égale à celle de l'espace entier. En outre, si la dimension d'un
+sous-espace est égale à celle de l'espace, le sous-espace lui-même est
+égal à l'espace entier.</div>
+ 
+  
+ <div data-role="collapsible">
+<h4>démonstration</h4>  Supposons E de dimension n et F sous-espace de E. Considérons dans F
+tous les systèmes libres. Leur nombre d'éléments ne peut excéder n.
+Prenons un tel système ayant un nombre maximal d'éléments, c'est
+nécessairement une base de F. Par ailleurs, le théorème de la base
+incomplète nous dit qu'il est possible de complèter toute base de F en
+une base de E. Mais si la base de F comporte n éléments c'est bien
+évidemment déjà une base de E.</div>
+ 
+ 
+ 
+  Par analogie avec la dimension 3 de l'espace usuel.
+  <a name="hyperplan">
+  </a>
+  
+<div id="container">
+<div id="label">définition</div>   Dans un espace de dimension finie
+n, tout sous-espace de dimension n-1 est appelé un
+   <strong><em>'hyperplan'</em></strong>.</div>
+  
+  <h2>
+   Autres conséquences:
+  </h2>
+  Les propriétés suivantes découlent immédiatement des définitions et des
+propriétés précédentes:
+  <ul>
+   <li>
+    la dimension de
+    <input type="button" value="l'intersection" onclick="go('opsev.html')"  data-inline="true"/>
+     de deux sous-espaces est
+inférieure à la dimension de chacun d'eux.
+   </li>
+   <li>
+    dim(F∩G)=dim F ⇔ F⊆G.
+   </li>
+   <li>
+    La dimension d'une
+    <input type="button" value="somme" onclick="go('opsev.html')"  data-inline="true"/>
+      de deux sous-espaces est
+inférieure ou égale à la somme de leurs dimensions.
+   </li>
+   <li>
+    dim(F+G)= dim(F)+dim(G)-dim(F∩G)
+   </li>
+   <li>
+    E=F⊕G ⇒ dim(E)=dim(F)+dim(G). La réciproque étant fausse.
+   </li>
+   <li>
+    Dans un espace de dimension finie n, pour qu'un système de
+n vecteurs forme une base, il
+    <strong>suffit</strong>
+    que
+ce soit un système libre ou que ce soit un système générateur.
+   </li>
+  </ul>
+  <h2>
+   Exemples
+  </h2>
+  <ol>
+   <li>
+    L'espace K<sup>n</sup> est de dimension n
+    <input type="button" value="(base canonique)" onclick="go('bases.html#canonique')"  data-inline="true"/>
+
+   </li>
+   <li>
+    L'espace des polynômes de degré ≤ n est de dimension n+1
+(base B=(1,x,x<sup>2</sup>,...,x<sup>n</sup>))
+   </li>
+   <li>
+    Les solutions sur &reals; de
+l'équation différentielle f'=f forment un espace vectoriel de dimension
+1. (Multiples de la fonction x → e<sup>x</sup>)
+   </li>
+  </ol>
+
+
+</div><!-- /fr --> 
+
+<div lang="en">
+For the moment we have spoken of vector spaces with
+  <input type="button" value="finite dimension" onclick="go('generateurs.html')" data-inline="true">
+
+  <u>without specifying what actually this dimension is</u>. The time has come to fill this gap. 
+   <br>
+  Suppose first that E has a
+    <input type="button" value="basis" onclick="go('bases.html')" data-inline="true"> with a single vector B=(u). So 
+ it is easy to prove that any basis of E will have a single vector, this 
+ vector being a nonzero multiple of u. Indeed if  
+ S=(v<sub>1</sub>,v<sub>2</sub>), 
+ we can write v<sub>1</sub>= αu and v<sub>2</sub>=βu. If α and β are not both zero, suppose for example α ≠ 0, 
+ we then have v<sub>2</sub>=βα<sup>-1</sup>v<sub>1</sub>
+   which is a 
+  <input type="button" value="linear relationship" onclick="go('libres.html')" data-inline="true"> between v<sub>1</sub>
+   and v<sub>2</sub>. 
+ We say that such a space is of dimension 1 (a vector line). 
+ We will generalize this result. 
+ 
+   <h2>
+   Fundamental theorem
+   </h2>
+
+<a name="th1e" ></a><div id="container">
+<div id="label">theorem </div>If E has a
+ <input type="button" value="basis" onclick="go('bases.html')" data-inline="true">
+ formed of n
+ vectors, then n+1 vectors are necessarily
+ 
+ <input type="button" value="linearly dependent" onclick="go('libres.html')" data-inline="true">.
+ </div>
+ <div data-role="collapsible">
+<h4>proof</h4>We have just proved above the theorem in the case where
+ n=1.  We will proceed by induction on n.
+    <br>Let therefore be the basis B=(u<sub>1</sub>,....,u<sub>n</sub>) 
+ and let S=(v<sub>1</sub>,...,v<sub>n+1</sub>) 
+    <br>
+   We decompose the vectors of S on the basis B
+    <br>
+   v<sub>j</sub>= α<sub>j,1</sub>u<sub>1</sub>+ α<sub>j,2</sub>u<sub>2</sub>+ ... + α<sub>j,n</sub>u<sub>n</sub>
+   <br>If all α<sub>j,n</sub>
+    were zero for 1 ≤ j ≤ n, 
+ then in fact the n+1 vectors v<sub>j</sub>
+    would be 
+ linear combinations of the vectors u<sub>1</sub>, ..., u<sub>n-1 
+   </sub>
+    which are a basis of a subspace F of E, the vectors v<sub>j</sub>
+    would therefore all be in F, and applying the induction hypothesis, 
+ any subsystem of S with n elements would be linearly dependent, so S would be itself 
+ linearly dependent. 
+    <br>We can therefore assume that all α<sub>j,n</sub>
+    are  not zero. Even if it means changing the order of the vectors of the system S, we can 
+ suppose that α<sub>n+1,n</sub>≠0. This allows us 
+ to express u<sub>n</sub>as a function of v<sub>n+1</sub>and of the u<sub>i</sub>for 1 ≤ i ≤ n-1: 
+    <br>
+   u<sub>n</sub>=(α<sub>n+1,n</sub>)<sup>-1</sup>(v<sub>n+1</sub>-α<sub>n+1,1</sub>u<sub>1</sub>-α<sub>n+1,2</sub>u<sub>2</sub>-...-α<sub>n+1,n-1</sub>u<sub>n-1</sub>)
+    <br>We will now report the expression of u<sub>n</sub>
+    in 
+ each of the first n equations to get: 
+    <br>
+   v<sub>j</sub>=α<sub>j,1</sub>u<sub>1</sub>+α<sub>j,2</sub>u<sub>2</sub>+...+α<sub>j,n</sub>(α<sub>n+1,n</sub>)<sup>-1</sup>(v<sub>n+1</sub>-α<sub>n+1,1</sub>u<sub>1</sub>-α<sub>n+1,2</sub>u<sub>2</sub>-...-α<sub>n+1,n-1</sub>u<sub>n-1</sub>)
+    <br>So the n vectors v<sub>j</sub>-α<sub>j,n</sub>(α<sub>n+1,n</sub>)<sup>-1</sup>v<sub>n+1</sub>
+    all belong to the subspace F with basis (u<sub>1</sub>,...,u<sub>n-1</sub>). We can therefore apply the recurrence hypothesis to them and conclude that 
+ the existence of a linear relationship between them, which will provide us with a 
+ linear relation for the system S=(v<sub>1</sub>,...,v<sub>n+1</sub>) 
+  
+ </div>
+ 
+ 
+ 
+  The immediate consequence of this result is the following:
+  
+ <a name="th2e" ></a><div id="container">
+<div id="label">theorem </div>In a vector space of
+ finite dimension, all bases have the same number of elements. </div>
+ 
+<div data-role="collapsible">
+<h4>proof</h4>Let B<sub>1</sub>and B<sub>2</sub> two 
+ basis of the same vector space of finite dimension E. According to the 
+ previous theorem since B<sub>1</sub> is a basis B<sub>2</sub> cannot have more elements than B<sub>1</sub>, without 
+ that would be a linearly dependent system. But since B<sub>2</sub>
+    is a basis so the converse is true. Ultimately, B<sub>1</sub> and B<sub>2</sub> necessarily have the same number 
+ of elements.  </div>
+
+ 
+  <h2>
+   Definitions
+   </h2>
+  <a name="defdime"></a>
+<div id="container">
+<div id="label">definition </div>In a finite dimensional space, 
+ the number of elements common to all the bases, is called the 
+    <strong><em>'dimension' </em></strong> of the space. </div>
+
+  It follows from the above that:
+ 
+ <a name="th3e" ></a><div id="container">
+<div id="label">theorem </div>All
+ <input type="button" value="subspaces" onclick="go('sousev.html')" data-inline="true"> of a space of
+ finite dimension
+ is itself of finite dimension and its dimension is less than or
+ equal to that of the entire space.  Furthermore, if the dimension of a
+ subspace is equal to that of the space, the subspace itself is
+ equal to the entire space. </div>
+ 
+ <div data-role="collapsible">
+<h4>proof</h4> Suppose E of dimension n and F subspace of E. Consider in F
+ all linearly independent systems.  Their number of elements cannot exceed n.
+ Consider such a system having a maximum number of elements, that is
+ necessarily a basis of F. On the other hand, the incomplete basis theorem
+ tells us that it is possible to complete any basis of F by
+ a basis of E. But if the basis of F has n elements it is obviously already a basis of E. </div>
+ 
+ 
+ 
+ 
+  By analogy with the dimension 3 of the usual space.
+   <a name="hyperplane" >
+  </a>
+  
+<div id="container">
+<div id="label">definition </div>In a finite dimensional space 
+ n, any n-1 dimensional subspace is called a 
+    <strong><em>'hyperplane' </em></strong>. </div>
+  
+  <h2>
+   Other consequences:
+   </h2>The following properties follow immediately from the definitions and
+ previous properties:
+   <ul>
+   <li>
+    the dimension of
+     <input type="button" value="the intersection" onclick="go('opsev.html')" data-inline="true"> of two subspaces is
+ less than the dimension of each of them.
+    </li>
+   <li>
+    dim(F∩G)=dim F ⇔ F⊆G.
+    </li>
+   <li>
+    The dimension of a
+     <input type="button" value="sum" onclick="go('opsev.html')" data-inline="true"> of two subspaces is
+ less than or equal to the sum of their dimensions.
+    </li>
+   <li>
+    dim(F+G)= dim(F)+dim(G)-dim(F∩G)
+    </li>
+   <li>E=F⊕G ⇒ dim(E)=dim(F)+dim(G).  The converse being false.
+    </li>
+   <li>In a space of finite dimension n, for a system of 
+ n vectors forms a basis, it 
+     <strong>enough </strong>
+     that 
+ whether it is a linearly independent system or whether it is a spanning system. 
+    </li>
+  </ul>
+  <h2>
+   Examples
+   </h2>
+  <ol>
+   <li>
+    The space K<sup>n</sup> is of dimension n
+      <input type="button" value="(canonical basis)" onclick="go('bases.html#canoniquee')" data-inline="true">
+
+   </li>
+   <li>The space of polynomials of degree ≤ n is of dimension n+1 
+ (basis B=(1,x,x<sup>2</sup>,...,x<sup>n</sup>)) 
+    </li>
+   <li>The solutions on ℝ of 
+ the differential equation f'=f form a vector space of dimension 
+ 1. (Multiples of the function x → e<sup>x</sup>) 
+    </li>
+  </ol>
+
+
+</div><!-- /en --> 
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+ 	 <li><input type="button" value="Retour au menu 'Espaces vectoriels'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to Vector spaces" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@linearly independent.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

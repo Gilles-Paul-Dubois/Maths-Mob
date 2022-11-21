@@ -1,0 +1,78 @@
+﻿<html>
+ <head>
+  <title>
+   Mersenne1.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -</span><span class="s1"> 
+</span><span class="s2">from </span><span class="s1">math </span><span class="s2">import </span><span class="s1">sqrt 
+ 
+premiers=[] </span><span class="s0"># recevra la suite des nombres premiers- will receive list of prime numbers</span><span class="s1"> 
+ 
+</span><span class="s0">#teste si un nombre n est premier</span><span class="s1"> 
+</span><span class="s0">#checks if n is prime</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">Est_Premier(n): 
+    </span><span class="s2">if </span><span class="s1">n&lt;=</span><span class="s3">1</span><span class="s1">: </span><span class="s0"># 0 et 1 non premiers - 0 and 1 not prime</span><span class="s1"> 
+        </span><span class="s2">return False</span><span class="s1"> 
+    </span><span class="s2">elif </span><span class="s1">n&lt;=</span><span class="s3">3</span><span class="s1">: </span><span class="s0"># 2 et 3 premiers - 2 and 3 prime</span><span class="s1"> 
+        </span><span class="s2">return True</span><span class="s1"> 
+    </span><span class="s2">elif </span><span class="s1">n%</span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">: </span><span class="s0"># on ne teste pas les pairs &gt;2</span><span class="s1"> 
+        </span><span class="s2">return False</span><span class="s1"> 
+    </span><span class="s2">else</span><span class="s1">: 
+        r=int(sqrt(n))+</span><span class="s3">1 </span><span class="s0"># borne supérieure pour les diviseurs possibles - upper bound for divisor candidates</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">3</span><span class="s1">,r,</span><span class="s3">2</span><span class="s1">): </span><span class="s0"># on ne teste que les diviseurs impairs - test only for odd numbers</span><span class="s1"> 
+            </span><span class="s2">if not </span><span class="s1">(n%i): 
+                </span><span class="s2">return False </span><span class="s0"># on a trouvé un diviseur, perdu ! - divisor found, failure !</span><span class="s1"> 
+        </span><span class="s2">return True  </span><span class="s0">#on n'a rien trouvé, gagné ! - nothing found, success !</span><span class="s1"> 
+ 
+</span><span class="s0"># remplit la liste premiers globale avec les n premiers nombres premiers</span><span class="s1"> 
+</span><span class="s0"># fills the global list with the first n prime numbers </span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">RemplirPremiers(n): 
+    i=</span><span class="s3">0</span><span class="s1"> 
+    j=</span><span class="s3">2</span><span class="s1"> 
+    </span><span class="s2">while </span><span class="s1">i&lt;n: 
+        </span><span class="s2">if </span><span class="s1">Est_Premier(j): 
+            premiers.append(j) 
+            j=j+</span><span class="s3">1</span><span class="s1"> 
+            i=i+</span><span class="s3">1</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            j=j+</span><span class="s3">1</span><span class="s1"> 
+ 
+</span><span class="s0"># nombre de Mersenne d'ordre p</span><span class="s1"> 
+</span><span class="s0"># Mersenne number of order p p</span><span class="s1">
+</span><span class="s2">def </span><span class="s1">Mersenne(p): 
+    </span><span class="s2">return </span><span class="s3">2</span><span class="s1">**premiers[p]-</span><span class="s3">1</span><span class="s1"> 
+ 
+</span><span class="s0"># affiche les 10 premiers nombres de Mersenne</span><span class="s1"> 
+</span><span class="s0"># prints the first 10 Mersenne numbers</span><span class="s1"> 
+</span><span class="s0"># puis, parmi ceux-ci, ceux qui sont premiers</span><span class="s1"> 
+</span><span class="s0"># Then, among these, those which are prime</span><span class="s1">
+</span><span class="s2">def </span><span class="s1">main(): 
+    RemplirPremiers(</span><span class="s3">100</span><span class="s1">) 
+    M= [Mersenne(p) </span><span class="s2">for </span><span class="s1">p </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">10</span><span class="s1">)] 
+    MP=[n </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">M </span><span class="s2">if </span><span class="s1">Est_Premier(n)] 
+    print(M) 
+    print(MP) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

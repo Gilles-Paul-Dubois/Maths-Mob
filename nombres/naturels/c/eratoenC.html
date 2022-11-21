@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   Untitled
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <meta content="SynEdit HTML exporter" name="generator"/>
+  <style type="text/css">
+   <!--
+body { color: #000000; background-color: #FFFFFF; }
+.cpp1-assembler { }
+.cpp1-character { }
+.cpp1-comment { color: #008000; font-style: italic; }
+.cpp1-float { color: #000080; }
+.cpp1-hexadecimal { color: #000080; }
+.cpp1-identifier { }
+.cpp1-illegalchar { }
+.cpp1-number { color: #000080; }
+.cpp1-octal { color: #0000FF; }
+.cpp1-preprocessor { }
+.cpp1-reservedword { font-weight: bold; }
+.cpp1-space { color: #008080; }
+.cpp1-string { color: #800000; }
+.cpp1-symbol { }
+-->
+  </style>
+ </head>
+ <body>
+  <pre>
+<code><span style="font: 10pt Courier New;"><span class="cpp1-comment">// crible.cpp : définit le point d'entrée pour l'application console.
+</span><span class="cpp1-preprocessor">#include "stdafx.h"
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;math.h&gt;
+#include &lt;time.h&gt;
+
+#define max 2000000
+
+</span><span class="cpp1-comment">// entiers super longs sur 8 octets pour additionner</span>
+<span class="cpp1-comment">// super long inters on 8 bytes to add</span>
+<span class="cpp1-reservedword">typedef</span><span class="cpp1-space"> </span><span class="cpp1-reservedword">struct
+</span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">low;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">high;
+}entier_long;
+
+entier_long</span><span class="cpp1-space"> </span><span class="cpp1-symbol">*pS;
+
+</span><span class="cpp1-comment">// ajouter un int à un superlong</span>
+<span class="cpp1-comment">// add an int to a superlong</span>
+<span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">add</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(entier_long</span><span class="cpp1-space"> </span><span class="cpp1-symbol">*</span><span class="cpp1-space"> </span><span class="cpp1-identifier">pEL,</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">u)
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">pEL-&gt;low+=u;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(pEL-&gt;low&gt;</span><span class="cpp1-number">1000000000</span><span class="cpp1-symbol">)
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">(pEL-&gt;low)-=</span><span class="cpp1-number">1000000000</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-symbol">(pEL-&gt;high)++;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+}
+
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">racine=(</span><span class="cpp1-reservedword">int</span><span class="cpp1-symbol">)sqrt((</span><span class="cpp1-reservedword">double</span><span class="cpp1-symbol">)max)+</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;
+
+</span><span class="cpp1-reservedword">char</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Crible[max];
+
+</span><span class="cpp1-comment">//initialisation du crible</span>
+<span class="cpp1-comment">// initialisation of sieve</span>
+<span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">init</span><span class="cpp1-space"> </span><span class="cpp1-symbol">()
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">pS=(entier_long</span><span class="cpp1-space"> </span><span class="cpp1-symbol">*)malloc(</span><span class="cpp1-reservedword">sizeof</span><span class="cpp1-symbol">(entier_long));
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">pS-&gt;low=pS-&gt;high=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">for</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;max;i++)
+</span><span class="cpp1-space">        </span><span class="cpp1-identifier">Crible[i]=</span><span class="cpp1-number">1</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">Crible[</span><span class="cpp1-number">0</span><span class="cpp1-symbol">]=Crible[</span><span class="cpp1-number">1</span><span class="cpp1-symbol">]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+}
+
+</span><span class="cpp1-comment">// cribler</span>
+<span class="cpp1-comment">// to sieve</span>
+<span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">go()
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">k=</span><span class="cpp1-number">2</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">j;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(k&lt;=racine)
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">{
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">for</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(j=k;j*k&lt;max;j++)
+</span><span class="cpp1-space">            </span><span class="cpp1-identifier">Crible[j*k]=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+</span><span class="cpp1-space">        </span><span class="cpp1-identifier">k++;
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">while</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(!</span><span class="cpp1-space"> </span><span class="cpp1-identifier">Crible[k])
+</span><span class="cpp1-space">            </span><span class="cpp1-identifier">k++;
+</span><span class="cpp1-space">    </span><span class="cpp1-symbol">}
+}
+
+</span><span class="cpp1-comment">// sommer les premiers</span>
+<span class="cpp1-comment">// sum prime numbers</span>
+<span class="cpp1-reservedword">void</span><span class="cpp1-space"> </span><span class="cpp1-identifier">somme()
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">i;
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">for</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(i=</span><span class="cpp1-number">0</span><span class="cpp1-symbol">;i&lt;max;i++)
+</span><span class="cpp1-space">        </span><span class="cpp1-reservedword">if</span><span class="cpp1-space"> </span><span class="cpp1-symbol">(Crible[i])
+</span><span class="cpp1-space">            </span><span class="cpp1-identifier">add(pS,i);
+}
+
+
+</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">_tmain(</span><span class="cpp1-reservedword">int</span><span class="cpp1-space"> </span><span class="cpp1-identifier">argc,</span><span class="cpp1-space"> </span><span class="cpp1-identifier">_TCHAR*</span><span class="cpp1-space"> </span><span class="cpp1-identifier">argv[])
+{
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">double</span><span class="cpp1-space"> </span><span class="cpp1-identifier">debut,milieu,fin;
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">debut=clock();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">init();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">go();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">milieu=clock();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">somme();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">fin=clock();
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"Temps du crible: %.10lf s\n"</span><span class="cpp1-symbol">,(milieu-debut)/CLOCKS_PER_SEC);
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"Temps de la sommation: %.10lf s\n"</span><span class="cpp1-symbol">,(fin-milieu)/CLOCKS_PER_SEC);
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">printf(</span><span class="cpp1-string">"Resultat: %d%09d\n"</span><span class="cpp1-symbol">,pS-&gt;high,pS-&gt;low);
+</span><span class="cpp1-space">    </span><span class="cpp1-identifier">system(</span><span class="cpp1-string">"Pause"</span><span class="cpp1-symbol">);
+</span><span class="cpp1-space">    </span><span class="cpp1-reservedword">return</span><span class="cpp1-space"> </span><span class="cpp1-number">0</span><span class="cpp1-symbol">;
+}
+
+
+</span></span>
+</code></pre>
+  <script type="text/javascript">
+   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+   try {
+var pageTracker = _gat._getTracker("UA-10793331-1");
+pageTracker._trackPageview();
+} catch(err) {}
+  </script>
+ </body>
+</html>

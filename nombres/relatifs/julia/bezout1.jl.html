@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>bezout1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># rectifier les définitions de julia</span>
+<span class="s0"># change Julia's definitions of quotient and remainder</span>
+<span class="s1">reste(a,b)= a%b&gt;=</span><span class="s2">0 </span><span class="s1">? a%b : b+a%b </span><span class="s0"># définition mathématique- mathematical definition</span>
+<span class="s1">quot(a,b) =(a-reste(a,b))÷b </span><span class="s0">#idem - the same</span>
+
+<span class="s3">function </span><span class="s1">Bezout(a,b)</span>
+    <span class="s1">s,t,u,v=</span><span class="s2">1</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">1</span>
+    <span class="s3">while </span><span class="s1">b!=</span><span class="s2">0</span>
+        <span class="s1">q=quot(a,b)</span>
+        <span class="s1">a, s, t, b, u, v = b, u, v, a - q * b, s - q * u, t - q * v</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">a&gt;</span><span class="s2">0 </span><span class="s1">? (a,s,t) : (-a, -s, -t)</span>
+<span class="s3">end</span>
+
+<span class="s1">println(Bezout(</span><span class="s2">21</span><span class="s1">,</span><span class="s2">8</span><span class="s1">))</span>
+</pre>
+</body>
+</html>

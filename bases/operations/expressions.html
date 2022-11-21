@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Expressions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    
+    
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="b">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="b">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au menu 'Opérations'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to operations" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Approche semi-formelle </h2>
+          <p> Supposons que V<sub>1</sub>, V<sub>2</sub> et V<sub>3</sub> soient trois vecteurs. </p>
+          <p> Alors V<sub>1</sub>
+            <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>V<sub>2</sub> désigne généralement le produit scalaire de V<sub>1</sub> et de V<sub>2</sub> (et est un nombre). Sachant que l'écriture λV est souvent utilisée pour désigner le produit externe du réel λ par le vecteur V, une <span style="font-weight: bold; font-style: italic;"> 'expression'</span> telle que (V<sub>1</sub>
+            <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>V<sub>2</sub>)V<sub>3</sub> a un sens et elle correspond au produit (loi externe) du scalaire V<sub>1</sub>
+            <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>V<sub>2</sub> par le vecteur V<sub>3</sub>.
+          </p>
+          <p> De la même façon V<sub>1</sub>
+            <font size="+1" style="font-weight: bold;">.</font>(V<sub>2</sub>+V<sub>3</sub>) représente le produit scalaire du vecteur V<sub>1</sub> par la somme des deux vecteurs V<sub>2</sub> et V<sub>3</sub> , et est donc un nombre. <br /> On peut donc donner du sens à des expressions complexes du type : <br /> ((λV<sub>1</sub>)+(μV<sub>2</sub>)) <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>(V<sub>3</sub>∧V<sub>4</sub>) <br /> qui sera un nombre égal à un produit scalaire d'une somme de deux multiples avec un produit vectoriel.
+          </p>
+          <p> On peut ainsi former toutes sortes d'expressions, <span style="text-decoration: underline;"> pourvu qu'elles aient un sens</span> ! </p>
+          <p> Par ailleurs, on utilise dans de telles expressions des 'abus d'écriture' consistant à <span style="text-decoration: underline;"> omettre des parenthèses</span> conformément à des <span style="font-weight: bold; font-style: italic;"> 'règles d'usage'</span>. <br /> Dans notre exemple on écrira , par exemple, plus souvent plus simplement 'λV<sub>1</sub>+μV<sub>2</sub>' au lieu de '(λV<sub>1</sub>)+(μV<sub>2</sub>)', parce qu'on convient de <span style="font-weight: bold; font-style: italic;"> 'règles de priorité implicites'</span>, nous verrons cela plus en détail au prochain paragraphe. </p>
+          <p> Les expressions peuvent donc être définies récursivement : </p>
+          <div id="container">
+            <div id="label">définition</div>
+            <ol>
+              <li> Les constantes sont des expressions. </li>
+              <li> Les variables sont des expressions. </li>
+              <li> En substituant des expressions aux paramètres d'un opérateur on obtient des expressions (pourvu que chaque expression soit d'un type compatible avec le paramètre auquel elle est subsituée). </li>
+            </ol>
+          </div>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Semi-formal approach </h2>
+          <p> Suppose that V<sub>1</sub>, V<sub>2</sub> et V<sub>3</sub> are three vectors. </p>
+          <p> Then V<sub>1</sub>
+            <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>V<sub>2</sub> usually denotes the scalar product of V<sub>1</sub> with V<sub>2</sub> (and is a number). Knowing that the notation λV is often used to denote the product of the scalar &lambda; by the vector V, an <span style="font-weight: bold; font-style: italic;"> 'expression'</span> such as (V<sub>1</sub>
+            <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>V<sub>2</sub>)V<sub>3</sub> has a meaning and corresponds to product (external) of the scalar V<sub>1</sub>
+            <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>V<sub>2</sub> by the vector V<sub>3</sub>.
+          </p>
+          <p> The same way V<sub>1</sub>
+            <font size="+1" style="font-weight: bold;">.</font>(V<sub>2</sub>+V<sub>3</sub>) represents the scalar product of V<sub>1</sub> by the sum of the two vectors V<sub>2</sub> et V<sub>3</sub> , and so is a number. <br /> Thus we can give meaning to complex expressions of the type : <br /> ((λV<sub>1</sub>)+(μV<sub>2</sub>)) <font size="+1">
+ <span style="font-weight: bold;">.</span>
+            </font>(V<sub>3</sub>∧V<sub>4</sub>) <br /> which will be a number equal to the scalar product of a sum of two multiples with a cross product.
+          </p>
+          <p> Thus we can create all types of expressions <span style="text-decoration: underline;"> as long as they have a meaning</span> ! </p>
+          <p> Furthermore, we use in such expressions 'notation abuses' consisting in <span style="text-decoration: underline;"> omission of parentheses</span> applying some <span style="font-weight: bold; font-style: italic;"> 'usage rules'</span>. <br /> In our example, we will write, for example, more simply 'λV<sub>1</sub>+μV<sub>2</sub>' instead of '(λV<sub>1</sub>)+(μV<sub>2</sub>)', because we agree about <span style="font-weight: bold; font-style: italic;"> 'implicit priority rules'</span>, we will study this in greater detail in next page. </p>
+          <p> Expressions can be defined recursively : </p>
+          <div id="container">
+            <div id="label">definition</div>
+            <ol>
+              <li> Constants are expressions. </li>
+              <li> Variables are expressions. </li>
+              <li> By substituting expressions to the operands of an operator we obtain new expressions (if, of course the result of every substitution is of a type compatible with the substituted operand). </li>
+            </ol>
+          </div>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Le coin de Python </h2>
+          <p> Voici un exemple de programme d'analyse syntaxique d'une expression donnée sous forme de chaîne et sans espaces. <br /> En cas de succès la fonction retourne une arbre sous forme de liste (type Lisp ou Scheme), en cas d'échec la valeur Faux. </p>
+          <object border="3" data="python/expr.html" height="400" type="text/html" width="600"></object>
+          <h2>Le coin de Julia</h2>
+          <p> Le module MTH229 qui intègre SymPy possède un puissant analyseur syntaxique ('parser'), capable de détecter toute expression bien formée à partir de constantes, de variables déclarées, d'opérateurs et d'appels de fonctions.</p>
+          <object border="3" data="julia/exp1.jl.html" height="160" type="text/html" width="600"></object>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's corner </h2>
+          <p> Here is an example of a program parsing an expression given as a string. <br /> In case of success the function returns a tree given as a list (Lisp or Scheme type), in case of failure value False. </p>
+          <object border="3" data="python/expr_en.html" height="400" type="text/html" width="600"></object>
+          <h2>Julia's corner</h2>
+          <p> The MTH229 package which includes Simpy possesses a powerful parser able to detect any well formed expression starting from constants, variables, operators and function calls.</p>
+          <object border="3" data="julia/exp1.jl.html" height="160" type="text/html" width="600"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Opérations'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Bases'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to operations" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to bases" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

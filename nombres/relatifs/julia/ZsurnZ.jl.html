@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #dd6718;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># utilisation d'une macro pour construire les Z/pZ</span>
+<pre><span class="s0"># use of a macro to build the Z/pZ</span>
+<span class="s0">#p is a parameter of the macro</span>
+<span class="s0">#structure with parameter p to represent all Z/pZ fields</span>
+<span class="s2">macro </span><span class="s1">Z(p)</span>
+    <span class="s2">quote</span>
+        <span class="s2">struct </span><span class="s1">F_p</span>
+            <span class="s1">x::Int</span>
+            <span class="s2">function </span><span class="s1">F_p(n::Int)</span><span class="s0">#constructeur interne- internal constructor</span>
+                <span class="s1">r=n % $p</span>
+                <span class="s2">if </span><span class="s1">r&gt;= </span><span class="s3">0</span>
+                    <span class="s2">return </span><span class="s1">new(r)</span>
+                <span class="s2">else</span>
+                    <span class="s2">return </span><span class="s1">new($p+r)</span>
+                <span class="s2">end</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s4">@Z </span><span class="s3">5 </span><span class="s0">#Construction de Z/5Z - à partir de là Z_p = Z/5Z - Construction of Z/5Z - from this point Z_p=Z/5Z</span>
+ <span class="s1">S_p=[F_p(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">4</span><span class="s1">]</span>
+<span class="s1">println(S_p)</span>
+<span class="s1">Base.:*(n1::F_p, n2::F_p) = F_p(n1.x * n2.x) </span><span class="s0"># le produit</span>
+<span class="s1">Base.:+(n1::F_p, n2::F_p) = F_p(n1.x + n2.x) </span><span class="s0"># la somme</span>
+<span class="s1">null(n::F_p) = n.x == </span><span class="s3">0</span>
+<span class="s1">unit(n::F_p) = n.x == </span><span class="s3">1</span>
+<span class="s2">function </span><span class="s1">Base.inv(n::F_p)</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">4</span>
+        <span class="s2">if </span><span class="s1">unit(F_p(i)*n)</span>
+            <span class="s2">return </span><span class="s1">F_p(i)</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s1">println([n </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">S_p </span><span class="s2">if </span><span class="s1">null(n)])</span>
+<span class="s1">println([n </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">S_p </span><span class="s2">if </span><span class="s1">unit(n)])</span>
+<span class="s1">println([inv(F_p(i)) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">4</span><span class="s1">])</span>
+</pre>
+</body>
+</html>

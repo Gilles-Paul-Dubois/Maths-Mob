@@ -1,0 +1,135 @@
+<html>
+<head>
+<title>rat2.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<pre>
+<span class="s1">function </span><span class="s0">fact(n) </span><span class="s2">#factorielle - factorial</span>
+    <span class="s0">result::Int128=</span><span class="s3">1</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s3">1</span><span class="s0">:n</span>
+        <span class="s0">result*=i</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">result</span>
+<span class="s1">end</span>
+
+
+<span class="s1">function </span><span class="s0">pgcd(m::Int128,n::Int128) </span><span class="s2">#comme son nom l'indique - lcd of m and n</span>
+    <span class="s1">while </span><span class="s0">m%n !=</span><span class="s3">0</span>
+        <span class="s0">r=m%n</span>
+        <span class="s0">m=n</span>
+        <span class="s0">n=r</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">n</span>
+<span class="s1">end</span>
+
+<span class="s2">#erreur spéciale si dénominateur est nul - special error if denominator is zero</span>
+<span class="s1">struct </span><span class="s0">RatioZeroDen &lt;: Exception</span>
+    <span class="s0">msg::String</span>
+<span class="s1">end</span>
+<span class="s2"># définition de l'objet avec constructeur - definition of object (struct) with constructor</span>
+<span class="s1">mutable struct </span><span class="s0">Rationnel</span>
+    <span class="s0">num::Int128</span>
+    <span class="s0">den::Int128</span>
+    <span class="s1">function </span><span class="s0">Rationnel(m::Int128,n::Int128)</span><span class="s2">#constructeur 'interne' - internal constructor</span>
+        <span class="s1">if </span><span class="s0">n==</span><span class="s3">0</span>
+            <span class="s0">throw(RatioZeroDen(</span><span class="s4">&quot;Erreur dénominateur nul&quot;</span><span class="s0">))</span>
+        <span class="s1">end</span>
+        <span class="s1">if </span><span class="s0">m==</span><span class="s3">0</span>
+            <span class="s1">return </span><span class="s0">new(</span><span class="s3">0</span><span class="s0">,</span><span class="s3">1</span><span class="s0">)</span>
+        <span class="s1">end</span>
+        <span class="s0">p=m*n</span>
+        <span class="s1">if </span><span class="s0">p&gt;</span><span class="s3">0</span>
+            <span class="s0">q=pgcd(m,n)</span>
+            <span class="s1">return </span><span class="s0">new(m÷q,n÷q)</span>
+        <span class="s1">else</span>
+            <span class="s0">m=abs(m)</span>
+            <span class="s0">n=abs(n)</span>
+            <span class="s0">q=pgcd(m,n)</span>
+            <span class="s1">return </span><span class="s0">new(-m÷q,n÷q)</span>
+        <span class="s1">end</span>
+    <span class="s1">end</span>
+<span class="s1">end</span>
+
+<span class="s2">#représentation externe en chaîne de caractères - display as a string</span>
+<span class="s1">function </span><span class="s0">Base.string(r::Rationnel)</span>
+    <span class="s1">if </span><span class="s0">r.den==</span><span class="s3">1</span>
+        <span class="s1">return </span><span class="s0">string(r.num)</span>
+    <span class="s1">else</span>
+        <span class="s1">return </span><span class="s0">string(r.num,</span><span class="s4">&quot;/&quot;</span><span class="s0">,r.den)</span>
+    <span class="s1">end</span>
+<span class="s1">end</span>
+
+<span class="s1">function </span><span class="s0">test() </span><span class="s2"># test d'impression - checks printing</span>
+    <span class="s0">L = [(</span><span class="s3">0</span><span class="s0">, </span><span class="s3">7</span><span class="s0">), (</span><span class="s3">6</span><span class="s0">, </span><span class="s3">2</span><span class="s0">), (-</span><span class="s3">1</span><span class="s0">, </span><span class="s3">2</span><span class="s0">), (-</span><span class="s3">3</span><span class="s0">, </span><span class="s3">2</span><span class="s0">), (</span><span class="s3">3</span><span class="s0">, -</span><span class="s3">2</span><span class="s0">), (-</span><span class="s3">3</span><span class="s0">, -</span><span class="s3">2</span><span class="s0">)]</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s0">L</span>
+        <span class="s0">println(string(Rationnel(i[</span><span class="s3">1</span><span class="s0">], i[</span><span class="s3">2</span><span class="s0">])))</span>
+    <span class="s1">end</span>
+<span class="s1">end</span>
+<span class="s2"># surcharges d'opérateurs - overloading operators</span>
+<span class="s0">Base.:+(r1::Rationnel,r2::Rationnel)= Rationnel(r1.num*r2.den+r1.den*r2.num, r1.den*r2.den) </span><span class="s2">#somme</span>
+<span class="s0">Base.:*(r1::Rationnel,r2::Rationnel)= Rationnel(r1.num*r2.num, r1.den*r2.den) </span><span class="s2">#produit</span>
+<span class="s0">Base.:-(r1::Rationnel)= Rationnel(-r1.num,r1.den) </span><span class="s2">#opposé - opposite</span>
+<span class="s0">Base.:-(r1::Rationnel,r2::Rationnel) = r1+(-r2) </span><span class="s2">#différence - difference</span>
+<span class="s0">Base.inv(r1::Rationnel) = Rationnel(r1.den,r1.num) </span><span class="s2"># inverse</span>
+<span class="s0">Base.:/(r1::Rationnel,r2::Rationnel)= r1*(inv(r2)) </span><span class="s2"># division</span>
+<span class="s1">function </span><span class="s0">Base.:^(r1::Rationnel, n::Int) </span><span class="s2">#puissances - powers</span>
+    <span class="s1">if </span><span class="s0">n==</span><span class="s3">0</span>
+        <span class="s1">return </span><span class="s0">Rationnel(</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">)</span>
+    <span class="s1">end</span>
+    <span class="s1">if </span><span class="s0">n==</span><span class="s3">1</span>
+        <span class="s1">return </span><span class="s0">r1</span>
+    <span class="s1">end</span>
+    <span class="s1">if </span><span class="s0">n&gt;</span><span class="s3">0</span>
+        <span class="s1">return </span><span class="s0">Rationnel(r1.num^n,r1.den^n)</span>
+    <span class="s1">else</span>
+        <span class="s1">return </span><span class="s0">Rationnel(r1.den^(-n), r1.num^(-n))</span>
+    <span class="s1">end</span>
+<span class="s1">end</span>
+<span class="s0">Base.float(r1::Rationnel)=r1.num/r1.den </span><span class="s2">#conversion</span>
+
+<span class="s1">function </span><span class="s0">SommeInvFact(n)</span><span class="s2">#sommes partielles des inverses factorielles - partial sum of inverse factorials</span>
+    <span class="s0">Result=Rationnel(</span><span class="s3">2</span><span class="s0">,</span><span class="s3">1</span><span class="s0">)</span>
+    <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s3">2</span><span class="s0">:n</span>
+        <span class="s0">u=Rationnel(</span><span class="s3">1</span><span class="s0">,fact(i))</span>
+        <span class="s0">Result=Result+u</span>
+    <span class="s1">end</span>
+    <span class="s1">return </span><span class="s0">Result</span>
+<span class="s1">end</span>
+
+<span class="s1">function </span><span class="s0">main() </span><span class="s2">#fonction principale - main function</span>
+    <span class="s0">test()</span>
+    <span class="s0">r1, r2 = Rationnel(</span><span class="s3">2</span><span class="s0">, </span><span class="s3">3</span><span class="s0">), Rationnel(</span><span class="s3">1</span><span class="s0">, </span><span class="s3">6</span><span class="s0">)</span>
+    <span class="s0">println(string(r1 + r2))</span>
+    <span class="s0">println(string(r1 * r2))</span>
+    <span class="s0">println(string(-r1))</span>
+    <span class="s0">println(string(r1 - r2))</span>
+    <span class="s0">println(string(inv(r1)))</span>
+    <span class="s0">println(string(r1 / r2))</span>
+    <span class="s0">println(string(r1^</span><span class="s3">0</span><span class="s0">))</span>
+    <span class="s0">println(string(r1^</span><span class="s3">1</span><span class="s0">))</span>
+    <span class="s0">println(string(r1^</span><span class="s3">2</span><span class="s0">))</span>
+    <span class="s0">println(string(r1^(-</span><span class="s3">2</span><span class="s0">)))</span>
+    <span class="s0">println(float(SommeInvFact(</span><span class="s3">12</span><span class="s0">))) </span><span class="s2">#exemple d'utilisation - example of use</span>
+    <span class="s0">println(exp(</span><span class="s3">1</span><span class="s0">)) </span><span class="s2">#comparer avec le nombre d'Euler e pour tester la convergence - compare with Euler's number to check convergence</span>
+    
+    <span class="s1">try</span>
+        <span class="s0">bizarre=Rationnel(</span><span class="s3">1</span><span class="s0">,</span><span class="s3">0</span><span class="s0">) </span><span class="s2">#provoquer l'erreur pour finir - generates an error to finish</span>
+    <span class="s1">catch </span><span class="s0">err</span>
+        <span class="s1">if isa</span><span class="s0">(err, RatioZeroDen)</span>
+            <span class="s0">println(err.msg)</span>
+        <span class="s1">end</span>
+    <span class="s1">end</span>
+<span class="s1">end</span>
+
+<span class="s0">main()</span>
+</pre>
+</body>
+</html>

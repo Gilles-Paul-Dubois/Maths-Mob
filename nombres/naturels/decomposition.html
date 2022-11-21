@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Décomposition en facteurs premiers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+    <script src="js/decomposition.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/decomposition/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/decomposition/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Voici un des résultats les plus importants de l'arithmétique: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Tout nombre n≥2 se décompose en produit de facteurs <input type="button" value="premiers" onclick="go('premiers.html')" data-inline="true" />. <br /> \(n=p_{1}^{r_{1}}p_{2}^{r_{2}}...p_{k}^{r_{k}}\) <br /> où tous les nombres p<sub>i</sub> sont des nombres premiers distincts avec p<sub>1</sub> &lt;p<sub>2</sub> &lt;...&lt;p<sub>k</sub>
+            <br /> et où les r<sub>i</sub> désignent des exposants entiers ≥ 1.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La preuve constitue un excellent cas de <input type="button" value="récurrence forte" onclick="go('../../bases/logique/recurrence.html#forte')" data-inline="true" />. <br /> Le théorème est vrai pour 2. Soit n un entier n &gt;2 si n est premier il n'y a rien à démontrer. Si n n'est pas premier alors on peut écrire <br /> n=pq où p et q vérifient (2 ≤ p &lt;n) ∧ ( 2 ≤ q &lt; n). <br /> On peut donc appliquer l'hypothèse de récurrence forte à p et q, qui sont donc décomposables en produits de facteurs premiers, il en va donc de même pour n. <br /> Cela dit, si p est un facteur (diviseur) premier de n, p peut à nouveau diviser n/p, c'est à dire qu'en fait rien n'empêche que n soit divisible par p<sup>2</sup> , p<sup>3</sup> , etc... <br /> Donc, à partir de la décomposition de n en facteurs premiers et en regroupant les facteurs premiers entre eux on arrive à: <br /> \(n=p_{1}^{r_{1}}p_{2}^{r_{2}}...p_{k}^{r_{k}}\) <br /> où tous les nombres p<sub>i</sub> sont des nombres premiers distincts avec p<sub>1</sub> &lt;p<sub>2</sub> &lt;...&lt;p<sub>k</sub>
+            <br /> et où les r<sub>i</sub> désignent des exposants entiers ≥ 1.
+          </div>
+          <div id="container">
+            <div id="label">définition</div> C'est cette écriture qu'on appelle <span style="font-weight: bold; font-style: italic;"> 'décomposition de n en produit de facteurs premiers' </span>.
+          </div> Vous pouvez générer quelques exemples avec le formulaire ci-dessous: <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> Here is one of the most important result of arithmetic : <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem</div> Every natural n≥2 can be decomposed into a product of <input type="button" value="prime" onclick="go('premiers.html')" data-inline="true" /> factors. <br /> \(n=p_{1}^{r_{1}}p_{2}^{r_{2}}...p_{k}^{r_{k}}\) <br /> where all numbers p<sub>i</sub> are distinct primes with p<sub>1</sub> &lt;p<sub>2</sub> &lt;...&lt;p<sub>k</sub>
+            <br /> and where the r<sub>i</sub> denote integral powers ≥ 1.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4> This is an excellent exemple of <input type="button" value="strong induction" onclick="go('../../bases/logique/recurrence.html#fortee')" data-inline="true" />. <br /> The theorem is true for number 2. Let n be a natural n &gt;2 if n is prime, nothing to prove.If n isn't prime then we can write <br /> n=pq where p and q satisfy (2 ≤ p &lt;n) ∧ ( 2 ≤ q &lt; n). <br /> So we can apply the strong induction hypothesis to p and q, which can be decomposed into prime factors, and so is n. <br /> This being said, if p is a prime divisor (factor) of n, p can again be a divisor of n/p which means that nothing prevent n to have p<sup>2</sup> as a divisor, the same way n can be divisible by p<sup>3</sup> and so on... <br /> So starting from the first form of decomposition, ordering and grouping the prime factors of n we arrive to : <br /> \(n=p_{1}^{r_{1}}p_{2}^{r_{2}}...p_{k}^{r_{k}}\) <br /> where all the p<sub>i</sub> are distinct prime numbers with p<sub>1</sub> &lt;p<sub>2</sub> &lt;...&lt;p<sub>k</sub>
+            <br /> and where the r<sub>i</sub> denote integral exponents ≥ 1.
+          </div>
+          <div id="container">
+            <div id="label">definition</div> It is precisely this writing which we call <span style="font-weight: bold; font-style: italic;"> 'decomposition of n as a product of prime factors' </span>.
+          </div> You can generate a few examples with the following form : <br />
+        </div>
+        <!-- /en -->
+        <form method="get" name="diviseurs">
+          <table border="1" cellpadding="2" cellspacing="2" style="text-align: left; background-color: #f6f6f6; width: 100%;">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">
+                  <div lang="fr">Donner un entier 0&lt; n ≤ 100000</div>
+                  <!-- /fr -->
+                  <div lang="en">Give a natural integer 0&lt; n ≤ 100000</div>
+                  <!-- /en -->
+                  <input name="getdiv" />
+                  <input name="Go" onclick="ClickOnGo()" type="button" value="Go!" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr"> Décomposition de n:</div>
+                  <!-- /fr -->
+                  <div lang="en">Decomposition of n :</div>
+                  <!-- /en -->
+                  <textarea cols="74" name="divn" readonly="readonly" rows="2"></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div lang="fr">Message d'erreur éventuel:</div>
+                  <!-- /fr -->
+                  <div lang="en">Eventual error message:</div>
+                  <!-- /en -->
+                  <input name="erreur" readonly="readonly" size="80" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div lang="fr">
+          <br /> Le théorème qui suit est d'une utilisation fréquente: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> La décomposition d'un nombre en facteurs premiers est unique.
+          </div> La preuve est très facile en utilisant le <input type="button" value="théorème dit de Bézout" onclick="go('../relatifs/bezout.html')" data-inline="true" />, lequel trouve naturellement sa place dans le chapitre consacré aux entiers relatifs. <br /> Nous la donnerons donc ultérieurement. <br /> En attendant voyons comment s'applique ce théorème d'unicité. <br /> Une égalité telle que: <br /> 5<sup>3</sup>&times; 7<sup>2</sup> =3<sup>4</sup> &times;7<sup>3</sup>
+          <br /> est obligatoirement fausse car le facteur 5 figure à gauche et pas à droite ou bien parce que 3 figure à droite et pas à gauche. <br /> Une égalité telle que: <br /> 5<sup>4</sup>&times;7<sup>2</sup> =5<sup>3</sup>&times;7<sup>3</sup>
+          <br /> est obligatoirement fausse aussi parce que l'exposant de 7 est plus fort à droite, ou bien parce que l'exposant de 5 est plus faible à gauche. <br />
+          <br /> Pour ce qui concerne maintenant la <span style="font-weight: bold;"> pratique </span> de cette décomposition, les choses sont plus compliquées. Elles peuvent même être très compliquées si le nombre à décomposer est très grand. <br /> Disons que si on repère une factorisation du nombre, on utilisera cette factorisation puis on décomposera chaque facteur. S'il n'existe aucune factorisation évidente, il faut disposer d'une liste de nombres premiers inférieurs ou égaux à la racine du nombre à décomposer, on prend alors ces nombres dans l'ordre 1 par 1 et on teste, à chaque fois qu'on trouve un diviseur, on divise le nombre par ce diviseur et on continue l'opération avec le quotient. Il se peut que tout échoue, c'est tout simplement que le nombre était premier il est alors tout décomposé.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <br /> The following theorem is used very often : <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem</div> The decomposition of an integer in prime factors is unique.
+          </div> The proof is very easy using the <input type="button" value="theorem of Bézout" onclick="go('../relatifs/bezout.html')" data-inline="true" />, which can be found in the chapter dedicated to integers. <br /> We will give this proof later. <br /> In the meantime let's see how to use this theorem : <br /> An equality such as : <br /> 5<sup>3</sup>&times;7<sup>2</sup> =3<sup>4</sup>&times;7<sup>3</sup>
+          <br /> is necessarily false gecause factor 5 is found on the left and not on the right or because 3 is found on the right and not on the left. <br /> An equality such as : <br /> 5<sup>4</sup>&times;7<sup>2</sup> =5<sup>3</sup>&times;7<sup>3</sup>
+          <br /> is false too because the exponent of 7 is stronger on the right side, or because the exponent of 5 is weaker on the left side <br /> Now, concerning the <strong>practical aspect</strong> of such decomposition, things are more complicated. They can be even very complicated if the number to factorize is very big. <br /> Let's say that if we locate a factorization of the number, we will use this factorization then we will break down each factor. If there is no obvious factorization, you need a list of numbers primes less than or equal to the root of the number to be broken down, we then take these numbers in the order one by one and we test, each time we find a divisor, we divide the number by this divisor and we continue the operation with the quotient. It may all fail, it's just that the number was prime so it's all decomposed.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <a name="exdec"></a>
+          <h2> Le coin de Python </h2>
+          <p> Ce programme affiche la décomposition en facteurs premiers d'un nombre. </p>
+          <object border="3" data="python/decompose1.html" height="340" type="text/html" width="100%"></object>
+          <h2> Café Julia </h2>
+          <p> Ce programme Julia 1.6 affiche également la décomposition en facteurs premiers d'un nombre. </p>
+          <object border="3" data="julia/decomp1.jl.html" height="270" type="text/html" width="100%"></object>
+          <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <a name="exdece"></a>
+          <h2> Python's corner </h2>
+          <p> This program displays the decomposition of a number </p>
+          <object border="3" data="python/decompose1.html" height="340" type="text/html" width="100%"></object>
+          <h2> Julia's corner </h2>
+          <p> This program does the same with Julia 1.6 </p>
+          <object border="3" data="julia/decomp1.jl.html" height="270" type="text/html" width="100%"></object>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Naturels'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to naturals" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>              
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,53 @@
+﻿<html>
+ <head>
+  <title>
+   rac2.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+ 
+</span><span class="s0">#calcul de racine de 2 avec une précision donnée</span><span class="s1"> 
+</span><span class="s0">#computation of &radic;2 with given precision</span><span class="s1">
+</span><span class="s2">import </span><span class="s1">math 
+ 
+</span><span class="s0"># le générateur - the generator</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">rac2 (): 
+    pow=</span><span class="s3">1</span><span class="s1"> 
+    app=</span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">yield </span><span class="s1">app </span><span class="s0"># première approximation entière - first integral approx.</span><span class="s1"> 
+    </span><span class="s2">while True </span><span class="s1">: </span><span class="s0"># détermination des décimales successives - determining decimals in sequence</span><span class="s1"> 
+        pow=pow*</span><span class="s3">100</span><span class="s1"> 
+        u=</span><span class="s3">0</span><span class="s1"> 
+        </span><span class="s2">while </span><span class="s1">(app*</span><span class="s3">10</span><span class="s1">+u)*(app*</span><span class="s3">10</span><span class="s1">+u) &lt;= </span><span class="s3">2</span><span class="s1">*pow: 
+            u+=</span><span class="s3">1</span><span class="s1"> 
+        app=app*</span><span class="s3">10</span><span class="s1">+u-</span><span class="s3">1</span><span class="s1"> 
+        </span><span class="s2">yield </span><span class="s1">app 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    racine=rac2() </span><span class="s0"># objet généré - generated object</span><span class="s1"> 
+    print(math.sqrt(</span><span class="s3">2</span><span class="s1">)) </span><span class="s0"># juste pour vérifier - just to check</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">50</span><span class="s1">): 
+        root=str(next(racine)) </span><span class="s0">#pour un affichage propre - for clean display</span><span class="s1"> 
+        print(root[</span><span class="s3">0</span><span class="s1">]+</span><span class="s4">','</span><span class="s1">+root[</span><span class="s3">1</span><span class="s1">:]) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

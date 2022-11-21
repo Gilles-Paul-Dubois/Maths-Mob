@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 03</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="d">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../multilat.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p> Soit K un corps de caractéristique ≠ 2. Soit E un K-espace vectoriel de dimension finie et q une forme quadratique sur E ( <input type="button" value="voir ex02" onclick="go('ex02.html')" data-inline="true" /> ). <br /> Si B est une base de E et si (a<sub>1</sub>,...,a<sub>n</sub>) sont les coordonnées de x par rapport à B, on a donc une expression de q la forme: <br /> \(q(x)=\sum_{1\leqslant i,j\leqslant n}^{}a_{i}a_{j}\alpha_{i,j}\) <br /> On dit que q est <strong>
+              <em> 'réduite à une somme de carrés' </em>
+            </strong> si les coefficients α<sub>i,j</sub> sont nuls quand i≠j. <br /> Montrer qu'on peut toujours trouver une base pour laquelle q soit réduite à une somme de carrés. <br /> Applications: <br /> Réduire à une somme de carrés les formes quadratiques suivantes: <br /> x<sub>1</sub>x<sub>2</sub>+x<sub>2</sub>x<sub>3</sub>+x<sub>3</sub>x<sub>1</sub>
+            <br /> 
+            x<sub>1</sub><sup>2</sup>-2x<sub>1</sub>x<sub>2</sub>+2x<sub>1</sub>x<sub>3</sub>-2x<sub>1</sub>x<sub>4</sub>+x<sub>2</sub><sup>2</sup>+2x<sub>2</sub>x<sub>3</sub>-4x<sub>2</sub>x<sub>4</sub>+x<sub>3</sub><sup>2</sup>-2x<sub>4</sub><sup>2</sup>
+            <br />
+          </p>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <p> Utiliser un artifice de calcul semblable à celui de la réduction des polynômes du second degré: <br> ax<sup>2</sup>+bx+c=a((x+b/2a)<sup>2</sup>-Δ/4a<sup>2</sup>) </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <p> Nous allons raisonner sur des exemples simples, le cas général ne différant en rien de ces cas particuliers. <br /> Nous cherchons d'abord dans l'ordre la première coordonnée x<sub>i</sub> apparaissant avec un coefficient non nul. <br /> Supposons que ce soit x<sub>1</sub>. <br /> Cela signifie qu'il existe un terme non nul en x<sub>1</sub>
+             <sup>2</sup> ou bien des produits x<sub>1</sub>x<sub>k</sub> avec k ≠ 1, ou bien les deux. <br /> Nous distinguerons deux cas. <br />
+            <ol>
+              <li> Il existe un terme en x<sub>1</sub><sup>2</sup> : <br /> Par exemple 2x<sub>1</sub><sup>2</sup>+2x<sub>1</sub>x<sub>2</sub>+2x<sub>2</sub><sup>2</sup>+4x<sub>2</sub>x<sub>3</sub>+5x<sub>3</sub><sup>2</sup>
+                <br /> Mettre en facteur le coefficient de x<sub>1</sub><sup>2</sup>
+                <br /> 2(x<sub>1</sub><sup>2</sup>+x<sub>1</sub>x<sub>2</sub>)+2x<sub>2</sub><sup>2</sup>+4x<sub>2</sub>x<sub>3</sub>+5x<sub>3</sub><sup>2</sup>
+                <br /> 2(x<sub>1</sub>+x<sub>2</sub>/2)<sup>2</sup>-x<sub>2</sub><sup>2</sup>/4+2x<sub>2</sub><sup>2</sup>+4x<sub>2</sub>x<sub>3</sub>+5x<sub>3</sub><sup>2</sup>
+                <br /> 2(x<sub>1</sub>+x<sub>2</sub>/2)<sup>2</sup>+q<sub>1</sub>(x) où q<sub>1</sub>(x) est une forme quadratique ne contenant plus x<sub>1</sub>. <br /> Il suffit alors de continuer avec x<sub>2</sub> et ainsi de suite, jusqu'à épuisement des variables.
+              </li>
+              <li> Il n'existe pas de terme en x<sub>1</sub><sup>2</sup> : <br /> par exemple x<sub>1</sub>x<sub>2</sub>+x<sub>1</sub>x<sub>3</sub>+x<sub>2</sub><sup>2</sup>-x<sub>2</sub>x<sub>3</sub>
+                <br /> Mettre en facteur x<sub>1</sub>
+                <br /> x<sub>1</sub>(x<sub>2</sub>+x<sub>3</sub>)+x<sub>2</sub><sup>2</sup>-x<sub>2</sub>x<sub>3</sub>
+                <br /> Puis utiliser l'identité (a+b)²-(a-b)²=4ab <br /> (1/4)(x<sub>1</sub>+x<sub>2</sub>+x<sub>3</sub>)<sup>2</sup>-(1/4)(x<sub>1</sub>-x<sub>2</sub>-x<sub>3</sub>)<sup>2</sup>+x<sub>2</sub><sup>2</sup>-x<sub>2</sub>x<sub>3</sub>
+                <br /> (1/4)(x<sub>1</sub>+x<sub>2</sub>+x<sub>3</sub>)<sup>2</sup>-(1/4)(x<sub>1</sub>-x<sub>2</sub>-x<sub>3</sub>)<sup>2</sup>+q<sub>1</sub>(x) où q<sub>1</sub>(x) est une forme quadratique ne contenant plus x<sub>1</sub>. <br /> Il suffit alors de continuer avec x<sub>2</sub> et ainsi de suite, jusqu'à épuisement des variables.
+              </li>
+            </ol> Solutions des deux questions calculatoires: <br /> ((1/2)x<sub>1</sub>+(1/2)x<sub>2</sub>+x<sub>3</sub>)<sup>2</sup>-((1/2)x<sub>1</sub>-(1/2)x<sub>2</sub>)<sup>2</sup>-x<sub>3</sub>
+           <sup>2</sup>
+            <br /> (x<sub>1</sub>-x<sub>2</sub>+x<sub>3</sub>-x<sub>4</sub>)<sup>2</sup>+(x<sub>2</sub>+x<sub>3</sub>+x<sub>4</sub>)<sup>2</sup>-(x<sub>2</sub>-x<sub>3</sub>+2x<sub>4</sub>)<sup>2</sup>
+            </p>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../multilat.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>Let K be a field of characteristic ≠ 2. Let E be a finite dimensional K-vector space and q a quadratic form on E ( <input type="button" value="see ex02" onclick="go('ex02.html')" data-inline="true">). <br> If B is a basis of E and if (a<sub>1</sub>,...,a<sub>n</sub>) are the coordinates of x with respect to B, then we have an expression for q in the form: <br> \(q(x)=\sum_{1\leqslant i,j\leqslant n}^{}a_{i}a_{j}\alpha_{i,j}\) <br>We say that q is <strong>
+              <em> 'reduced to a sum of squares' </em>
+            </strong> if the coefficients α<sub>i,j</sub> are zero when i≠j. <br> Show that we can always find a basis for which q is reduced to a sum of squares. <br> Applications: <br> Reduce to a sum of squares the following quadratic forms: <br> x<sub>1</sub>x<sub>2</sub>+x<sub>2</sub>x<sub>3</sub>+x<sub>3</sub>x<sub>1</sub>
+            <br> 
+            x<sub>1</sub><sup>2</sup>-2x<sub>1</sub>x<sub>2</sub>+2x<sub>1</sub>x<sub>3</sub>-2x<sub>1</sub>x<sub>4</sub>+x<sub>2</sub><sup>2</sup>+2x<sub>2</sub>x<sub>3</sub>-4x<sub>2</sub>x<sub>4</sub>+x<sub>3</sub><sup>2</sup>-2x<sub>4</sub><sup>2</sup>            
+            <br>
+          </p>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <p>Use a calculation trick similar to that of the reduction of quadratic polynomials: <br> ax<sup>2</sup>+bx+c=a((x+b/2a)<sup>2</sup>-Δ/4a<sup>2</sup>) </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <p>We will reason on simple examples, the general case not differing in any way from these particular cases. <br>We first search in order for the first coordinate x<sub>i</sub> appearing with a non-zero coefficient. <br> Suppose it is x<sub>1</sub>. <br>This means that there is a nonzero term in x<sub>1</sub>
+             <sup>2</sup> or products x<sub>1</sub>x<sub>k</sub> with k ≠ 1, or both. <br> We will distinguish two cases. <br>
+            </p>
+            <ol>
+              <li>There is a term in x<sub>1</sub><sup>2</sup> : <br> For example 2x<sub>1</sub><sup>2</sup>+2x<sub>1</sub>x<sub>2</sub>+2x<sub>2</sub><sup>2</sup>+4x<sub>2</sub>x<sub>3</sub>+5x<sub>3</sub><sup>2</sup>
+                <br> Factor the coefficient of x<sub>1</sub><sup>2</sup>
+                <br> 2(x<sub>1</sub><sup>2</sup>+x<sub>1</sub>x<sub>2</sub>)+2x<sub>2</sub><sup>2</sup>+4x<sub>2</sub>x<sub>3</sub>+5x<sub>3</sub><sup>2</sup>
+                <br /> 2(x<sub>1</sub>+x<sub>2</sub>/2)<sup>2</sup>-x<sub>2</sub><sup>2</sup>/4+2x<sub>2</sub><sup>2</sup>+4x<sub>2</sub>x<sub>3</sub>+5x<sub>3</sub><sup>2</sup>
+                <br /> 2(x<sub>1</sub>+x<sub>2</sub>/2)<sup>2</sup>+q<sub>1</sub>(x) where q<sub>1</sub>(x) is a quadratic form no longer containing x<sub>1</sub>. <br>Then just continue with x<sub>2</sub> and so on, until the variables are exhausted.
+              </li>
+              <li>There is no term in x<sub>1</sub><sup>2</sup> : <br> for example x<sub>1</sub>x<sub>2</sub>+x<sub>1</sub>x<sub>3</sub>+x<sub>2</sub><sup>2</sup>-x<sub>2</sub>x<sub>3</sub>
+                <br> Factor x<sub>1</sub>
+                <br> x<sub>1</sub>(x<sub>2</sub>+x<sub>3</sub>)+x<sub>2</sub><sup>2</sup>-x<sub>2</sub>x<sub>3</sub>
+                <br> Then use the identity (a+b)²-(a-b)²=4ab <br> (1/4)(x<sub>1</sub>+x<sub>2</sub>+x<sub>3</sub>)<sup>2</sup>-(1/4)(x<sub>1</sub>-x<sub>2</sub>-x<sub>3</sub>)<sup>2</sup>+x<sub>2</sub><sup>2</sup>-x<sub>2</sub>x<sub>3</sub>
+                <br> (1/4)(x<sub>1</sub>+x<sub>2</sub>+x<sub>3</sub><sup>2</sup>-(1/4)(x<sub>1</sub>-x<sub>2</sub>-x<sub>3</sub><sup>2</sup>+q<sub>1</sub>(x) where q<sub>1</sub>(x) is a quadratic form no longer containing x<sub>1</sub>. <br>Then just continue with x<sub>2</sub> and so on, until the variables are exhausted.
+              </li>
+            </ol> Solutions of the two computational questions: <br /> ((1/2)x<sub>1</sub>+(1/2)x<sub>2</sub>+x<sub>3</sub>)<sup>2</sup>-((1/2)x<sub>1</sub>-(1/2)x<sub>2</sub>)<sup>2</sup>-x<sub>3</sub>
+           <sup>2</sup>
+            <br /> (x<sub>1</sub>-x<sub>2</sub>+x<sub>3</sub>-x<sub>4</sub>)<sup>2</sup>+(x<sub>2</sub>+x<sub>3</sub>+x<sub>4</sub>)<sup>2</sup>-(x<sub>2</sub>-x<sub>3</sub>+2x<sub>4</sub>)<sup>2</sup>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

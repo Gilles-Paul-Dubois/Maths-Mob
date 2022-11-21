@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+	 <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="b">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="b">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../permutations.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>Cet exercice suppose connue la notion de <input type="button" value="cycle" onclick="go('../../cycles.html')"  data-inline="true"/>, ainsi que celle de <input type="button" value="transposition" onclick="go('../../transpositions.html')"  data-inline="true"/>.</p>
+          <br /> σ étant une permutation de l'ensemble {1,2,....n} on définit la signature ε(σ) de σ par la formule: <br />
+				<span style="font-size: larger;">\(\prod_{1\leqslant i< j\leqslant n}^{}\frac{\sigma (i)-\sigma (j)}{i-j}\)</span>
+          <br /> En outre, on dit que σ présente une <span style="font-weight: bold; font-style: italic;"> inversion</span> sur le couple (i,j) (i&lt;j) si σ(i)&gt;σ(j). <br />
+          <ol>
+            <li> Montrer que ε(σ)=+1 ou ε(σ)= -1, et que ε(σ)=(-1) <sup>ni(σ)</sup> où ni(σ) représente le nombre d'inversions de &sigma;.
+            <li> Montrer que ε(σ <font size="-1">o</font>τ)=ε(σ)&times;ε(τ). </li>
+            <li> Quelle est la signature d'une transposition ? </li>
+            <li> Donner une autre formule pour la signature d'une permutation. </li>
+            <li> Comment calculer en pratique la signature d'une permutation ? </li>
+          </ol>
+          <div data-role="collapsible">
+            <h4>aide</h4> Dans la formule de définition de la signature, la sommation est faite sur toutes les <span style="font-weight: bold; font-style: italic;"> paires </span> {i,j}d'éléments de {1,2,...,n}. <br /> Or l'application {i,j} → {σ(i),σ(j)}est une bijection de l'ensemble de ces paires sur lui-même. <br /> La signature de σ <font size="-1"> o </font> τ est définie par: <br />
+ <span style="font-size: larger;">\(\prod_{1\leqslant i< j\leqslant n}^{}\frac{\sigma\circ \tau  (i)-\sigma\circ \tau  (j)}{i-j}\)</span>
+            <br />
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4> Dans le quotient, le produit du haut est donc égal au produit du bas au signe près, un facteur -1 étant introduit à chaque inversion de σ . <br /> La signature de σ <font size="-1"> o </font> τ vaut donc: <br />
+ <span style="font-size: larger;">\(\prod_{1\leqslant i< j\leqslant n}^{}\frac{\left ( \sigma\circ \tau  (i)-\sigma\circ \tau  (j) \right )\left ( \tau (i)-\tau (j) \right )}{\left ( i-j \right )\left ( \tau (i)-\tau (j) \right )}\)</span>
+            <br /> soit encore: <br />
+<span style="font-size: larger;">\( \prod_{1\leqslant i< j\leqslant n}^{}\frac{\sigma\circ \tau  (i)-\sigma\circ \tau  (j)}{\tau (i)-\tau (j)}\times \prod_{1\leqslant i< j\leqslant n}^{}\frac{\tau (i)-\tau (j)}{i-j}\)</span>
+            <br /> Or dans la formule ci dessus le premier produit est égal à ε(σ) <br /> parce que: <br /> {i,j} → {τ(i),τ(j)}est une bijection de l'ensemble des paires de {1,2,...n} sur lui-même. <br /> D'où la formule cherchée. <br /> La signature d'une transposition est égale à -1, car elle présente une inversion et une seule. <br /> La signature d'une permutation σ peut encore être définie comme: <br /> (-1) <sup>p</sup> si σ peut être décomposée en un produit de p transpositions. <br /> Remarque: la décomposition de σ en produit de transpositions n'est évidemment pas unique mais, d'une décomposition à l'autre, ce qui ne change pas c'est la <span style="font-weight: bold; font-style: italic;"> parité</span> du nombre de transpositions. <br /> Pour obtenir la signature d'une permutation, on la décompose en cycles. <br /> Tout cycle d'ordre p a une signature égale à (-1) <sup>p-1</sup> d'après ce qui précède. <br /> Il suffit ensuite d'appliquer la question 2. <br />
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../permutations.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>This exercise supposes known the notion of <input type="button" value="cycle" onclick="go('../../cycles.html')"  data-inline="true"/>, and that of  <input type="button" value="transposition" onclick="go('../../transpositions.html')"  data-inline="true"/> as well.</p>          
+          <br /> σ being a permutation of the set {1,2,....n} we define the signature ε(σ) of σ by the formula : <br />
+<span style="font-size: larger;">\(\prod_{1\leqslant i< j\leqslant n}^{}\frac{\sigma (i)-\sigma (j)}{i-j}\)</span>
+          <br /> Moreover,we says that σ presents an <span style="font-weight: bold; font-style: italic;"> inversion</span> on the pair (i,j) (i&lt;j) if σ(i)&gt;σ(j). <br />
+          <ol>
+            <li> Show that ε(σ)=+1 or ε(σ)= -1, and that ε(σ)=(-1) <sup>ni(σ)</sup> where ni(σ) denotes the number of inversions of &sigma;.
+            <li> show that ε(σ <font size="-1">o</font>τ)=ε(σ)&times;ε(τ). </li>
+            <li> What is the signature of a transposition ? </li>
+            <li> Give another formula for the signature of a permutation. </li>
+            <li> Practically how to compute the signature of a permutation ? </li>
+          </ol>
+          <div data-role="collapsible">
+            <h4>hint</h4> In the formula given to define the signature signature, sum is made over all <span style="font-weight: bold; font-style: italic;"> pairs </span> {i,j} of elements of {1,2,...,n}. <br /> Now the map {i,j} → {σ(i),σ(j)} is a bijection of the set of all these pairs on itself. <br /> The signature of σ <font size="-1"> o </font> τ is defined by: <br />
+<span style="font-size: larger;">\(\prod_{1\leqslant i< j\leqslant n}^{}\frac{\sigma\circ \tau  (i)-\sigma\circ \tau  (j)}{i-j}\)</span>
+            <br />
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4> In the quotient, the factor of the top is the same as the factor of the bottom maybe with a different sign, a  factor -1 being introduced by every inversion of σ . <br /> The signature of &sigma;<font size="-1">o</font>τ has value : <br />
+ <span style="font-size: larger;">\(\prod_{1\leqslant i< j\leqslant n}^{}\frac{\left ( \sigma\circ \tau  (i)-\sigma\circ \tau  (j) \right )\left ( \tau (i)-\tau (j) \right )}{\left ( i-j \right )\left ( \tau (i)-\tau (j) \right )}\)</span>
+            <br /> Or: <br />
+ <span style="font-size: larger;">\( \prod_{1\leqslant i< j\leqslant n}^{}\frac{\sigma\circ \tau  (i)-\sigma\circ \tau  (j)}{\tau (i)-\tau (j)}\times \prod_{1\leqslant i< j\leqslant n}^{}\frac{\tau (i)-\tau (j)}{i-j}\)</span>
+            <br /> But in the formula just above the first product is ε(σ) <br /> because: <br /> {i,j} → {τ(i),τ(j)} is a bijection of the set of pairs of {1,2,...n} onto itself. <br /> So we have the formula we are looking for. <br /> The signature of a transposition is -1, because it gives one inversion and only one <br /> So the signature of a permutation can be defined as well as <br /> (-1) <sup>p</sup> if σ can be expressed as a product of p transpositions. <br /> Note: The decomposition de σ in a product of transpositions is not unique but,from one decomposition to another what does not change is the <b>
+              <i>parity</i>
+            </b> of the number of transpositions. <br /> To get the signature of a permutation we begin by a decomposition in cycles. <br /> Any cycle of order p has a signature equal to (-1) <sup>p-1</sup> from what we saw previously. <br /> It's enough to apply the result of question 2. <br />
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>            
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

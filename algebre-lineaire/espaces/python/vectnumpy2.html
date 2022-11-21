@@ -1,0 +1,53 @@
+﻿<html>
+ <head>
+  <title>
+   vectnumpy2.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+</span><span class="s0">#python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s0">""" Vérification expérimentale des propriétés d'un sous-espace vectoriel"""</span><span class="s1"> 
+</span><span class="s0">""" Experimental checking of properties of a subspace"""</span><span class="s1"> 
+</span><span class="s2">from </span><span class="s1">numpy </span><span class="s2">import </span><span class="s1">array 
+</span><span class="s2">from </span><span class="s1">random </span><span class="s2">import </span><span class="s1">randint 
+ 
+</span><span class="s0"># ensemble aléatoire de vecteurs du 'plan' P x+y+z=0</span><span class="s1"> 
+</span><span class="s0"># Random subset of the plane P x+y+z=0</span><span class="s1">
+L = [array([x,y,-x-y]) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">range(-</span><span class="s3">10</span><span class="s1">,</span><span class="s3">11</span><span class="s1">) </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">range(-</span><span class="s3">10</span><span class="s1">,</span><span class="s3">11</span><span class="s1">)] 
+ 
+</span><span class="s0"># test d'appartenance de u au plan P</span><span class="s1"> 
+</span><span class="s0"># Checking u member of P</span><span class="s1">
+</span><span class="s2">def </span><span class="s1">IsInP (u): 
+    </span><span class="s2">return </span><span class="s1">u[</span><span class="s3">0</span><span class="s1">]+u[</span><span class="s3">1</span><span class="s1">]+u[</span><span class="s3">2</span><span class="s1">]==</span><span class="s3">0</span><span class="s1"> 
+ 
+</span><span class="s4">""" Liste aléatoire de 20 vecteurs de la forme au+bv avec u dans L, v dans L et a et b aléatoires entiers """</span><span class="s1"> 
+</span><span class="s4">""" Random list of 20 vectors of the form au+bv with u in L, v in L and a , b random integers """</span><span class="s1"> 
+AL=[ randint(-</span><span class="s3">10</span><span class="s1">,</span><span class="s3">10</span><span class="s1">)*L[randint(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">400</span><span class="s1">)]+randint(-</span><span class="s3">10</span><span class="s1">,</span><span class="s3">10</span><span class="s1">)*L[randint(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">400</span><span class="s1">)] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">20</span><span class="s1">)] 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">""" vérifie si tous les vecteurs de AL sont dans P"""</span><span class="s1"> 
+    </span><span class="s0">""" Checks if all vectors of AL are in P"""</span><span class="s1">    
+    </span><span class="s2">global </span><span class="s1">AL 
+    </span><span class="s2">for </span><span class="s1">u </span><span class="s2">in </span><span class="s1">AL: 
+        print (u) 
+    print (all([IsInP(u) </span><span class="s2">for </span><span class="s1">u </span><span class="s2">in </span><span class="s1">AL])) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__==</span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+</span></pre>
+ </body>
+</html>

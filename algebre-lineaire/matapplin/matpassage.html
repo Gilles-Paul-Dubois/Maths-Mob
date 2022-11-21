@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Matrices de passage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/matpassage/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices et applications linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/matpassage/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Matrices and linear maps'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Soit E un <input type="button" value="espace vectoriel" onclick="go('../espaces/defev.html')" data-inline="true" /> de <input type="button" value="dimension" onclick="go('../espaces/dimension.html#defdim')" data-inline="true" /> finie n, et soit B=(u<sub>1</sub>,...,u<sub>n</sub>) et B'=(v<sub>1</sub>,...,v<sub>n</sub>) deux <input type="button" value="bases" onclick="go('../espaces/bases.html')" data-inline="true" /> de E. <br /> Nous nous posons les problèmes suivants: <ul>
+            <li> Ayant les <input type="button" value="coordonnées" onclick="go('../espaces/bases.html')" data-inline="true" /> d'un vecteur dans la base B comment les avoir dans la base B' ? </li>
+            <li> Ayant la <input type="button" value="matrice" onclick="go('../matapplin/defmatapp.html')" data-inline="true" /> d'un endomorphisme f de E par rapport à la base B, comment avoir la matrice du même endomorphisme par rapport à B' ? </li>
+          </ul> Le premier problème peut, dans tous les cas, être résolu en posant un système d'équations, mais il est possible que cette opération de conversion de coordonnées soit à répéter de nombreuses fois. Il est donc souhaitable d'obtenir un procédé automatique (des formules calculées une fois pour toutes) pour effectuer les conversions. La même remarque vaut pour les matrices d'endomorphismes. <div id="container">
+            <div id="label">définition</div> Considérons la matrice P de l'application identique par rapport aux bases B' et B, P=M(Id,B',B). <br /> Les colonnes de P sont les coordonnées des vecteurs de la base B' exprimés dans la base B. P s'appelle par définition la <strong>
+              <em>'matrice de passage'</em>
+            </strong> de B à B'.
+          </div>
+          <h2>Propriétés</h2> Il résulte immédiatement de la définition que: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> La matrice de passage de B' à B est <input type="button" value="l'inverse" onclick="go('../matrices/algmat.html')" data-inline="true" /> de la matrice de passage de B à B'
+          </div> Cette matrice de passage résout nos deux problèmes, plus précisément: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si X est la <input type="button" value="matrice colonne" onclick="go('matcolonne.html')" data-inline="true" /> représentant le vecteur u dans la base B alors P<sup>-1</sup>X est la matrice colonne représentant u dans la base B'.
+          </div> La démonstration tient tout entière dans la définition de P. <a name="th3"></a>
+          <div id="container">
+            <div id="label">théorème</div> Soit f un endomorphisme de E. Alors si M<sub>1</sub>=M(f,B) et M<sub>2</sub>=M(f,B') on a entre M<sub>1</sub> et M<sub>2</sub> la relation: <br /> M<sub>2</sub>=P<sup>-1</sup>M<sub>1</sub>P
+          </div> Cela résulte du théorème sur la <input type="button" value="matrice d'une composée" onclick="go('../matapplin/prodetcomp.html')" data-inline="true" /> et du fait que f=Id <font size="-2">o</font>f <font size="-2">o</font>Id <br /> Examinons maintenant le cas où B est la base canonique de K<sup>n</sup>
+          <br /> Soit B'=(v<sub>1</sub>,...,v<sub>n</sub>). La matrice P est obtenue immédiatemment, c'est celle dont les colonnes sont les coordonnées des v<sub>i</sub> . Tout se résume donc à un calcul d'inverse. <h2> Le coin de Python </h2> Nous calculons ici une matrice de passage en inversant une matrice par les fonctions spécialisées des bibliothèques numpy et scipy. <p>
+            <object border="3" data="python/passage1.html" height="300" type="text/html" width="100%"></object>
+          </p> Voici le résultat de l'exécution <br />
+          <table border="1" cellpadding="0" cellspacing="0">
+            <tbody>
+              <tr>
+                <td> [[ 2 1 0 0] <br /> [ 3 2 0 0] <br /> [ 1 1 3 4] <br /> [ 2 -1 2 3]] <br /> [[ 2.00000000e+00 -1.00000000e+00 0.00000000e+00 0.00000000e+00] <br /> [ -3.00000000e+00 2.00000000e+00 2.48580453e-16 -3.17210451e-16] <br /> [ 3.10000000e+01 -1.90000000e+01 3.00000000e+00 -4.00000000e+00] <br /> [ -2.30000000e+01 1.40000000e+01 -2.00000000e+00 3.00000000e+00]] <br />
+                </td>
+              </tr>
+            </tbody>
+          </table> De fait le résultat est : \[\begin{pmatrix} 2& -1 & 0& 0\\ -3& 2& 0& 0\\ 31& -19& 3 & -4\\ -23 & 14& -2& 3\\ \end{pmatrix}\] <p> Ce genre d'erreurs d'arrondi (très faible de l'ordre de 10<sup>-16</sup>, se produit souvent. Il est le résultat du grand nombre d'opérations effectuées et de la précision des flottants du système (quel qu'il soit ...). Il n'y a jamais de calcul exact avec des 'floats'. </p>
+          <h2> Le coin de Julia </h2>
+          <p>Même chose avec Julia 1.6 et le package LinearAlgebra. cette fois il n'y a pas d'erreurs d'arrondis.</p>
+          <p>
+            <object border="3" data="julia/passage.jl.html" height="100" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition </h2> Let E be a <input type="button" value="vector space" onclick="go('../espaces/defev.html')" data-inline="true"> of finite <input type="button" value="dimension" onclick="go('../espaces/dimension.html#defdime')" data-inline="true"> n, and let B=(u<sub>1</sub>,...,u<sub>n</sub>) and B'=(v<sub>1</sub>,...,v<sub>n</sub>) be two <input type="button" value="bases" onclick="go('../espaces/bases.html')" data-inline="true"> of E. <br> We have the following problems: <ul>
+            <li> Having the <input type="button" value="coordinates" onclick="go('../espaces/bases.html')" data-inline="true"> of a vector in the base B how to have them in the base B' ? </li>
+            <li> Having the <input type="button" value="matrix" onclick="go('../matapplin/defmatapp.html')" data-inline="true"> of an endomorphism f of E with respect to the basis B, how to have the matrix of the same endomorphism with respect to B' ? </li>
+          </ul>The first problem can, in any case, be solved by laying a system of equations, but it is possible that this coordinate conversion operation has to be repeated many times. It is therefore desirable to obtain an automatic process (formulas calculated once and for all) to perform the conversions. The same remark is valid for the matrices of endomorphisms. <div id="container">
+            <div id="label">definition </div>Let us consider the matrix P of the identity map with respect to the bases B' and B, P=M(Id,B',B). <br>The columns of P are the coordinates of the vectors of the basis B' expressed in the basis B. P is called by definition the <strong>
+              <em>'transition matrix' </em>
+            </strong> from B to B'.
+          </div>
+          <h2>Properties </h2> It follows immediately from the definition that: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>The transition matrix from B' to B is <input type="button" value="the inverse" onclick="go('../matrices/algmat.html')" data-inline="true"> of the transition matrix from B to B'
+          </div> This transition matrix solves our two problems, more precisely: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If X is the <input type="button" value="column matrix" onclick="go('matcolonne.html')" data-inline="true"> representing vector u in base B then P<sup>-1</sup>X is the column matrix representing u in base B'.
+          </div> The proof lies entirely in the definition of P. <a name="th3e"></a>
+          <div id="container">
+            <div id="label">theorem </div>Let f be an endomorphism of E. Then if M<sub>1</sub>=M(f,B) and M<sub>2</sub>=M(f,B') we have between M<sub>1</sub> and M<sub>2</sub> the relationship: <br> M<sub>2</sub>=P<sup>-1</sup>M<sub>1</sub>P
+          </div> This follows from the theorem on the <input type="button" value="matrix of a composite" onclick="go('../matapplin/prodetcomp.html')" data-inline="true"> and the fact that f=Id <font size="-2">o</font>f <font size="-2">o</font>Id <br> Let us now examine the case where B is the canonical basis of K<sup>n</sup>
+          <br>Let B'=(v<sub>1</sub>,...,v<sub>n</sub>). The matrix P is obtained immediately, it is the one the columns of which are the coordinates of the v<sub>i</sub> . It all boils down to the calculation of an inverse. <h2> Python's Corner </h2>We compute here a transition matrix in inverting a matrix by the specialized functions of the libraries numpy and scipy. <p>
+            <object data="python/passage1.html" type="text/html" width="100%" height="300" border="3"></object>
+          </p> Here is the result of execution : <br>
+          <table cellspacing="0" cellpadding="0" border="1">
+            <tbody>
+              <tr>
+                <td> [[ 2 1 0 0] <br> [ 3 2 0 0] <br> [ 1 1 3 4] <br> [ 2 -1 2 3]] <br> [[ 2.00000000e+00 -1.00000000e+00 0.00000000e+00 0.00000000e+00] <br> [ -3.00000000e+00 2.00000000e+00 2.48580453e-16 -3.17210451e-16] <br> [ 3.10000000e+01 -1.90000000e+01 3.00000000e+00 -4.00000000e+00] <br> [ -2.30000000e+01 1.40000000e+01 -2.00000000e+00 3.00000000e+00]] <br>
+                </td>
+              </tr>
+            </tbody>
+          </table> In fact the (real) result is: \[\begin{pmatrix} 2& -1 & 0& 0\\ -3& 2& 0& 0\\ 31& -19& 3 & -4\\ -23 & 14& -2& 3\\ \end{pmatrix}\] <p>This kind of rounding errors (very small of the order of 10<sup>-16</sup>, often occurs. It is the result of the large number of operations carried out and the precision of the floating points of the system (whatever ...). There is never an exact calculation with 'floats'. </p>
+          <h2> Julia's corner </h2>
+          <p>Same thing with Julia 1.6 and the LinearAlgebra package. this time there are no rounding errors. </p>
+          <p>
+            <object data="julia/passage.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Matrices et applications linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Matrices and linear maps'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

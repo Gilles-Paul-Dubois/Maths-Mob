@@ -1,0 +1,56 @@
+﻿<html>
+ <head>
+  <title>
+   entiers.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+ 
+</span><span class="s0"># division euclidienne d'un entier de Gauss par un autre</span><span class="s1"> 
+</span><span class="s0"># Euclidean division of a Gauss integer by another one</span><span class="s1">
+ 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+</span><span class="s2">def </span><span class="s1">Norme(z): 
+    </span><span class="s0">"""Il ne s'agit pas d'une norme euclidienne ici"""</span><span class="s1"> 
+    </span><span class="s0">"""It's not an Euclidean norm here"""</span><span class="s1">     
+    </span><span class="s2">return </span><span class="s1">z.real*z.real+z.imag*z.imag 
+ 
+</span><span class="s2">def </span><span class="s1">FourCorners (z1,z2): 
+    </span><span class="s0">"""Détermine les 4 solutions possibles pour le quotient euclidien"""</span><span class="s1"> 
+    </span><span class="s0">"""Finds out the four possible solutions for the Euclidean quotient"""</span><span class="s1">    
+    q=z1/z2 
+    x=q.real 
+    y=q.imag 
+    n=math.floor(x) 
+    m=math.floor(y) 
+    </span><span class="s2">return </span><span class="s1">complex(n,m),complex(n+</span><span class="s3">1</span><span class="s1">,m),complex(n+</span><span class="s3">1</span><span class="s1">,m+</span><span class="s3">1</span><span class="s1">),complex(n,m+</span><span class="s3">1</span><span class="s1">) 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    u=-</span><span class="s3">36</span><span class="s1">+</span><span class="s3">242j</span><span class="s1"> 
+    v=</span><span class="s3">50</span><span class="s1">+</span><span class="s3">50j</span><span class="s1"> 
+    L=FourCorners(u,v) 
+    S=[z </span><span class="s2">for </span><span class="s1">z </span><span class="s2">in </span><span class="s1">L </span><span class="s2">if </span><span class="s1">Norme(u-z*v)&lt;Norme(v)] 
+    print(S) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

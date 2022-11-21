@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>cauchy1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre>
+<span class="s1">function </span><span class="s0">racine(p)</span>
+    <span class="s0">Channel() </span><span class="s1">do </span><span class="s0">c</span>
+        <span class="s0">pow=</span><span class="s2">1</span>
+        <span class="s0">num=</span><span class="s2">1</span>
+        <span class="s0">den=</span><span class="s2">1</span>
+        <span class="s0">push!(c,num//den)</span>
+        <span class="s1">while true</span>
+            <span class="s0">pow=pow*</span><span class="s2">100</span>
+            <span class="s0">u=</span><span class="s2">0</span>
+            <span class="s1">while </span><span class="s0">(num*</span><span class="s2">10</span><span class="s0">+u)*(num*</span><span class="s2">10</span><span class="s0">+u)&lt;=p*pow</span>
+                <span class="s0">u+=</span><span class="s2">1</span>
+            <span class="s1">end</span>
+            <span class="s0">num=num*</span><span class="s2">10</span><span class="s0">+u-</span><span class="s2">1</span>
+            <span class="s0">den=den*</span><span class="s2">10</span>
+            <span class="s0">push!(c,num//den)</span>
+        <span class="s1">end</span>
+    <span class="s1">end</span>
+<span class="s1">end</span>
+
+<span class="s0">RAC3=racine(</span><span class="s2">3</span><span class="s0">)</span>
+
+<span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:</span><span class="s2">10</span>
+    <span class="s0">println(take!(RAC3))</span>
+<span class="s1">end</span>
+<span class="s0">println(sqrt(p))</span>
+</pre>
+</body>
+</html>

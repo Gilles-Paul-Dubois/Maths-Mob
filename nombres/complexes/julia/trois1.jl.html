@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>trois1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">ComplexeZeroDiv &lt;: Exception</span>
+    <span class="s1">msg::String</span>
+<span class="s0">end</span>
+
+<span class="s0">mutable struct </span><span class="s1">MonComplexe</span>
+    <span class="s1">x::Float64</span>
+    <span class="s1">y::Float64</span>
+<span class="s0">end</span>
+<span class="s2"># représentation externe sous forme de chaîne</span>
+<span class="s0">function </span><span class="s1">Base.string(z::MonComplexe)</span>
+    <span class="s0">if </span><span class="s1">z.y==</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">string(z.x)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.x==</span><span class="s3">0 </span><span class="s1">&amp;&amp; z.y==</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s4">&quot;i&quot;</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.x==</span><span class="s3">0 </span><span class="s1">&amp;&amp; z.y==-</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s4">&quot;-i&quot;</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.x==</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">string(z.y,</span><span class="s4">&quot;i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.y==</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">string(z.x,</span><span class="s4">&quot;+i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.y==-</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">string(z.x,</span><span class="s4">&quot;-i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z.y&gt;</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">string(z.x,</span><span class="s4">&quot;+&quot;</span><span class="s1">,z.y,</span><span class="s4">&quot;i&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">string(z.x,z.y,</span><span class="s4">&quot;i&quot;</span><span class="s1">)</span>
+<span class="s0">end</span>
+
+<span class="s1">null(z1::MonComplexe)=z1.x==</span><span class="s3">0 </span><span class="s1">&amp;&amp;z1.y==</span><span class="s3">0 </span><span class="s2">#test de nullité</span>
+<span class="s2">#surcharge d'opérateurs usuels</span>
+<span class="s1">Base.:+(z1::MonComplexe,z2::MonComplexe) = MonComplexe(z1.x+z2.x,z1.y+z2.y) </span><span class="s2">#somme</span>
+<span class="s1">Base.:-(z1::MonComplexe) = MonComplexe(-z1.x,-z1.y) </span><span class="s2">#opposé</span>
+<span class="s1">Base.:-(z1::MonComplexe,z2::MonComplexe) = MonComplexe(z1.x-z2.x,z1.y-z2.y) </span><span class="s2">#soustraction</span>
+<span class="s1">Base.:*(z1::MonComplexe,z2::MonComplexe) = MonComplexe(z1.x*z2.x-z1.y*z2.y,z1.x*z2.y+z1.y*z2.x) </span><span class="s2">#produit</span>
+<span class="s1">Base.conj(z1::MonComplexe)= MonComplexe(z1.x,-z1.y)</span>
+<span class="s1">Base.real(z1::MonComplexe) = z1.x </span><span class="s2">#partie réelle</span>
+<span class="s1">Base.imag(z1::MonComplexe) = z1.y </span><span class="s2">#partie imaginaire</span>
+<span class="s0">function </span><span class="s1">Base.:inv(z1::MonComplexe)</span>
+    <span class="s0">if </span><span class="s1">null(z1)</span>
+        <span class="s1">throw(ComplexeZeroDiv(</span><span class="s4">&quot;Erreur division par zéro&quot;</span><span class="s1">))</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">MonComplexe(z1.x/(z1.x*z1.x+z1.y*z1.y),-z1.y/(z1.x*z1.x+z1.y*z1.y)) </span><span class="s2">#inverse</span>
+<span class="s0">end</span>
+<span class="s1">Base.:/(z1::MonComplexe,z2::MonComplexe) = z1*(inv(z2)) </span><span class="s2">#quotient</span>
+<span class="s0">function </span><span class="s1">Base.:^(z1::MonComplexe, n::Int) </span><span class="s2">#exponentiation-puissances</span>
+    <span class="s0">if </span><span class="s1">n==</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">MonComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">n&gt;</span><span class="s3">0</span>
+        <span class="s1">result=MonComplexe(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n</span>
+            <span class="s1">result=result*z1</span>
+        <span class="s0">end</span>
+        <span class="s0">return </span><span class="s1">result</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">n==-</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">inv(z1)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">n&lt;</span><span class="s3">0</span>
+        <span class="s1">z2=inv(z1)</span>
+        <span class="s0">return </span><span class="s1">z2^(-n)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">modu(z1::MonComplexe)=sqrt(z1.x*z1.x+z1.y*z1.y) </span><span class="s2">#module</span>
+
+<span class="s0">function </span><span class="s1">argu(z1::MonComplexe)</span>
+    <span class="s0">if </span><span class="s1">z1.x == </span><span class="s3">0 </span><span class="s1">&amp;&amp; z1.y == </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s3">0</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z1.x == </span><span class="s3">0 </span><span class="s1">&amp;&amp; z1.y &gt; </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">pi / </span><span class="s3">2</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z1.x == </span><span class="s3">0 </span><span class="s1">&amp;&amp; z1.y &lt; </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">pi / </span><span class="s3">2</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">z1.x &gt; </span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">atan(z1.y / z1.x)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">pi - atan(z1.y / (-z1.x))</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">racines(Z::MonComplexe,n)</span>
+    <span class="s1">theta=argu(Z)</span>
+    <span class="s1">rho=modu(Z)</span>
+    <span class="s1">r=rho^(</span><span class="s3">1</span><span class="s1">/n)</span>
+    <span class="s1">angles=[(theta+</span><span class="s3">2</span><span class="s1">*k*pi)/n </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:n-</span><span class="s3">1</span><span class="s1">]</span>
+    <span class="s1">sol(k)=MonComplexe(r*cos(angles[k]), r*sin(angles[k]))</span>
+    <span class="s0">return </span><span class="s1">[sol(k) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n]</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">cardan(a::MonComplexe,b::MonComplexe,c::MonComplexe,d::MonComplexe)</span>
+    <span class="s1">b,c,d=b/a,c/a,d/a</span>
+    <span class="s1">p=c-b*b/MonComplexe(</span><span class="s3">3</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">q=d-b*c/MonComplexe(</span><span class="s3">3</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)-(b^</span><span class="s3">3</span><span class="s1">)/MonComplexe(</span><span class="s3">27</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)+(b^</span><span class="s3">3</span><span class="s1">)/MonComplexe(</span><span class="s3">9</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">B,C= q,-p^</span><span class="s3">3</span><span class="s1">/MonComplexe(</span><span class="s3">27</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">D=B*B-MonComplexe(</span><span class="s3">4</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)*C</span>
+    <span class="s1">R=racines(D,</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">U=(-B+R[</span><span class="s3">1</span><span class="s1">])/MonComplexe(</span><span class="s3">2</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">roots=racines(U,</span><span class="s3">3</span><span class="s1">)</span>
+    <span class="s1">sol1=[u-p/(MonComplexe(</span><span class="s3">3</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)*u) </span><span class="s0">for </span><span class="s1">u </span><span class="s0">in </span><span class="s1">roots]</span>
+    <span class="s1">sol2=[z-b/MonComplexe(</span><span class="s3">3</span><span class="s1">,</span><span class="s3">0</span><span class="s1">) </span><span class="s0">for </span><span class="s1">z </span><span class="s0">in </span><span class="s1">sol1]</span>
+    <span class="s0">return </span><span class="s1">sol2</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">resolution(a,b,c,d)</span>
+    <span class="s1">Z=cardan(a,b,c,d)</span>
+    <span class="s1">println(</span><span class="s4">&quot;racines&quot;</span><span class="s1">)</span>
+    <span class="s1">println(Z[</span><span class="s3">1</span><span class="s1">])</span>
+    <span class="s1">println(Z[</span><span class="s3">2</span><span class="s1">])</span>
+    <span class="s1">println(Z[</span><span class="s3">3</span><span class="s1">])</span>
+    <span class="s1">P1=a*Z[</span><span class="s3">1</span><span class="s1">]^</span><span class="s3">3</span><span class="s1">+b*(Z[</span><span class="s3">1</span><span class="s1">]^</span><span class="s3">2</span><span class="s1">)+c*Z[</span><span class="s3">1</span><span class="s1">]+d</span>
+    <span class="s1">P2=a*Z[</span><span class="s3">2</span><span class="s1">]^</span><span class="s3">3</span><span class="s1">+b*(Z[</span><span class="s3">2</span><span class="s1">]^</span><span class="s3">2</span><span class="s1">)+c*Z[</span><span class="s3">2</span><span class="s1">]+d</span>
+    <span class="s1">P3=a*Z[</span><span class="s3">3</span><span class="s1">]^</span><span class="s3">3</span><span class="s1">+b*(Z[</span><span class="s3">3</span><span class="s1">]^</span><span class="s3">2</span><span class="s1">)+c*Z[</span><span class="s3">3</span><span class="s1">]+d</span>
+    <span class="s2">#vérification</span>
+    <span class="s1">println(</span><span class="s4">&quot;Vérication&quot;</span><span class="s1">)</span>
+    <span class="s1">println(P1)</span>
+    <span class="s1">println(P2) </span>
+    <span class="s1">println(P3)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">MonComplexe(a) </span><span class="s2">#nouveau constructeur</span>
+    <span class="s0">return </span><span class="s1">MonComplexe(a,</span><span class="s3">0</span><span class="s1">)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">a,b,c,d =MonComplexe(</span><span class="s3">1</span><span class="s1">),MonComplexe(</span><span class="s3">3</span><span class="s1">),MonComplexe(-</span><span class="s3">6</span><span class="s1">),MonComplexe(</span><span class="s3">4</span><span class="s1">)</span>
+    <span class="s1">resolution(a,b,c,d)</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

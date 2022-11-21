@@ -1,0 +1,180 @@
+<html>
+<head>
+<title>exo8.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+.s4 { color: #008080; font-weight: bold;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># -*- coding: utf-8 -*-</span>
+<span class="s0"># python version 3.4</span>
+
+<span class="s0"># Tester une relation d'ordre total</span>
+
+<span class="s1">E = set([</span><span class="s2">1</span><span class="s1">, </span><span class="s2">2</span><span class="s1">, </span><span class="s2">3</span><span class="s1">, </span><span class="s2">6</span><span class="s1">, </span><span class="s2">10</span><span class="s1">, </span><span class="s2">12</span><span class="s1">, </span><span class="s2">15</span><span class="s1">, </span><span class="s2">30</span><span class="s1">, </span><span class="s2">60</span><span class="s1">, </span><span class="s2">120</span><span class="s1">, </span><span class="s2">180</span><span class="s1">])  </span><span class="s0"># l'ensemble</span>
+<span class="s1">A = set([</span><span class="s2">10</span><span class="s1">, </span><span class="s2">12</span><span class="s1">, </span><span class="s2">30</span><span class="s1">])</span>
+<span class="s1">B = set([</span><span class="s2">2</span><span class="s1">, </span><span class="s2">3</span><span class="s1">, </span><span class="s2">6</span><span class="s1">, </span><span class="s2">10</span><span class="s1">, </span><span class="s2">30</span><span class="s1">])</span>
+<span class="s1">C = set([</span><span class="s2">3</span><span class="s1">, </span><span class="s2">120</span><span class="s1">])</span>
+
+
+<span class="s3">def </span><span class="s1">R(x, y):</span>
+    <span class="s3">return </span><span class="s1">y % x == </span><span class="s2">0</span><span class="s1">;</span>
+
+
+<span class="s3">def </span><span class="s1">EstTransitive(Rel, E):</span>
+    <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">E:</span>
+        <span class="s3">for </span><span class="s1">y </span><span class="s3">in </span><span class="s1">E:</span>
+            <span class="s3">for </span><span class="s1">z </span><span class="s3">in </span><span class="s1">E:</span>
+                <span class="s3">if </span><span class="s1">Rel(x, y) </span><span class="s3">and </span><span class="s1">Rel(y, z) </span><span class="s3">and </span><span class="s1">(</span><span class="s3">not </span><span class="s1">Rel(x, z)):</span>
+                    <span class="s3">return False</span>
+    <span class="s3">return True</span>
+
+
+<span class="s3">def </span><span class="s1">EstAntiSymetrique(Rel, E):</span>
+    <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">E:</span>
+        <span class="s3">for </span><span class="s1">y </span><span class="s3">in </span><span class="s1">E:</span>
+            <span class="s3">if </span><span class="s1">(Rel(x, y) </span><span class="s3">and </span><span class="s1">Rel(y, x) </span><span class="s3">and </span><span class="s1">x != y):</span>
+                <span class="s3">return False</span>
+    <span class="s3">return True</span>
+
+
+<span class="s3">def </span><span class="s1">EstReflexive(Rel, E):</span>
+    <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">E:</span>
+        <span class="s3">if </span><span class="s1">(</span><span class="s3">not </span><span class="s1">Rel(x, x)):</span>
+            <span class="s3">return False</span>
+        <span class="s3">return True</span>
+
+
+<span class="s3">def </span><span class="s1">EstOrdre(Rel, E):</span>
+    <span class="s3">return </span><span class="s1">EstReflexive(Rel, E) </span><span class="s3">and </span><span class="s1">EstAntiSymetrique(Rel, E) </span><span class="s3">and </span><span class="s1">EstTransitive(Rel, E)</span>
+
+
+<span class="s3">def </span><span class="s1">EstTotal(Rel, E):</span>
+    <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">E:</span>
+        <span class="s3">for </span><span class="s1">y </span><span class="s3">in </span><span class="s1">E:</span>
+            <span class="s3">if </span><span class="s1">((</span><span class="s3">not </span><span class="s1">R(x, y)) </span><span class="s3">and </span><span class="s1">(</span><span class="s3">not </span><span class="s1">R(y, x))):</span>
+                <span class="s3">return False</span>
+    <span class="s3">return True</span>
+
+
+<span class="s3">def </span><span class="s1">EstMajorant(y, X):</span>
+    <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">X:</span>
+        <span class="s3">if not </span><span class="s1">R(x, y):</span>
+            <span class="s3">return False</span>
+    <span class="s3">return True</span>
+
+
+<span class="s3">def </span><span class="s1">Majorants(X, E):</span>
+    <span class="s3">return </span><span class="s1">set([y </span><span class="s3">for </span><span class="s1">y </span><span class="s3">in </span><span class="s1">E </span><span class="s3">if </span><span class="s1">EstMajorant(y, X)])</span>
+
+
+<span class="s3">def </span><span class="s1">EstMinorant(y, X):</span>
+    <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">X:</span>
+        <span class="s3">if not </span><span class="s1">R(y, x):</span>
+            <span class="s3">return False</span>
+    <span class="s3">return True</span>
+
+
+<span class="s3">def </span><span class="s1">Minorants(X, E):</span>
+    <span class="s3">return </span><span class="s1">set([y </span><span class="s3">for </span><span class="s1">y </span><span class="s3">in </span><span class="s1">E </span><span class="s3">if </span><span class="s1">EstMinorant(y, X)])</span>
+
+
+<span class="s3">def </span><span class="s1">PlusGrand(X, E):</span>
+    <span class="s1">M = Majorants(X, E)</span>
+    <span class="s1">PGL = [x </span><span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">M </span><span class="s3">if </span><span class="s1">x </span><span class="s3">in </span><span class="s1">X]</span>
+    <span class="s3">if </span><span class="s1">PGL == []:</span>
+        <span class="s3">return </span><span class="s4">'Inexistant'</span>
+    <span class="s3">else</span><span class="s1">:</span>
+        <span class="s3">return </span><span class="s1">PGL[</span><span class="s2">0</span><span class="s1">]</span>
+
+
+<span class="s3">def </span><span class="s1">PlusPetit(X, E):</span>
+    <span class="s1">M = Minorants(X, E)</span>
+    <span class="s1">PGL = [x </span><span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">M </span><span class="s3">if </span><span class="s1">x </span><span class="s3">in </span><span class="s1">X]</span>
+    <span class="s3">if </span><span class="s1">PGL == []:</span>
+        <span class="s3">return </span><span class="s4">'Inexistant'</span>
+    <span class="s3">else</span><span class="s1">:</span>
+        <span class="s3">return </span><span class="s1">PGL[</span><span class="s2">0</span><span class="s1">]</span>
+
+
+<span class="s3">def </span><span class="s1">BorneSup(X, E):</span>
+    <span class="s3">return </span><span class="s1">PlusPetit(Majorants(X, E), E)</span>
+
+
+<span class="s3">def </span><span class="s1">BorneInf(X, E):</span>
+    <span class="s3">return </span><span class="s1">PlusGrand(Minorants(X, E), E)</span>
+
+
+<span class="s3">def </span><span class="s1">Test1():</span>
+    <span class="s1">print(</span><span class="s4">&quot;Ordre: &quot;</span><span class="s1">, EstOrdre(R, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Total: &quot;</span><span class="s1">, EstTotal(R, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Majorants &quot;</span><span class="s1">, Majorants(E, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Minorants &quot;</span><span class="s1">, Minorants(E, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Plus Grand: &quot;</span><span class="s1">, PlusGrand(E, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Plus petit: &quot;</span><span class="s1">, PlusPetit(E, E))</span>
+    <span class="s3">return</span>
+
+
+<span class="s3">def </span><span class="s1">Test2(X):</span>
+    <span class="s1">print(</span><span class="s4">&quot;Majorants &quot;</span><span class="s1">, Majorants(X, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Minorants &quot;</span><span class="s1">, Minorants(X, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Plus Grand: &quot;</span><span class="s1">, PlusGrand(X, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Plus petit: &quot;</span><span class="s1">, PlusPetit(X, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Borne supérieure: &quot;</span><span class="s1">, BorneSup(X, E))</span>
+    <span class="s1">print(</span><span class="s4">&quot;Borne inférieure: &quot;</span><span class="s1">, BorneInf(X, E))</span>
+
+
+<span class="s3">def </span><span class="s1">main():</span>
+    <span class="s1">print(</span><span class="s4">&quot;Pour l'ensemble E:&quot;</span><span class="s1">)</span>
+    <span class="s1">Test1()</span>
+    <span class="s1">print(</span><span class="s4">&quot;Pour la partie A:&quot;</span><span class="s1">)</span>
+    <span class="s1">Test2(A)</span>
+    <span class="s1">print(</span><span class="s4">&quot;Pour la partie B:&quot;</span><span class="s1">)</span>
+    <span class="s1">Test2(B)</span>
+    <span class="s1">print(</span><span class="s4">&quot;Pour la partie C:&quot;</span><span class="s1">)</span>
+    <span class="s1">Test2(C)</span>
+
+
+<span class="s3">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+
+<span class="s4">&quot;&quot;&quot;  
+Résultat de l'exécution:  
+Pour l'ensemble E:  
+Ordre: True  
+Total: False  
+Majorants set([])  
+Minorants set([1])  
+Plus Grand: Inexistant  
+Plus petit: 1  
+Pour la partie A:  
+Majorants set([120, 60, 180])  
+Minorants set([1, 2])  
+Plus Grand: Inexistant  
+Plus petit: Inexistant  
+Borne supérieure: 60  
+Borne inférieure: 2  
+Pour la partie B:  
+Majorants set([120, 60, 180, 30])  
+Minorants set([1])  
+Plus Grand: 30  
+Plus petit: Inexistant  
+Borne supérieure: 30  
+Borne inférieure: 1  
+Pour la partie C:  
+Majorants set([120])  
+Minorants set([1, 3])  
+Plus Grand: 120  
+Plus petit: 3  
+Borne supérieure: 120  
+Borne inférieure: 3  
+&quot;&quot;&quot;</span>
+</pre>
+</body>
+</html>

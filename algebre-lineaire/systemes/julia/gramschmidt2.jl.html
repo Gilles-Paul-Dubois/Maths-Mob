@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#surcharge de * pour le produit scalaire -  overloading * for dot product</span>
+<span class="s1">Base.:*(v1,v2)=reduce(+,map(*,v1,v2))</span>
+<span class="s0">#norme d'un vecteur - norm of a vector</span>
+<span class="s1">norm(v)=sqrt(v*v)</span>
+<span class="s0">#normalisation - normalization</span>
+<span class="s1">normalize(v)=(</span><span class="s2">1</span><span class="s1">/norm(v))*v</span>
+<span class="s0">#L est un système orthonormé de vecteurs - L is an orthonormal system of vectors</span>
+<span class="s0">#calcule la projection orthogonale de v sur le sous-espace qu'ils engendrent - computes the orth. projection on the subspace they span</span>
+<span class="s3">function </span><span class="s1">projorth(v,L)</span>
+    <span class="s1">s=length(v)</span>
+    <span class="s3">if </span><span class="s1">isempty(L)</span>
+        <span class="s3">return </span><span class="s1">repeat([</span><span class="s2">0</span><span class="s1">],s)</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">reduce(+,[(v*w)*w </span><span class="s3">for </span><span class="s1">w </span><span class="s3">in </span><span class="s1">L])</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s1">schmidt(L)</span>
+    <span class="s1">O=[]</span>
+    <span class="s3">while </span><span class="s1">!isempty(L)</span>
+        <span class="s1">x=pop!(L)</span>
+        <span class="s1">push!(O, normalize(x-projorth(x,O)))</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">O</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s1">aleamatrice(n)</span>
+    <span class="s1">R=zeros(n,n)</span>
+    <span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n, j </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s1">R[i,j]=rand(Float64)</span>
+        <span class="s3">end</span>
+    <span class="s3">return </span><span class="s1">R</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s1">main()</span>
+    <span class="s1">n=</span><span class="s2">3</span>
+    <span class="s1">A=aleamatrice(n)</span>
+    <span class="s1">ColsA=[A[:,j] </span><span class="s3">for </span><span class="s1">j </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n]</span>
+    <span class="s1">GS=schmidt(ColsA)</span>
+    <span class="s1">tQ=zeros(n,n)</span>
+    <span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n , j </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s1">tQ[i,j]=(GS[i])[j]</span>
+    <span class="s3">end</span>
+    <span class="s1">Q=transpose(tQ)</span>
+    <span class="s1">println(tQ)</span>
+    <span class="s1">println(Q)</span>
+    <span class="s1">println(Q*tQ)</span>
+    <span class="s1">T=tQ*A</span>
+    <span class="s1">println(T)</span>
+    <span class="s1">println(A-Q*T)</span>
+<span class="s3">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

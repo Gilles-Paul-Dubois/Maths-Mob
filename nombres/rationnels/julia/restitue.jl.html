@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">pgcd(m,n)</span>
+    <span class="s0">while </span><span class="s1">m%n!=</span><span class="s2">0</span>
+        <span class="s1">t=m</span>
+        <span class="s1">m=n</span>
+        <span class="s1">n=t%n</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">n</span>
+<span class="s0">end</span>
+
+<span class="s1">nbc(n)=n&lt;</span><span class="s2">10 </span><span class="s1">? </span><span class="s2">1 </span><span class="s1">: </span><span class="s2">1</span><span class="s1">+nbc(n÷10)</span>
+
+<span class="s0">function </span><span class="s1">restitue1(e,p)</span>
+    <span class="s1">b=nbc(p)</span>
+    <span class="s1">n=</span><span class="s2">10</span><span class="s1">^b-</span><span class="s2">1</span>
+    <span class="s1">m=e*n+p</span>
+    <span class="s1">D=pgcd(m,n)</span>
+    <span class="s0">return </span><span class="s1">m÷D,n÷D</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">restitue2(e,d,p)</span>
+    <span class="s1">a,b=nbc(d),nbc(p)</span>
+    <span class="s1">n=(</span><span class="s2">10</span><span class="s1">^(</span><span class="s2">2</span><span class="s1">a))*(</span><span class="s2">10</span><span class="s1">^b-</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">m=n+d*(</span><span class="s2">10</span><span class="s1">^b-</span><span class="s2">1</span><span class="s1">)*(</span><span class="s2">10</span><span class="s1">^a)+p*(</span><span class="s2">10</span><span class="s1">^a)</span>
+    <span class="s1">D=pgcd(m,n)</span>
+    <span class="s0">return </span><span class="s1">m÷D,n÷D</span>
+<span class="s0">end</span>
+
+<span class="s1">println(restitue1(</span><span class="s2">1</span><span class="s1">,</span><span class="s2">1234</span><span class="s1">))</span>
+<span class="s1">println(restitue2(</span><span class="s2">2</span><span class="s1">,</span><span class="s2">27</span><span class="s1">,</span><span class="s2">45</span><span class="s1">))</span></pre>
+</body>
+</html>

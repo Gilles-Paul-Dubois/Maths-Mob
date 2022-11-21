@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>groupe1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># la loi est identifiée avec un dictionnaire</span>
+
+<span class="s0">#test d'associativité'</span>
+<span class="s1">associative(T)= all((T[(T[(i,j)],k)]==T[(i,T[(j,k)])] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n))</span>
+<span class="s0">#test de commutativité</span>
+<span class="s1">commutative(T)= all((T[(i,j)]==T[(j,i)] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n))</span>
+<span class="s0"># x est il neutre pour T ?</span>
+<span class="s1">neutre(x,T)= all([T[(x,i)]==i &amp;&amp; T[(i,x)]==i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n])</span>
+<span class="s0"># i et j sont ils symétriques pour T</span>
+<span class="s1">sym(i,j,x,T)=T[(i,j)]==x &amp;&amp; T[(j,i)]==x</span>
+<span class="s0"># i a-t-il un symétrique pour T quand x est neutre</span>
+<span class="s1">hassym(i,x,T)=any((sym(i,j,x,T) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n))</span>
+<span class="s0"># T définit il une loi de groupe abélien d'élément neutre x'</span>
+<span class="s1">groupab(x,T)=associative(T)&amp;&amp; commutative(T) &amp;&amp; neutre(x,T) &amp;&amp; all((hassym(i,x,T) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n))</span>
+
+<span class="s0">#fonction qui généère une loi de groupe abélien</span>
+<span class="s2">function </span><span class="s1">genere()</span>
+    <span class="s1">Table=Dict()</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n</span>
+        <span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s3">0</span><span class="s1">:n</span>
+            <span class="s1">Table[(i,j)]=(i+j)%(n+</span><span class="s3">1</span><span class="s1">)</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s1">Table</span>
+<span class="s2">end</span>
+
+<span class="s1">n=</span><span class="s3">4</span>
+<span class="s1">Table=genere()</span>
+<span class="s0">#test</span>
+<span class="s1">println(groupab(</span><span class="s3">0</span><span class="s1">,Table))</span>
+</pre>
+</body>
+</html>

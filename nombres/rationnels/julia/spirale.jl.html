@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">squarodd(k)=(</span><span class="s1">2</span><span class="s0">k+</span><span class="s1">1</span><span class="s0">)*(</span><span class="s1">2</span><span class="s0">k+</span><span class="s1">1</span><span class="s0">)</span>
+
+<span class="s2">function </span><span class="s0">trouve_k(n)</span>
+    <span class="s0">i=</span><span class="s1">0</span>
+    <span class="s2">while </span><span class="s0">squarodd(i)&lt;=n</span>
+        <span class="s0">i+=</span><span class="s1">1</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">i</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">trouve_h(n)</span>
+    <span class="s0">k=trouve_k(n)</span>
+    <span class="s2">return </span><span class="s0">(</span><span class="s1">8</span><span class="s0">k+n-squarodd(k)+</span><span class="s1">1</span><span class="s0">)%(</span><span class="s1">8</span><span class="s0">k)</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">offset(k,h)</span>
+    <span class="s0">q=h÷(</span><span class="s1">2</span><span class="s0">*k)</span>
+    <span class="s0">r=h-</span><span class="s1">2</span><span class="s0">q*k</span>
+    <span class="s2">if </span><span class="s0">q==</span><span class="s1">0</span>
+        <span class="s2">return </span><span class="s1">0</span><span class="s0">,r</span>
+    <span class="s2">elseif </span><span class="s0">q==</span><span class="s1">1</span>
+        <span class="s2">return </span><span class="s0">r,</span><span class="s1">2</span><span class="s0">k</span>
+    <span class="s2">elseif </span><span class="s0">q==</span><span class="s1">2</span>
+        <span class="s2">return </span><span class="s1">2</span><span class="s0">k,</span><span class="s1">2</span><span class="s0">k-r</span>
+    <span class="s2">else</span>
+        <span class="s2">return </span><span class="s1">2</span><span class="s0">k-r,</span><span class="s1">0</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">P(n)</span>
+    <span class="s0">k,h=trouve_k(n),trouve_h(n)</span>
+    <span class="s0">o=offset(k,h)</span>
+    <span class="s2">return </span><span class="s0">-k+o[</span><span class="s1">1</span><span class="s0">],-k+o[</span><span class="s1">2</span><span class="s0">]</span>
+<span class="s2">end</span>
+
+<span class="s2">for </span><span class="s0">n </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">24</span>
+    <span class="s0">println(P(n))</span>
+<span class="s2">end</span>
+
+</pre>
+</body>
+</html>

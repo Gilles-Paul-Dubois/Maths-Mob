@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>ordre1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">transitive(R,X)=all((R(x,z)||!(R(x,y)&amp;&amp;R(y,z)) </span><span class="s1">for </span><span class="s0">x </span><span class="s1">in </span><span class="s0">X </span><span class="s1">for </span><span class="s0">y </span><span class="s1">in </span><span class="s0">X </span><span class="s1">for </span><span class="s0">z </span><span class="s1">in </span><span class="s0">X))</span>
+<span class="s0">reflexive(R,X)=all((R(x,x) </span><span class="s1">for </span><span class="s0">x </span><span class="s1">in </span><span class="s0">X))</span>
+<span class="s0">antisymetrique(R,X)=all((x==y || !(R(x,y)&amp;&amp;R(y,x)) </span><span class="s1">for </span><span class="s0">x </span><span class="s1">in </span><span class="s0">X </span><span class="s1">for </span><span class="s0">y </span><span class="s1">in </span><span class="s0">X))</span>
+
+<span class="s0">ordre(R,X)=reflexive(R,X)&amp;&amp;transitive(R,X)&amp;&amp;antisymetrique(R,X)</span>
+
+<span class="s0">R1(x,y)=</span><span class="s1">true</span>
+<span class="s0">R2(x,y)=x&lt;=y</span>
+
+<span class="s0">E=Set(</span><span class="s2">&quot;abuvy&quot;</span><span class="s0">)</span>
+<span class="s0">println(ordre(R1,E))</span>
+<span class="s0">println(ordre(R2,E))</span>
+</pre>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Le quatrième degré</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="c">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="c">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/quatrieme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/quatrieme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Forme canonique </h2> Nous nous attaquons maintenant fort logiquement au degré supérieur, c'est à dire le degré 4. <br /> Les techniques que nous avons utilisées jusqu'à présent vont, cette fois encore, fonctionner. <br /> L'équation générale (complexe) du quatrième degré a la forme suivante: <br /> az<sup>4</sup>+bz<sup>3</sup>+cz<sup>2</sup>+dz+e=0 où a,b,c,d,e ∈ &complexes; et a ≠ 0. <br /> Remarquons qu'on peut tout de suite supposer que a=1 (en divisant les deux membres par a ≠ 0). <br /> Remarquons aussi qu'en remplaçant l'inconnue z par z-b/4 le terme de degré 3 disparaît. <div id="container"> Bref, on peut supposer sans perte de généralité, que l'équation du quatrième degré a la forme suivante: <br /> z<sup>4</sup>+pz<sup>2</sup>+qz+r=0. </div>
+          <h2> L'algorithme </h2> Il n'y a rien là de bien nouveau. Ces techniques ont été utilisées avec succès pour les degrés 2 et 3. <br /> L'idée nouvelle, due à Ferrari, intervient ici: <br /> L'équation ci-dessus est équivalente à: <br /> (z<sup>2</sup>+u/2)<sup>2</sup> =(u-p)z<sup>2</sup>-qz+u²/4-r pour toute valeur de u . <br /> L'idée est maintenant de trouver une valeur de u telle que le second membre soit un carré parfait de la forme (u-p)(z-k)². <br /> Il suffit pour cela d'annuler le discriminant Δ = (-q)²-4(u-p)(u²/4-r) <br /> Donc de résoudre l'équation en u: <br /> u<sup>3</sup>-pu<sup>2</sup>-4ru+(4pr-q²)=0 <br /> Ce que l'on peut faire par la méthode de Cardan. <br /> La valeur de u étant trouvée, notre équation s'écrit: <br /> (z<sup>2</sup>+u/2)<sup>2</sup> =(u-p)(z-k)<sup>2</sup>
+          <br /> Soit t l'une quelconque des deux racines carrées complexes de (u-p) <br /> Notre équation s'écrit: <br /> (z<sup>2</sup>+u/2)<sup>2</sup> =[t(z-k)]<sup>2</sup>
+          <br /> Elle se décompose donc en deux équations de degré 2: <br /> z²+u/2=t(z-k) soit z²-tz+(u/2+tk)=0 <br /> z²+u/2=-t(z-k) soit z²+tz+(u/2-tk)=0 <br /> que nous savons résoudre. <h2> Exemple traité </h2>
+          <table border="1" cellpadding="10" cellspacing="2" style="text-align: left;  width: 100px;">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;"> 2z<sup>4</sup> -2z<sup>3</sup> -2z<sup>2</sup> +4z-3=0 <br /> normalisation: <br /> z<sup>4</sup> -z<sup>3</sup> -z<sup>2</sup> +2z-3/2=0 <br /> Changement de variable z=Z+1/4, l'équation devient: <br /> Z<sup>4</sup> -(11/8)Z<sup>2</sup> +(11/8)Z-275/256=0 <br /> Soit encore: <br /> Z<sup>4</sup> +uZ<sup>2</sup> +u²/4 = (u+11/8)Z<sup>2</sup> -(11/8)Z+u²/4+275/256 <br /> Le discriminant du second membre est Δ =(11/8)²-4(u+11/8)(u²/4 +275/253)= 121/64 -(u+11/8)(u²+1100/256) <br /> Δ = -u<sup>3</sup> -(11/8)u² -(1100/256)u -12100/2048+121/64 <br /> Δ = -u<sup>3</sup> -(11/8)u² -(275/64)u-2057/512 <br /> Donc Δ=0 peut s'écrire <br /> u<sup>3</sup> +(11/8)u² +(275/64)u+2057/512=0 <br /> La méthode de Cardan donne une solution réelle u<sub>0</sub> = -1,02089... <br /> La résolution de l'équation en Z donne les 4 solutions: <br /> Z<sub>1</sub> = 0,29753571214225694+0,7458895349676002i <br /> Z<sub>2</sub> = 0,29753571214225694-0,7458895349676002i <br /> Z<sub>3</sub> = 1,0269627583642902 <br /> Z<sub>4</sub> = -1,6220341826488043 <br /> Puis en tenant compte du changement z=Z+1/4, 4 solutions finales: <br /> z<sub>1</sub> = 0,5475357121422569+0,7458895349676002i <br /> z<sub>2</sub> = 0,5475357121422569-0,7458895349676002i <br /> z<sub>3</sub> = 1,2769627583642902 <br /> z<sub>4</sub> = -1,3720341826488043 <br />
+                  <br />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Canonical form </h2>We are now busy quite logically with the level just above, i.e. degree 4. <br>The techniques we have used so far will, this once again, operate. <br>The general (complex) equation of the fourth degree has the following form: <br>az<sup>4</sup>+bz<sup>3</sup>+cz<sup>2</sup>+dz+e=0 where a,b,c,d,e ∈ ℂ and a ≠ 0. <br>Note that we can immediately assume that a=1 (by dividing the two members by a ≠ 0). <br>Note also that by replacing the unknown z by zb/4 the term of degree 3 disappears. <div id="container">In short, we can assume without loss of generality that the equation of the fourth degree has the following form: <br> z<sup>4</sup>+pz<sup>2</sup>+qz+r=0. </div>
+          <h2> The algorithm </h2>There is nothing very new there. These techniques have been used with success for degrees 2 and 3. <br> The new idea, due to Ferrari, comes in here: <br> The above equation is equivalent to: <br>(z<sup>2</sup>+u/2)<sup>2</sup> =(up)z<sup>2</sup>-qz+u²/4-r for any value of u. <br>The idea is now to find a value of u such that the second member is a perfect square of the form (up)(zk)². <br>It suffices for this to cancel the discriminant Δ = (-q)²-4(u-p)(u²/4-r) <br> So to solve the equation in u: <br> u<sup>3</sup>-pu<sup>2</sup>-4ru+(4pr-q²)=0 <br> What can be done by the Cardan method. <br> The value of u having been found, our equation is written: <br>(z<sup>2</sup>+u/2)<sup>2</sup> =(u-p)(zk)<sup>2</sup>
+          <br> Let t be any of the two complex square roots of (u-p) <br> Our equation is written: <br>(z<sup>2</sup>+u/2)<sup>2</sup> =[t(z-k)]<sup>2</sup>
+          <br> It is therefore broken down into two equations of degree 2: <br> z²+u/2 = t (zk) or z²-tz+(u/2+tk) = 0 <br> z²+u/2 = -t (zk) or z²+tz+(u/2-tk) = 0 <br> that we know how to solve. <h2> Example treated </h2>
+          <table style="text-align: left;  width: 100px;" cellspacing="2" cellpadding="10" border="1">
+            <tbody>
+              <tr>
+                <td style="white-space: nowrap;">2z<sup>4</sup> -2z<sup>3</sup> -2z<sup>2</sup> +4z-3=0 <br> normalization: <br>z<sup>4</sup> -z<sup>3</sup> -z<sup>2</sup> +2z-3/2=0 <br> Change of variable z=Z+1/4, the equation becomes: <br>Z<sup>4</sup> - (11/8) Z<sup>2</sup> + (11/8) Z-275/256 = 0 <br> Or again: <br>Z<sup>4</sup> +uz<sup>2</sup> +u²/4 = (u+11/8)Z<sup>2</sup> -(11/8)Z+u²/4+275/256 <br>The second member discriminant is Δ = (11/8)<sup>2</sup>-4 (u + 11/8) (u²/4 +275/253) = 121/64 - (u + 11/8) (u² + 1100/256) <br>Δ = -u<sup>3</sup> -(11/8)u² -(1100/256)u -12100/2048+121/64 <br>Δ = -u<sup>3</sup> -(11/8)u² -(275/64)u-2057/512 <br> So Δ=0 can be written <br>u<sup>3</sup> +(11/8)u² +(275/64)u+2057/512=0 <br>Cardan's method gives a real solution u<sub>0</sub> = -1.02089... <br> Solving the equation in Z gives the 4 solutions: <br>Z<sub>1</sub> = 0.29753571214225694+0.7458895349676002i <br>Z<sub>2</sub> = 0.29753571214225694-0.7458895349676002i <br>Z<sub>3</sub> = 1.0269627583642902 <br>Z<sub>4</sub> = -1.6220341826488043 <br> Then taking into account the change z=Z+1/4, 4 final solutions: <br>z<sub>1</sub> = 0.5475357121422569+0.7458895349676002i <br>z<sub>2</sub> = 0.5475357121422569-0.7458895349676002i <br>z<sub>3</sub> = 1,2769627583642902 <br>z<sub>4</sub> = -1.3720341826488043 <br>
+                  <br>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Complexes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Nombres'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to complexes" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to numbers" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

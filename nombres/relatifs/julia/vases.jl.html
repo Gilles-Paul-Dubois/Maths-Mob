@@ -1,0 +1,123 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#modélisation des deux vases</span>
+<pre><span class="s0">#Modelization of the two vases</span>
+<span class="s2">mutable struct </span><span class="s1">Vases</span>
+    <span class="s1">A::Int</span>
+    <span class="s1">B::Int</span>
+    <span class="s2">function </span><span class="s1">Vases()</span>
+        <span class="s2">return </span><span class="s1">new(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s1">LibreA(V::Vases)=CapA(V)-V.A </span><span class="s0">#volume inoccupé de A- volume free in A</span>
+<span class="s1">LibreB(V::Vases)=CapB(V)-V.B </span><span class="s0">#volume inocuppé de B - volume free in B</span>
+<span class="s1">CapA(V::Vases)=</span><span class="s3">13</span>
+<span class="s1">CapB(V::Vases)=</span><span class="s3">31</span>
+<span class="s1">Egal(V::Vases,W::Vases)=V.A==W.A &amp;&amp; V.B==W.B</span>
+<span class="s0">#opérations élémentaires - elementary operations</span>
+<span class="s2">function </span><span class="s1">ViderA(V::Vases)</span>
+    <span class="s1">W=Vases();    </span>
+    <span class="s1">W.A=</span><span class="s3">0</span><span class="s1">;</span>
+    <span class="s1">W.B=V.B;</span>
+    <span class="s2">return </span><span class="s1">W</span>
+<span class="s2">end</span>
+<span class="s2">function </span><span class="s1">ViderB(V::Vases)</span>
+    <span class="s1">W=Vases();</span>
+    <span class="s1">W.A=V.A;</span>
+    <span class="s1">W.B=</span><span class="s3">0</span><span class="s1">;</span>
+    <span class="s2">return </span><span class="s1">W</span>
+<span class="s2">end</span>
+<span class="s2">function </span><span class="s1">RemplirA(V::Vases)</span>
+    <span class="s1">W=Vases() ;</span>
+    <span class="s1">W.A=CapA(V);</span>
+    <span class="s1">W.B=V.B;</span>
+    <span class="s2">return </span><span class="s1">W</span>
+<span class="s2">end</span>
+<span class="s2">function </span><span class="s1">RemplirB(V::Vases)</span>
+    <span class="s1">W=Vases();</span>
+    <span class="s1">W.A=V.A;</span>
+    <span class="s1">W.B=CapB(V);</span>
+    <span class="s2">return </span><span class="s1">W</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s1">TransvaserAdansB(V::Vases)</span>
+    <span class="s1">W=Vases()</span>
+    <span class="s2">if </span><span class="s1">LibreB(V)&gt;=V.A</span>
+         <span class="s1">W.B=V.B+V.A</span>
+         <span class="s1">W.A=</span><span class="s3">0        </span>
+    <span class="s2">else</span>
+        <span class="s1">W.A=V.A-LibreB(V)</span>
+        <span class="s1">W.B=CapB(V)</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s1">W</span>
+<span class="s2">end</span>
+<span class="s2">function </span><span class="s1">TransvaserBdansA(V::Vases)</span>
+    <span class="s1">W=Vases()</span>
+    <span class="s2">if </span><span class="s1">LibreA(V)&gt;=V.B</span>
+         <span class="s1">W.A=V.B+V.A</span>
+         <span class="s1">W.B=</span><span class="s3">0        </span>
+    <span class="s2">else</span>
+        <span class="s1">W.B=V.B-LibreA(V)</span>
+        <span class="s1">W.A=CapA(V)</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s1">W</span>
+<span class="s2">end</span>
+
+
+<span class="s1">Ops=[ViderA,ViderB,RemplirA,RemplirB,TransvaserAdansB,TransvaserBdansA]</span>
+<span class="s1">next(V::Vases)=[f(V) </span><span class="s2">for </span><span class="s1">f </span><span class="s2">in </span><span class="s1">Ops </span><span class="s2">if </span><span class="s1">!Egal(f(V),V) ]</span>
+
+<span class="s2">function </span><span class="s1">Step(n,V::Vases)</span>
+    <span class="s2">if </span><span class="s1">n==</span><span class="s3">1</span>
+        <span class="s2">return </span><span class="s1">next(V)</span>
+    <span class="s2">else</span>
+        <span class="s1">result=[]</span>
+        <span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">Step(n-</span><span class="s3">1</span><span class="s1">,V)</span>
+            <span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">next(x)</span>
+                <span class="s2">if </span><span class="s1">y.B&lt;</span><span class="s3">0</span>
+                    <span class="s1">println(x)</span>
+                <span class="s2">end</span>
+                <span class="s2">if </span><span class="s1">!any((Egal(y,z) </span><span class="s2">for </span><span class="s1">z </span><span class="s2">in </span><span class="s1">result))</span>
+                    <span class="s1">push!(result,y)</span>
+                <span class="s2">end</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+        <span class="s2">return </span><span class="s1">result</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s1">Wins(V::Vases)= V.A==</span><span class="s3">1 </span><span class="s1">|| V.B==</span><span class="s3">1</span>
+<span class="s1">WinnerInL(L)=any((Wins(W) </span><span class="s2">for </span><span class="s1">W </span><span class="s2">in </span><span class="s1">L))</span>
+
+<span class="s1">V=Vases()</span>
+
+<span class="s2">function </span><span class="s1">TrouveSol(V)</span>
+    <span class="s1">n=</span><span class="s3">1</span>
+    <span class="s1">L=next(V)</span>
+    <span class="s2">while true</span>
+        <span class="s1">L=Step(n,V)</span>
+        <span class="s2">if </span><span class="s1">WinnerInL(L)</span>
+            <span class="s2">return </span><span class="s1">n</span>
+        <span class="s2">end</span>
+        <span class="s1">n=n+</span><span class="s3">1</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+
+<span class="s1">println(TrouveSol(V))</span>
+    
+</pre>
+</body>
+</html>

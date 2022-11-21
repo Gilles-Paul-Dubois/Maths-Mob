@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Bases orthonormées</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href=".././css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/basorth/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/basorth/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Définitions </h2> Dans tout ce qui suit, le corps de base est supposé être égal à &reals; où à &complexes;. <input type="button" value="l'involution" onclick="go('hermit.html')" data-inline="true" /> sur K sera soit l'identité (cas orthogonal réel ou complexe) soit la conjugaison (cas hermitien complexe). E est un espace vectoriel sur K supposé de dimension finie, f une <input type="button" value="forme hermitienne" onclick="go('hermit.html#herm')" data-inline="true" /> sur E. <a name="def1"></a>
+          <div id="container">
+            <div id="label">définition</div> Une base B=(u<sub>1</sub>,...,u<sub>n</sub>) de E est dite <strong>
+              <em>'orthonormale'</em>
+            </strong> pour f si elle possède la propriété suivante : <ul>
+              <li> f(u<sub>i</sub>,u<sub>j</sub>)=0 si i ≠ j 1 ≤ i,j ≤ n </li>
+              <li> f(u<sub>i</sub>,u<sub>i</sub>)= 1 ∀ i 1 ≤ i ≤ n </li>
+            </ul>
+          </div>
+          <h3> Exemples </h3>
+          <ol>
+            <li> La base canonique de &reals;<sup>n</sup> est orthonormale pour le produit scalaire usuel. </li>
+            <li> La base canonique de &complexes;<sup>n</sup> est orthonormale pour la forme \(\left ( \left ( x_{1} ,...,x_{n}\right ),\left ( y_{1},...,y_{n} \right ) \right )\to \sum_{i=1}^{n}x_{i}\overline{y_{i}}\). </li>
+          </ol>
+          <a name="def2"></a>
+          <div id="container">
+            <div id="label">définition</div> Une forme hermitienne f sur E est dite <strong>
+              <em>'positive'</em>
+            </strong> si elle vérifie: <br /> f(u,u) ∈ &reals; et f(u,u) ≥ 0 ∀ u ∈ E.
+          </div>
+          <a name="def3"></a>
+          <div id="container">
+            <div id="label">définition</div> Une forme hermitienne f sur E est dite <strong>
+              <em>'définie positive'</em>
+            </strong> si elle est positive et si: <br /> f(u,u) =0 si et seulement si u=0
+          </div> Il résulte immmédiatement des définitions que: <a name="prop1"></a>
+          <div id="container">
+            <div id="label">propriété</div> Dans le cas orthogonal réel une forme est définie positive si elle possède une base orthonormale. La même chose vaut pour une forme hermitienne dans le cas complexe.
+          </div>
+          <a name="prop2"></a>
+          <div id="container">
+            <div id="label">propriété</div> Toute forme définie positive est <input type="button" value="non dégénérée" onclick="go('nondeg.html#def')" data-inline="true" />.
+          </div> Voici maintenant un résultat évident: <a name="th1"></a>
+          <div id="container">
+            <div id="label">théorème</div> Soit f une forme définie positive sur E et soit F un sous-espace de E alors : <br /> F et F<sup>⊥</sup> sont en <input type="button" value="somme directe" onclick="go('../espaces/opsev.html#dirsum')" data-inline="true" />. c'est à dire que F∩F<sup>⊥</sup>={0}.
+          </div> Et voici un résultat très important qui est, en somme, la réciproque d'un des résultats précédents: <a name="th2"></a>
+          <div id="container">
+            <div id="label">théorème</div> Si f est une forme positive non dégénérée sur E alors E possède une base orthonormale pour f.
+          </div>
+          <div data-role="collapsible">
+            <h4>démonstration</h4> On raisonne par récurrence sur la dimension de E. Si dim E=1 et si u est un vecteur non nul de E alors <br /> u/√(f(u,u)) est un vecteur 'unitaire' de E, il forme donc à lui seul une base orthonormée de E. <br /> Supposons le résultat établi à l'ordre n-1. Soit E un espace de dimension n et F un hyperplan de E. Alors F, par hypothèse de récurrence, possède une base orthonormale B'=(u<sub>1</sub>,...,u<sub>n-1</sub>). Soit v un vecteur n'appartenant pas à F et soit un le vecteur <br /> u= v-f(v,u<sub>1</sub>)u<sub>1</sub>-f(v,u<sub>2</sub>)u<sub>2</sub>-...-f(v,u<sub>n-1</sub>)u<sub>n-1</sub>. On vérifie de suite que u est orthogonal à u<sub>1</sub>, u<sub>2</sub>, ..., u<sub>n-1</sub> et que u ne peut être dans F car v le serait. Si nous posons donc u<sub>n</sub>=u/√(f(u,u)), la base (u<sub>1</sub>,...,u<sub>n</sub>) est une base orthonormée de E.
+          </div>
+          <a name="projorth"></a>
+          <h2> Projection orthogonale sur un sous-espace </h2> Soit F un sous-espace de E et B'=(a<sub>1</sub>,...,a<sub>p</sub>) une base orthonormale de F. Soit maintenant v un vecteur quelconque de E posons <br /> p<sub>F</sub>(v)= f(v,a<sub>1</sub>)a<sub>1</sub>+...+f(v,a<sub>p</sub>)a<sub>p</sub>
+          <br /> On remarque que : <br />
+          <ul>
+            <li> p<sub>F</sub>(v) est dans F </li>
+            <li> v-p<sub>F</sub>(v) est <input type="button" value="orthogonal" onclick="go('vectorth.html')" data-inline="true" /> à F </li>
+          </ul> Le vecteur p<sub>F</sub>(v) est forcément unique à posséder cette propriété puisque F et F<sup>⊥</sup> sont en somme directe. <a name="def4"></a>
+          <div id="container">
+            <div id="label">définition</div> Le vecteur p<sub>F</sub>(v) s'appelle la <strong>
+              <em>'projection orthogonale'</em>
+            </strong> de v sur F relativement à la forme f.
+          </div> Voici une appliquette vous permettant de visualiser dans le plan une projection orthogonale sur une droite (OA). <ul>
+            <li>Vous pouvez faire varier la droite (OA) en déplaçant le point A.</li>
+            <li>Chaque point M du plan correspond à un vecteur \(\overrightarrow{OM}\) .</li>
+            <li>Vous pouvez déplacer le point M, son image M' est recalculée aussitôt.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Definitions </h2> In what follows, the base field is assumed to be equal to ℝ or to ℂ. <input type="button" value="involution" onclick="go('hermit.html')" data-inline="true"> over K will be either the identity (real or complex orthogonal case) or the conjugation (complex Hermitian case). E is a vector space over K assumed to be of finite dimension, f a <input type="button" value="hermitian form" onclick="go('hermit.html#herme')" data-inline="true"> on E. <a name="def1e"></a>
+          <div id="container">
+            <div id="label">definition </div>A basis B=(u<sub>1</sub>,...,u<sub>n</sub>) of E is said to be <strong>
+              <em>'orthonormal' </em>
+            </strong> for f if it has the following property: <ul>
+              <li> f(u<sub>i</sub>,u<sub>j</sub>)=0 si i ≠ j 1 ≤ i,j ≤ n </li>
+              <li> f(u<sub>i</sub>,u<sub>i</sub>)= 1 ∀ i 1 ≤ i ≤ n </li>
+            </ul>
+          </div>
+          <h3> Examples </h3>
+          <ol>
+            <li>The canonical (or standard) basis of ℝ<sup>n</sup> is orthonormal for the usual dot product. </li>
+            <li>The canonical basis of ℂ<sup>n</sup> is orthonormal for the form \(\left ( \left ( x_{1} ,...,x_{n}\right ),\left ( y_{1},...,y_{n} \right ) \right )\to \sum_{i=1}^{n}x_{i}\overline{y_{i}}\). </li>
+          </ol>
+          <a name="def2e"></a>
+          <div id="container">
+            <div id="label">definition </div>A Hermitian form f on E is said to be <strong>
+              <em>'positive' </em>
+            </strong> if it checks: <br> f(u,u) ∈ ℝ and f(u,u) ≥ 0 ∀ u ∈ E.
+          </div>
+          <a name="def3e"></a>
+          <div id="container">
+            <div id="label">definition </div>A Hermitian form f on E is said to be <strong>
+              <em>'positive definite' </em>
+            </strong> if it is positive and if: <br> f(u,u) =0 if and only if u=0
+          </div> It follows immediately from the definitions that: <a name="prop1e"></a>
+          <div id="container">
+            <div id="label">property </div>In the real orthogonal case a form is defined positive if it has an orthonormal basis. The same goes for a Hermitian form in the complex case.
+          </div>
+          <a name="prop2e"></a>
+          <div id="container">
+            <div id="label">property </div>Any positive definite form is <input type="button" value="non degenerate" onclick="go('nondeg.html#defe')" data-inline="true">.
+          </div> Now here is an obvious result: <a name="th1e"></a>
+          <div id="container">
+            <div id="label">theorem </div>Let f be a positive definite form over E and let F be a subspace of E then: <br>F and F<sup>⊥</sup> are in <input type="button" value="direct sum" onclick="go('../espaces/opsev.html#dirsume')" data-inline="true">. that is, F∩F<sup>⊥</sup>= {0} and F+F<sup>⊥</sup>=E.
+          </div> And here is a very important result which is, in short, the converse of one of the previous results: <a name="th2e"></a>
+          <div id="container">
+            <div id="label">theorem </div>If f is a non degenerate positive form on E then E has an orthonormal basis for f.
+          </div>
+          <div data-role="collapsible">
+            <h4>proof</h4>We reason by induction on the dimension of E. If dim E=1 and if u is a non-zero vector of E then <br> u/√(f(u,u)) is a 'unit' vector of E, so it alone forms an orthonormal basis of E. <br>Assume the result established at order n-1. Let E be a space of dimension n and F a hyperplane of E. Then F, by assumption of induction, has an orthonormal basis B'=(u<sub>1</sub>,...,u<sub>n-1</sub>). Let v be a vector not belonging to F and let a be the vector <br>u= v-f(v,u<sub>1</sub>)u<sub>1</sub>-f(v,u<sub>2</sub>)u<sub>2</sub>-...-f(v,u<sub>n-1</sub>)u<sub>n-1</sub>. We check immediately that u is orthogonal to u<sub>1</sub>, u<sub>2</sub>, ..., u<sub>n-1</sub> and that u cannot be in F because v would be. If we therefore set u<sub>n</sub>=u/√(f(u,u)), the basis (u<sub>1</sub>,...,u<sub>n</sub>) is an orthonormal basis of E.
+          </div>
+          <!-- /proof -->
+          <a name="projorthe"></a>
+          <h2> Orthogonal projection on a subspace </h2> Let F be a subspace of E and B'=(a<sub>1</sub>,...,a<sub>p</sub>) an orthonormal basis of F. Let v be any vector of E let us set <br> p<sub>F</sub>(v)= f(v,a<sub>1</sub>)a<sub>1</sub>+...+f(v,a<sub>p</sub>)a<sub>p</sub>
+          <br> We note that : <br>
+          <ul>
+            <li> p<sub>F</sub>(v) is in F </li>
+            <li> v-p<sub>F</sub>(v) is <input type="button" value="orthogonal" onclick="go('vectorth.html')" data-inline="true"> to F </li>
+          </ul>The vector p<sub>F</sub>(v) is necessarily unique to possess this property since F and F<sup>⊥</sup> are in direct sum. <a name="def4e"></a>
+          <div id="container">
+            <div id="label">definition </div>The vector p<sub>F</sub>(v) is called the <strong>
+              <em>'orthogonal projection' </em>
+            </strong> of v on F relatively to the form f.
+          </div>Here is an applet allowing you to visualize in the plan a orthogonal projection on a line (OA). <ul>
+            <li>You can vary the line (OA) by moving point A. </li>
+            <li>Each point M of the plane corresponds to a vector \(\overrightarrow{OM}\) . </li>
+            <li>You can move the point M, its image M' is recalculated immediately. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div class="jxgbox" id="box4" style="width:500px; height:500px;"></div>
+        <script src="js/projorthplan.js"></script>
+        <div lang="fr">
+          <h2> Procédé de Schmidt </h2> Le <strong>
+            <em>"procédé d'orthonormalisation de Schmidt"</em>
+          </strong> consiste à fabriquer, à partir de n'importe quelle base, une base orthonormale en s'inspirant de la démonstration par récurrence vue plus haut. Partons donc d'une base quelconque B=(v<sub>1</sub>,...,v<sub>n</sub>). Posons c<sub>1</sub>=v<sub>1</sub>/√(f(v<sub>1</sub>,v<sub>1</sub>)) de sorte que c<sub>1</sub> vérifie f(c<sub>1</sub>,c<sub>1</sub>)=1. <br> Soit u<sub>2</sub>= v<sub>2</sub>-f(v<sub>2</sub>,c<sub>1</sub>)c<sub>1</sub> et : <br> c<sub>2</sub>=u<sub>2</sub>/√(f(u<sub>2</sub>,u<sub>2</sub>)) <br> On voit que c<sub>1</sub> et c<sub>2</sub> vérifient : <ul>
+            <li> f(c<sub>i</sub>,c<sub>i</sub>)=1 pour 1≤i≤2 </li>
+            <li> f(c<sub>i</sub>,c<sub>j</sub>)=0 si i≠j </li>
+            <li> Le sous-espace engendré par (c<sub>1</sub>,c<sub>2</sub>) est le même que le sous-espace engendré par (v<sub>1</sub>,v<sub>2</sub>) </li>
+          </ul> On construit ainsi c<sub>i</sub> à partir de v<sub>1</sub>,..., v<sub>i-1</sub> en prenant la projection orthogonale u<sub>i</sub> de v<sub>i</sub> sur le sous-espace engendré par c<sub>1</sub>,...,c<sub>i-1</sub> , le vecteur c<sub>i</sub> c<sub>i</sub> étant donné par \(\frac{v_{i}-u_{i}}{\sqrt{f\left ( v_{i}-u_{i},v_{i}-u_{i} \right )}}\).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Gram-Schmidt's process </h2>the <strong>
+            <em>"Gram-Schmidt orthonormalization process" </em>
+          </strong> consists in making, from any base, a base orthonormal drawing inspiration from the proof by recurrence seen more high. So let's start from any base B=(v<sub>1</sub>,...,v<sub>n</sub>). Let's pose c<sub>1</sub>=v<sub>1</sub>/√(f(v<sub>1</sub>,v<sub>1</sub>)) so that c<sub>1</sub> verifies f(c<sub>1</sub>,c<sub>1</sub>)=1. <br>Let u<sub>2</sub>= v<sub>2</sub>-f(v<sub>2</sub>,c<sub>1</sub>)c<sub>1</sub> and : <br> c<sub>2</sub>=u<sub>2</sub>/√(f(u<sub>2</sub>,u<sub>2</sub>)) <br>We see that c<sub>1</sub> and c<sub>2</sub> check : <ul>
+            <li> f(c<sub>i</sub>,c<sub>i</sub>)=1 for 1≤i≤2 </li>
+            <li> f(c<sub>i</sub>,c<sub>j</sub>)=0 if i≠j </li>
+            <li> The subspace spanned by (c<sub>1</sub>,c<sub>2</sub>) is the same as the subspace spanned by (v<sub>1</sub>,v<sub>2</sub>) </li>
+          </ul>We thus construct c<sub>i</sub> from v<sub>1</sub>,..., v<sub>i-1</sub> taking the orthogonal projection u<sub>i</sub> of<sub>vi</sub> on the subspace spanned by c<sub>1</sub>,...,c<sub>i-1</sub> c<sub>i</sub> being given by \(\frac{v_{i}-u_{i}}{\sqrt{f\left ( v_{i}-u_{i},v_{i}-u_{i} \right )}}\).
+        </div>
+        <!-- /en -->
+        <br />
+        <img alt="" border="0" height="180" src="images/Gram%E2%80%93Schmidt_process.gif" width="350" />
+        <br />
+        <em>
+          <font size="-1"> Image: http://fr.wikipedia.org/wiki/Fichier:Gram%E2%80%93Schmidt_process.svg </font>
+        </em>
+        <br />
+        <div lang="fr">
+          <p>L'appliquette ci-dessous montre le procédé de Schmidt en action. <br>
+          <ul>
+            <li>On part de 6 vecteurs (u<sub>1</sub> , .. u<sub>6</sub> ) formant les colonnes d'une matrice, choisie aléatoirement. </li>
+            <li> A chaque étape (étape suivante) on applique le procédé de Schmidt pour obtenir une base orthonormale (v<sub>1</sub> , ... ,v<sub>6</sub> ). </li>
+            <li>Le résultat apparaît dans la seconde matrice en partant du haut.</li>
+            <li>Le système finalement transformé apparaît dans la matrice en dessous à la sixième et dernière étape.</li>
+            <li>Quand le processus est terminé à la sixième itération, la troisième matrice doit être l'identité. Elle contient en effet les produits scalaires v<sub>i</sub> .v<sub>j</sub> comme coefficients. </li>
+          </ul>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p> The applet below shows Schmidt's process in action. <br>
+          <ul>
+            <li>We start from 6 vectors (u<sub>1</sub> , .. u<sub>6</sub> ) forming the columns of a matrix, chosen randomly. </li>
+            <li>At each step (next step) the Schmidt process is applied to obtain an orthonormal basis (v<sub>1</sub> , ... ,v<sub>6</sub> ). </li>
+            <li>The result appears in the second matrix from the top. </li>
+            <li>The finally transformed system appears in the matrix below at the sixth and final stage. </li>
+            <li>When the process is complete on the sixth iteration, the third matrix should be the identity. It indeed contains the scalar products v<sub>i</sub> .v<sub>j</sub> as coefficients. </li>
+          </ul>
+          </p>
+        </div>
+        <!-- /en -->
+        <div>
+          <table border="2" id="myTable">
+            <tr>
+              <td>
+                <button onclick="nameSpace2.Paint();" type="button">
+                  <div lang="fr">Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+                <button onclick="nameSpace2.NextStep();" type="button">
+                  <div lang="fr">Etape suivante</div>
+                  <!-- /fr -->
+                  <div lang="en">Next step</div>
+                  <!-- /en -->
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="10" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="10" id="myCanvas3" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/gramschmidt1.js"></script>
+        <div lang="fr">
+          <h2> Encore quelques définitions </h2>
+          <a name="def5"></a>
+          <div id="container">
+            <div id="label">définition</div> Une forme hermitienne définie positive s'apellera souvent un <strong>
+              <em>'produit scalaire'</em>
+            </strong>.
+          </div>
+          <a name="def6"></a>
+          <div id="container">
+            <div id="label">notation</div> Quand il n'y aura aucune ambiguïté sur la forme f, au lieu de f(x,x) nous noterons souvent (x|x) ou plus simplement x.x
+          </div>
+          <a name="def7"></a>
+          <div id="container">
+            <div id="label">définition</div> Pour tout vecteur x de E le nombre positif √(x.x) sera noté ||x|| et appelé la <strong>
+              <em>'norme'</em>
+            </strong> de x.
+          </div>
+          <h2> Visualisation du produit scalaire. </h2> L'appliquette ci-dessous présente un vecteur u et un vecteur v . <ul>
+            <li>Vous pouvez faire varier les vecteurs u et v en déplaçant les extrémités à la souris.</li>
+            <li>La valeur du produit scalaire s'affiche à chaque instant, ainsi que la valeur en degrés de l'angle (u,v).</li>
+            <li>Observez que le produit scalaire est nul quand les vecteurs sont orthogonaux.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> A few more definitions </h2>
+          <a name="def5e"></a>
+          <div id="container">
+            <div id="label">definition </div>A Hermitian positive definite form will often be called a <strong>
+              <em>'scalar product' </em>
+            </strong>.
+          </div>
+          <a name="def6e"></a>
+          <div id="container">
+            <div id="label">notation </div> When there is no ambiguity on the form f, instead of f(x,x) we will often note (x|x) or more simply x.x
+          </div>
+          <a name="def7e"></a>
+          <div id="container">
+            <div id="label">definition </div>For any vector x of E the positive number √(xx) will be denoted ||x|| and called the <strong>
+              <em>'norm' </em>
+            </strong> of x.
+          </div>
+          <h2> Visualization of the dot product. </h2> The applet below shows a vector u and a vector v . <ul>
+            <li>You can vary the u and v vectors by moving the endpoints with the mouse. </li>
+            <li>The value of the dot product is displayed at each instant, as well as the value in degrees of the angle (u,v). </li>
+            <li>Observe that the dot product is zero when the vectors are orthogonal. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div class="jxgbox" id="box5" style="width:500px; height:500px;"></div>
+        <script src="js/prodscal.js"></script>
+        <div lang="fr">
+          <h2> Le coin de Python </h2> Voici une implémentation de l'algorithme d'orthonormalisation de Schmidt <p>
+            <object border="3" data="python/gramschmidt1.html" height="400" type="text/html" width="100%"></object>
+          </p>
+          <h2> Le coin de Julia </h2> Même chose avec Julia 1.6 <p>
+            <object border="3" data="julia/schmidt.jl.html" height="400" type="text/html" width="100%"></object>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>
+            <font style="vertical-align: inherit;"> Python's Corner </font>
+          </h2>
+          <font style="vertical-align: inherit;"> Here is an implementation of Schmidt's orthonormalization algorithm </font>
+          <p>
+            <object data="python/gramschmidt1.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+          <h2>
+            <font style="vertical-align: inherit;"> Julia's corner </font>
+          </h2>
+          <font style="vertical-align: inherit;"> Same with Julia 1.6 </font>
+          <p>
+            <object data="julia/schmidt.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+          </p>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Orthogonalité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Orthogonality'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

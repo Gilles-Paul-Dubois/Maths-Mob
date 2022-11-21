@@ -1,0 +1,68 @@
+﻿<html>
+ <head>
+  <title>
+   atkin.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+
+<span class="s0">#version python 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+limite=</span><span class="s3">1000000</span><span class="s1"> 
+crible=[</span><span class="s3">0</span><span class="s1">]*limite 
+racine= int(math.sqrt(limite)+</span><span class="s3">1</span><span class="s1">) 
+ 
+</span><span class="s2">def </span><span class="s1">cond1 (n): 
+    </span><span class="s2">return </span><span class="s1">n&lt;limite </span><span class="s2">and </span><span class="s1">((n%</span><span class="s3">12</span><span class="s1">==</span><span class="s3">1</span><span class="s1">)</span><span class="s2">or</span><span class="s1">(n%</span><span class="s3">12</span><span class="s1">==</span><span class="s3">5</span><span class="s1">)) 
+</span><span class="s2">def </span><span class="s1">cond2(n): 
+    </span><span class="s2">return </span><span class="s1">n&lt;limite </span><span class="s2">and </span><span class="s1">(n%</span><span class="s3">12</span><span class="s1">==</span><span class="s3">7</span><span class="s1">) 
+</span><span class="s2">def </span><span class="s1">cond3(x,y,n): 
+    x&gt;y </span><span class="s2">and </span><span class="s1">(n&lt;limite)</span><span class="s2">and </span><span class="s1">(n%</span><span class="s3">12</span><span class="s1">==</span><span class="s3">11</span><span class="s1">) 
+</span><span class="s2">def </span><span class="s1">debut(): 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,racine): 
+        </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">1</span><span class="s1">,racine): 
+            n=</span><span class="s3">4</span><span class="s1">*x*x+y*y 
+            </span><span class="s2">if </span><span class="s1">cond1(n): 
+                crible[n]=</span><span class="s2">not </span><span class="s1">crible[n] 
+            n=</span><span class="s3">3</span><span class="s1">*x*x+y*y 
+            </span><span class="s2">if </span><span class="s1">cond2(n): 
+                crible[n]=</span><span class="s2">not </span><span class="s1">crible[n] 
+            n=</span><span class="s3">3</span><span class="s1">*x*x-y*y 
+            </span><span class="s2">if </span><span class="s1">cond3(x,y,n): 
+                crible[n]= </span><span class="s2">not </span><span class="s1">crible[n] 
+</span><span class="s2">def </span><span class="s1">fin(): 
+    </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">5</span><span class="s1">,limite): 
+        L=[k*n*n </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,limite/(n*n))] 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">L: 
+            crible[k]=</span><span class="s3">0</span><span class="s1"> 
+             
+</span><span class="s2">def </span><span class="s1">affiche(): 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">5</span><span class="s1">,limite): 
+        </span><span class="s2">if </span><span class="s1">crible[i]: 
+            print(i) 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    debut() 
+    fin() 
+    affiche() 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+ 
+</span></pre>
+ </body>
+</html>

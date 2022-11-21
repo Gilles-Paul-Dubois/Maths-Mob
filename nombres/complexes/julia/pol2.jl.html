@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>pol2.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">normaliser(L)</span>
+    <span class="s0">if </span><span class="s1">length(L)==</span><span class="s2">1</span>
+        <span class="s0">return </span><span class="s1">L</span>
+    <span class="s0">elseif </span><span class="s1">L[</span><span class="s0">end</span><span class="s1">]==</span><span class="s2">0</span>
+        <span class="s0">return </span><span class="s1">normaliser(L[</span><span class="s2">1</span><span class="s1">:end-</span><span class="s2">1</span><span class="s1">])</span>
+    <span class="s0">else</span>
+        <span class="s0">return </span><span class="s1">L</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s3">#ajoute des 0 à la queue de L pour atteindre la longueur n si nécessaire</span>
+<span class="s3">#adds 0's to the tail of L to reacch length  n if needed</span>
+<span class="s3">#utilitaire pour l'ajout de polynômes de degrés diférents</span>
+<span class="s3">#utility to add polynomials with different degrees</span>
+<span class="s0">function </span><span class="s1">allonge(L,n)</span>
+    <span class="s1">l=length(L)</span>
+    <span class="s0">if </span><span class="s1">l&gt;=n</span>
+        <span class="s0">return</span>
+    <span class="s0">else</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">l+</span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s1">push!(L,</span><span class="s2">0</span><span class="s1">)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">mutable struct </span><span class="s1">PolComplex</span>
+    <span class="s1">C::Vector{ComplexF64} </span><span class="s3"># la liste des coefficients par ordre des puissances croissantes - list of coeffs with increasing powers order</span>
+    <span class="s0">function </span><span class="s1">PolComplex(L)</span>
+        <span class="s1">L=normaliser(L)</span>
+        <span class="s0">return </span><span class="s1">new(L)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">degre(P::PolComplex) = length(P.C)-</span><span class="s2">1 </span><span class="s3">#le degré d'un polynôme - the degrre of a polynomial</span>
+
+<span class="s1">coefficient(P::PolComplex,n)=P.C[n+</span><span class="s2">1</span><span class="s1">]</span><span class="s3"># coeff de la puissance n-ième de l'inconnue - n-th coeff</span>
+
+<span class="s3"># surcharge des opérateurs - overloading of operators</span>
+<span class="s0">function </span><span class="s1">Base.string(P::PolComplex) </span><span class="s3"># représentation externe - converts to string</span>
+    <span class="s1">Result=string(</span><span class="s4">&quot;(&quot;</span><span class="s1">,P.C[</span><span class="s2">1</span><span class="s1">],</span><span class="s4">&quot;)&quot;</span><span class="s1">)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:length(P.C)</span>
+        <span class="s1">Result=string(Result,</span><span class="s4">&quot;+&quot;</span><span class="s1">,</span><span class="s4">&quot;(&quot;</span><span class="s1">,P.C[i],</span><span class="s4">&quot;)&quot;</span><span class="s1">,</span><span class="s4">&quot;X^&quot;</span><span class="s1">,i-</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Result</span>
+<span class="s0">end</span>
+<span class="s0">function </span><span class="s1">Base.:+(P1::PolComplex,P2::PolComplex)</span><span class="s3">#somme de deux polynomes - sum of two polynomials</span>
+    <span class="s1">l1=length(P1.C)</span>
+    <span class="s1">l2=length(P2.C)</span>
+    <span class="s1">l=max(l1,l2)</span>
+    <span class="s1">L1=deepcopy(P1.C) </span><span class="s3">#pour ne pas modifier les coefficients de P1 - not to change P1's coeffs.</span>
+    <span class="s1">L2=deepcopy(P2.C) </span><span class="s3">#idem - same</span>
+    <span class="s1">allonge(L1,l)</span>
+    <span class="s1">allonge(L2,l)</span>
+    <span class="s1">L=[L1[i]+L2[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:l]</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:-(P1::PolComplex) </span><span class="s3">#l'opposé - the opposite</span>
+    <span class="s1">L=[-c </span><span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">P1.C]</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s1">Base.:-(P1::PolComplex,P2::PolComplex)=P1+(-P2)</span><span class="s3"># la différence - difference</span>
+
+<span class="s0">function </span><span class="s1">Base.:*(z,P1::PolComplex) </span><span class="s3">#produit par un complexe - product by a complex</span>
+    <span class="s1">L=[z*c </span><span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">P1.C]</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:*(P1::PolComplex,P2::PolComplex)</span><span class="s3">#sproduit de deux polynomes - product of two polynomials</span>
+    <span class="s1">d1=degre(P1)</span>
+    <span class="s1">d2=degre(P2)</span>
+    <span class="s1">d=d1+d2+</span><span class="s2">1</span>
+    <span class="s1">L=zeros(Complex,d)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:d</span>
+      <span class="s1">T=[P1.C[j]*P2.C[k] </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:(d1+</span><span class="s2">1</span><span class="s1">) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:(d2+</span><span class="s2">1</span><span class="s1">) </span><span class="s0">if </span><span class="s1">j+k==i+</span><span class="s2">1</span><span class="s1">]</span>
+      <span class="s1">L[i]=reduce(+,T)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">PolComplex(L)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:^(P::PolComplex,n) </span><span class="s3">#puissances positives - positive powers</span>
+    <span class="s1">R=PolComplex([</span><span class="s2">1</span><span class="s1">])</span>
+    <span class="s0">if </span><span class="s1">n==</span><span class="s2">0</span>
+        <span class="s0">return </span><span class="s1">R</span>
+    <span class="s0">else</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+            <span class="s1">R=R*P</span>
+        <span class="s0">end</span>
+        <span class="s0">return </span><span class="s1">R</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">pol1=PolComplex([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">,</span><span class="s2">3</span><span class="s1">])</span>
+    <span class="s1">pol2=PolComplex([</span><span class="s2">4</span><span class="s1">,</span><span class="s2">4</span><span class="s1">])</span>
+    <span class="s1">println(string(pol1))</span>
+    <span class="s1">println(string(-pol2))</span>
+    <span class="s1">println(string(</span><span class="s2">2</span><span class="s1">pol1))</span>
+    <span class="s1">println(string(pol1+pol2))</span>
+    <span class="s1">println(string(pol1*pol2))</span>
+    <span class="s1">println(string(pol1^</span><span class="s2">2</span><span class="s1">))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>
