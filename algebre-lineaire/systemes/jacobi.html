@@ -1,96 +1,375 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-	<title>Méthode de jacobi</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../css/themes/myown.css" />
-	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <title>Méthode de jacobi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
     <link href="../../css/myown.css" rel="stylesheet">
-	<script src="../../js/jquery-1.11.3.js"></script>
-	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-	<script src="../../js/custom.js"></script>
-	 <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
-  </head>	
-	
-
-<body style="overflow: auto; "class="fr">
-<script> window.onload=get();</script>
-<a name="beg"></a>
-<div data-role="page" data-theme="d">
-
-	<div data-role="header">
-<table>
-<tr>
-<td>Choisissez votre langue !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-<td>Choose your language !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-</tr>
-</table>	
-	</div><!-- /header -->
-
-<div style="overflow: auto; "  data-role="content" data-theme="d">
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercices" onclick="go('exercices/jacobi/menu.html')" /></li>  
- 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercises" onclick="go('exercices/jacobi/menu.html')" /></li>
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
-  </ul>
-</div><!-- /navbar --></div><!-- /en --> 
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div></div><!-- /en --> 
-
-	</div><!-- /content -->
-
-<div data-role="footer">
-	<table cellpadding="10">
-<tr>
-	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
-	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
-	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
-	<td><a href="https://www.mathjax.org">
-    <img title="Powered by MathJax"
-    src="https://www.mathjax.org/badge/badge.gif"
-    border="0" alt="Powered by MathJax" />
-</a></td>	
-</tr>
-</table>	
-</div><!-- /footer -->
-<ul style=list-style-type:'';>
- <li>
- <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-   </li>
-<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-	</ul>
-</div><!-- /page -->
-
-</body>
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/jacobi/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/jacobi/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> La méthode de Jacobi </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The Jacobi method</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img alt="" src="images/Carl_Jacobi.jpg" width="220" height="252" border="0">
+          <br>
+          <em>
+            <font size="-1"> Carl Gustav Jacob Jacobi (1804-1851)Image:http://en.wikipedia.org/wiki/File:Carl_Jacobi.jpg </font>
+          </em>
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> L'idée est d'utiliser la remarque donnée dans la, page précédente consacrée aux <input type="button" value="itérations successives" onclick="go('iterations.html#')" data-inline="true" />, en posant: <br /> M=E+F avec: <ul>
+            <li> E est une matrice triangulaire inférieure stricte extraite de A (éléments diagonaux nuls). </li>
+            <li> F est une matrice triangulaire supérieure stricte extraite de A. </li>
+          </ul> D étant la diagonale de A. Nous allons maintenant donner des conditions suffisantes pour que le théorème de Picard Banach s'applique. Il faut donc s'assurer que ||D<sup>-1</sup>M|| &lt; 1 <h2> Matrices à diagonale dominante </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The idea is to use the remark given in the previous page devoted to <input data-inline="true" onclick="go('iterations.html#')" type="button" value="successive iterations" />, by asking: <br /> M=E+F with: <ul>
+            <li> E is a strict lower triangular matrix extracted from A (zero diagonal elements). </li>
+            <li> F is a strict upper triangular matrix extracted from A. </li>
+          </ul>D being the diagonal of A. We will now give sufficient conditions for the Picard Banach's theorem applies. We must therefore ensure that ||D<sup>-1</sup>M|| < 1 <h2> Diagonally Dominant Matrices </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une matrice A = (a<sub>i,j</sub>)<sub>1≤i,j≤n</sub> est dite à <strong>
+              <em> 'diagonale dominante' </em>
+            </strong> si elle vérifie :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \left| \alpha_{i,i} \right|> \sum_{j\neq i}^{}\left| \alpha _{i,j}\right| \text { }\forall i \text { }1\leqslant i\leqslant n \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A matrix A = (a i,j ) 1≤i,j≤n is said to be ' <strong>
+              <em>diagonally dominant</em>
+            </strong>' if it verifies:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \left| \alpha_{i,i} \right|> \sum_{j\neq i}^{}\left| \alpha _{i,j}\right| \text { }\forall i \text { }1\leqslant i\leqslant n \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette condition peut sembler très forte, mais en fait dans les gros systèmes, les matrices sont souvent des <input type="button" value="matrices bandes" onclick="go('../matrices/bandes.html#')" data-inline="true" />. Lorsque ces matrices sont issues d'équations aux dérivées partielles le coefficient diagonal est souvent dominant. <br /> Nous allons maintenant supposer que A est à diagonale dominante, et chercher la forme de D<sup>-1</sup>M. Remarquons tout de suite que dans notre cas (système de Cramer) il est impossible qu'un seul élément diagonal soit nul sinon nous aurions une ligne et une colonne nulle contrairement à l'hypothèse qu'on a affaire à un système de Cramer. <br /> La matrice D est donc <input type="button" value="diagonale" onclick="go('../matrices/matdiag.html#')" data-inline="true" /> sans aucun 0. Son inverse est donc la matrice diagonale dont les éléments sont les inverses des élements de D. Calculons maintenant les coefficients de D<sup>-1</sup>M soient les c<sub>i,j</sub> on a : <br /> c<sub>i,i</sub>=0 ∀ i 1≤i≤n <br /> c<sub>i,j</sub>= a<sub>i,j</sub>/a<sub>i,i</sub> i ≠ j <br /> d'où |c<sub>i,j</sub>|&lt;1 ∀(i,j) 1≤i,j≤n i ≠ j <br /> Prenons maintenant sur K<sup>n</sup> la <input type="button" value="norme" onclick="go('../orthogonalite/normes.html#')" data-inline="true" /> L<sub>∞</sub> et sur M(n,K) <input type="button" value="la norme matricielle" onclick="go('../orthogonalite/normes.html#def3')" data-inline="true" /> associée. <br /> On a évidemment ||D<sup>-1</sup>M|| &lt; 1 <br /> Voici maintenant une appliquette qui vous permettra de visualiser la méthode de Jacobi pour des matrices d'ordre 4 à diagonale dominante à coefficients réels. <ul>
+            <li> Appuyer seulement sur le bouton "Autre exemple".</li>
+            <li> Un système est généré avec matrice A et second membre B (affichés à l'écran).</li>
+            <li> On démarre toujours avec le vecteur nul pour approximation d'ordre 0.</li>
+            <li> En appuyant sur 'Etape suivante', vous faites une itération supplémentaire.</li>
+            <li> Le compteur d'itérations est tenu à jour.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This condition may seem very strong, but in fact in large systems matrices are often <input data-inline="true" onclick="go('../matrices/bandes.html#')" type="button" value=" band matrices" />. When these matrices come from partial differential equations the diagonal coefficient is often dominant. <br />We will now assume that A is diagonally dominant, and find the shape of D<sup>-1</sup>M. Note immediately that in our case (Cramer's system) it is impossible for a single diagonal element to be zero otherwise we would have a row and a null column contrary to the hypothesis that we are dealing with to a Cramer system. <br /> The matrix D is therefore <input data-inline="true" onclick="go('../matrices/matdiag.html#')" type="button" value="diagonal" /> without any 0. Its inverse is therefore the diagonal matrix whose elements are the inverses of the elements of D. Let us now calculate the coefficients of D<sup>-1</sup>M denote them the c<sub>i,j</sub> we have : <br /> c<sub>i,i</sub>=0 ∀ i 1≤i≤n <br />c<sub>i,j</sub>= a<sub>i,j</sub>/a<sub>i,i</sub> i ≠ j <br /> hence |c<sub>i,j</sub>|
+          <1 ∀(i,j) 1≤i,j≤ni ≠ j <br />Let us now take on K<sup>n</sup> the <input data-inline="true" onclick="go('../orthogonalite/normes.html#')" type="button" value="norm" />L<sub>∞</sub> and on M(n,K) <input data-inline="true" onclick="go('../orthogonalite/normes.html#def3e')" type="button" value=" matrix norm" /> associated. <br />We obviously have ||D<sup>-1</sup>M||
+          < 1 <br />Here is now an applet that will allow you to visualize the Jacobi's method for order 4 matrices, diagonal dominant with real coefficients. <ul>
+            <li>Just press the "Other example" button for a new case. </li>
+            <li>A system is generated with matrix A and second member B (displayed on the screen). </li>
+            <li>We always start with the null vector for approximation of order 0. </li>
+            <li>By pressing 'Next step', you generate an additional iteration. </li>
+            <li>The iteration counter is kept up to date. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <table border="2">
+            <tbody>
+              <tr>
+                <td colspan="2">
+                  <button onclick="nameSpace2.Paint();" type="button">
+                    <div lang="fr">Nouvel exemple</div>
+                    <!-- /fr -->
+                    <div lang="en">New example</div>
+                    <!-- /en -->
+                  </button>
+                  <button onclick="nameSpace2.NextStep();" type="button">
+                    <div lang="fr">Itération suivante</div>
+                    <!-- /fr -->
+                    <div lang="en">Next step</div>
+                    <!-- /en -->
+                  </button>
+                  <input id="myText1" type="text">
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <div lang="fr">Matrice A</div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix A</div>
+                  <!-- /en -->
+                </td>
+                <td align="center">
+                  <div lang="fr">Second membre B</div>
+                  <!-- /fr -->
+                  <div lang="en">Second member B</div>
+                  <!-- /en -->
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas1" style="border:1px solid #000000;" width="320" height="80"></canvas>
+                </td>
+                <td align="center">
+                  <canvas id="myCanvas5" style="border:1px solid #000000;" width="80" height="80"></canvas>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <div lang="fr">Matrice D</div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix D</div>
+                  <!-- /en -->
+                </td>
+                <td align="center">
+                  <div lang="fr"> Solution 'exacte'</div>
+                  <!-- /fr -->
+                  <div lang="en">'exact' solution</div>
+                  <!-- /en -->
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas2" style="border:1px solid #000000;" width="320" height="80"></canvas>
+                </td>
+                <td align="center">
+                  <canvas id="myCanvas6" style="border:1px solid #000000;" width="80" height="80"></canvas>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <div lang="fr">Matrice M</div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix M</div>
+                  <!-- /en -->
+                </td>
+                <td align="center"> X<sub>n</sub>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas3" style="border:1px solid #000000;" width="320" height="80"></canvas>
+                </td>
+                <td align="center">
+                  <canvas id="myCanvas7" style="border:1px solid #000000;" width="80" height="80"></canvas>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <div lang="fr">Matrice D<sup>-1</sup>
+                  </div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix D<sup>-1</sup>
+                  </div>
+                  <!-- /en -->
+                </td>
+                <td align="center"> X<sub>n+1</sub>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas4" style="border:1px solid #000000;" width="320" height="80"></canvas>
+                </td>
+                <td align="center">
+                  <canvas id="myCanvas8" style="border:1px solid #000000;" width="80" height="80"></canvas>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <script src="js/jacobi.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2> Le coin de Python </h2>
+          <p>Voici une implémentation de la méthode des itérations successives de Jacobi.</p>
+          <p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's Corner </h2>
+          <p>Here is an implementation of the method of successive iterations of Jacobi. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/jacobi.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2> Le coin de Julia </h2>
+          <p>Même chose avec Julia 1.6</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Julia's corner </h2>
+          <p>Same with Julia 1.6 </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/jacobi.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
 </html>

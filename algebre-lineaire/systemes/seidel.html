@@ -1,95 +1,331 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-	<title>Méthode de Gauss-Seidel</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../css/themes/myown.css" />
-	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <title>Méthode de Gauss-Seidel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
     <link href="../../css/myown.css" rel="stylesheet">
-	<script src="../../js/jquery-1.11.3.js"></script>
-	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-	<script src="../../js/custom.js"></script>
-  
-  </head>	
-	
-
-<body style="overflow: auto; "class="fr">
-<script> window.onload=get();</script>
-<a name="beg"></a>
-<div data-role="page" data-theme="d">
-
-	<div data-role="header">
-<table>
-<tr>
-<td>Choisissez votre langue !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-<td>Choose your language !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-</tr>
-</table>	
-	</div><!-- /header -->
-
-<div style="overflow: auto; "  data-role="content" data-theme="d">
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercices" onclick="go('exercices/seidel/menu.html')" /></li>  
- 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercises" onclick="go('exercices/seidel/menu.html')" /></li>
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
-  </ul>
-</div><!-- /navbar --></div><!-- /en --> 
-
-
-
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div></div><!-- /en --> 
-
-	</div><!-- /content -->
-
-<div data-role="footer">
-	<table cellpadding="10">
-<tr>
-	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
-	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
-	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
-
-</tr>
-</table>	
-</div><!-- /footer -->
-<ul style=list-style-type:'';>
- <li>
- <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-   </li>
-<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-	</ul>
-</div><!-- /page -->
-
-</body>
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seidel/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seidel/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> La méthode de Gauss Seidel </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Gauss Seidel's method</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <img alt="" height="255" src="images/seidel.jpeg" width="198" />
+        <br />
+        <em>
+          <span style="font-size: smaller;"> Philipp Ludwig von Seidel</span>
+        </em>
+        <br />
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Nous conservons les notations de la page concernant la <input type="button" value="méthode de Jacobi" onclick="go('jacobi.html#')" data-inline="true" />. L'idée est la même mais au lieu de prendre pour D la diagonale extraite de A on prend pour D la matrice triangulaire supérieure extraite de A (y compris les éléments diagonaux). <br /> La matrice M est alors la même que la matrice F de l'exposé précédent (triangulaire inférieure gauche stricte). <br /> La méthode de Gauss-Seidel a la réputation de converger plus rapidement que celle de Jacobi. <br /> Des tests faits avec une série de 100 exécutions des programmes donnés en exemple pour Jacobi et Gauss-Seidel donne les moyennes d'erreurs suivantes: <br /> Jacobi 25 itérations: 10<sup>-14</sup>
+          <br /> Gauss Seidel 13 itérations: 10<sup>-14</sup>
+          <br /> Voici maintenant une appliquette qui vous permettra de visualiser la méthode de Seidel-Gauss pour pour des matrices d'ordre 4 à diagonale dominante à coefficients réels. <ul>
+            <li> Appuyer seulement sur le bouton "Nouvel exemple".</li>
+            <li>Un système est généré avec matrice A et second membre B (affichés à l'écran).</li>
+            <li>On démarre toujours avec le vecteur nul pour approximation d'ordre 0.</li>
+            <li>En appuyant sur 'Etape suivante', vous faites une itération supplémentaire.</li>
+            <li>Le compteur d'itérations est tenu à jour.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We keep the notations of the page concerning the <input data-inline="true" onclick="go('jacobi.html#')" type="button" value="Jacobi's method" />. The idea is the same but instead of taking for D the extracted diagonal of A we take for D the upper triangular matrix extracted from A (including diagonal elements). <br /> The matrix M is then the same as the matrix F of the previous presentation (strict lower left triangular). <br /> The Gauss-Seidel method has the reputation of converging faster than that of Jacobi. <br />Tests made with a series of 100 executions of the given programs as an example for Jacobi and Gauss-Seidel gives the following error mean values : <br /> Jacobi 25 iterations: 10<sup>-14</sup>
+          <br /> Gauss Seidel 13 iterations: 10<sup>-14</sup>
+          <br />Here is now an applet that will allow you to visualize the Seidel-Gauss method for diagonally dominant matrices of order 4 with real coefficients. <ul>
+            <li>Just press the "New example" button. </li>
+            <li>A system is generated with matrix A and second member B (displayed on the screen). </li>
+            <li>We always start with the null vector for approximation of order 0. </li>
+            <li>By pressing 'Next step', you make an additional iteration. </li>
+            <li>The iteration counter is kept up to date. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <table border="2">
+            <tr>
+              <td colspan="2">
+                <button onclick="nameSpace2.Paint();" type="button">
+                  <div lang="fr">Nouvel exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">New example</div>
+                  <!-- /en -->
+                </button>
+                <button onclick="nameSpace2.NextStep();" type="button">
+                  <div lang="fr">Itération suivante</div>
+                  <!-- /fr -->
+                  <div lang="en">Next step</div>
+                  <!-- /en -->
+                </button>
+                <input id="myText1" type="text" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice A</div>
+                <!-- /fr -->
+                <div lang="en">Matrix A</div>
+                <!-- /en -->
+              </td>
+              <td align="center">
+                <div lang="fr">Second membre B</div>
+                <!-- /fr -->
+                <div lang="en">Second member B</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas1" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas5" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice D</div>
+                <!-- /fr -->
+                <div lang="en">Matrix D</div>
+                <!-- /en -->
+              </td>
+              <td align="center">
+                <div lang="fr">Solution 'exacte'</div>
+                <!-- /fr -->
+                <div lang="en">'exact' solution</div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas2" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas6" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr">Matrice M</div>
+                <!-- /fr -->
+                <div lang="en">Matrix M</div>
+                <!-- /en -->
+              </td>
+              <td align="center"> X<sub>n</sub>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas3" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas7" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <div lang="fr"> Matrice D<sup>-1</sup>
+                </div>
+                <!-- /fr -->
+                <div lang="en">Matrix D<sup>-1</sup>
+                </div>
+                <!-- /en -->
+              </td>
+              <td align="center"> X<sub>n+1</sub>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <canvas height="200" id="myCanvas4" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+              <td align="center">
+                <canvas height="200" id="myCanvas8" style="border:1px solid #000000;" width="350"></canvas>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <script src="js/seidel.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Le coin de Python</h2>
+          <p>Voici une implémentation de la méthode des itérations successives de Gauss-Seidel.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner </h2>
+          <p>Here is an implementation of the method of successive iterations of Gauss-Seidel. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object border="3" data="python/seidel.html" height="400" type="text/html" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Même chose avec Julia 1.6</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner </h2>
+          <p>Same thing with Julia 1.6 </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object border="3" data="julia/seidel.jl.html" height="400" type="text/html" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
 </html>

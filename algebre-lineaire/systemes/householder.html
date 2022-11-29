@@ -1,96 +1,385 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-	<title>Méthode de Householderx</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../css/themes/myown.css" />
-	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <title>Méthode de Householderx</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
     <link href="../../css/myown.css" rel="stylesheet">
-	<script src="../../js/jquery-1.11.3.js"></script>
-	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-	<script src="../../js/custom.js"></script>
-	 <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
-  </head>	
-	
-
-<body style="overflow: auto; "class="fr">
-<script> window.onload=get();</script>
-<a name="beg"></a>
-<div data-role="page" data-theme="d">
-
-	<div data-role="header">
-<table>
-<tr>
-<td>Choisissez votre langue !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-<td>Choose your language !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-</tr>
-</table>	
-	</div><!-- /header -->
-
-<div style="overflow: auto; "  data-role="content" data-theme="d">
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercices" onclick="go('exercices/householder/menu.html')" /></li>  
- 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercises" onclick="go('exercices/householder/menu.html')" /></li>
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
-  </ul>
-</div><!-- /navbar --></div><!-- /en --> 
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div></div><!-- /en --> 
-
-	</div><!-- /content -->
-
-<div data-role="footer">
-	<table cellpadding="10">
-<tr>
-	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
-	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
-	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
-	<td><a href="https://www.mathjax.org">
-    <img title="Powered by MathJax"
-    src="https://www.mathjax.org/badge/badge.gif"
-    border="0" alt="Powered by MathJax" />
-</a></td>	
-</tr>
-</table>	
-</div><!-- /footer -->
-<ul style=list-style-type:'';>
- <li>
- <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-   </li>
-<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-	</ul>
-</div><!-- /page -->
-
-</body>
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/householder/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/householder/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Réflexions </h2> E désigne un espace euclidien de dimension finie. <br /> Nous rappelons ce qu'est une symétrie orthogonale par rapport à un sous espace F. <br /> L'espace E est somme directe de F et F<sup>⊥</sup> tout vecteur x s'écrit donc de façon unique x=y+z avec y ∈ F et z ∈ F<sup>⊥</sup>. <br /> L'application x → y-z possède les propriétés suivantes: <br /> C'est une <input type="button" value="application orthogonale" onclick="go('../orthogonalite/grouporth.html#')" data-inline="true" />, s<sup>*</sup>=s<sup>-1</sup>. <br /> Elle est involutive s <font size="-1">o</font>s=Id <br /> Donc en définitive: <br /> s=s*=s<sup>-1</sup>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Reflexions </h2> E denotes a finite dimensional Euclidean space. <br /> We recall what is an orthogonal symmetry with respect to a subspace F. <br />The space E is direct sum of F and F<sup>⊥</sup> any vector x is therefore written in a unique way x=y+z with y ∈ F and z ∈ F<sup>⊥</sup>. <br /> The map x → y-z has the following properties: <br /> It's a <input data-inline="true" onclick="go('../orthogonalite/grouporth.html#')" type="button" value=" orthogonal application" />, s<sup>*</sup>=s<sup>-1</sup>. <br /> It is involutive s <font size="-1">o</font>s=Id <br /> So ultimately: <br /> s=s*=s<sup>-1</sup>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Dans le cas particulier où F est un <input type="button" value="hyperplan" onclick="go('../espaces/dimension.html#hyperplan')" data-inline="true" /> nous appellerons une telle symétrie une <strong>
+              <em> 'réflexion' </em>
+            </strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> In the special case where F is a <input data-inline="true" onclick="go('../espaces/dimension.html#hyperplane')" type="button" value=" hyperplane" />we will call such a symmetry a <strong>
+              <em> 'reflection' </em>
+            </strong> .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Le premier résultat important concernant les réflexions est le suivant: </div>
+        <!-- /fr -->
+        <div lang="en"> The first important result concerning reflections is the following: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> x et y étant deux vecteurs de même <input type="button" value="norme" onclick="go('../orthogonalite/basorth.html#def7')" data-inline="true" /> non nulle. Il existe une et une seule réflexion transformant x en y.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> x and y being two vectors with the same <input data-inline="true" onclick="go('../orthogonalite/basorth.html#def7e')" type="button" value=" norm" />not zero. There is one and only one reflection transforming x into y.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il est clair que la réflexion cherchée est exactement la réflexion par rapport à l'hyperplan H <input type="button" value="orthogonal" onclick="go('../orthogonalite/vectorth.html#sevorth')" data-inline="true" /> au vecteur x-y. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It is clear that the sought reflection is exactly the reflection with respect to the hyperplane H <input data-inline="true" onclick="go('../orthogonalite/vectorth.html#sevorth')" type="button" value="orthogonal" /> to the vector x-y. <br />
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <img alt="" src="images/symorth.png" width="538" height="318" border="0">
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2> Produits tensoriels </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Tensor products</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="not1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">notation 1</div> Soit W un vecteur colonne de ℝ<sup>n</sup> , alors le produit matriciel W<sup>t</sup>W est une matrice carrée d'ordre n que nous noterons W⊗W .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">notation 1</div> Let W be a column vector of ℝ<sup>n</sup> , then the matrix product WW<sup>T</sup> is a square matrix of order n that we will denote W⊗W .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> W⊗W est clairement symétrique
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> W⊗W is clearly symmetric
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Le coefficient d'indice i,j est w<sub>i</sub>w<sub>j</sub>. </div>
+        <!-- /fr -->
+        <div lang="en"> The coefficient with index i,j is indeed w<sub>i</sub>w<sub>j</sub>. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Considérons le cas particulier où W est de norme euclidienne 1 (||W||=1) alors dans ce cas : <br> (W⊗W)(W⊗W)=W⊗W.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> Consider the particular case where W has Euclidean norm 1 (||W||=1) then in this case: <br /> (W⊗W)(W⊗W)=W⊗W.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit pour le voir d'utiliser la définition du produit tensoriel et le fait que W est de norme 1. </div>
+        <!-- /fr -->
+        <div lang="en"> It is enough to see it to use the definition of the tensor product and the fact that W has norm 1. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Toujours dans le cas où ||W||=1. L'application S de matrice: <br> M(S)=I-2W⊗W vérifie: <br> S=S<sup>-1</sup>=S<sup>*</sup>
+            <br> S(W)=-W
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> Always in the case where ||W||=1. The application S with matrix : <br /> M(S)=I-2W⊗W verifies: <br /> S=S<sup>-1</sup>=S<sup>*</sup>
+            <br /> S(W)=-W
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour la première partie, il suffit pour le voir de calculer le produit S<sup>2</sup> et d'utiliser la propriété précédente. <br> Pour la seconde partie l'égalité résulte de la définition de W⊗W et du fait que W est de norme 1. <br> En conclusion: </div>
+        <!-- /fr -->
+        <div lang="en"> For the first part, it suffices to see it to calculate the product S<sup>2</sup> and use the previous property. <br /> For the second part the equality results from the definition of W⊗W and from the fact that W has norm 1. <br /> In conclusion: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> S est la symétrie orthogonale par rapport à l'hyperplan H=W<sup>⊥</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> S is the orthogonal symmetry with respect to the hyperplane H=W<sup>⊥</sup>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous pouvons maintenant combiner cela avec la première partie: </div>
+        <!-- /fr -->
+        <div lang="en"> We can now combine this with the first part: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Si x et y sont deux vecteurs de même norme non nulle, la réflexion transformant x en y a pour matrice I-2W⊗W où W est le vecteur (x-y)/||x-y||.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> If x and y are two vectors with the same nonzero norm, the reflection transforming x into y has for matrix I-2W⊗W where W is the vector (x-y)/||x-y||.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Factorisation de Householder </h2> Nous avons maintenant tous les outils nécessaires pour donner l'algorithme de décomposition QR de Householder. <br> Soit A une matrice carrée régulière d'ordre n. <br> On désigne par U<sub>1</sub>,...,U<sub>n</sub> les vecteurs colonnes de la matrice A. <br> (e<sub>1</sub>,...,e<sub>n</sub>) désigne la base canonique de ℝ<sup>n</sup>. Nous affirmons que:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Householder factorization </h2> We now have all the tools needed to give Householder's QR decomposition algorithm. <br /> Let A be a regular square matrix of order n. <br />We denote by U<sub>1</sub>,...,U<sub>n</sub> the column vectors of the matrix A. <br />(e<sub>1</sub>,...,e<sub>n</sub>) denotes the canonical basis of ℝ<sup>n</sup>. We affirm that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> Il existe une réflexion H<sub>1</sub> tel que le vecteur H<sub>1</sub>A(e<sub>1</sub>)=H<sub>1</sub>U<sub>1</sub> ait toutes ses coordonnées nulles sauf la première.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> There is a reflection H<sub>1</sub> such that the vector H<sub>1</sub>A(e<sub>1</sub>)=H<sub>1</sub>U<sub>1</sub> has all its coordinates zero except the first one.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit d'appliquer ce qui précède avec x=U<sub>1</sub> et y=kαe<sub>1</sub> où α=||U<sub>1</sub>|| et k = +/- 1. <br> En pratique nous prendrons toujours k du signe opposé de la première coordonnée de U<sub>1</sub>. Il existe donc une réflexion H<sub>1</sub> telle que: H<sub>1</sub>A soit de la forme: </div>
+        <!-- /fr -->
+        <div lang="en"> Just apply the above with x=U<sub>1</sub> and y=kαe<sub>1</sub> where α=||U<sub>1</sub>|| and k = +/- 1. <br> In practice we will always take k from the opposite sign of the first coordinate of U<sub>1</sub>. There is therefore a reflection H<sub>1</sub> such as: H<sub>1</sub>A is of the form: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( A=\begin{pmatrix} x& . & .& . & . \\ 0& & & & \\ 0& & A_{1} & & \\ 0& & & & \\ 0& & & & \\ \end{pmatrix} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Appliquons maintenant l'hypothèse de récurrence à la matrice A<sub>1</sub> d'ordre n-1. Nous avons une factorisation A<sub>1</sub>=Q<sub>1</sub>R<sub>1</sub> avec Q<sub>1</sub> orthogonale. <br> Ce que nous pouvons encore écrire<sup>t</sup>Q<sub>1</sub>A<sub>1</sub>=R<sub>1</sub>. <br> De cette écriture nous pouvons déduire:<sup>t</sup>Q<sub>1</sub>'A<sub>1</sub>'=R<sub>1</sub>' où: <br> ∀ M, M' est la matrice obtenue en bordant M par la ligne (1,0, .. ,0) au dessus et par la colonne<sup>t</sup> (1,0, ... ,0) à gauche. On peut alors écrire: <br> H<sub>1</sub>A=A<sub>1</sub>'+ M où M a toutes ses lignes nulles sauf la première. <br> En multipliant par<sup>t</sup>Q<sub>1</sub>' <br>
+         <sup>t</sup>Q<sub>1</sub>'H<sub>1</sub> A=R<sub>1</sub>'+<sup>t</sup>Q<sub>1</sub>'M <br> Vu la forme de<sup>t</sup>Q<sub>1</sub>' on peut affirmer que<sup>t</sup>Q<sub>1</sub>'M comporte des zéros partout sauf sur la première ligne. <br> De sorte que: <br> R<sub>1</sub>'+<sup>t</sup>Q<sub>1</sub>'M est triangulaire <br> et, <br>
+         <sup>t</sup>Q<sub>1</sub>'H<sub>1</sub> est orthogonale comme produit de deux matrices orthogonales. <br> Le théorème est donc démontré par récurrence sur le rang de A. <h2>Le coin de Python </h2> Voici une implémentation de l'algorithme de factorisation QR par la méthode de Householder.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let us now apply the induction hypothesis to the matrix A<sub>1</sub> of order n-1. We have a factorization A<sub>1</sub>=Q<sub>1</sub>R<sub>1</sub> with Q<sub>1</sub> orthogonal. <br /> What we can still write Q<sub>1</sub>
+         <sup>T</sup>A<sub>1</sub>=R<sub>1</sub>. <br /> From this writing we can deduce:Q<sub>1</sub>'<sup>T</sup>A<sub>1</sub>'=R<sub>1</sub>' where: <br />∀ M, M' is the matrix obtained by bounding M by the row (1,0, .. ,0) above and by the column (1,0, ... ,0)<sup>T</sup> to the left. We can then write: <br /> H<sub>1</sub>A=A<sub>1</sub>'+ M where M has all its rows zero except the first. <br /> By multiplying by Q<sub>1</sub>'<sup>T</sup>
+          <br /> Q<sub>1</sub>'<sup>T</sup>H<sub>1</sub> A=R<sub>1</sub>'+Q<sub>1</sub>'<sup>T</sup>M <br /> Given the shape of Q<sub>1</sub>'<sup>T</sup> we can say that Q<sub>1</sub>'<sup>t</sup>M has zeros everywhere except on the first line. <br /> So that: <br /> R<sub>1</sub>'+Q<sub>1</sub>'<sup>T</sup>M is triangular <br /> and, <br /> Q<sub>1</sub>'<sup>T</sup>H<sub>1</sub> is orthogonal as the product of two orthogonal matrices. <br /> The theorem is thus proved by induction on the rank of A. <h2> Python's corner </h2> Here is an implementation of the QR factorization algorithm by Householder's method.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/householder.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2> Le coin de Julia </h2>
+          <p>Même chose avec Julia 1.6</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Julia's corner </h2>
+          <p>Same with Julia 1.6 </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/householder.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
 </html>

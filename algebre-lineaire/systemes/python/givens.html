@@ -1,0 +1,86 @@
+﻿<html>
+ <head>
+  <title>
+   givens.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">scipy </span><span class="s2">import </span><span class="s1">* 
+</span><span class="s2">import </span><span class="s1">numpy </span><span class="s2">as </span><span class="s1">np 
+</span><span class="s2">from </span><span class="s1">random </span><span class="s2">import </span><span class="s1">randint 
+</span><span class="s3">"""factorisation QR méthode de Givens - QR factorization via Givens' method"""</span><span class="s1"> 
+</span><span class="s0">###implémentation itérative - iterative implementation</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">c(p,q,A): 
+    </span><span class="s0">"""cosinus theta"""</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">A[p,p]==</span><span class="s4">0 </span><span class="s2">and </span><span class="s1">A[q,p]==</span><span class="s4">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s4">1</span><span class="s1"> 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">A[p,p]/sqrt(A[p,p]*A[p,p]+A[q,p]*A[q,p]) 
+ 
+</span><span class="s2">def </span><span class="s1">s(p,q,A): 
+    </span><span class="s0">"""sinus theta"""</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">A[p,p]==</span><span class="s4">0 </span><span class="s2">and </span><span class="s1">A[q,p]==</span><span class="s4">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">A[q,p]/sqrt(A[p,p]*A[p,p]+A[q,p]*A[q,p]) 
+ 
+</span><span class="s2">def </span><span class="s1">G(q,p,A): 
+    </span><span class="s0">"""Selon l'algo - according algorithm"""</span><span class="s1"> 
+    G=eye(len(A)) </span><span class="s0">#identité - unity matrix</span><span class="s1"> 
+    G[p,p]=c(p,q,A) 
+    G[p,q]=s(p,q,A) 
+    G[q,p]= -s(p,q,A) 
+    G[q,q]= c(p,q,A) 
+    </span><span class="s2">return </span><span class="s1">matrix(G) 
+ 
+</span><span class="s2">def </span><span class="s1">q(A): 
+    </span><span class="s0">"""calcule la transposée (donc l'inverse) du facteur Q - computes the transpose (hence the inverse) of Q factor"""</span><span class="s1"> 
+    n=len(A) 
+    q=eye(n) 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,n): 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,i): 
+            q=G(i,j,A)*q 
+            A=G(i,j,A)*A 
+    </span><span class="s2">return </span><span class="s1">q 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    n=</span><span class="s4">4</span><span class="s1"> 
+    A = np.random.rand(n, n) </span><span class="s0">#matrice aléatoire - random matrix</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,n): 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range (</span><span class="s4">0</span><span class="s1">,n): 
+            A[i,j]=randint(</span><span class="s4">0</span><span class="s1">,</span><span class="s4">9</span><span class="s1">)-</span><span class="s4">4</span><span class="s1"> 
+    print (A) 
+    Q=q(A) 
+    R=Q*A 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,n): 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range (</span><span class="s4">0</span><span class="s1">,i): 
+            R[i,j]=</span><span class="s4">0 </span><span class="s0">#si résultat non exact - if result not exact</span><span class="s1"> 
+ 
+    Q=Q.transpose() 
+    print (</span><span class="s3">"Q="</span><span class="s1">) 
+    print (Q) 
+    print (</span><span class="s3">"R="</span><span class="s1">) 
+    print (R) 
+    print (Q*R) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+<span class="s2">#surcharge de * pour le produit scalaire - overloading * for dot product</span>
+<span class="s1">Base.:*(v1,v2)=reduce(+,map(*,v1,v2))</span>
+<span class="s2">#norme d'un vecteur - norm of a vector</span>
+<span class="s1">norme(v)=sqrt(v*v)</span>
+<span class="s2">#normalisation - normalization</span>
+<span class="s1">normalize(v)=(</span><span class="s3">1</span><span class="s1">/norme(v))*v</span>
+
+<span class="s0">function </span><span class="s1">aleamatrice(n)</span>
+    <span class="s1">R=zeros(n,n)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n, j </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n</span>
+            <span class="s1">R[i,j]=rand(Float64)</span>
+        <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">R</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">H1(A)</span>
+    <span class="s1">n=size(A,</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s1">X=A[:,</span><span class="s3">1</span><span class="s1">]</span>
+    <span class="s1">N1=norm(X)</span>
+    <span class="s1">Y=repeat([</span><span class="s3">0.0</span><span class="s1">],n)</span>
+    <span class="s1">W=X-Y</span>
+    <span class="s1">W=normalize(W)</span>
+    <span class="s1">W=hcat(W)</span>
+    <span class="s1">TENS=W*transpose(W)</span>
+    <span class="s1">IDn=Matrix(</span><span class="s3">1.0</span><span class="s1">I,n,n)</span>
+    <span class="s1">H=IDn-</span><span class="s3">2</span><span class="s1">TENS</span>
+    <span class="s0">return </span><span class="s1">H</span>
+    
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">q(A)</span>
+    <span class="s1">n=size(A,</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s0">if </span><span class="s1">n==</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">Matrix(I,</span><span class="s3">1</span><span class="s1">,</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s1">R1=H1(A)*A</span>
+    <span class="s1">R2=R1[</span><span class="s3">2</span><span class="s1">:end,</span><span class="s3">2</span><span class="s1">:end]</span>
+    <span class="s1">Q1=q(R2)</span>
+    <span class="s1">Q2=Matrix(</span><span class="s3">1.0</span><span class="s1">I,n,n)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">2</span><span class="s1">:n, j </span><span class="s0">in </span><span class="s3">2</span><span class="s1">:n</span>
+        <span class="s1">Q2[i,j]=Q1[i-</span><span class="s3">1</span><span class="s1">,j-</span><span class="s3">1</span><span class="s1">]</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Q2*H1(A)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">n=</span><span class="s3">3</span>
+    <span class="s1">A=aleamatrice(n)</span>
+    <span class="s1">println(A)</span>
+    <span class="s1">Q=q(A)</span>
+    <span class="s1">println(Q)</span>
+    <span class="s1">R=Q*A</span>
+    <span class="s1">println(R)</span>
+    <span class="s1">Q=transpose(Q)</span>
+    <span class="s1">println(Q*R)</span>
+
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

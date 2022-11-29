@@ -1,695 +1,425 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-	<title>Méthode de Cholesky</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../css/themes/myown.css" />
-	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <title>Méthode de Cholesky</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
     <link href="../../css/myown.css" rel="stylesheet">
-	<script src="../../js/jquery-1.11.3.js"></script>
-	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-	<script src="../../js/custom.js"></script>
-	 <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
-  </head>	
-	
-
-<body style="overflow: auto; "class="fr">
-<script> window.onload=get();</script>
-<a name="beg"></a>
-<div data-role="page" data-theme="d">
-
-	<div data-role="header">
-<table>
-<tr>
-<td>Choisissez votre langue !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-<td>Choose your language !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-</tr>
-</table>	
-	</div><!-- /header -->
-
-<div style="overflow: auto; "  data-role="content" data-theme="d">
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercices" onclick="go('exercices/cholesky/menu.html')" /></li>  
- 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercises" onclick="go('exercices/cholesky/menu.html')" /></li>
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
-  </ul>
-</div><!-- /navbar --></div><!-- /en --> 
-<div lang="en">Warning : To avoid conflict with previous conventions we will denote by A<sup>t</sup> instead of A<sup>T</sup> the transpose of matrix A. We will use letter T to denote triangular matrices, so that T<sup>t</sup> will denote the <input type="button" value="transpose" onclick="go('../matrices/mattranspo.html#')"  data-inline="true"/> of the <input type="button" value="triangular" onclick="go('../matrices/mattri.html#')"  data-inline="true"/> matrix T.</div><!-- /en --> 
-
-<div lang="fr">
-<h2>
-   Matrices symétriques définies positives
-  </h2>
-  Bien que des extensions et des généralisations soient possibles pour le cas
-  <input type="button" value="hilbertien (hermitien) complexe" onclick="go('../orthogonalite/hermit.html#')" data-inline="true" />, nous nous bornons ici à condidérer des matrices réelles
-  <input type="button" value="symétriques" onclick="go('../reducmat/redsym.html#matsym')" data-inline="true" />.
-  <br/>
-  Nous savons ce qu'est une
-  <input type="button" value="forme bilinéaire" onclick="go('../determinants/multilat.html#')" data-inline="true" />. Nous savons également ce qu'est
-  <input type="button" value="la matrice d'une forme bilinéaire" onclick="go('../orthogonalite/hermit.html#matsesqu')" data-inline="true" />.
-  Nous avons donc tout ce qu'il faut pour définir les matrices qui vont faire l'objet de notre étude.
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-
-<h2>
-   Positive definite symmetric matrices
-   </h2>
-  Although extensions and generalizations are possible for the case
-   <input data-inline="true" onclick="go('../orthogonalite/hermit.html#')" type="button" value=" Hilbertian (Hermitian) complex"/>, we confine ourselves here to considering real 
-   <input data-inline="true" onclick="go('../reducmat/redsym.html#matsyme')" type="button" value=" symmetric"/> matrices. 
-   <br/
-  We know what a
-   <input data-inline="true" onclick="go('../determinants/multilat.html#')" type="button" value=" bilinear form"/> is.  We also know what
-   <input data-inline="true" onclick="go('../orthogonalite/hermit.html#matsesque')" type="button" value=" bilinear form"/> is.
-   We therefore have everything we need to define the matrices that will be the subject of our study.
-
-
-</div><!-- /en --> 
-
-<!-- STOP -->
-<a name="def1"></a>
-<div id="container">
-<div lang="fr">
-<div id="label">définition 1</div>
-Une matrice A est dite symétrique définie
-positive (sdp) si elle est symétrique et si la forme bilinéaire
-associée relativement à la base canonique est
-   <input type="button" value="définie positive" onclick="go('../orthogonalite/basorth.html#def3')" data-inline="true" />.
-  
-</div><!--/fr-->
-<div lang="en">
-<div id="label">definition 1</div>
-A matrix A is said to be symmetric 
- positive  definite (spd) if it is symmetric and if the bilinear form
- associated relatively to the standard basis is
-    <input data-inline="true" onclick="go('../orthogonalite/basorth.html#def3e')" type="button" value="positive definite"/>.
-
-
-</div><!-- /en -->
-</div> <!-- /cont -->
-<!-- /STOP -->
-
-<div lang="fr">
-
-Notre définition revient donc à: 
-
-</div><!-- /fr --> 
-
-<div lang="en">
-
-Our definition therefore amounts to: 
-
-</div><!-- /en --> 
-
-<!-- STOP -->
-<a name="def2"></a>
-<div id="container">
-<div lang="fr">
-<div id="label">définition 2</div>
-A sdp ⇔ <sup>t</sup>A=A et ∀ X vecteur colonne de ℝ<sup>n</sup>
-   on a <sup>t</sup>XAX ∈ ℝ et <sup>t</sup>XAX ≥ 0 et <sup>t</sup>XAX=0 ⇒ X=0.
-  
-</div><!--/fr-->
-<div lang="en">
-<div id="label">definition 2</div>
-A spd ⇔ A<sup>t</sup>=A and ∀ X column vector of ℝ<sup>n</sup>
-     we have <sup>t</sup>XAX ∈ ℝ and X<sup>t</sup>AX ≥ 0 and X<sup>t</sup>AX=0 ⇒ X=0.
-</div><!-- /en -->
-</div> <!-- /cont -->
-<!-- /STOP -->
-
-<div lang="fr">
- Pour des exemples de matrices sdp on peut prendre:
-  <br/>
-<ul>
-<li>
-    Les matrices (α<sub>i,j</sub>) où α<sub>i,j</sub>=1/(1+|i+j|)
-   </li>
-<li>
-    Les matrices (α<sub>i,j</sub>) où α<sub>i,j</sub>=1/(i+j-1)
-   </li>
-</ul>
-  Nous savons déjà beaucoup de choses sur de telles matrices, en
-particulier qu'elles ont toutes leurs valeurs propres réelles, et
-qu'elles sont
-  <input type="button" value="diagonalisables" onclick="go('../reducmat/redsym.html#')" data-inline="true" />
-  relativement à une base orthonormale. Nous avons tout de suite quelques résultats supplémentaires.
-
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-For examples of spd matrices we can take:
-   <br/>
-<ul>
-<li>
-    The matrices (α<sub>i,j</sub>) where α<sub>i,j</sub>=1/(1+|i+j|)
-    </li>
-<li>
-    The matrices (α<sub>i,j</sub>) where α<sub>i,j</sub>=1/(i+j-1)
-    </li>
-</ul>We already know a lot about such matrices, in
- particular that their eigenvalues are real, and
- that they are
-   <input data-inline="true" onclick="go('../reducmat/redsym.html#')" type="button" value=" diagonalizable"/> relatively to an orthonormal basis.  We have some additional results right away.
-
-
-</div><!-- /en --> 
-
-<!-- STOP -->
-<a name="prop1"></a>
-<div id="container">
-<div lang="fr">
-<div id="label">propriété 1</div>
-Dans le cas d'une matrice sdp toutes les valeurs propres sont strictement positives.
-</div><!--/fr-->
-<div lang="en">
-<div id="label">property 1</div>
-In the case of a spd matrix all the eigenvalues ​​are strictly positive. 
-</div><!-- /en -->
-</div> <!-- /cont -->
-<!-- /STOP -->
-
-<div lang="fr">
-On voit cela en utilisant les vecteurs propres. En outre l'existence d'une valeur propre nulle entrainerait <sup>t</sup>XX=||X||<sup>2</sup>=0, pour un vecteur propre correspondant, ce qui est une contradiction.
-De fait on peut montrer que:
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-
-This can be seen using eigenvectors.   Moreover the existence of a null eigenvalue would involve X<sup>t</sup>X=||X||<sup>2</sup>=0, for a corresponding eigenvector, which is a contradiction.
-  In fact, we can show that:
-
-</div><!-- /en --> 
-
-<!-- STOP -->
-<a name="prop2"></a>
-<div id="container">
-<div lang="fr">
-<div id="label">propriété 2</div>
-Cette propriété caractérise les matrices sdp.
-</div><!--/fr-->
-<div lang="en">
-<div id="label">property 2</div>
-This property characterizes spd matrices.
- 
-</div><!-- /en -->
-</div> <!-- /cont -->
-<!-- /STOP -->
-
-<div lang="fr">
-Bien que les matrices sdp puissent apparaître très particulières, elles
-apparaissent souvent naturellement comme matrices de systèmes
-linéaires, particulièrement pour:
-  <ul>
-   <li>
-    La recherche de pseudo-solutions par l'approximation par les moindres carrés.
-   </li>
-   <li>
-    La méthode de simulation de Monte-Carlo
-   </li>
-   <li>
-    Les filtres de Kalman
-   </li>
-  </ul>
-  Une étude particulière se justifie donc pleinement.
-  <h2>
-   Factorisation de Cholesky
-  </h2>
-  Le théorème principal est dû à André-Louis Cholesky (1875-1918).
-  <br>
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-Although spd matrices may appear very particular, they
- often appear naturally as matrices of linear systems, particularly for:
-   <ul>
-<li>
-    The search for pseudo-solutions by least squares approximation.
-    </li>
-<li>
-    The Monte-Carlo simulation method
-    </li>
-<li>
-    Kalman filters
-    </li>
-</ul>
-  A specific study is therefore fully justified.
-   <h2>
-   Cholesky factorization
-   </h2>
-  The main theorem is due to André-Louis Cholesky (1875-1918).
-   <br>
-
-
-</div><!-- /en -->
-
-<!-- STOP IMAGE -->
-<img alt="" src="images/39-cholesky.jpg" width="292" height="350" border="0">
-  <br>
-  <em>
-   <font size="-1">
-    Image: Archives de l'Ecole polytechnique (Fonds A. Cholesky).
-   </font>
-  </em>
-<!-- /STOP IMAGE --> 
-
-<div lang="fr">
- <br>
-  On peut l'énoncer ainsi:
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-
-
-
-</div><!-- /en --> 
-
-<!-- STOP -->
-<a name="thm1"></a>
-<div id="container">
-<div lang="fr">
-<div id="label">théorème 1</div>
- Toute matrice A sdp possède une factorisation LU du type A=<sup>t</sup>TDT où T est une matrice triangulaire supérieure et D diagonale.
-</div><!--/fr-->
-<div lang="en">
-<div id="label">theorem 1</div>
-Any spd matrix A  has an LU factorization of the type A=T<sup>t</sup>DT where T is an upper triangular matrix with diagonal D.
-</div><!-- /en -->
-</div> <!-- /cont -->
-<!-- /STOP -->
-
-<div lang="fr">
-  On voit tout de suite l'intérêt pratique d'un tel théorème. En fait dans une factorisation LU classique on recherche
-  <span style="text-decoration: underline;">
-   deux
-  </span>
-  matrices triangulaires distinctes, n'ayant en fait aucun rapport particulier entre elles. Dans ce cas nous ne cherchons
-  <span style="text-decoration: underline;">
-   qu'une
-  </span>
-  matrice triangulaire (donc en fait une demi-matrice).
-  <br>
-  La preuve de cet énoncé est liée aux divers algorithmes de détermination de T.
-  <br>
-  Ces algorithmes sont nombreux:
-  <ul>
-   <li>
-    Algorithme de Cholesky original
-   </li>
-   <li>
-    Algorithme de Cholesky Banachiewicz
-   </li>
-   <li>
-    Algorithme de Cholesky Crout
-   </li>
-  </ul>
-  La plupart de ces algorithmes font intervenir des calculs de racines carrées.
-  <br>
-  Nous renvoyons le lecteur intéressé aux divers liens vers les (nombreuses) pages web où ces calculs sont détaillés.
-  <br>
-  Nous choisissons pour notre part, d'exposer une méthode de factorisation sensiblement différente, du type:
-  <br>
-  A=<sup>t</sup>TDT,
-présentant l'avantage de ne pas faire appel à des calculs de racines.
-Cela peut être intéressant particulièrement dans le cas de résolution
-sur le corps ℚ des rationnels. L'inconvénient étant que la résolution finale du système:
-  <br><sup>t</sup> TDTX=B, passe par la résolution de 3 systèmes:
-  <br><sup>t</sup>TZ=B
-  <br>
-  DY=Z
-  <br>
-  TX=Y
-  <br>
-  dont deux sont triangulaires et un diagonal. Cependant la résolution
-d'un système diagonal ne nécessite qu'une division par une inconnue. Voici
-la factorisation dans le cas du rang 3.
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-We immediately see the practical interest of such a theorem.   In fact in a classical LU factorization we seek 
-   <span style="text-decoration: underline;">
-     two
-   </span>
-    distinct triangular matrices, having in fact no particular relationship between them.   In this case we are  looking for
-   <span style="text-decoration: underline;">
-     only one 
-   </span>
-    triangular matrix (so actually a half-matrix). 
-   <br/>
-  The proof of this statement is related to the various algorithms to find T.
-   <br/>
-  These algorithms are numerous:
-   <ul>
-<li>
-    Original Cholesky algorithm
-    </li>
-<li>
-    Cholesky Banachiewicz algorithm
-    </li>
-<li>
-    Cholesky Crout algorithm
-    </li>
-</ul>
-  Most of these algorithms involve square root calculations.
-   <br/>
-  We refer the interested reader to the various links to the (numerous) web pages where these calculations are detailed.
-   <br/>
-  We choose for our part, to expose a method of factorization appreciably different, of the type:
-   <br/>A=T<sup>t</sup>DT, 
-  having the advantage of not using root calculations. 
-  This can be particularly interesting in the case of solving 
-  on the body ℚ of the rationals.   The downside being that the final system resolution: 
-   <br/>
-    T<sup>t</sup>DTX=B, goes through the resolution of 3 systems: 
-   <br/>T<sup>t</sup>Z=B
-   <br/>
-  DY=Z
-   <br/>
-  TX=Y
-   <br/>two of which are triangular and one diagonal.  However the resolution
- of a diagonal system requires only one division by an unknown.  Here is
- the factorization in the case of rank 3.
-
-
-</div><!-- /en --> 
-
-<!-- FORMULE UNIV INLINE -->
-<div lang="fr"><p>\(
-A=L\times D\times ^{t}L=
-\begin{pmatrix}
-1 & 0 & 0 \\
-L_{21} &  1& 0 \\
-L_{31} & L_{32} &  1\\
-\end{pmatrix}
- \times 
-\begin{pmatrix}
- D_{1}& 0 & 0 \\
-0 & D_{2} & 0 \\
-0 & 0 & D_{3} \\
-\end{pmatrix}
-\times 
-\begin{pmatrix}
-1 & L_{21} &  L_{31}\\
- 0& 1 & L_{32} \\
- 0& 0 & 1 \\
-\end{pmatrix} 
-\)</p></div><!-- /fr --> 
-<!-- /FORMULE UNIV INLINE-->
-
-<!-- FORMULE UNIV INLINE -->
-<div lang="en"><p>\(
-A=L\times D\times L^{t}=
-\begin{pmatrix}
-1 & 0 & 0 \\
-L_{21} &  1& 0 \\
-L_{31} & L_{32} &  1\\
-\end{pmatrix}
- \times 
-\begin{pmatrix}
- D_{1}& 0 & 0 \\
-0 & D_{2} & 0 \\
-0 & 0 & D_{3} \\
-\end{pmatrix}
-\times 
-\begin{pmatrix}
-1 & L_{21} &  L_{31}\\
- 0& 1 & L_{32} \\
- 0& 0 & 1 \\
-\end{pmatrix} 
-\)</p></div><!-- /en --> 
-<!-- /FORMULE UNIV INLINE-->
-
-<!-- FORMULE UNIV INLINE -->
-<p>\(
-A=\begin{pmatrix}
-D_{1} &  &  \\
- L_{21}D_{1}&  L_{21}^{2}D_{1}+D_{2}&  \\
- L_{31}D_{1}& L_{31}L_{21}D_{1}+L_{32}D_{2} &  L_{31}^{2}D_{1}+L_{32}^{2}D_{2}+D_{3}\\
-\end{pmatrix}
-\)</p>
-<!-- /FORMULE UNIV INLINE-->
-
-<div lang="fr">
-En identifiant il vient les relations de récurrence: 
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-
-By identifying it comes the recurrence relations: 
-
-
- 
-
-</div><!-- /en --> 
-
-<!-- FORMULE UNIV INLINE -->
-<p>\(
-D_{i}=A_{ii}-\sum_{k=1}^{i-1}L_{ik}^{2}D_{k}
-\)</p>
-<!-- /FORMULE UNIV INLINE-->
-
-<!-- FORMULE UNIV INLINE -->
-<p>\(
-L_{ij}=\frac{1}{D_{j}}\left ( A_{ij} -\sum_{k=1}^{j-1}L_{jk}D_{k}\right )
-\)</p>
-<!-- /FORMULE UNIV INLINE-->
-
-<div lang="fr">
-
-Voici maintenant une appliquette qui vous permettra de visualiser des factorisations de Cholesky pour des matrices d'ordre 4 symétriques définies positives à coefficients réels. 
-
-</div><!-- /fr --> 
-
-<div lang="en">
-
-Here is now an applet which will allow you to visualize Cholesky factorizations for positive definite symmetric  matrices of the 4th order with real coefficients. 
-
-</div><!-- /en --> 
-
-<!-- STOP  APPLET-->
-  <div>
-   <table border="2">
-    <tbody><tr>
-     <td align="center">
-      <button onclick="nameSpace2.Paint();" type="button">
-       <div lang="fr">Nouvel exemple</div><!-- /fr --> <div lang="en">New example</div><!-- /en --> 
-      </button>
-     </td>
-    </tr>
-    <tr>
-     <td align="center">
-      <div lang="fr">Matrice A</div><!-- /fr --> <div lang="en">Matrix A</div><!-- /en --> 
-     </td>
-    </tr>
-    <tr>
-     <td align="center">
-      <canvas id="myCanvas1" style="border:1px solid #000000;" width="320" height="80">
-      </canvas>
-     </td>
-    </tr>
-    <tr>
-     <td align="center">
-      <div lang="fr">Matrice T</div><!-- /fr --><div lang="en">Matrix T</div><!-- /en -->  
-     </td>
-    </tr>
-    <tr>
-     <td align="center">
-      <canvas id="myCanvas2" style="border:1px solid #000000;" width="320" height="80">
-      </canvas>
-     </td>
-    </tr>
-   </tbody></table>
-  </div>
-  <script src="js/cho.js">
-  </script>
-<!-- /STOP  APPLET-->
-
-<div lang="fr">
- <h2>
-   Le coin de Python
-  </h2>
-  Voici une implémentation de la méthode de réduction de Cholesky au
-moyen d'une matrice diagonale, n'utilisant pas les racines carrées.
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-<h2>
-   Python's Corner
-   </h2>Here is an implementation of Cholesky's reduction method by
- means of a diagonal matrix, not using square roots.
-
-
-
-</div><!-- /en --> 
-
-<!-- STOP CODE -->
-<p>
-   <object data="python/cholesky1.html" type="text/html" width="100%" height="400" border="3">
-   </object>
-  </p>
-<!-- /STOP  CODE-->
-
-<div lang="fr">
- Voici un exemple d'utilisation de la bibliothèque scipy.linalg pour la factorisation de Cholesky (classique).
-
-
-</div><!-- /fr --> 
-
-<div lang="en">
-Here is an example of using the scipy.linalg library for (classic) Cholesky factorization. 
-
-
-</div><!-- /en --> 
-
-<!-- STOP CODE -->
-<p>
-   <object data="python/cholesky2.html" type="text/html" width="100%" height="150" border="3">
-   </object>
-  </p>
-<!-- /STOP  CODE-->
-
-<div lang="fr">
-
- Voici le résultat de l'exécution:
-  <br>
-  [[ 1.  1.  1.  1.]
-  <br>
-  [ 0.  2.  2.  2.]
-  <br>
-  [ 0.  0.  3.  3.]
-  <br>
-  [ 0.  0.  0.  1.]]
-  <br>
-  C'est la matrice T, on a donc A=<sup>t</sup>TT
-  <br>
-   <h2>
-   Le coin de Julia
-  </h2>
-  Voici une implémentation de la méthode de réduction de Cholesky au
-moyen d'une matrice diagonale, n'utilisant pas les racines carrées.
-
-</div><!-- /fr --> 
-
-<div lang="en">
-Here is the result of the execution:
-   <br/>
-  [[ 1. 1. 1. 1.]
-   <br/>
-  [ 0. 2. 2. 2.]
-   <br/>
-  [ 0. 0. 3. 3.]
-   <br/>
-  [ 0. 0. 0. 1.]]
-   <br/>
-  It is the matrix T, so we have A=T<sup>t</sup>DT
-   <br/>
-<h2>
-   Julia's corner
-   </h2>Here is an implementation of Cholesky's reduction method by
- means of a diagonal matrix, not using square roots.
-
-
-</div><!-- /en -->
-
-<!-- STOP CODE -->
-  <p>
-   <object data="julia/cholesky1.jl.html" type="text/html" width="100%" height="400" border="3">
-   </object>
-  </p>
-<!-- /STOP  CODE--> 
-
-<div lang="fr">
-
-Voici un exemple d'utilisation du package LinearAlgebra de Julia 1.6 pour la factorisation de Cholesky (classique).
-
-</div><!-- /fr --> 
-
-<div lang="en">
-
-Here is an example of using the LinearAlgebra package from Julia 1.6 for Cholesky factorization (classic). 
-
-</div><!-- /en --> 
-
-<!-- STOP CODE -->
-<p>
-   <object data="julia/cholesky2.jl.html" type="text/html" width="100%" height="80" border="3">
-   </object>
-  </p>
-<!-- /STOP  CODE-->
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div></div><!-- /en --> 
-
-	</div><!-- /content -->
-
-<div data-role="footer">
-	<table cellpadding="10">
-<tr>
-	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
-	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
-	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
-	<td><a href="https://www.mathjax.org">
-    <img title="Powered by MathJax"
-    src="https://www.mathjax.org/badge/badge.gif"
-    border="0" alt="Powered by MathJax" />
-</a></td>	
-</tr>
-</table>	
-</div><!-- /footer -->
-<ul style=list-style-type:'';>
- <li>
- <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-   </li>
-<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-	</ul>
-</div><!-- /page -->
-
-</body>
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/cholesky/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/cholesky/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="en">Warning : To avoid conflict with previous conventions we will denote by A<sup>t</sup> instead of A<sup>T</sup> the transpose of matrix A. We will use letter T to denote triangular matrices, so that T<sup>t</sup> will denote the <input type="button" value="transpose" onclick="go('../matrices/mattranspo.html#')" data-inline="true" /> of the <input type="button" value="triangular" onclick="go('../matrices/mattri.html#')" data-inline="true" /> matrix T. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Matrices symétriques définies positives </h2> Bien que des extensions et des généralisations soient possibles pour le cas <input type="button" value="hilbertien (hermitien) complexe" onclick="go('../orthogonalite/hermit.html#')" data-inline="true" />, nous nous bornons ici à condidérer des matrices réelles <input type="button" value="symétriques" onclick="go('../reducmat/redsym.html#matsym')" data-inline="true" />. <br /> Nous savons ce qu'est une <input type="button" value="forme bilinéaire" onclick="go('../determinants/multilat.html#')" data-inline="true" />. Nous savons également ce qu'est <input type="button" value="la matrice d'une forme bilinéaire" onclick="go('../orthogonalite/hermit.html#matsesqu')" data-inline="true" />. Nous avons donc tout ce qu'il faut pour définir les matrices qui vont faire l'objet de notre étude.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Positive definite symmetric matrices </h2> Although extensions and generalizations are possible for the case <input data-inline="true" onclick="go('../orthogonalite/hermit.html#')" type="button" value=" Hilbertian (Hermitian) complex" />, we confine ourselves here to considering real <input data-inline="true" onclick="go('../reducmat/redsym.html#matsyme')" type="button" value=" symmetric" /> matrices. <br / We know what a <input data-inline="true" onclick="go('../determinants/multilat.html#')" type="button" value=" bilinear form" /> is. We also know what <input data-inline="true" onclick="go('../orthogonalite/hermit.html#matsesque')" type="button" value=" bilinear form" /> is. We therefore have everything we need to define the matrices that will be the subject of our study.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une matrice A est dite symétrique définie positive (sdp) si elle est symétrique et si la forme bilinéaire associée relativement à la base canonique est <input type="button" value="définie positive" onclick="go('../orthogonalite/basorth.html#def3')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A matrix A is said to be symmetric positive definite (spd) if it is symmetric and if the bilinear form associated relatively to the standard basis is <input data-inline="true" onclick="go('../orthogonalite/basorth.html#def3e')" type="button" value="positive definite" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Notre définition revient donc à: </div>
+        <!-- /fr -->
+        <div lang="en"> Our definition therefore amounts to: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> A sdp ⇔<sup>t</sup>A=A et ∀ X vecteur colonne de ℝ<sup>n</sup> on a<sup>t</sup>XAX ∈ ℝ et<sup>t</sup>XAX ≥ 0 et<sup>t</sup>XAX=0 ⇒ X=0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A spd ⇔ A<sup>t</sup>=A and ∀ X column vector of ℝ<sup>n</sup> we have<sup>t</sup>XAX ∈ ℝ and X<sup>t</sup>AX ≥ 0 and X<sup>t</sup>AX=0 ⇒ X=0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour des exemples de matrices sdp on peut prendre: <br />
+          <ul>
+            <li> Les matrices (α<sub>i,j</sub>) où α<sub>i,j</sub>=1/(1+|i+j|) </li>
+            <li> Les matrices (α<sub>i,j</sub>) où α<sub>i,j</sub>=1/(i+j-1) </li>
+          </ul> Nous savons déjà beaucoup de choses sur de telles matrices, en particulier qu'elles ont toutes leurs valeurs propres réelles, et qu'elles sont <input type="button" value="diagonalisables" onclick="go('../reducmat/redsym.html#')" data-inline="true" /> relativement à une base orthonormale. Nous avons tout de suite quelques résultats supplémentaires.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> For examples of spd matrices we can take: <br />
+          <ul>
+            <li> The matrices (α<sub>i,j</sub>) where α<sub>i,j</sub>=1/(1+|i+j|) </li>
+            <li> The matrices (α<sub>i,j</sub>) where α<sub>i,j</sub>=1/(i+j-1) </li>
+          </ul>We already know a lot about such matrices, in particular that their eigenvalues are real, and that they are <input data-inline="true" onclick="go('../reducmat/redsym.html#')" type="button" value=" diagonalizable" /> relatively to an orthonormal basis. We have some additional results right away.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Dans le cas d'une matrice sdp toutes les valeurs propres sont strictement positives.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> In the case of a spd matrix all the eigenvalues ​​are strictly positive.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On voit cela en utilisant les vecteurs propres. En outre l'existence d'une valeur propre nulle entrainerait<sup>t</sup>XX=||X||<sup>2</sup>=0, pour un vecteur propre correspondant, ce qui est une contradiction. De fait on peut montrer que: </div>
+        <!-- /fr -->
+        <div lang="en"> This can be seen using eigenvectors. Moreover the existence of a null eigenvalue would involve X<sup>t</sup>X=||X||<sup>2</sup>=0, for a corresponding eigenvector, which is a contradiction. In fact, we can show that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Cette propriété caractérise les matrices sdp.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> This property characterizes spd matrices.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Bien que les matrices sdp puissent apparaître très particulières, elles apparaissent souvent naturellement comme matrices de systèmes linéaires, particulièrement pour: <ul>
+            <li> La recherche de pseudo-solutions par l'approximation par les moindres carrés. </li>
+            <li> La méthode de simulation de Monte-Carlo </li>
+            <li> Les filtres de Kalman </li>
+          </ul> Une étude particulière se justifie donc pleinement. <h2> Factorisation de Cholesky </h2> Le théorème principal est dû à André-Louis Cholesky (1875-1918). <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Although spd matrices may appear very particular, they often appear naturally as matrices of linear systems, particularly for: <ul>
+            <li> The search for pseudo-solutions by least squares approximation. </li>
+            <li> The Monte-Carlo simulation method </li>
+            <li> Kalman filters </li>
+          </ul> A specific study is therefore fully justified. <h2> Cholesky factorization </h2> The main theorem is due to André-Louis Cholesky (1875-1918). <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <img alt="" src="images/39-cholesky.jpg" width="292" height="350" border="0">
+        <br>
+        <em>
+          <font size="-1"> Image: Archives de l'Ecole polytechnique (Fonds A. Cholesky). </font>
+        </em>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <br> On peut l'énoncer ainsi:
+        </div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Toute matrice A sdp possède une factorisation LU du type A=<sup>t</sup>TDT où T est une matrice triangulaire supérieure et D diagonale.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Any spd matrix A has an LU factorization of the type A=T<sup>t</sup>DT where T is an upper triangular matrix with diagonal D.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On voit tout de suite l'intérêt pratique d'un tel théorème. En fait dans une factorisation LU classique on recherche <span style="text-decoration: underline;"> deux</span> matrices triangulaires distinctes, n'ayant en fait aucun rapport particulier entre elles. Dans ce cas nous ne cherchons <span style="text-decoration: underline;"> qu'une</span> matrice triangulaire (donc en fait une demi-matrice). <br> La preuve de cet énoncé est liée aux divers algorithmes de détermination de T. <br> Ces algorithmes sont nombreux: <ul>
+            <li> Algorithme de Cholesky original </li>
+            <li> Algorithme de Cholesky Banachiewicz </li>
+            <li> Algorithme de Cholesky Crout </li>
+          </ul> La plupart de ces algorithmes font intervenir des calculs de racines carrées. <br> Nous renvoyons le lecteur intéressé aux divers liens vers les (nombreuses) pages web où ces calculs sont détaillés. <br> Nous choisissons pour notre part, d'exposer une méthode de factorisation sensiblement différente, du type: <br> A=<sup>t</sup>TDT, présentant l'avantage de ne pas faire appel à des calculs de racines. Cela peut être intéressant particulièrement dans le cas de résolution sur le corps ℚ des rationnels. L'inconvénient étant que la résolution finale du système: <br>
+         <sup>t</sup> TDTX=B, passe par la résolution de 3 systèmes: <br>
+         <sup>t</sup>TZ=B <br> DY=Z <br> TX=Y <br> dont deux sont triangulaires et un diagonal. Cependant la résolution d'un système diagonal ne nécessite qu'une division par une inconnue. Voici la factorisation dans le cas du rang 3.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We immediately see the practical interest of such a theorem. In fact in a classical LU factorization we seek <span style="text-decoration: underline;"> two</span> distinct triangular matrices, having in fact no particular relationship between them. In this case we are looking for <span style="text-decoration: underline;"> only one</span> triangular matrix (so actually a half-matrix). <br /> The proof of this statement is related to the various algorithms to find T. <br /> These algorithms are numerous: <ul>
+            <li> Original Cholesky algorithm </li>
+            <li> Cholesky Banachiewicz algorithm </li>
+            <li> Cholesky Crout algorithm </li>
+          </ul> Most of these algorithms involve square root calculations. <br /> We refer the interested reader to the various links to the (numerous) web pages where these calculations are detailed. <br /> We choose for our part, to expose a method of factorization appreciably different, of the type: <br />A=T<sup>t</sup>DT, having the advantage of not using root calculations. This can be particularly interesting in the case of solving on the body ℚ of the rationals. The downside being that the final system resolution: <br /> T<sup>t</sup>DTX=B, goes through the resolution of 3 systems: <br />T<sup>t</sup>Z=B <br /> DY=Z <br /> TX=Y <br />two of which are triangular and one diagonal. However the resolution of a diagonal system requires only one division by an unknown. Here is the factorization in the case of rank 3. </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <div lang="fr">
+          <p>\( A=L\times D\times ^{t}L= \begin{pmatrix} 1 & 0 & 0 \\ L_{21} & 1& 0 \\ L_{31} & L_{32} & 1\\ \end{pmatrix} \times \begin{pmatrix} D_{1}& 0 & 0 \\ 0 & D_{2} & 0 \\ 0 & 0 & D_{3} \\ \end{pmatrix} \times \begin{pmatrix} 1 & L_{21} & L_{31}\\ 0& 1 & L_{32} \\ 0& 0 & 1 \\ \end{pmatrix} \)</p>
+        </div>
+        <!-- /fr -->
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <div lang="en">
+          <p>\( A=L\times D\times L^{t}= \begin{pmatrix} 1 & 0 & 0 \\ L_{21} & 1& 0 \\ L_{31} & L_{32} & 1\\ \end{pmatrix} \times \begin{pmatrix} D_{1}& 0 & 0 \\ 0 & D_{2} & 0 \\ 0 & 0 & D_{3} \\ \end{pmatrix} \times \begin{pmatrix} 1 & L_{21} & L_{31}\\ 0& 1 & L_{32} \\ 0& 0 & 1 \\ \end{pmatrix} \)</p>
+        </div>
+        <!-- /en -->
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( A=\begin{pmatrix} D_{1} & & \\ L_{21}D_{1}& L_{21}^{2}D_{1}+D_{2}& \\ L_{31}D_{1}& L_{31}L_{21}D_{1}+L_{32}D_{2} & L_{31}^{2}D_{1}+L_{32}^{2}D_{2}+D_{3}\\ \end{pmatrix} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> En identifiant il vient les relations de récurrence: </div>
+        <!-- /fr -->
+        <div lang="en"> By identifying it comes the recurrence relations: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( D_{i}=A_{ii}-\sum_{k=1}^{i-1}L_{ik}^{2}D_{k} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( L_{ij}=\frac{1}{D_{j}}\left ( A_{ij} -\sum_{k=1}^{j-1}L_{jk}D_{k}\right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Voici maintenant une appliquette qui vous permettra de visualiser des factorisations de Cholesky pour des matrices d'ordre 4 symétriques définies positives à coefficients réels. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is now an applet which will allow you to visualize Cholesky factorizations for positive definite symmetric matrices of the 4th order with real coefficients. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <table border="2">
+            <tbody>
+              <tr>
+                <td align="center">
+                  <button onclick="nameSpace2.Paint();" type="button">
+                    <div lang="fr">Nouvel exemple</div>
+                    <!-- /fr -->
+                    <div lang="en">New example</div>
+                    <!-- /en -->
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <div lang="fr">Matrice A</div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix A</div>
+                  <!-- /en -->
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas1" style="border:1px solid #000000;" width="320" height="80"></canvas>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <div lang="fr">Matrice T</div>
+                  <!-- /fr -->
+                  <div lang="en">Matrix T</div>
+                  <!-- /en -->
+                </td>
+              </tr>
+              <tr>
+                <td align="center">
+                  <canvas id="myCanvas2" style="border:1px solid #000000;" width="320" height="80"></canvas>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <script src="js/cho.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2> Le coin de Python </h2> Voici une implémentation de la méthode de réduction de Cholesky au moyen d'une matrice diagonale, n'utilisant pas les racines carrées.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Python's Corner </h2>Here is an implementation of Cholesky's reduction method by means of a diagonal matrix, not using square roots.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/cholesky1.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici un exemple d'utilisation de la bibliothèque scipy.linalg pour la factorisation de Cholesky (classique). </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an example of using the scipy.linalg library for (classic) Cholesky factorization. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/cholesky2.html" type="text/html" width="100%" height="150" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici le résultat de l'exécution: <br> [[ 1. 1. 1. 1.] <br> [ 0. 2. 2. 2.] <br> [ 0. 0. 3. 3.] <br> [ 0. 0. 0. 1.]] <br> C'est la matrice T, on a donc A=<sup>t</sup>TT <br>
+          <h2> Le coin de Julia </h2> Voici une implémentation de la méthode de réduction de Cholesky au moyen d'une matrice diagonale, n'utilisant pas les racines carrées.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Here is the result of the execution: <br /> [[ 1. 1. 1. 1.] <br /> [ 0. 2. 2. 2.] <br /> [ 0. 0. 3. 3.] <br /> [ 0. 0. 0. 1.]] <br /> It is the matrix T, so we have A=T<sup>t</sup>DT <br />
+          <h2> Julia's corner </h2>Here is an implementation of Cholesky's reduction method by means of a diagonal matrix, not using square roots.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/cholesky1.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici un exemple d'utilisation du package LinearAlgebra de Julia 1.6 pour la factorisation de Cholesky (classique). </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an example of using the LinearAlgebra package from Julia 1.6 for Cholesky factorization (classic). </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/cholesky2.jl.html" type="text/html" width="100%" height="80" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
 </html>

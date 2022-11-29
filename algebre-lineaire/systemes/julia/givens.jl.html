@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+<span class="s2">#surcharge de * pour le produit scalaire - oveloading * for dot product</span>
+<span class="s1">Base.:*(v1,v2)=reduce(+,map(*,v1,v2))</span>
+<span class="s2">#norme d'un vecteur - norm of a vector</span>
+<span class="s1">norme(v)=sqrt(v*v)</span>
+<span class="s2">#normalisation - normalization</span>
+<span class="s1">normalize(v)=(</span><span class="s3">1</span><span class="s1">/norme(v))*v</span>
+
+<span class="s0">function </span><span class="s1">aleamatrice(n)</span>
+    <span class="s1">R=zeros(n,n)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n, j </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n</span>
+            <span class="s1">R[i,j]=rand(-n:n)</span>
+        <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">R</span>
+<span class="s0">end</span>
+
+<span class="s1">c(p,q,A)= A[p,p]==</span><span class="s3">0 </span><span class="s1">&amp;&amp; A[q,p]==</span><span class="s3">0 </span><span class="s1">? </span><span class="s3">1 </span><span class="s1">: A[p,p]/sqrt(A[p,p]*A[p,p]+A[q,p]*A[q,p])</span>
+<span class="s1">s(p,q,A)= A[p,p]==</span><span class="s3">0 </span><span class="s1">&amp;&amp; A[q,p]==</span><span class="s3">0 </span><span class="s1">? </span><span class="s3">0 </span><span class="s1">: A[q,p]/sqrt(A[p,p]*A[p,p]+A[q,p]*A[q,p])</span>
+
+<span class="s0">function </span><span class="s1">G(q,p,A)</span>
+    <span class="s1">n=size(A,</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s1">G=Matrix(</span><span class="s3">1.0</span><span class="s1">I,n,n)</span>
+    <span class="s1">G[p,p]=c(p,q,A) </span>
+    <span class="s1">G[p,q]=s(p,q,A) </span>
+    <span class="s1">G[q,p]= -s(p,q,A) </span>
+    <span class="s1">G[q,q]= c(p,q,A)  </span>
+    <span class="s0">return </span><span class="s1">G</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">q(A)</span>
+    <span class="s1">n=size(A,</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s1">q=Matrix(</span><span class="s3">1.0</span><span class="s1">I,n,n)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n, j </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:i-</span><span class="s3">1</span>
+        <span class="s1">q=G(i,j,A)*q</span>
+        <span class="s1">A=G(i,j,A)*A</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">q</span>
+<span class="s0">end</span>
+
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">n=</span><span class="s3">4</span>
+    <span class="s1">A=aleamatrice(n)</span>
+    <span class="s1">println(A)</span>
+    <span class="s1">Q=q(A)</span>
+    <span class="s1">R=Q*A</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:n, j </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:i-</span><span class="s3">1</span>
+        <span class="s1">R[i,j]=</span><span class="s3">0</span>
+    <span class="s0">end    </span>
+    <span class="s1">Q=transpose(Q)</span>
+    <span class="s1">println(Q)</span>
+    <span class="s1">println(R)</span>
+    <span class="s1">println(Q*R)</span>
+
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

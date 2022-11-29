@@ -1,0 +1,85 @@
+<html>
+<head>
+<title>cons1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">LinearAlgebra</span>
+
+<span class="s0">function </span><span class="s1">diagdom(n)</span>
+    <span class="s1">M=zeros(Float64,n,n)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n, j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s1">M[i,j]=rand()</span>
+    <span class="s0">end</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s1">L1=[abs(M[i,j]) </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n </span><span class="s0">if </span><span class="s1">j !=i]</span>
+        <span class="s1">L2=[abs(M[j,i]) </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n </span><span class="s0">if </span><span class="s1">j !=i] </span>
+        <span class="s1">s=reduce(+,L1)+reduce(+,L2)</span>
+        <span class="s1">M[i,i]=s+rand(</span><span class="s2">5</span><span class="s1">:</span><span class="s2">10</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">M</span>
+<span class="s0">end</span>
+
+
+<span class="s0">function </span><span class="s1">diag(A)</span>
+    <span class="s1">n=size(A,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">M=copy(A)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n, j </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s0">if </span><span class="s1">i!=j</span>
+            <span class="s1">M[i,j]= </span><span class="s2">0.</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">M</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">matM(A)</span>
+    <span class="s1">n=size(A,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">M=copy(A)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n</span>
+        <span class="s1">M[i,i]=</span><span class="s2">0</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">M</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">jacobi(D,M,B,X,chnl)</span>
+    <span class="s1">put!(chnl,X)</span>
+    <span class="s0">while true</span>
+        <span class="s1">X=D*B-D*(M*X)</span>
+        <span class="s1">put!(chnl,X)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">n=</span><span class="s2">4</span>
+    <span class="s1">A=diagdom(n)</span>
+    <span class="s1">println(A)</span>
+    <span class="s1">B=hcat([rand() </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n])</span>
+    <span class="s1">println(B)</span>
+    <span class="s1">D=diag(A)</span>
+    <span class="s1">println(D)</span>
+    <span class="s1">D=inv(D)</span>
+    <span class="s1">M=matM(A)</span>
+    <span class="s1">println(M)</span>
+    <span class="s1">X=hcat([</span><span class="s2">0 </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n])</span>
+    <span class="s1">my_channel = Channel( (channel_arg) -&gt; jacobi(D,M,B,X, channel_arg) )</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">20</span>
+        <span class="s1">S1=take!(my_channel)</span>
+        <span class="s1">println(S1)</span>
+    <span class="s0">end</span>
+    <span class="s1">S2=A\B</span>
+    <span class="s1">println(S2)</span>
+    <span class="s1">S1=take!(my_channel)</span>
+    <span class="s1">println(norm(S1-S2))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

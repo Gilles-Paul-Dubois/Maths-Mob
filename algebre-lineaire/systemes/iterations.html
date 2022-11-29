@@ -1,96 +1,349 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8" />
-	<title>Méthode des itérations successives</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../../css/themes/myown.css" />
-	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <title>Méthode des itérations successives</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
     <link href="../../css/myown.css" rel="stylesheet">
-	<script src="../../js/jquery-1.11.3.js"></script>
-	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-	<script src="../../js/custom.js"></script>
-	 <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
-  </head>	
-	
-
-<body style="overflow: auto; "class="fr">
-<script> window.onload=get();</script>
-<a name="beg"></a>
-<div data-role="page" data-theme="d">
-
-	<div data-role="header">
-<table>
-<tr>
-<td>Choisissez votre langue !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-<td>Choose your language !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-</tr>
-</table>	
-	</div><!-- /header -->
-
-<div style="overflow: auto; "  data-role="content" data-theme="d">
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-      <li><input type="button" value="Exercices" onclick="go('exercices/iterations/menu.html')" /></li>
- 	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Exercises" onclick="go('exercices/iterations/menu.html')" /></li>
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
-  </ul>
-</div><!-- /navbar --></div><!-- /en --> 
-
-<div lang="fr"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div><!-- /navbar --></div><!-- /fr --> 
-<div lang="en"><div>
-  <ul style=list-style-type:'';>
-    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
-	 <li><input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" /></li>
-  	 <li><input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" /></li>
-  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
-  </ul>
-</div></div><!-- /en --> 
-
-	</div><!-- /content -->
-
-<div data-role="footer">
-	<table cellpadding="10">
-<tr>
-	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
-	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
-	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
-	<td><a href="https://www.mathjax.org">
-    <img title="Powered by MathJax"
-    src="https://www.mathjax.org/badge/badge.gif"
-    border="0" alt="Powered by MathJax" />
-</a></td>	
-</tr>
-</table>	
-</div><!-- /footer -->
-<ul style=list-style-type:'';>
- <li>
- <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-   </li>
-<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-	</ul>
-</div><!-- /page -->
-
-</body>
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="d">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="d">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/iterations/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/iterations/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2> Pré-requis </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Prerequisites</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Nous avons déjà vu ce qu'on entend par <strong>
+              <em> 'point-fixe' </em>
+            </strong> d'une application f d'un ensemble E dans lui-même. Il s'agit de tout élement x de E égal à sa propre image par f. ( <input type="button" value="revoir" onclick="go('../../bases/applications/fixes.html#')" data-inline="true" />)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We have already seen what is meant by <strong>
+              <em> 'fixed point' </em>
+            </strong> of a mapping f from a set E to itself. It is any element x of E equal to its own image by f. ( <input data-inline="true" onclick="go('../../bases/applications/fixes.html#')" type="button" value=" review" />)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous avons également vu ce qu'est une suite de Cauchy. ( <input type="button" value="Suivre ce lien" onclick="go('../../nombres/rationnels/cauchy.html#')" data-inline="true" />). <br /> Nous avons également vu ce qu'est un espace métrique ( <input type="button" value="Suivre ce lien" onclick="go('../../nombres/reels/metrique.html#')" data-inline="true" />). <br /> Nous supposons ici, de plus, connues les notions de suite convergente et de fonction continue. (Pas encore exposées dans ce cours) <br /> Pour comprendre l'énoncé qui va suivre il faut savoir ce qu'est un espace métrique 'complet'. </div>
+        <!-- /fr -->
+        <div lang="en"> We have also seen what a Cauchy sequence is. ( <input data-inline="true" onclick="go('../../nombres/rationnels/cauchy.html#')" type="button" value=" Follow this link" />). <br /> We have also seen what a metric space is ( <input data-inline="true" onclick="go('../../nombres/reels/metrique.html#')" type="button" value=" Follow this link" />). <br />We suppose here, moreover, known the notions of convergent sequence and continuous function. (Not yet exposed in this course) <br /> To understand the following statement, we must know what a 'complete' metric space is. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Un espace métrique est dit <strong>
+              <em> 'complet' </em>
+            </strong> si toute suite de Cauchy de cet espace est convergente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A metric space is said <strong>
+              <em> 'complete' </em>
+            </strong> if any Cauchy sequence of this space is convergent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> ℝ et ℂ sont complets. <br> Il en est de même de ℝ<sup>n</sup> et ℂ<sup>n</sup>. <br> Voici encore une définition (E désigne un espace métrique): </div>
+        <!-- /fr -->
+        <div lang="en"> ℝ and ℂ are complete. <br />It is the same for ℝ<sup>n</sup> and ℂ<sup>n</sup>. <br /> Here is one more definition (E denotes a metric space): </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Une application f de E dans E est dite <strong>
+              <em> 'contractante' </em>
+            </strong> si elle vérifie: <br> d(f(x),f(y)) ≤ kd(x,y) ∀ (x,y) ∈ E×E, où k est une constante réelle 0&lt;k&lt;1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> A map f from E to E is said to be <strong>
+              <em> 'contractor or contraction' </em>
+            </strong> if it checks: d(f(x),f(y)) ≤ kd(x,y) ∀ (x,y) ∈ E×E, where k is a real constant 0&lt;k&lt;1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2> Le théorème de Picard-Banach </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The Picard-Banach theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellspacing="0" cellpadding="10" border="1" bgcolor="#000000">
+          <tbody>
+            <tr>
+              <td>
+                <font color="#FFFFFF"> Stefan Banach (1892-1945) </font>
+              </td>
+              <td>
+                <font color="#FFFFFF"> Emile Picard (1856-1941) </font>
+              </td>
+            </tr>
+            <tr>
+              <td valign="middle" align="center">
+                <img alt="" src="images/Banach.jpg" width="101" height="133" border="0">
+              </td>
+              <td valign="middle" align="center">
+                <img alt="" src="images/Picard.jpg" width="101" height="133" border="0">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Voici l'énoncé du théorème attribué à ces deux mathématiciens: </div>
+        <!-- /fr -->
+        <div lang="en"> Here is the statement of the theorem attributed to these two mathematicians: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit f une application contractante d'une espace métrique E complet dans lui-même, dans ces conditions: <br> f est continue <br> f possède un unique point fixe x <br> Pour tout élément x<sub>0</sub> de E x est limite de la suite récurrente commençant par x<sub>0</sub> et définie par x<sub>n+1</sub>=f(x<sub>n</sub>)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let f be a contracting map of a complete metric space E into itself, under these conditions: <br /> f is continuous <br /> f has a unique fixed point x <br />For any element x<sub>0</sub> of E x is the limit of the recurrent sequence starting with x<sub>0</sub> and defined by x<sub>n+1</sub>=f(x<sub>n</sub>)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> L'hypothèse faite sur f prouve que d(x-y) &lt; ε ⇒ d(fx),f(y)) &lt; ε . La continuité en résulte. On montre par récurrence que si (x<sub>n</sub>) est une suite telle que dans l'enoncé, on a:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( d\left ( f\left ( x_{n+1} \right ),f\left ( x_{n} \right ) \right )\leqslant k^{n}d\left ( x_{1} ,x_{0}\right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> et si p ≥ q
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant \sum_{i=q}^{p-1}d\left ( f\left ( x_{i} \right ),f\left ( x_{i+1} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant \sum_{i=q}^{p-1}k^{i}d\left (x_{0},x_{1} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant k^{q}\sum_{i=0}^{p-1-q}k^{i}d\left (x_{0},x_{1} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant \frac{k^{q}}{1-k}d\left (x_{0},x_{1} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Cette inégalité montre que la suite x<sub>0</sub>,f(x<sub>0</sub>), f(f(x<sub>0</sub>)),...,f<sup>n</sup>(x<sub>0</sub>) est une suite de Cauchy. Elle est donc convergente vers une limite x. <br> Comme on a f(x<sub>n</sub>)=x<sub>n+1</sub> et que f est continue, on a en passant à la limite f(x)=x et x est un point fixe de f. <br> Si x et y sont deux points quelconques on a d(fx),f(y)) &lt; d(x,y) on ne peut donc avoir deux points fixes distincts et ceci achève la démonstration.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The hypothesis made on f proves that d(xy) < ε ⇒ d(fx),f(y)) < ε . Continuity results from this. We show by induction that if (x<sub>n</sub>) is a sequence such as in the statement, we have: !-- FORMULE UNIV INLINE --> <p>\( d\left ( f\left ( x_{n+1} \right ),f\left ( x_{n} \right ) \right )\leqslant k^{n}d\left ( x_{1} ,x_{0}\right ) \)</p>
+              <!-- /FORMULE UNIV INLINE--> and if p ≥ q
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant \sum_{i=q}^{p-1}d\left ( f\left ( x_{i} \right ),f\left ( x_{i+1} \right ) \right ) \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant \sum_{i=q}^{p-1}k^{i}d\left (x_{0},x_{1} \right ) \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant k^{q}\sum_{i=0}^{p-1-q}k^{i}d\left (x_{0},x_{1} \right ) \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( d\left ( f\left ( x_{p} \right ),f\left ( x_{q} \right ) \right )\leqslant \frac{k^{q}}{1-k}d\left (x_{0},x_{1} \right ) \)</p>
+              <!-- /FORMULE UNIV INLINE--> This inequality shows that the sequence x<sub>0</sub>,f(x<sub>0</sub>), f(f(x<sub>0</sub>)),...,f<sup>n</sup>(x<sub>0</sub>) is a Cauchy sequence. It is therefore convergent towards a limit x. <br />As we have f(x<sub>n</sub>)=x<sub>n+1</sub> and that f is continuous, we have in passing to the limit f(x)=x and x is a fixed point of f. <br />If x and y are any two points we have d(fx),f(y)) < d(x,y) we cannot therefore have two distinct fixed points and this completes the demonstration. </div>
+                <!--demo -->
+          </div>
+          <!-- /en -->
+          <!-- /STOP -->
+          <div lang="fr"> Ce théorème porte le nom de <strong>
+              <em> 'théorème des approximations successives' </em>
+            </strong>. Il dit en substance que pour trouver une suite convergeant vers le point fixe x de f il suffit de partir d'une valeur quelconque x<sub>0</sub> et de transformer à répétition par f. <br> Naturellement plus x<sub>0</sub> est voisin de x et plus k est petit, plus la convergence sera rapide. </div>
+          <!-- /fr -->
+          <div lang="en"> This theorem is called <strong>
+              <em> 'successive approximation theorem' </em>
+            </strong> . He essentially says that to find a sequence converging to the fixed point x of f it suffices to start from any value x<sub>0</sub> and transform repeatedly by f. <br />Naturally the more x<sub>0</sub> is close to x and the smaller k is, the faster the convergence will be. </div>
+          <!-- /en -->
+          <!-- STOP IMAGE -->
+          <p>
+            <img alt="" src="images/pointfixe.gif" width="600" height="240" border="0" />
+            <br>
+            <em>
+              <font size="-1"> Image http://en.wikipedia.org/wiki/File:Sine_fixed_point.svg (modifiée) </font>
+            </em>
+          </p>
+          <!-- /STOP IMAGE -->
+          <div lang="fr">
+            <h2> Application à la résolution des systèmes </h2> Considérons un système de Cramer: <br> AX=B <br> La matrice A peut s'exprimer de différentes manières sous la forme A=D+M où D est inversible. <br> Le système équivaut donc à: <br> (D+M)X=B <br> ou encore <br> DX=B-MX <br> X=-D<sup>-1</sup>MX+D<sup>-1</sup>B <br> Tout revient donc à trouver un point fixe à l'application f: X → -D<sup>-1</sup>MX+D<sup>-1</sup>B <br> On pourra appliquer la méthode des itérations successives si cette application est contractante. <br> Or d(f(X)-f(Y)) = ||D<sup>-1</sup>MX+D<sup>-1</sup>B- D<sup>-1</sup>MY+D<sup>-1</sup>B||=||D<sup>-1</sup>MX-D<sup>-1</sup>MY|| =||D<sup>-1</sup>M(X-Y)||. <br> Introduisons la norme matricielle de D<sup>-1</sup>M, on a: <br> ||D<sup>-1</sup>M(X-Y)|| ≤ ||D<sup>-1</sup>M||×||X-Y||. <br> L'application f sera donc contractante si ||D<sup>-1</sup>M|| &lt;1 <br> Ce qui sera le cas si ||D<sup>-1</sup>||×||M|| &lt; 1
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h2> Application to the resolution of systems </h2> Consider a Cramer system: <br /> AX=B <br /> The matrix A can be expressed in different ways in the form A=D+M where D is invertible. <br /> The system is therefore equivalent to: <br /> (D+M)X=B <br /> or <br /> DX=B-MX <br /> X=-D<sup>-1</sup>MX+D<sup>-1</sup>B <br /> Everything therefore comes down to finding a fixed point at the map f: X → -D<sup>-1</sup>MX+D<sup>-1</sup>B <br /> The method of successive iterations can be applied if this application is contracting. <br /> Or d(f(X)-f(Y)) = ||D<sup>-1</sup>MX+D<sup>-1</sup>B- D<sup>-1</sup>MY+D<sup>-1</sup>B||=||D<sup>-1</sup>MX-D<sup>-1</sup>MY|| =||D<sup>-1</sup>M(X-Y)||. <br /> Let us introduce the matrix norm of D<sup>-1</sup>M, we have: <br />||D<sup>-1</sup>M(XY)|| ≤ ||D<sup>-1</sup>M||×||XY||. <br />The map f will therefore be contracting if ||D<sup>-1</sup>M||
+            <1 <br />Which will be the case if ||D<sup>-1</sup>||×||M|| < 1 </div>
+              <!-- /en -->
+              <div lang="fr">
+                <div>
+                  <ul style=list-style-type:'';>
+                    <li>
+                      <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour au menu 'Systèmes linéaires'" onclick="go('index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour au menu 'Algèbre linéaire'" onclick="go('../index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                    </li>
+                  </ul>
+                </div>
+                <!-- /navbar -->
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <div>
+                  <ul style=list-style-type:'';>
+                    <li>
+                      <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to 'Linear systems'" onclick="go('index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to Linear Algebra" onclick="go('../index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /en -->
+          </div>
+          <!-- /content -->
+          <div data-role="footer">
+            <table cellpadding="10">
+              <tr>
+                <td>
+                  <div lang="fr">Création Gilles Dubois</div>
+                  <div lang="en">Created by Gilles Dubois</div>
+                </td>
+                <td>
+                  <div lang="fr">Janvier 2022</div>
+                  <div lang="en">January 2022</div>
+                </td>
+                <td>
+                  <div lang="fr">Version mobile Jquery</div>
+                  <div lang="en">Mobile Jquery version</div>
+                </td>
+                <td>
+                  <a href="https://www.mathjax.org">
+                    <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- /footer -->
+          <ul style=list-style-type:'';>
+            <li>
+              <div lang="fr">
+                <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+              </div>
+              <div lang="en">
+                <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+              </div>
+            </li>
+            <li>
+              <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /page -->
+  </body>
 </html>

@@ -1,0 +1,79 @@
+﻿<html>
+ <head>
+  <title>
+   householder.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">scipy </span><span class="s2">import </span><span class="s1">* 
+</span><span class="s2">from </span><span class="s1">scipy.linalg </span><span class="s2">import </span><span class="s1">norm 
+</span><span class="s2">import </span><span class="s1">numpy </span><span class="s2">as </span><span class="s1">np 
+</span><span class="s3">"""Implémentation récursive de la méthode de Householder"""</span><span class="s1"> 
+</span><span class="s3">"""recursive implementation of Householder method"""</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">H1(A): 
+    </span><span class="s0">"""Matrice H telles que HA ait une première colonne presque nulle"""</span><span class="s1"> 
+    </span><span class="s0">"""Matrices H such taht HA has almost null first column"""</span><span class="s1">     
+    X=array([A[j,</span><span class="s4">0</span><span class="s1">] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(A))]) 
+    N1=norm(X) </span><span class="s0"># norme quadratique du vecteur X - quadratic norm of vector X</span><span class="s1"> 
+    Y=[</span><span class="s4">0</span><span class="s1">]*len(A) </span><span class="s0">#ligne nulle - null row</span><span class="s1"> 
+    Y[</span><span class="s4">0</span><span class="s1">]=N1 </span><span class="s2">if </span><span class="s1">A[</span><span class="s4">0</span><span class="s1">,</span><span class="s4">0</span><span class="s1">]&lt;</span><span class="s4">0 </span><span class="s2">else </span><span class="s1">-N1 
+    W=array(X-Y) </span><span class="s0"># vecteur différence X-Y - difference vector X-Y</span><span class="s1"> 
+    N2=norm(W) </span><span class="s0">#norme de W - norm of W</span><span class="s1"> 
+    W=(</span><span class="s4">1</span><span class="s1">/N2)*W </span><span class="s0"># vecteur W normé - W has now norm 1</span><span class="s1"> 
+    W=np.matrix([W]) 
+    TENS=W.transpose()*W </span><span class="s0">#produit tensoriel - tensor product</span><span class="s1"> 
+    IDn=eye(len(A)) </span><span class="s0"># matrice unité - unity matrix</span><span class="s1"> 
+    H=IDn-</span><span class="s4">2</span><span class="s1">*TENS </span><span class="s0">#</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">H 
+ 
+</span><span class="s2">def </span><span class="s1">q(A): 
+    </span><span class="s0">""" Calcul de Q par la méthode de Householder - Computation of Q via Housholder's method"""</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">len(A)==</span><span class="s4">1</span><span class="s1">: </span><span class="s0"># si ordre 1 - if order is 1</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">eye(len(A)) </span><span class="s0">#rien à faire - nothing to do</span><span class="s1"> 
+    R1=H1(A)*A </span><span class="s0">#matrice triangulaire - triangular matrix</span><span class="s1"> 
+    R2=R1[ix_(range(</span><span class="s4">1</span><span class="s1">,len(A))  ,range(</span><span class="s4">1</span><span class="s1">,len(A)))] </span><span class="s0"># on supprime la première ligne et la première colonne - delete first row and first column</span><span class="s1"> 
+    Q1=q(R2) </span><span class="s0"># appel récursif - recursive call</span><span class="s1"> 
+    ColNulle=np.matrix([array([</span><span class="s4">0</span><span class="s1">]) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(A)-</span><span class="s4">1</span><span class="s1">)]) </span><span class="s0">#la matrice colonne nulle - The null column matrix</span><span class="s1"> 
+    Q1=concatenate((ColNulle,Q1),</span><span class="s4">1</span><span class="s1">) </span><span class="s0"># à ajouter devant - to add in front</span><span class="s1"> 
+    Ligne0=np.matrix( [array([</span><span class="s4">0</span><span class="s1">]*len(A))]) </span><span class="s0"># la ligne nulle - the null row</span><span class="s1"> 
+    Q1=concatenate((Ligne0,Q1)) </span><span class="s0">#à mettre en premier - to place in first position</span><span class="s1"> 
+    Q1[</span><span class="s4">0</span><span class="s1">,</span><span class="s4">0</span><span class="s1">]=</span><span class="s4">1 </span><span class="s0">#changer le premier coefficient de 0 en 1 - change first coefficient from 0 to 1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">Q1*H1(A) </span><span class="s0"># composer avec H1 compose with H1</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    n=</span><span class="s4">3</span><span class="s1"> 
+    A =np.random.rand(n, n)  </span><span class="s0">#matrice aléatoire- random matrix</span><span class="s1"> 
+    A=np.matrix(A) 
+    print (A) 
+    print (</span><span class="s3">'--------------'</span><span class="s1">) 
+    Q=np.matrix(q(A)) 
+    print (Q) 
+    print (</span><span class="s3">'--------------'</span><span class="s1">) 
+    R=Q*A 
+    print (</span><span class="s3">'--------------'</span><span class="s1">) 
+    print (R) 
+    print (</span><span class="s3">'--------------'</span><span class="s1">) 
+    Q=Q.transpose() 
+    print (Q*R) </span><span class="s0">#on retrouve A - we find A back</span><span class="s1"> 
+ 
+main() 
+ 
+ 
+</span></pre>
+ </body>
+</html>

@@ -1,0 +1,90 @@
+﻿<html>
+ <head>
+  <title>
+   jacex01.py
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+  <style type="text/css">
+   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+  </style>
+ </head>
+ <body bgcolor="#ffffff">
+  <pre>
+<span class="s0">#version python 3.4</span><span class="s1">
+ 
+</span><span class="s2">from </span><span class="s1">scipy </span><span class="s2">import </span><span class="s1">linalg 
+</span><span class="s2">from </span><span class="s1">random </span><span class="s2">import </span><span class="s1">randint 
+</span><span class="s2">import </span><span class="s1">numpy </span><span class="s2">as </span><span class="s1">np 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+</span><span class="s0">### Méthode des itérations successives de Jacobi</span><span class="s1"> 
+</span><span class="s0">### Jacobi's method of successive iterations</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">DiagDom(n): 
+    </span><span class="s0">"""Genère une matrice aléatoire à diagonale dominante"""</span><span class="s1"> 
+    </span><span class="s0">"""generates a random diagonally dominant matrix"""</span><span class="s1">     
+    M = np.random.rand(n, n) </span><span class="s0">#matrice aléatoire - random matrix</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range (</span><span class="s3">0</span><span class="s1">,n): 
+        L1=[abs(M[i,j]) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n) </span><span class="s2">if </span><span class="s1">j !=i] 
+        L2=[abs(M[j,i]) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n) </span><span class="s2">if </span><span class="s1">j !=i] 
+        s= reduce(</span><span class="s2">lambda </span><span class="s1">x,y:x+y,L1+L2) 
+        M[i,i]=s+randint(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">3</span><span class="s1">) 
+    </span><span class="s2">return </span><span class="s1">np.matrix(M) 
+ 
+</span><span class="s2">def </span><span class="s1">Diag(A): 
+    </span><span class="s0">"""Matrice diagonale extraite de A - diagonal matrix extracted from A""</span><span class="s1"> 
+    D=A.copy() 
+    n=len(D) 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n): 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n): 
+            </span><span class="s2">if </span><span class="s1">j!=i: 
+                D[i,j]=</span><span class="s3">0</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">np.matrix(D) 
+ 
+</span><span class="s2">def </span><span class="s1">MatM(A): 
+    </span><span class="s0">"""Matrice extraite de A en remplaçant les coeff. diagonaux par des zéros"""</span><span class="s1"> 
+    </span><span class="s0">"""Matrix built from A replacing diagonal coefficients with zeros"""</span><span class="s1">     
+    M=A.copy() 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(A)): 
+        M[i,i]=</span><span class="s3">0</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">M 
+ 
+</span><span class="s2">def </span><span class="s1">Jacobi(D,M,B,X): 
+    </span><span class="s0">"""itérateur de Jacobi -jacobi's iterator"""</span><span class="s1"> 
+    </span><span class="s2">yield </span><span class="s1">X 
+    </span><span class="s2">while True</span><span class="s1">: 
+        X= D*B-D*M*X 
+        </span><span class="s2">yield </span><span class="s1">X 
+ 
+</span><span class="s2">def </span><span class="s1">JacTest(k): 
+    n=</span><span class="s3">4</span><span class="s1"> 
+    A=DiagDom(n) </span><span class="s0"># matrice du système - matrix of the system</span><span class="s1"> 
+    B= np.matrix(np.random.rand(n, </span><span class="s3">1</span><span class="s1">)) </span><span class="s0">#matrice aléatoire second membre - random second memeber</span><span class="s1"> 
+    D=Diag(A) 
+    D=linalg.inv(D) 
+    M=MatM(A) 
+    X=np.matrix( [[</span><span class="s3">0</span><span class="s1">] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,n)]) 
+    Jac=Jacobi(D,M,B,X) 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,k):</span><span class="s0"># k itérations par Jacobi - k steps by Jacobi</span><span class="s1"> 
+        S1=next(Jac) 
+    S2=linalg.solve(A,B)</span><span class="s0"># solution 'exacte' - solution considered as 'exact'</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">linalg.norm(S1-S2)     
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">5</span><span class="s1">,</span><span class="s3">41</span><span class="s1">,</span><span class="s3">5</span><span class="s1">): 
+        s=</span><span class="s3">0</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">100</span><span class="s1">): 
+            s+= JacTest(k) 
+        print (k,s/</span><span class="s3">100</span><span class="s1">) 
+     
+</span><span class="s2">if </span><span class="s1">__name__== </span><span class="s4">"__main__"</span><span class="s1">: 
+    main()  
+ 
+</span></pre>
+ </body>
+</html>
