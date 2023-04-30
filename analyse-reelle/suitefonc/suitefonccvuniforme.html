@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Convergence uniforme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitefonccvuniforme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites de fonctions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitefonccvuniforme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences of functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Supposons que la suite (f<sub>n</sub>) <input type="button" value="converge simplement" onclick="go('suitefonccvsimple.html#')" data-inline="true" /> vers f sur D. Cela signifie que pour tout x∈D et pour tout ε &gt; 0 il existe N tel que n &gt; N ⇒ |f<sub>n</sub>(x)-f(x)| &lt; ε. L'entier N dépend évidemment de ε et de x de sorte qu'il convient de le noter en toute rigueur N(ε,x).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> Suppose the sequence (f<sub>n</sub>) <input type="button" value="pointwise converges" onclick="go('suitefonccvsimple.html#')" data-inline="true" /> towards f on D. This means that for all x∈D and for all ε > 0 there exists N such that n > N ⇒ |f<sub>n</sub>(x)-f(x)| < ε. The integer N obviously depends on ε and on x so that it should strictly be noted N(ε,x). </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="def1"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">définition 1</div> On dit que la convergence de (f<sub>n</sub>) est <b>
+                  <i>'uniforme sur D'</i>
+                </b> si l'entier N(&epsilon;,x) ne dépend que de &epsilon; et pas de x. Autrement dit &forall;&epsilon;&isin;D &exist;N(&epsilon;) tel que <br>n &gt; N(&epsilon;) &rArr; |f<sub>n</sub>(x)-f(x)| &lt; &epsilon; &forall;x&isin;D.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">definition 1</div> The convergence of (f<sub>n</sub>) is said to be <b>
+                  <i>'uniform on D'</i>
+                </b> if the integer N(&epsilon;,x) depends only on &epsilon; and not on x. Otherwise said &forall;&epsilon;&isin;D &exist;N(&epsilon;) such that <br>n > N(&epsilon;) &rArr; |f<sub>n</sub>(x)-f(x)| < &epsilon; &forall;x&isin;D. </div>
+                  <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr"> La convergence uniforme est donc une propriété plus forte que la convergence simple. <br> L'intérêt de cette notion réside dans le résultat suivant: </div>
+              <!-- /fr -->
+              <div lang="en"> Uniform convergence is therefore a stronger property than pointwise convergence. <br> The interest of this notion lies in the following result: </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="thm1"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">théorème 1</div> La limite uniforme d'une suite de fonctions <input type="button" value="continues" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> est une fonction continue.
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">theorem 1</div> The uniform limit of a sequence of <input type="button" value="continuous" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> functions is a continuous function.
+                </div>
+                <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr"> Avant de passer à la preuve remarquons que la limite simple d'une suite de fonctions continues n'est pas forcément continue comme le montre <input type="button" value="l'exemple" onclick="go('suitefonccvsimple.html#')" data-inline="true" /> f<sub>n</sub>(x)=x<sup>n</sup> avec D=[0,1]. <br /> Voici une autre exemple: D=[0,π] f<sub>n</sub>(x)=sin<sup>n</sup>(x) <br /> Au début n=0. <br /> Appuyer sur le bouton 'n+' pour augmenter la valeur de n. <br /> Appuyer sur le bouton 'n-' pour diminuer la valeur de n. </div>
+              <!-- /fr -->
+              <div lang="en"> Before moving on to the proof, note that the pointwise limit of a sequence of continuous functions is not necessarily continuous, as shown by the <input type="button" value="example" onclick="go('suitefonccvsimple.html')" data-inline="true" /> f<sub>n</sub>(x)=x<sup>n</sup> with D=[0,1]. <br /> Here is another example: D=[0,π] f<sub>n</sub>(x)=sin<sup>n</sup>(x) <br /> At the start n=0. <br /> Press the 'n+' button to increase the value of n. <br /> Press the 'n-' button to decrease the value of n. </div>
+              <!-- /en -->
+              <!-- STOP  APPLET-->
+              <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+              <script src="js/cvunif1.js"></script>
+              <button type='button' id='myButton11' onClick='nameSpace1.nextplus()'>n+</button>
+              <button type='button' id='myButton12' onClick='nameSpace1.nextminus()'>n-</button>
+              <!-- /STOP  APPLET-->
+              <!-- STOP -->
+              <div lang="fr">
+                <div data-role="collapsible">
+                  <h4>démonstration du théorème 1</h4> Soit x<sub>0</sub>&isin;D et &epsilon; &gt; 0 alors il existe N tel que n &ge; N &rArr; |f<sub>n</sub>(x)-f(x)| &lt; &epsilon;/3. <br> f<sub>N</sub> étant continue en x<sub>0</sub> il existe &eta; &gt; 0 tel que |x-x<sub>0</sub>| &lt; &eta; &rArr; |f<sub>N</sub>(x)-f<sub>N</sub>(x<sub>0</sub>)| &lt; &epsilon;/3. <br> L'inégalité du triangle nous donne aussitôt: <br> |f(x)-f(x<sub>0</sub>)| &lt; |f(x)-f<sub>N</sub>(x)+|f<sub>N</sub>(x)-f<sub>N</sub>(x<sub>0</sub>)|+|f(x<sub>0</sub>)-f<sub>N</sub>(x<sub>0</sub>)| &le; &epsilon;
+                </div>
+                <!--demo -->
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <div data-role="collapsible">
+                  <h4>proof of theorem 1</h4> Let x<sub>0</sub>&isin;D and &epsilon; > 0 then there exists N such that n &ge; N &rArr; |f<sub>n</sub>(x)-f(x)| < &epsilon;/3. <br> f<sub>N</sub> being continuous at x<sub>0</sub> there exists &eta; > 0 such that |x-x<sub>0</sub>| < &eta; &rArr; |f<sub>N</sub>(x)-f<sub>N</sub>(x<sub>0</sub>)| < &epsilon;/3. <br> The triangle inequality immediately gives us: <br> |f(x)-f(x<sub>0</sub>)| < |f(x)-f<sub>N</sub>(x)+|f<sub>N</sub>(x)-f<sub>N</sub>(x<sub>0</sub>)|+|f(x<sub>0</sub>)-f<sub>N</sub>(x<sub>0</sub>)| &le; &epsilon;
+                </div>
+                <!--demo -->
+              </div>
+              <!-- /en -->
+              <!-- /STOP -->
+              <div lang="fr"> Remarquons avant de continuer que la convergence uniforme est une condition suffisante pour que la limite d'une suite de fonctions continues soit continue mais que cette condition n'est nullement nécessaire. Ainsi sur D=[0,1[ la suite f<sub>n</sub>(x)=x<sup>n</sup> converge simplement mais non uniformément vers la fonction continue nulle. <br> Voici une autre exemple où on peut observer une convergence uniforme: <br> D=[0,&pi;] f<sub>n</sub>(x)=3sin(x)/n <br> Au début n=1. <br> Appuyer sur le bouton 'n+' pour augmenter la valeur de n. <br> Appuyer sur le bouton 'n-' pour diminuer la valeur de n. </div>
+              <!-- /fr -->
+              <div lang="en"> Let us remark before continuing that uniform convergence is a sufficient condition for the limit of a sequence of continuous functions to be continuous but that this condition is by no means necessary. Thus on D=[0,1[ the sequence f<sub>n</sub>(x)=x<sup>n</sup> converges simply but not uniformly to the zero continuous function. <br> Here is another example where uniform convergence can be observed: <br> D=[0,&pi;] f<sub>n</sub>(x)=3sin(x)/n <br> At the start n=1. <br> Press the 'n+' button to increase the value of n. <br> Press the 'n-' button to decrease the value of n. </div>
+              <!-- /en -->
+              <!-- STOP  APPLET-->
+              <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+              <script src="js/cvunif2.js"></script>
+              <button type='button' id='myButton21' onClick='nameSpace2.nextplus()'>n+</button>
+              <button type='button' id='myButton22' onClick='nameSpace2.nextminus()'>n-</button>
+              <!-- /STOP  APPLET-->
+              <div lang="fr">
+                <h2>Critère de Cauchy uniforme</h2> Ceci est l'équivalent pour les suites de fonctions du <input type="button" value="critère de Cauchy" onclick="go('../suites/suitescauchy.html#')" data-inline="true" /> pour les suites de réels.
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <h2>Uniform Cauchy criterion</h2> This is the equivalent for function suites of the <input type="button" value="Cauchy criterion" onclick="go('../suites/suitescauchy.html#')" data-inline="true" /> for sequences of real numbers.
+              </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="def2"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">définition 2</div> On dit que la suite (f<sub>n</sub>) satisfait au critère de Cauchy relativement à D, si &forall;&epsilon; &gt; 0 il existe un entier N tel que p &gt; N et q &gt; N &rArr; |f<sub>p</sub>(x)-f<sub>q</sub>(x)| &lt; &epsilon; &forall;x&isin;D.
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">definition 2</div> We say that the sequence (f<sub>n</sub>) satisfies the Cauchy criterion with respect to D, if &forall;&epsilon; > 0 there exists an integer N such that p > N and q > N &rArr; |f<sub>p</sub>(x)-f<sub>q</sub>(x)| < &epsilon; &forall;x&isin;D. </div>
+                    <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <div lang="fr"> Nous avons donc: </div>
+                <!-- /fr -->
+                <div lang="en"> So we have: </div>
+                <!-- /en -->
+                <!-- STOP -->
+                <a name="thm2"></a>
+                <div id="container">
+                  <div lang="fr">
+                    <div id="label">théorème 2</div> Si (f<sub>n</sub>) est une suite de fonctions continues satisfaisant au critère de Cauchy uniforme sur D, alors (f<sub>n</sub>) est uniformément convergente vers une fonction f sur D, laquelle est bien également continue en vertu du résultat précédent.
+                  </div>
+                  <!--/fr-->
+                  <div lang="en">
+                    <div id="label">theorem 2</div> If (f<sub>n</sub>) is a sequence of continuous functions satisfying the uniform Cauchy criterion on D, then (f<sub>n</sub>) is uniformly convergent to a function f on D, which is also continuous by virtue of the previous result.
+                  </div>
+                  <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <!-- STOP -->
+                <div lang="fr">
+                  <div data-role="collapsible">
+                    <h4>démonstration</h4> En effet pour tout x la suite (fn(x)) est une suite de Cauchy, il en résulte qu'elle est convergente désignons par f(x) sa limite, nous définissons ainsi une fonction f sur D qui est la limite simple de (f<sub>n</sub>) mais il est évident au moyen de l'inégalité triangulaire que f est en fait limite uniforme de (f<sub>n</sub>).
+                  </div>
+                  <!--demo -->
+                </div>
+                <!-- /fr -->
+                <div lang="en">
+                  <div data-role="collapsible">
+                    <h4>proof</h4> Indeed for all x the sequence (fn(x)) is a Cauchy sequence, it follows that it is convergent let us denote by f(x) its limit, we thus define a function f on D which is the simple limit of (f<sub>n</sub>) but it is obvious by means of the triangle inequality that f is in fact the uniform limit of (f<sub>n</sub>).
+                  </div>
+                  <!--demo -->
+                </div>
+                <!-- /en -->
+                <!-- /STOP -->
+                <div lang="fr">
+                  <h2>Convergence uniforme et opérations</h2> Les résultats suivants résultent des résultats sur les <input type="button" value="limites et opérations algébriques" onclick="go('../suites/suiteslimopalg.html#')" data-inline="true" /> et se démontrent sans la moindre difficulté:
+                </div>
+                <!-- /fr -->
+                <div lang="en">
+                  <h2>Uniform convergence and operations</h2> The following results result from results on <input type="button" value="limits and algebraic operations" onclick="go('../suites/suiteslimopalg.html#')" data-inline="true" /> and are proven without the slightest difficulty:
+                </div>
+                <!-- /en -->
+                <!-- STOP -->
+                <a name="thm3"></a>
+                <div id="container">
+                  <div lang="fr">
+                    <div id="label">théorème 3</div> La limite uniforme d'une <input type="button" value="somme de deux suites" onclick="go('suitefoncespaces.html#def1')" data-inline="true" /> est la somme de leurs limites uniformes (quand elles existent, bien sûr).
+                  </div>
+                  <!--/fr-->
+                  <div lang="en">
+                    <div id="label">theorem 3</div> The uniform limit of an <input type="button" value="sum of two sequences" onclick="go('suitefoncespaces.html#def1')" data-inline="true" /> is the sum of their limits uniforms (when they exist, of course).
+                  </div>
+                  <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <!-- STOP -->
+                <a name="thm4"></a>
+                <div id="container">
+                  <div lang="fr">
+                    <div id="label">théorème 4</div> La limite uniforme d'un <input type="button" value="produit de deux suites" onclick="go('suitefoncespaces.html#def3')" data-inline="true" /> est le produit de leurs limites uniformes (quand elles existent, bien sûr).
+                  </div>
+                  <!--/fr-->
+                  <div lang="en">
+                    <div id="label">theorem 4</div> La limite uniforme d'un <input type="button" value="produit de deux suites" onclick="go('suitefoncespaces.html#def3')" data-inline="true" /> est le produit de leurs limites uniformes (quand elles existent, bien sûr).
+                  </div>
+                  <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <div lang="fr">
+                  <h2>Application aux séries de fonctions</h2>
+                </div>
+                <!-- /fr -->
+                <div lang="en">
+                  <h2>Application to series of functions</h2>
+                </div>
+                <!-- /en -->
+                <!-- STOP -->
+                <a name="def3"></a>
+                <div id="container">
+                  <div lang="fr">
+                    <div id="label">définition 3</div> On dit que la série (s<sub>n</sub>(x),u<sub>n</sub>(x)) converge uniformément sur D vers une fonction s si s est limite uniforme de la série des sommes partielles.
+                  </div>
+                  <!--/fr-->
+                  <div lang="en">
+                    <div id="label">definition 3</div> We say that the series (s<sub>n</sub>(x),u<sub>n</sub>(x)) converges uniformly on D to a function s if s is a uniform limit of the series of partial sums.
+                  </div>
+                  <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <!-- STOP -->
+                <a name="thm5"></a>
+                <div id="container">
+                  <div lang="fr">
+                    <div id="label">théorème 5</div> Si toutes les fonctions u<sub>n</sub> sont continues alors toutes les s<sub>n</sub> le sont en tant que sommes d'un nombre fini de fonctions continues. Donc dans ce cas (si les u<sub>n</sub> sont toutes continues sur D) et si la série est uniformément convergente alors la somme s(x) sera une fonction continue.
+                  </div>
+                  <!--/fr-->
+                  <div lang="en">
+                    <div id="label">theorem 5</div> If all u<sub>n</sub> functions are continuous then all s<sub>n</sub> are continuous as sums of a finite number of continuous functions. So in this case (if the u<sub>n</sub> are all continuous on D) and if the series is uniformly convergent then the sum s(x) will be a continuous function.
+                  </div>
+                  <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <div lang="fr"> Cela dit le critère de Cauchy uniforme pour les séries de fonctions peut s'énoncer ainsi: </div>
+                <!-- /fr -->
+                <div lang="en"> That said, the uniform Cauchy criterion for series of functions can be stated as follows: </div>
+                <!-- /en -->
+                <!-- STOP -->
+                <a name="thm6"></a>
+                <div id="container">
+                  <div lang="fr">
+                    <div id="label">théorème 6</div> Pour que la série (s<sub>n</sub>,u<sub>n</sub>) converge uniformément sur D il faut et il suffit que pour tout &epsilon; &gt; 0, il existe un entier N tel que p &gt; N et q &gt; p &rArr; |u<sub>p+1</sub>(x)+u<sub>p+2</sub>(x)+ ... +u<sub>q</sub>(x)| &lt; &epsilon; &forall;x&isin;D.
+                  </div>
+                  <!--/fr-->
+                  <div lang="en">
+                    <div id="label">theorem 6</div> For the series (s<sub>n</sub>,u<sub>n</sub>) to converge uniformly on D it is necessary and sufficient that for all &epsilon; > 0, there exists an integer N such that p > N and q > p &rArr; |u<sub>p+1</sub>(x)+u<sub>p+2</sub>(x)+ ... +u<sub>q</sub>(x)| < &epsilon; &forall;x&isin;D. </div>
+                      <!-- /en -->
+                  </div>
+                  <!-- /cont -->
+                  <!-- /STOP -->
+                  <div lang="fr"> Compte tenu de l'inégalité triangulaire généralisée, on a donc le résultat suivant: </div>
+                  <!-- /fr -->
+                  <div lang="en"> Given the generalized triangle inequality, we have the following result: </div>
+                  <!-- /en -->
+                  <!-- STOP -->
+                  <a name="thm7"></a>
+                  <div id="container">
+                    <div lang="fr">
+                      <div id="label">théorème 7</div> Si (s<sub>n</sub>,u<sub>n</sub>) est une série à terme général u<sub>n</sub>(x) continu, une condition suffisante pour que la série converge uniformément vers une fonction continue est que pour tout &epsilon; &gt; 0 il existe un entier N tel que q &gt; p &gt; N &rArr; |u<sub>p+1</sub>(x)|+|u<sub>p+2</sub>(x)|+ ... +|u<sub>q</sub>(x)| &lt; &epsilon;
+                    </div>
+                    <!--/fr-->
+                    <div lang="en">
+                      <div id="label">theorem 7</div> If (s<sub>n</sub>,u<sub>n</sub>) is a series with continuous general term u<sub>n</sub>(x), a sufficient condition for the series to converge uniformly to a continuous function is that for all &epsilon; > 0 there exists an integer N such that q > p > N &rArr; |u<sub>p+1</sub>(x)|+|u<sub>p+2</sub>(x)|+ ... +|u<sub>q</sub>(x )| < &epsilon; </div>
+                        <!-- /en -->
+                    </div>
+                    <!-- /cont -->
+                    <!-- /STOP -->
+                    <div lang="fr"> Nous allons maintenant donner une condition suffisante pour que cela soit réalisé. </div>
+                    <!-- /fr -->
+                    <div lang="en"> We will now give a sufficient condition for this to happen. </div>
+                    <!-- /en -->
+                    <!-- STOP -->
+                    <a name="def4"></a>
+                    <div id="container">
+                      <div lang="fr">
+                        <div id="label">définition 4</div> On dit que la série (s<sub>n</sub>,u<sub>n</sub>) définie sur un domaine D est <b>
+                          <i>'normalement convergente'</i>
+                        </b> sur D s'il existe une série convergente à termes réels positifs (&sigma;<sub>n</sub>,&alpha;<sub>n</sub>), telle que: <br> |u<sub>n</sub>(x)| &le; &alpha;<sub>n</sub> &forall;x&isin;D.
+                      </div>
+                      <!--/fr-->
+                      <div lang="en">
+                        <div id="label">definition 4</div> We say that the series (s<sub>n</sub>,u<sub>n</sub>) defined on a domain D is <b>
+                          <i>'normally convergent'</i>
+                        </b> on D if there is a convergent series with positive real terms (&sigma;<sub>n</sub>,&alpha;<sub>n</sub>), such that: <br> |u<sub>n</sub>(x)| &le; &alpha;<sub>n</sub> &forall;x&isin;D.
+                      </div>
+                      <!-- /en -->
+                    </div>
+                    <!-- /cont -->
+                    <!-- /STOP -->
+                    <div lang="fr"> Le résultat suivant est alors presque évident compte tenu de tout ce qui précède: </div>
+                    <!-- /fr -->
+                    <div lang="en"> The following result is then almost obvious given all of the above: </div>
+                    <!-- /en -->
+                    <!-- STOP -->
+                    <a name="thm8"></a>
+                    <div id="container">
+                      <div lang="fr">
+                        <div id="label">théorème 8</div> Une condition suffisante pour que la série (s<sub>n</sub>,u<sub>n</sub>) à terme général continu u<sub>n</sub>(x) soit uniformément convergente sur D est qu'elle soit normalement convergente sur D.
+                      </div>
+                      <!--/fr-->
+                      <div lang="en">
+                        <div id="label">theorem 8</div> A sufficient condition for the series (s<sub>n</sub>,u<sub>n</sub>) with continuous general term u<sub>n</sub>(x) to be uniformly convergent on D is that it is normally convergent on D.
+                      </div>
+                      <!-- /en -->
+                    </div>
+                    <!-- /cont -->
+                    <!-- /STOP -->
+                    <div lang="fr">
+                      <h2>Les théorèmes de Dini</h2>
+                    </div>
+                    <!-- /fr -->
+                    <div lang="en">
+                      <h2>Dini's theorems</h2>
+                    </div>
+                    <!-- /en -->
+                    <!-- STOP IMAGE -->
+                    <table cellpadding="0" cellspacing="0" border="2" bgcolor="#FFFFFF">
+                      <tr>
+                        <td align="center">Ulisse Dini (1845/1918-IT)</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <img src="images/Dini.jpeg" width="254" height="326" border="0" alt="">
+                        </td>
+                      </tr>
+                    </table>
+                    <!-- /STOP IMAGE -->
+                    <div lang="fr"> La convergence uniforme entraîne la convergence simple, la réciproque étant en général fausse. Il existe pourtant certains cas où cela se produit. C'est Ulisse Dini qui a isolé deux de ces cas importants. Ces résultats servent principalement en théorie de l'intégration. <h3>Premier théorème de Dini</h3>
+                    </div>
+                    <!-- /fr -->
+                    <div lang="en"> Uniform convergence leads to simple convergence, the converse being in general false. However, there are some cases where this happens. It was Ulisse Dini who isolated two of these important cases. These results serve mainly in integration theory. <h3>Dini's first theorem</h3>
+                    </div>
+                    <!-- /en -->
+                    <!-- STOP -->
+                    <a name="thm9"></a>
+                    <div id="container">
+                      <div lang="fr">
+                        <div id="label">théorème 9</div> Si D est un sous-ensemble <input type="button" value="compact" onclick="go('../../nombres/reels/compactes.html#')" data-inline="true" /> de &reals; et si (f<sub>n</sub>) est une suite <b>
+                          <input type="button" value="monotone" onclick="go('suitefoncdef.html#def6')" data-inline="true" />
+                        </b> de fonctions numériques définies sur D, et si (f<sub>n</sub>) converge simplement vers une fonction <b>continue</b> sur D alors la convergence est uniforme sur D.
+                      </div>
+                      <!--/fr-->
+                      <div lang="en">
+                        <div id="label">theorem 9</div> If D is a <input type="button" value="compact" onclick="go('../../nombres/reels/compactes.html#')" data-inline="true" /> subset of &reals; and if (f<sub>n</sub>) is a <b>
+                          <input type="button" value="monotonic" onclick="go('suitefoncdef.html#def6')" data-inline=" true" />
+                        </b> sequence of numerical functions defined on D, and if (f<sub>n</sub>) simply converges to a <b>continuous</b> function on D then the convergence is uniform on D.
+                      </div>
+                      <!-- /en -->
+                    </div>
+                    <!-- /cont -->
+                    <!-- /STOP -->
+                    <div lang="fr"> Pour démontrer ce premier théorème nous aurons besoin d'une lemme (résultat préliminaire). Ce résultat, très important, peut servir de caractérisation des parties compactes de &reals;. </div>
+                    <!-- /fr -->
+                    <div lang="en"> To prove this first theorem we will need a lemma (preliminary result). This very important result can serve as a characterization of the compact subsets of &reals;. </div>
+                    <!-- /en -->
+                    <!-- STOP -->
+                    <a name="def5"></a>
+                    <div id="container">
+                      <div lang="fr">
+                        <div id="label">définition 5</div> Soit (V<sub>n</sub>)<sub>n&isin;&naturals;</sub> une famille d'ouverts de &reals; on dit que cette famille <strong>'recouvre'</strong> K (ou bien est un <strong>'recouvrement'</strong> de K) si K est inclus dans la réunion des V<sub>n</sub>(soit K &sube;<sub>
+                          <font size="8">&cup;</font>
+                        </sub>V<sub>n</sub>
+                       <sub>(n&isin;&naturals;)</sub> ou encore &forall;x&isin;K &exist;n&isin;&naturals; tel que x&isin;V<sub>n</sub>).
+                      </div>
+                      <!--/fr-->
+                      <div lang="en">
+                        <div id="label">definition 5</div> Let (V<sub>n</sub>)<sub>n&isin;&naturals;</sub> be a family of open sets of &reals; we say that this family <strong>'covers'</strong> K (or is a <strong>'covering'</strong> of K) if K is included in the union of V<sub>n</sub>(either K &sube;<sub>
+                          <font size="8">&cup;</font>
+                        </sub>V<sub>n</sub>
+                       <sub>(n&isin;&naturals;)</sub> or yet &forall;x&isin;K &exist;n&isin;&naturals; such as x&isin;V<sub>n</sub>).
+                      </div>
+                      <!-- /en -->
+                    </div>
+                    <!-- /cont -->
+                    <!-- /STOP -->
+                    <div lang="fr"> Voici l'énoncé du lemme connu sous le nom de théorème de Heine-Borel: </div>
+                    <!-- /fr -->
+                    <div lang="en"></div>
+                    <!-- /en -->
+                    <!-- STOP -->
+                    <a name="thm10"></a>
+                    <div id="container">
+                      <div lang="fr">
+                        <div id="label">théorème 10 dit de Heine-Borel</div> Si K est compact, de tout recouvrement dénombrable de K on peut extraire un recouvrement fini.
+                      </div>
+                      <!--/fr-->
+                      <div lang="en">
+                        <div id="label">theorem 10 - known as Heine-Borel</div> If K is compact, from any countable covering of K we can extract a finite sub-covering.
+                      </div>
+                      <!-- /en -->
+                    </div>
+                    <!-- /cont -->
+                    <!-- /STOP -->
+                    <!-- STOP -->
+                    <div lang="fr">
+                      <div data-role="collapsible">
+                        <h4>démonstration du lemme</h4> Posons pour tout entier n F<sub>n</sub>=K-(V<sub>1</sub>∪V2∪...∪V<sub>n</sub>). Supposons que notre lemme soit faux, alors tous les F<sub>n</sub> seraient non vides. Dans ce cas nous pouvons construire une suite (x<sub>n</sub>) de point de K, telle que x<sub>n</sub>∈F<sub>n</sub> ∀n. De cette suite nous pouvons extraire une suite partielle x<sub>p(n)</sub> convergente, d'après le théorème de <input type="button" value="Bolzano-Weierstrass" onclick="go('../suites/suitesaccumulation.html#thm1')" data-inline="true" />. Soit a la limite de cette suite, a∈K car K étant compact est en particulier fermé. Donc a est dans l'un des V<sub>n</sub> puiqu'ils recouvrent K, disons a ∈V<sub>k</sub>. <br /> Comme V<sub>k</sub> est ouvert, il existe ε tel que |x-a| &lt; ε ⇒ x∈V<sub>k</sub>. <br /> D'autre part pour n suffisamment grand tous les x<sub>p(n)</sub> vérifient |x<sub>p(n)</sub>-a| &lt; ε. <br /> Mais chaque x<sub>p(n)</sub> n'appartient pas à la réunion V<sub>1</sub>∪V<sub>2</sub>∪...∪V<sub>p(n)</sub> donc pas à la réunion V<sub>1</sub>∪V<sub>2</sub>∪...∪V<sub>n</sub> puisque p(n) ≥ n car p est injective. <br /> Celà est une contradiction.
+                      </div>
+                      <!--demo -->
+                    </div>
+                    <!-- /fr -->
+                    <div lang="en">
+                      <div data-role="collapsible">
+                        <h4>proof of the lemma</h4> For any n let F<sub>n</sub>=K-(V<sub>1</sub>∪V2∪...∪V<sub>n</sub>). Suppose our lemma is false, then all F<sub>n</sub> would be non-empty. In this case we can construct a sequence (x<sub>n</sub>) of points of K, such that x<sub>n</sub>∈F<sub>n</sub> ∀n. From this sequence we can extract a convergent partial sequence x<sub>p(n)</sub>, according to the <input type="button" value="Bolzano-Weierstrass" onclick="go('../suites/suitesaccumulation.html#thm1')" data-inline="true" /> theorem. Let a be the limit of this sequence, a∈K since K being compact is in particular closed. So a is in one of V<sub>n</sub> since they cover K, say a ∈V<sub>k</sub>. <br /> Since V<sub>k</sub> is open, there exists ε such that |x-a| < ε ⇒ x∈V<sub>k</sub>. <br /> On the other hand for n large enough all x<sub>p(n)</sub> satisfy |x<sub>p(n)</sub>-a|
+                          < ε. <br /> But each x<sub>p(n)</sub> does not belong to the union V<sub>1</sub>∪V<sub>2</sub>∪...∪V<sub>p (n)</sub> therefore not at the union V<sub>1</sub>∪V<sub>2</sub>∪...∪V<sub>n</sub> since p(n) ≥ n because p is injective. <br /> This is a contradiction
+                      </div>
+                      <!--demo -->
+                    </div>
+                    <!-- /en -->
+                    <!-- /STOP -->
+                    <div lang="fr"> Nous pouvons maintenant passer à la démonstration du premier théorème de Dini. </div>
+                    <!-- /fr -->
+                    <div lang="en"> We can now move on to the proof of Dini's first theorem. </div>
+                    <!-- /en -->
+                    <!-- STOP -->
+                    <div lang="fr">
+                      <div data-role="collapsible">
+                        <h4>démonstration du premier théorème de Dini</h4> Tout d'abord on peut supposer que la suite (f<sub>n</sub>) est décroissante, sinon on remplace la suite (f<sub>n</sub>) et la fonction f par leurs opposées. Ensuite on peut supposer que f est nulle, sinon on remplace f<sub>n</sub> par f<sub>n</sub>-f. <br /> Il résulte donc des hypothèses faites que tous les f<sub>n</sub> sont ≥ 0 sur D. <br /> Fixons un réel ε &gt; 0. <br /> Pour tout entier n désignons par V<sub>n</sub>(ε)={x∈D | f<sub>n</sub>(x) &lt; ε} <br /> Par <input type="button" value="continuité" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> des f<sub>n</sub> ces ensembles sont des <input type="button" value="ouverts" onclick="go('../../nombres/reels/ouverts.html#')" data-inline="true" />. <br /> La <input type="button" value="convergence simple" onclick="go('suitefonccvsimple.html#')" data-inline="true" /> des f<sub>n</sub> vers 0 entraîne qu'ils forment un recouvrement de K. <br /> On peut donc en extraire un recouvrement fini, ce qui signifie qu'il existe un entier N(ε) tel que K⊆ V<sub>1</sub>∪V<sub>2</sub>∪...∪V<sub>N(ε)</sub>
+                        <br /> Mais par monotonie la suite V<sub>n</sub>(ε) est croissante. <br /> Donc V<sub>1</sub>∪V<sub>2</sub>∪...∪V<sub>N(ε)</sub>=V<sub>N(ε)</sub> et K=V<sub>N(ε)</sub>. <br /> Utilisant à nouveau l'hypothèse de monotonie si n ≥ N(ε) on a: <br /> f<sub>n</sub>(x) ≤ f<sub>N(ε</sub>(x) ≤ ε ∀x∈D. <br /> D'où la convergence uniforme de f<sub>n</sub> vers 0 sur D.
+                      </div>
+                      <!--demo -->
+                    </div>
+                    <!-- /fr -->
+                    <div lang="en">
+                      <div data-role="collapsible">
+                        <h4>proof od Dini's first theorem</h4> First of all we can suppose that the sequence (f<sub>n</sub>) is decreasing, otherwise we replace the sequence (f<sub>n</sub>) and the function f by their opposites. Then we can assume that f is zero, otherwise we replace f<sub>n</sub> by f<sub>n</sub>-f. <br /> It therefore follows from the assumptions made that all the f<sub>n</sub> are ≥ 0 on D. <br /> Fix a real ε > 0. <br /> For any integer n denote by V<sub>n</sub>(ε)={x∈D | f<sub>n</sub>(x)
+                        < ε} <br /> By <input type="button" value="continuity" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> of the f<sub>n</sub> these sets are <input type="button" value="open" onclick="go('../../nombres/reels/ouverts.html#')" data-inline="true" />. <br /> The <input type="button" value="pointwise convergence" onclick="go('suitefonccvsimple.html#')" data-inline="true" /> of f<sub>n</sub> to 0 causes that 'they form a covering of K. <br /> We can therefore extract a finite cover, which means that there exists an integer N(ε) such that K⊆ V<sub>1</sub>∪V<sub>2</sub>∪...∪ V<sub>N(ε)</sub>
+                        <br /> But by monotoncity the sequence V<sub>n</sub>(ε) is increasing. <br /> So V<sub>1</sub>∪V<sub>2</sub>∪...∪V<sub>N(ε)</sub>=V<sub>N(ε)</sub> and K=V<sub>N(ε)</sub>. <br /> Again using the monotonicity assumption if n ≥ N(ε) we have: <br /> f<sub>n</sub>(x) ≤ f<sub>N(ε</sub>(x) ≤ ε ∀x∈D. <br /> Hence the uniform convergence of f<sub>n</sub> to 0 on D.
+                      </div>
+                      <!--demo -->
+                    </div>
+                    <!-- /en -->
+                    <!-- /STOP -->
+                    <div lang="fr"></div>
+                    <!-- /fr -->
+                    <h3>Second théorème de Dini</h3>
+                    <div lang="en">
+                      <h3>Dini's second theorem</h3>
+                    </div>
+                    <!-- /en -->
+                    <!-- STOP -->
+                    <a name="thm11"></a>
+                    <div id="container">
+                      <div lang="fr">
+                        <div id="label">théorème 11</div> Si D=[a,b] est un intervalle <input type="button" value="compact" onclick="go('../../nombres/reels/compactes.html#')" data-inline="true" /> et si les f<sub>n</sub> sont des fonctions <input type="button" value="croissantes" onclick="go('../foncnum/foncnummonotones.html#')" data-inline="true" /> sur D, et si la suite (f<sub>n</sub>) converge simplement vers une fonction <input type="button" value="continue" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> f sur D, alors la suite (f<sub>n</sub>) converge uniformément vers f sur D.
+                      </div>
+                      <!--/fr-->
+                      <div lang="en">
+                        <div id="label">theorem 11</div> If D=[a,b] is a <input data-inline="true" onclick="go('../../nombres/reels/compactes.html#')" type="button" value="compact" /> interval and if the f<sub>n</sub> are <input data-inline="true" onclick="go('../foncnum/foncnummonotones.html#')" type="button" value="increasing" /> functions on D, and if the sequence (f<sub>n</sub>) pointwise converges to a <input data-inline="true" onclick="go('../continuite/contsurdom.html#')" type="button" value="continuous" /> function f on D, then the sequence (f<sub>n</sub>) converges uniformly to f on D.
+                      </div>
+                      <!-- /en -->
+                    </div>
+                    <!-- /cont -->
+                    <!-- /STOP -->
+                    <!-- STOP -->
+                    <div lang="fr">
+                      <div data-role="collapsible">
+                        <h4>démonstration</h4> Comme <input type="button" value="nous l'avons vu" onclick="go('suitefonccvsimple.html#convetmot#')" data-inline="true" />, la fonction f est croissante. En outre, étant continue sur un compact, elle est <input type="button" value="uniformément continue" onclick="go('../continuite/contuniforme.html#')" data-inline="true" /> sur ce compact. <br /> Soit ε un réel &gt; 0. <br /> On peut donc trouver une suite de points de D, a<sub>0</sub>=a &lt; a<sub>1</sub> &lt; a<sub>2</sub> &lt; ... &lt; a<sub>k-1</sub> &lt; a<sub>k</sub>=b, telle que: <br /> ∀i∈{0,1, ... ,k-1} f(a<sub>i+1</sub>)-f(a<sub>i</sub>) &lt; ε/2 <br /> ∀x∈[a,b] il existe un entier i tel que x∈[a<sub>i</sub>,a<sub>i+1</sub>] <br /> La croissance de f et des f<sub>n</sub> et le choix de la subdivision impliquent (pour tout entier n): <br /> f<sub>n</sub>(x)-f(x) ≤ f<sub>n</sub>(a<sub>i+1</sub>)-f(a<sub>i</sub>) ≤ f<sub>n</sub>(a<sub>i+1</sub>)-f(a<sub>i+1</sub>)+ε/2 <br /> et <br /> f<sub>n</sub>(x)-f(x) ≥ f<sub>n</sub>(a<sub>i</sub>)-f(a<sub>i+1</sub>) ≥ f<sub>n</sub>(a<sub>i</sub>)-f(a<sub>i</sub>)-ε/2 <br /> Par convergence simple, pour chaque i il existe un entier N(i,ε) tel que n &gt; N(i,ε)⇒ |f(a<sub>i</sub>)-f<sub>n</sub>(a<sub>i</sub>)| &lt; ε/2 <br /> Posant N(ε)=Sup<sub>0 ≤ i ≤ k</sub>N(i,ε) on a |f(a<sub>i</sub>)-f<sub>n</sub>(a<sub>i</sub>)| &lt; ε/2 ∀i∈{0,1,..,k} ∀n &gt; N(ε) <br /> D'où nous concluons |f<sub>n</sub>(x)-f(x)| ≤ ε ∀x∈D ∀n &gt; N(ε). La convergence est donc uniforme.
+                      </div>
+                      <!--demo -->
+                    </div>
+                    <!-- /fr -->
+                    <div lang="en">
+                      <div data-role="collapsible">
+                        <h4>proof</h4> As <input type="button" value="we saw" onclick="go('suitefonccvsimple.html#convetmot#')" data-inline="true" />, the function f is increasing. Also, being continuous on a compact, it is <input type="button" value="uniformly continuous" onclick="go('../continuite/contuniforme.html#')" data-inline="true" /> on this compact. <br /> Let ε be a real > 0. <br /> We can therefore find a sequence of points of D, a<sub>0</sub>=a < a<sub>1</sub>
+                          < a<sub>2</sub>
+                            < ... < a<sub>k-1</sub>
+                              < a<sub>k</sub>=b, such that: <br /> ∀i∈{0,1, ... ,k-1} f(a<sub>i+1</sub>)-f(a<sub>i</sub>)
+                                < ε/2 <br /> ∀x∈[a,b] there exists an integer i such that x∈[a<sub>i</sub>,a<sub>i+1</sub>] <br /> The variation of f and the f<sub>n</sub> and the choice of the subdivision imply (for any integer n): <br /> f<sub>n</sub>(x)-f(x) ≤ f<sub>n</sub>(a<sub>i+1</sub>)-f(a<sub>i</sub>) ≤ f<sub>n</sub>(a<sub>i+1</sub>)-f(a<sub>i+1</sub>)+ε/2 <br /> and <br /> f<sub>n</sub>(x)-f(x) ≥ f<sub>n</sub>(a<sub>i</sub>)-f(a<sub>i+1</sub>) ≥ f<sub>n</sub>(a<sub>i</sub>)-f(a<sub>i</sub>)-ε/2 <br /> By simple convergence, for each i there exists an integer N(i,ε) such that n > N(i,ε)⇒ |f(a<sub>i</sub>)-f<sub>n</sub>(a<sub>i</sub>)|
+                                < ε/2 <br /> Setting N(ε)=Sup<sub>0 ≤ i ≤ k</sub>N(i,ε) we have |f(a<sub>i</sub>)-f<sub>n</sub>(a<sub>i</sub>)| < ε/2 ∀i∈{0,1,..,k} ∀n> N(ε) <br /> Hence we conclude |f<sub>n</sub>(x)-f(x)| ≤ ε ∀x∈D ∀n > N(ε). The convergence is therefore uniform.
+                      </div>
+                      <!--demo -->
+                    </div>
+                    <!-- /en -->
+                    <!-- /STOP -->
+                    <div lang="fr"> Un exemple de suite convergent simplement mais non uniformément vers une fonction continue (la fonction nulle) sur l'intervalle compact [0,1]. <br> f<sub>n</sub>(x)=n<sup>2</sup>x<sup>n</sup>(1-x) <br> Au début n=0. <br> Appuyer sur le bouton 'n+' pour augmenter la valeur de n. <br> Appuyer sur le bouton 'n-' pour diminuer la valeur de n. </div>
+                    <!-- /fr -->
+                    <div lang="en"> An example of a sequence pointwise convergent but not uniformly convergent to a continuous function (the null function) on the compact interval [0,1]. <br> f<sub>n</sub>(x)=n<sup>2</sup>x<sup>n</sup>(1-x) <br> At the start n=0. <br> Press the 'n+' button to increase the value of n. <br> Press the 'n-' button to decrease the value of n. </div>
+                    <!-- /en -->
+                    <!-- STOP  APPLET-->
+                    <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+                    <script src="js/cvunif3.js"></script>
+                    <button type='button' id='myButton31' onClick='nameSpace3.nextplus()'>n+</button>
+                    <button type='button' id='myButton32' onClick='nameSpace3.nextminus()'>n-</button>
+                    <!-- /STOP  APPLET-->
+                    <div lang="fr"> La suite n'est pas monotone et les fonctions ne sont pas croissantes. </div>
+                    <!-- /fr -->
+                    <div lang="en"> a sequence is not monotonic and the functions are not increasing. </div>
+                    <!-- /en -->
+                    <div lang="fr">
+                      <div>
+                        <ul style=list-style-type:'';>
+                          <li>
+                            <input type="button" value="Exercices" onclick="go('exercices/suitefonccvuniforme/menu.html')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Retour au menu 'Suites de fonctions'" onclick="go('index.html')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- /navbar -->
+                    </div>
+                    <!-- /fr -->
+                    <div lang="en">
+                      <div>
+                        <ul style=list-style-type:'';>
+                          <li>
+                            <input type="button" value="Exercises" onclick="go('exercices/suitefonccvuniforme/menu.html')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Back to 'Sequences of functions'" onclick="go('index.html')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                          </li>
+                          <li>
+                            <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <!-- /en -->
+                  </div>
+                  <!-- /content -->
+                  <div data-role="footer">
+                    <table cellpadding="10">
+                      <tr>
+                        <td>
+                          <div lang="fr">Création Gilles Dubois</div>
+                          <div lang="en">Created by Gilles Dubois</div>
+                        </td>
+                        <td>
+                          <div lang="fr">Janvier 2022</div>
+                          <div lang="en">January 2022</div>
+                        </td>
+                        <td>
+                          <div lang="fr">Version mobile Jquery</div>
+                          <div lang="en">Mobile Jquery version</div>
+                        </td>
+                        <td>
+                          <a href="https://www.mathjax.org">
+                            <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                  <!-- /footer -->
+                  <ul style=list-style-type:'';>
+                    <li>
+                      <div lang="fr">
+                        <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+                      </div>
+                      <div lang="en">
+                        <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+                      </div>
+                    </li>
+                    <li>
+                      <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+                    </li>
+                  </ul>
+                </div>
+                <!-- /page -->
+  </body>
+</html>

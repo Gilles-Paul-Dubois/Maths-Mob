@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Suites convergentes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesconvergentes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesconvergentes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <b>La notion de limite est le fondement même de l'analyse mathématique</b>. Aussi cette page est d'une extrême importance. Il importe de bien comprendre cette première formalisation de la notion de limite d'une suite de réels lorsque l'indice tend vers l'infini, parce que toutes les autres notions (limite d'une fonction numérique, dérivée, intégrale définie) seront strictement calquées sur ce modèle. <h2>Observations préliminaires</h2> Commençons par observer le comportement de certaines suites déjà données en exemples dans ce cours sur les suites: <h3>Exemple 1</h3>
+          <p>La suite de Fibonacci semble assez régulière. Elle est croissante, les termes successifs deviennent de plus en plus grands et de plus en plus rapidement. La définition même de cette suite suggère que ce phénomène ne fera que s'amplifier quand n continue à grandir. <u>On peut donc faire un pronostic pour se qu'il se passe quand n va devenir très grand.</u>
+            <br> L'appliquette suivante montre les termes successifs de la suite de Fibonacci. <br /> Au début, il n'y a que le premier, appuyez sur le bouton 'Suivant' pour en voir un de plus. <br /> Appuyez sur 'Recommencer' pour recommencer depuis le début.
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <b>The notion of limit is the very foundation of mathematical analysis </b> . That's why this page is of extreme importance. It is important to understand this first formalization of the notion of limit of a sequence of real numbers when the index tends to infinity, because all the other notions (limit of a numerical function, derivative, definite integral) will be strictly copied on this model. <h2>Preliminary observations </h2> Let's start by observing the behavior of some sequences already given as examples in the introductory page on sequences: <h3>Example 1 </h3>
+          <p>The Fibonacci sequence seems quite regular. It is increasing, the successive terms becoming bigger and bigger and faster. The very definition of this sequence suggests that this phenomenon will only increase when n continues to grow. <u> We can therefore make a prognosis for what happens when n becomes very large. </u>
+            <br /> The following applet shows the successive terms of the Fibonacci sequence. <br /> At the beginning there is only the first one, press the 'Next' button to see one more. <br /> Press '+10' to see 10 more at once. <br> Press 'Restart' to start over from the beginning.
+          </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box8" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace8.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace8.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace8.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/suitesdef08.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Exemple 2</h3>
+          <p>La suite n&times;sin(n) parait totalement anarchique. Elle n'est ni bornée ni monotone ni périodique. Quand n prend des valeurs grandes u<sub>n</sub> peut être positif ou négatif, très grand ou très petit en valeur absolue. <u>Il semble impossible de pouvoir se livrer à la moindre prédiction quand n va devenir de plus en plus grand</u>. Disons que cette suite 'oscille' et même pas à l'intérieur de bornes fixes. <br> L'appliquette suivante montre les termes successifs de cette suite. Au début, il n'y a que les deux premiers, appuyez sur le bouton 'Suivant' pour en voir un de plus. Appuyez sur 'Recommencer' pour recommencer depuis le début. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example 2 </h3>
+          <p>The sequence n×sin(n) seems totally anarchic. It is neither bounded nor monotonic nor periodic. When n takes large values ​​u<sub>n</sub>can be positive or negative, very large or very small in absolute value. <u> It seems impossible to make the slightest prediction when n will become larger and larger </u> . Let's say that this sequence 'oscillates' and not even within fixed bounds. <br />The following applet shows the successive terms of this sequence. At first there are only the first two, press the 'Next' button to see one more. Press 'Restart' to start over from the beginning. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace3.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace3.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace3.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/nsinus-n-.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Exemple 3</h3>
+          <p>La suite récurrente u<sub>n+1</sub>=u<sub>n</sub>+1/n est évidemment croissante mais sa croissance semble très lente comparée à la suite de Fibonacci. <u>Il est difficile de prédire si cette suite est bornée</u>. <br> L'appliquette suivante montre les termes successifs de cette suite. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example 3 </h3>
+          <p>The recurrent sequence u<sub>n+1</sub>=u<sub>n</sub>+1/n is obviously increasing but its growth seems very slow compared to the Fibonacci sequence. <u> It is difficult to predict whether this sequence is bounded </u> . <br /> The following applet shows the successive terms of this sequence. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box5" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace5.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace5.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace5.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/suitesdef05.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Exemple 4</h3>
+          <p>La même remarque que la précédente s'applique à la suite u<sub>n</sub>=u<sub>n-1</sub>+1/n² dont la croissance semble encore plus lente que la précédente. <u>Impossible de dire, sur une simple observation, si cette suite est bornée ou non</u>. <br> L'appliquette suivante montre les termes successifs de cette suite. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example 4 </h3>
+          <p>The same remark as the previous one applies to the sequence u<sub>n</sub>=u<sub>n-1</sub>+1/n² its growth seems even slower than the previous one. <u> Impossible to say, on a simple observation, if this sequence is bounded or not </u> . <br /> The following applet shows the successive terms of this sequence. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box7" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace7.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace7.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace7.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/suitesdef07.js"></script>
+        <!-- /STOP  APPLET-->
+        <a name="radic2"></a>
+        <div lang="fr">
+          <h3>Exemple 5</h3>
+          <p>Pour la suite u<sub>n</sub>=√(2+u<sub>n-1</sub>). <u>Il semble qu'il s'agisse d'une suite croissante, dont les termes restent en dessous de la valeur 2, qui sont très vite très voisins de 2</u>, et <b>
+              <i>"d'autant plus voisins de 2 que n est grand"</i>
+            </b>. C'est ce comportement sur lequel nous allons nous concentrer ici. <br> L'appliquette suivante montre les termes successifs de cette suite. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example 5 </h3>
+          <p>For the sequence u<sub>n</sub>=√(2+u<sub>n-1</sub>). <u> It seems to be an increasing sequence, whose terms remain below the value 2, which are very quickly very close to 2 </u> , and <b>
+              <i> "all the more close to 2 as n is large" </i>
+            </b> . It is this behavior that we will focus on here. <br /> The following applet shows the successive terms of this sequence. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box6" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace6.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace6.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace6.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/suitesdef06.js"></script>
+        <!-- /STOP  APPLET-->
+        <a name="ex6"></a>
+        <div lang="fr">
+          <h3>Exemple 6</h3> L'exemple u<sub>n</sub>=n<sup>1/n</sup> nous montre une suite d'abord croissante, puis décroissante. <u>Il semble que dans sa phase de décroissance tous les termes de la suite restent au dessus de la valeur 1</u>, mais rien ne nous permet, pour le moment d'affirmer cela avec une certitude absolue. A ce stade, l'affirmation selon laquelle <b>
+            <i>"plus n grandit et plus u<sub>n</sub> est voisin de 1" </i>
+          </b> reste une conjecture, la possibilité subsiste que u<sub>n</sub> descende en dessous de 1, ou bien au contraire ne puisse s'approcher de 1 <b>
+            <i>"d'aussi près qu'on veut"</i>
+          </b>. <br> L'appliquette suivante montre les termes successifs de cette suite.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example 6 </h3>The example u<sub>n</sub>=n<sup>1/n</sup> shows us a first increasing, then decreasing sequence. <u> It seems that in its phase of decrease all the terms of the sequence remain above the value 1 </u> , but nothing allows us, for the moment, to affirm this with absolute certainty. At this stage, the assertion according to which <b>
+            <i> grows and the closer u<sub>n</sub> is to 1" </i>
+          </b> remains a conjecture, the possibility remains that u<sub>n</sub> falls below 1, or on the contrary cannot approach 1 <b>
+            <i> "as close as we want' </i>
+          </b> . <br /> The following applet shows the successive terms of this sequence.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace2.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace2.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace2.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/racine-nieme-de-n.js"></script>
+        <!-- /STOP  APPLET-->
+        <a name="deflim"></a>
+        <div lang="fr">
+          <h2>Définitions</h2> Notre but est ici d'apporter un peu plus de rigueur dans tous les prédicats de la section précédente. On s'intéresse plus particulièrement aux derniers exemples, c'est à dire aux cas où quand n grandit u<sub>n</sub> semble s'approcher d'une valeur fixe finie, qu'on appelera une <b>
+            <i>'limite'</i>
+          </b>. <br /> Intuitivement, la suite (u<sub>n</sub>) tend vers la limite a (a nombre réel donné) si: <br />
+          <ul>
+            <li>
+              <b>'plus n grandit et plus u<sub>n</sub> est voisin de a, la différence entre u<sub>n</sub> et a étant d'autant plus petite que n est grand' </b>.
+            </li>
+          </ul> Ou bien encore: <br />
+          <ul>
+            <li>La différence entre u<sub>n</sub> et a peut être rendue <b>'aussi petite qu'on veut, pourvu que n soit suffisamment grand'</b>. </li>
+          </ul> Il s'agit ici d'affirmations encore vagues demandant à être <b>formalisées</b> et <b>quantifiées</b>. <br /> C'est <input type="button" value="Louis Augustin Cauchy" onclick="go('http://fr.wikipedia.org/wiki/Augustin_Louis_Cauchy#')" data-inline="true" /> qui, le premier, a amené de la rigueur dans ce type d'énoncés
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions </h2>Our goal here is to bring a little more rigor to all the predicates of the previous section. We are particularly interested in the last examples, i.e. in cases where when n grows u<sub>n</sub>seems to approach a finite fixed value, which we will call a <b>
+            <i> 'limit' </i>
+          </b> . <br /> Intuitively, the sequence (u<sub>n</sub>) tends to the limit a (a given real number) if: <br />
+          <ul>
+            <li>
+              <b>'the more n grows, the closer u<sub>n</sub>is to a, the difference between u<sub>n</sub>and a being all the smaller as n is large' </b> .
+            </li>
+          </ul> Or even: <br />
+          <ul>
+            <li>The difference between u<sub>n</sub>and a can be made <b> 'as small as you like, provided n is large enough </b> . </li>
+          </ul> These are still vague assertions that need to be <b> formalized </b> and <b> quantified </b> . <br /> This is <input data-inline="true" onclick="go('http://fr.wikipedia.org/wiki/Augustin_Louis_Cauchy#')" type="button" value="Louis Augustin Cauchy" />who was the first to bring rigor and clarity to this kind of statement
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/Augustin_Louis_Cauchy.JPG" alt="" width="300" height="438" border="0">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <p> Voici donc maintenant la définition formelle de la notion de convergence d'une suite de nombres réels:</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Here is now the formal definition of the notion of convergence of a sequence of real numbers: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> a désignant un nombre réel, on dit que la suite (u<sub>n</sub>
+           <sub>)n∈ℕ</sub>
+            <b>
+              <i>'converge'</i>
+            </b> vers a ou bien admet a pour <b>
+              <i>'limite'</i>
+            </b> si: ∀ε&gt;0 ∃N tel que
+            <!-- FORMULE UNIV INLINE --> \( n> N ~~\Rightarrow ~~\left|u_{n} -a\right|< \epsilon \) <!-- /FORMULE UNIV INLINE-->.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> a denoting a real number, we say that the sequence (u<sub>n</sub>
+           <sub> )n∈ℕ</sub>
+            <b>
+              <i> 'converges' </i>
+            </b> towards a or admits a for <b>
+              <i> 'limit' </i>
+            </b> if: ∀ε>0 ∃N such that
+            <!-- FORMULE UNIV INLINE --> \( n> N ~~\Rightarrow ~~\left|u_{n} -a\right|< \epsilon \) <!-- /FORMULE UNIV INLINE-->.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="not1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">notation 1</div>
+            <p>Le nombre a est limite de la suite (u<sub>n</sub>
+             <sub>)n∈ℕ</sub> s'écrira de manière condensée:
+            </p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{n \to \infty }u_{n}=a \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">notation 1</div>
+            <p>The number a is the limit of the sequence (u<sub>n</sub>
+             <sub> )n∈ℕ</sub> will be written in a condensed way:
+            </p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{n \to \infty }u_{n}=a \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Visualisation du processus de convergence</h3> Voici une appliquette qui vous permet de voir les rôles respectifs du paramètre ε (réel) et de l'entier N (dépendant évidemment de ε). Une suite tend vers une limite a matérialisée par une ligne horizontale de couleur rouge (droite y=a). <br> Vous pouvez faire varier ε à l'aide de la réglette. <br> Le N(ε) est alors calculé automatiquement et matérialisé par une verticale verte. <br> Les horizontales de couleur bleur représentent les droites d'équation y=a-ε et y=a+ε. <br> L'énoncé dit <strong>qu'aucun point de la suite ne doit se trouver en dehors du rectangle délimité par la verticale verte et les deux horizontales bleues</strong>. <br> N'hésitez pas à utiliser les outils en bas à droite de la zone graphique pour zoomer et se déplacer sur le graphique.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Visualization of the convergence process </h3>Here is an applet that allows you to see the respective roles of the parameter ε (real) and of the integer N (obviously depending on ε). A sequence tends towards a limit a materialized by a horizontal line of red color (line y=a). <br /> You can vary ε using the slider. <br /> The N(ε) is then calculated automatically and materialized by a green vertical. <br /> The bluish horizontals represent the straight lines with equation y=a-ε and y=a+ε. <br /> The statement says <strong> that no point of the sequence must lie outside the rectangle bounded by the green vertical and the two blue horizontals </strong> . <br /> Feel free to use the tools at the bottom right of the chart area to zoom and move around the chart.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box11" class="jxgbox" style="width:1000px; height:400px;"></div>
+        <div lang="fr">Choix de &epsilon; :</div>
+        <!-- /fr -->
+        <div lang="en">Choice of &epsilon; :</div>
+        <!-- /en --> : <input type='range' id="myRange11" step='0.01' min='0.07' max='0.5' value='0.5' onchange="nameSpace11.changep(this.value)" />
+        <div lang="fr">Valeur de &epsilon; :</div>
+        <!-- /fr -->
+        <div lang="en">Value of &epsilon; :</div>
+        <!-- /en -->
+        <input type='text' id='myText111'> V <div lang="fr">aleur de N(&epsilon;) :</div>
+        <!-- /fr -->
+        <div lang="en">Value of N(&epsilon;) :</div>
+        <!-- /en -->
+        <input type='text' id='myText112'>
+        <script src="js/visulim.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Remarques concernant la définition formelle</h2>
+          <h4>Formalisation totale</h4> Avant de continuer effectuons quelques remarques: <br /> On pourra réviser les <input type="button" value="notions de logique élémentaire" onclick="go('../../bases/logique/index.html#')" data-inline="true" />. <br /> Le N dont est annoncée l'existence dépend bien évidemment de ε et de a, il faudrait donc en toute rigueur le noter N(a,ε). <br /> La définition de la convergence s'écrit donc, en langage formalisé: <br /> ∀ε&gt;0(∃N(a,ε)(n&gt;N⇒|u<sub>n</sub>-a|&lt;ε) <br /> Désignons maintenant par R(n,N) la relation n&gt;N et par S(n,ε,u,a) la relation |u<sub>n</sub>-a|&lt;ε. <br /> Sachant que R⇒S équivaut à S∨¬R, (voir <input type="button" value="implication" onclick="go('../../bases/logique/implication.html#')" data-inline="true" />) nous obtenons: <br /> ∀ε&gt;0(∃N(a,ε)(∀n(S(n,ε,u,a)∨¬R(n,N)))) <br />
+          <h4>Non convergence</h4> Examinons maintenant la <input type="button" value="négation" onclick="go('../../bases/logique/quantinegat.html#')" data-inline="true" /> de cette affirmation. <br /> ∃ε&gt;0(∀N(∃n(¬S(n,ε,u,a)∧R(n,N)))) <br /> D'où nous concluons: <br /> a n'est pas limite de la suite (u<sub>n</sub>
+         <sub>)n∈ℕ</sub> peut s'écrire: <br /> Il existe un réel ε&gt;0 tel que pour tout entier N on peut trouver n&gt;N tel que |u<sub>n</sub>-a|≥ε. <br /> Tout comme il est important de savoir écrire logiquement la convergence d'une suite vers une limite, il est également important de savoir exprimer le contraire. <br />
+          <h4>Conditions sur ε</h4> Voyons maintenant les hypothèses supplémentaires que l'on peut formuler sur ε <br /> On peut, sans restreindre la généralité supposer que ε est &lt;1 en effet si la propriété est vraie ∀ε'&lt;1, elle est vraie a fortiori pour tout ε &gt;0 car si ε&gt; ε' alors |u<sub>n</sub>-a|&lt;ε dès que u<sub>n</sub>-a|&lt;ε'. <br /> La valeur 1 ici n'a aucune importance. on aurait pu tout aussi bien prendre 1/2 ou 1/3 ou n'importe quelle valeur &gt;0. <br /> La première partie de l'assertion peut donc être comprise avec un sous-entendu comme ∀&epsilon; &gt;0 (aussi petit soit-il). <br /> De plus comme &rationals; est <input type="button" value="dense" onclick="go('../../nombres/reels/densite.html#')" data-inline="true" /> dans ℝ on peut si on veut supposer que ε est rationnel. <br /> Par contre l'inégalité stricte ε&gt;0 est fondamentale car si &epsilon;=0 alors la relation |u<sub>n</sub>-a|&lt;ε n'est JAMAIS vérifiée. <br />
+          <h4>Importance des autres inégalités dans la définition</h4> Reprenons la définition formelle de la convergence de la suite (u<sub>n</sub>
+         <sub>)n∈ℕ</sub> vers a: <br /> ∀ε&gt;0 ∃N tel que n&gt;N ⇒ |u<sub>n</sub>-a|&lt;ε <br /> On a vu qu'on ne pouvait toucher à la première ingélité stricte ε&gt;0, mais peut-on remplacer les deux autres: <br /> n&gt;N et |u<sub>n</sub>-a|&lt;ε par des inégalités larges, comme ceci: <br /> ∀ε&gt;0 ∃N tel que n≥N ⇒ |u<sub>n</sub>-a|≤ε <br /> Pour la première c'est évident car la condition n&gt;N est équivalente à n≥N+1, donc s'il existe un N tel que n&gt;N ⇒ ... alors il existe N'=N+1 tel que n≥N' ⇒ ...... <br /> Pour la seconde c'est non moins évident car une propriété qui est vraie ∀ε est vraie pour un epsilon donné et aussi pour sa moitié. <br /> De plus la relation |u<sub>n</sub>-a|≤ε/2 implique bien |u<sub>n</sub>-a|&lt;ε alors que la relation |u<sub>n</sub>-a|&lt;ε implique évidement |u<sub>n</sub>-a|≤ε. <br /> En conclusion on peut, si on veut, remplacer les deux dernières inégalités par des inégalités larges et prendre pour définition de la convergence de la suite (u<sub>n</sub>
+         <sub>)n∈ℕ</sub> vers a: <br /> ∀ε&gt;0 ∃N tel que n≥N ⇒ |u<sub>n</sub>-a|≤ε <br />
+          <h2>Etude d'un cas pratique</h2> Nous verrons par la suite que la plupart du temps il n'est pas indispensable de revenir à la définiton pour prouver qu'une suite converge vers une limite donnée. Mais on n'a parfois aucun autre recours. <br /> Voyons en pratique comment on s'y prend pour démontrer, par exemple, que la suite donnée ici en exemple n°6 soit u<sub>n</sub>=n<sup>1/n</sup> converge bien vers la constante 1. <br /> La suite étant clairement minorée par 1, il suffit d'établir que ∀ε&gt;0 il existe un entier N tel que: <br /> n&gt;N ⇒ n<sup>1/n</sup>-1 &lt; ε <br /> L'inégalité à démontrer est donc équivalente à: <br /> n &lt;(1+ε)<sup>n</sup> pour n suffisamment grand. <br /> On peut comme on la vu plus tôt supposer que ε est rationnel et même de la forme 1/k avec k entier &gt;1. <br /> Tout revient donc à démontrer que: <br /> n&lt;(1+1/k)<sup>n</sup> pour n suffisamment grand, soit encore: <br /> (k+1)<sup>n</sup>-nk<sup>n</sup>&gt;0 pour n suffisamment grand. <br /> En utilisant le début du développement du binôme dont tous les termes sont positifs nous pouvons écrire: <br /> (k+1)<sup>n</sup>-nk<sup>n</sup>&gt;k<sup>n</sup>+nk<sup>n-1</sup>+(n(n-1)/2)k<sup>n-2</sup>-nk<sup>n</sup>
+          <br /> soit encore: <br /> (k+1)<sup>n</sup>-nk<sup>n</sup>&gt;(0.5n<sup>2</sup>+αn+β)k<sup>n-2</sup>
+          <br /> où α=(k-k²-1/2) et β=k² <br /> Le signe de (k+1)<sup>n</sup>-nk<sup>n</sup> est donc le signe de 0.5n<sup>2</sup>+αn+β, binôme du second degré en n et comme le coefficient dominant est 0.5&gt;0 pour n suffisamment grand ce binôme sera positif. <h2>Propriétés</h2> Un résultat extrêmement important est le suivant:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Remarks on the formal definition </h2>
+          <h4>Total formalization </h4> Before continuing, let us make a few remarks: <br /> We can revise the <input data-inline="true" onclick="go('../../bases/logique/index.html#')" type="button" value="notions of elementary logic" />. <br /> The N the existence of which is announced obviously depends on ε and on a, it would therefore be necessary in all rigor to denote it N(a,ε). <br /> The definition of convergence is therefore written, in formal language: <br /> ∀ε>0(∃N(a,ε)(n>N⇒|u<sub>n</sub>-a|
+          <ε) <br /> Let us now denote by R(n,N) the relation n>N and by S(n,ε,u,a) the relation |u<sub>n</sub>-a|
+          <ε. <br />Knowing that R⇒S is equivalent to S∨¬R, (see <input data-inline="true" onclick="go('../../bases/logique/implication.html#')" type="button" value="implication" />) we obtain: <br /> ∀ε>0(∃N(a,ε)(∀n(S(n,ε,u,a)∨¬R(n,N)))) <br />
+          <h4>Non convergence </h4> Let us now examine the <input data-inline="true" onclick="go('../../bases/logique/quantinegat.html#')" type="button" value=" negation" /> of this statement. <br /> ∃ε>0(∀N(∃n(¬S(n,ε,u,a)∧R(n,N)))) <br /> From which we conclude: <br /> a is not a limit of the sequence (u<sub>n</sub>
+         <sub> )n∈ℕ</sub>can be written: <br /> There exists a real ε>0 such that for any integer N we can find n>N such that |u<sub>n</sub>-a|≥ε. <br /> Just as it is important to know how to logically write the convergence of a sequence towards a limit, it is also important to know how to express the opposite. <br />
+          <h4>Conditions on ε </h4> Let us now see the additional hypotheses that we can formulate on ε <br /> We can, without restricting the generality, assume that ε is <1 indeed if the property is true ∀ε' <1, it is true a fortiori for all ε>0 because if ε> ε' then |u<sub>n</sub>-a|< ε as soon as u<sub>n</sub>-a|
+              <ε'. <br />The value 1 here is irrelevant. we could just as well have taken 1/2 or 1/3 or any value >0. <br /> The first part of the assertion can therefore be understood with an implication as ∀ε >0 (however small). <br /> Also as ℚ is <input data-inline="true" onclick="go('../../nombres/reels/densite.html#')" type="button" value="dense" />in ℝ we can if we want to suppose that ε is rational. <br /> On the other hand, the strict inequality ε>0 is fundamental because if ε=0 then the relation |u<sub>n</sub>-a|
+              <ε is NEVER verified. <br />
+              <h4>Importance of other inequalities in the definition </h4> Let us take again the formal definition of the convergence of the sequence (u<sub>n</sub>
+             <sub> )n∈ℕ</sub>towards a: <br /> ∀ε>0 ∃N such that n>N ⇒ |u<sub>n</sub>-a|
+              <ε <br /> We have seen that we cannot touch the first strict inequality ε>0, but can we replace the other two: <br /> n>N and |u<sub>n</sub>-a|
+              <ε by inequalities in the wider sense, like this: <br /> ∀ε>0 ∃N such that n≥N ⇒ |u<sub>n</sub>-a|≤ε <br /> For the first it is obvious because the condition n>N is equivalent to n≥N+1, so if there exists an N such that n>N ⇒ ... then there exists N'=N+1 such that n ≥N' ⇒ ...... <br /> For the second it is not less obvious because a property which is true ∀ε is true for a given epsilon and also for its half. <br />Moreover the relation |u<sub>n</sub>-a|≤ε/2 indeed implies |u<sub>n</sub>-a|<ε whereas the relation |u<sub>n</sub>-a|<ε obviously implies |u<sub>n</sub>-a|≤ε. <br /> In conclusion, we can, if we want, replace the last two inequalities by large inequalities and take as the definition of the convergence of the sequence (u<sub>n</sub>
+                 <sub> )n∈ℕ</sub>towards a: <br /> ∀ε>0 ∃N such that n≥N ⇒ |u<sub>n</sub>-a|≤ε <br />
+                  <h2>Study of a practical case </h2>We will see later that most of the time it is not essential to return to the definition to prove that a sequence converges to a given limit. But sometimes we have no other possibility. <br /> Let's see in practice how we go about demonstrating, for example, that the sequence given here in example n°6 is u<sub>n</sub>=n<sup>1/n</sup>indeed converges to the constant 1. <br /> The sequence being clearly lower bounded by 1, it suffices to establish that ∀ε>0 there exists an integer N such that: <br /> n>N ⇒ n<sup>1/n</sup>-1
+                  < ε <br /> The inequality to be proved is therefore equivalent to: <br /> n < (1+ε)<sup>n</sup>for n large enough. <br /> We can, as we saw earlier, assume that ε is rational and even of the form 1/k with k integer >1. <br /> It all boils down to showing that: <br /> n<(1+1 /k)<sup>n</sup>for n large enough, or again: <br /> (k+1)<sup>n</sup>-nk<sup>n</sup>>0 for n large enough. <br /> Using the beginning of the binomial expansion of which all terms are positive we can write: <br /> (k+1)<sup>n</sup>-nk<sup>n</sup>>k<sup>n</sup>+nk<sup>n-1</sup>+(n(n-1)/2)k<sup>n-2</sup>-nk<sup>n</sup>
+                      <br /> or again: <br /> (k+1)<sup>n</sup>-nk<sup>n</sup>>(0.5n<sup>2</sup>+αn+β)k<sup>n-2</sup>
+                      <br /> where α=(k-k²-1/2) and β=k² <br /> The sign of (k+1)<sup>n</sup>-nk<sup>n</sup>is therefore the sign of 0.5n<sup>2</sup>+αn+β, quadratic binomial in n and as the dominant coefficient is 0.5>0 for n sufficiently large this binomial will be positive. <h2>Properties </h2> An extremely important result is the following:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si une suite converge, elle ne peut converger que vers <strong>une seule limite</strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If a sequence converges, it can only converge to a single limit .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons que (u<sub>n</sub>) tende vers a et b avec a≠b. <br> Supposons b&gt;a et posons ε=(b-a)/2 <br> Donc il existerait N<sub>1</sub> tel que n&gt;N<sub>1</sub> ⇒|u<sub>n</sub>-a|&lt;ε <br> il existerait aussi N<sub>2</sub> tel que n&gt;N<sub>2</sub> ⇒|u<sub>n</sub>-b|&lt;ε <br> Donc si on pose N<sub>3</sub>=max(N<sub>1</sub>,N<sub>2</sub>) et si n&gt;N<sub>3</sub> on a simultanément: <br> |u<sub>n</sub>-a|&lt;ε et |u<sub>n</sub>-b|&lt;ε <br> Utilisant l'inégalité triangulaire nous en concluons: <br> |a-b|&lt;2ε <br> ce qui est une contradiction.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose that (u<sub>n</sub>) tends to a and to bas well with a≠b. <br />Suppose b>a and let ε=(b-a)/2 <br /> So there would exist N<sub>1</sub>such that n>N<sub>1</sub>⇒|u<sub>n</sub>-a|
+            <ε <br /> there would also exist N<sub>2</sub>such that n>N<sub>2</sub>⇒|u<sub>n</sub>-b|
+            <ε <br /> So if we set N<sub>3</sub>=max(N<sub>1</sub>,N<sub>2</sub>) and if n>N<sub>3</sub>we have simultaneously: <br /> |u<sub>n</sub>-a|<ε and |u<sub>n</sub>-b|
+              <ε <br /> Using the triangle inequality we conclude: <br /> |a-b|
+              <2ε <br /> which is a contradiction.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"></div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box12" class="jxgbox" style="width:1000px; height:400px;"></div>
+        <div lang="fr">Choix de &epsilon; :</div>
+        <!-- /fr -->
+        <div lang="en">Choice of &epsilon; :</div>
+        <!-- /en -->
+        <input type='range' id="myRange12" step='0.01' min='0.07' max='0.5' value='0.5' onchange="nameSpace12.changep(this.value)" />
+        <div lang="fr">Valeur de &epsilon;</div>
+        <!-- /fr -->
+        <div lang="en">Value of &epsilon; :</div>
+        <!-- /en --> : <input type='text' id='myText121'>
+        <div lang="fr">Valeur de N(&epsilon;) :</div>
+        <!-- /fr -->
+        <div lang="en">Value of N(&epsilon;) :</div>
+        <!-- /en -->
+        <input type='text' id='myText122'>
+        <script src="js/unilim.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Une suite convergente est nécessairement bornée.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> A convergent sequence is necessarily bounded.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet soit ε un nombre &gt;0 et soit N tel que n&gt;N ⇒ |u<sub>n</sub>-a|&lt;ε <br> On a donc |u<sub>n</sub>|&lt; M<sub>2</sub>=a+ε pour n&gt; N. <br> Posons maintenant M<sub>1</sub>=Sup(|u<sub>0</sub>|,|u<sub>1</sub>|, ... ,|u<sub>N</sub>|) <br> Alors il est clair que si M=Sup(M<sub>1</sub>,M<sub>2</sub>), on a: |u<sub>n</sub>| ≤M &forall; n.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed let ε be a number >0 and let N such that n>N ⇒ |u<sub>n</sub>-a|
+            <ε <br /> We therefore have |u<sub>n</sub>|< M<sub>2</sub>=a+ε for n> N. <br /> Let us now set M<sub>1</sub>=Sup(|u<sub>0</sub>|,|u<sub>1</sub>|, ... ,|u<sub>N</sub>|) <br />Then it is clear that if M=Sup(M<sub>1</sub>,M<sub>2</sub>), we have: |u<sub>n</sub>| ≤M ∀ n.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Toute suite extraite d'une suite convergente converge vers la même limite.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> Any subsequence extracted from a convergent sequence converges to the same limit.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit en effet v<sub>n</sub>=u(p(n)) une suite extraite de (u<sub>n</sub>). On suppose que (u<sub>n</sub>) converge vers la limite a. Soit ε un nombre réel positif. Il existe donc un entier N tel que n&gt;N &rArr; |u<sub>n</sub>-a|&lt;ε. Comme n →p(n) est strictement croissante on a en particulier p(n)&gt;n ∀n. donc si n&gt;N |u<sub>p(n)</sub>-a|&lt; ε qui peut encore s'écrire |v<sub>n</sub>-a|&lt;ε.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let v<sub>n</sub> =u(p(n)) be a subsequence of (u<sub>n</sub>). We assume that (u<sub> n</sub>) converges to the limit a. Let ε be a positive real number. Thus there exists an integer N such that n&gt;N ⇒ |u<sub>n</sub> -a|&lt;ε. As n →p(n) is strictly increasing we have in particular p(n)&gt;n ∀n. so if n&gt;N |u<sub>p(n)</sub> -a|&lt; ε which can still be written |v<sub>n</sub> -a|&lt;ε.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Aucune suite périodique ne peut être convergente sauf si elle est stationnaire.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> No periodic sequence can be convergent unless it is constant.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons par exemple que u soit périodique de période k avec u<sub>0</sub>≠u<sub>1</sub>. Considérons la suite s définie par s<sub>n</sub>=u<sub>kn</sub>, cette suite extraite de u est stationnaire et converge donc vers u<sub>0</sub>. <br> Considérons la suite t définie par s<sub>n</sub>=u<sub>kn+1</sub>, cette suite extraite de u est stationnaire et converge donc vers u<sub>1</sub>. Donc si u était convergente, en vertu du résultat qui précède, les suites s et t devraient tendre vers la même limite que u.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose for example that u is periodic of period k with u<sub>0</sub>≠u<sub>1</sub>. Consider the sequence s defined by s<sub>n</sub>=u<sub>kn</sub>, this sequence extracted from u is stationary and therefore converges to u<sub>0</sub>. <br />Consider the sequence t defined by s<sub>n</sub>=u<sub>kn+1</sub>, this sequence extracted from u is stationary and therefore converges to u<sub>1</sub>. So if u were convergent, by virtue of the above result, the sequences s and t should tend to the same limit as u.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Quelques (très) mauvaises définitions</h2> La plupart des 'mauvaises' définitions résultent d'un mélange du langage courant et du langage mathématique. <br> Ainsi dans le langage courant la notion de 'limite' véhicule l'idée de quelque chose dont on se rapproche mais qu'on ne peut jamais atteindre. <br> Rien de tel pour la notion mathématique de limite (par exemple pour les suites). Une suite peut tout à fait prendre des valeurs égales à la limite. D'ailleurs si on prend une suite stationnaire (constante), il est facile de prouver qu'elle converge vers son terme initial (constant), une telle suite est donc une infinité de fois égale à sa limite. Mais il est possible qu'une suite n'atteigne jamais sa limite, ce sera par exemple le cas des suites strictement monotones. <br> Un autre exemple de 'mauvaise' définition (par manque de précision) est le suivant: <br> La suite (u<sub>n</sub>) tend vers a si plus n est grand et plus u<sub>n</sub> se rapproche de a. <br> Avec une telle définition notre exemple traité (la suite n<sup>1/n</sup>) tendrait également vers 0 vers -1, etc.... <h2>A quoi servent les ordinateurs?</h2> Pour le problème qui nous préoccupe ici, à savoir la convergence des suites. Les ordinateurs peuvent être utilisés principalement pour: <ul>
+            <li>Conjecturer l'existence et la valeur de la limite d'une suite.</li>
+            <li>Vérifier la validité d'un calcul de limite.</li>
+          </ul>
+          <p>Les programmes qui peuvent établir l'existence d'une limite sont des programmes qui font du raisonnement, donc du calcul formel avec des prédicats. La plupart du temps ils sont incapables de décider de la stratégie de preuve. On admet que majoritairement les raisonnements qui conduisent à l'existence d'une limite pour une suite sont toujours et sans doute pour longtemps encore d'origine humaine.</p>
+          <h4>code python</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Some (very) bad definitions </h2> Most of the 'bad' definitions result from a mixture of everyday language and mathematical language. <br /> Thus, in everyday language, the notion of 'limit' conveys the idea of ​​something to which we are approaching but which we can never reach. <br />Nothing like this for the mathematical notion of limit (for example for sequences). A sequence can take values ​​equal to the limit. Moreover if we take a constant sequence, it is easy to prove that it converges towards its initial term , such a sequence is therefore an infinity of times equal to its limit. But it is possible that a sequence never reaches its limit, this will be the case for example of strictly monotone sequences. <br /> Another example of a 'bad' definition (due to lack of precision) is the following: <br /> The sequence (u<sub>n</sub>) tends to a if the larger n is and the closer un<sub>is</sub>to a. <br /> With such a definition our treated example (the sequence n<sup>1/n</sup>) would also tend towards 0 towards -1, etc.... <h2>What are computers used for? </h2>For the problem that concerns us here, namely the convergence of sequences. Computers can be used primarily for: <ul>
+            <li>Conjecture the existence and the value of the limit of a sequence. </li>
+            <li>Check the validity of a limit calculation. </li>
+          </ul>
+          <p>The programs which can establish the existence of a limit are programs which do reasoning, therefore computer algebra with predicates. Most of the time they are unable to decide on the proof strategy. It is admitted that for the most part the reasoning which leads to the existence of a limit for a sequence is always and undoubtedly for a long time still of human origin. </p>
+          <h4>code python </h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/suitesconv1.html" type="text/html" width="100%" height="150" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici le résultat de l'exécution : <br> 1.25892541179 <br> 1.04712854805 <br> 1.00693166885 <br> 1.00092145832 <br>
+          <h4>code julia</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Result of running this program : <br> 1.25892541179 <br> 1.04712854805 <br> 1.00693166885 <br> 1.00092145832 <br>
+          <h4>code julia</h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/suitesconv1.jl.html" type="text/html" width="100%" height="80" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Pour les valeurs très grandes de n le calcul des termes u<sub>n</sub> est sujet à caution. Une étude d'analyse numérique est donc toujours souhaitable pour s'assurer de la validité des résultats voir à ce sujet <input type="button" value="représentation des réels en machine" onclick="go('../../nombres/reels/machine.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> For very large values of n the calculation of the terms u<sub>n</sub> is questionable. A numerical analysis study is therefore always desirable to ensure the validity of the results see on this subject <input data-inline="true" onclick="go('../../nombres/reels/machine.html#')" type="button" value="representation real numbers in machine" />. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesconvergentes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesconvergentes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

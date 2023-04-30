@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>prodpartpi.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">liste_2000_premiers()</span>
+    <span class="s1">P, p,i = [</span><span class="s2">2</span><span class="s1">, </span><span class="s2">3</span><span class="s1">], </span><span class="s2">3</span><span class="s1">,</span><span class="s2">2</span>
+    <span class="s0">while </span><span class="s1">i &lt; </span><span class="s2">2000</span>
+        <span class="s1">p += </span><span class="s2">2 </span><span class="s3">#inutile de tester les nombres pairs - not necessary to check even numbers</span>
+        <span class="s0">if </span><span class="s1">all((p % x != </span><span class="s2">0 </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">P))</span>
+            <span class="s1">push!(P, p)</span>
+            <span class="s1">i+=</span><span class="s2">1</span>
+         <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">P</span>
+<span class="s0">end</span>
+
+<span class="s1">L=liste_2000_premiers()</span>
+
+<span class="s1">premier(n)=L[n]</span>
+
+<span class="s0">function </span><span class="s1">v(n)</span>
+    <span class="s1">p=premier(n)</span>
+    <span class="s0">return </span><span class="s1">(p-</span><span class="s2">1</span><span class="s1">)%</span><span class="s2">4</span><span class="s1">==</span><span class="s2">0 </span><span class="s1">? </span><span class="s2">1</span><span class="s1">+</span><span class="s2">1</span><span class="s1">/p : </span><span class="s2">1 </span><span class="s1">-</span><span class="s2">1</span><span class="s1">/p</span>
+<span class="s0">end</span>
+
+<span class="s1">prod(n)=reduce(*,(v(i) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:n))</span>
+
+<span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">[</span><span class="s2">100</span><span class="s1">,</span><span class="s2">500</span><span class="s1">,</span><span class="s2">1000</span><span class="s1">,</span><span class="s2">1800</span><span class="s1">]</span>
+    <span class="s1">println(</span><span class="s2">2</span><span class="s1">/prod(i))</span>
+<span class="s0">end</span>
+</pre>
+</body>
+</html>

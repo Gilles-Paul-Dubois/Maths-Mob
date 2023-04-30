@@ -1,114 +1,369 @@
-
-
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="utf-8" />
-      <title>Séries</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="../../css/themes/myown.css" />
-      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
-      <link href="../../css/myown.css" rel="stylesheet">
-      <script src="../../js/jquery-1.11.3.js"></script>
-      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-      <script src="../../js/custom.js"></script>
-
- 
-   </head>
-   <body style="overflow: auto; "class="fr">
-      <script> window.onload=get();</script>
-      <a name="beg"></a>
-      <div data-role="page" data-theme="f">
-         <div data-role="header">
-            <table>
-               <tr>
-                  <td>Choisissez votre langue !</td>
-                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-                  <td>Choose your language !</td>
-                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-               </tr>
-            </table>
-         </div>
-         <!-- /header -->
-         <div style="overflow: auto; "  data-role="content" data-theme="f">
-            <div lang="fr">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Liens externes" onclick="go('liens.html')" /></li>
-                     <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
- 
-            </div>
-            <div lang="en">
-               <div>
-                  <ul style=list-style-type:'';>
-                  
-                      <li><input type="button" value="External links" onclick="go('liens.html')" /></li>
-                     <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-  
-             
-            </div>
-            
-            <div lang="fr">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
-                     <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-            </div>
-            <!-- /fr --> 
-          <div lang="en">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
-                     <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-            </div>
-            <!-- /en -->                               
-         </div>
-         <!-- /content -->
-         <div data-role="footer">
-            <table cellpadding="10">
-               <tr>
-                  <td>
-                     <div lang="fr">Création Gilles Dubois</div>
-                     <div lang="en">Created by Gilles Dubois</div>
-                  </td>
-                  <td>
-                     <div lang="fr">Janvier 2022</div>
-                     <div lang="en">January 2022</div>
-                  </td>
-                  <td>
-                     <div lang="fr">Version mobile Jquery</div>
-                     <div lang="en">Mobile Jquery version</div>
-                  </td>
-               </tr>
-            </table>
-         </div>
-         <!-- /footer -->
-         <ul style=list-style-type:'';>
-            <li>
-               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-            </li>
-            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-         </ul>
+  <head>
+    <meta charset="utf-8" />
+    <title>Séries numériques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
       </div>
-      <!-- /page -->
-   </body>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Définitions" onclick="go('seriesdef.html')" />
+              </li>
+              <li>
+                <input type="button" value="Séries convergentes" onclick="go('seriesconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Séries à termes positifs" onclick="go('seriespos.html')" />
+              </li>
+              <li>
+                <input type="button" value="Convergence absolue" onclick="go('seriesabsconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Convergence commutative" onclick="go('seriescomconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Critère de d'Alembert" onclick="go('seriesdalembert.html')" />
+              </li>
+              <li>
+                <input type="button" value="Règle de Cauchy" onclick="go('seriescauchy.html')" />
+              </li>
+              <li>
+                <input type="button" value="Test de condensation" onclick="go('seriescondensation.html')" />
+              </li>
+              <li>
+                <input type="button" value="Critère de Dirichlet" onclick="go('seriesdirichlet.html')" />
+              </li>
+              <li>
+                <input type="button" value="Règle de Raabe-Duhamel" onclick="go('seriesraabe.html')" />
+              </li>
+              <li>
+                <input type="button" value="Téléscopage" onclick="go('seriestelescopage.html')" />
+              </li>
+              <li>
+                <input type="button" value="Séries doubles" onclick="go('seriesdouble.html')" />
+              </li>
+              <li>
+                <input type="button" value="Séries produit" onclick="go('seriesproduit.html')" />
+              </li>
+              <li>
+                <input type="button" value="Méthodologie" onclick="go('seriesmethodo.html')" />
+              </li>
+              <li>
+                <input type="button" value="Liens externes" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Definitions" onclick="go('seriesdef.html')" />
+              </li>
+              <li>
+                <input type="button" value="Convergence of series" onclick="go('seriesconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Series with positive terms" onclick="go('seriespos.html')" />
+              </li>
+              <li>
+                <input type="button" value="Absolute convergence" onclick="go('seriesabsconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Commutative convergence" onclick="go('seriescomconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="d'Alembert criterion" onclick="go('seriesdalembert.html')" />
+              </li>
+              <li>
+                <input type="button" value="Cauchy's rule" onclick="go('seriescauchy.html')" />
+              </li>
+              <li>
+                <input type="button" value="Condensation test" onclick="go('seriescondensation.html')" />
+              </li>
+              <li>
+                <input type="button" value="Dirichlet's test" onclick="go('seriesdirichlet.html')" />
+              </li>
+              <li>
+                <input type="button" value="Raabe-Duhamel rule" onclick="go('seriesraabe.html')" />
+              </li>
+              <li>
+                <input type="button" value="Telecoping series" onclick="go('seriestelescopage.html')" />
+              </li>
+              <li>
+                <input type="button" value="Double series" onclick="go('seriesdouble.html')" />
+              </li>
+              <li>
+                <input type="button" value="Cauchy product" onclick="go('seriesproduit.html')" />
+              </li>
+              <li>
+                <input type="button" value="Méthodology" onclick="go('seriesmethodo.html')" />
+              </li>
+              <li>
+                <input type="button" value="External links" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <div lang="fr">
+          <h2>Pré-requis</h2> Ce chapitre suppose parfaitement connus les définitions et les résultats du chapitre précédent intitulé <input type="button" value="'Suites'" onclick="go('../suites/index.html')" data-inline="true" />. <h2>Historique</h2> La plupart des ouvrages traitant des séries, introduisent le concept par une allusion au philosophe grec pré-socratique Zénon d'Elée (Zeno d'Elea), qui est né vers -480 et mort vers -420. Nous respecterons donc l'usage sans pour autant reprendre à notre compte les traditionnels commentaires des auteurs attribuant à Zénon une naïveté qui n'était certainement pas la sienne. Zénon est l'auteur de plusieurs paradoxes, parmi lesquels les plus célèbres sont: <br />
+          <font size="-1">
+            <em>Citation wikipédia: <ul>
+                <li>
+                  <strong>Paradoxe de la Dichotomie:</strong>
+                  <br /> Un mobile pour aller de A en C doit d'abord arriver en B, qui se trouve entre A et C. Mais avant d'arriver en B, il doit d'abord arriver en B' situé entre A et B, et ainsi de suite... In fine, le mobile ne pourra donc pas arriver en C au bout d'un temps fini
+                </li>
+                <li>
+                  <strong>Paradoxe d'Achille et de la tortue:</strong>
+                  <br /> Si Achille situé en O poursuit une tortue qui se trouve en A. Le temps qu'il arrive en A, la tortue sera en B. Achille devra donc ensuite aller en B. Mais alors la tortue sera en C, et ainsi de suite. Achille pourra se rapprocher sans cesse de la tortue, mais il ne pourra jamais la rattraper.
+                </li>
+                <li>
+                  <strong>Paradoxe de la flèche:</strong>
+                  <br /> Une flèche qui vole est en fait immobile. En effet, à chaque instant, elle est dans un espace égal à elle même. Elle est donc à chaque instant au repos. Si on décompose le mouvement en une suite d'instants, elle ne peut donc pas se mouvoir, puisqu'elle est constamment au repos.
+                </li>
+                <li>
+                  <strong>Paradoxe du Stade:</strong>
+                  <br /> Un train (succession de masses égales) croise sur un stade un train qui va en sens inverse et un train immobile. Dans le même temps où il parcourt deux wagons du train immobile, il croise quatre wagons du train allant en sens contraire. Donc le train a parcouru dans le même temps deux distances différentes.
+                </li>
+              </ul>
+            </em>
+          </font> De fait ces paradoxes nécessitent pour leur compréhension, une connaissance exacte de la perception grecque ancienne de l'espace, du temps et du mouvement. Aujourd'hui encore ils ont un sens et font l'objet de discussions sérieuses. Nous renvoyons le lecteur intéressé à la page de liens pour lire les articles s'y rapportant. <br /> D'un point de vue plus moderne, il s'agit d'étendre, si possible les <input type="button" value="sommes généralisées" onclick="go('../../bases/operations/familles.html#')" data-inline="true" /> à des ensembles d'indices <input type="button" value="infinis" onclick="go('../../bases/ensembles/infini.html#')" data-inline="true" />, tout en essayant de voir à quelles conditions les propriétés usuelles de l'addition, à savoir <input type="button" value="l'associativité" onclick="go('../../bases/operations/associative.html#')" data-inline="true" /> et <input type="button" value="la commutativité" onclick="go('../../bases/operations/commutative.html#')" data-inline="true" />. <br /> Au 18°, ces notions ne sont toujours pas clarifiées. Par exemple la série infinie: <br /> 1-1+1-1+1-1+ .... <br /> Pouvait être écrite soit comme (1-1)+(1-1)+(1-1)+ ....+(1-1) <br /> Auquel cas sa 'somme' est 'évidemment' nulle. <br /> Ou bien comme: 1+(-1+1)+(-1+1)+.... <br /> Auquel cas sa 'somme' est 'évidemment' égale à 1. <br /> On avait donc là de nouveaux paradoxes dont la réfutation n'est guère plus facile que pour ceux de Zénon. <br /> Tous ces paradoxes ne trouvent leur solution que dans la définition rigoureuse des concepts de suite, de limite et de <b>
+            <i>'série'</i>
+          </b>. <br /> Nous allons nous employer à clarifier les choses dans ce chapitre. <br />
+          <h2>Opérations sur des listes de nombres (Python)</h2>
+          <p>Voici un code Python qui calcule une somme de termes d'une suite lorsque l'indice parcourt un ensemble prédéfini.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Prerequisites </h2> This chapter assumes that the definitions and results of the previous chapter entitled <input data-inline="true" onclick="go('../suites/index.html')" type="button" value="sequences" />. <h2>Historical </h2>Most works dealing with series introduce the concept with an allusion to the pre-Socratic Greek philosopher Zeno of Elea (Zeno d'Elea), who was born around -480 and died around -420. We will therefore respect the usage without however taking over the traditional comments of the authors attributing to Zeno a naivety which was certainly not his. Zeno is the author of several paradoxes, among which the most famous are: <br />
+          <font size="-1">
+            <em>Wikipedia citation: <ul>
+                <li>
+                  <strong>Paradox of Dichotomy: </strong>
+                  <br /> A mobile to go from A to C must first arrive at B, which is between A and C. But before arriving at B, it must first arrive at B' located between A and B, and so on. more... Ultimately, the mobile will therefore not be able to arrive in C after a finite time
+                </li>
+                <li>
+                  <strong>Paradox of Achilles and the tortoise: </strong>
+                  <br />If Achilles located in O pursues a tortoise which is in A. By the time he arrives in A, the tortoise will be in B. Achilles will then have to go to B. But then the tortoise will be in C, and so on. Achilles will be able to constantly approach the tortoise, but he will never be able to catch up with it.
+                </li>
+                <li>
+                  <strong>Arrow paradox: </strong>
+                  <br />A flying arrow is actually stationary. Indeed, at every moment, it is in a space equal to itself. It is therefore at rest at all times. If we decompose the movement into a series of instants, it therefore cannot move, since it is constantly at rest.
+                </li>
+                <li>
+                  <strong>Stadium paradox: </strong>
+                  <br />A train (succession of equal masses) crosses on a stadium a train going in the opposite direction and a stationary train. At the same time as he travels through two carriages of the motionless train, he crosses four carriages of the train going in the opposite direction. So the train traveled at the same time two different distances.
+                </li>
+              </ul>
+            </em>
+          </font>In fact, these paradoxes require, for their understanding, an exact knowledge of the ancient Greek perception of space, time and movement. Even today they have a meaning and are the subject of serious discussions. We refer the interested reader to the links page to read the related articles. <br /> From a more modern point of view, it is a matter of extending, if possible, the <input data-inline="true" onclick="go('../../bases/operations/familles.html#')" type="button" value=" generalized sums" />to <input data-inline="true" onclick="go('../../bases/ensembles/infini.html#')" type="button" value="infinite" /> sets of indices, and to see under which conditions the usual properties of addition, namely <input data-inline="true" onclick="go('../../bases/operations/associative.html#')" type="button" value="associativity" />and <input data-inline="true" onclick="go('../../bases/operations/commutative.html#')" type="button" value=" commutativity" />. <br /> are conserved. In the 18° century , these notions are still not clarified. For example the infinite series: <br /> 1-1+1-1+1-1+ .... <br /> Could be written either as (1-1)+(1-1)+(1-1)+ ....+(1-1) <br /> In which case its 'sum' is 'obviously' zero. <br />Or like: 1+(-1+1)+(-1+1)+.... <br /> In which case its 'sum' is 'obviously' equal to 1. <br /> We thus had here new paradoxes whose refutation is hardly easier than for those of Zeno. <br /> All these paradoxes find their solution only in the rigorous definition of the concepts of sequence, limit and <b>
+            <i> 'series' </i>
+          </b> . <br />We will try to clarify things in this chapter. <br />
+          <h2>Operations on lists of numbers (Python) </h2>
+          <p>Here is a Python code that calculates a sum of terms of a sequence when the index traverses a predefined set. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/seriesintro.html" type="text/html" border="3" height="250" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Voici un programme Julia 1.6 qui fait la même chose :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>
+            <font style="vertical-align: inherit;">Here is a Julia 1.6 program that does the same thing: </font>
+          </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/seriesintro.jl.html" type="text/html" border="3" height="180" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Approche intuitive</h2> L'appliquette suivante illustre graphiquement le paradoxe de la dichotomie et montre qu'en additionnant 1/2 + 1/4 + 1/8 +1/16 + ... +1/2 <sup>n</sup> on n'obtient jamais 1. <br />
+          <p>Plus exactement si on pose:</p>
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \sum_{i=1}^{n}u_{i} \)</p>
+          <!-- /FORMULE UNIV INLINE--> On a toujours <br /> s<sub>n</sub> &lt; 1 <br /> En fait (s<sub>n</sub>) est une suite croissante et majorée par 1. Elle est donc convergente. <br /> On peut voir que: <br /> 1-s<sub>n</sub>=(1/2) <sup>n</sup>
+          <br /> Donc que lim <sub>n→∞</sub> s<sub>n</sub>=1. <p>Ce qu'on écrira:</p>
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \sum_{i=1}^{\infty }u_{i}=1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Au début n=1. <br /> Appuyez sur le bouton 'Suivant' pour augmenter n d'une unité. <br /> Appuyez sur 'Recommencer' pour recommencer depuis le début.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Intuitive approach </h2> The following applet graphically illustrates the paradox of the dichotomy and shows that by adding 1/2 + 1/4 + 1/8 +1/16 + ... +1/2 <sup>n</sup>we never get 1. <br />
+          <p>More exactly if we put: </p>
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \sum_{i=1}^{n}u_{i} \)</p>
+          <!-- /FORMULE UNIV INLINE--> We always have <br /> s<sub>n</sub>&lt;1 <br /> In fact (s<sub>n</sub>) is an increasing sequence and bounded by 1. It is therefore convergent. <br /> We can see that: <br /> 1-s<sub>n</sub>= (1/2) <sup>n</sup>
+          <br /> So that lim <sub>n→∞</sub>s<sub>n</sub>=1. <p>What we will write: </p>
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \sum_{i=1}^{\infty }u_{i}=1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> At the beginning n=1. <br /> Press the 'Next' button to increase n by one unit. <br /> Press 'Restart' to start over from the beginning.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="myCanvas1" width="600" height="600" style="border:1px solid #000000;"></canvas>
+          <br />
+          <button type="button" onclick="Step();">
+            <div lang="fr">Suivant</div>
+            <!-- /fr -->
+            <div lang="en">Next</div>
+            <!-- /en -->
+          </button> &nbsp; <input type="text" id="mytext">
+          <button type="button" onclick="Restart();">
+            <div lang="fr">Recommencer</div>
+            <!-- /fr -->
+            <div lang="en">Restart</div>
+            <!-- /en -->
+          </button>
+          <script src="js/zenon.js"></script>
+        </div>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Cliquez pour le paradoxe de Zénon. <br /> Le jaune ne remplira JAMAIS le carré, même si les limites liées à la résolution d'écran le laissent à penser. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Click for Zeno's paradox. The yellow color will NEVER fill all the square even if limits connected with the screen resolution could let you think so. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
 </html>
-

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limite en un point</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimpoint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimpoint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Dans tout ce qui suit (f,D) désigne une fonction numérique de domaine D. x<sub>0</sub> désigne un point <b>
+            <i>adhérent</i>
+          </b> à D. Nous avons déjà rencontré cette notion <input type="button" value="ici" onclick="go('../../nombres/reels/ouverts.html#ad')" data-inline="true" />. <br /> Conformément aux usages nous notons <span style="text-decoration: overline; ">D</span> l'adhérence de D. <br /> Nous rappelons que x<sub>0</sub>∈ <span style="text-decoration: overline; ">D</span> signifie que tout <input type="button" value="voisinage" onclick="go('../../nombres/reels/voisinages.html#')" data-inline="true" /> de x<sub>0</sub> contient un point de D, où encore que ∀ε &gt; 0 il existe un x∈D tel que |x-x<sub>0</sub>| &lt; ε. <br /> Remarquons que D⊆ <span style="text-decoration: overline; ">D</span>, en conséquence la fonction f peut être définie en x<sub>0</sub> (cas x<sub>0</sub>∈D) ou bien ne pas être définie en x<sub>0</sub> (cas x<sub>0</sub>∈ <span style="text-decoration: overline; ">D</span>-D). <br /> On peut encore voir les choses différemment, en disant que x<sub>0</sub> est un <input type="button" value="point d'accumulation" onclick="go('../suites/suitesaccumulation.html#')" data-inline="true" /> d'une suite de points de D. <br /> En pratique, et c'est le cas le plus fréquent, quand f n'est pas définie en x<sub>0</sub>, x<sub>0</sub> sera une borne d'un intervalle à l'intérieur duquel f est définie. Vous pouvez voir les choses ainsi pour une première approche. <br />
+          <h2>Limite finie d'une fonction quand la variable tend vers un point adhérent</h2> x<sub>0</sub> étant comme il est dit plus haut:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> In what follows (f,D) denotes a numerical function of domain D. x<sub>0</sub> designates a point <b>
+            <i>adherent</i>
+          </b> to D. We have already encountered this notion <input type="button" value="here" onclick="go('../../nombres/reels/ouverts.html#ade')" data-inline="true" />. <br /> In accordance with usage we denote <span style="text-decoration: overline; ">D</span> the closure of D. <br /> We recall that x<sub>0</sub>∈ <span style="text-decoration: overline; ">D</span> means that any <input type="button" value="neighborhood" onclick="go('../../nombres/reels/voisinages.html#')" data-inline="true" /> of x<sub>0</sub> contains a point of D, where even though ∀ε>0 there exists an x∈D such that |xx<sub>0</sub>|
+          <ε. <br /> Note that D⊆ <span style="text-decoration: overline; ">D</span>, therefore the function f can be defined at x<sub>0</sub> (case x<sub>0</sub>∈D) or not be defined in x<sub>0</sub> (case x<sub>0</sub>∈ <span style="text-decoration: overline; ">D</span>-D). <br /> We can still see things differently, by saying that x<sub>0</sub> is an <input type="button" value="accumulation point" onclick="go('../suites/suitesaccumulation.html#')" data-inline="true" /> of a sequence of points from D. <br /> In practice, and this is the most frequent case, when f is not defined at x<sub>0</sub>, x<sub>0</sub> will be an extremity of an interval inside which f is defined. You can see it that way for a first approach. <br />
+          <h2>Finite limit of a function when the variable tends to a cluster point</h2> x<sub>0</sub> being as it is said above:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Nous dirons que f tend vers la limite a quand x tend vers x<sub>0</sub>, si &forall;&epsilon; &gt; 0 il existe &eta; tel que: |x-x<sub>0</sub>| &lt; &eta; &rArr; |f(x)-a| &lt; &epsilon; <br> Ce que nous écrirons de façon symbolique :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}}f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE--> si f est définie en x<sub>0</sub>, et :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE--> si f n'est pas définie en x<sub>0</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We will say that f tends to the limit a when x tends to x<sub>0</sub>, if &forall;&epsilon; &gt; 0 there exists &eta; such as: |x-x<sub>0</sub>| &lt; &eta; &rArr; |f(x)-a| &lt; &epsilon; <br> What we will write symbolically:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}}f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE--> if f is defined on x<sub>0</sub>, and :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE--> if f is not defined on x<sub>0</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <p>Naturellement cette définition est à rapprocher des définitions de limites que nous avons pour <input type="button" value="les suites" onclick="go('../suites/suitesconvergentes.html#')" data-inline="true" />, ainsi que des définitions de <input type="button" value="limites à l'infini des fonctions numériques" onclick="go('foncnumlimalinf.html#')" data-inline="true" />. <br /> En particulier toutes les remarques faites sur le choix de ε, la nature des inégalités, restent valables. Tout comme dans les cas précédents le nombre η dépend du nombre ε, mais aussi de x<sub>0</sub>, et devrait donc en toute rigueur, être noté η(ε,x<sub>0</sub>). Voici une appliquette qui vous permet de voir ce qui se passe pour la fonction f(x)=x.sin(1/x) (non définie en 0) quand x→0. <br /> Cliquez sur 'Zoom+' pour voir le détail au voisinage de l'origine. <br> Vous pouvez également utiliser la barre d'outils en bas à droite du graphique. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Naturally this definition is to be compared to the definitions of limits that we have for <input type="button" value="the sequences" onclick="go('../suites/suitesconvergentes.html#')" data-inline="true" />, as well as definitions of <input type="button" value="limits of numeric functions when the variable tends to infinity" onclick="go('foncnumlimalinf.html#')" data-inline=" true" />. <br /> In particular all the remarks made on the choice of ε, the nature of the inequalities, remain valid. As in the previous cases, the number η depends on the number ε, but also on x<sub>0</sub>, and should therefore strictly be denoted η(ε,x<sub>0</sub>) . Here is an applet that allows you to see what happens for the function f(x)=x.sin(1/x) (not defined at 0) when x→0. <br /> Click on 'Zoom+' to see the detail near the origin. <br> You can also use the toolbar at the bottom right of the chart. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton11' onClick='nameSpace1.zoomplus()'>Zoom+</button>
+        <button type='button' id='myButton12' onClick='nameSpace1.zoommoins()'>Zoom-</button>
+        <script src="js/funclimpoint1.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />
+        <!-- /STOP -->
+        <div lang="fr"> L'écriture lim<sub>x&rarr;x<sub>0</sub> x&ne;x<sub>0</sub>
+          </sub>f(x)=a peut avoir un sens même si f est définie en x<sub>0</sub>. Elle signifie simplement que l'on néglige totalement la valeur de f en x<sub>0</sub>. </div>
+        <!-- /fr -->
+        <div lang="en"> The writing lim<sub>x&rarr;x<sub>0</sub> x&ne;x<sub>0</sub>
+          </sub>f(x)=a can make sense even if f is defined at x<sub>0</sub>. It simply means that we totally neglect (ignore) the value of f at x<sub>0</sub>. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Nous dirons que f tend vers la limite a quand x tend vers x<sub>0</sub> par valeurs distinctes de x<sub>0</sub>, si &forall;&epsilon; &gt; 0 il existe &eta; tel que: |x-x<sub>0</sub>| &lt; &eta; et x&ne;x<sub>0</sub> &rArr; |f(x)-a| &lt; &epsilon; <br> Ce que nous écrirons: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We will say that f tends to the limit a when x tends to x<sub>0</sub> by values distinct ​​from x<sub>0</sub>, if &forall;&epsilon; &gt; 0 there exists &eta; such as: |x-x<sub>0</sub>| &lt; &eta; and x&ne;x<sub>0</sub> &rArr; |f(x)-a| &lt; &epsilon; <br> What we will write: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Limite infinie d'une fonction quand la variable tend vers un point adhérent</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Infinite limit of a function when the variable tends to a cluster point</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Nous dirons que f tend vers +&infin; quand x tend vers x<sub>0</sub>, si &forall;M&isin;&reals; il existe &eta; tel que: |x-x<sub>0</sub>| &lt; &eta; &rArr; f(x) &gt; M <br> Ce que nous écrirons: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}}f(x)=+\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> si f est définie en x<sub>0</sub>, et :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=+\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> si f n'est pas définie en x<sub>0</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We will say that f tends to +&infin; as x tends to x<sub>0</sub>, if &forall;M&isin;&reals; there is &eta; such as: |x-x<sub>0</sub>| &lt; &eta; &rArr; f(x) &gt; M <br> What we will write: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}}f(x)=+\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> if f is defined on x<sub>0</sub>, and :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=+\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> if f is not defined on x<sub>0</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous permet de voir ce qui se passe pour la fonction f(x)=1/x<sup>2</sup> (non définie en 0) quand x&rarr;0. <br> Cliquez sur 'zoom+' et 'zoom-' conjointement avec l'option '-' du menu de navigation en bas et à droite du graphique. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to see what happens for the function f(x)=1/x<sup>2</sup> (not defined in 0) when x&rarr;0. <br> Click on 'zoom+' and 'zoom-' in conjunction with the '-' option in the navigation menu at the bottom right of the chart. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton21' onClick='nameSpace2.zoomplus()'>Zoom+</button>
+        <button type='button' id='myButton22' onClick='nameSpace2.zoommoins()'>Zoom-</button>
+        <script src="js/funclimpoint2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> On a la définition analogue pour une fonction tendant vers -&infin; en un point adhérent: </div>
+        <!-- /fr -->
+        <div lang="en"> We have the analogous definition for a function tending to -&infin; at a cluster point: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Nous dirons que f tend vers -&infin; quand x tend vers x<sub>0</sub>, si &forall;m&isin;&reals; il existe &eta; tel que: |x-x<sub>0</sub>| &lt; &eta; &rArr; f(x) &lt; m <br> Ce que nous écrirons: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}}f(x)=-\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> si f est définie en x<sub>0</sub>, et :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=-\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> si f n'est pas définie en x<sub>0</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> We will say that f tends to -&infin; as x tends to x<sub>0</sub>, if &forall;m&isin;&reals; there is &eta; such as: |x-x<sub>0</sub>| &lt; &eta; &rArr; f(x) &lt; m <br> What we will write: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}}f(x)=-\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> if f is defined on x<sub>0</sub>, et :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}, x\neq x_{0}}f(x)=-\infty \)</p>
+            <!-- /FORMULE UNIV INLINE--> if f is not defined on x<sub>0</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Oscillations bornées</h2> Voici un autre comportement possible pour une fonction au voisinage d'un point adhérent, correspondant à une fonction bornée. <br> Voici une appliquette qui vous permet de voir ce qui se passe pour la fonction f(x)=sin(1/x) (non définie en 0) quand x&rarr;0. <br> Cliquez sur 'Zoom+', conjointement avec le bouton '+' du menu de navigation pour voir le détail au voisinage de l'origine.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Bounded oscillations</h2> Here is another possible behavior for a function in the neighborhood of a cluster point, corresponding to a bounded function. <br> Here is an applet that allows you to see what happens for the function f(x)=sin(1/x) (not defined at 0) when x&rarr;0. <br> Click on 'Zoom+', together with the '+' button of the navigation menu to see the detail in the neighborhood of the origin.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton31' onClick='nameSpace3.zoomplus()'>Zoom+</button>
+        <button type='button' id='myButton32' onClick='nameSpace3.zoommoins()'>Zoom-</button>
+        <script src="js/funclimpoint3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Oscillations non bornées</h2> Voici encore un autre comportement possible pour une fonction au voisinage d'un point adhérent, correspondant à une fonction cette fois non bornée. <br> Voici une appliquette qui vous permet de voir ce qui se passe pour la fonction f(x)=(1/x)sin(1/x) (non définie en 0) quand x&rarr;0. <br> Cliquez sur 'Zoom+', conjointement avec le '+' du menu de navigation en bas à droite, pour voir le détail au voisinage de l'origine.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Unbounded oscillations</h2> Here is yet another possible behavior for a function in the neighborhood of a cluster point, corresponding to an unbounded function this time. <br> Here is an applet that allows you to see what happens for the function f(x)=(1/x)sin(1/x) (not defined in 0) when x&rarr;0. <br> Click on 'Zoom+', together with the '+' in the navigation menu at the bottom right, to see the detail in the neighborhood of the origin.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton41' onClick='nameSpace4.zoomplus()'>Zoom+</button>
+        <button type='button' id='myButton42' onClick='nameSpace4.zoommoins()'>Zoom-</button>
+        <script src="js/funclimpoint4.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Un module de calcul symbolique est parfaitement capable d'évaluer certaines limites. <br> Ici le module sympy calcule la limite de (sin(x)-x)/x<sup>3</sup> lorsque x tend vers 0 et trouve le résultat -1/6
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> A symbolic computation module is perfectly capable of evaluating certain limits. <br> Here the sympy module calculates the limit of (sin(x)-x)/x<sup>3</sup> when x tends to 0 and finds the result -1/6
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/calclim.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p <!-- /STOP CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Même chose avec Julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>Same with Julia 1.6:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/calclim.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimpoint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimpoint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

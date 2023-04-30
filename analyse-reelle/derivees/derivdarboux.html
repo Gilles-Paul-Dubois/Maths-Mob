@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Théorème de Darboux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Au 19° siècle la plupart des mathématiciens pensaient que le <input type="button" value="théorème des valeurs intermédiaires" onclick="go('../continuite/contvalint.html#thm1')" data-inline="true" /> caractérisait les <input type="button" value="fonctions continues" onclick="go('../continuite/contsurdom.html#')" data-inline="true" />, en ce sens qu'elles étaient les seules à posséder cette propriété. Gaston Darboux (1842/1917-FR) mit fin à cette croyance. </div>
+        <!-- /fr -->
+        <div lang="en"> In the 19th century most mathematicians thought that the <input type="button" value="intermediate value theorem" onclick="go('../continuite/contvalint.html#thm1')" data-inline=" true" /> characterized <input type="button" value="continuous functions" onclick="go('../continuite/contsurdom.html#')" data-inline="true" />, in this sense that they were the only ones to own this property. Gaston Darboux (1842/1917-FR) put an end to this belief. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/250px-Darboux.jpg" width="250" height="335" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Il a montré du même coup qu'une <input type="button" value="fonction dérivée" onclick="go('derivfoncderiv.html#')" data-inline="true" /> n'est pas n'importe quoi, en ce sens qu'une fonction quelconque n'est pas toujours la dérivée d'une autre fonction. <br /> Le théorème de Darboux, dit en substance que les dérivées des fonctions possèdent, tout comme les fonctions continues, la propriété de la valeur intermédiaire. </div>
+        <!-- /fr -->
+        <div lang="en"> He showed at the same time that a <input type="button" value="derivative" onclick="go('derivfoncderiv.html#')" data-inline="true" /> is not whatever, in the sense that any function is not always the derivative of another function. <br /> Darboux's theorem essentially says that the derivatives of functions have, just like continuous functions, the property of intermediate value. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si f est dérivable sur [a,b] (c'est à dire dérivable sur ]a,b[ dérivable à droite en a, dérivable à gauche en b). Si m est un nombre entre f'(a) et f'(b), alors il existe c &isin; ]a,b( tel que f'(c)=m.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If f is differentiable on [a,b] (ie differentiable on ]a,b[ right differentiable at a, left differentiable at b). If m is a number between f'(a) and f'(b), then there exists c &isin; ]a,b( such that f'(c)=m.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit g la fonction définir sur [a,b] par <br /> g(x)=f(x)-m(x-a) <br /> Alors g est continue et elle atteint donc un minimum sur [a,b] ( <input type="button" value="revoir ce résultat" onclick="go('../continuite/contimcompact.html#')" data-inline="true" />), en un point c ∈ [a,b]. <br /> Ce point ne peut être ni a ni b car g'(a)=f'(a)-m &lt; 0 et g'(b)=f'(b)-m &gt; 0. <br /> Donc la dérivée de g en c est nulle, g'(c)=0 ⇔ f'(c)=m CQFD.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let g be the function defined on [a,b] by <br /> g(x)=f(x)-m(x-a) <br /> Then g is continuous and it therefore reaches a minimum on [a,b] ( <input type="button" value="review this result" onclick="go('../continuite/contimcompact.html#')" data-inline="true" />), at a point c ∈ [a,b]. <br /> This point cannot be either a or b because g'(a)=f'(a)-m < 0 and g'(b)=f'(b)-m> 0. <br /> So the derivative of g at c is zero, g'(c)=0 ⇔ f'(c)=m QED.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

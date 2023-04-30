@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Vitesse de convergence</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+	 <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+  </head>	
+	
+
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="f">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="f">
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/suitesvitesse/menu.html')" /></li>  
+ 	 <li><input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/suitesvitesse/menu.html')" /></li>
+	 <li><input type="button" value="Back to 'Sequences'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+<h2>Premier exemple: Calcul de π par la méthode d'Archimède.</h2>
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>First example: Calculation of π by Archimedes' method.</h2> 
+</div><!-- /en --> 
+<!-- STOP IMAGE -->
+<table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+<tr>
+<td align="center"><font color="#FFFFFF"><div lang="fr">Portrait d'imagination d'Archimède par Fetti (1620)</div><!-- /fr --><div lang="en">Imagination portrait of Archimedes by Fetti (1620)</div><!-- /en -->  </font></td>
+</tr>
+<tr>
+<td align="center"><img src="images/fetti-1620.jpg" width="240" height="320" border="0" alt=""></td>
+</tr>
+</table>
+<!-- /STOP IMAGE -->
+
+<div lang="fr">
+n désigne un entier quelconque.<br>
+Désignons par S<sub>n</sub> le demi-périmètre du polygone régulier à n-côtés inscrit dans un cercle de rayon 1.<br>
+Désignons par T<sub>n</sub> le demi-périmètre du polygone régulier à n-côtés exinscrit à ce même cercle.<br>
+On peut vérifier par un petit calcul de trigonométrie que:
+</div><!-- /fr --> 
+
+<div lang="en">
+n denotes any integer. <br/>
+Let S<sub>n</sub> denote the half-perimeter of the regular polygon with n-sides inscribed in a circle of radius 1. <br/>
+Denote by T<sub>n</sub> the semi-perimeter of the regular polygon with n-sides exscribed from this same circle. <br/>
+We can verify by a small calculation of trigonometry that:
+</div><!-- /en --> 
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle S_{n}=n\times sin\left ( \frac{\pi }{n} \right )
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle T_{n}=n\times tan\left ( \frac{\pi }{n} \right )
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+<div lang="fr">
+<p>On peut vérifier rapidement les relations de récurrence entre les deux suites:</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>We can quickly check the recurrence relations between the two sequences: </p>
+</div><!-- /en --> 
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle T_{2n}=\frac{2S_{n}T_{n}}{S_{n}+T_{n}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle S_{2n}=\sqrt{S_{n}T_{2n}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+<div lang="fr">
+<p>L'appliquette suivante montre la méthode d'Archimède pour le calcul de &pi;.</p>
+<p> Au début, n=4,S<sub>4</sub>=2&radic;2, T<sub>4</sub>=4. Appuyez sur le bouton 'Click!' pour doubler n.</p>
+<p> Appuyez sur 'Restart' pour recommencer depuis le début.</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>The following applet shows Archimedes' method for calculating π. </p>
+<p>At the start, n=4, S<sub>4</sub>=2√2, T<sub>4</sub>=4.   Press the 'Click!'   to double n. </p>
+<p>Press 'Restart' to start over. </p>
+</div><!-- /en --> 
+<!-- STOP  APPLET-->
+       <div>
+            <canvas id="myCanvas1" width="600" height="600"
+                    style="border:1px solid #000000;">
+            </canvas> 
+            <br/>
+            <div lang="fr">Cliquez pour voir l'algorithme d'Archimède </div><div lang="en">Click to see Archimedes algorithm</div><!-- /en --> <!-- /fr --> 
+            <button type="button" onclick="Step();"> Click!</button> <div lang="fr">Suivant:</div><!-- /fr --> <div lang="en">Next:</div><!-- /en -->  <input type="text" id="mytext"><button type="button" onclick="Restart();"> Restart!</button>
+            <script src="js/archi.js"></script>          
+        </div>    
+<!-- /STOP  APPLET-->
+<div lang="fr">
+<p>Voici maintenant un programme Python qui calcule les termes des deux suites adjacentes S<sub>2<sup>n</sup></sub> et T<sub>2<sup>n</sup></sub>. La valeur de &pi; se trouve donc à chaque étape entre les deux valeurs calculées.<br>
+Nous faisons 12 itérations successives à partir de n=4. Nous trouvons donc à la fin des polygones à 2<sup>13</sup>=8192 côtés.</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>Here is now a Python program which calculates the terms of the two adjacent sequences S<sub>2<sup>n</sup></sub> and T<sub>2<sup>n</sup></sub> .   The value of π is therefore at each stage between the two calculated values. <br/>We do 12 successive iterations starting from n=4.   We therefore find at the end of the polygons with 2<sup>13</sup>=8192 sides. </p>
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+<p><object data="python/archi1.html" type="text/html" border="3" height="200" width="100%"></object></p>
+<!-- /STOP  CODE-->
+
+<div lang="fr">
+<p>Voici le résultat de l'exécution.
+	Nous avons à chaque étape mis en valeur les décimales exactes du calcul de &pi;.</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+Here is the result of the execution.
+	 We have at each step highlighted the exact decimals of the calculation of π.
+</div><!-- /en --> 
+
+<!-- STOP -->
+<table cellpadding="5" cellspacing="2" border="1" >
+<tr>
+<td>i= 0 n= 4 2.82842712475 4 1.17157287525<br>
+i= 1 n= 8 <strong><font color="#FF0000">3</font></strong>.06146745892 3.31370849898 0.252241040064<br>
+i= 2 n= 16 <strong><font color="#FF0000">3.1</font></strong>2144515226 3.18259787807 0.0611527258165<br>
+i= 3 n= 32 <strong><font color="#FF0000">3.1</font></strong>3654849055 3.15172490743 0.0151764168833<br>
+i= 4 n= 64 <strong><font color="#FF0000">3.14</font></strong>033115695 3.14411838525 0.00378722829115<br>
+i= 5 n= 128 <strong><font color="#FF0000">3.141</font></strong>27725093 3.14222362994 0.000946379009684<br>
+i= 6 n= 256 <strong><font color="#FF0000">3.1415</font></strong>1380114 3.14175036917 0.000236568024666<br>
+i= 7 n= 512 <strong><font color="#FF0000">3.1415</font></strong>7294037 3.1416320807 5.91403360906e-05<br>
+i= 8 n= 1024 <strong><font color="#FF0000">3.1415</font></strong>8772528 3.14160251026 1.47849796495e-05<br>
+i= 9 n= 2048 <strong><font color="#FF0000">3.14159</font></strong>142151 3.14159511775 3.69623838914e-06<br>
+i= 10 n= 4096 <strong><font color="#FF0000">3.141592</font></strong>34557 3.14159326963 9.24059189611e-07<br>
+i= 11 n= 8192 <strong><font color="#FF0000">3.141592</font></strong>57658 3.1415928076 2.31014772201e-07<br>
+0.215301194993<br>
+0.24243765329<br>
+0.248172369763<br>
+0.249546933263<br>
+0.24988697193<br>
+0.249971757874<br>
+0.249992940399<br>
+0.249998235161<br>
+0.249999558794<br>
+0.249999889706<br>
+0.249999972727<br>
+</td>
+</tr>
+</table>
+<!-- /STOP -->
+<div lang="fr">
+<p>Voici un programme Julia faisant la même chose.</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>Here is a Julia program doing the same thing.</p> 
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+<p><object data="julia/arch1.jl.html" type="text/html" border="3" height="200" width="100%"></object></p>
+<!-- /STOP  CODE-->
+
+<div lang="fr">
+ Dans un second temps nous listons les rapports des différences des incertitudes T<sub>n</sub>-S<sub>n</sub>. Il semble que ces rapports tendent vers la valeur 0.25, c'est à dire que toute nouvelle incertitude soit 4 fois plus petite que la précédente.  <b>Nous avons 6 décimales exactes après 11 itérations</b>.
+<h2>Second exemple: La méthode de Newton.</h2>
+</div><!-- /fr --> 
+
+<div lang="en">
+Secondly, we list the ratios of the differences of the uncertainties T<sub>n</sub>-S<sub>n</sub>.   It seems that these ratios tend towards the value 0.25, that is to say that any new uncertainty is 4 times smaller than the previous one. <b>  We have 6 exact decimal places after 11 iterations </b> .
+ <h2>Second example: Newton's method. </h2>
+</div><!-- /en --> 
+
+<!-- STOP IMAGE -->
+<table bgcolor="#000000">
+<tr>
+<td align="center"><font color="#FFFFFF"><div lang="fr">Portrait de Sir Isaac Newton</div><!-- /fr --> <div lang="en">Portrait of Sir Isaac Newton</div></font><!-- /en --> </td>
+</tr>
+<tr>
+<td align="center"><img src="images/GodfreyKneller-IsaacNewton-1689.jpg" width="407" height="559" border="0" alt=""></td>
+</tr>
+<tr>
+<td align="center"><i><font size="-1">http://fr.wikipedia.org/wiki/Fichier:GodfreyKneller-IsaacNewton-1689.jpg</font></i></td>
+</tr>
+</table>
+<!-- /STOP IMAGE -->
+
+<div lang="fr">
+<p>C'est une méthode d'approximation des racines d'équations du type f(x)=0, pour des fonctions satisfaisant à certaines conditions, concernant principalement leur dérivabilité.
+Nous n'exposerons ici cette méthode que sur un cas très particulier, la détermination de la racine de l'équation x²=2 sur l'intervalle [1,2].
+La méthode de Newton conduit à la construction d'une suite récurrente donnée par:</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+It is a method of approximating the roots of equations of the type f(x)=0, for functions satisfying certain conditions, mainly concerning their differentiability.
+ We will present this method here only on a very particular case, the determination of the root of the equation x²=2 on the interval [1,2].
+ Newton's method leads to the construction of a recurrent sequence given by: 
+</div><!-- /en --> 
+
+<!-- STOP -->
+<ul>
+	<li>
+<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle u_{0}=1
+
+\)
+<!-- /FORMULE UNIV INLINE-->
+	
+	</li>
+	<li>
+<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle u_{n+1}=u_{n}+\frac{2-u_{n}^{2}}{2u_{_{n}}}
+
+\)
+<!-- /FORMULE UNIV INLINE-->
+	
+	</li>
+</ul>
+<!-- /STOP -->
+
+<div lang="fr">
+<p>Voici un programme Python qui calcule les 8 premiers termes de cette suite.</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>Here is a Python program that calculates the first 8 terms of this sequence. </p>
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+<p><object data="python/newton1.html" type="text/html" border="3" height="200" width="100%"></object></p>
+<!-- /STOP  CODE-->
+<div lang="fr">
+<p>Voici le résultat d'une exécution:</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>Here is the result of an execution: </p>
+</div><!-- /en --> 
+
+<!-- STOP -->
+<table cellpadding="5" cellspacing="5" border="2" >
+<tr>
+<td><b><font  face="courier">
+i= 0 : <font color="#FF0000">1</font><br>
+i= 1 : <font  color="#FF0000">1</font>.5<br>
+i= 2 : <font color="#FF0000">1.41</font>66666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666667<br>
+i= 3 : <font color="#FF0000">1.41421</font>56862745098039215686274509803921568627450980392156862745098039215686274509803921568627450980392<br>
+i= 4 : <font color="#FF0000">1.41421356237</font>46899106262955788901349101165596221157440445849050192000543718353892683589900431576443402<br>
+i= 5 : <font color="#FF0000">1.41421356237309504880168</font>96235025302436149819257761974284982894986231958242289236217849418367358303566<br>
+i= 6 : <font color="#FF0000">1.41421356237309504880168872420969807856967187537</font>72340015610131331132652556303399785317871612507104752<br>
+i= 7 : <font color="#FF0000">1.414213562373095048801688724209698078569671875376948073176679737990732478462107038850387534327641</font>6016<br>
+
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<font  color="#0000FF">&radic;2=1.4142135623730950488016887242096980785696718753769480731766797379907324784621070388503875343276415727</font>
+
+</font></b></td>
+</tr>
+</table>
+<!-- /STOP -->
+<div lang="fr">
+<p>Voici un programme Julia faisant la même chose.</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+
+
+<p>Here is a Julia program doing the same thing.</p>
+
+
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+<p><object data="julia/newton1.jl.html" type="text/html" border="3" height="200" width="100%"></object></p>
+
+<!-- /STOP  CODE-->
+
+<div lang="fr">
+<p>Nous remarquons cette fois que la convergence est plus rapide. L'erreur sur la limite n'évolue par de façon linéaire avec n comme dans l'exemple précédent, mais on peut prouver qu'il s'agit d'une convergence <b><i>'quadratique'</i></b> c'est à dire que l'erreur varie de façon inversement proportionelle au carré du rang de n. D'où une convergence extrêmement rapide.<b> Nous avons 11 décimales exactes après seulement 4 itérations</b> (à comparer avec le cas précédent).</p>
+<h2>Troisième exemple: une convergence lente.</h2>
+<p>Reprenons maintenant l'exemple traité <input type="button" value="ici" onclick="go('suitesmonoetconv.html#harmalt#')" data-inline="true" />.Soit la suite récurrente définie par :</p>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>We notice this time that the convergence is faster.   The error on the limit does not evolve linearly with n as in the previous example, but we can prove that it is a <b><i> 'quadratic' </i></b> convergence , that is to say that the error varies from inversely proportional to the square of the rank of n.   Hence an extremely rapid convergence. <b>  We have 11 exact decimals after only 4 iterations </b> (compare with the previous case). </p>
+<h2>Third example: a slow convergence. </h2>
+<p>Now let's go back to the example <input data-inline="true" onclick="go('suitesmonoetconv.html#harmalt#')" type="button" value="here"/>. Consider the recurrent sequence defined by: </p>
+</div><!-- /en --> 
+
+<!-- STOP -->
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle u_{0}=1
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+<div lang="fr">
+et
+</div><!-- /fr --> 
+
+<div lang="en">
+and
+</div><!-- /en --> 
+<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle u_{n}=u_{n-1}+\frac{(-1)^{n}}{n+1}
+
+\)
+<!-- /FORMULE UNIV INLINE-->
+
+
+<!-- /STOP -->
+
+<div lang="fr">
+<p>On constate que la limite se trouve dans tout intervalle ]u<sub>2n</sub>,u<sub>2n-1</sub>[ de longueur 1/(2n+1).</p>
+<p>On constate cependant que la longueur de ces intervalles ne décroit pas dans un rapport donné parce que le rapport des longueurs de ces intervalles tend vers 1.<br/> C'est ce que nous appelons un cas de <b><i>'convergence lente'</i></b>.<br/>
+Après 80000 itérations nous n'avons que 4 décimales exactes. Après 5000 nous en avions déjà 3.</p>
+<h2>Définitions</h2>
+</div><!-- /fr --> 
+
+<div lang="en">
+<p>We note that the limit is in any interval ]u<sub>2n</sub>,u<sub>2n-1</sub>[ of length 1/(2n+1). </p>
+<p>We note however that the length of these intervals does not decrease in a given ratio because the ratio of the lengths of these intervals tends towards 1. <br/>This is what we call a case of <b><i> 'slow convergence' </i></b> . <br/>After 80000 iterations we only have 4 exact decimals.  After 5000 we already had 3. </p>
+<h2>Definitions </h2>
+</div><!-- /en --> 
+<!-- STOP -->
+<a name="def1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 1</div>
+On suppose que la suite u=(u<sub>n</sub>) tend vers la limite a.<br> 
+On dit que la suite u converge <b><i>'linéairement' </i></b> ou <b><i>'géométriquement'</i></b> vers a, s'il existe un nombre k , 0&lt;k&lt;1 tel que:<br>
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|}=k
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Le nombre k est appelé <b><i>'vitesse de convergence'</i></b>
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 1</div>
+We assume that the sequence u=(u<sub>n</sub>) tends to the limit a. <br/>
+The sequence u is said to converge <b><i> 'linearly' </i></b> or <b><i> 'geometrically' </i></b> to a, if there is a number k , 0<k<1 such that: <br>
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|}=k
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+The number k is called <b><i> 'convergence speed' </i></b>
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<!-- STOP -->
+<a name="def2"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 2</div>
+Si
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+est vérifiée pour k = 0, alors la convergence de la suite est dite <b><i>'rapide'</i></b>.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 2</div>
+If
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+holds for k = 0, then the convergence of the sequence is said to be <b><i> 'fast' </i></b> .
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<!-- STOP -->
+<a name="def3"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 3</div>
+On dit que la suite (u<sub>n</sub>) de limite a est <b><i>'convergente d'ordre q'</i></b>, s'il existe un nombre k , 0&lt;k&lt;1 tel que: 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|^{q}}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 3</div>
+We say that the sequence (u<sub>n</sub>) of limit a is <b><i> 'convergent of order q' </i></b> , if there exists a number k , 0<k<1 such that:
+ <!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|^{q}}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<!-- STOP -->
+<a name="def4"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 4</div>
+En particulier :
+<ul>
+	<li>la convergence d'ordre 2 est dite <b><i>'quadratique'</i></b>.</li>
+	<li>la convergence d'ordre 3 est dite <b><i>'cubique'</i></b>.</li>
+	<li>la convergence d'ordre 4 est dite <b><i>'quartique'</i></b>.</li>
+</ul>
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 4</div>
+Especially :
+ <ul>
+<li>convergence of order 2 is called <b><i> 'quadratic' </i></b> . </li>
+<li>convergence of order 3 is called <b><i> 'cubic' </i></b> . </li>
+<li>convergence of order 4 is called <b><i> 'quartic' </i></b> . </li>
+</ul>
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<!-- STOP -->
+<a name="def5"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 5</div>
+On parle de <b><i>'convergence lente'</i></b> lorsqu'on a: 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|}=1
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 5</div>
+We speak of <b><i> 'slow convergence' </i></b> when we have:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{\left|u_{n+1}-a \right|}
+{\left|u_{n}-a \right|}=1
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+<h2>Propriétés</h2>
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>Properties</h2> 
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="prop1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">propriété 1</div>
+Tout d'abord il est possible qu'une suite converge et que la vitesse de convergence n'existe pas.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">property 1</div>
+First of all it is possible that a sequence converges and that the speed of convergence does not exist.
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+<div lang="fr">
+Prendre par exemple la suite définie par:<br>
+ <ul>
+	<li>u<sub>2n</sub>=1/n</li>
+	<li>u<sub>2n+1</sub>=2/n</li>
+</ul>
+Cette suite converge vers 0.<br>
+Si n est impair u<sub>n+1</sub>/u<sub>n</sub>=2<br>
+Si n est pair u<sub>n+1</sub>/u<sub>n</sub>=1/2<br>
+Donc la limite de (u<sub>n+1</sub>-0)/(u<sub>n</sub>-0) n'existe pas.<br>
+
+On peut parfois déterminer la vitesse de convergence d'une suite, (sachant qu'elle existe) en utilisant le résultat suivant:
+</div><!-- /fr --> 
+
+<div lang="en">
+Take for example the sequence defined by: <br/>
+<ul>
+<li>u<sub>2n</sub>=1/n </li>
+<li>u<sub>2n+1</sub>=2/n </li>
+</ul>
+This sequence converges to 0. <br/>
+If n is odd u<sub>n+1</sub>/u<sub>n</sub>=2 <br/>
+If n is even u<sub>n+1</sub>/u<sub>n</sub>=1/2 <br/>
+So the limit of (u<sub>n+1</sub>-0)/(u<sub>n</sub>-0) does not exist. <br/>
+
+We can sometimes determine the speed of convergence of a sequence, (knowing that it exists) by using the following result:
+ 
+</div><!-- /en --> 
+<a name="taudac"></a>
+
+<!-- STOP -->
+<a name="prop2"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">propriété 2</div>
+Supposons que
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle  \lim_{n \to \infty }\frac{u_{n+1}-a}{u_{n}-a}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+existe avec k ∈ ]-1,0[ ∪ ]0,1[<br>
+Ce qui entraîne en particulier que u converge avec la vitesse |k|.<br>
+Dans ces conditions, s'il existe un entier N≥1 tel que u<sup>n+1</sup>≠u<sup>n</sup> si n≥N, on a également:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle  \lim_{n \to \infty }\frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+ 
+</div><!--/fr-->
+<div lang="en">
+<div id="label">property 2</div>
+Suppose that
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle  \lim_{n \to \infty }\frac{u_{n+1}-a}{u_{n}-a}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE--> 
+exists with  k ∈ ]-1,0[ ∪ ]0,1[ <br/>
+This implies in particular that u converges with the speed |k|. <br/>
+Under these conditions, if there exists an integer N≥1 such that u<sup>n+1</sup>≠u<sup>n</sup>if n≥N, we also have:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle  \lim_{n \to \infty }\frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+Tout repose sur la formule :
+</div><!-- /fr --> 
+
+<div lang="en">
+Everything is based on the formula: 
+</div><!-- /en --> 
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}=\frac{u_{n}-a}{u_{n-1}-a}\times 
+\frac{1-\frac{u_{n+1}-a}{u_{n}-a}}{1-\frac{u_{n}-a}{u_{n_1}-a}} 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+<div lang="fr">
+l suffit de faire tendre n vers +∞ dans le membre de droite et d'appliquer les résultats concernant <input type="button" value="les limites et les opérations algébriques" onclick="go('suiteslimopalg.html#')" data-inline="true" />.<br/>
+<img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/> Mais !
+</div><!-- /fr --> 
+
+<div lang="en">
+It suffices to make n tend to +∞ in the right-hand side and to apply the results concerning <input data-inline="true" onclick="go('suiteslimopalg.html#')" type="button" value="limits and algebraic operations"/>. <br/>
+<img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>But !
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="prop3"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">propriété 3</div>
+Il se peut que la suite possède une vitesse de convergence sans que :
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+existe.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">property 3</div>
+It is possible that the sequence has a speed of convergence without the convergence of : 
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+Voici un exemple:<br>
+Soit u la suite définie par:
+<ul>
+	<li>u<sub>2p</sub>=(-1)<sup>p</sup>k<sup>2p</sup></li>
+	<li>u<sub>2p+1</sub>=(-1)<sup>p</sup>k<sup>2p+1</sup></li>
+</ul>
+Cette suite converge clairement vers 0 avec la vitesse k si  0&lt;k&lt;1<br>
+Mais on a:
+</div><!-- /fr --> 
+
+<div lang="en">
+Here is an example: <br/>
+Let u be the sequence defined by:
+ <ul>
+<li>u<sub>2p</sub>=(-1)<sup>p</sup>k<sup>2p</sup></li>
+<li>u<sub>2p+1</sub>=(-1)<sup>p</sup>k<sup>2p+1</sup></li>
+</ul>
+This sequence clearly converges to 0 with speed k if 0<k<1 <br/>
+But we have:
+</div><!-- /en --> 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{u_{2p+1}-u_{2p}}{u_{2p}-u_{2p-1}}=\frac{k(1-k)}{k+1}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+<div lang="fr">
+et aussi
+</div><!-- /fr --> 
+
+<div lang="en">
+and also
+</div><!-- /en --> 
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{u_{2p+2}-u_{2p+1}}{u_{2p+1}-u_{2p}}=\frac{k(1+k)}{1-k}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+<div lang="fr">
+Ce qui prouve que
+</div><!-- /fr --> 
+
+<div lang="en">
+Which proves that
+</div><!-- /en --> 
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+<div lang="fr">
+
+</div><!-- /fr --> 
+n'est pas convergente.<br>
+Cependant nous disposons de la condition suffisante suivante, connue sous le nom de <b><i>'test de d'Alembert'</i></b>:
+<div lang="en">
+s not convergent. <br/>
+However, we have the following sufficient condition, known as  <b><i> 'd'Alembert test' </i></b> :
+</div><!-- /en --> 
+<a name="testal"></a>
+<!-- STOP -->
+<a name="prop4"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">propriété 4</div>
+Si pour n suffisamment grand u<sub>n</sub> ≠ u<sub>n-1</sub> et:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}=k
+
+\)</p>
+où k est un réel vérifiant -1&lt;k&lt;1.<br>
+Alors (u<sub>n</sub>) converge vers une limite finie a:
+<ul>
+	<li>avec la vitesse |k| si k ≠0</li>
+	<li>rapidement si k=0</li>
+</ul>
+<!-- /FORMULE UNIV INLINE-->
+
+</div><!--/fr-->
+<div lang="en">
+<div id="label">property 4</div>
+If for n large enough u<sub>n</sub>≠ u<sub>n-1</sub>and:
+ <!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}}=k
+
+\)</p>
+where k is a real satisfying -1&lt;k&lt;1. <br/>
+Then (u<sub>n</sub>) converges to a finite limit a:
+ <ul>
+<li>with the speed |k|  if k ≠0 </li>
+<li>quickly if k=0 </li>
+</ul>
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+<!-- STOP -->
+<div lang="fr">
+<div data-role="collapsible">
+<h4>démonstration</h4>
+<p>Montrons d'abord la convergence de la suite.<br>
+Choisissons ε de façon que  |k|+ε = k<sub>1</sub> &lt;1<br>
+Il existe alors un entier N tel que:
+</p>
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle n> N \Rightarrow \left| \frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}} \right|\leqslant k_{1}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+De là nous tirons par multiplication: 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle n> N \Rightarrow \left| \frac{u_{n+1}-u_{n}}{u_{N}-u_{N-1}} \right|\leqslant k_{1}^{n-N}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+puis
+|u<sub>n+1</sub>-u<sub>n</sub>| ≤ k<sub>1</sub><sup>n-N</sup>|u<sub>N+1</sub>-u<sub>N</sub>|<br>
+Posant K = |u<sub>N+1</sub>-u<sub>N</sub>|, nous obtenons si p&gt;q &gt;N:<br><br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤ |u<sub>p</sub>-u<sub>p-1</sub>|+|u<sub>p-1</sub>-u<sub>p-2</sub>|+ ... +|u<sub>q+1</sub>-u<sub>q</sub>|<br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤ Kk<sub>1</sub><sup>p-N</sup>+ ... +Kk<sub>1</sub><sup>q-N</sup><br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤Kk<sub>1</sub><sup>q-N</sup>(1+k<sub>1</sub>+ ... +k<sub>1</sub><sup>p-q</sup>)
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left| u_{p}-u_{q}\right|\leqslant Kk_{1}^{q-N}\left ( \frac{1-k_{1}^{p-q+1}}{1-k_{1}} \right )
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Et comme k<sub>1</sub> &lt; 1
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left| u_{p}-u_{q}\right|\leqslant Kk_{1}^{q-N}\left 
+( \frac{1}{1-k_{1}} \right )
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Soit en posant H=K/(1-k<sub>1</sub>) <br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤ Hk<sub>1</sub><sup>q-N</sup><br>
+Et à nouveau en invoquant le fait que k<sub>1</sub> &lt;1 on voit que (u<sub>n</sub>) est une suite de Cauchy. Elle est donc convergente.<br>
+Nous allons maintenant distinguer 3 cas:
+<h4>Le cas où 0&lt;k&lt;1</h4>
+Choisissons ε &lt; inf(1-k,k) et posons k<sub>1</sub>=k-ε et k<sub>2</sub>=k+ε<br> 
+Il existe donc un entier N tel que si n&gt;N on a:<br>
+0 &lt;k<sub>1</sub> &lt; q<sub>n</sub> &lt; k<sub>2</sub>&lt;1<br>
+où:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle q_{n}=\frac{u_{n+2}-u_{n+1}}{u_{n+1}-u_{n}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+On en déduit par multiplication que:<br>
+(k<sub>1</sub>)<sup>p</sup> ≤ q<sub>n</sub>q<sub>n+1</sub>q<sub>n+2</sub> ...q<sub>n+p-1</sub> ≤ (k<sub>2</sub>)<sup>p</sup> ∀ p ≥1<br>
+Par sommation on en déduit que si n &gt; N et p ≥ 1, on a:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \sum_{i=0}^{p}k_{1}^{i}\leqslant \frac{u_{n+p-1}-u_{n}}{u_{n+1}-u_{n}}
+\leqslant \sum_{i=0}^{p} k_{2}^{i}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+En laissant n fixe et en faisant tendre p vers +∞ on obtient:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{1}{1-k_{1}}\leqslant \frac{a-u_{n}}{u_{n+1}-u_{n}}\leqslant \frac{1}{1-k_{2}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+d'où on déduit:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle 1-k_{1}\geqslant \frac{u_{n+1}-u_{n}}{a-u_{n}}\geqslant 1-k_{2}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+puis pour tout n &gt;N
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle k_{1}\leqslant \frac{u_{n+1}-a}{u_{n}-a}\leqslant k_{2}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Comme k<sub>1</sub> et k<sub>2</sub> peuvent être choisis aussi près qu'on veut de k on en déduit:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle  \lim_{n \to \infty }\frac{u_{n+1}-a}{u_{n}-a}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+CQFD.
+<h4>Le cas où -1&lt;k&lt;0</h4>
+<p>Nous conservons la méthode et les notations du cas précédent.<br>
+Soient donc k<sub>1</sub> et k<sub>2</sub> tels que -1 &lt;k<sub>1</sub>&lt;k&lt;k<sub>2</sub>&lt;0<br>
+Comme précédemment, à partir d'un certain rang N, nous avons k<sub>1</sub>&lt;q<sub>n</sub>&lt;k<sub>2</sub>&lt;0
+par produit nous aurons:</p>
+Si p est impair
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle k_{1}^{p}\leqslant \frac{u_{n+p+1}-u_{n+p}}{u_{n+1}-u_{p}}\leqslant k_{2}^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+et si p est pair
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle k_{2}^{p}\leqslant \frac{u_{n+p+1}-u_{n+p}}{u_{n+1}-u_{p}}\leqslant k_{1}^{p}
+
+\)</p>
+
+<!-- /FORMULE UNIV INLINE-->
+Par sommation, il vient alors si n&gt;N et si p est impair
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle 1+k_{1}+k_{2}^{2}+k_{1}^{3}+...+k_{2}^{p-1}+k_{1}^{p}\leqslant 
+\frac{u_{n+p+1}-u_{n}}{u_{n+1}-u_{n}} \leqslant 
+ 1+k_{2}+k_{1}^{2}+k_{2}^{3}+...+k_{1}^{p-1}+k_{2}^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+On obtient donc en laissant fixe n et en faisant tendre p vers +∞
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle 1+\frac{k_{1}}{1-k_{1}^{2}}+\frac{k_{2}^{2}}{1-k_{2}^{2}}\leqslant 
+\frac{a-u_{n}}{u_{n+1}-u_{n}} \leqslant 
+1+\frac{k_{2}}{1-k_{2}^{2}}+\frac{k_{1}^{2}}{1-k_{1}^{2}}  
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Or k<sub>1</sub> et k<sub>2</sub> peuvent être choisis aussi près de k qu'on le désire.<br>
+Mais alors les 2 expressions qui encadrent le quotient 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{a-u_{n}}{u_{n+1}-u_{n}} 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Sont aussi près de 1/(1-k) qu'on le désire.<br>
+Il en résulte que:
+<!-- FORMULE UNIV INLINE -->
+<ol>\(
+\displaystyle \lim_{n \to \infty }\frac{a-u_{n}}{u_{n+1}-u_{n}}=\frac{1}{1-k}
+
+\)</ol>
+<!-- /FORMULE UNIV INLINE-->
+Donc que :
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{u_{n+1}-a}{u_{n}-a}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+
+<h4>Le cas k=0</h4>
+
+Soit ε un réel donné vérifiant 0&lt;ε&lt;1<br>
+Il existe donc un entier N tel que pour n&gt;N on ait: |q<sub>n</sub>|&lt;ε<br>
+On a donc pour n&gt;N et tout entier p:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left|\frac{u_{n+p+1}-u_{n+p}}{u_{n+1}-u_{n}} \right|\leqslant \varepsilon ^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+En sommant à partir de p=1, il vient: 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left|\frac{u_{n+p+1}-u_{n+1}}{u_{n+1}-u_{n}} \right|\leqslant \varepsilon +...+\varepsilon ^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+En faisant tendre p vers +∞ on en déduit :
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left|\frac{a-u_{n+1}}{u_{n+1}-u_{n}} \right|\leqslant 
+\frac{\varepsilon }{1-\varepsilon } 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Et donc, comme ε est arbitrairement petit: 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left| \frac{a-u_{n+1}}{u_{n+1}-u_{n}}\right|=0_{+}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Nous obtenons donc par inversion: 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left|\frac{ u_{n}-a}{u_{n+1}-a}-1\right|=+\infty 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+D'où nous tirons: 
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left|\frac{ u_{n}-a}{u_{n+1}-a}\right|=+\infty 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+et par une nouvelle inversion: 
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left|\frac{ u_{n+1}-a}{u_{n}-a}\right|=0_{+} 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+</div><!--demo -->
+</div><!-- /fr -->
+<div lang="en">
+<div data-role="collapsible">
+<h4>proof</h4>
+<p>We first show the convergence of the sequence. <br/>
+Choose ε so that |k|+ε = k<sub>1</sub><1 <br/>
+Then there is an integer N such that:
+ </p>
+ 
+ </p>
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle n> N \Rightarrow \left| \frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}} \right|\leqslant k_{1}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+From this we derive by multiplication:
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle n> N \Rightarrow \left| \frac{u_{n+1}-u_{n}}{u_{N}-u_{N-1}} \right|\leqslant k_{1}^{n-N}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+then 
+|u<sub>n+1</sub>-u<sub>n</sub>| ≤ k<sub>1</sub><sup>n-N</sup>|u<sub>N+1</sub>-u<sub>N</sub>|<br>
+Setting K = |u<sub>N+1</sub>-u<sub>N</sub>|, we get if p&gt;q &gt;N:<br><br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤ |u<sub>p</sub>-u<sub>p-1</sub>|+|u<sub>p-1</sub>-u<sub>p-2</sub>|+ ... +|u<sub>q+1</sub>-u<sub>q</sub>|<br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤ Kk<sub>1</sub><sup>p-N</sup>+ ... +Kk<sub>1</sub><sup>q-N</sup><br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤Kk<sub>1</sub><sup>q-N</sup>(1+k<sub>1</sub>+ ... +k<sub>1</sub><sup>p-q</sup>)
+
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left| u_{p}-u_{q}\right|\leqslant Kk_{1}^{q-N}\left ( \frac{1-k_{1}^{p-q+1}}{1-k_{1}} \right )
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+And since k<sub>1</sub> <  1
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left| u_{p}-u_{q}\right|\leqslant Kk_{1}^{q-N}\left 
+( \frac{1}{1-k_{1}} \right )
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+or by setting H=K/(1-k<sub>1</sub>) <br>
+|u<sub>p</sub>-u<sub>q</sub>| ≤ Hk<sub>1</sub><sup>q-N</sup><br>
+And again by invoking the fact that k<sub>1</sub> <1 we see that (u<sub>n</sub>) is a Cauchy sequence.  It is therefore convergent.<br>
+We will now distinguish 3 cases:
+
+<h4>Case where 0&lt;k&lt;1</h4>
+Choose ε <  inf(1-k,k) and let k<sub>1</sub>=k-ε and k<sub>2</sub>=k+ε<br> 
+ So there exists an integer N such that if n>N we have:<br>
+ 0 <k<sub>1</sub> <  q<sub>n</sub> <  k<sub>2</sub><1<br>
+ where:
+ <!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle q_{n}=\frac{u_{n+2}-u_{n+1}}{u_{n+1}-u_{n}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+We deduce by multiplication that:<br>
+ (k<sub>1</sub>)<sup>p</sup> ≤ q<sub>n</sub>q<sub>n+1</sub>q<sub>n+2</sub > ...q<sub>n+p-1</sub> ≤ (k<sub>2</sub>)<sup>p</sup> ∀ p ≥1<br>
+ By summation we deduce that if n >  N and p ≥ 1, we have:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \sum_{i=0}^{p}k_{1}^{i}\leqslant \frac{u_{n+p-1}-u_{n}}{u_{n+1}-u_{n}}
+\leqslant \sum_{i=0}^{p} k_{2}^{i}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+Leaving n fixed and letting p tend to +∞ we get:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{1}{1-k_{1}}\leqslant \frac{a-u_{n}}{u_{n+1}-u_{n}}\leqslant \frac{1}{1-k_{2}}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+from which we deduce:
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle 1-k_{1}\geqslant \frac{u_{n+1}-u_{n}}{a-u_{n}}\geqslant 1-k_{2}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+then for all n > N
+
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle k_{1}\leqslant \frac{u_{n+1}-a}{u_{n}-a}\leqslant k_{2}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+As k<sub>1</sub> and k<sub>2</sub> can be chosen as close as we want to k we deduce:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle  \lim_{n \to \infty }\frac{u_{n+1}-a}{u_{n}-a}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+QED.
+<h4>Case where-1&lt;k&lt;0</h4>
+<p>We keep the method and the notations of the previous case.<br>
+ Let k<sub>1</sub> and k<sub>2</sub> be such that -1 <k<sub>1</sub><k<k<sub>2</sub>&lt ;0<br>
+ As before, from a certain rank N, we have k<sub>1</sub><q<sub>n</sub><k<sub>2</sub><0
+ by multiplication we will have:</p>
+ If p is odd
+ <!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle k_{1}^{p}\leqslant \frac{u_{n+p+1}-u_{n+p}}{u_{n+1}-u_{p}}\leqslant k_{2}^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+and if p is even
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle k_{2}^{p}\leqslant \frac{u_{n+p+1}-u_{n+p}}{u_{n+1}-u_{p}}\leqslant k_{1}^{p}
+
+\)</p>
+
+<!-- /FORMULE UNIV INLINE-->
+
+By summation, it then comes if n>N and if p is odd
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle 1+k_{1}+k_{2}^{2}+k_{1}^{3}+...+k_{2}^{p-1}+k_{1}^{p}\leqslant 
+\frac{u_{n+p+1}-u_{n}}{u_{n+1}-u_{n}} \leqslant 
+ 1+k_{2}+k_{1}^{2}+k_{2}^{3}+...+k_{1}^{p-1}+k_{2}^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+We therefore obtain by leaving n fixed and by making p tend towards +∞
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle 1+\frac{k_{1}}{1-k_{1}^{2}}+\frac{k_{2}^{2}}{1-k_{2}^{2}}\leqslant 
+\frac{a-u_{n}}{u_{n+1}-u_{n}} \leqslant 
+1+\frac{k_{2}}{1-k_{2}^{2}}+\frac{k_{1}^{2}}{1-k_{1}^{2}}  
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+But k<sub>1</sub> and k<sub>2</sub> can be chosen as close to k as desired.<br>
+ But then the 2 expressions that frame the quotient
+ <!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \frac{a-u_{n}}{u_{n+1}-u_{n}} 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Are as close to 1/(1-k) as desired.<br>
+ It follows that:
+ <!-- FORMULE UNIV INLINE -->
+<ol>\(
+\displaystyle \lim_{n \to \infty }\frac{a-u_{n}}{u_{n+1}-u_{n}}=\frac{1}{1-k}
+
+\)</ol>
+<!-- /FORMULE UNIV INLINE-->
+So that :
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\frac{u_{n+1}-a}{u_{n}-a}=k
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+<h4>Case  k=0</h4>
+Let ε be a given real satisfying 0<ε<1<br>
+ There thus exists an integer N such that for n>N we have: |q<sub>n</sub>|<ε<br>
+ We therefore have for n>N and any integer p:
+ <!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left|\frac{u_{n+p+1}-u_{n+p}}{u_{n+1}-u_{n}} \right|\leqslant \varepsilon ^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+Summing from p=1, it comes:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left|\frac{u_{n+p+1}-u_{n+1}}{u_{n+1}-u_{n}} \right|\leqslant \varepsilon +...+\varepsilon ^{p}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+By letting p tend to +∞ we deduce:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \left|\frac{a-u_{n+1}}{u_{n+1}-u_{n}} \right|\leqslant 
+\frac{\varepsilon }{1-\varepsilon } 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+And so, as ε is arbitrarily small:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left| \frac{a-u_{n+1}}{u_{n+1}-u_{n}}\right|=0_{+}
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+So we get by inversion:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left|\frac{ u_{n}-a}{u_{n+1}-a}-1\right|=+\infty 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+From where we derive:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left|\frac{ u_{n}-a}{u_{n+1}-a}\right|=+\infty 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+and by a new inversion:
+<!-- FORMULE UNIV INLINE -->
+<p>\(
+\displaystyle \lim_{n \to \infty }\left|\frac{ u_{n+1}-a}{u_{n}-a}\right|=0_{+} 
+
+\)</p>
+<!-- /FORMULE UNIV INLINE-->
+
+
+
+</div><!--demo -->
+</div><!-- /en -->
+<!-- /STOP -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/suitesvitesse/menu.html')" /></li>  
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/suitesvitesse/menu.html')" /></li>  
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to 'Sequences'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>	
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dérivée d'une série</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivserie/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivserie/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Cas général</h2> Il résulte des résultats de la <input type="button" value="page précédente" onclick="go('derivsuite.html#')" data-inline="true" /> sur les dérivées des suites que:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>General case</h2> It follows from the results of the <input type="button" value="previous page" onclick="go('derivsuite.html#')" data-inline="true" /> on derivatives of sequences that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si I est un intervalle de &reals; et si (u<sub>n</sub>) est une <input type="button" value="suite de fonctions" onclick="go('../suitefonc/suitefoncdef.html#')" data-inline="true" /> définies et <input type="button" value="dérivables sur I" onclick="go('derivfoncderiv.html#')" data-inline="true" /> possédant les propriétés suivantes: <ul>
+              <li>∀ c ∈ I, il existe un réel r tel que <input type="button" value="la série de terme général (u
+													<sub>n</sub>')" onclick="go('../suitefonc/suitefoncdef.html#def7')" data-inline="true" /> soit <input type="button" value="uniformément convergente" onclick="go('../suitefonc/suitefonccvuniforme.html#')" data-inline="true" /> sur [c-r,c+r]. </li>
+              <li>∃ x<sub>0</sub> ∈ I tel que la <input type="button" value="série de terme général u
+														<sub>n</sub>(x
+														<sub>0</sub>) converge" onclick="go('../series/seriesconv.html#')" data-inline="true" />. </li>
+            </ul> Alors: <ul>
+              <li>Pour tout c la série de terme général (u<sub>n</sub>) converge uniformément sur [c-r,c+r] </li>
+              <li>Si s désigne la somme de la série (u<sub>n</sub>) et si t désigne la somme de la série (u<sub>n</sub>'), s est dérivable en tout x ∈ I et s'(x)=t(x). </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If I is an interval of &reals; and if (u<sub>n</sub>) is an <input type="button" value="sequence of functions" onclick="go('../suitefonc/suitefoncdef.html#')" data-inline="true" /> defined and <input type="button" value="differentiable on I" onclick="go('derivfoncderiv.html#')" data-inline="true" /> having the following properties: <ul>
+              <li>∀ c ∈ I, there exists a real r such that <input type="button" value="the series with  general term (u
+															<sub>n</sub>')" onclick="go('../suitefonc/suitefoncdef.html#def7')" data-inline="true" /> let <input type="button" value="uniformly convergent" onclick="go('../suitefonc/suitefonccvuniforme.html#')" data-inline="true" /> on [c-r,c+r]. </li>
+              <li>∃ x<sub>0</sub> ∈ I such that the <input type="button" value="series  with general term u
+																<sub>n</sub>(x
+																<sub>0</sub >) converges" onclick="go('../series/seriesconv.html#')" data-inline="true" />. </li>
+            </ul> Then : <ul>
+              <li>For all c the series of general term (u<sub>n</sub>) converges uniformly on [c-r,c+r] </li>
+              <li>If s denotes the sum of the series (u<sub>n</sub>) and if t denotes the sum of the series (u<sub>n</sub>'), s is differentiable at all x ∈ I and s'(x)=t(x). </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce qui implique donc que: </div>
+        <!-- /fr -->
+        <div lang="en"> Which therefore implies that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si I est un intervalle tel que la série de terme général (u<sub>n</sub>') converge uniformément sur I, et s'il existe un point x<sub>0</sub> de I tel que la série de terme général u<sub>n</sub>(x<sub>0</sub>) converge alors la série de fonctions de terme général (u<sub>n</sub>) converge uniformément sur I, sa somme s est dérivable sur I et s'=t où t est la somme de la série (u<sub>n</sub>').
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If I is an interval such that the series of general term (u<sub>n</sub>') converges uniformly on I, and if there exists a point x<sub>0</sub> of I such that the series of general term u<sub>n</sub>(x<sub>0</sub>) converges then the series of functions of general term (u<sub>n</sub>) converges uniformly on I, its sum s is differentiable over I and s'=t where t is the sum of the series (u<sub>n</sub>').
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Et encore ce dernier corollaire: </div>
+        <!-- /fr -->
+        <div lang="en"> And again this last corollary: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Si I est un intervalle tel que la série de terme général (u<sub>n</sub>') <input type="button" value="converge normalement sur I" onclick="go('../suitefonc/suitefonccvuniforme.html#def4')" data-inline="true" />, et s'il existe un point x<sub>0</sub> de I tel que la série de terme général u<sub>n</sub>(x<sub>0</sub>) converge alors la série de fonctions de terme général (u<sub>n</sub>) converge uniformément sur I, sa somme s est dérivable sur I et s'=t où t est la somme de la série (u<sub>n</sub>').
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> If I is an interval such that the series with general term (u<sub>n</sub>') <input type="button" value="converges normally on I" onclick="go('../suitefonc/suitefonccvuniforme.html#def4')" data-inline="true" />, and if there is a point x<sub>0</sub> of I such that the series with general term u<sub>n</sub>(x<sub>0</sub>) converges then the series of functions of general term (u<sub>n</sub>) converges uniformly on I, its sum s is differentiable on I and s'=t where t is the sum of the series (u<sub>n</sub>').
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Cas des séries entières</h2> Constatons d'abord que:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of power series</h2> Let us first note that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> La <input type="button" value="série dérivée formelle" onclick="go('../suitefonc/suitefoncserent.html#def4')" data-inline="true" /> de la série entière de terme général u<sub>n</sub>(x)=a<sub>n</sub>x<sup>n</sup> est exactement la série de terme général u<sub>n</sub>'(x).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> The <input type="button" value="formal derivative series" onclick="go('../suitefonc/suitefoncserent.html#def4')" data-inline="true" /> of the power series with general term u<sub>n</sub>(x)=a<sub>n</sub>x<sup>n</sup> is exactly the series with general term u<sub>n</sub>'(x ).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Et puisqu'une série entière et sa dérivée ont même <input type="button" value="rayon de convergence" onclick="go('../suitefonc/suitefoncserent.html#def2')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> And since an integer series and its derivative have the same <input type="button" value="convergence radius" onclick="go('../suitefonc/suitefoncserent.html#def2')" data-inline="true " />. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Si R est le rayon de convergence de la série entière de terme général u<sub>n</sub>(x)=a<sub>n</sub>x<sup>n</sup> alors pour tout r&lt;R la somme de la série de terme général u<sub>n</sub> est dérivable sur [-r,+r] et sa dérivée est la somme de la série dérivée.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> If R is the radius of convergence of the entire series of general term u<sub>n</sub>(x)=a<sub>n</sub>x<sup>n</sup> then for all r< R the sum of the series of general term u<sub>n</sub> is differentiable over [-r,+r] and its derivative is the sum of the derivative series.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Autrement dit, une série entière peut se dériver 'terme à terme', ce qui n'est pas le cas des séries de fonctions en général, comme on peut le voir avec la série trigonométrique de terme général sin(nx) qui converge en 0 et dont la série dérivée ne converge pas en ce point. </div>
+        <!-- /fr -->
+        <div lang="en"> In other words, a power series can be differentiated 'term by term', which is not the case for series of functions in general, as can be seen with the trigonometric series of general term sin(nx) which converges at 0 and whose derivative series does not converge at this point. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivserie/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivserie/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

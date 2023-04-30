@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Convexité</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contconvexes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contconvexes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous présentons ici une certaine classe de fonctions présentant un intérêt du point de vue de la continuité, mais possédant aussi beaucoup d'autres propriétés. Ce concept permet de démontrer tout un ensemble d'inégalités fort utiles dans de nombreuses branches de l'analyse mathématique. <h2>Définition</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We introduce here a certain class of functions which are interesting from the point of view of continuity, but which also possess many other properties. This concept makes it possible to demonstrate a whole set of inequalities that are very useful in many branches of mathematical analysis. <h2>Definition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un sous-ensemble du plan est dit <b>
+              <i>'convexe'</i>
+            </b> si chaque fois qu'il contient deux points il contient tout le segment joignant ces deux points.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A subset of the plane is said to be <b>
+              <i>'convex'</i>
+            </b> if each time it contains two points it contains the entire segment joining these two points.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples: </h3> L'intérieur d'un cercle, d'une ellipse, d'un triangle, d'un rectangle, sont des ensembles convexes. <br> Voici une appliquette mettant en évidence la convexité d'une ellipse. <br> Déplacez deux points A et B à l'intérieur de l'ellipse. <br> Le segment [AB] sera traçé qui doit se trouver entièrement à l'intérieur de l'ellipse.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Examples: </h3> The interior of a circle, an ellipse, a triangle, a rectangle, are convex sets. <br> Here is an applet highlighting the convexity of an ellipse. <br> Move two points A and B inside the ellipse. <br> The segment [AB] will be drawn which must lie entirely inside the ellipse.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:600px; height:400px;"></div>
+        <script src="js/convex1.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Soit f une fonction numérique définie sur un ensemble D.<br> 
+            On appelle <strong>
+              <em>'épigraphe'</em>
+            </strong> de f l'ensemble des points (x,y) du plan avec x&isin;D et y &gt; f(x).<br>
+            On appelle <strong>
+              <em>'hypographe'</em>
+            </strong> de f l'ensemble des points (x,y) du plan avec x&isin;D et y &lt; f(x).            
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> let f be a numerical function defined on a set D. <br>
+            We call <strong>
+              <em>'epigraph'</em>
+            </strong> of f the set of points (x,y) of the plane with x&isin;D and y &gt; f(x).<br>
+            We call <strong>
+              <em>'hypograph'</em>
+            </strong> of f the set of points (x,y) of the plane with x&isin;D and y &lt; f(x).<br>            
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Les points de l'épigraphe sont donc les points situés au-dessus du graphe. <br> Voici une appliquette qui vous permet de visualiser l'épigraphe d'une fonction. <br> Cliquez sur le bouton 'Choix fonction' pour changer de fonction. </div>
+        <!-- /fr -->
+        <div lang="en"> The points of the epigraph are therefore the points located above the graph. <br> Here is an applet that allows you to view the epigraph of a function. <br> Click on the 'Change function' button to change function. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace2.choicef()'>
+          <div lang="fr">Choix fonction</div>
+          <!-- /fr -->
+          <div lang="en">Change function</div>
+          <!-- /en -->
+        </button>
+        <script src="js/convex2.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Une fonction est dite <b>
+              <i>'convexe'</i>
+            </b> si son épigraphe est convexe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> A function is said <b>
+              <i>'convex'</i>
+            </b> if its epigraph is convex.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser l'épigraphe de fonctions convexes. <br> Cliquez sur le bouton 'Choix fonction' pour changer de fonction. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize the epigraph of convex functions. <br> Click on the 'Change function' button to change function. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton3' onClick='nameSpace3.choicef()'>
+          <div lang="fr">Choix fonction</div>
+          <!-- /fr -->
+          <div lang="en">Change function</div>
+          <!-- /en -->
+        </button>
+        <script src="js/convex3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> La propriété suivante est une évidence géométrique : </div>
+        <!-- /fr -->
+        <div lang="en"> The following property is geometric evidence : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Une condition nécessaire et suffisante pour qu'une fonction soit convexe est que pour tout couple de points M,N du graphe, le segment [MN] soit tout entier dans l'épigraphe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> A necessary and sufficient condition for a function to be convex is that for any pair of points M,N of the graph, the segment [MN] is entirely in the epigraph.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Sachant que si M(x<sub>0</sub>,y<sub>0</sub>) et N(x<sub>1</sub>,y<sub>1</sub>) le point P(&lambda;)(&lambda;x<sub>0</sub>+(1-&lambda;)x<sub>1</sub>,&lambda;y<sub>0</sub>+(1-&lambda;)y<sub>1</sub>) parcourt le segment [MN] quand &lambda; varie de 1 à 0, nous avons donc la nouvelle propriété : </div>
+        <!-- /fr -->
+        <div lang="en"> Knowing that if M(x<sub>0</sub>,y<sub>0</sub>) and N(x<sub>1</sub>,y<sub>1</sub>) the point P(&lambda;)(&lambda;x<sub>0</sub>+(1-&lambda;)x<sub>1</sub>,&lambda;y<sub>0</sub>+(1-&lambda;)y<sub>1</sub>) traverses segment [MN] when &lambda; varies from 1 to 0, so we have the new property: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Une condition nécéssaire et suffisante pour que f soit convexe sur I est que: f(&lambda;x<sub>0</sub>+(1-&lambda;)x<sub>1</sub>) &le; &lambda;f(x<sub>0</sub>)+(1-&lambda;)f(x<sub>1</sub>), &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I&times;I.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> A necessary and sufficient condition for f to be convex on I is that: f(&lambda;x<sub>0</sub>+(1-&lambda;)x<sub>1</sub>) &le; &lambda;f(x<sub>0</sub>)+(1- &lambda;)f(x<sub>1</sub>), &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I&times;I.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Lemme des 3 cordes</h2> Le résultat suivant devient évident quand on sait que le taux de variation de f de a à b soit (f(b)-f(a))/(b-a) représente la pente de la sécante à la courbe représentative de f passant par les points du graphe d'abscisses a et b:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Lemma of the 3 chords</h2> The following result becomes obvious when we know that the rate of variation of f from a to b that is (f(b)-f(a))/(b-a) represents the slope of the secant of the representative curve of f passing through the points of the graph with abscissae a and b :
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si f est convexe sur I et si a,b,c sont trois points de I vérifiant a &lt; b &lt; c alors:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{f(b)-f(a)}{b-a}\leqslant \frac{f(c)-f(a)}{c-a} \leqslant \frac{f(c)-f(b)}{c-b} \)</p>
+            <!-- /FORMULE UNIV INLINE--> En outre si l'une des 3 égalités est vérifiée &forall; a,b,c a &lt; b &lt; c alors f est convexe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If f is convex on I and if a,b,c are three points of I satisfying a &lt; b &lt; c then:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{f(b)-f(a)}{b-a}\leqslant \frac{f(c)-f(a)}{c-a} \leqslant \frac{f(c)-f(b)}{c-b} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Moreover if one of the 3 equalities is verified &forall; a,b,c a &lt; b &lt; c then f is convex.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui illustre la définition d'une fonction convexe ainsi que le théorème des 3 cordes. <br> Vous pouvez: <ul>
+            <li>Faire varier la variable a entre 0 et 3 (point rouge).</li>
+            <li>Faire varier la variable b entre 5 et 8 (idem).</li>
+            <li>Faire varier la valeur c entre a et b (idem).</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that illustrates the definition of a convex function as well as the 3 string theorem. <br> You can: <ul>
+            <li>Vary variable a between 0 and 3 (red dot).</li>
+            <li>Vary the variable b between 5 and 8 (idem).</li>
+            <li>Vary the value c between a and b (idem).</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/convex4.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Continuité</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Continuity</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Toute application convexe sur un intervalle I est continue sur cet intervalle.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Any convex map on an interval I is continuous on this interval.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet pour tout a∈I l'application g<sub>a</sub>: x → Δf(a,x) ( <input type="button" value="taux de variation" onclick="go('../foncnum/foncnummonotones.html#tauxvar#')" data-inline="true" /> de f entre x et a) est d'après le lemme des 3 cordes, croissante. <br /> Il en résulte donc que lim<sub>x→a+</sub> g<sub>a</sub>(x) existe et est finie (voir par exemple <input type="button" value="cette page" onclick="go('../foncnum/foncnumlimagauche.html#foncmo#')" data-inline="true" />), mais aussi lim<sub>x→a-</sub> g<sub>a</sub>(x). Donc lim<sub>x→a+</sub> f(x)-f(a) =lim<sub>x→a-</sub> f(x)-f(a)=0 et f est continue en a. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed for any a∈I the map g<sub>a</sub>: x → Δf(a,x) ( <input type="button" value="rate of change" onclick="go('../foncnum/foncnummonotones.html#tauxvar#')" data-inline="true" /> of f between x and a) is according to the 3-string lemma, increasing. <br /> It therefore follows that lim<sub>x→a+</sub> g<sub>a</sub>(x) exists and is finite (see for example <input type="button" value="this page" onclick="go('../foncnum/foncnumlimagauche.html#foncmo#')" data-inline="true" />), but also lim<sub>x→a-</sub> g<sub>a</sub>(x). So lim<sub>x→a+</sub> f(x)-f(a) =lim<sub>x→a-</sub> f(x)-f(a)=0 and f is continuous in a. <br />
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contconvexes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contconvexes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

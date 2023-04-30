@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>prodinf1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+</span><span class="s2">import </span><span class="s1">itertools </span><span class="s2">as </span><span class="s1">it 
+</span><span class="s2">import </span><span class="s1">operator </span><span class="s2">as </span><span class="s1">op 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">prod0(L): 
+    </span><span class="s0">&quot;&quot;&quot;produit itératif simple - simple iterative product&quot;&quot;&quot;</span><span class="s1"> 
+    P = </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">while </span><span class="s1">L: 
+        P *= L[</span><span class="s3">0</span><span class="s1">] 
+        L = L[</span><span class="s3">1</span><span class="s1">:] 
+    </span><span class="s2">return </span><span class="s1">P 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">prod1(L): 
+    </span><span class="s0">&quot;&quot;&quot;produit itératif des éléments d'une liste avec la fonction reduce - iterative product using reduce function&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">len(L) == </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">len(L) == </span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">L[</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">return </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x * y, L) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">prod2(L): 
+    </span><span class="s0">&quot;&quot;&quot;produit récursif des éléments d'une liste - recursive product of elements of a list&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">len(L) == </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">len(L) == </span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">L[</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">return </span><span class="s1">L[</span><span class="s3">0</span><span class="s1">] * prod2(L[</span><span class="s3">1</span><span class="s1">:]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    print(</span><span class="s4">&quot;test prod0&quot;</span><span class="s1">) 
+    print(prod0([]))  </span><span class="s0"># liste vide - empty list</span><span class="s1"> 
+    print(prod0([</span><span class="s3">1</span><span class="s1">]))  </span><span class="s0"># un seul facteur - only one factor</span><span class="s1"> 
+    L = [i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">4</span><span class="s1">)]  </span><span class="s0"># factorielle 4 - 4! factorial 4</span><span class="s1"> 
+    print(prod0(L)) 
+    print(</span><span class="s4">&quot;test prod1&quot;</span><span class="s1">) 
+    print(prod1([]))  </span><span class="s0"># liste vide - empty list</span><span class="s1"> 
+    print(prod1([</span><span class="s3">1</span><span class="s1">]))  </span><span class="s0"># un seul facteur - only one factor</span><span class="s1"> 
+    L = [i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">4</span><span class="s1">)]  </span><span class="s0"># factorielle 4 - factorial 4</span><span class="s1"> 
+    print(prod1(L)) 
+    print(</span><span class="s4">&quot;test prod2&quot;</span><span class="s1">) 
+    print(prod2([]))  </span><span class="s0"># liste vide - empty list</span><span class="s1"> 
+    print(prod2([</span><span class="s3">1</span><span class="s1">]))  </span><span class="s0"># un seul facteur - only one factor</span><span class="s1"> 
+    L = [i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">4</span><span class="s1">)]  </span><span class="s0"># factorielle 4 - factorial 4</span><span class="s1"> 
+    print(prod2(L)) 
+    print(</span><span class="s4">&quot;test prod3&quot;</span><span class="s1">) 
+    </span><span class="s0"># nouveau avec python 3.4 - new with Python 3.4</span><span class="s1"> 
+    </span><span class="s0"># ramène la suite des produits partiels - computes the sequence of partial products</span><span class="s1"> 
+    L = (it.accumulate([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">, </span><span class="s3">4</span><span class="s1">, </span><span class="s3">5</span><span class="s1">], op.mul)) 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L: 
+        print(x) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

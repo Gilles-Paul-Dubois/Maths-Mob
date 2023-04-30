@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>exo3.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">func(x)=x*x-x-</span><span class="s1">1</span>
+
+<span class="s2">function </span><span class="s0">gensec(x0,x1,f,c::Channel)</span>
+    <span class="s0">a,b=x0,x1</span>
+    <span class="s2">while true</span>
+        <span class="s0">a, b = b, (a * f(b) - b * f(a)) / (f(b) - f(a)) </span>
+        <span class="s0">put!(c,b)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+        
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">S = Channel( (channel_arg) -&gt; gensec(</span><span class="s1">3</span><span class="s0">,</span><span class="s1">2</span><span class="s0">,func, channel_arg) )</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">0</span><span class="s0">:</span><span class="s1">6</span>
+        <span class="s0">println(take!(S))</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span>
+ 
+
+ 
+</pre>
+</body>
+</html>

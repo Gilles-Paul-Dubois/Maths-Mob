@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fonctions monotones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnummonotones/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnummonotones/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous avons déjà vu la notion d'application ' <input type="button" value="compatible'" onclick="go('../../bases/applications/compordre.html#')" data-inline="true" /> avec une relation d'ordre. <br /> Nous appliquons ici ces notions aux fonctions numériques. <br /> La situation est tout à fait semblable aux <input type="button" value="suites" onclick="go('../suites/suitesmonotones.html#')" data-inline="true" />. <h2>Fonctions strictement monotones</h2>
+          <h3>Strictement croissantes</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have already seen the notion of application ' <input type="button" value="compatible'" onclick="go('../../bases/applications/compordre.html#')" data-inline="true" /> with an order relation. <br /> Here we apply these notions to numerical functions. <br /> The situation is quite similar to <input type="button" value="suites" onclick="go('../suites/monotonesuites.html#')" data-inline="true" />. <h2>Strictly monotonic functions</h2>
+          <h3>Strictly increasing</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que f est <b>
+              <i>'strictement croissante'</i>
+            </b> sur D si et seulement si: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>&gt;x<sub>0</sub> &rArr; f(x<sub>1</sub>)&gt;f(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that f is <b>
+              <i>'strictly increasing'</i>
+            </b> on D if and only if: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>>x<sub>0</sub> &rArr; f(x<sub>1</sub>)>f(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Illustration (l'allure est 'montante' quand on parcourt la courbe de gauche à droite): </div>
+        <!-- /fr -->
+        <div lang="en"> Illustration (the pace is 'rising' when the curve is traversed from left to right): </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/strictcrois.png" width="352" height="403" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h3>Strictement décroissantes</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Strictly decreasing</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit que f est <b>
+              <i>'strictement décroissante'</i>
+            </b> sur D si et seulement si: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>&gt;x<sub>0</sub> &rArr; f(x<sub>1</sub>) &lt; f(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that f is <b>
+              <i>'strictly decreasing'</i>
+            </b> on D if and only if: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>>x<sub>0</sub> &rArr; f(x<sub>1</sub>) &lt; f(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Illustration (l'allure est 'descendante' quand on parcourt la courbe de gauche à droite): </div>
+        <!-- /fr -->
+        <div lang="en"> Illustration (the pace is 'descending' when the curve is traversed from left to right): </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/strictdec.png" width="313" height="399" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit que f est <b>
+              <i>'strictement monotone' </i>
+            </b>sur D si et seulement si: <br> f est strictement croissante ou strictement décroissante sur D.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We say that f is <b>
+              <i>'strictly monotonic' </i>
+            </b>on D if and only if: <br> f is strictly increasing or strictly decreasing on D.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Propriété importante</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Important property</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Toute fonction strictement monotone sur son domaine est <input type="button" value="injective" onclick="go('../../bases/applications/injections.html#')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> Any strictly monotone function on its domain is <input type="button" value="injective" onclick="go('../../bases/applications/injections.html#')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve résulte du fait que ≥ est une relation d' <input type="button" value="ordre total" onclick="go('../../bases/relations/ordre.html#')" data-inline="true" /> sur &reals;. <h2>Fonctions monotones (au sens large)</h2>
+          <h3>Croissantes</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof results from the fact that ≥ is a relation of <input type="button" value="total order" onclick="go('../../bases/relations/ordre.html#')" data-inline="true" /> on &reals;. <h2>Monotonic functions (in the wider sense)</h2>
+          <h3>Increasing</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> On dit que f est <b>
+              <i>'croissante au sens large'</i>
+            </b> sur D si et seulement si: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>&ge;x<sub>0</sub> &rArr; f(x<sub>1</sub>)&ge;f(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> We say that f is <b>
+              <i>'increasing in the wider sense'</i>
+            </b> over D if and only if: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>&ge;x<sub>0</sub> &rArr; f(x<sub>1</sub>)&ge;f(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Illustration (il peut y avoir un ou plusieurs 'paliers'): </div>
+        <!-- /fr -->
+        <div lang="en"> Illustration (there can be one or more 'levellings'): </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/croislarge.png" width="318" height="402" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h3>Décroissantes</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Decreasing</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> On dit que f est <b>
+              <i>'décroissante au sens large'</i>
+            </b> sur D si et seulement si: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>&ge;x<sub>0</sub> &rArr; f(x<sub>1</sub>)&le;f(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> We say that f is <b>
+              <i>'decreasing in the wider sense'</i>
+            </b> over D if and only if: &forall; (x<sub>0</sub>,x<sub>1</sub>) &isin; D&times;D x<sub>1</sub>&ge;x<sub>0</sub> &rArr; f(x<sub>1</sub>)&le;f(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Illustration (il peut y avoir un ou plusieurs 'paliers'): </div>
+        <!-- /fr -->
+        <div lang="en"> Illustration (there can be one or more 'levellings'): </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/mondec.png" width="284" height="397" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Importance du domaine de définition</h2> La mention du domaine de définition est <b>
+            <i>particulièrement importante</i>
+          </b> pour tous les problèmes de monotonie. <br> Dans l'exemple ci-dessous, la fonction est: <ul>
+            <li>strictement croissante sur tout intervalle de la forme ]-&infin;,a] avec a&le;-2</li>
+            <li>croissante au sens large sur tout intervalle de la forme ]-&infin;,a] avec a&le;2</li>
+            <li>strictement décroissante sur tout intervalle de la forme[a,+&infin;[ avec a&ge;2</li>
+            <li> décroissante au sens large sur tout intervalle de la forme[a,+&infin;[ avec a&ge;-2</li>
+            <li>non monotone sur tout intervalle de la forme [a,b] avec a&lt;-2 et b&gt;2</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Importance of the definition domain</h2> Mentioning the domain of definition is <b>
+            <i>particularly important</i>
+          </b> for all monotonicity problems. <br> In the example below, the function is: <ul>
+            <li>strictly increasing on any interval of the form ]-&infin;,a] with a&le;-2</li>
+            <li>increasing in the wider sense on any interval of the form ]-&infin;,a] with a&le;2</li>
+            <li>strictly decreasing on any interval of the form [a,+&infin;[ with a&ge;2</li>
+            <li> decreasing in the wider sense on any interval of the form [a,+&infin;[ with a&ge;-2</li>
+            <li>non-monotonic on any interval of the form [a,b] with a<-2 and b>2 </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/vardom.png" width="275" height="400" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <a name="tauxvar"></a>
+        <div lang="fr">
+          <h2>Taux de variation</h2> Si x<sub>0</sub> et x<sub>1</sub> désigne des éléments <b>
+            <i>distincts</i>
+          </b> du domaine de définition D de f.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Average rate of change</h2> If x<sub>0</sub> and x<sub>1</sub> denote <b>
+            <i>distinct</i>
+          </b> elements of the domain of definition D of f.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 6</div> On appelle <b>
+              <i>'taux d'accroissement de f de x<sub>0</sub> à x<sub>1</sub>' </i>
+            </b> la quantité:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \Delta f\left ( x_{0},x_{1} \right )=\frac{f\left ( x_{1} \right )-f\left ( x_{0} \right )}{x_{1}-x_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 6</div> We call <b>
+              <i>'average rate of change of f from x<sub>0</sub> to x<sub>1</sub>' </i>
+            </b> the quantity:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \Delta f\left ( x_{1},x_{2} \right )=\frac{f\left ( x_{1} \right )-f\left ( x_{0} \right )}{x_{1}-x_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Si D est un intervalle I fini ou infini, les propriétés suivantes sont pratiquement évidentes: </div>
+        <!-- /fr -->
+        <div lang="en"> If D is a finite or infinite I interval, the following properties are practically obvious: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Une condition nécessaire et suffisante pour que f soit strictement croissante sur I est que: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1</sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>)&gt;0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> A necessary and sufficient condition for f to be strictly increasing over I is that: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1 </sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>)>0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Une condition nécessaire et suffisante pour que f soit strictement décroissante sur I est que: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1</sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>)&lt;0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> A necessary and sufficient condition for f to be strictly decreasing over I is that: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1 </sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>) <0. </div>
+              <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <!-- STOP -->
+          <a name="prop4"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">propriété 4</div> Une condition nécessaire et suffisante pour que f soit croissante sur I est que: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1</sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>)&ge;0.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">property 4</div> A necessary and sufficient condition for f to be increasing on I is that: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1 </sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>)&ge;0.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <!-- STOP -->
+          <a name="prop5"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">propriété 5</div> Une condition nécessaire et suffisante pour que f soit décroissante sur I est que: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1</sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>)&le;0.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">property 5</div> A necessary and sufficient condition for f to be decreasing over I is that: &forall;(x<sub>0</sub>,x<sub>1</sub>)&isin;I<sup>2</sup> x<sub>0</sub>&ne;x<sub>1 </sub> &Delta;f(x<sub>0</sub>,x<sub>1</sub>)&le;0.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Le taux de variation est une notion très importante. Il indique par son signe le sens de variation de la fonction, il indique par sa magnitude le rythme de cette variation. <br> En outre l'étude de cette quantité sera par la suite à la base de la notion de dérivée. <br> L'interprétation géométrique est la suivante: </div>
+          <!-- /fr -->
+          <div lang="en"> The average rate of change is a very important concept. It indicates by its sign the direction of variation of the function, it indicates by its magnitude the rhythm of this variation. <br> In addition, the study of this quantity will later be the basis of the notion of derivative. <br> The geometric interpretation is as follows: </div>
+          <!-- /en -->
+          <!-- STOP IMAGE -->
+          <p>
+            <img src="images/tauxvar.png" width="311" height="398" border="0" alt="">
+            <br>
+          </p>
+          <!-- /STOP IMAGE -->
+          <div lang="fr"> On voit ici que le taux de variation de la fonction f(x)=-x²/4+4 entre les points x<sub>0</sub>=-2 et x<sub>1</sub>=4 est égal à -1. </div>
+          <!-- /fr -->
+          <div lang="en"> We see here that the average rate of change of the function f(x)=-x²/4+4 between the points x<sub>0</sub>=-2 and x<sub>1</sub>=4 is equal to -1. </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="prop6"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">propriété 6</div> D'une façon générale &Delta;f(x<sub>0</sub>,x<sub>1</sub>) est la pente de la droite passant par les points (x<sub>0</sub>,f(x<sub>0</sub>)) et (x<sub>1</sub>,f(x<sub>1</sub>)).
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">property 6</div> We see that graphically &Delta;f(x<sub>0</sub>,x<sub>1</sub>) is the slope of the straight line passing through the points (x<sub>0</sub>, f(x<sub>0</sub>)) and (x<sub>1</sub>,f(x<sub>1</sub>))
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h2>Monotonie et opérations algébriques</h2> Nous renvoyons le lecteur aux exercices de cette section. <br /> Pour l'addition et la multiplication par un scalaire, <input type="button" value="cet exercice" onclick="go('exercices/foncnummonotones/ex01.html#')" data-inline="true" />. <br /> Pour le produit, <input type="button" value="cet exercice" onclick="go('exercices/foncnummonotones/ex02.html#')" data-inline="true" />. <h2>Monotonie et composition</h2> Nous renvoyons le lecteur à <input type="button" value="cet exercice" onclick="go('exercices/foncnummonotones/ex03.html#')" data-inline="true" />. <br />
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h2>Monotonicity and algebraic operations </h2> We refer the reader to the exercises in this section. <br /> For addition and multiplication by a scalar, <input data-inline="true" onclick="go('exercices/foncnummonotones/ex01.html#')" type="button" value="this exercise" />. <br /> For the product, <input data-inline="true" onclick="go('exercices/foncnummonotones/ex02.html#')" type="button" value=" this exercise" />. <h2>Monotonicity and composition </h2> We refer the reader to <input data-inline="true" onclick="go('exercices/foncnummonotones/ex03.html#')" type="button" value=" this exercise" />. <br />
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/foncnummonotones/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/foncnummonotones/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <table cellpadding="10">
+            <tr>
+              <td>
+                <div lang="fr">Création Gilles Dubois</div>
+                <div lang="en">Created by Gilles Dubois</div>
+              </td>
+              <td>
+                <div lang="fr">Janvier 2022</div>
+                <div lang="en">January 2022</div>
+              </td>
+              <td>
+                <div lang="fr">Version mobile Jquery</div>
+                <div lang="en">Mobile Jquery version</div>
+              </td>
+              <td>
+                <a href="https://www.mathjax.org">
+                  <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /footer -->
+        <ul style=list-style-type:'';>
+          <li>
+            <div lang="fr">
+              <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+            <div lang="en">
+              <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+          </li>
+          <li>
+            <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /page -->
+  </body>
+</html>

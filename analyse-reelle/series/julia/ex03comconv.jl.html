@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>exo3.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">u(n)= n%</span><span class="s1">2</span><span class="s0">==</span><span class="s1">0 </span><span class="s0">? </span><span class="s1">1</span><span class="s0">/(n+</span><span class="s1">1</span><span class="s0">) : -</span><span class="s1">1</span><span class="s0">/(n+</span><span class="s1">1</span><span class="s0">)</span>
+
+
+<span class="s2">function </span><span class="s0">genp(c::Channel)</span>
+    <span class="s0">p,k=</span><span class="s1">0</span><span class="s0">,</span><span class="s1">1</span>
+    <span class="s0">put!(c,p)</span>
+    <span class="s0">lasteven=p</span>
+    <span class="s0">lastodd=-</span><span class="s1">1</span>
+    <span class="s0">last=p</span>
+    <span class="s2">while true</span>
+        <span class="s0">k+=</span><span class="s1">1</span>
+        <span class="s2">if </span><span class="s0">last==lasteven</span>
+            <span class="s2">for </span><span class="s0">h </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:k</span>
+                <span class="s0">p=lastodd+</span><span class="s1">2</span><span class="s0">*h</span>
+                <span class="s0">put!(c,p)</span>
+            <span class="s2">end</span>
+            <span class="s0">lastodd=p</span>
+            <span class="s0">last=p</span>
+        <span class="s2">else</span>
+            <span class="s2">for </span><span class="s0">h </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:k</span>
+                <span class="s0">p=lasteven+</span><span class="s1">2</span><span class="s0">*h</span>
+                <span class="s0">put!(c,p)</span>
+            <span class="s2">end</span>
+            <span class="s0">lasteven=p</span>
+            <span class="s0">last=p           </span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">P= Channel(genp)</span>
+    <span class="s0">L=[take!(P) </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">200</span><span class="s0">]</span>
+    <span class="s0">println(L)</span>
+    <span class="s0">M=[u(k) </span><span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s0">L]</span>
+    <span class="s0">S=[reduce(+,M[</span><span class="s1">1</span><span class="s0">:k-</span><span class="s1">1</span><span class="s0">]) </span><span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s1">2</span><span class="s0">:</span><span class="s1">199</span><span class="s0">]</span>
+    <span class="s0">println(S)</span>
+    
+<span class="s2">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

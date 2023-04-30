@@ -1,0 +1,122 @@
+<html>
+<head>
+<title>devlim2.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">DLError(Exception): 
+    </span><span class="s2">def </span><span class="s1">__init__(self, value): 
+        self.value = value 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">DevLim: 
+    </span><span class="s2">def </span><span class="s1">__init__(self, n, a, f, C): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur admettant en paramètre l'ordre, le point, la fonction et la suite des coefficients&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s0">&quot;&quot;&quot;constructor taking as parameters the order, the point, the function and the sequence of coefficients&quot;&quot;&quot;</span><span class="s1">         
+        self.n = n 
+        self.a = a 
+        self.f = f 
+        self.C = C 
+ 
+    </span><span class="s2">def </span><span class="s1">approx(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;Approximation polynomiale de f - polynomial approximation of f&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">sum([self.C[k] * x ** k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(self.n + </span><span class="s3">1</span><span class="s1">)]) 
+ 
+    </span><span class="s2">def </span><span class="s1">reste(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;erreur absolue commise - absolute value of the error&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.f(x) - self.approx(x) 
+ 
+    </span><span class="s2">def </span><span class="s1">epsilon(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;relativisation par rapport à (x-a)^n - comparison with (x-a)^n  &quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.reste(x) / ((x - self.a) ** self.n) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;addition de deux D.L. - addition of 2 F.T.E.&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.a != other.a:  </span><span class="s0"># erreur si les D.L. ne concernent pas le même point -Error if both F.T.E. not for the same point</span><span class="s1"> 
+            </span><span class="s2">raise </span><span class="s1">DLError(</span><span class="s4">&quot;Les D.L. ne concernent pas le même point&quot;</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            r = min(self.n, other.n) 
+ 
+            </span><span class="s2">def </span><span class="s1">s(x): 
+                </span><span class="s2">return </span><span class="s1">self.f(x) + other.f(x) 
+ 
+            C = [self.C[k] + other.C[k] </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, r + </span><span class="s3">1</span><span class="s1">)] 
+            </span><span class="s2">return </span><span class="s1">DevLim(r, self.a, s, C) 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;produit de deux D.L. - product of 2 F.T.E.&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.a != other.a:  </span><span class="s0"># erreur si les D.L. ne concernent pas le même point - Error if both F.T.E. not for the same point</span><span class="s1"> 
+            </span><span class="s2">raise </span><span class="s1">DLError(</span><span class="s4">&quot;Les D.L. ne concernent pas le même point&quot;</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            r = min(self.n, other.n) 
+ 
+            </span><span class="s2">def </span><span class="s1">p(x): 
+                </span><span class="s2">return </span><span class="s1">self.f(x) * other.f(x) 
+ 
+            C = [</span><span class="s3">0</span><span class="s1">] * (r + </span><span class="s3">1</span><span class="s1">) 
+            </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, r + </span><span class="s3">1</span><span class="s1">): 
+                C[k] = sum([self.C[i] * other.C[k - i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, r + </span><span class="s3">1</span><span class="s1">) </span><span class="s2">if </span><span class="s1">i &lt;= k]) 
+            </span><span class="s2">return </span><span class="s1">DevLim(r, self.a, p, C) 
+ 
+ 
+</span><span class="s0"># Développement limité d'ordre 4 de la fonction sinus au voisinage de 0</span><span class="s1"> 
+</span><span class="s0"># F.T.E.4 for sine function near origin</span><span class="s1"> 
+DL1 = DevLim(</span><span class="s3">4</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, math.sin, [</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, -</span><span class="s3">1 </span><span class="s1">/ </span><span class="s3">6.0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">]) 
+</span><span class="s0">#développement limité d'ordre 3 du cosinus au voisinage de 0</span><span class="s1"> 
+</span><span class="s0">#F.T.E.3 for cosine near 0</span><span class="s1">
+DL2 = DevLim(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, math.cos, [</span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, -</span><span class="s3">0.5</span><span class="s1">, </span><span class="s3">0</span><span class="s1">]) 
+S = [</span><span class="s3">0.1</span><span class="s1">, </span><span class="s3">0.01</span><span class="s1">, </span><span class="s3">0.001</span><span class="s1">] 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    DL3 = </span><span class="s2">None</span><span class="s1"> 
+    DL4 = </span><span class="s2">None</span><span class="s1"> 
+    </span><span class="s2">try</span><span class="s1">: 
+        DL3 = DL1 + DL2 
+    </span><span class="s2">except </span><span class="s1">DLError </span><span class="s2">as </span><span class="s1">e: 
+        print(</span><span class="s4">&quot;Erreur D.L.&quot;</span><span class="s1">, e.value) 
+    </span><span class="s2">if </span><span class="s1">DL3 != </span><span class="s2">None</span><span class="s1">: 
+        print(DL3.C) 
+        </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">S: 
+            print(DL3.approx(x), DL3.reste(x), DL3.epsilon(x)) 
+    </span><span class="s2">try</span><span class="s1">: 
+        DL4 = DL1 * DL2 
+    </span><span class="s2">except </span><span class="s1">DLError </span><span class="s2">as </span><span class="s1">e: 
+        print(</span><span class="s4">&quot;Erreur D.L.&quot;</span><span class="s1">, e.value) 
+    </span><span class="s2">if </span><span class="s1">DL4 != </span><span class="s2">None</span><span class="s1">: 
+        print(DL4.C) 
+        </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">S: 
+            print(DL4.approx(x), DL4.reste(x), DL4.epsilon(x)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span><span class="s4">&quot;&quot;&quot; 
+Résultat de l'exécution - result of running
+1, 1, -0.5, -0.16666666666666666] 
+1.0948333333333335 4.248591520372713e-06 0.004248591520372712 
+1.0099498333333332 4.1749870227647534e-10 0.0004174987022764753 
+1.0009994998333331 4.196643033083092e-14 4.196643033083092e-05 
+[0, 1, 0.0, -0.6666666666666666] 
+0.09933333333333334 1.3320641972791591e-06 0.001332064197279159 
+0.009999333333333334 1.3333206067001058e-11 1.3333206067001056e-05 
+0.0009999993333333333 1.3335686721571705e-16 1.3335686721571705e-07 
+&quot;&quot;&quot;</span></pre>
+</body>
+</html>

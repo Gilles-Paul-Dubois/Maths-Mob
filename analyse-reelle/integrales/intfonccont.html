@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Cas des fonctions continues</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intfonccont/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intfonccont/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Théorème fondamental</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Fundamental theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit f une fonction Riemann-intégrable sur [a,b], la fonction définie par
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle x \mapsto F(x)=\int_{a}^{x} f(t)dt \)</p>
+            <!-- /FORMULE UNIV INLINE--> est partout définie et continue sur [a,b]. <br> En outre, cette fonction est dérivable en tout point x<sub>0</sub> de continuité de f et F'(x<sub>0</sub>)=f(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let f be a Riemann-integrable function on [a,b], then the function defined by
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle x \mapsto F(x)=\int_{a}^{x} f(t)dt \)</p>
+            <!-- /FORMULE UNIV INLINE--> is everywhere defined and continuous on [a,b]. <br> Moreover, this function is differentiable at any point x<sub>0</sub> of continuity of f and F'(x<sub>0</sub>)=f(x<sub>0</sub>) .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Le fait que F(x) soit définie est une conséquence d'un résultat déjà-vu <input type="button" value="ici" onclick="go('intriemint.html#prop4')" data-inline="true" />. <br /> La continuité de F résulte de l'encadrement vu <input type="button" value="ici" onclick="go('intriemint.html#prop10')" data-inline="true" />, qui prouve que F est <input type="button" value="lipschitzienne" onclick="go('../continuite/contuniforme.html#def2')" data-inline="true" />. <br /> Pour la seconde partie nous avons en vertu de la <input type="button" value="relation de Chasles pour les intégrales" onclick="go('intriemint.html#prop5')" data-inline="true" />
+            <br />
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F(x+h)-F(x)=\int_{x}^{x+h}f(t)dt \)</p>
+            <!-- /FORMULE UNIV INLINE--> d'où nou tirons
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m(h).h\leqslant F(x+h)-F(x)\leqslant M(h).h \)</p>
+            <!-- /FORMULE UNIV INLINE--> où <p>
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle m(h)=inf_{t\in [x,x+h]}f(t) \)
+              <!-- /FORMULE UNIV INLINE--> et
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle M(h)=sup_{t\in [x,x+h]}f(t) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> toujours en vertu de <input type="button" value="ce résultat" onclick="go('intriemint.html#prop10')" data-inline="true" />
+            <br> Nous en concluons que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m(h)\leqslant \frac{F(x+h)-F(x)}{h}\leqslant M(h) \)</p>
+            <!-- /FORMULE UNIV INLINE--> et comme
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle lim_{h \to 0}m(h)=lim_{h \to 0}M(h)=f(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> si f est continue en x, notre résultat suit.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The fact that F(x) is defined is a consequence of a deja-vu result <input type="button" value="here" onclick="go('intriemint.html#prop4')" data-inline=" true" />. <br /> The continuity of F results from the enclosing seen <input type="button" value="here" onclick="go('intriemint.html#prop10')" data-inline="true" />, which proves that F is <input type="button" value="lipschitzian" onclick="go('../continuite/contuniforme.html#def2')" data-inline="true" />. <br /> For the second part we have under the <input type="button" value="Chasles relation for integrals" onclick="go('intriemint.html#prop5')" data-inline="true" />
+            <br />
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F(x+h)-F(x)=\int_{x}^{x+h}f(t)dt \)</p>
+            <!-- /FORMULE UNIV INLINE--> from where we deduce
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m(h).h\leqslant F(x+h)-F(x)\leqslant M(h).h \)</p>
+            <!-- /FORMULE UNIV INLINE--> where <p>
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle m(h)=inf_{t\in [x,x+h]}f(t) \)
+              <!-- /FORMULE UNIV INLINE--> and
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle M(h)=sup_{t\in [x,x+h]}f(t) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p> always due to <input type="button" value="this result" onclick="go('intriemint.html#prop10')" data-inline="true" />
+            <br> We conclude that
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m(h)\leqslant \frac{F(x+h)-F(x)}{h}\leqslant M(h) \)</p>
+            <!-- /FORMULE UNIV INLINE--> and since
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle lim_{h \to 0}m(h)=lim_{h \to 0}M(h)=f(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> if f is continuous at x, our result follows.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser ce théorème. <br> La fonction représentée est f(x)=4/x. <br> Vous pouvez faire varier x entre les bornes 3 et 6 avec le premier curseur. <br> Avec le second curseur vous pouvez faire varier h de -1 à +1. <br> Nous avons ici </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize this theorem. <br> The function represented is f(x)=4/x. <br> You can vary x between bounds 3 and 6 with the first slider. <br> With the second slider you can vary h from -1 to +1. <br> We have here </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle F(x)=\int_{1}^{x}f(t)dt \)
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/showintegrals3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Conséquences importantes</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Important consequences</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si f est continue sur [a,b], f possède une <input type="button" value="primitive" onclick="go('../primitives/primdef.html#def1')" data-inline="true" /> sur [a,b]. <br /> La primitive de f qui s'annule en a est
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{x}f(t)dt \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If f is continuous on [a,b], f has an <input type="button" value="antiderivative" onclick="go('../primitives/primdef.html#def1')" data-inline=" true" /> on [a,b]. <br /> The antiderivative of f which vanishes at a is
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{x}f(t)dt \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> C'est évidemment une conséquence immédiate du résultat précédent et du fait que F(a)=0 en vertu de la définition même de l'intégrale de Riermann <input type="button" value="sur un intervalle de longueur nulle" onclick="go('intriemint.html#def3')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> This is obviously an immediate consequence of the previous result and of the fact that F(a)=0 by virtue of the very definition of the Riermann integral <input type="button" value="over an interval of zero length" onclick="go('intriemint.html#def3')" data-inline="true" />. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Si F est une primitive quelconque de f sur un intervalle I contenant [a,b]
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)dx=F(b)-F(a) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> If F is any antiderivative of f on an interval I containing [a,b]
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)dx=F(b)-F(a) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ceci résulte du fait que sur un intervalle une fonction possède au plus une primitive prenant en un point donné une valeur donnée. <h2>Théorème de la moyenne pour les intégrales définies</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This results from the fact that over an interval a function has at most one primitive taking a given value at a given point. <h2>Mean Value Theorem for definite integrals</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Si f est continue sur [a,b] alors il existe c &isin; [a,b] tel que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=f(c)(b-a) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> If f is continuous on [a,b] then there exists c &isin; [a,b] such that
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=f(c)(b-a) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> On obtient cela soit en appliquant le théorème des accroissements finis à une primitive de f soit en partant de l'encadrement vu <input type="button" value="ici" onclick="go('intriemint.html#prop10')" data-inline="true" />
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m(b-a)\leqslant \int_{a}^{b}f(x)dx\leqslant M(b-a) \)</p>
+            <!-- /FORMULE UNIV INLINE--> et le théorème de la <input type="button" value="valeur intermédiaire" onclick="go('../continuite/contvalint.html#thm1')" data-inline="true" /> pour les fonctions continues.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> This is obtained either by applying the mean value theorem to a primitive of f or by starting from the bounding seen <input type="button" value="here" onclick="go('intriemint.html#prop10')" data-inline="true" />
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m(b-a)\leqslant \int_{a}^{b}f(x)dx\leqslant M(b-a) \)</p>
+            <!-- /FORMULE UNIV INLINE--> and the <input type="button" value="intermediate value" onclick="go('../continuite/contvalint.html#thm1')" data-inline="true" /> theorem for continuous functions .
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Autre résultat important</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Another important result</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Si f est une fonction continue positive sur [a,b] et si
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=0 \)
+            <!-- /FORMULE UNIV INLINE--> alors f est nulle sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> If f is a positive continuous function on [a,b] and if
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=0 \)
+            <!-- /FORMULE UNIV INLINE--> then f is zero on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons en effet que f(x<sub>0</sub>) &gt;0 avec x<sub>0</sub>&isin;[a,b]. On pourrait dans ce cas trouver une fonction étagée positive e inférieure à f et verifiant e(x) &ge; f(x<sub>0</sub>)/2 sur un intervalle de longueur &delta; &gt; 0. L'intégrale de e sur [a,b], qui minore celle de f, serait donc au moins égale à f(x<sub>0</sub>)&delta;/2.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose indeed that f(x<sub>0</sub>) &gt;0 with x<sub>0</sub>&isin;[a,b]. We could in this case find a positive step function e less than f and verifying e(x) &ge; f(x<sub>0</sub>)/2 over an interval of length &delta; &gt; 0. The integral of e over [a,b], which is less than that of f, would therefore be at least equal to f(x<sub>0</sub>)&delta;/2.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Second théorème de la moyenne</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Second Mean Value Theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Soit g une fonction continue sur [a,b] et f une fonction dérivable sur [a,b] et dont la dérivée garde un signe constant (ce qui implique que f est monotone). <br> Dans ces conditions, il existe un nombre c&isin;[a,b] tel que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx=f(a)\int_{a}^{c}g(x)dx+f(b)\int_{c}^{b}g(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> Let g be a continuous function on [a,b] and f a differentiable function on [a,b] whose derivative keeps a constant sign (which implies that f is monotone). <br> Under these conditions, there exists a number c&isin;[a,b] such that
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx=f(a)\int_{a}^{c}g(x)dx+f(b)\int_{c}^{b}g(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons par exemple f croissante, alors
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx\geqslant f(a)\int_{a}^{b}g(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx \leqslant f(b)\int_{a}^{b}g(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE--> Posons maintenant
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F(x)=f(a)\int_{a}^{x}g(t)dt+f(b)\int_{x}^{b}g(t)dt \)</p>
+            <!-- /FORMULE UNIV INLINE--> On a donc
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F(b)\leqslant \int_{a}^{b}f(x)g(x)dx\leqslant F(a) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Mais F est une fonction continue à laquelle nous pouvons appliquer le théorème de la valeur intermédiaire. <br> Il existe donc c&isin; [a,b] tel que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx=F(c) \)</p>
+            <!-- /FORMULE UNIV INLINE--> ce qui correspond exactement à notre énoncé.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose for example that f is increasing, then
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx\geqslant f(a)\int_{a}^{b}g(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx \leqslant f(b)\int_{a}^{b}g(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE--> Let's set now
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F(x)=f(a)\int_{a}^{x}g(t)dt+f(b)\int_{x}^{b}g(t)dt \)</p>
+            <!-- /FORMULE UNIV INLINE--> So we have
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F(b)\leqslant \int_{a}^{b}f(x)g(x)dx\leqslant F(a) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Buts F is a continuous function to which we can apply the theorem of the intermediate value. <br> Hence it exists c&isin; [a,b] such that
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)g(x)dx=F(c) \)</p>
+            <!-- /FORMULE UNIV INLINE--> which is another way to express our statement.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Forme dite de 'Bonnet' du théorème précédent</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>So-called 'Bonnet' form of the previous theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 7</div> Soient f et g deux fonctions continues définies sur [a,b]. On suppose en outre f positive et décroissante. <br> Dans ces conditions il existe un réel c&isin;[a,b], tel que :
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)g(x)dx=f(a)\int_{a}^{c}g(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 7</div> Let f and g be two continuous functions defined on [a,b]. We further assume that f is positive and decreasing. <br> Under these conditions there exists a real c&isin;[a,b], such that:
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)g(x)dx=f(a)\int_{a}^{c}g(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4>
+            <p>Il suffit d'appliquer la formule précdénte avec au lieu de la fonction f la fonction &phi; x &rarr; f(x)-f(b)</p>
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4>
+            <p>Just apply the previous formula with instead of the function f the function &phi; x &rarr; f(x)-f(b)</p>
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Un programme de calcul symbolique peut calculer des intégrales définies de fonctions continues. <br> Voici un exemple de calcul avec le module 'sympy'. <br> L'intégrale calculée est
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\pi /2}^{+\pi /2}cos(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> qui vaut 2.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> A symbolic calculation program can calculate definite integrals of continuous functions. <br> Here is an example of calculation with the 'sympy' module. <br> The calculated integral is
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\pi /2}^{+\pi /2}cos(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> the value of which is 2.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/intdefinie.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Même chose avec Julia 1.6 et MTH229</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>Same with Julia 1.6 and MTH229</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/integrate.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intfonccont/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intfonccont/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

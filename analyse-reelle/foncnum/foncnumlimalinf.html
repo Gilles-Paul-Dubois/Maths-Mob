@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limites à l'infini</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimalinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimalinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Limite finie d'une fonction quand la variable tend vers +∞</h2> Nous allons pour la première fois voir la notion de limite d'une fonction numérique. <br /> Cette notion n'est pas complètement nouvelle, nous avons déjà vu la notion de limite pour les <input type="button" value="suites" onclick="go('../suites/suitesconvergentes.html#')" data-inline="true" /> (et en conséquence les séries) de nombres réels. <br /> Nous commençons tout exprès par le cas où la variable tend vers +∞ car il y a un parallèle parfait avec ce que nous avons vu dans le cas des suites: On suppose dans tout ce qui suit que le domaine de définition de D contient un intervalle de la forme [k,+∞[ ( k réel quelconque) faute de quoi nos énoncés n'auraient pas de sens.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Finite limit of a function when the variable tends to +∞</h2> We are going to see for the first time the notion of limit of a numerical function. <br /> This concept is not completely new, we have already seen the notion of limit for <input type="button" value="sequences" onclick="go('../suites/suitesconvergentes.html#')" data-inline="true" /> (and therefore series) of real numbers. <br /> We start on purpose with the case where the variable tends to +∞ because there is a perfect parallel with what we have seen in the case of sequences: We suppose in all that follows that the domain of definition of D contains an interval of the form [k,+∞[ (k is any real number) otherwise our statements would have no meaning.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que la fonction f <b>
+              <i>'tend vers la limite a'</i>
+            </b> lorsque x tend vers +&infin; si &forall; &epsilon; &gt; 0 donné il existe un réel X tel que x &gt; X &rArr; |f(x)-a| &lt; &epsilon;. <br> On écrit cela de façon raccourcie:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that the function f <b>
+              <i>'tends to the limit a'</i>
+            </b> when x tends to +&infin; if &forall; &epsilon;>0 given there exists a real X such that x>X &rArr; |f(x)-a|<&epsilon;. <br> We write this in a short way:
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle \lim_{x \to +\infty }f(x)=a \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Toutes les remarques que nous avons faites dans le cas des suites s'appliquent encore à cette situation. Notamment la signification intuitive de cette affirmation qui peut s'exprimer ainsi: <br> "f(x) est aussi près de a qu'on veut pourvu que x soit suffisamment grand". Mais aussi le fait que le réel X dépend du réel &epsilon; et devrait être noté en toute rigueur X(&epsilon;). S'appliquent également les remarques faites sur la nature des inégalités (des inégalités larges peuvent remplacer les inégalités strictes, à l'exception de &epsilon; &gt; 0). <br> Voici l'exemple d'une fonction qui tend vers 2 lorsque x&rarr;+&infin;. <br> Faire varier &epsilon; au moyen du curseur entre 0.5 et 0.07. <br> Vous voyez s'afficher la variation de X correspondante telle que x &gt; X &rArr; |f(x)-2| &lt; &epsilon; <br> Remarquez que <b>
+            <i>dans ce cas particulier la courbe passe alternativement au dessus et en dessous de la limite</i>
+          </b>. </div>
+        <!-- /fr -->
+        <div lang="en"> All the remarks we made in the case of suites still apply to this situation. In particular the intuitive meaning of this statement which can be expressed as follows: <br> "f(x) is as close to a as we want provided x is large enough". But also the fact that the real X depends on the real &epsilon; and should strictly be denoted X(&epsilon;). The remarks made on the nature of the inequalities also apply (broad inequalities can replace strict inequalities, with the exception of &epsilon;>0). <br> Here is an example of a function that tends to 2 when x&rarr;+&infin;. <br> Vary &epsilon; using the slider between 0.5 and 0.07. <br> You see the corresponding variation of X such as x>X &rArr; |f(x)-2|<&epsilon; <br> Notice that <b>
+              <i>in this particular case the curve goes alternately above and below the limit</i>
+            </b>. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box11" class="jxgbox" style="width:1000px; height:400px;"></div>
+        <div lang="fr">Choix de &epsilon; </div>
+        <!-- /fr -->
+        <div lang="en">Choice of &epsilon;</div>
+        <!-- /en -->
+        <input type='range' id="myRange11" step='0.01' min='0.07' max='0.5' value="0.5" onchange="nameSpace11.changep(this.value)" />
+        <div lang="fr">Valeur de X(&epsilon;) :</div>
+        <!-- /fr -->
+        <div lang="en">Value of X(&epsilon;)</div>
+        <!-- /en -->
+        <input type='text' id='myText112'>
+        <script src="js/visulimfunc_a_l_inf.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Limite infinie d'une fonction quand la variable tend vers +&infin;</h2> Nous procéderons encore par analogie avec les suites.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Infinite limit of a function when the variable tends to +&infin;</h2> We will again proceed by analogy with the sequences.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit que f <strong>
+              <em>tend vers +&infin;</em>
+            </strong> (ou bien diverge vers +&infin;) quand x &rarr;+&infin; si &forall; M&isin;&reals;, &exist; X&isin;&reals; tel que x &gt; X &rArr; f(x) &gt; M. <br> Écriture symbolique :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=+\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that f <strong>
+              <em>tends to +&infin;</em>
+            </strong> (or diverges to +&infin;) when x &rarr;+&infin; if &forall; M&isin;&reals;, &exist; X&isin;&reals; such that x>X &rArr; f(x)>M. <br> Symbolic writing:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=+\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous montre une fonction qui tend vers +&infin; quand x tend vers +&infin;. <br> Au moyen du curseur vous fixez une valeur entière M entre 5 et 30. <br> La valeur de X telle que f(x) &gt; M est aussitôt calculée. <br> Vous voyez apparaître en rouge la droite d'équation y=M et en bleu la droite d'équation x=X. <br> Vous devez donc vérifier qu' à droite de la verticale bleue tous les points du graphe vert sont au dessus de l'horizontale rouge. <br> Vous noterez sur cet exemple qu' <b>
+            <i>une fonction n'a pas besoin d'être croissante pour tendre vers +&infin;</i>
+          </b>. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that shows you a function that tends to +&infin; as x tends to +&infin;. <br> Using the slider you set an integer value M between 5 and 30. <br> The value of X such that f(x)>M is immediately calculated. <br> You see the line with equation y=M appear in red and the line with equation x=X in blue. <br> You must therefore check that to the right of the blue vertical all the points of the green graph are above the red horizontal. <br> You will notice in this example that <b>
+            <i>a function does not need to be increasing to tend to +&infin;</i>
+          </b>. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <div lang="fr"> Fixer M avec le curseur</div>
+        <!-- /fr -->
+        <div lang="en">Set M with slider</div>
+        <!-- /en -->
+        <input type='range' id="myRange1" step='0.1' min='5' max='30' value="5" onchange="nameSpace1.changer(this.value)" />
+        <input type='text' id='MyText1'>
+        <script src="js/functendverslinf.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit que f <strong>
+              <em>tend vers -&infin;</em>
+            </strong> (ou bien diverge vers -&infin;) quand x &rarr;+&infin; si &forall; m&isin;&reals;, &exist; X&isin;&reals; tel que x &gt; X &rArr; f(x) &lt; m. <br> Écriture symbolique : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=-\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We say that f <strong>
+              <em>tends to -&infin;</em>
+            </strong> (or diverges to -&infin;) when x &rarr;+&infin; if &forall; m&isin;&reals;, &exist; X&isin;&reals; such that x &gt; X &rArr; f(x) &lt; m. <br> Symbolic writing: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=-\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Oscillations bornées</h2> Voici un autre comportement possible pour x&rarr;+&infin;: <ul>
+            <li>La fonction ne tend vers aucune limite réelle.</li>
+            <li>La fonction ne tend ni vers +&infin; ni vers -&infin;.</li>
+            <li>La fonction est bornée.</li>
+          </ul> Appuyer sur le bouton '+10' pour augmenter les valeurs de x.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Bounded oscillations</h2> Here is another possible behavior for x&rarr;+&infin;: <ul>
+            <li>The function tends to no real limit.</li>
+            <li>The function neither tends to +&infin; nor to -&infin;.</li>
+            <li>The function is bounded.</li>
+          </ul> Press the '+10' button to increase the values ​​of x.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" id='myButton2' onclick="nameSpace2.plus10()"> +10 </button>
+        <script src="js/oscilbornee.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Oscillations non bornées</h2> Voici un autre exemple de comportement pour x&rarr;+&infin;: <ul>
+            <li>La fonction ne tend vers aucune limite réelle.</li>
+            <li>La fonction ne tend ni vers +&infin; ni vers -&infin;.</li>
+            <li>La fonction n'est pas bornée.</li>
+          </ul> . Appuyer sur le bouton '+10' pour augmenter les valeurs de x.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Unbounded oscillations</h2> Here is another example behavior for x&rarr;+&infin;: <ul>
+            <li>The function tends to no real limit.</li>
+            <li>The function neither tends to +&infin; nor to -&infin;.</li>
+            <li>The function is not bounded.</li>
+          </ul> . Press the '+10' button to increase the values ​​of x.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace3.plus10()"> +10 </button>
+        <script src="js/oscilnonbornee.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Cas des fonctions monotones</h2> Nous avons bien évidemment le même résultat que pour les suites:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of monotone functions</h2> We obviously have the same result as for the sequences:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Pour une fonction f croissante, lorsque x&rarr;+&infin; il n'existe que 2 possibilités: <br /> Soit f n'est pas majorée auquel cas elle tend vers +∞. <br /> Soit f est majorée auquel cas elle converge vers la limite Sup(f(D)), la borne supérieure de l'image du domaine de f. Cette borne existe <input type="button" value="nous l'avons vu" onclick="go('../suites/suitesbornees.html#')" data-inline="true" />
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> For an increasing function f, when x&rarr;+&infin; there are only 2 possibilities: <br /> Either f is not bounded in which case it tends to +∞. <br /> Let f be bounded in which case it converges to the limit Sup(f(D)), the supremum of the image of the domain of f. This terminal exists <input type="button" value="we saw it" onclick="go('../suites/suitesbornees.html#')" data-inline="true" />
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Visualisons maintenant le cas d'une fonction croissante et bornée. <br> L'appliquette qui suit fonctionne comme la précédente: </div>
+        <!-- /fr -->
+        <div lang="en"> Let us now visualize the case of an increasing and bounded function. <br> The following applet works like the previous one: </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" id='myButton4' onclick="nameSpace4.plus10()"> +10 </button>
+        <script src="js/croisetbornee.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Et on a, bien sûr, l'énoncé analogue pour les fonctions décroissantes: </div>
+        <!-- /fr -->
+        <div lang="en"> And we have, of course, the analogous statement for decreasing functions: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Pour une fonction f décroissante, lorsque x&rarr;+&infin; il n'existe que 2 possibilités: <br> Soit f n'est pas minorée auquel cas elle tend vers -&infin;. <br> Soit f est minorée auquel cas elle converge vers la limite Inf(f(D)), la borne inférieure de l'image du domaine de f.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> For a decreasing function f, when x&rarr;+&infin; there are only 2 possibilities: <br> Let f not be lower bounded, in which case it tends to -&infin;. <br> Let f be lower bounded, in which case it converges to the limit Inf(f(D)), the infimum of the image of the domain of f.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Cas où la variable tend vers -&infin;</h2> Nous pouvons maintenant par symétrie décrire ce qui se passe quand n &rarr; - &infin;.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case where the variable tends to -&infin;</h2> We can now by symmetry describe what happens when n &rarr; - &infin;.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> On dit que la fonction f <b>
+              <i>'tend vers la limite a'</i>
+            </b> lorsque x tend vers -&infin; si &forall; &epsilon; &gt; 0 donné il existe un réel X tel que x &lt; X &rArr; |f(x)-a| &lt; &epsilon;. <br> On écrit cela de façon raccourcie:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to -\infty }f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> We say that the function f <b>
+              <i>'tends to the limit a'</i>
+            </b> when x tends to -&infin; if &forall; &epsilon;>0 given there exists a real X such that x &lt; X &rArr; |f(x)-a| &lt; &epsilon;. <br> We write this in a short way:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to -\infty }f(x)=a \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> On dit que f <strong>
+              <em>tend vers +&infin;</em>
+            </strong> (ou bien diverge vers +&infin;) quand x &rarr;-&infin; si &forall; M&isin;&reals;, &exist; X&isin;&reals; tel que x &lt; X &rArr; f(x) &gt; M. <br> Ecriture symbolique : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to -\infty }f(x)= +\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> We say that f <strong>
+              <em>tends to +&infin;</em>
+            </strong> (or diverges to +&infin;) when x &rarr;-&infin; if &forall; M&isin;&reals;, &exist; X&isin;&reals; such that x &lt; X &rArr; f(x) &gt; M. <br> Symbolic writing: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to -\infty }f(x)= +\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 6</div> On dit que f <strong>
+              <em>tend vers -&infin;</em>
+            </strong> (ou bien diverge vers -&infin;) quand x &rarr;-&infin; si &forall; m&isin;&reals;, &exist; X&isin;&reals; tel que x &lt; X &rArr; f(x) &lt; m. <br> Ecriture symbolique : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to -\infty }f(x)= -\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 6</div> We say that f <strong>
+              <em>tends to -&infin;</em>
+            </strong> (or diverges to -&infin;) when x &rarr;-&infin; if &forall; m&isin;&reals;, &exist; X&isin;&reals; such that x &lt; X &rArr; f(x) &lt; m. <br> Symbolic writing: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to -\infty }f(x)= -\infty \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimalinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimalinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

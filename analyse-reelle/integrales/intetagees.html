@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fonctions étagées</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intetagees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intetagees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soit [a,b] un intervalle compact de la droite réelle et f une fonction numérique définie sur [a,b]. <br /> On dit que f est <b>
+              <i>'étagée'</i>
+            </b> (ou <b>
+              <i>'en escaliers'</i>
+            </b>) sur [a,b], s'il existe une <input type="button" value="subdivision" onclick="go('intsubdiv.html#')" data-inline="true" /> s=(x<sub>0</sub>,x<sub>1</sub>, ...,x<sub>n-1</sub>,x<sub>n</sub>) de [a,b] telle que f soit constante sur chacun des intervalles ouverts ]x<sub>i</sub>,x<sub>i+1</sub>[ 0 ≤ i ≤ n-1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let [a,b] be a compact interval of the real line and f a numerical function defined on [a,b]. <br /> We say that f is a <b>
+              <i>'step function'</i>
+            </b> (or a <b>
+              <i>'staircase function'</i>
+            </b>) on [a,b], if there is a <input type="button" value="partition" onclick="go('intsubdiv.html#')" data-inline="true" /> s=(x<sub>0</sub>,x<sub>1</sub>, ...,x<sub>n-1</sub>,x<sub>n</sub>) of [a,b] such that f is constant on each of the open intervals ]x<sub>i</sub>,x<sub>i+1</sub>[ 0 ≤ i ≤ n-1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> NB: Les valeurs de f en les points x<sub>i</sub> de la subdivision peuvent être quelconques. <br> Il résulte immédiatement de cette définition que: </div>
+        <!-- /fr -->
+        <div lang="en"> NB: The values of f at the points x<sub>i</sub> of the partition can be arbitrary. <br> It follows immediately from this definition that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Si f est étagée sur [a,b] relativement à une subdivision s, alors f est étagée relativement à toute subdivision de [a,b] <input type="button" value="plus fine" onclick="go('intsubdiv.html#def4')" data-inline="true" /> que s.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> If f is a step function on [a,b] relative to a partition s, then f is also a step function relative to any partition of [a,b] which is a <input type="button" value="refinement" onclick="go('intsubdiv.html#def4')" data-inline="true" /> of s.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Visualisation de quelques fonctions étagées</h2> Voici une appliquette vous permettant de voir certaines subdivisions de l'intervalle [1,8] ainsi que des fonctions étagées relatives à ces subdivisions. <br> Vous pouvez sélectionner un type (aléatoire, arithmétique ou géométrique) au moyen des boutons. <br> Vous pouvez également faire varier le nombre de points de la subdivision avec les boutons 'n+' et 'n-'. <br> Les valeurs de la fonction sont aléatoires.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Visualization of some step functions</h2> Here is an applet allowing you to see some partitions of the interval [1,8] as well as step functions relative to these partitions. <br> You can select a type (random, arithmetic or geometric) using the buttons. <br> You can also vary the number of points in the partition with the 'n+' and 'n-' buttons. <br> The values of the function are random.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:400px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace1.alea()'>
+          <div lang="fr">aléatoire</div>
+          <!-- /fr -->
+          <div lang="en">random</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton2' onClick='nameSpace1.ari()'>
+          <div lang="fr">arithmétique</div>
+          <!-- /fr -->
+          <div lang="en">arithmetic</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton3' onClick='nameSpace1.geo()'>
+          <div lang="fr">géométrique</div>
+          <!-- /fr -->
+          <div lang="en">geometric</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton4' onClick='nameSpace1.plus()'>n+</button>
+        <button type='button' id='myButton5' onClick='nameSpace1.minus()'>n-</button>
+        <script src="js/etage01.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Structure d'espace vectoriel</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Vector space structure</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Les fonctions étagées sur [a,b] sont munies d'une structure <input type="button" value="d'espace vectoriel" onclick="go('../../algebre-lineaire/espaces/defev.html#defax')" data-inline="true" />. <br /> Plus précisément, cet ensemble est un <input type="button" value="sous-espace vectoriel" data-inline="true" /> de l'espace de toutes les <input type="button" value="fonctions bornées" onclick="go('../foncnum/foncnumbornees.html#')" data-inline="true" /> sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Step functions on [a,b] have a <input type="button" value="vector space structure" onclick="go('../../algebre-lineaire/espaces/defev.html#defax')" data-inline="true" />. <br /> Specifically, this set is an <input type="button" value="vector subspace" onclick="go('../../algebre-lineaire/espaces/sousev.html#defaxe')" data-inline="true" /> of the space of all <input type="button" value="bounded functions" onclick="go('../foncnum/foncnumbornees.html#')" data-inline="true" /> on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il est clair que le produit d'une fonction étagée par un scalaire est encore une fonction étagée. <br /> Il est non moins clair que la somme de deux fonctions étagées relativement à la même subdivision est encore une fonction étagée relativement à cette même subdivision. <br /> Dans le cas général il suffit de remarquer que si f est étagée sur [a,b] relativement à s<sub>1</sub> et si g est étagée sur [a,b] relativement à s<sub>2</sub>, alors f et g sont étagées relativement à s<sub>1</sub>∨s<sub>2</sub>. <br /> Vous pouvez avec cette appliquette, visualiser la somme de deux fonctions étagées sur le même intervalle. <br /> Le fonctionnement est identique à la précédente. <br /> Tout ce qui concerne la première fonction est représenté en rouge, y compris son graphe. <br /> Tout ce qui concerne la seconde fonction est représenté en bleu, y compris son graphe. <br /> La fonction représentée en vert est la somme des deux précédentes, elle est également étagée. </div>
+        <!-- /fr -->
+        <div lang="en"> It is clear that the product of a step function by a scalar is still a step function. <br /> It is no less clear that the sum of two step functions relatively to the same partition is still a step function relatively to this same partition. <br /> In the general case it suffices to remark that if f is a step function on [a,b ] relative to s<sub>1</sub> and if g is a step function on [a,b] relative to s<sub>2</sub>, then f and g are step functions relative to s<sub>1</sub>∨s<sub>2</sub>. <br /> You can with this applet, visualize the sum of two step functions over the same interval. <br /> The operation is identical to the previous one. <br /> Everything about the first function is shown in red, including its graph. <br /> Everything about the second function is shown in blue, including its graph. <br /> The function represented in green is the sum of the two previous ones, it is also a staircase function. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:400px;"></div>
+        <table width="100%">
+          <tr>
+            <td>
+              <font color="#FF0000">
+                <div lang="fr">Première fonction</div>
+                <!-- /fr -->
+                <div lang="en">First function</div>
+                <!-- /en -->
+              </font>
+              <button type='button' id='myButton21' onClick='nameSpace2.alea1()'>
+                <div lang="fr">aléatoire</div>
+                <!-- /fr -->
+                <div lang="en">random</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton22' onClick='nameSpace2.ari1()'>
+                <div lang="fr">arithmétique</div>
+                <!-- /fr -->
+                <div lang="en">arithmetic</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton23' onClick='nameSpace2.geo1()'>
+                <div lang="fr">géométrique</div>
+                <!-- /fr -->
+                <div lang="en">geometric</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton24' onClick='nameSpace2.plus1()'>n+</button>
+              <button type='button' id='myButton25' onClick='nameSpace2.minus1()'>n-</button>
+            </td>
+            <td>
+              <font color="#0000FF">
+                <div lang="fr">Seconde fonction</div>
+                <!-- /fr -->
+                <div lang="en">Second function</div>
+                <!-- /en -->
+              </font>
+              <button type='button' id='myButton26' onClick='nameSpace2.alea2()'>
+                <div lang="fr">aléatoire</div>
+                <!-- /fr -->
+                <div lang="en">random</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton27' onClick='nameSpace2.ari2()'>
+                <div lang="fr">arithmétique</div>
+                <!-- /fr -->
+                <div lang="en">arithmetic</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton28' onClick='nameSpace2.geo2()'>
+                <div lang="fr">géométrique</div>
+                <!-- /fr -->
+                <div lang="en">geometric</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton29' onClick='nameSpace2.plus2()'>n+</button>
+              <button type='button' id='myButton20' onClick='nameSpace2.minus2()'>n-</button>
+            </td>
+          </tr>
+        </table>
+        <script src="js/etage02.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Programmation</h2> Voir <input type="button" value="l'exercice proposé" onclick="go('exercices/intetagees/ex01.html')" data-inline="true" />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Programming</h2> See <input type="button" value="proposed exercise" onclick="go('exercices/intetagees/ex01.html')" data-inline="true" />
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intetagees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intetagees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

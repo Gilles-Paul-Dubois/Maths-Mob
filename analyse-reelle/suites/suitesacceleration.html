@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Accélération de convergence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesacceleration/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesacceleration/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>La plupart des suites convergent vers des constantes mathématiques (π,e, √2,etc..), où des fractions de ces constantes, et on est tenté de les utiliser pour calculer ces constantes avec une précision de plus en plus grande. <br /> La précision obtenue dépend bien entendu en premier lieu de la vitesse de convergence de la suite. Mais elle dépend également d'autres facteurs comme la difficulté de calculer le terme de rang n de la suite, nécessitant parfois n iétérations comme dans le cas de la suite d'Euler (1+1/n)<sup>n</sup> que nous avons déjà rencontrée plusieurs fois, ou bien la précision du type numérique utilisé pour les calculs ( <input type="button" value="float" onclick="go('../../nombres/reels/machine.html#')" data-inline="true" />, double, etc...). <br /> Nous nous préoccupons ici des améliorations que l'on peut obtenir en augmentant la vitesse de convergence d'une suite initiale par des procédés relativement simples (transformations linéaires). <br /> Les conditions d'applications de ces procédés sont assez restrictives, elles supposent parfaitement connu le mode de convergence de la suite initiale. </p>
+          <h2>Comparaison des vitesses de convergence</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Most sequences converge towards mathematical constants (π,e, √2,etc..), or fractions of these constants, and one is tempted to use them to calculate these constants with greater and greater precision. <br />The precision obtained depends of course in the first place on the speed of convergence of the sequence. But it also depends on other factors such as the difficulty of calculating the term of rank n of the sequence, sometimes requiring n iterations as in the case of the Euler sequence (1+1/n)<sup>n</sup> which we have already encountered several times, or the precision of the numeric type used for the calculations ( <input data-inline="true" onclick="go('../../nombres/reels/machine.html#')" type="button" value=" Back to float" />, double, etc...). <br /> We are concerned here with the improvements that can be obtained by increasing the speed of convergence of an initial sequence by relatively simple processes (linear transformations). <br /> The conditions of application of these processes are rather restrictive, they suppose perfectly known the mode of convergence of the initial sequence. </p>
+          <h2>Comparison of convergence speeds</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soient (u<sub>n</sub>= et (v<sub>n</sub>) deux suites convergeant toutes deux vers la même limite a. <br> On suppose en outre que pour n suffisamment grand on a toujours u<sub>n</sub>≠a. <br> Dans ces conditions on dit que la suite (v<sub>n</sub>) converge vers a <b>
+              <i>'plus rapidement'</i>
+            </b> que la suite (u<sub>n</sub>) ssi:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\lim_{n\rightarrow \infty }}\frac{v_{n}-a}{u_{n}-a}=0 \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let (u<sub>n</sub>= and (v<sub>n</sub>) be two sequences both converging to the same limit a. <br />We further assume that for n sufficiently large we always have u<sub>n</sub>≠a. <br />Under these conditions we say that the sequence (v<sub>n</sub>) converges to a <b>
+              <i> 'faster' </i>
+            </b> than the sequence (u<sub>n</sub>) iff:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\lim_{n\rightarrow \infty }}\frac{v_{n}-a}{u_{n}-a}=0 \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple:</h3>
+          <p>Un des procédés pour accélérer la convergence d'une suite est l'extraction. Prenons par exemple la suite d'Euler u<sub>n</sub>=(1+1/n)<sup>n</sup> dont la convergence est manifestement lente. Si nous posons v<sub>n</sub>=u<sub>2<sup>n</sup>
+            </sub>, on vérifie immédiatement qu'on obtient une suite dont la convergence est géométrique de vitesse 1/2. Cependant cette accélération est purement factice, tout à fait illusoire, puisque le coût du calcul du terme de rang n de la suite d'Euler est en O(n) (produit de n facteurs) donc le coût du calcul de v<sub>n</sub> est en O(2<sup>n</sup>). Il faut donc se tourner vers des procédés qui augmente la vitesse de convergence 'à coût constant'. <br> Le point de départ de notre développement est le résultat suivant. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example: </h3>
+          <p>One of the processes to accelerate the convergence of a sequence is extraction. Take for example the Euler sequence u<sub>n</sub>=(1+1/n)<sup>n</sup> the convergence of which is manifestly slow. If we set v<sub>n</sub>=u<sub>2<sup>n</sup>
+            </sub> , we immediately check that we obtain a sequence the convergence of which is geometric with speed 1/2. However, this acceleration is purely artificial, completely illusory, since the cost of calculating the term of rank n of the Euler sequence is in O(n) (product of n factors) therefore the cost of calculating v<sub>n</sub> is in O(2<sup>n</sup>). It is therefore necessary to turn to processes which increase the speed of convergence 'at constant cost'. <br /> The starting point of our development is the following result. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si la suite u<sub>n</sub> converge vers la limite a avec:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\lim_{n\rightarrow \infty }}\frac{u_{n+1}-a}{u_{n}-a}=k \)</p>
+            <!-- /FORMULE UNIV INLINE--> Alors la suite (v<sub>n</sub>) définie par:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v_{n}=\frac{u_{n+1}-k.u_{n}}{1-k} \)</p>
+            <!-- /FORMULE UNIV INLINE--> converge également vers a plus rapidement que u.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If the sequence u<sub>n</sub>converges to the limit a with:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\lim_{n\rightarrow \infty }}\frac{u_{n+1}-a}{u_{n}-a}=k \)</p>
+            <!-- /FORMULE UNIV INLINE--> Then the sequence (v<sub>n</sub>) defined by:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v_{n}=\frac{u_{n+1}-k.u_{n}}{1-k} \)</p>
+            <!-- /FORMULE UNIV INLINE--> also converges to a faster than u.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit pour le voir de faire tendre n vers ∞ dans le membre de droite de la formule: </div>
+        <!-- /fr -->
+        <div lang="en"> To see this, it suffices to make n tend to ∞ in the right-hand side of the formula: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{v_{n}-a}{u_{n}-a}=\frac{1}{1-k}\times \frac{u_{n+1}-a}{u_{n}-a}-\frac{k}{1-k} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr">
+          <h2>La méthode de Richardson-Romberg</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The method of Richardson-Romberg</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td style="padding: 10; ">
+              <font color="#FFFFFF">Lewis Fry Richardson(1909-2003) UK</font>
+            </td>
+            <td>
+              <font color="#FFFFFF">Werner Romberg (1880-1953) DE</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/Lewis_Fry_Richardson.jpeg" width="158" height="230" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/Romberg.jpg" width="157" height="230" border="0" alt="">
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <em>
+                <font size="-1" color="#FFFFFF">Image Wikipédia</font>
+              </em>
+            </td>
+            <td align="center">
+              <em>
+                <font size="-1" color="#FFFFFF">Image HNMI(USA)</font>
+              </em>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> La méthode dite de 'Richardson' ou de 'Romberg' résulte de l'application de la remarque précédente au cas de suites convergeant géométriquement. <br> Plus précisément: </div>
+        <!-- /fr -->
+        <div lang="en"> The so-called 'Richardson' or 'Romberg' method results from the application of the previous remark to the case of geometrically converging sequences. <br /> More precisely: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit (u<sub>n</sub>) une suite dont le terme général est de la forme: <br> u<sub>n</sub>=a+&lambda;k<sup>n</sup>+O(h<sup>n</sup>) où on a |h|&lt;|k|&lt;1. <br> Posons:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v_{n}=\frac{u_{n+1}-k.u_{n}}{1-k} \)</p>
+            <!-- /FORMULE UNIV INLINE--> alors v<sub>n</sub>-a=O(h<sup>n</sup>)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Let (u<sub>n</sub>) be a sequence whose general term is of the form: <br /> u<sub>n</sub>=a+λk<sup>n</sup>+O(h<sup>n</sup>) where we have |h|
+            <|k| <1. <br /> Let's set:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v_{n}=\frac{u_{n+1}-k.u_{n}}{1-k} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Then v<sub>n</sub>-a=O(h<sup>n</sup>)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est immédiate. <br> Posons w<sub>n</sub>=u<sub>n</sub>-a-&lambda;k<sup>n</sup> de sorte que w<sub>n</sub>=O(h<sup>n</sup>). <br> Alors
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle v_{n}-a=\frac{w_{n+1}-k.w_{n}}{1-k} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left | v_{n}-a \right |\leqslant \frac{\left | w_{n+1} \right |+k\left | w_{n} \right |}{1-k}\leqslant \frac{A\left ( \left | h \right |+\left | k \right | \right )}{1-k}\times \left | h \right |^{n}\leqslant M\left | h \right |^{n} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Voici un programme python qui applique le procédé de Richardson Romberg à la suite d'Archimède: <br> u<sub>n</sub>=2<sup>n</sup>sin(π/2<sup>n</sup>) <br> Nous prendrons pour acquis que la suite converge géométriquement avec la vitesse 1/4, chose que nous n'avons fait que vérifier empiriquement (une démonstration rigoureuse est fondée sur le développement en série entière de la fonction sinus). Nous admettrons également que l'accélérée de Richardson de cette suite converge avec la vitesse 1/16. Nous avons ici enchainé deux processus d'accélération. Nous verrons par la suite qu'il existe un moyen d'itérer ces procédés sans connaître les vitesses de convergence.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is immediate. <br /> Let w<sub>n</sub>=u<sub>n</sub>-a-λk<sup>n</sup>such that w<sub>n</sub>=O(h<sup>n</sup>). <br /> So
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle v_{n}-a=\frac{w_{n+1}-k.w_{n}}{1-k} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left | v_{n}-a \right |\leqslant \frac{\left | w_{n+1} \right |+k\left | w_{n} \right |}{1-k}\leqslant \frac{A\left ( \left | h \right |+\left | k \right | \right )}{1-k}\times \left | h \right |^{n}\leqslant M\left | h \right |^{n} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Here is a python program which applies the process of Richardson Romberg fto Archimedes method: <br /> u<sub>n</sub>= 2<sup>n</sup>sin(π/2<sup>n</sup>) <br /> We will take for granted that the sequence converges geometrically with the speed 1/4, something that we have only verified empirically (a rigorous proof is based on the development of the sine function in whole series). We will also admit that the Richardson acceleration of this sequence converges with the speed 1/16. Here we have chained two acceleration processes. We will see later that there is a way to iterate these processes without knowing the speeds of convergence.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/archi2.html" type="text/html" bgcolor="#FFFFFF" width="100%" height="200" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Et voici le résultat de l'exécution: </div>
+        <!-- /fr -->
+        <div lang="en"> And here is the result of the execution: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <table cellspacing="5" cellpadding="5" border="1">
+          <tbody>
+            <tr>
+              <td> 0.313165528844&nbsp;&nbsp;&nbsp; 0.00244508327756&nbsp;&nbsp;&nbsp; 2.2604598553e-06 <br> 0.0801251946691&nbsp;&nbsp;&nbsp; 0.000154936885962 &nbsp;&nbsp;&nbsp;3.56186848904e-08 <br> 0.0201475013317&nbsp;&nbsp;&nbsp; 9.71694788943e-06&nbsp;&nbsp;&nbsp; 5.57736523632e-10 <br> 0.00504416304385&nbsp;&nbsp;&nbsp; 6.0783212108e-07 &nbsp;&nbsp;&nbsp;8.73523475775e-12 <br> 0.00126149663505 &nbsp;&nbsp;&nbsp;3.79976969889e-08&nbsp;&nbsp;&nbsp; 3.50386386572e-13 <br> 0.000315402657036 &nbsp;&nbsp;&nbsp;2.37518449353e-09 &nbsp;&nbsp;&nbsp;-1.19237952845e-12 <br> 7.88524456476e-05&nbsp;&nbsp;&nbsp; 1.4733103626e-10 &nbsp;&nbsp;&nbsp;-3.62820884448e-12 <br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /STOP -->
+        <div lang="fr">
+          <p>Et voici l'équivalent avec Julia 1.6</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>And here is the equivalent with Julia 1.6 </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/archi2.jl.html" type="text/html" bgcolor="#FFFFFF" width="100%" height="200" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>La méthode d'Aitken</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The method of Aitken</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellspacing="0" cellpadding="10" border="0" bgcolor="#000000">
+          <tbody>
+            <tr>
+              <td>
+                <font color="#FFFFFF">Alexander Aitken (1895-1967) NZ</font>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <img src="images/aitkenpic.jpg" alt="" width="195" height="232" border="0">
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <font size="-1">
+                  <em>
+                    <font color="#FFFFFF">Image: http://www.maths.otago.ac.nz</font>
+                  </em>
+                </font>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> La méthode d'Aitken est fondée sur ce qui précède, conjointement avec le résultat rappelé <input type="button" value="ici" onclick="go('suitesvitesse.html#taudac')" data-inline="true" />. <br> Posons donc </div>
+        <!-- /fr -->
+        <div lang="en"> Aitken's method is based on the above, together with the result recalled <input data-inline="true" onclick="go('suitesvitesse.html#taudac')" type="button" value="here" />. <br /> So let's put </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle v_{n}=\frac{u_{n+1}-k_{n}u_{n}}{1-k_{n}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où </div>
+        <!-- /fr -->
+        <div lang="en"> Where </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle k_{n}=\frac{u_{n+1}-u_{n}}{u_{n}-u_{n-1}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> On a donc : </div>
+        <!-- /fr -->
+        <div lang="en"> So we have : </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{n\rightarrow \infty }\frac{v_{n}-a}{u_{n}-a}=\lim_{n\rightarrow \infty }\frac{1}{1-k_{n}}\times \left ( \frac{u_{n+1}-a}{u_{n}-a}-k_{n} \right )=0 \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> On peut également exprimer v<sub>n</sub> de la manière suivante </div>
+        <!-- /fr -->
+        <div lang="en"> We can also express v<sub>n</sub> the following way </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle v_{n}=u_{n-1}-\frac{\left ( u_{n}-u_{n-1} \right )^{2}}{u_{n+1}-2u_{n}+u_{n-1}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> ou bien encore </div>
+        <!-- /fr -->
+        <div lang="en"> or else </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle v_{n}=u_{n-1}-\frac{\left (\Delta u_{n} \right )^{2} }{\Delta ^{2}u_{n}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où </div>
+        <!-- /fr -->
+        <div lang="en"> where </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \Delta u_{n}=u_{n}-u_{n-1} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> et </div>
+        <!-- /fr -->
+        <div lang="en"> and </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \Delta ^{2}u_{n}=u_{n+1}-2u_{n}+u_{n-1} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Voici un programme python qui applique le procédé d'Aitken pour le calcul de &pi; par la méthode d'Archimède avec 2 itérations successives. <br> L'avantage de cette méthode réside évidemment dans le fait qu'on n'a pas besoin de connaître les vitesses de convergence, aussi bien pour la suite initiale que pour les suites accélérées quand on itère le processus. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is a python program that applies Aitken's process for calculating π by Archimedes' method with 2 successive iterations. <br /> The advantage of this method obviously resides in the fact that one does not need to know the speeds of convergence, as well for the initial sequence as for the accelerated sequences when one iterates the process. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/aitken2.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Résultat de l'exécution: </div>
+        <!-- /fr -->
+        <div lang="en"> Result of execution : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <table border="2">
+          <tr>
+            <td> 0.0201475013317&nbsp;&nbsp;&nbsp; -3.91596509708e-05&nbsp;&nbsp;&nbsp; -3.98591541995e-08 <br> 0.00504416304385 &nbsp;&nbsp;&nbsp;-2.43586940085e-06 &nbsp;&nbsp;&nbsp;-6.1611027391e-10 <br> 0.00126149663505 &nbsp;&nbsp;&nbsp;-1.52061584213e-07 &nbsp;&nbsp;&nbsp;-9.30322485715e-12 <br> 0.000315402657036&nbsp;&nbsp;&nbsp; -9.50077438944e-09&nbsp;&nbsp;&nbsp; -1.9433343823e-12 <br>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP -->
+        <div lang="fr">
+          <p>Et voici l'équivalent avec Julia 1.6.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>AZnd here is the equivalent with Julia 1.6</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/aitken2.jl.html" type="text/html" bgcolor="#FFFFFF" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesacceleration/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesacceleration/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

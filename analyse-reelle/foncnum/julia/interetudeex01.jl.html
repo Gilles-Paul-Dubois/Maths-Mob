@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>exo1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">step = pi / </span><span class="s1">100</span>
+<span class="s0">TabX = [step * i </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">0</span><span class="s0">:</span><span class="s1">51</span><span class="s0">]</span>
+<span class="s0">TabY = [cos(x) </span><span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s0">TabX]</span>
+<span class="s0">TabDa = [(TabY[i + </span><span class="s1">1</span><span class="s0">] - TabY[i]) / (TabX[i + </span><span class="s1">1</span><span class="s0">] - TabX[i]) </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">50</span><span class="s0">]</span>
+<span class="s0">TabDb = [TabY[i] - TabDa[i] * TabX[i] </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">50</span><span class="s0">]</span>
+
+<span class="s2">function </span><span class="s0">inter(x)</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">2</span><span class="s0">:</span><span class="s1">50</span>
+        <span class="s2">if </span><span class="s0">TabX[i] &gt;= x</span>
+            <span class="s2">return </span><span class="s0">i-</span><span class="s1">1</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s1">20</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">f1(x)</span>
+    <span class="s0">k=inter(x)</span>
+    <span class="s0">a=TabDa[k]</span>
+    <span class="s0">b=TabDb[k]</span>
+    <span class="s2">return </span><span class="s0">a*x+b</span>
+<span class="s2">end</span>
+
+<span class="s0">f2(x)= x &lt;= pi/</span><span class="s1">2 </span><span class="s0">? f1(x) : -f1(pi-x)</span>
+<span class="s0">f3(x)= x&gt;=</span><span class="s1">0 </span><span class="s0">? f2(x) : f2(-x)</span>
+<span class="s2">function </span><span class="s0">f4(x)</span>
+    <span class="s2">if </span><span class="s0">x &gt;=</span><span class="s1">0</span>
+        <span class="s2">while </span><span class="s0">!(-pi&lt;=x&lt;=pi)</span>
+            <span class="s0">x=x-</span><span class="s1">2</span><span class="s0">pi</span>
+        <span class="s2">end</span>
+        <span class="s2">return </span><span class="s0">f3(x)</span>
+    <span class="s2">else</span>
+        <span class="s2">while </span><span class="s0">!(-pi&lt;=x&lt;=pi)</span>
+            <span class="s0">x=x+</span><span class="s1">2</span><span class="s0">pi</span>
+        <span class="s2">end</span>
+        <span class="s2">return </span><span class="s0">f3(x)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s0">-</span><span class="s1">10</span><span class="s0">:</span><span class="s1">10</span>
+    <span class="s0">print(f4(i),</span><span class="s3">&quot; : &quot;</span><span class="s0">,cos(i),</span><span class="s3">'\n'</span><span class="s0">)</span>
+<span class="s2">end</span>
+</pre>
+</body>
+</html>

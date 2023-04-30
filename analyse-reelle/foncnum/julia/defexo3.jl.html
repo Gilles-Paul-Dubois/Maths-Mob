@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>exo3.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #1750eb;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Gtk</span>
+<span class="s0">using </span><span class="s1">Cairo</span>
+<span class="s1">win = GtkWindow(</span><span class="s2">&quot;Fonctions trigo&quot;</span><span class="s1">,</span><span class="s3">600</span><span class="s1">,</span><span class="s3">600</span><span class="s1">)</span>
+<span class="s1">hbox = GtkBox(:v)  </span><span class="s4"># :h makes a horizontal layout, :v a vertical layout</span>
+<span class="s1">push!(win, hbox)</span>
+<span class="s1">c = GtkCanvas(</span><span class="s3">600</span><span class="s1">,</span><span class="s3">500</span><span class="s1">)</span>
+<span class="s1">push!(hbox,c)</span>
+<span class="s1">bleu = GtkButton(</span><span class="s2">&quot;sinus&quot;</span><span class="s1">)</span>
+<span class="s1">rouge = GtkButton(</span><span class="s2">&quot;cosinus&quot;</span><span class="s1">)</span>
+<span class="s1">efface=GtkButton(</span><span class="s2">&quot;Effacer&quot;</span><span class="s1">)</span>
+<span class="s1">ferme = GtkButton(</span><span class="s2">&quot;Quitter&quot;</span><span class="s1">)</span>
+<span class="s1">push!(hbox, bleu)</span>
+<span class="s1">push!(hbox, rouge)</span>
+<span class="s1">push!(hbox, efface)</span>
+<span class="s1">push!(hbox, ferme)</span>
+
+<span class="s1">id1 = signal_connect(rouge, </span><span class="s2">&quot;clicked&quot;</span><span class="s1">) </span><span class="s0">do </span><span class="s1">widget</span>
+     <span class="s1">cosinus()</span>
+<span class="s0">end</span>
+<span class="s1">id2 = signal_connect(bleu, </span><span class="s2">&quot;clicked&quot;</span><span class="s1">) </span><span class="s0">do </span><span class="s1">widget</span>
+     <span class="s1">sinus()</span>
+<span class="s0">end</span>
+<span class="s1">id3 = signal_connect(ferme, </span><span class="s2">&quot;clicked&quot;</span><span class="s1">) </span><span class="s0">do </span><span class="s1">widget</span>
+     <span class="s1">bye()</span>
+<span class="s0">end</span>
+<span class="s1">id4 = signal_connect(efface, </span><span class="s2">&quot;clicked&quot;</span><span class="s1">) </span><span class="s0">do </span><span class="s1">widget</span>
+     <span class="s1">wipe()</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">wipe()</span>
+    <span class="s1">ctx = getgc(c)</span>
+    <span class="s1">h = height(c)</span>
+    <span class="s1">w = width(c)</span>
+    <span class="s1">rectangle(ctx, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, w, h)</span>
+    <span class="s1">set_source_rgb(ctx, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s1">fill(ctx)</span>
+    <span class="s1">draw(c)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">cosinus()</span>
+    <span class="s1">wipe()</span>
+    <span class="s1">ctx = getgc(c)</span>
+    <span class="s1">h = height(c)</span>
+    <span class="s1">w = width(c)</span>
+    <span class="s1">drawaxes()</span>
+    <span class="s1">grad()</span>
+    <span class="s1">step=</span><span class="s3">4</span><span class="s1">pi/</span><span class="s3">100</span>
+    <span class="s1">L=[(-</span><span class="s3">2</span><span class="s1">pi+k*step,cos(-</span><span class="s3">2</span><span class="s1">pi+k*step)) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">100</span><span class="s1">]</span>
+    <span class="s1">drawline(L)</span>
+    <span class="s1">draw(c)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">grad()</span>
+    <span class="s1">ctx = getgc(c)</span>
+    <span class="s1">h = height(c)</span>
+    <span class="s1">w = width(c)</span>
+    <span class="s1">set_font_size(ctx,</span><span class="s3">20</span><span class="s1">)</span>
+    <span class="s1">move_to(ctx,w/</span><span class="s3">8</span><span class="s1">-</span><span class="s3">30</span><span class="s1">,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;-3π/2&quot;</span><span class="s1">)    </span>
+    <span class="s1">move_to(ctx,w/</span><span class="s3">4</span><span class="s1">,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;-π&quot;</span><span class="s1">)</span>
+    <span class="s1">move_to(ctx,</span><span class="s3">3</span><span class="s1">w/</span><span class="s3">8</span><span class="s1">-</span><span class="s3">30</span><span class="s1">,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;-π/2&quot;</span><span class="s1">) </span>
+    <span class="s1">move_to(ctx,</span><span class="s3">5</span><span class="s1">w/</span><span class="s3">8</span><span class="s1">-</span><span class="s3">30</span><span class="s1">,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;π/2&quot;</span><span class="s1">)       </span>
+    <span class="s1">move_to(ctx,</span><span class="s3">3</span><span class="s1">w/</span><span class="s3">4</span><span class="s1">,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;π&quot;</span><span class="s1">)</span>
+    <span class="s1">move_to(ctx,</span><span class="s3">7</span><span class="s1">w/</span><span class="s3">8</span><span class="s1">-</span><span class="s3">30</span><span class="s1">,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;3π/2&quot;</span><span class="s1">)     </span>
+    <span class="s1">move_to(ctx,w/</span><span class="s3">2</span><span class="s1">-</span><span class="s3">20</span><span class="s1">,h/</span><span class="s3">4</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;1&quot;</span><span class="s1">)  </span>
+    <span class="s1">move_to(ctx,w/</span><span class="s3">2</span><span class="s1">-</span><span class="s3">20</span><span class="s1">,</span><span class="s3">3</span><span class="s1">h/</span><span class="s3">4</span><span class="s1">)</span>
+    <span class="s1">show_text(ctx,</span><span class="s2">&quot;-1&quot;</span><span class="s1">)        </span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">drawaxes()</span>
+    <span class="s1">ctx = getgc(c)</span>
+    <span class="s1">h = height(c)</span>
+    <span class="s1">w = width(c)</span>
+    <span class="s1">move_to(ctx,</span><span class="s3">0</span><span class="s1">,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">line_to(ctx,w,h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">move_to(ctx,w/</span><span class="s3">2</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">line_to(ctx,w/</span><span class="s3">2</span><span class="s1">,h)</span>
+    <span class="s1">set_source_rgb(ctx,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">stroke(ctx)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">drawline(PTS)</span>
+    <span class="s1">ctx = getgc(c)</span>
+    <span class="s1">h = height(c)</span>
+    <span class="s1">w = width(c)    </span>
+    <span class="s1">convx(x)=floor(x*w/</span><span class="s3">4</span><span class="s1">pi+w/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">convy(y)=floor(-y*h/</span><span class="s3">4</span><span class="s1">+h/</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">pts=[(convx(P[</span><span class="s3">1</span><span class="s1">]),convy(P[</span><span class="s3">2</span><span class="s1">])) </span><span class="s0">for </span><span class="s1">P </span><span class="s0">in </span><span class="s1">PTS]</span>
+    <span class="s1">start=pts[</span><span class="s3">1</span><span class="s1">]</span>
+    <span class="s1">move_to(ctx, start[</span><span class="s3">1</span><span class="s1">],start[</span><span class="s3">2</span><span class="s1">])</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">2</span><span class="s1">:length(pts)</span>
+        <span class="s1">line_to(ctx,pts[i][</span><span class="s3">1</span><span class="s1">],pts[i][</span><span class="s3">2</span><span class="s1">])</span>
+    <span class="s0">end</span>
+    <span class="s1">set_source_rgb(ctx,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+    <span class="s1">stroke(ctx) </span>
+ <span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">sinus()</span>
+    <span class="s1">wipe()</span>
+    <span class="s1">ctx = getgc(c)</span>
+    <span class="s1">h = height(c)</span>
+    <span class="s1">w = width(c)</span>
+    <span class="s1">drawaxes()</span>
+    <span class="s1">grad()</span>
+    <span class="s1">step=</span><span class="s3">4</span><span class="s1">pi/</span><span class="s3">100</span>
+    <span class="s1">L=[(-</span><span class="s3">2</span><span class="s1">pi+k*step,sin(-</span><span class="s3">2</span><span class="s1">pi+k*step)) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">100</span><span class="s1">]</span>
+    <span class="s1">drawline(L)    </span>
+    <span class="s1">draw(c)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">bye()</span>
+    <span class="s1">Gtk.destroy(win)</span>
+<span class="s0">end</span>
+
+<span class="s1">showall(win)</span></pre>
+</body>
+</html>

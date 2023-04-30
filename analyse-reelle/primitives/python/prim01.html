@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>prim01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">PrimApprox(f, x, n, F0): 
+    </span><span class="s0">&quot;&quot;&quot;Approximation de la primitive de f (à supposer qu'elle existe)  
+    prenant la valeur F0 en 0 
+    en allant de 0 à x par un step de x/n&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Approximating the anti-derivative of f (supposing it exists)  
+    taking the value F0 in 0
+    going from 0 to x with a step of x/n&quot;&quot;&quot;</span><span class="s1"> 
+    epsilon = x / n 
+    F = F0 
+    </span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">): 
+        F = F + f(i * epsilon) * epsilon 
+    </span><span class="s2">return </span><span class="s1">F 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">f1(x): 
+    </span><span class="s0">&quot;&quot;&quot; une fonction dont on connait la primitive = atan juste pour test de la méthode - a function the anti-derivative of which is known just for checking&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s3">1 </span><span class="s1">/ (</span><span class="s3">1 </span><span class="s1">+ x * x) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">f2(x): 
+    </span><span class="s0">&quot;&quot;&quot;la fonction donnée en exemple ci-dessus, primitive inconnue - function giv en above as an example integral unknown&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">math.sqrt(</span><span class="s3">1 </span><span class="s1">+ math.sin(x) * math.sin(x)) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot; on teste la méthode avec 100,200,300, ...,1000 itérations 
+    pour calculer une approximation de la primitive en x=1&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot; We check the method with 100,200,300, ...,1000 iterations 
+    to compute an approximation of the integral in x=1&quot;&quot;&quot;</span><span class="s1">     
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">11</span><span class="s1">): 
+        n = i * </span><span class="s3">100</span><span class="s1"> 
+        print(PrimApprox(f1, </span><span class="s3">1.0</span><span class="s1">, n, </span><span class="s3">0</span><span class="s1">), math.pi / </span><span class="s3">4</span><span class="s1">)  </span><span class="s0"># pour vérifier - to check</span><span class="s1"> 
+        print(PrimApprox(f2, </span><span class="s3">1.0</span><span class="s1">, n, </span><span class="s3">0</span><span class="s1">)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

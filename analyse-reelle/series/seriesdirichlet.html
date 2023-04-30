@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Le critère de Dirichlet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seriesdirichlet/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seriesdirichlet/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Galerie des portraits</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Portrait gallery</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td>
+              <font color="#FFFFFF">Niels-Henrik Abel (1802-1829) NOR</font>
+            </td>
+            <td>
+              <font color="#FFFFFF">Johann Peter Gustav Lejeune Dirichlet (1805-1859) DE</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/Niels_Henrik_Abel_(detail).jpeg" width="268" height="326" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/Dirichlet.jpg" width="268" height="326" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Le lemme d'Abel</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Abel's lemma</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit (u<sub>n</sub>) une suite décroissante de termes positifs, et soit (v<sub>n</sub>) une suite quelconque. On a alors:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left | \sum_{i=0}^{n} u_{i} v_{i}\right |\leqslant Au_{0} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où A=Sup(|v<sub>0</sub>|,|v<sub>0</sub>+v<sub>1</sub>|, ... ,|v<sub>0</sub>+v<sub>1</sub>+ ...+v<sub>n</sub>|)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let (u<sub>n</sub>) be a decreasing sequence of positive terms, and let (v<sub>n</sub>) be any sequence. We then have:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left | \sum_{i=0}^{n} u_{i} v_{i}\right |\leqslant Au_{0} \)</p>
+            <!-- /FORMULE UNIV INLINE--> where A=Sup(|v<sub>0</sub>|,|v<sub>0</sub>+v<sub>1</sub>|, ... ,|v<sub>0</sub>+v<sub>1</sub>+ ...+v<sub>n</sub>|)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Posons s<sub>n</sub>=v<sub>0</sub>+v<sub>1</sub>+ ... +v<sub>n</sub>
+            <br> On a:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=0}^{n}u_{i}v_{i}=u_{0}s_{0}+u_{1}\left ( s_{1}-s_{0} \right )+...+u_{n}\left ( s_{n}-s_{n-1} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=0}^{n}u_{i}v_{i}=s_{0}\left ( u_{0}-u_{1} \right )+s_{1}\left ( u_{1}-u_{2} \right )+...+s_{n-1}\left ( u_{n-1}-u_{n} \right )+s_{n}u_{n} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Comme u<sub>0</sub>≥u<sub>1</sub>≥u<sub>2</sub>≥ ... <br> On a : <br> |s<sub>i</sub>|(u<sub>i-1</sub>-u<sub>i</sub>)≤A(u<sub>i-1</sub>-u<sub>i</sub>) <br> Et aussi: <br> |s<sub>n</sub>|u<sub>n</sub>≤Au<sub>n</sub>
+            <br> De sorte que le lemme s'obtient par sommation en appliquant l'inégalité triangulaire.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let s<sub>n</sub>=v<sub>0</sub>+v<sub>1</sub>+ ... +v<sub>n</sub>
+            <br> We have:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=0}^{n}u_{i}v_{i}=u_{0}s_{0}+u_{1}\left ( s_{1}-s_{0} \right )+...+u_{n}\left ( s_{n}-s_{n-1} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=0}^{n}u_{i}v_{i}=s_{0}\left ( u_{0}-u_{1} \right )+s_{1}\left ( u_{1}-u_{2} \right )+...+s_{n-1}\left ( u_{n-1}-u_{n} \right )+s_{n}u_{n} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Since u<sub>0</sub>≥u<sub>1</sub>≥u<sub>2</sub>≥ ... <br> We have: <br> |s<sub>i</sub>|(u<sub>i-1</sub>-u<sub>i</sub>)≤A(u<sub>i-1</sub>-u<sub>i</sub>) <br> And also: <br> |s<sub>n</sub>|u<sub>n</sub>≤Au<sub>n</sub>
+            <br> So that the lemma is obtained by summation by applying the triangle inequality.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Le théorème de Dirichlet</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Dirichlet's theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si \(\left | \sum_{i=0}^{n} v_{i}\right |\leqslant K\) où K est indépendant de n, et si (u<sub>n</sub>) est une suite décroissante tendant vers 0, alors \(\sum_{i=0}^{n}u_{i}v_{i}\) est convergente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If \(\left | \sum_{i=0}^{n} v_{i}\right |\leqslant K\) where K is independent of n, and if (u<sub>n</sub>) is a decreasing sequence tending to 0, then \(\sum_{i=0}^{n}u_{i}v_{i}\) is convergent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit ε un nombre réel &gt;0 donné. <br> On peut trouver N tel que n&gt;N ⇒ v<sub>n</sub>&lt;ε/2K. <br> Comme:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=p+1}^{q}u_{i}=\sum_{i=0}^{q}u_{i}-\sum_{i=0}^{p}u_{i} \)</p>
+            <!-- /FORMULE UNIV INLINE--> On a:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}\right|\leqslant \left| \sum_{i=0}^{q}u_{i}\right|+\left| \sum_{i=0}^{p}u_{i}\right| \)</p>
+            <!-- /FORMULE UNIV INLINE--> Donc:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}\right|\leqslant 2K \)</p>
+            <!-- /FORMULE UNIV INLINE--> Mais d'après le lemme d'Abel:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}v_{i}\right|\leqslant Av_{p+1} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où A≤2K. <br> Donc si p≥q&gt;N, il vient:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}v_{i}\right|\leqslant \varepsilon \)</p>
+            <!-- /FORMULE UNIV INLINE--> La série de terme général u<sub>n</sub>v<sub>n</sub> satisfait donc au critère de cauchy, elle est donc convergente.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let ε a real number &gt;0 given. <br> We can find N such that n&gt;N ⇒ v<sub>n</sub>&lt;ε/2K. <br> Since :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=p+1}^{q}u_{i}=\sum_{i=0}^{q}u_{i}-\sum_{i=0}^{p}u_{i} \)</p>
+            <!-- /FORMULE UNIV INLINE--> We have :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}\right|\leqslant \left| \sum_{i=0}^{q}u_{i}\right|+\left| \sum_{i=0}^{p}u_{i}\right| \)</p>
+            <!-- /FORMULE UNIV INLINE--> Hence :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}\right|\leqslant 2K \)</p>
+            <!-- /FORMULE UNIV INLINE--> But, according Abel's lemma
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}v_{i}\right|\leqslant Av_{p+1} \)</p>
+            <!-- /FORMULE UNIV INLINE--> where A≤2K. <br> So if p≥q&gt;N, we get :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left| \sum_{i=p+1}^{q}u_{i}v_{i}\right|\leqslant \varepsilon \)</p>
+            <!-- /FORMULE UNIV INLINE--> The series with general term u<sub>n</sub>v<sub>n</sub> satisfies this way Cauchy's criterion, so it is convergent.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Application aux séries alternées</h2> Le théorème de Dirichlet admet le corollaire important suivant:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Application to alternating series</h2> Dirichlet's theorem admits the following important corollary:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Soit (s,a) une série de terme général: a<sub>n</sub>=(-1)<sup>n</sup>u<sub>n</sub>
+            <br /> où (u<sub>n</sub>) est une suite décroissante de termes positifs tendant vers 0. Alors (s,a) est convergente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> Let (s,a) be a series of general terms: a<sub>n</sub>=(-1)<sup>n</sup>u<sub>n</sub>
+            <br> where (u<sub>n</sub>) is a decreasing sequence of positive terms tending to 0. Then (s,a) is convergent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit d'appliquer le théorème de Dirichlet avec v<sub>n</sub>=(-1)<sup>n</sup>. <br /> On retouve ainsi une démonstration simple de la convergence de la <input type="button" value="série harmonique alternée" onclick="go('../suites/suitesmonoetconv.html#harmalt')" data-inline="true" />
+          <h3>Remarque:</h3> Dans le cas précis ci-dessus, la suite des sommes partielles d'ordre pair est décroissante et converge vers la somme de la série. La suite des sommes partielles est croissante et converge aussi vers la somme de la série. (s<sub>2n</sub>) et (s<sub>2n+1</sub>) sont donc deux suites <input type="button" value="adjacentes" onclick="go('../suites/suitesmonoetconv.html#adja')" data-inline="true" />. <br /> Ce qui fait que si S est la somme de la série on a toujours: <br /> s<sub>2n</sub>≥S≥s<sub>2n+1</sub>
+          <br /> et la différence s<sub>2n</sub>-s<sub>2n+1</sub> est une majoration de l'erreur commise en remplaçant S par s<sub>2n</sub>. <h2>Le test d'Abel</h2> Le théorème de Dirichlet admet une autre conséquence importante:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Just apply Dirichlet's theorem with v<sub>n</sub>=(-1)<sup>n</sup>. <br /> We thus find a simple proof of the convergence of the <input type="button" value="alternating harmonic series" onclick="go('../suites/suitesmonoetconv.html#harmalt')" data-inline="true" />
+          <h3>Note:</h3> In the precise case above, the sequence of partial sums of even order is decreasing and converges towards the sum of the series. The sequence of partial sums is increasing and also converges towards the sum of the series. (s<sub>2n</sub>) and (s<sub>2n+1</sub>) are therefore two sequences <input type="button" value="adjacent" onclick="go('../suites/suitesmonoetconv.html#adja')" data-inline="true" />. <br /> This means that if S is the sum of the series, we always have: <br /> s<sub>2n</sub>≥S≥s<sub>2n+1</sub>
+          <br /> and the difference s<sub>2n</sub>-s<sub>2n+1</sub> is an upper bound for the error made in replacing S by s<sub>2n</sub>. <h2>Abel's test</h2> Dirichlet's theorem admits another important consequence:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Si la série (s,v) de terme général v<sub>n</sub> est convergente et si u<sub>n</sub> est une suite <input type="button" value="monotone" onclick="go('../suites/suitesmonotones.html#')" data-inline="true" />, <input type="button" value="bornée" onclick="go('../suites/suitesbornees.html#')" data-inline="true" /> alors la série de terme général u<sub>n</sub>v<sub>n</sub> est également convergente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> If the series (s,v) of general term v<sub>n</sub> is convergent and if u<sub>n</sub> is a sequence <input type="button" value="monotonic" onclick="go('../suites/suitesmonotones.html#')" data-inline="true" />, <input type="button" value="bounded" onclick="go('../suites/suitesbornees.html#')" data-inline="true" /> then the general term series u<sub>n</sub>v<sub>n</sub> is also convergent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet la suite (u<sub>n</sub>) est forcément convergente soit u sa limite. <br> Posons a<sub>n</sub>=|u-u<sub>n</sub>| <br> Alors la suite (a<sub>n</sub>) est décroissante et tend vers 0. <br> Il en résulte que la série de terme général a<sub>n</sub>v<sub>n</sub> converge d'après le théorème de Dirichlet. <br> Supposons que (u<sub>n</sub>) soit croissante, de sorte que a<sub>n</sub>=u-u<sub>n</sub>. <br> Alors la série de terme génral uv<sub>n</sub> converge, de même que celle de terme général (u-u<sub>n</sub>)v<sub>n</sub>. <br> Par différence on voit que la série de terme général u<sub>n</sub>v<sub>n</sub> converge également. <br> Le raisonnement est identique en remplaçant la différence par une somme quand (u<sub>n</sub>) est décroissante.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed the sequence (u<sub>n</sub>) is necessarily convergent, let u be its limit. <br> Let a<sub>n</sub>=|u-u<sub>n</sub>| <br> Then the sequence (a<sub>n</sub>) is decreasing and tends to 0. <br> It follows that the series of general term a<sub>n</sub>v<sub>n</sub> converges according to Dirichlet's theorem. <br> Suppose that (u<sub>n</sub>) is increasing, so that a<sub>n</sub>=u-u<sub>n</sub>. <br> Then the series of general term uv<sub>n</sub> converges, as well as that of general term (u-u<sub>n</sub>)v<sub>n</sub>. <br> By difference we see that the series of general term u<sub>n</sub>v<sub>n</sub> also converges. <br> The reasoning is identical by replacing the difference by a sum when (u<sub>n</sub>) is decreasing.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seriesdirichlet/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seriesdirichlet/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

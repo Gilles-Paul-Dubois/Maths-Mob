@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fonctions Riemann-intégrables</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intriemint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intriemint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Soit f une fonction bornée sur [a,b]. <br> On vérifie immédiatement que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> Let f be a function bounded on [a,b]. <br> We immediately check that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Les <input type="button" value="sommes de Darboux" onclick="go('intsomdarboux.html#def1')" data-inline="true" /> supérieures D(f,s) sur [a,b] sont toutes minorées par m(b-a) où m=Inf<sub>x∈[a,b]</sub>f(x). <br /> Les sommes de Darboux inférieures d(f,s) sur [a,b] sont toutes majorées par M(b-a) où M=Sup<sub>x∈[a,b]</sub>f(x).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> The upper <input type="button" value="Darboux sums" onclick="go('intsomdarboux.html#def1')" data-inline="true" /> D(f,s) over [a,b] are all lower bounded by m(b-a) where m=Inf<sub>x∈[a,b]</sub>f(x). <br /> The lower Darboux sums d(f,s) on [a,b] are all upper bounded by M(b-a) where M=Sup<sub>x∈[a,b]</sub>f(x).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il en résulte ( <input type="button" value="ce théorème" onclick="go('../suites/suitesbornees.html#theoborsup#')" data-inline="true" />) que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from ( <input type="button" value="this theorem" onclick="go('../suites/suitesbornees.html#theoborsup#')" data-inline="true" />) that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> D=inf<sub>s</sub>D(f,s) est un nombre fini dans l'intervalle [m(b-a),M(b-a)]. <br> d=sup<sub>s</sub>d(f,s) est un nombre fini dans l'intervalle [m(b-a),M(b-a)]. <br> Les bornes supérieures et inférieures sont prises ici sur l'ensemble de toutes les subdivisions possibles de l'intervalle [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> D=inf<sub>s</sub>D(f,s) is a finite number in the interval [m(b-a),M(b-a)]. <br> d=sup<sub>s</sub>d(f,s) is a finite number in the interval [m(b-a),M(b-a)]. <br> Supremum and infimum are to be taken here on all possible partitions of interval [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En outre puisque on a toujours d(f,s<sub>1</sub>)≤D(f,s<sub>2</sub>) ( <input type="button" value="revoir ce résultat" onclick="go('intsomdarboux.html#prop3')" data-inline="true" />), il en résulte que d ≤ D. </div>
+        <!-- /fr -->
+        <div lang="en"> Also since we still have d(f,s<sub>1</sub>)≤D(f,s<sub>2</sub>) ( <input type="button" value="review this result" onclick="go('intsomdarboux.html#prop3')" data-inline="true" />), it follows that d ≤ D. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que f est <strong>
+              <em>'intégrable au sens de Riemann'</em>
+            </strong> (ou Riemann-intégrable) sur [a,b] si D=d. <br> Dans ce cas la valeur commune de D et d est appelée <b>
+              <i>"l'intégrale définie de f sur [a,b]"</i>
+            </b> et notée
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that f is <strong>
+              <em>'integrable in the sense of Riemann'</em>
+            </strong> (or Riemann-integrable) over [a,b] if D=d. <br> In this case the common value of D and d is called <b>
+              <i>'the definite integral of f over [a,b]'</i>
+            </b> and denoted
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Il résulte de cette définition que les fonctions étagées sont Riemann-intégrables et que leur intégrale au sens de Riemann est la même que <input type="button" value="celle définie précédemment" onclick="go('integretagees.html#def1')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> It follows from this definition that the staged functions are Riemann-integrable and that their integral in the sense of Riemann is the same as <input type="button" value="that defined previously" onclick="go('integretagees.html#def1 ')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On voit immédiatement que cette définition est équivalente à : </div>
+        <!-- /fr -->
+        <div lang="en"> We immediately see that this definition is equivalent to : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> f est Riemann-intégrable sur [a,b] si et seulement si, pour tout ε &gt; 0 il existe deux <input type="button" value="fonctions étagées" onclick="go('intetagees.html#def1')" data-inline="true" /> E et e sur [a,b], vérifiant: <br> e ≤ f ≤ E <br>et
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}E(x)dx-\int_{a}^{b}e(x)dx\leqslant \varepsilon \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> f is Riemann-integrable over [a,b] if and only if, for all ε &gt; 0 there are two <input type="button" value="step functions" onclick="go('intetagees.html#def1')" data-inline="true" /> E and e on [a,b], verifying: <br> e ≤ f ≤ E <br>and
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}E(x)dx-\int_{a}^{b}e(x)dx\leqslant \varepsilon \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela signifie donc que dans le cas d'une fonction positive l'hypographe de f entre a et b est mesurable au sens que nous avons précisé dans l' <input type="button" value="introduction à ce chapitre" onclick="go('index.html#debut')" data-inline="true" /> et que l'intégrale est le mesure de cet hypographe. <br />
+          <h2>Examinons maintenant le cas d'une fonction négative.</h2> Voici une appliquette qui vous permet de voir l'encadrement d'une intégrale par des sommes de Darboux pour une fonction négative. <br /> Vous pouvez sélectionner un type (aléatoire, arithmétique ou géométrique) au moyen des boutons. <br /> Vous pouvez également sélectionner le nombre de points avec les boutons 'n+' et 'n-'. <br /> Vous voyez apparaître les sommes de Darboux supérieures et inférieures en rouge et en bleu sur le graphique.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This therefore means that in the case of a positive function the hypograph of f between a and b is measurable in the sense that we specified in the <input type="button" value="introduction to this chapter" onclick=" go('index.html#debut')" data-inline="true" /> and that the integral is the measure of this hypograph. <br />
+          <h2>Let us now examine the case of a negative function.</h2> Here is an applet that allows you to see the bounding of an integral by Darboux sums for a negative function. <br /> You can select a type (random, arithmetic or geometric) using the buttons. <br /> You can also select the number of stitches with the 'n+' and 'n-' buttons. <br /> You see the upper and lower Darboux sums appear in red and blue on the graph.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace1.alea()'>
+          <div lang="fr">aléatoire</div>
+          <!-- /fr -->
+          <div lang="en">random</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton2' onClick='nameSpace1.ari()'>
+          <div lang="fr">arithmétique</div>
+          <!-- /fr -->
+          <div lang="en">arithmetic</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton3' onClick='nameSpace1.geo()'>
+          <div lang="fr">géométrique</div>
+          <!-- /fr -->
+          <div lang="en">geometric</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton4' onClick='nameSpace1.plus()'>n+</button>
+        <button type='button' id='myButton5' onClick='nameSpace1.minus()'>n-</button>
+        <script src="js/darboux2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> L'intégrale apparaît cette fois comme la mesure d'un <input type="button" value="épigraphe" onclick="go('../continuite/contconvexes.html#def2')" data-inline="true" />. <h2>Passons au cas général.</h2> Vous pouvez voir, au moyen de l'appliquette ci-dessous, l'intégrale de 0 à x de certaines fonctions prenant des valeurs positives et négatives. <br> Vous pouvez changer de fonction avec le bouton 'Autre exemple'. <br> Vous pouvez également faire varier x en attrapant le point avec la souris. </div>
+        <!-- /fr -->
+        <div lang="en"> The integral appears this time as the measure of an <input type="button" value="epigraph" onclick="go('../continuite/contconvexes.html#def2')" data-inline="true" />. <h2>Let's move on to the general case.</h2> You can see, using the applet below, the integral from 0 to x of certain functions taking positive and negative values. <br> You can change the function with the 'Other example' button. <br> You can also vary x by dragging the point with the mouse. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton41' onClick='nameSpace4.choicef()'>
+          <div lang="fr">Autre exemple</div>
+          <!-- /fr -->
+          <div lang="en">Other example</div>
+          <!-- /en -->
+        </button>
+        <script src="js/showintegrals2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Vous voyez que l'intégrale définie apparaît comme une différence de mesures d'hypographes avec des mesures d'épigraphes. </div>
+        <!-- /fr -->
+        <div lang="en"> You see that the definite integral appears as a difference of hypograph measures with epigraph measures. </div>
+        <!-- /en -->
+        <a name="extint"></a>
+        <div lang="fr">
+          <h2>Extension de la définition de l'intégrale définie</h2> Commençons par une propriété intuitive, simple mais importante :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Extension of the definition of the definite integral</h2> Let's start with an intuitive, simple but important property:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Si f est R-intégrable sur (a,b] alors f est R-intégrable sur [c,d] pour tout intervalle [c,d] &sube; [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> If f is R-integrable over (a,b] then f is R-integrable over [c,d] for any interval [c,d] &sube; [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La preuve ne présente pas de difficultés particulières. <br> Choisissons s telle que &Delta;(f,s) &le; &epsilon;. (le &Delta; étant ici relatif à l'intervalle [a,b]). <br> Ajoutons à s les deux points c et d s'ils ne font pas partie de la subdivision. On obtient ainsi une subdivision s' plus fine de [a,b], donc &Delta;(s') &le; &epsilon;. <br> Si maintenant nous désignons par s" la subdivision de [c,d] constituée par la trace de s' sur [c,d], on a &Delta;(s") &le; &Delta;(s') &le; &epsilon; (le symbole &Delta; de gauche étant relatif cette fois à l'intervalle [c,d]).
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The proof does not show any particular difficulties. <br> Choose s such that &Delta;(f,s)&le;&epsilon;. (the &Delta; here being relative to the interval [a,b]). <br> Add to s the two points c and d if they are not part of the subdivision. We thus obtain a refionement s' of s, hence &Delta;(s') &le; &epsilon;. <br> If now we designate by s" the subdivision of [c,d] constituted by the trace of s' on [c,d], we have &Delta;(s") &le; &Delta;(s') &le; &epsilon; (the symbol &Delta; on the left being this time relative to the interval [c,d]).
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Jusqu'à présent nous avons donné un sens à
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> quand a &lt;b. <br> Nous convenons maintenant de poser :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Till now we have given a meaning to
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> When a &lt;b. <br> We now agree to set :
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\left\{\begin{matrix} 0 ~~si~~a=b\\ -\int_{b}^{a}f(x)dx~~si~~a> b \end{matrix}\right. \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\left\{\begin{matrix} 0 ~~if~~a=b\\ -\int_{b}^{a}f(x)dx~~if~~a> b \end{matrix}\right. \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de ces nouvelles définitions que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from these new definitions that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{c}f(x)dx=\int_{a}^{b}f(x)dx+\int_{b}^{c}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>chaque fois que les 3 intégrales ont un sens.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{c}f(x)dx=\int_{a}^{b}f(x)dx+\int_{b}^{c}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>Every time that the three integrals have meaning.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Cette égalité porte le nom de <b>
+              <i>'relation de Chasles'</i>
+            </b> pour les intégrales.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> This equality is called the <b>
+              <i>'Chasles relation'</i>
+            </b> for integrals.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Elle se démontre en considérant toutes les configurations possibles pour les 3 points a,b,c. <br> Par exemple si a &le; b &le; c, elle est trivialement vraie pour les fonctions étagées, et on obtient le résultat pour les fonctions Riemann-intégrables par passage à la limite. <h2>Autres propriétés</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It is demonstrated by considering all the possible configurations for the 3 points a,b,c. <br> For example if a &le; b &le; c, it is trivially true for step functions, and we obtain the result for Riemann-integrable functions by passing to the limit. <h2>Other properties</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Les fonctions Riemann-intégrables sur [a,b] ont une structure d'espace vectoriel, et même d'algèbre.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> Les fonctions Riemann-intégrables sur [a,b] ont une structure d'espace vectoriel, et même d'algèbre.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat est indissociable du suivant : </div>
+        <!-- /fr -->
+        <div lang="en"> This result is inseparable from the following: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> L'intégrale est une forme linéaire sur l'espace des fonctions Riemann-intégrables sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> The integral is a linear form on the space of Riemann-integrable functions on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En fait si f<sub>1</sub> et f<sub>2</sub> sont des fonctions étagées encadrant f, f<sub>1</sub> &le; f &le; f<sub>2</sub> et si g<sub>1</sub> et g<sub>2</sub> sont deux fonctions étagées encadrant g, g<sub>1</sub> &le; g &le; g<sub>2</sub>, alors f<sub>1</sub>+g<sub>1</sub> et f<sub>2</sub>+g<sub>2</sub>, qui sont, nous l'avons vu, étagées encadrent f+g, de sorte que notre affirmation résulte du fait que l'intégrale est linéaire sur les fonctions étagées. Par ailleurs la formule
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\lambda f(x)dx=\lambda \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> valable pour les fonctions étagées, 'passe' aux fonctions Riemann-intégrables par encadrement. <br> Pour vérifier qu'on a une structure d'algèbre, il faut montrer que le produit de deux fonctions Riemann-intégrables est encore du même type. <br> On commence par étudier le cas où les deux fonctions sont positives. En appliquant le fait que le produit de deux fonctions étagées est une fonction étagée, on encadre le produit f&times;g par des fonctions étagées qui sont des produits de fonctions encadrant f par des fonctions encadrant g. <br> Pour le cas général il suffit de remarquer que toute fonction est différence de deux fonctions positives. f=f<sub>+</sub> - f<sub>-</sub> où f<sub>+</sub>(x)=Sup (f(x),0) et f<sub>-</sub>(x)=Sup(-f(x),0). Le produit f&times;g apparaît alors comme une <input type="button" value="combinaison linéaire" onclick="go('../../algebre-lineaire/espaces/generateurs.html#comblin')" data-inline="true" /> de produits de fonctions positives.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> In fact if f<sub>1</sub> and f<sub>2</sub> are step functions enclosing f, f<sub>1</sub> &le; f &le; f<sub>2</sub> and if g<sub>1</sub> and g<sub>2</sub> are two step functions enclosing g, g<sub>1</sub> &le; g &le; g<sub>2</sub>, then f<sub>1</sub>+g<sub>1</sub> and f<sub>2</sub>+g<sub>2</sub>, which are, as we have seen, themselves step functions enclose f+g, so our assertion follows from the fact that the integral is linear over the step functions. Furthermore the formula
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\lambda f(x)dx=\lambda \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> valid for step functions, 'passes' to Riemann-integrable functions by enclosing. <br> To verify that we have an algebraic structure, we must show that the product of two Riemann-integrable functions is still of the same type. <br> We start by studying the case where the two functions are positive. By applying the fact that the product of two step functions is a step function, we enclose the product f&times;g by step functions which are products of functions enclosing f by functions enclosing g. <br> For the general case it suffices to remark that every function is the difference of two positive functions. f=f<sub>+</sub> - f<sub>-</sub> where f<sub>+</sub>(x)=Sup (f(x),0) and f<sub>-</sub>(x)=Sup(-f(x),0). The product f&times;g then appears as a <input type="button" value="linear combination" onclick="go('../../algebre-lineaire/espaces/generateurs.html#combline')" data-inline="true" /> of positive functions products.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 8</div> L'intégrale est une forme linéaire positive, c'est à dire que f &ge; 0 sur [a,b] &rArr;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx\geqslant 0 \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 8</div> The integral is a positive linear form, ie f &ge; 0 on [a,b] &rArr;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx\geqslant 0 \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet ce résultat est vrai si f est étagée. Le retour à la définition par les sommes de Darboux permet de conclure en toute généralité. <br> La combinaison des deux résultats qui précédent entraîne : </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed this result is true if f is of staircase type. The return to the definition by the Darboux sums makes it possible to conclude in all generality. <br> The combination of the two previous results leads to : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 9</div> Si f &ge; g sur [a,b] alors
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx\geqslant \int_{a}^{b}g(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 9</div> If f &ge; g on [a,b] then
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx\geqslant \int_{a}^{b}g(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Le résultat qui précède admet comme cas particulier : </div>
+        <!-- /fr -->
+        <div lang="en"> The previous result admits as a special case : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop10"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 10</div> Si M=Sup<sub>x&isin;[a,b]</sub>f(x) et m=Inf<sub>x&isin;[a,b]</sub>f(x) alors
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle m(b-a)\leqslant \int_{a}^{b}f(x)dx\leqslant M(b-a) \)
+            <!-- /FORMULE UNIV INLINE-->.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 10</div> If M=Sup<sub>x&isin;[a,b]</sub>f(x) and m=Inf<sub>x&isin;[a,b]</sub>f(x) then
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle m(b-a)\leqslant \int_{a}^{b}f(x)dx\leqslant M(b-a) \)
+            <!-- /FORMULE UNIV INLINE-->.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On a toujours : </div>
+        <!-- /fr -->
+        <div lang="en"> We always have : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop11"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 11</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left | \int_{a}^{b}f(x)dx \right |\leqslant \int_{a}^{b}\left | f(x) \right |dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 11</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left | \int_{a}^{b}f(x)dx \right |\leqslant \int_{a}^{b}\left | f(x) \right |dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Si f<sub>+</sub>(x)=Sup (f(x),0) et f<sub>-</sub>(x)=Sup(-f(x),0) on a f=f<sub>+</sub>-f<sub>-</sub> et |f|=f<sub>+</sub>+f<sub>-</sub>. Cet énoncé résulte donc du fait que f est une forme linéaire positive. <br> Nous allons maintenant donner des conditions suffisantes pour que certaines fonctions courantes possèdent une intégrale au sens de Riemann. <h2>Fonctions réglées sur un intervalle</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> If f<sub>+</sub>(x)=Sup (f(x),0) and f<sub>-</sub>(x)=Sup(-f(x),0) we have f= f<sub>+</sub>-f<sub>-</sub> and |f|=f<sub>+</sub>+f<sub>-</sub>. This statement therefore follows from the fact that f is a positive linear form. <br> We are now going to give sufficient conditions for certain common functions to have an integral in the sense of Riemann. <h2> Regulated (ruled) functions on an interval</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> On dit que f est <b>
+              <i>'réglée'</i>
+            </b> sur [a,b] si f est <input type="button" value="limite uniforme" onclick="go('../suitefonc/suitefonccvuniforme.html#def1')" data-inline="true" /> d'une suite de <input type="button" value="fonctions étagées" onclick="go('intetagees.html#def1')" data-inline="true" /> sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> We say that f is <b>
+              <i>'regulated or ruled'</i>
+            </b> on [a,b] if f is <input type="button" value="uniform limit" onclick="go('../suitefonc/suitefonccvuniforme.html#def1')" data-inline="true" /> of a sequence of <input type="button" value="step functions" onclick="go('intetagees.html#def1')" data-inline="true" /> on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Concernant les fonctions réglées nous avons la proposition suivante : </div>
+        <!-- /fr -->
+        <div lang="en"> Concerning the regulated functions we have the following proposition : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop12"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 12</div> Toute fonction réglée sur [a,b] est Riemann-intégrable sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 12</div> Any regulated function on [a,b] is Riemann-integrable on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit en effet &epsilon; un réel &gt;0 donné et g une fonction étagée telle que Sup<sub>x&isin;[a,b]</sub>|f(x)-g(x)| &le; &epsilon;. Alors la fonction étagée e=g-&epsilon; minore f tandis que E=g+&epsilon; majore f, et on a
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \int_{a}^{b}E(x)dx-\int_{a}^{b}e(x)dx\leqslant 2\varepsilon (b-a) \)</p>
+          <!-- /FORMULE UNIV INLINE--> d'où notre proposition. <br> Nous allons maintenant caractériser les fonctions réglées sur un intervalle.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let &epsilon; a given real &gt;0 and g a step function such that Sup<sub>x&isin;[a,b]</sub>|f(x)-g(x)| &le; &epsilon;. Then the step function e=g-&epsilon; is a lower bound for f while E=g+&epsilon; is an upper bound for f, and we have
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \int_{a}^{b}E(x)dx-\int_{a}^{b}e(x)dx\leqslant 2\varepsilon (b-a) \)</p>
+          <!-- /FORMULE UNIV INLINE--> whence our statement. <br> We are now going to characterize the functions regulated on an interval.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop13"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 13</div> Une condition nécessaire et suffisante pour qu'une fonction soit réglée sur [a,b] est qu'en tout point x ∈ ]a,b[ f possède en x une <input type="button" value="limite à droite" onclick="go('../foncnum/foncnumlimagauche.html#def2')" data-inline="true" /> et une limite à gauche, que f possède une limite à droite en a et une limite à gauche en b.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 13</div> A necessary and sufficient condition for a function to be set on [a,b] is that at any point x ∈ ]a,b[ f has at x a <input type="button" value="limit from the right" onclick="go('../foncnum/foncnumlimagauche.html#def2')" data-inline="true" /> and a limit from the left , that f has a limit from the right at a and a limit from the left at b .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La condition est nécessaire. On se donne ε&gt;0. Supposons que f soit limite uniforme d'une suite de fonctions étagées (f<sub>n</sub>). Alors il existe n tel que Sup<sub>x∈[a,b]</sub>|f(x)-f<sub>n</sub>(x)| ≤ ε/3. Pour tout x de [a,b] il existe un intervalle ]c,d[ contenant x tel que |f<sub>n</sub>(s)-f<sub>n</sub>(t)| lorsque s et t sont tous deux dans ]c,x[ ou tous deux dans ]x,d[. Nous avons donc en utilisant l'inégalité triangulaire et dans les mêmes hypothèses sur s et t |f(s)-f(t)| ≤ ε , ce qui prouve l'existence des limites à droite et à gauche de f qui satisfait de chaque côté au critère de Cauchy. <br /> La condition est suffisante. Pour tout entier n et tout x ∈ [a,b], il existe un intervalle ouvert V(x)=]c(x),d(x)[ tel que |f(s)-f(t)| ≤ 1/n si s et t sont tous deux dans ]c(x),x[∩[a,b] ou dans ]x,d(x)[∩[a,b]. Comme [a,b] est un intervalle compact on peut le recouvrir par un nombre fini d'intervalles V(x<sub>i</sub>) ( <input type="button" value="voir cette page" onclick="go('../suitefonc/suitefonccvuniforme.html#thm10#')" data-inline="true" />). Considérons maintenant la subdivision formée par les points a,b, x<sub>i</sub>, c<sub>i</sub>(x), d<sub>i</sub>(x) (en ordre croissant).On désigne cette subdivision par (y<sub>0</sub>,y<sub>1</sub>, ...,y<sub>m</sub>). Soit alors g<sub>n</sub> la fonction étagée constante sur chaque intervalle ]y<sub>i</sub>,y<sub>i+1</sub>[ et prenant la valeur f((y<sub>i</sub>+y<sub>i+1</sub>)/2). On a Sup<sub>x∈[a,b]</sub> |f(x)-g<sub>n</sub>(x)| ≤ 1/n.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The condition is necessary. We are given ε&gt;0. Let f be the uniform limit of a sequence of step functions (f<sub>n</sub>). Then there exists n such that Sup<sub>x∈[a,b]</sub>|f(x)-f<sub>n</sub>(x)| ≤ ε/3. For all x of [a,b] there exists an interval ]c,d[ containing x such that |f<sub>n</sub>(s)-f<sub>n</sub>(t)| when s and t are both in ]c,x[ or both in ]x,d[. We therefore have using the triangular inequality and under the same assumptions on s and t |f(s)-f(t)| ≤ ε , which proves the existence of the right and left limits of f which satisfies each side to the Cauchy criterion. <br /> The condition is sufficient. For any integer n and any x ∈ [a,b], there exists an open interval V(x)=]c(x),d(x)[ such that |f(s)-f(t)| ≤ 1 /n if both s and t are in ]c(x),x[∩[a,b] or in ]x,d(x)[∩[a,b]. As [a,b] is a compact interval it can be covered by a finite number of intervals V(x<sub>i</sub>) ( <input type="button" value="see this page" onclick="go('../suitefonc/suitefonccvuniforme.html#thm10#')" data-inline="true" />). Now consider the partition formed by the points a,b, x<sub>i</sub>, c<sub>i</sub>(x), d<sub>i</sub>(x) (in order increasing). We denote this partition by (y<sub>0</sub>,y<sub>1</sub>, ...,y<sub>m</sub>). Let g<sub>n</sub> be the constant step function on each interval ]y<sub>i</sub>,y<sub>i+1</sub>[ and taking the value f((y< sub>i </sub>+y<sub>i+1</sub>)/2). We have Sup<sub>x∈[a,b]</sub> |f(x)-g<sub>n</sub>(x)| ≤ 1/n.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Quelques exemples de fonctions réglées (donc Riemann-intégrables)</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Some examples of regulated functions (therefore Riemann-integrable)</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 6</div> Une fonction est dite <b>
+              <i>'continue par morceaux'</i>
+            </b> sur [a,b] est une fonction telle qu'il existe une subdivision s=(x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>) de [a,b] telle que f possède une limite à droite et à gauche en chacun des x<sub>i</sub> 1&le;i&le;n-1, f possède une limite à droite en x<sub>0</sub>=a, f possède une limite à gauche en x<sub>n</sub>=b et f est continue sur chaque intervalle ouvert ]x<sub>i</sub>,x<sub>i+1</sub>[, 0&le;i&le;n-1. Autrement dit f doit être prolongeable par continuité à chaque intervalle fermé [x<sub>i</sub>,x<sub>i+1</sub>].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 6</div> A function is said <b>
+              <i>'piecewise continuous '</i>
+            </b> on [a,b] is a function such that there is a partition s=(x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>) of [a,b] such that f has a limit from the right and from the left in each of the x<sub> i</sub> 1&le;i&le;n-1, f has a right limit at x<sub>0</sub>=a, f has a left limit at x<sub>n</sub>=b and f is continuous on each open interval ]x<sub>i</sub>,x<sub>i+1</sub>[, 0&le;i&le;n-1. In other words f must be extendable by continuity on each closed interval [x<sub>i</sub>,x<sub>i+1</sub>].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <ul>
+            <li>Les fonctions <input type="button" value="continues" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> sont réglées </li>
+            <li>Les fonctions <input type="button" value="monotones" onclick="go('../foncnum/foncnummonotones.html#')" data-inline="true" /> sont réglées </li>
+            <li>Les fonctions continues par morceaux sont réglées</li>
+            <li>Les fonctions monotones par morceaux sont réglées</li>
+          </ul> Les fonctions monotones sont en effet réglées puisqu'en tout point elles possèdent une limite à droite et une limite à gauche. <br /> Par exemple si f est croissante lim<sub>x→a-,x&lt;a</sub> f(x) =Inf<sub> x&lt;a</sub> f(x) <br />
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />Cependant les fonctions réglées, bien que constituant une catégorie importante de fonctions Riemann-intégrables, ne sont pas les seules fonctions Riemann-intégrables. <br /> Un exemple classique est la fonction définie par f(x)=sin(1/x) si x≠0 et f(0)=0. ( <input type="button" value="voir cet exercice" onclick="go('exercices/intriemint/ex01.html#')" data-inline="true" />). <a name="contrex"></a>
+          <h2>Un exemple de fonction non-intégrable au sens de Riemmann</h2> Nous avons jusqu'à présent donné beaucoup d'exemples de fonctions intégrables au sens de Riemann. Le lecteur pourrait croire que toutes les fonctions le sont. <br /> De la même façon que la plupart des fonctions ne sont pas continues, que la plupart des nombres réels sont transcendants, on retrouve toujours les mêmes 'rares' exemples dans les traités. C'est un paradoxe auquel nous n'échapperons pas cette fois encore. Nous allons donner un exemple de fonction non intégrable au sens de Riemann. C'est la <input type="button" value="'fonction caractéristique'" onclick="go('../../bases/applications/caracteristique.html#')" data-inline="true" /> de &rationals;. <br /> Il est facile de voir que pour cette fonction f sur l'intervalle [0,1], nous avons D=1 et d=0 (nous reprenons ici les notations des <input type="button" value="sommes de Darboux" onclick="go('intsomdarboux.html#def1')" data-inline="true" />). <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <ul>
+            <li>
+              <input type="button" value="Continuous" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> functions are regulated
+            </li>
+            <li>
+              <input type="button" value="Monotonic" onclick="go('../foncnum/foncnummonotones.html#')" data-inline="true" /> functions are regulated
+            </li>
+            <li>Piecewise continuous functions are regulated</li>
+            <li>Piecewise monotonic functions are regulated</li>
+          </ul> Monotonic functions are indeed regulated since at any point they have a limit on the right and a limit on the left. <br /> For example if f is increasing lim<sub>x→a-,x&lt;a</sub> f(x) =Inf<sub> x&lt;a</sub> f(x) <br />
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />However regulated functions, although constituting an important category of Riemann-integrable functions, are not the only Riemann-integrable functions. <br /> A classic example is the function defined by f(x)=sin(1/x) if x≠0 and f(0)=0. ( <input type="button" value="see this exercise" onclick="go('exercices/intriemint/ex01.html#')" data-inline="true" />). <a name="contrexe"></a>
+          <h2>An example of a function non-integrable in the sense of Riemmann</h2> We have so far given many examples of Riemann-integrable functions. The reader might think that all functions are. <br /> In the same way that most functions are not continuous, that most real numbers are transcendental, we always find the same 'rare' examples in treatises. It is a paradox from which we will not escape once again. We are going to give an example of a non-integrable function in the sense of Riemann. This is the <input type="button" value="'characteristic function'" onclick="go('../../bases/applications/caracteristique.html#')" data-inline="true" /> by &rationals;. <br /> It is easy to see that for this function f on the interval [0,1], we have D=1 and d=0 (we use here the notations of <input type="button" value="Darboux sums" onclick="go('intsomdarboux.html#def1')" data-inline="true" />).
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intriemint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intriemint/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

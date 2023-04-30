@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Formule de Taylor-Young</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/tayloryoung/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/tayloryoung/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td>
+              <font color="#FFFFFF">William-Henry Young <br> (1863/1942-UK) </font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle">
+              <img src="images/young.jpeg" width="91" height="109" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Nous utilisons ici les définitions et les notations de la <input type="button" value="page d'introduction" onclick="go('index.html#def1')" data-inline="true" />. <br /> Le théorème de Taylor-Young peut s'énoncer ainsi: </div>
+        <!-- /fr -->
+        <div lang="en"> Here we use the definitions and notations of the <input type="button" value="intro page" onclick="go('index.html#def1')" data-inline="true" />. <br /> The Taylor-Young theorem can be stated as follows: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> R(n,f,a)(x)=o((x-a)<sup>n</sup>)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> R(n,f,a)(x)=o((x-a)<sup>n</sup>)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce qui, en langage plus clair, signifie que T est une approximation de f d'ordre n au sens que l'erreur commise en remplaçant f par le polynôme T au voisinage de a est négligeable devant (x-a)<sup>n</sup>. <br> La preuve est simple si on remarque que la fonction R=R(n,f,a) est n fois dérivable en a et vérifie: <br> R<sup>(0)</sup>(a)=R<sup>(1)</sup>(a)= ... = R<sup>(n)</sup>(a)=0 <br> Pour montrer que : </div>
+        <!-- /fr -->
+        <div lang="en"> Which, in plainer language, means that T is an approximation of f of order n in the sense that the error made in replacing f by the polynomial T in the neighborhood of a is negligible compared to (x-a)<sup>n</sup>. <br> The proof is simple if we notice that the function R=R(n,f,a) is n times differentiable at a and verifies: <br> R<sup>(0)</sup>(a)=R<sup>(1)</sup>(a)= ... = R<sup>(n)</sup>(a)=0 <br> To show that: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{x \to a, x\neq a}\frac{R(x)}{(x-a)^{n}}=0 \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Il suffit d'appliquer n fois à répétition la <input type="button" value="règle de l'Hospital" onclick="go('../derivees/derivlhospital.html#thm1')" data-inline="true" />. <br /> Voici maintenant une appliquette vous permettant de voir des approximations polynomiales de la fonction exponentielle sur l'intervalle [-1,+1]. <br /> Vous pouvez fixer l'ordre n de cette approximation obtenue avec la formule de Taylor-Young : <br /> exp(x)=1+x+x<sup>2</sup>/2! + ... + x<sup>n</sup>/n! +o(x<sup>n</sup>) <br /> En bleu l'exponentielle, en vert l'approximation de Taylor. <br /> Les deux tendent à se confondre pour n &gt; 6. </div>
+        <!-- /fr -->
+        <div lang="en"> Simply apply the <input type="button" value="l'Hospital'rule" n times repeatedly onclick="go('../derivees/derivlhospital.html#thm1')" data-inline="true " />. <br /> Here is now an applet allowing you to see polynomial approximations of the exponential function on the interval [-1,+1]. <br /> You can fix the order n of this obtained approximation with the Taylor-Young formula: <br /> exp(x)=1+x+x<sup>2</sup>/2! + ... + x<sup>n</sup>/n! +o(x<sup>n</sup>) <br /> In blue the exponential, in green the Taylor approximation. <br /> The two tend to merge for n &gt; 6. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button style='button' id='myButton1' onclick="nameSpace1.nplus()">n+</button>
+        <button style='button' id='myButton2' onclick="nameSpace1.nminus()">n-</button>
+        <script src="js/taylyoung.js"></script>
+        <!-- /STOP  APPLET-->
+        <a name="appli"></a>
+        <div lang="fr">
+          <h3>Applications</h3> On cherche une approximation d'ordre 3 de la fonction sinus au voisinage de 0. <br> Sachant que la dérivée de sin est cos que la dérivée seconde de sin est -sin et que la dérivée d'ordre 3 est -cos, il vient : <br> sin(x)=x-x<sup>3</sup>/6+o(x<sup>3</sup>). <br> On cherche une approximation d'ordre 3 de la fonction cosinus au voisinage de 0. <br> Sachant que la dérivée de cos est -sin, que la dérivée seconde de cos est -cos que la dérivée troisième est sin, il vient : <br> cos(x)=1-x<sup>2</sup>/2+o(x<sup>3</sup>)
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We are looking for an approximation of order 3 of the sine function in the neighborhood of 0. <br> Knowing that the derivative of sin is cos that the second derivative of sin is -sin and that the derivative of order 3 is -cos, it comes: <br> sin(x)=x-x<sup>3</sup>/6+o(x<sup>3</sup>). <br> We are looking for an approximation of order 3 of the cosine function in the neighborhood of 0. <br> Knowing that the derivative of cos is -sin, that the second derivative of cos is -cos and the third derivative is sin, it comes: <br> cos(x)=1-x<sup>2</sup>/2+o(x<sup>3</sup>) </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/tayloryoung/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/tayloryoung/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

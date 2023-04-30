@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intégrales dépendant d'un paramètre</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Notion de dérivée partielle</h2> On suppose que f est une fonction de 2 variables (t,x) &rarr; f(t,x), définie sur un produit de deux intervalles.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Notion of partial derivative</h2> We assume that f is a function of 2 variables (t,x) &rarr; f(t,x), defined on a product of two intervals.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On définit la <b>
+              <i>'dérivée partielle'</i>
+            </b> de f par rapport à x au point (t<sub>0</sub>,x<sub>0</sub>) comme étant la dérivée de la fonction d'une variable x &rarr; f(t<sub>0</sub>,x) au point x<sub>0</sub>. Cette dérivée partielle se note
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\partial f}{\partial x}\left ( t_{0},x_{0} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> de sorte que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\partial f}{\partial x}\left ( t_{0},x_{0} \right )=\lim_{h \to 0}\frac{f\left ( t_{0},x_{0}+h \right )-f\left ( t_{0},x_{0} \right )}{h} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We define the <b>
+              <i>'partial derivative'</i>
+            </b> of f with respect to x at the point (t<sub>0</sub>,x<sub>0</sub>) as being the derivative of the function of a variable x &rarr; f(t<sub>0</sub>,x) at point x<sub>0</sub>. This partial derivative is written
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\partial f}{\partial x}\left ( t_{0},x_{0} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> so that
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\partial f}{\partial x}\left ( t_{0},x_{0} \right )=\lim_{h \to 0}\frac{f\left ( t_{0},x_{0}+h \right )-f\left ( t_{0},x_{0} \right )}{h} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On peut définir de la même façon la notion de dérivée partielle par rapport à chacune des variables d'une fonction d'un nombre quelconque de variables. <br>
+          <h3>Exemple</h3> Si f(t,x)=tx<sup>2</sup>
+          <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We can define in the same way the notion of partial derivative with respect to each of the variables of a function of any number of variables. <br>
+          <h3>Example</h3> If f(t,x)=tx<sup>2</sup>
+          <br>
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{\partial f}{\partial x}\left ( t_{0},x_{0} \right )=2t_{0}x_{0} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{\partial f}{\partial t}\left ( t_{0},x_{0} \right )=x_{0}^{2} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr">
+          <h2>Continuité d'une fonction de deux variables</h2> Soit f une fonction de deux variables définie sur un produit d'intervalles I &times; J.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Continuity of a function of two variables</h2> Let f be a function of two variables defined on a product of intervals I &times; J.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit que f est continue au point (t<sub>0</sub>,x<sub>0</sub>) si pour tout réel &epsilon;&gt;0, il existe &eta;&gt;0 tel que : <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \sqrt{\left ( t-t_{0} \right )^{2}+\left ( x-x_{0} \right )^{2}}< \eta \Rightarrow \left | f(t,x)-f\left ( t_{0},x_{0} \right ) \right |< \varepsilon \) <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that f is continuous at the point (t<sub>0</sub>,x<sub>0</sub>) if for any real &epsilon;&gt;0, there exists &eta;&gt;0 such that : <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \sqrt{\left ( t-t_{0} \right )^{2}+\left ( x-x_{0} \right )^{2}}< \eta \Rightarrow \left | f(t,x)-f\left ( t_{0},x_{0} \right ) \right |< \varepsilon \) <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> NB: Dans l'inégalité ci-dessus le membre de gauche représente la distance euclidienne dans le plan des points M<sub>0</sub>(t<sub>0</sub>,x<sub>0</sub>), M(t,x), de sorte que la définition peut encore s'énoncer : </div>
+        <!-- /fr -->
+        <div lang="en"> NB: In the inequality above the left-hand side represents the Euclidean distance in the plane of the points M<sub>0</sub>(t<sub>0</sub>,x<sub>0</sub>), M(t,x), so that the definition can still be stated: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \forall ~\varepsilon > 0~~ \exists ~\eta > 0~~|~~d\left ( M,M_{0} \right )< \eta \Rightarrow d\left ( f(M),f\left ( M_{0} \right ) \right )< \varepsilon \) </p>
+            <!-- /FORMULE UNIV INLINE-->
+            <div lang="fr"> C'est en fait cette dernière formulation qui permet de généraliser la notion de fonction continue à des fonctions définies sur &reals;<sup>p</sup> et à valeurs dans &reals;<sup>q</sup>. <br> Notons que si f est continue en tant que fonction de deux variables alors quand on fixe une des deux variables on obtient une fonction continue de l'autre variable. Cependant la réciproque est fausse comme le montre l'exemple suivant
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle f(t,x)=\left\{\begin{matrix} \frac{(t+x)^{2}}{t^{2}+x^{2}}~~si~~(t,x)\neq (0,0) \\ 1~~si~~(t,x)=(0,0) \end{matrix}\right. \)</p>
+              <!-- /FORMULE UNIV INLINE--> Les fonctions t &rarr; f(t,0) et x &rarr; f(0,x) sont toutes les deux continues à l'origine mais la fonction f n'est pas continue en (0,0) en tant que fonction de deux variables comme on peut le voir en faisant tendre (t,x) vers (0,0) sur la droite d'équation x=-t. <br> Nous aurons également besoin du théorème suivant, analogue d'un théorème connu pour les fonctions d'une variable :
+            </div>
+            <!-- /fr -->
+            <div lang="en"> It is in fact this last formulation which makes it possible to generalize the notion of continuous function to functions defined on &reals;<sup>p</sup> and to values in &reals;<sup>q</sup>. <br> Note that if f is continuous as a function of two variables then when we fix one of the two variables we obtain a continuous function of the other variable. However the converse is false as shown in the following example
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle f(t,x)=\left\{\begin{matrix} \frac{(t+x)^{2}}{t^{2}+x^{2}}~~if~~(t,x)\neq (0,0) \\ 1~~if~~(t,x)=(0,0) \end{matrix}\right. \)</p>
+              <!-- /FORMULE UNIV INLINE--> The functions t &rarr; f(t,0) and x &rarr; f(0,x) are both continuous at the origin but the function f is not continuous at (0,0) as a function of two variables as can be seen by letting (t,x) tend towards (0,0) on the line of equation x=-t. <br> We will also need the following theorem, analogous to a known theorem for functions of a single variable:
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm1"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 1</div> Si f est continue en tout point d'un produit de deux intervalles compacts I et J alors pour tout &epsilon; &gt;0 donné, il existe &eta; &gt;0 tel que d((t,x),(t',x')) &lt; &eta; &rArr; |f(t,x)-f(t',x')| &lt; &epsilon;.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 1</div> i f is continuous at any point of a product of two compact intervals I and J then for all &epsilon; &gt;0 given, there is &eta; >0 such that d((t,x),(t',x')) &lt; &eta; &rArr; |f(t,x)-f(t',x')| &lt; &epsilon;.
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr"> Le théorème ci-dessus, qui exprime la <input type="button" value="continuité uniforme" onclick="go('../continuite/contuniforme.html#def1')" data-inline="true" /> sur un produit d'intervalles compacts d'une fonction continue se démontre de façon tout à fait analogue au cas d'une variable. <h2>Enoncé du théorème principal</h2> Le théorème que nous allons énoncer appartient encore à la catégorie des inversions de limites, puisqu'il s'agit de 'dérivation sous le signe d'intégration'. </div>
+            <!-- /fr -->
+            <div lang="en"> The above theorem, which expresses the <input type="button" value="uniform continuity" onclick="go('../continuite/contuniforme.html#def1')" data-inline="true" /> on a product of compact intervals of a continuous function is proved in a completely analogous way to the case of a variable. <h2>Statement of the main theorem</h2> The theorem that we are going to state still belongs to the category of limit inversions, since it is 'derivation under the sign of integration'. </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm2"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 2</div> Soit I un intervalle [a,b] et J un intervalle compact. On considère une application f définie sur I&times;J f: (t,x) &rarr; f(x,t). On fait sur f les hypothèses suivantes : <ul>
+                  <li>f est une fonction continue sur I &times; J en tant que fonction de deux variables.</li>
+                  <li>
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\partial f}{\partial x} \)
+                    <!-- /FORMULE UNIV INLINE--> est définie et continue également sur I × J.
+                  </li>
+                </ul> Dans ces conditions : <ul>
+                  <li> Pour tout x &isin; J l'intégrale
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(t,x)dt \)
+                    <!-- /FORMULE UNIV INLINE--> existe ; on désigne cette fonction par G(x)
+                  </li>
+                  <li> Pour tout x &isin; J l'intégrale
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\frac{\partial f}{\partial x}(t,x)dt \)
+                    <!-- /FORMULE UNIV INLINE--> existe ; on désigne cette fonction par g(x)
+                  </li>
+                  <li> G est dérivable en tout point x de J et G'(x)=g(x). </li>
+                </ul>
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 2</div> Let I be an interval [a,b] and J a compact interval. We consider a map f defined on I&times;J f: (t,x) &rarr; f(x,t). We make the following assumptions on f: <ul>
+                  <li>f is a continuous function on I &times; J as a function of two variables.</li>
+                  <li>
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\partial f}{\partial x} \)
+                    <!-- /FORMULE UNIV INLINE--> is defined and continuous on I × J as well.
+                  </li>
+                </ul> Under these conditions : <ul>
+                  <li> For any x &isin; J the integral
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(t,x)dt \)
+                    <!-- /FORMULE UNIV INLINE--> exists ; we denote this function by G(x)
+                  </li>
+                  <li> For any x &isin; J the integral
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\frac{\partial f}{\partial x}(t,x)dt \)
+                    <!-- /FORMULE UNIV INLINE--> exists ; we denote this function by g(x)
+                  </li>
+                  <li> G is differentiable at any point x of J and G'(x)=g(x). </li>
+                </ul>
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP -->
+            <div lang="fr">
+              <div data-role="collapsible">
+                <h4>démonstration</h4>
+                <p>Les intégrales définissant les fonctions G et g existent parce que l'hypothèse de continuité des fonctions f et
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\partial f}{\partial x} \)
+                  <!-- /FORMULE UNIV INLINE--> comme fonctions de deux variables entraîne leur continuité séparée en fonction de chacune des deux variables.
+                </p>
+                <p> Par ailleurs, pour ε > 0 donné, il existe δ > 0 tel que
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle |x-x'|< \delta \Rightarrow \left | \frac{\partial f}{\partial x}(t,x')-\frac{\partial f}{\partial x}(t,x) \right |< \frac{\varepsilon }{b-a} \) <!-- /FORMULE UNIV INLINE--> pour une raison d'uniforme continuité de la dérivée partielle sur I × J.
+                </p>
+                <p> Cette remarque étant faite on a par définition d'une dérivée : <br>
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle G'(x)=\lim_{h \to 0}\int_{a}^{b}\frac{f(t,x+h)-f(t,x)}{h}dt \)
+                  <!-- /FORMULE UNIV INLINE-->
+                </p>
+                <p> Maintenant si nous prenons h tel que |h|&lt;δ le <input type="button" value="théorème des accroissements finis" onclick="go('../derivees/derivaccfinis.html#thm1')" data-inline="true" /> nous donne: <br />
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{f(t,x+h)-f(t,x)}{h}=\frac{\partial f}{\partial x}(t,x+\theta h) \)
+                  <!-- /FORMULE UNIV INLINE-->
+                  <br> où &theta; ∈ ]0,1[.
+                </p>
+                <p> Nous avons alors <br>
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle \left | \frac{G(x+h)-G(x)}{h}-g(x) \right |< \int_{a}^{b}\left | \frac{\partial f}{\partial x} (t,x+\theta h)-\frac{\partial f}{\partial x}(t,x)\right |dt \) <!-- /FORMULE UNIV INLINE-->
+                    <br> et donc <br>
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \left | \frac{G(x+h)-G(x)}{h} -g(x)\right |< \varepsilon \) <!-- /FORMULE UNIV INLINE-->
+                      <br> d'où notre résultat. </p>
+              </div>
+              <!--demo -->
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <div data-role="collapsible">
+                <h4>proof</h4>
+                <p>The integrals defining the functions G and g exist because the assumption of continuity of the functions f and
+                  <!-- UNIV INLINE FORMULA --> \( \displaystyle \frac{\partial f}{\partial x} \)
+                  <!-- /INLINE UNIV FORMULA--> as functions of two variables entails their separate continuity as a function of each of the two variables.
+                </p>
+                <p> On the other hand for any ε > 0 given, we can find δ > 0 such that
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle |x-x'|< \delta \Rightarrow \left | \frac{\partial f}{\partial x}(t,x')-\frac{\partial f}{\partial x}(t,x) \right |< \frac{\varepsilon }{b-a} \) <!-- /FORMULE UNIV INLINE--> for a reason of uniform continuity of the partial derivative on I × J.
+                </p>
+                <p> This remark being done we have by definition of a derivative : <br>
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle G'(x)=\lim_{h \to 0}\int_{a}^{b}\frac{f(t,x+h)-f(t,x)}{h}dt \)
+                  <!-- /FORMULE UNIV INLINE-->
+                </p>
+                <p> Now, if we take h such that |h|&lt;δ the <input type="button" value="Mean Value Theorem" onclick="go('../derivees/derivaccfinis.html#thm1')" data-inline="true" /> gives us: <br />
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{f(t,x+h)-f(t,x)}{h}=\frac{\partial f}{\partial x}(t,x+\theta h) \)
+                  <!-- /FORMULE UNIV INLINE-->
+                  <br> where &theta; ∈ ]0,1[.
+                </p>
+                <p> We have then <br>
+                  <!-- FORMULE UNIV INLINE --> \( \displaystyle \left | \frac{G(x+h)-G(x)}{h}-g(x) \right |< \int_{a}^{b}\left | \frac{\partial f}{\partial x} (t,x+\theta h)-\frac{\partial f}{\partial x}(t,x)\right |dt \) <!-- /FORMULE UNIV INLINE-->
+                    <br> and hence <br>
+                    <!-- FORMULE UNIV INLINE --> \( \displaystyle \left | \frac{G(x+h)-G(x)}{h} -g(x)\right |< \varepsilon \) <!-- /FORMULE UNIV INLINE-->
+                      <br> whence our result
+              </div>
+              <!--demo -->
+            </div>
+            <!-- /en -->
+            <!-- /STOP -->
+            <div lang="fr"> Remarquons encore que : </div>
+            <!-- /fr -->
+            <div lang="en"> Note again that: </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm3"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 3</div> Le théorème précédent vaut si J est un intervalle quelconque (et pas seulement un intervalle compact)
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 3</div> The previous theorem holds if J is any interval (and not just a compact interval)
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr"> Il suffit en effet pour le voir de remarquer que tout intervalle est réunion d'une suite croissante d'intervalles compacts. </div>
+            <!-- /fr -->
+            <div lang="en"> In order to see this, it suffices to remark that every interval is the union of an increasing sequence of compact intervals. </div>
+            <!-- /en -->
+            <div lang="fr">
+              <div>
+                <ul style=list-style-type:'';>
+                  <li>
+                    <input type="button" value="Exercices" onclick="go('exercices/intparam/menu.html')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                  </li>
+                </ul>
+              </div>
+              <!-- /navbar -->
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <div>
+                <ul style=list-style-type:'';>
+                  <li>
+                    <input type="button" value="Exercises" onclick="go('exercices/intparam/menu.html')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                  </li>
+                  <li>
+                    <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

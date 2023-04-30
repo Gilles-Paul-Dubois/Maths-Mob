@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Calcul des dérivées</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivcalcul/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivcalcul/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Dérivée d'une somme</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Derivative of a sum</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Soient f et g deux fonctions numériques définies au voisinage de x<sub>0</sub>. <br> On suppose f et g toutes deux dérivables en x<sub>0</sub>. <br> Dans ces conditions la fonction somme f+g est également dérivable en x<sub>0</sub> et (f+g)'(x<sub>0</sub>)=f'(x<sub>0</sub>)+g'(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> Let f and g be two numerical functions defined in the neighborhood of x<sub>0</sub>. <br> Assume both f and g are differentiable at x<sub>0</sub>. <br> Under these conditions the sum function f+g is also differentiable at x<sub>0</sub> and (f+g)'(x<sub>0</sub>)=f'(x<sub>0</sub>)+g'(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte immédiatement de l'égalité: <br /> Δ(f+g)(x<sub>0</sub>,x<sub>1</sub>)=Δf(x<sub>0</sub>,x<sub>1</sub>)+Δg(x<sub>0</sub>,x<sub>1</sub>) (voir <input type="button" value="cet exercice" onclick="go('../foncnum/exercices/foncnummonotones/ex01.html')" data-inline="true" />). <h2>Dérivée d'un produit</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This follows immediately from the equality: <br /> Δ(f+g)(x<sub>0</sub>,x<sub>1</sub>)=Δf(x<sub>0</sub>,x<sub>1</sub>) +Δg(x<sub>0</sub>,x<sub>1</sub>) (see <input type="button" value="this exercise" onclick="go('../foncnum/exercices/foncnummonotones/ex01.html')" data-inline="true" />). <h2>Derivative of a product</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Soient f et g deux fonctions numériques définies au voisinage de x<sub>0</sub>. <br> On suppose f et g toutes deux dérivables en x<sub>0</sub>. <br> Dans ces conditions la fonction produit f&times;g est également dérivable en x<sub>0</sub> et (f&times;g)'(x<sub>0</sub>)=f'(x<sub>0</sub>)&times;g(x<sub>0</sub>)+g'(x<sub>0</sub>)&times;f(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Let f and g be two numerical functions defined in the neighborhood of x<sub>0</sub>. <br> Assume both f and g are differentiable at x<sub>0</sub>. <br> Under these conditions the product function f&times;g is also differentiable at x<sub>0</sub> and (f&times;g)'(x<sub>0</sub>)=f'(x<sub>0</sub>)&times;g(x<sub>0</sub>)+g'(x<sub>0</sub>)&times;f(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte immédiatement de l'égalité: <br /> Δf(x<sub>0</sub>,x<sub>1</sub>)(g(x<sub>0</sub>)+g(x<sub>1</sub>))+Δg(x<sub>0</sub>,x<sub>1</sub>)(f(x<sub>1</sub>)+f(x<sub>0</sub>))=2Δ(f×g)(x<sub>0</sub>,x<sub>1</sub>)(voir <input type="button" value="cet exercice" onclick="go('../foncnum/exercices/foncnummonotones/ex02.html')" data-inline="true" />) <h2>Dérivée d'un quotient</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en --> This follows immediately from the equality: <br /> Δf(x<sub>0</sub>,x<sub>1</sub>)(g(x<sub>0</sub>)+g(x<sub>1</sub>))+Δg(x<sub>0</sub>,x<sub>1</sub>)(f(x<sub>1</sub>)+f(x<sub>0</sub>))=2Δ(f×g)(x<sub>0</sub>,x<sub>1</sub>)(see <input type="button" value="this exercise" onclick="go('../foncnum/exercices/foncnummonotones/ex02.html')" data-inline="true" />) <h2>Derivative of a quotient</h2>
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Soient f et g deux fonctions numériques définies au voisinage de x<sub>0</sub>. <br> On suppose f et g toutes deux dérivables en x<sub>0</sub>. <br> On suppose en outre que g(x<sub>0</sub>)&ne;0. Dans ces conditions la fonction quotient f/g est également dérivable en x<sub>0</sub> et
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left ( \frac{f}{g} \right )'\left ( x_{0} \right )= \frac{f'\left ( x_{0} \right )g\left ( x_{0} \right )-f\left ( x_{0} \right )g'\left ( x_{0} \right )}{g\left ( x_{0} \right )^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> Let f and g be two numerical functions defined in the neighborhood of x<sub>0</sub>. <br> Assume both f and g are differentiable at x<sub>0</sub>. <br> We further assume that g(x<sub>0</sub>)&ne;0. Under these conditions the quotient function f/g is also differentiable at x<sub>0</sub> and
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left ( \frac{f}{g} \right )'\left ( x_{0} \right )= \frac{f'\left ( x_{0} \right )g\left ( x_{0} \right )-f\left ( x_{0} \right )g'\left ( x_{0} \right )}{g\left ( x_{0} \right )^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte du fait que </div>
+        <!-- /fr -->
+        <div lang="en"> This results from the fact that </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{f}{g}\left ( x_{0}+h \right )-\frac{f}{g}\left ( x_{0} \right )= \frac{\left ( f\left ( x_{0}+h \right ) -f\left ( x_{0} \right )\right )g\left ( x_{0} \right )-\left ( g\left ( x_{0}+h \right ) -g\left ( x_{0} \right )\right )f\left ( x_{0} \right )} {g\left ( x_{0} \right )g\left ( x_{0}+h \right )} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> d'où nous tirons </div>
+        <!-- /fr -->
+        <div lang="en"> from where we get </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \Delta \frac{f}{g}\left ( x_{0},x_{0}+h \right )= \frac{g\left ( x_{0} \right )\Delta f\left ( x_{0},x_{0}+h \right )-f\left ( x_{0} \right )\Delta g\left ( x_{0},x_{0}+h \right )} {g\left ( x_{0} \right )g\left ( x_{0}+h \right )} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Il suffit maintenant de passer à la limite quand h&rarr;0 dans l'égalité ci-dessus, pour obtenir l'égalité voulue. <h2>Dérivée d'un produit par un scalaire</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It is now sufficient to pass to the limit when h&rarr;0 in the equality above, to obtain the desired equality. <h2>Derivative of a product by a scalar</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Soient f une fonction numérique définie au voisinage de x<sub>0</sub>. <br> On suppose f dérivable en x<sub>0</sub>. <br> Dans ces conditions, si &lambda; est un réel quelconque la fonction &lambda;f est également dérivable en x<sub>0</sub> et (&lambda;f)'(x<sub>0</sub>)=&lambda;f'(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> Let f be a numerical function defined in the neighborhood of x<sub>0</sub>. <br> Suppose f is differentiable at x<sub>0</sub>. <br> Under these conditions, if &lambda; is any real the function &lambda;f is also differentiable at x<sub>0</sub> and (&lambda;f)'(x<sub>0</sub>)=&lambda;f'(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit d'appliquer le résultat sur les produits avec la fonction constante g(x)=&lambda; &forall;x, sachant que les constantes ont une dérivée nulle. <h2>Dérivée d'une différence</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It suffices to apply the result to the products with the constant function g(x)=&lambda; &forall;x, given that constants have null derivative. <h2>Derivative of a difference</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Soient f et g deux fonctions numériques définies au voisinage de x<sub>0</sub>. <br> On suppose f et g toutes deux dérivables en x<sub>0</sub>. <br> Dans ces conditions la fonction différence f-g est également dérivable en x<sub>0</sub> et (f-g)'(x<sub>0</sub>)=f'(x<sub>0</sub>)-g'(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> Let f and g be two numerical functions defined in the neighborhood of x<sub>0</sub>. <br> Assume both f and g are differentiable at x<sub>0</sub>. <br> Under these conditions the difference function f-g is also differentiable at x<sub>0</sub> and (f-g)'(x<sub>0</sub>)=f'(x<sub>0</sub>)-g'(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte de f-g=f+(-1)&times;g et des résultats précédents. <h2>Dérivée d'une puissance</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This follows from f-g=f+(-1)&times;g and previous results. <h2>Derivative of a power</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Soit f<sub>n</sub> la fonction numérique définie sur &reals; par f<sub>n</sub>(x)=x<sup>n</sup> où n est un entier positif. Alors f<sub>n</sub> est dérivable en tout point x<sub>0</sub> et f<sub>n</sub>'(x<sub>0</sub>)=nx<sub>0</sub>
+           <sup>n-1</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> Let f<sub>n</sub> be the numeric function defined on &reals; by f<sub>n</sub>(x)=x<sup>n</sup> where n is a positive integer. Then f<sub>n</sub> is differentiable at any point x<sub>0</sub> and f<sub>n</sub>'(x<sub>0</sub>)=nx<sub>0</sub>
+           <sup>n-1</sup>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette propriété est vraie pour n=0 et n=1. Elle se démontre par récurrence sur n en utilisant la formule de dérivation d'un produit. <h2>Dérivée d'une composée</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This property is true for n=0 and n=1. It is proved by induction on n using the formula for the derivation of a product. <h2>Derivative of a composite (chain-rule)</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> Soit f une fonction numérique définie et dérivable au voisinage de x<sub>0</sub>. <br> Soi g une fonction numérique définie dans un voisinage de y<sub>0</sub>=f(x<sub>0</sub>) et dérivable en y<sub>0</sub>. <br> Alors g<font size="-1">o</font>f est dérivable en x<sub>0</sub> et (g<font size="-1">o</font>f)'(x<sub>0</sub>)=g'(y<sub>0</sub>)&times;f'(x<sub>0</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> Let f be a numerical function defined in the neighborhood of x<sub>0</sub> and differentiable at x<sub>0</sub>. <br> Let g be a numerical function defined in a neighborhood of y<sub>0</sub>=f(x<sub>0</sub>) and differentiable at y<sub>0</sub>. <br> Then g<font size="-1">o</font>f is differentiable at x<sub>0</sub> and (g<font size="-1">o</font>f)'( x<sub>0</sub>)=g'(y<sub>0</sub>)&times;f'(x<sub>0</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On a Δg<font size="-1">o</font>f(x<sub>0</sub>,x<sub>1</sub>)=Δg(f(x<sub>0</sub>),f(x(<sub>1</sub>))×Δf(x<sub>0</sub>,x<sub>1</sub>) si f est injective (voir <input type="button" value="cet exercice" onclick="go('../foncnum/exercices/foncnummonotones/ex03.html')" data-inline="true" />). <br /> Mais si f(x<sub>0</sub>)=f(x<sub>1</sub>) on a Δf(x<sub>0</sub>,x<sub>1</sub>)=0 on a aussi Δg<font size="-1">o</font>f(x<sub>0</sub>,x<sub>1</sub>)=0. <br /> L'égalité Δg<font size="-1">o</font>f(x<sub>0</sub>,x<sub>1</sub>)=Δg(f(x<sub>0</sub>),f(x(<sub>1</sub>))×Δf(x<sub>0</sub>,x<sub>1</sub>) est donc vraie dans tous les cas. <br /> En faisant tendre x<sub>1</sub> vers x<sub>0</sub> on obtient l'égalité souhaitée. <h3>Cas particulier</h3> En combinant avec le résultat précédent il vient: </div>
+        <!-- /fr -->
+        <div lang="en"> We have Δg<font size="-1">o</font>f(x<sub>0</sub>,x<sub>1</sub>)=Δg(f(x<sub>0</sub>),f(x(<sub>1</sub>))×Δf(x<sub>0</sub>,x<sub>1</sub>) if f is injective (see <input type="button" value="this exercise" onclick="go('../foncnum/exercices/foncnummonotones/ex03.html')" data-inline="true" />). <br /> But if f(x<sub>0</sub>)=f(x<sub>1</sub>) we have Δf(x<sub>0</sub>,x<sub>1</sub>)=0 and we have too Δg<font size="-1">o</font>f(x<sub>0</sub>,x<sub>1</sub>)=0. <br /> So the equality Δg<font size="-1">o</font>f(x<sub>0</sub>,x<sub>1</sub>)=Δg(f(x<sub>0</sub>),f(x(<sub>1</sub>))×Δf(x<sub>0</sub>,x<sub>1</sub>) is true in all cases. <br /> Letting x<sub>1</sub> tend towards x<sub>0</sub> we get what we need. <h3>Special case</h3> Combining with the previous result, we get : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 8</div> (f<sup>n</sup>)'(x)=nf'(x)f(x)<sup>n-1</sup>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 8</div> (f<sup>n</sup>)'(x)=nf'(x)f(x)<sup>n-1</sup>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Dérivée d'un polynôme</h2> Un polynôme est une somme de monômes. <br> Un monôme est le produit d'une puissance de x par un scalaire. <br> Il suffit donc de combiner les règles précédentes.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Derivative of a polynomial</h2> A polynomial is a sum of monomials. <br> A monomial is the product of a power of x by a scalar. <br> It is therefore sufficient to combine the previous rules.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 9</div> Si f(x)=a<sub>n</sub>x<sup>n</sup>+a<sub>n-1</sub>x<sup>n-1</sup>+ ... +a<sub>2</sub>x<sup>2</sup>+a<sub>1</sub>x+a<sub>0</sub>, alors f'(x)=na<sub>n</sub>x<sup>n-1</sup>+(n-1)a<sub>n-1</sub>x<sup>n-2</sup>+ ... +2a<sub>2</sub>x+a<sub>1</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 9</div> If f(x)=a<sub>n</sub>x<sup>n</sup>+a<sub>n-1</sub>x<sup>n-1</sup>+ ... +a<sub>2</sub>x<sup>2</sup>+a<sub>1</sub>x+a<sub>0</sub>, then f'(x)=na<sub>n</sub>x<sup>n-1</sup>+(n-1)a<sub>n-1</sub>x<sup>n-2</sup>+ ... +2a<sub>2</sub>x+a<sub>1</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Dérivée d'une fonction rationnelle</h2> Si r(x) est une fonction rationnelle alors
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Derivative of a rational function</h2> If r(x) is a rational function then
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle r(x)=\frac{p(x)}{q(x)} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où p(x) et q(x) sont des fonctions polynômes que l'on sait dériver. </div>
+        <!-- /fr -->
+        <div lang="en"> where p(x) and q(x) are polynomial functions that we know how to differentiate. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop10"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 10</div> D'où la fonction r est dérivable en tout point x telle que q(x)&ne;0 et
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle r'(x)=\frac{p'(x)q(x)-p(x)q'(x)}{q(x)^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> r' est donc aussi une fraction rationnelle.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 10</div> Hence the function r is differentiable at any point x such that q(x)&ne;0 and
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle r'(x)=\frac{p'(x)q(x)-p(x)q'(x)}{q(x)^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> r' is therefore also a rational fraction.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Cas particulier</h3>
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle r(x)=\frac{1}{x^{n}} \)
+          <!-- /FORMULE UNIV INLINE--> où n est un entier strictement positif.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Special case</h3>
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle r(x)=\frac{1}{x^{n}} \)
+          <!-- /FORMULE UNIV INLINE--> where n is a strictly positive integer.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop11"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 11</div> Alors la formule de dérivation des puissances reste valable pour les puissances négatives.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 11</div> Then derivation formula for powers remains valid for negative powers.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop12"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 12</div> En particulier la dérivée de 1/x est donc -1/x².
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 12</div> In particular the derivative of 1/x is therefore -1/x².
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Utilisant cette dernière règle conjointement avec la règle de dérivation des composées on obtient: </div>
+        <!-- /fr -->
+        <div lang="en"> Using this last rule in conjunction with the rule for differentiation of composite functions we get: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop13"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 13</div> (1/f)'(x)=-f'(x)/f(x)<sup>2</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 13</div> (1/f)'(x)=-f'(x)/f(x)<sup>2</sup>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Dérivées des fonctions trigonométriques</h2>
+          <h3>Cas du sinus</h3> Nous avons l'identité
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Derivatives of trigonometric functions</h2>
+          <h3>Case of sine</h3> We have the identity
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{sin(x+h)-sin(x)}{h}=2\frac{sin(h/2)cos(x+h/2)}{h}=\frac{sin(h/2)}{h/2}cos(x+h/2) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> comme
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x\rightarrow 0,x\neq 0}\frac{sin(x)}{x}=1 \)
+          <!-- /FORMULE UNIV INLINE--> et que cosinus est une fonction continue, il en résulte que :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> since
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x\rightarrow 0,x\neq 0}\frac{sin(x)}{x}=1 \)
+          <!-- /FORMULE UNIV INLINE--> and that cosine is a continuous function, we get :
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop14"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 14</div> sinus est partout dérivable et sin'(x)=cos(x).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 14</div> sine is everywhere differentiable and sin'(x)=cos(x).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Cas du cosinus</h3> Sachant que cos(x)=sin(x+&pi;/2) et appliquant le théorème de dérivation des fonctions composées il vient immédiatement:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of the cosine</h3> Knowing that cos(x)=sin(x+&pi;/2) and applying the differentiation theorem of composite functions it comes immediately:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop15"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 15</div> cos'(x)=-sin(x)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 15</div> cos'(x)=-sin(x)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Cas de la tangente</h3> On obtient la dérivée de la fonction tangente en utilisant la définition tan(x)=sin(x)/cos(x) et la règle de dérivation des quotients.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of the tangent</h3> We obtain the derivative of the tangent function using the definition tan(x)=sin(x)/cos(x) and the rule of differentiation of quotients.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop16"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 16</div> tan'(x)=1/cos<sup>2</sup>(x)=1+tan<sup>2</sup>(x) x&ne;k&pi;
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 16</div> tan'(x)=1/cos<sup>2</sup>(x)=1+tan<sup>2</sup>(x) x&ne;k&pi;
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Cas de la cotangente</h3> On obtient la dérivée de la cotangente en remarquant que c'est l'inverse de la tangente.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of the cotangent</h3> We obtain the derivative of the cotangent by noticing that it is the inverse of the tangent.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop17"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 17</div> cotan'(x)=-1-cotan<sup>2</sup>(x)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 17</div> cotan'(x)=-1-cotan<sup>2</sup>(x)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un programme effectuant un calcul de dérivées. Ce programme traite des expressions symboliques entrées sous forme de chaînes de caractères. Il traite les fonctions d'une variable, notée X, sans paramètres.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> Here is a program performing a calculation of derivatives. This program processes symbolic expressions entered as character strings. It processes the functions of a variable, denoted X, without parameters.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/deriv01.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Ce programme est bien imparfait. Il ne reconnaît que les expressions bien parenthésées, sans aucun abus d'écriture. <br /> Les règles de simplification sont, en l'état actuel, insuffisantes. Il existe beaucoup d'opérations non prises en charge (regroupement des mêmes puissances de la variable, etc.). <br /> Il est perfectible, mais les programmes de ce type gagnent à utiliser des analyseurs lexicaux et des compilateurs spécialisés (LEX-YACC). Il existe un module python fournissant ces services (le module PLY). <br /> Voir par exemple ce qui a été fait dans ce cours <input type="button" value="pour l'évaluation des expressions arithmétiques" onclick="go('../../bases/operations/evaluation.html#yacc')" data-inline="true" /> ainsi que pour l'évaluation des <input type="button" value="formules du calcul propositionnel" onclick="go('../../bases/logique/formules.html#')" data-inline="true" />, une grande partie du travail cependant, reste à la charge du programmeur. <h2>Le coin de Julia</h2>
+          <p>On peut refaire avec Julia le travail fait ci-dessus avec Python, nous choisissons pourtant ici d'utiliser une bibliothèque (le projet MTH229) pour faire du calcul symbolique de dérivées.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This program is very imperfect. It only recognizes properly parenthesized expressions, without any writing abuse. <br /> The simplification rules are, as they stand, insufficient. There are a lot of unsupported operations (grouping the same powers of the variable, etc). <br /> It can be improved, but programs of this type benefit from using lexical analyzers and specialized compilers (LEX-YACC). There is a python module providing these services (the PLY module). <br /> See for example what has been done in this course <input type="button" value="for the evaluation of arithmetic expressions" onclick="go('../../bases/operations/evaluation.html#yacc')" data-inline="true" /> as well as for the evaluation of <input type="button" value="propositional calculus formulas" onclick="go('../../bases/logique/formules.html#')" data-inline="true" />, however, much of the work remains with the programmer. <h2>Julia's corner</h2>
+          <p>We can redo with Julia the work done above with Python, however we choose here to use a library (the MTH229 project) to do symbolic calculation of derivatives.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/derivcalcsymb.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivcalcul/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivcalcul/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Etude de la variation avec la dérivée</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivvariation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivvariation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Résultat fondamental</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Fundamental result</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit f une fonction définie et continue sur [a,b]. Si f est dérivable sur ]a,b[ et si f'(x) &gt; 0 &forall;x &isin; ]a,b[, alors f est strictement croissante sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let f be a function defined and continuous on [a,b]. If f is differentiable on ]a,b[ and if f'(x) > 0 &forall;x &isin; ]a,b[, then f is strictly increasing on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons f(x<sub>2</sub>) &lt; f(x<sub>1</sub>), alors, <input type="button" value="en vertu de ce résultat" onclick="go('derivextrema.html#')" data-inline="true" />, il existe au voisinage de x<sub>1</sub> un point x<sub>3</sub> vérifiant x<sub>1</sub> &lt; x<sub>3</sub> &lt; x<sub>2</sub>, tel que f(x<sub>3</sub>) &gt; f(x<sub>1</sub>). On a donc f(x<sub>3</sub>) &gt; f(x<sub>1</sub>) &gt; f(x<sub>2</sub>). f est continue sur [x<sub>3</sub>,x<sub>2</sub>] donc d'après le <input type="button" value="théorème des valeurs intermédiaires" onclick="go('../continuite/contvalint.html#thm1')" data-inline="true" />, il existe x<sub>4</sub>∈ [x<sub>3</sub>,x<sub>2</sub>] tel que f(x<sub>1</sub>)=f(x<sub>4</sub>). Mais alors d'après le <input type="button" value="théorème de Rolle" onclick="go('derivrolle.html#thm1')" data-inline="true" /> f'(x) s'annule sur ]x<sub>1</sub>,x<sub>4</sub>[, contrairement à l'hypothèse. f est donc strictement croissante sur ]a,b[. <br /> Il résulte de ce qui précède que si a &lt; x' &lt; x on a toujours f(x) &lt; f(x') donc quand x → a+ f(x) tend vers f(a) en décroissant. Il en résulte que f(a)=lim<sub>x→a+</sub>f(x) &lt; f(x'). <br /> f est donc strictement croissante sur [a,b].
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose f(x<sub>2</sub>) < f(x<sub>1</sub>), then, <input data-inline="true" onclick="go('derivextrema.html#')" type="button" value="under this result" />, there exists in the neighborhood of x<sub>1</sub> a point x<sub>3</sub> satisfying x<sub>1</sub>
+              < x<sub>3</sub>
+                < x<sub>2</sub>, such that f(x<sub>3</sub>) > f(x<sub>1</sub>). We therefore have f(x<sub>3</sub>) > f(x<sub>1</sub>) > f(x<sub>2</sub>). f is continuous on [x<sub>3</sub>,x<sub>2</sub>] so according to the <input data-inline="true" onclick="go('../continuite/contvalint.html#thm1')" type="button" value=" intermediate value theorem" />, there exists x<sub>4</sub>∈ [x<sub>3</sub>,x<sub>2</sub>] such that f(x<sub>1</sub>)=f(x<sub>4</sub>). But then according to <input data-inline="true" onclick="go('derivrolle.html#thm1')" type="button" value=" Rolle's theorem" />f'(x) vanishes on ]x<sub>1</sub>,x<sub>4</sub>[, contrary to the hypothesis. f is therefore strictly increasing on ]a,b[. <br />It follows from the above that if a < x' < x we ​​always have f(x) < f(x') so when x → a+ f(x) tends to f(a) while decreasing. It follows that f(a)=lim<sub>x→a+</sub>f(x)
+                    < f(x'). <br /> f is therefore strictly increasing on [a,b].
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Bien entendu on a le résultat symétrique: </div>
+        <!-- /fr -->
+        <div lang="en"> Of course we have the symmetric result: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit f une fonction définie et continue sur [a,b]. Si f est dérivable sur ]a,b[ et si f'(x) &lt; 0 &forall;x &isin; ]a,b[, alors f est strictement décroissante sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Let f be a function defined and continuous on [a,b]. If f is differentiable on ]a,b[ and if f'(x) < 0 &forall;x &isin; ]a,b[, then f is strictly decreasing over [a,b]. </div>
+              <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h2>Application</h2> Il résulte du paragraphe sur les extrema locaux et du résultat qui précède que:
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h2>App</h2> It follows from the paragraph on local extrema and from the preceding result that:
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="prop1"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">propriété 1</div> L'étude de la variation d'une fonction dérivable se ramène à l'étude du signe de sa dérivée.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">property 1</div> The study of the variation of a differentiable function comes down to the study of the sign of its derivative.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <!-- STOP -->
+          <a name="prop2"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">propriété 2</div> Les extrema locaux correspondent aux points où la dérivée s'annule avec changement de signe.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">property 2</div> The local (relative) extrema correspond to the points where the derivative is canceled with change of sign.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <!-- STOP -->
+          <a name="def1"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 1</div> Les annulations de la dérivée sans changement de signe correspondent à des <strong>
+                <em>'inflexions'</em>
+              </strong>, points où la courbe représentative de la fonction traverse sa tangente.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 1</div> Cancellations of the derivative without change of sign correspond to <strong>
+                <em>'inflections'</em>
+              </strong>, points where the curve representing the function crosses its tangent.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> L'appliquette qui suit vous permet de voir les variations d'une fonction avec extrema locaux et inflexions. </div>
+          <!-- /fr -->
+          <div lang="en"> The following applet allows you to see the variations of a function with local extrema and inflections. </div>
+          <!-- /en -->
+          <!-- STOP  APPLET-->
+          <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+          <script src="js/varfonc.js"></script>
+          <button type='button' id='myButton22' onClick='nameSpace1.pause()'>Stop/Restart</button>
+          <button type="button" id="myButton21" onClick="nameSpace1.go()">
+            <div lang="fr">Recommencer</div>
+            <!-- /fr -->
+            <div lang="en">New execution</div>
+            <!-- /en -->
+          </button>
+          <!-- /STOP  APPLET-->
+          <div lang="fr"> La fonction donnée en exemple présente: <ul>
+              <li>Trois maxima locaux</li>
+              <li>Une inflexion en 0</li>
+              <li>Trois minima locaux</li>
+            </ul> Ces considérations peuvent servir à de nombreux problèmes d'optimisation. <br /> Recherche d'un volume maximal ( <input type="button" value="voir cet exercice" onclick="go('exercices/derivvariation/ex01.html#')" data-inline="true" />) <br /> Recherche d'un trajet minimal ( <input type="button" value="voir cet exercice" onclick="go('exercices/derivvariation/ex02.html#')" data-inline="true" />) <br />
+          </div>
+          <!-- /fr -->
+          <div lang="en"> The example function has: <ul>
+              <li>Three local (relative)) maxima</li>
+              <li>An inflection at 0</li>
+              <li>Three local minima</li>
+            </ul> These considerations can be used for many optimization problems. <br /> Finding a maximum volume ( <input type="button" value="see this exercise" onclick="go('exercices/derivvariation/ex01.html#')" data-inline="true" />) <br /> Finding a minimal path ( <input type="button" value="see this exercise" onclick="go('exercices/derivvariation/ex02.html#')" data-inline="true" />) <br />
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/derivvariation/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/derivvariation/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <table cellpadding="10">
+            <tr>
+              <td>
+                <div lang="fr">Création Gilles Dubois</div>
+                <div lang="en">Created by Gilles Dubois</div>
+              </td>
+              <td>
+                <div lang="fr">Janvier 2022</div>
+                <div lang="en">January 2022</div>
+              </td>
+              <td>
+                <div lang="fr">Version mobile Jquery</div>
+                <div lang="en">Mobile Jquery version</div>
+              </td>
+              <td>
+                <a href="https://www.mathjax.org">
+                  <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /footer -->
+        <ul style=list-style-type:'';>
+          <li>
+            <div lang="fr">
+              <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+            <div lang="en">
+              <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+          </li>
+          <li>
+            <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /page -->
+  </body>
+</html>

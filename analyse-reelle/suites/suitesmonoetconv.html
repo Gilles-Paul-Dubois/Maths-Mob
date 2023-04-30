@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Monotonie et convergence</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesmonoetconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesmonoetconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Quelques observations préliminaires</h2> Nous avons vu de nombreuses suites croissantes: <ol>
+            <li>La <input type="button" value="suite de Fibonacci" onclick="go('suitesdef.html#fibo')" data-inline="true" />. </li>
+            <li>Les <input type="button" value="suites arithmétiques" onclick="go('suitesdef.html#ari')" data-inline="true" /> de raison r &gt; 0. </li>
+            <li>Les <input type="button" value="suites géométriques" onclick="go('suitesdef.html#geo')" data-inline="true" /> de raison q &gt;1 et de premier terme &gt; 0 . </li>
+            <li>
+              <input type="button" value="Cette suite" onclick="go('suitesdef.html#harm')" data-inline="true" />:
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}=u_{n-1}+\frac{1}{n} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>
+              <input type="button" value="Cette suite:" onclick="go('suitesdef.html#invcar')" data-inline="true" />
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}=u_{n-1}+\frac{1}{n^{2}} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>
+              <input type="button" value="Cette autre suite" onclick="go('suitesdef.html#euler')" data-inline="true" />
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}=\left ( 1+\frac{1}{n} \right )^{n} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+          </ol>
+          <p>Le seul fait qui n'était pas évident était le fait que l'exemple 6 correspond à une suite croissante. Cela a été démontré dans <input type="button" value="cet exercice" onclick="go('exercices/suitesmonotones/ex03.html#')" data-inline="true" />. <br /> Il est évident que les exemples 1,2 et 3 correspondent à des suites divergeant vers +∞. <br /> Nous avons montré que la suite de l'exemple 4 divergeait vers +∞ dans le cours. <br /> nous avons montré que la suite de l'exemple 5 était bornée dans le cours. <br /> nous avons vu que la suite de l'exemple 6 était bornée dans <input type="button" value="cet exercice" onclick="go('exercices/suitesbornees/ex03.html#')" data-inline="true" />. <br /> La question se pose de connaître le comportement asymptotique des suites des exemples 5 et 6, sachant qu'elles sont croissantes et bornées. <br /> Nous pouvons écrire de petits programmes de tests pour établir une conjecture. </p>
+          <h3>Exemple 5</h3>
+          <h4>Code Python</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Some Preliminary Observations </h2> We have seen many increasing sequences: <ol>
+            <li>The <input data-inline="true" onclick="go('suitesdef.html#fibo')" type="button" value="Fibonacci sequence" />. </li>
+            <li>The <input data-inline="true" onclick="go('suitesdef.html#ari')" type="button" value="Arithmetic progressions" />with reason r > 0. </li>
+            <li>The <input data-inline="true" onclick="go('suitesdef.html#geo')" type="button" value="Geometric progressions" />with ratio q >1 and first term > 0 . </li>
+            <li>
+              <input data-inline="true" onclick="go('suitesdef.html#harm')" type="button" value="This sequence" />:
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}=u_{n-1}+\frac{1}{n} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>
+              <input data-inline="true" onclick="go('suitesdef.html#invcar')" type="button" value="This sequence:" />
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}=u_{n-1}+\frac{1}{n^{2}} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>
+              <input data-inline="true" onclick="go('suitesdef.html#euler')" type="button" value="This other sequence" />
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}=\left ( 1+\frac{1}{n} \right )^{n} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+          </ol>
+          <p>The only fact that was not obvious was the fact that example 6 corresponds to an increasing sequence. This has been demonstrated in <input data-inline="true" onclick="go('exercices/suitesmonotones/ex03.html#')" type="button" value="this exercise" />. <br /> It is obvious that examples 1,2 and 3 correspond to sequences diverging towards +∞. <br /> We have shown in the course that the sequence of example 4 diverges towards +∞. <br /> we showed in the course that the sequence of example 5 was bounded. <br /> we saw that the sequence of example 6 was bounded in <input data-inline="true" onclick="go('exercices/suitesbornees/ex03.html#')" type="button" value="this exercise" />. <br /> The question arises of knowing the asymptotic behavior of the sequences of examples 5 and 6, knowing that they are increasing and bounded. <br /> We can write small test programs to establish a conjecture. </p>
+          <h3>Example 5 </h3>
+          <h4>Code Python </h4>
+        </div>
+        <!-- /en -->
+        <h4>Python code</h4>
+        <!-- STOP CODE -->
+        <object data="python/suiterecsimple3_2.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Voici le résultat de l'exécution:</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here's the result of execution :</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <table cellpadding="2" cellspacing="0" border="1">
+          <tr>
+            <td>0 : 0 <br> 1000 : 1.64393456668 <br> 2000 : 1.64443419183 <br> 3000 : 1.64460078906 <br> 4000 : 1.6446840981 <br> 5000 : 1.64473408685 <br> 6000 : 1.64476741407 <br> 7000 : 1.64479121991 <br> 8000 : 1.64480907466 <br> 9000 : 1.64482296191 <br>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Code Julia</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Julia code</h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/recsimple3_2.jl.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h3>Exemple 6</h3>
+          <h4>Code Python</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/suite_euler_2.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Voici le résultat de l'exécution: <br>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here's the result of running this program :</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <table cellpadding="2" cellspacing="0" border="1">
+          <tr>
+            <td>10 : 2.5937424601 <br> 100 : 2.70481382942 <br> 1000 : 2.71692393224 <br> 10000 : 2.71814592682 <br> 20000 : 2.71821387453 <br> 30000 : 2.71823652515 <br> 50000 : 2.71825464613 <br> 100000 : 2.71826823719 <br>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Code Julia</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Julia code</h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/suite_euler_2.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> On a la très nette impression qu'il y a convergence dans un cas comme dans l'autre. Il est maintenant temps de prouver ce résultat. </div>
+        <!-- /fr -->
+        <div lang="en"> We have the very clear feeling that we are dealing with convergent sequences in both cases. It's now time to prove this result. </div>
+        <!-- /en -->
+        <a name="theofond"></a>
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Toute suite croissante et majorée est convergente
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Every increasing and bounded sequence is convergent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est assez simple si on utilise le <input type="button" value="théorème de la borne supérieure" onclick="go('suitesbornees.html#thm1')" data-inline="true" />. Soit (u<sub>n</sub>) la suite en question, et soit B sa borne supérieure. Nous allons montrer que (u<sub>n</sub>) converge vers B. Soit ε un réel &gt; 0 . D'après la définition de la borne supérieure il existe un indice N tel que B-u<sub>N</sub> &lt; ε. Comme la suite est croissante, pour n &gt;N on a u<sub>n</sub> &gt; u<sub>N </sub>mais on a aussi u<sub>n</sub> &lt; B donc |u<sub>n</sub>-B| &lt; ε. <br /> Nous pouvons, après cette preuve, compléter le théorème. </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is quite simple if we use the <input data-inline="true" onclick="go('suitesbornees.html#thm1')" type="button" value="upper bound theorem" />. Let (u<sub>n</sub>) be the sequence in question, and let B be its upper bound. We are going to show that (u<sub>n</sub>) converges to B. Let ε be a real > 0 . According to the definition of the upper bound there exists an index N such that B-u<sub>N</sub> &lt; ε. As the sequence is increasing, for n &gt;N we have<sub>n</sub> &gt; u<sub>N</sub>but we also have u<sub>n</sub> &lt; B so |u<sub>n</sub>-B| &lt; ε. <br /> We can, after this proof, complete the theorem. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Toute suite croissante et majorée est convergente et sa limite est égale à sa borne supérieure.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Every increasing and bounded sequence is convergent and its limit is its supremum.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous avons évidemment un résultat symétrique pour les suites décroissantes: </div>
+        <!-- /fr -->
+        <div lang="en"> Of course we have a parallel result for decreasing sequences : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Toute suite décroissante et minorée est convergente et sa limite est égale à sa borne inférieure.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> Every decreasing and minored sequence is convergent and its limit is its infimum.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous pouvons même encore affiner un peu ce résultat: </div>
+        <!-- /fr -->
+        <div lang="en"> We can even be a little more accurate : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Dans le cas d'une suite bornée <strong>strictement</strong> monotone, la limite (qui existe donc) n'est jamais atteinte, en ce sens que si a est cette limite on n'a jamais l'égalité u<sub>n</sub>=a pour aucune valeur de n.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> In the case of a bounded, strictly monotonic sequence, the limit (which exists) is never attained which means that no term of the sequence is equal to the limit.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat a évidemment pour corollaire: </div>
+        <!-- /fr -->
+        <div lang="en"> And as a corollary : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Pour une suite monotone croissante il n'y a que deux possibilités: <ol>
+              <li>Soit elle est majorée auquel cas elle converge vers une limite finie</li>
+              <li>Soit elle n'est pas majorée alors elle tend vers +&infin;.</li>
+            </ol>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> For an increasing monotonic sequence, there are only two possibilities <ol>
+              <li>Either is it dominated (upper bounded in which case it converges to a finite limit.</li>
+              <li>Or it is not bounded in which case it diverges to infinity.</li>
+            </ol>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Et, bien sûr, le théorème symétrique pour les suites décroissantes. <br> Nous pouvons également remarquer que les théorèmes précédents s'appliquent aux suites bornées qui sont <b>'monotones à partir d'un certain rang'</b>. <h2>Remarques sur la nature du théorème précédent</h2> Le théorème qui précède est un théorème d'existence. Il affirme que, dans certaines conditions la limite d'une suite existe, <b>mais il ne permet pas de calculer sa valeur</b>. Nous pouvons donc maintenant affirmer que, dans le cas de l'exemple 5 ci-dessus la limite de la suite existe. L'exécution du programme nous laisse à penser que le début du développement décimal de cette limite est 2.718...Cependant, tant que nous n'avons pas fait une étude d'analyse numérique (estimer la différence entre un terme u<sub>n</sub> et la limite de la suite) rien ne permet d'affirmer que c'est vrai. La croissance pourrait très bien s'accélérer après l'indice 200000 et la limite pourrait être 2.9.. rien ne nous autorise à présent à l'exclure. <br> Démontrer qu'une suite converge c'est une chose, calculer sa limite c'est un autre problème (souvent plus difficile). <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> And, of course, the symmetric theorem for decreasing sequences. <br /> We can also notice that the previous theorems apply as well to bounded sequences which are <b> 'monotonic from a certain rank' </b> . <h2>Remarks on the nature of the previous theorem </h2>The above theorem is an existence theorem. It asserts that under certain conditions the limit of a sequence exists, <b> but it does not allow its value to be calculated </b> . We can therefore now assert that, in the case of example 5 above, the limit of the sequence exists. Running the program leads us to believe that the start of the decimal expansion of this limit is 2.718...However, until we have done a numerical analysis study (estimating the difference between a term u<sub>n</sub> and the limit of the sequence) there is nothing to confirm that this is true. The growth could very well accelerate after the index 200000 and the limit could be 2.9.. nothing authorizes us at present to exclude it. <br /> Proving that a sequence converges is one thing, calculating its limit is another problem (often more difficult). <br />
+        </div>
+        <!-- /en -->
+        <a name="adja"></a>
+        <div lang="fr">
+          <h2>Suites adjacentes </h3> Soient (u<sub>n</sub>) et (v<sub>n</sub>) deux suites de réels.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Adjacent sequences</h2> Let (u<sub>n</sub>) and (v<sub>n</sub>) two sequences of real numbers.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que (u<sub>n</sub>) et (v<sub>n</sub>) sont <strong>
+              <em>'adjacentes'</em>
+            </strong> si elles vérifient les conditions suivantes: <ul>
+              <li>(u<sub>n</sub>) est monotone croissante </li>
+              <li>(v<sub>n</sub>) est monotone décroissante </li>
+              <li>u<sub>n</sub>&lt;v<sub>n</sub> &forall; n </li>
+              <li>&forall; &epsilon; &gt; 0 , &exist; N | n &gt; N &rArr; v<sub>n</sub>-u<sub>n</sub> &lt; &epsilon; </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that (u<sub>n</sub>) and (v<sub>n</sub>) are <strong>
+              <em> 'adjacent' </em>
+            </strong> if they satisfy the following conditions: <ul>
+              <li>(u<sub>n</sub>) is monotonically increasing </li>
+              <li>(v<sub>n</sub>) is monotonically decreasing </li>
+              <li>u<sub>n</sub>
+                <v<sub>n</sub>∀ n
+              </li>
+              <li>∀ε > 0, ∃N | n > N ⇒ v<sub>n</sub>-u<sub>n</sub>
+                < ε </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <p> L'appliquette suivante montre les termes successifs de deux suites adjacentes. <br /> Au début, il n'y a que les deux premiers, appuyez sur le bouton 'Suivant' pour en voir un de plus. <br /> Appuyez sur le bouton '+10' pour en voir 10 de plus. <br /> Appuyez sur 'Recommencer' pour recommencer depuis le début. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>The following applet shows the successive terms of two adjacent sequences. <br /> At first there are only the first two, press the 'Next' button to see one more. <br /> Press the '+10' button to see 10 more. <br /> Press 'Restart' to start over from the beginning. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace1.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace1.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace1.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/adjacentes.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Concernant ces suites nous avons : </div>
+        <!-- /fr -->
+        <div lang="en"> Concerning these sequences we have : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Deux suites adjacentes sont convergentes et admettent la même limite.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> Two adjacent sequences are convergent and have the same limit.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <a name="harmalt"></a>
+        <div lang="fr">
+          <h3>Exemple traité</h3> Voici un cas d'application: <br> Considérons la suite récurrente définie par u<sub>0</sub>=1 et u<sub>n</sub>=u<sub>n-1</sub>+(-1)<sup>n</sup>/(n+1). <br> On désigne par (v<sub>n</sub>) la suite extraite de (u<sub>n</sub>) formée des termes de rang pair: <br> v<sub>0</sub>=1 <br> v<sub>2</sub>=1+(-1/2+1/3) <br> v<sub>3</sub>=1 +(-1/2+1/3)+(-1/4+1/5) <br> Alors il est évident que (v<sub>n</sub>) est décroissante puisque on ajoute à chaque fois une quantité négative. <br> On désigne par (w<sub>n</sub>) la suite extraite de (u<sub>n</sub>) formée des termes de rang impair: <br> w<sub>0</sub>=1/2 <br> w<sub>1</sub>=1/2+(1/3-1/4) <br> w<sub>2</sub>=1/2+(1/3-1/4)+(1/5-1/6) <br> Alors il est évident que (w<sub>n</sub>) est croissante puisqu'on ajoute à chaque fois une quantité positive. <br> On a de plus : v<sub>n</sub>-w<sub>n</sub>=u<sub>2n</sub>-u<sub>2n-1</sub>=1/(2n+1) <br> qui prouve que la suite v<sub>n</sub>-w<sub>n</sub> tend vers 0 donc que les suites (v<sub>n</sub>) et (w<sub>n</sub>) sont adjacentes. Il en résulte que ces deux suites ont même limite, et comme ces deux suites extraites ont une réunion égale à la suite initiale (u<sub>n</sub>) la suite (u<sub>n</sub>) elle-même converge vers la limite commune de (v<sub>n</sub>) et (w<sub>n</sub>) et on sait que cette limite se trouve dans chacun des intervalles ]w<sub>n</sub>,v<sub>n</sub>[. <br> Cette fois, un programme d'ordinateur nous permet de situer cette limite avec précision. <h4>code Python :</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example processed </h3> Here is an application case: <br /> Consider the recurrent sequence defined by u<sub>0</sub>=1 and u<sub>n</sub>=u<sub>n-1</sub>+(-1)<sup>n</sup>/(n+1). <br /> We denote by (v<sub>n</sub>) the sequence extracted from (u<sub>n</sub>) formed by terms of even rank: <br /> v<sub>0</sub>=1 <br /> v<sub>2</sub>=1+(-1/2+1/3) <br /> v<sub>3</sub>=1 +(-1/2+1/3)+(-1/4+1/5) <br /> Then it is obvious that (v<sub>n</sub>) is decreasing since a negative quantity is added each time. <br /> We denote by (w<sub>n</sub>) the sequence extracted from (u<sub>n</sub>) formed by terms of odd rank: <br /> w<sub>0</sub>= 1/2 <br /> w<sub>1</sub>=1/2+(1/3-1/4) <br /> w<sub>2</sub>=1/2+(1/3-1/4)+(1/5-1/6) <br /> Then it is obvious that (w<sub>n</sub>) is increasing since a positive quantity is added each time. <br />We also have: v<sub>n</sub>-w<sub>n</sub>=u<sub>2n</sub>-u<sub>2n-1</sub>=1/(2n+1) <br />which proves that the sequence v<sub>n</sub>-w<sub>n</sub>tends to 0 so that the sequences (v<sub>n</sub>) and (w<sub>n</sub>) are adjacent. It follows that these two sequences have the same limit, and as these two extracted sequences have a union equal to the initial sequence (u<sub>n</sub>) the sequence (u<sub>n</sub>) itself converges towards the common limit of (v<sub>n</sub>) and ( w<sub>n</sub>) and we know that this limit lies in each of the intervals ]w<sub>n</sub>,v<sub>n</sub>[. <br /> This time, a computer program allows us to locate this limit with precision. <h4>Python code: </h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/adjacentes1.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Résultat de l'exécution : </div>
+        <!-- /fr -->
+        <div lang="en"> Result of running : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <table cellpadding="2" cellspacing="0" border="1">
+          <tr>
+            <td>début: <br> ] 0.5 ; 1 [ <br> ] 0.692897492685 ; 0.693396993185 [ <br> ] 0.693022258638 ; 0.693272133701 [ <br> ] 0.693063881935 ; 0.693230493065 [ <br> ] 0.693084700085 ; 0.693209668843 [ <br> ] 0.693097193057 ; 0.693197173061 [ <br> ......... <br> fin: <br> ] 0.693143933859 ; 0.693150427282 [ <br> ] 0.693143975483 ; 0.693150385657 [ <br> ] 0.693144016053 ; 0.693150345087 [ <br>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Code Julia</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Julia code</h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/adjacentes1.jl.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <ul style=list-style-type:'';>
+          <li>
+            <input type="button" value="Exercices" onclick="go('exercices/suitesmonoetconv/menu.html')" />
+          </li>
+          <li>
+            <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+          </li>
+          <li>
+            <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+          </li>
+        </ul>
+      </div>
+      <!-- /navbar -->
+    </div>
+    <!-- /fr -->
+    <div lang="en">
+      <div>
+        <ul style=list-style-type:'';>
+          <li>
+            <input type="button" value="Exercises" onclick="go('exercices/suitesmonoetconv/menu.html')" />
+          </li>
+          <li>
+            <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+          </li>
+          <li>
+            <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+          </li>
+          <li>
+            <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /en -->
+    </div>
+    <!-- /content -->
+    <div data-role="footer">
+      <table cellpadding="10">
+        <tr>
+          <td>
+            <div lang="fr">Création Gilles Dubois</div>
+            <div lang="en">Created by Gilles Dubois</div>
+          </td>
+          <td>
+            <div lang="fr">Janvier 2022</div>
+            <div lang="en">January 2022</div>
+          </td>
+          <td>
+            <div lang="fr">Version mobile Jquery</div>
+            <div lang="en">Mobile Jquery version</div>
+          </td>
+          <td>
+            <a href="https://www.mathjax.org">
+              <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- /footer -->
+    <ul style=list-style-type:'';>
+      <li>
+        <div lang="fr">
+          <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+        <div lang="en">
+          <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+      </li>
+      <li>
+        <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+      </li>
+    </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

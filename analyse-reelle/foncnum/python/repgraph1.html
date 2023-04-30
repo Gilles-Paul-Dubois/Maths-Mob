@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>repgraph1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">tkinter </span><span class="s2">as </span><span class="s1">tk  </span><span class="s0"># le module graphique - graphical module</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math  </span><span class="s0"># module mathématique - math module</span><span class="s1"> 
+ 
+</span><span class="s3">&quot;&quot;&quot;paramètres du graphique - parameters of the graphic &quot;&quot;&quot;</span><span class="s1"> 
+Width = </span><span class="s4">600  </span><span class="s0"># largeur de la fenêtre en pixels - width of the window in pixels</span><span class="s1"> 
+Height = </span><span class="s4">600  </span><span class="s0"># hauteur de la fenêtre en pixels - height of the windows in pixels</span><span class="s1"> 
+Unit = </span><span class="s4">30  </span><span class="s0"># taille en pixels du vecteur unité - size in pixels of unit vector</span><span class="s1"> 
+Midx = Width / </span><span class="s4">2  </span><span class="s0"># abscisse du centre du graphique - abscissa of the center</span><span class="s1"> 
+Midy = Height / </span><span class="s4">2  </span><span class="s0"># ordonnée du centre du graphique - ordinate of the center</span><span class="s1"> 
+racine = tk.Tk()  </span><span class="s0"># la fenêtre de l'application - window of the application</span><span class="s1"> 
+racine.title(</span><span class="s3">&quot;Exemple de représentations graphiques - exemples of plotting&quot;</span><span class="s1">) 
+fond = tk.Canvas(racine, width=Width, height=Height, background=</span><span class="s3">'black'</span><span class="s1">)  </span><span class="s0"># aire de dessin - area of drawing</span><span class="s1"> 
+bouton = tk.Button(racine, text=</span><span class="s3">&quot;Quitter&quot;</span><span class="s1">, command=racine.quit)  </span><span class="s0"># pour quitter l'appli- To quit</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">f1(x): 
+    </span><span class="s0">&quot;&quot;&quot;une fonction qu'on veut représenter - A function we want to plot&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">x * math.sin(x) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">f2(x): 
+    </span><span class="s0">&quot;&quot;&quot;une autre - another one&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">-x * x 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">convert(x, y): 
+    </span><span class="s0">&quot;&quot;&quot;calcule les coordonnées en pixels sur l'image du point de coordonnées x, y réels&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Computes the coordinates in pixels on the image of the point with coordinates x,y real numbers&quot;&quot;&quot;</span><span class="s1">    
+    m = int(x * Unit) + Midx 
+    n = Midy - int(y * Unit) 
+    </span><span class="s2">return </span><span class="s1">m, n 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">packall():  </span><span class="s0"># initialisation des composants - initialization of components</span><span class="s1"> 
+    bouton.pack(side=tk.BOTTOM) 
+    fond.pack() 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">drawtick(x, y, mode): 
+    </span><span class="s0">&quot;&quot;&quot;graduation des axes - graduation of axes&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">mode == </span><span class="s3">&quot;H&quot;</span><span class="s1">: 
+        fond.create_line(x, y - </span><span class="s4">2</span><span class="s1">, x, y + </span><span class="s4">2</span><span class="s1">, fill=</span><span class="s3">&quot;white&quot;</span><span class="s1">) 
+    </span><span class="s2">if </span><span class="s1">mode == </span><span class="s3">&quot;V&quot;</span><span class="s1">: 
+        fond.create_line(x - </span><span class="s4">2</span><span class="s1">, y, x + </span><span class="s4">2</span><span class="s1">, y, fill=</span><span class="s3">&quot;white&quot;</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">drawaxes(): 
+    </span><span class="s0">&quot;&quot;&quot;tracé des axes - drawing of axes&quot;&quot;&quot;</span><span class="s1"> 
+    fond.create_line(</span><span class="s4">0</span><span class="s1">, Midy, Width, Midy, arrow=</span><span class="s3">&quot;last&quot;</span><span class="s1">, fill=</span><span class="s3">&quot;white&quot;</span><span class="s1">) 
+    fond.create_line(Midx, Height, Midx, </span><span class="s4">0</span><span class="s1">, arrow=</span><span class="s3">&quot;last&quot;</span><span class="s1">, fill=</span><span class="s3">&quot;white&quot;</span><span class="s1">) 
+    H = [i * Unit </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, Width // Unit + </span><span class="s4">1</span><span class="s1">)] 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">H: 
+        drawtick(x, Midy, </span><span class="s3">&quot;H&quot;</span><span class="s1">) 
+    V = [i * Unit </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, Height // Unit + </span><span class="s4">1</span><span class="s1">)] 
+    </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">V: 
+        drawtick(Midx, y, </span><span class="s3">&quot;V&quot;</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">drawgraph(f, xmin, xmax, step, color=</span><span class="s3">&quot;green&quot;</span><span class="s1">): 
+    </span><span class="s0">&quot;&quot;&quot;Tracé du graphe de la fonction f entre les valeurs xmin et xmax de la variable&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Plotting of function f between the values xmin and xmax of the variable&quot;&quot;&quot;</span><span class="s1">     
+    X = [xmin + k * step </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, int(Width / step)) </span><span class="s2">if </span><span class="s1">xmin + k * step &lt;= xmax] 
+    Graphe = [(x, f(x)) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">X] 
+    Points = [convert(P[</span><span class="s4">0</span><span class="s1">], P[</span><span class="s4">1</span><span class="s1">]) </span><span class="s2">for </span><span class="s1">P </span><span class="s2">in </span><span class="s1">Graphe] 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(Points) - </span><span class="s4">1</span><span class="s1">): 
+        P = Points[i] 
+        Q = Points[i + </span><span class="s4">1</span><span class="s1">] 
+        x0, y0 = P[</span><span class="s4">0</span><span class="s1">], P[</span><span class="s4">1</span><span class="s1">] 
+        x1, y1 = Q[</span><span class="s4">0</span><span class="s1">], Q[</span><span class="s4">1</span><span class="s1">] 
+        fond.create_line(x0, y0, x1, y1, fill=color) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    packall()  </span><span class="s0"># disposition des composants - Placing components</span><span class="s1"> 
+    drawaxes()  </span><span class="s0"># tracé des axes - drawing axes</span><span class="s1"> 
+    drawgraph(f1, -</span><span class="s4">5</span><span class="s1">, +</span><span class="s4">5</span><span class="s1">, </span><span class="s4">0.01</span><span class="s1">, </span><span class="s3">&quot;yellow&quot;</span><span class="s1">)  </span><span class="s0"># tracé du graphe de la première fonction</span><span class="s1"> 
+    drawgraph(f2, -</span><span class="s4">3</span><span class="s1">, </span><span class="s4">3</span><span class="s1">, </span><span class="s4">0.01</span><span class="s1">, </span><span class="s3">&quot;red&quot;</span><span class="s1">)  </span><span class="s0"># tracé de la seconde</span><span class="s1"> 
+    racine.mainloop()  </span><span class="s0"># boucle de traitement des évènements souris-clavier- Main loop scanning mouse and keyboard</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

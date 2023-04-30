@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limites supérieures et inférieures</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suiteslimsupinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suiteslimsupinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> Soit u=(u<sub>n</sub>)n∈ℕ une suite bornée. Pour tout k≥0 posons X<sub>k</sub>={u<sub>n</sub>|n≥k}. <br /> La suite des ensembles X<sub>k</sub> vérifie X<sub>0</sub>⊇X<sub>1</sub>⊇X<sub>2</sub>⊇ ... ⊇X<sub>k-1</sub>⊇X<sub>k</sub>⊇X<sub>k+1</sub>⊇ ...... <br /> Tous les ensembles X<sub>k</sub> sont <input type="button" value="bornés" onclick="go('../../bases/relations/bornes.html#')" data-inline="true" />, leur <input type="button" value="borne supérieure" onclick="go('../../bases/relations/bornes.html#')" data-inline="true" /> est majorée par la borne supérieure de la suite u, leur <input type="button" value="borne inférieure" onclick="go('../../bases/relations/bornes.html#')" data-inline="true" /> est minorée par la borne inférieure de la suite u. <br /> Posons M<sub>k</sub>=Sup(X<sub>k</sub>) et m<sub>k</sub>=Inf(X<sub>k</sub>). <br /> A cause de la relation X<sub>0</sub>⊇X<sub>1</sub>⊇X<sub>2</sub>⊇ ... ⊇X<sub>k-1</sub>⊇X<sub>k</sub>⊇X<sub>k+1</sub>⊇ ....., la suite (M<sub>k</sub>) est <input type="button" value="décroissante" onclick="go('suitesmonotones.html#')" data-inline="true" /> et la suite (m<sub>k</sub>) est <input type="button" value="croissante" onclick="go('suitesmonotones.html#')" data-inline="true" />. <br /> Ces deux suites sont donc <input type="button" value="convergentes" onclick="go('suitesconvergentes.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions </h2>Let u=(u<sub>n</sub>)n∈ℕ be a bounded sequence. For all k≥0 let X<sub>k</sub>={u<sub>n</sub>|n≥k}. <br /> The sequence of sets X<sub>k</sub>verifies X<sub>0</sub>⊇X<sub>1</sub>⊇X<sub>2</sub>⊇ ... ⊇X<sub>k-1</sub>⊇X<sub>k</sub>⊇X<sub>k+1</sub>⊇ ...... <br /> All sets X<sub>k</sub> are <input data-inline="true" onclick="go('../../bases/relations/bornes.html#')" type="button" value="bounded" />, their <input data-inline="true" onclick="go('../../bases/relations/bornes.html#')" type="button" value=" upper bound" />is bounded by the upper bound of the sequence u, their <input data-inline="true" onclick="go('../../bases/relations/bornes.html#')" type="button" value="lower bound" />is lower bounded by the lower bound of the sequence u. <br /> Let M<sub>k</sub>=Sup(X<sub>k</sub>) and m<sub>k</sub>=Inf(X<sub>k</sub>). <br /> Because of the relation X<sub>0</sub>⊇X<sub>1</sub>⊇X<sub>2</sub>⊇ ... ⊇X<sub>k-1</sub>⊇X<sub>k</sub>⊇X<sub>k+1</sub>⊇ ....., the sequence (M<sub>k</sub>) is <input data-inline="true" onclick="go('suitesmonotones.html#')" type="button" value=" decreasing" />and the sequence (m<sub>k</sub>) is <input data-inline="true" onclick="go('suitesmonotones.html#')" type="button" value=" increasing" />. <br /> These two sequences are therefore <input data-inline="true" onclick="go('suitesconvergentes.html#')" type="button" value=" convergent" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Pour toute <input type="button" value="suite bornée" onclick="go('suitesbornees.html#')" data-inline="true" /> u=(u<sub>n</sub>)n∈ℕ on appelle <b>
+              <i>'limite supérieure'</i>
+            </b> de u la limite de la suite (M<sub>k</sub>)<sub>k∈ℕ</sub> et on appelle <b>
+              <i>'limite inférieure'</i>
+            </b> de u la limite de la suite (m<sub>k</sub>)<sub>k∈ℕ</sub>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> For all <input data-inline="true" onclick="go('suitesbornees.html#')" type="button" value="bounded sequence" />u=(u<sub>n</sub>)n∈ℕ we call <b>
+              <i> 'upper limit' </i>
+            </b> of u the limit of the sequence (M<sub>k</sub>)<sub>k∈ℕ</sub> and we call <b>
+              <i> 'lower limit' </i>
+            </b> of u the limit of the sequence (m<sub>k</sub>)<sub>k∈ℕ</sub>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Notations</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Notations</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="not1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">notation 1</div> La limite supérieure de la suite u se note: <br> lim sup (u) ou encore
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> ou encore
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \displaystyle \overline{lim}_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">notation 1</div> The upper limit of the sequence u is written: <br> lim sup (u) or
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> or
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \displaystyle \overline{lim}_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="not2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">notation 2</div> La limite inférieure de la suite u se note: <br> lim inf (u) ou encore
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> ou encore
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \displaystyle \underline{lim}_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">notation 2</div> The lower limit of the sequence u is written: <br> lim inf (u) or
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> or
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \displaystyle \underline{lim}_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Propriétés</h2> Pour toute suite bornée u:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Properties</h2> For any bounded sequence u:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> On a toujours
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \leqslant \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> We always have
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \leqslant \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> preuve: <input type="button" value="Voir exercice 01" onclick="go('exercices/suiteslimsupinf/ex01.html#')" data-inline="true" />
+        </div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> est le plus grand des <input type="button" value="points d'accumulation" onclick="go('suitesaccumulation.html#')" data-inline="true" /> de la suite u.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> is the greatest of <input type="button" value="accumulation points" onclick="go('suitesaccumulation.html#')" data-inline="true" /> of the sequence u.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> preuve: <input type="button" value="Voir exercice 02" onclick="go('exercices/suiteslimsupinf/ex02.html#')" data-inline="true" />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> proof: <input type="button" value="See exercise 02" onclick="go('exercices/suiteslimsupinf/ex02.html#')" data-inline="true" />
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> est le plus petit des <input type="button" value="points d'accumulation" onclick="go('suitesaccumulation.html#')" data-inline="true" /> de la suite u.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE--> is the smallest of <input type="button" value="accumulation points" onclick="go('suitesaccumulation.html#')" data-inline="true" /> of the sequence u.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Si u converge vers le réel a alors:
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \leqslant a \leqslant \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> If u converges to the real number a then :
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} \leqslant a \leqslant \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> C'est la conséquence des deux résultats précédents et du fait que la <input type="button" value="limite" onclick="go('suitesconvergentes.html#')" data-inline="true" /> de la suite est un <input type="button" value="point d'accumulation" onclick="go('suitesaccumulation.html#')" data-inline="true" /> particulier. </div>
+        <!-- /fr -->
+        <div lang="en"> This is the consequence of the two previous results and of the fact that the <input data-inline="true" onclick="go('suitesconvergentes.html#')" type="button" value=" limit" />of the suite is a particular <input data-inline="true" onclick="go('suitesaccumulation.html#')" type="button" value="accumulation point" />. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Une condition nécessaire et suffisante pour que u converge est que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} = \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->. Dans ces conditions la limite de la suite u est la valeur commune des deux limites.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> A necessary and sufficient condition for u to converge is that
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \liminf_{ n\to \infty }u_{n} = \limsup_{ n\to \infty }u_{n} \)
+            <!-- /FORMULE UNIV INLINE-->. Under these conditions, the limit of the sequence u is the common value of the two limits.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> preuve: <input type="button" value="Voir exercice 03" onclick="go('exercices/suiteslimsupinf/ex03.html#')" data-inline="true" />
+          <h2>Exemples</h2>
+          <p> Pour une <input type="button" value="suite périodique" onclick="go('suitesperiodiques.html#')" data-inline="true" /> u de période k, lim sup u =Max(u<sub>0</sub>,u<sub>1</sub>,...,u<sub>k-1</sub>) et lim inf u =Min(u<sub>0</sub>,u<sub>1</sub>,...,u<sub>k-1</sub>) </p>
+          <p> L'appliquette suivante montre les termes successifs d'une suite admettant <strong>une limite supérieure égale à 2 et une limite inférieure égale à -1, elle possède en outre +1 comme point d'accumulation</strong>. Au début, il n'y a que les deux premiers, appuyez sur le bouton 'Suivant' pour en voir un de plus. <br> Appuyez sur '+10' pour en voir 10 de plus. <br> Appuyez sur 'Recommencer' pour recommencer depuis le début. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> proof: <input data-inline="true" onclick="go('exercices/suiteslimsupinf/ex03.html#')" type="button" value="See exercise 03" />
+          <h2>Examples </h2>
+          <p>For a <input data-inline="true" onclick="go('suitesperiodiques.html#')" type="button" value="periodic sequence" /> with period k, lim sup u =Max(u<sub>0</sub>,u<sub>1</sub>,...,u<sub>k-1</sub>) and lim inf u =Min(u<sub>0</sub>,u<sub>1</sub>,...,u<sub>k-1</sub>) </p>
+          <p>The following applet shows the successive terms of a sequence admitting <strong> an upper limit equal to 2 and a lower limit equal to -1, it also has +1 as an accumulation point </strong> . At first there are only the first two, press the 'Next' button to see one more. <br /> Press '+10' to see 10 more. <br /> Press 'Restart' to start over from the beginning. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width: 500px; height: 500px; "></div>
+        <button type="button" onclick="nameSpace1.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace1.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace1.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/limsupinf.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Droite réelle achevée
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overline{\mathbb{R}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </h2> Jusqu'à présent les symboles +∞ et -∞ n'avaient pas de sens 'propre'; ils n'intervenaient que dans des écritures faisant intervenir des limites et dans des expressions du type n → +∞ signifiant en gros 'n devenant de plus en plus grand'. <br /> Nous allons maintenant faire en sorte de donner un sens individuel aux symboles +∞ et -∞. Naturellement <b>ils ne représenteront pas des nombres réels</b>, mais ils permettront de généraliser un grand nombre d'énoncés concernant les <input type="button" value="suites monotones" onclick="go('suitesmonotones.html#')" data-inline="true" /> et les limites supérieures et inférieures des suites, sans distinction entre les cas 'borné' et 'non borné'. <br /> Soit donc I l'intervalle ]-1,+1[ et soit J son <input type="button" value="adhérence" onclick="go('../../nombres/reels/ouverts.html#ad')" data-inline="true" /> [-1,+1]. <br /> On considère l' <input type="button" value="application" onclick="go('../../bases/applications/definition.html#')" data-inline="true" /> f:ℝ→ I donnée par: <br /> f(x)=x/(1+|x|)
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Extended real line
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overline{\mathbb{R}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </h2> Until now the symbols +∞ and -∞ had no 'proper' meaning; they occurred only in expressions involving limits and in expressions of the type n → +∞ meaning roughly 'n becoming larger and larger'. <br />We will now make sure to give individual meaning to the +∞ and -∞ symbols. Naturally <b> they will not represent real numbers </b> , but they will allow generalizing a large number of statements concerning the <input data-inline="true" onclick="go('suitesmonotones.html#')" type="button" value="monotonic sequences" />and the upper and lower bounds of sequences, without distinguishing between the 'bounded' and 'unbounded' cases. <br /> Let I be the interval ]-1,+1[ and let J be its <input data-inline="true" onclick="go('../../nombres/reels/ouverts.html#ade')" type="button" value="closure" />[-1,+1]. <br /> We consider the <input data-inline="true" onclick="go('../../bases/applications/definition.html#')" type="button" value="mapping" />f:ℝ→ I given by: <br /> f(x)=x/(1+|x|)
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/achevee1.png" alt="" width="906" height="265" border="0">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Il est clair que c'est une <input type="button" value="bijection" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" />, la bijection réciproque étant l'application g:I → ℝ donnée par: <br /> g(x)=x/(1-|x|) </div>
+        <!-- /fr -->
+        <div lang="en"> It is clear that it is a <input data-inline="true" onclick="go('../../bases/applications/bijections.html#')" type="button" value="bijection" />, the inverse bijection being the map g:I → ℝ given by: <br /> g(x)=x/(1-|x|) </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On désigne par \( \displaystyle \overline{\mathbb{R}} \) et on appelle 'droite réelle achevée' l'ensemble ℝ∪{-∞}∪{+∞} où -∞ et +∞ sont deux nouveaux éléments qui n'appartiennent pas à ℝ.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We denote by \( \displaystyle \overline{\mathbb{R}} \) and we call 'extended real line' the set ℝ∪{-∞}∪{+∞} where -∞ and +∞ are two new elements not belonging to ℝ.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela fait nous prolongeons f en une application que nous noterons encore f: \( \displaystyle \overline{\mathbb{R}} \) → J définie par: <br /> f(-∞)=-1 et f(+∞)=+1 <br /> qui sera donc encore une bijection de \( \displaystyle \overline{\mathbb{R}} \) sur J, la bijection réciproque g étant caractérisée par g(-1)=-∞ et g(+1)=+∞ <br /> Remarquons maintenant que J est avec la <input type="button" value="distance" onclick="go('../../nombres/reels/metrique.html#')" data-inline="true" /> d(x,y)=|x-y| un espace métrique. <br /> Nous pouvons utiliser g pour 'transporter' cette distance sur \( \displaystyle \overline{\mathbb{R}} \) en posant: <br /> d(x,y)=d(g(x),g(y)) <br /> faisant ainsi de \( \displaystyle \overline{\mathbb{R}} \) un <input type="button" value="espace métrique" onclick="go('../../nombres/reels/metrique.html#')" data-inline="true" />. <br /> Notons que la restriction de cette distance à ℝ n'est pas égale à la distance usuelle, par exemple d(1,2)=1/6 alors que |1-2|=1. Cependant les <input type="button" value="voisinages" onclick="go('../../nombres/reels/voisinages.html#')" data-inline="true" /> des nombres réels sont les mêmes pour les deux distances. <br /> Cela dit pour cette distance les voisinages de +∞ dans \( \displaystyle \overline{\mathbb{R}} \) sont tous les ensembles contenant des ensembles de la forme {+∞} ∪ ]M,+∞[. <br /> Les voisinages de -∞ dans \( \displaystyle \overline{\mathbb{R}} \) sont tous les ensembles contenant des ensembles de la forme {-∞} ∪ ]+∞,m[. <br /> Ces remarques étant faites la convergence de la suite u vers le réel a peut être exprimée ainsi: </div>
+        <!-- /fr -->
+        <div lang="en"> This being done, we will prolongate f into a mapping which we will still denote by f: \( \displaystyle \overline{\mathbb{R}} \) → J defined by: <br /> f(-∞)=-1 and f(+∞)=+1 <br /> which will still be a bijection de \( \displaystyle \overline{\mathbb{R}} \) onto J, the inverse bijection g being characterized by g(-1)=-∞ et g(+1)=+∞ <br /> Notice now that J is together with the <input type="button" value="distance" onclick="go('../../nombres/reels/metrique.html#')" data-inline="true" /> d(x,y)=|x-y| a metric space. <br /> We can use g to 'carry' this distance onto \( \displaystyle \overline{\mathbb{R}} \) by setting: <br /> d(x,y)=d(g(x),g(y)) <br /> thus making \( \displaystyle \overline{\mathbb{R}} \) a <input type="button" value="metric space" onclick="go('../../nombres/reels/metrique.html#')" data-inline="true" />. <br /> Note that the restriction of this distance to ℝ is not the same as the usual distance, for exemple d(1,2)=1/6 although |1-2|=1. Nevertheless the <input type="button" value="neighborhoods" onclick="go('../../nombres/reels/voisinages.html#')" data-inline="true" /> of real numbers are the same for both distances. <br /> After this simple remark for this distance the neighborhoods of +∞ in \( \displaystyle \overline{\mathbb{R}} \) are all sets containing subsets of the form {+∞} ∪ ]M,+∞[. <br /> The neighborhoods of -∞ in \( \displaystyle \overline{\mathbb{R}} \) are all the sets having subsets of the form {-∞} ∪ ]+∞,m[. <br /> Now the convergence of u towards the real number a can be expressed the following way: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Pour tout voisinage V de a ∃N|n&gt;N ⇒ u<sub>n</sub> ∈V
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> For any neighborhood V of a ∃N|n&gt;N ⇒ u<sub>n</sub> ∈V
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous pouvons maintenant utiliser cette remarque pour <b>définir</b> la convergence d'une suite u=(u<sub>n</sub>) de réels vers un élément b de \( \displaystyle \overline{\mathbb{R}} \). </div>
+        <!-- /fr -->
+        <div lang="en"> We can now use this remark to <b>define</b> the convergence of a sequence u=(u<sub>n</sub>) of reals to an element b of \( \displaystyle \overline{\mathbb{R}} \). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit que la suite u=(u<sub>n</sub>) converge vers l'élément b de \( \displaystyle \overline{\mathbb{R}} \) (b pouvant donc être soit un réel a soit +∞ soit -∞) ssi: ∀V, voisinage de b, ∃N| n&gt;N ⇒ u<sub>n</sub> ∈V
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We say that the sequence u=(u<sub>n</sub>) converges to the element b of \( \displaystyle \overline{\mathbb{R}} \) (b could be either a real a or +∞ or -∞) iff: ∀V, neighborhood of b, ∃N| n&gt;N ⇒ u<sub>n</sub> ∈V
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On voit qu'avec cette nouvelle définition. Les propositions 'u diverge vers +∞' (au sens précédent) et 'u converge vers +∞' (au sens nouveau) signifient la même chose. Nous espérons que le lecteur débutant ne sera pas trop désorienté par ces usages un peu contradictoires. <h3>Prolongement de la relation d'ordre.</h3> Il suffit de transporter la relation d'ordre sur J, donc: <br> +∞ ≥ x ∀x∈\(\displaystyle \overline{\mathbb{R}}\) <br> -∞ ≤ x ∀x∈ \(\displaystyle \overline{\mathbb{R}}\) <br> La droite réelle achevée possède donc un <input type="button" value="plus grand élément" onclick="go('../../bases/relations/plusgrand.html#')" data-inline="true" /> (+∞) et un plus petit élément (-∞) <h3>Prolongement partiel des opérations algébriques</h3>
+          <h4>Somme</h4> Nous convenons que: <br /> (+∞)+(+∞)=(+∞) <br /> (+∞)+x=+∞ ∀x∈ℝ <br /> (-∞)+(-∞)=(-∞) <br /> (-∞)+x=-∞ ∀x∈ℝ <br /> l'expression (+∞)+(-∞) n'a pas de sens. <br /> l'expression (-∞)+(+∞) n'a pas de sens. <br /> On remarquera que ces deux derniers cas correspondent exactement aux <input type="button" value="cas d'indétermination" onclick="go('suiteslimopalg.html#indsum')" data-inline="true" /> des limites de sommes de suites. <h4>Produit</h4> Nous convenons le produit est commutatif et que: <br /> (+∞)×(+∞)=(+∞) <br /> (-∞)×(-∞)=(+∞) <br /> (-∞)×(+∞)=(-∞) <br />
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (+\infty )=+\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (-\infty )=-\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (+\infty )=-\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (-\infty )=+\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p> L'expression 0×+∞ n'a pas de sens. <br> L'expression 0×-∞ n'a pas de sens. <br> On remarquera que ces deux derniers cas correspondent exactement aux <input type="button" value="cas d'indétermination" onclick="go('suiteslimopalg.html#indprod')" data-inline="true" /> des limites de produits de suites. <h4>Quotient</h4> Pour tout réel a a/+∞=0 <br> Pour tout réel a a/-∞=0 <br>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (+\infty )/a=+\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (-\infty )/a=-\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (+\infty )/a=-\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (-\infty )/a=+\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p> Aucune expression du type b/0 avec b &isin; \( \displaystyle \overline{\mathbb{R}} n'a de sens. <br> ) (+∞)/(+∞) n'a pas de sens. <br> (+∞)/(-∞) n'a pas de sens. <br> (-∞)/(+∞) n'a pas de sens. <br> (-∞)/(-∞) n'a pas de sens. <br> On remarquera que ces quatre derniers cas correspondent encore à des <input type="button" value="cas d'indétermination" onclick="go('suiteslimopalg.html#indquot')" data-inline="true" /> des limites de quotients de suites. <h3>Simplification de quelques enonçés.</h3> On pourra maintenant dire que dans la droite réelle achevée:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We see that with this new definition. Such assertions as 'u diverges to +∞' (in the previous sense) and 'u converges to +∞' (in the new sense) have the same meaning. We hope that the beginner won't be too much in trouble with these habits a little contradictory. <h3>Extension of the order</h3> It's enough to carry the order on J, hence: <br> +∞ ≥ x ∀x∈\(\displaystyle \overline{\mathbb{R}}\) <br> -∞ ≤ x ∀x∈ \(\displaystyle \overline{\mathbb{R}}\) <br> So the extended real line possesses a <input type="button" value="greatest element" onclick="go('../../bases/relations/plusgrand.html#')" data-inline="true" /> (+∞) and a smallest element as well (-∞) <h3>Partial extension of algebraic operations</h3>
+          <h4>Sum</h4> We agree that: <br /> (+∞)+(+∞)=(+∞) <br /> (+∞)+x=+∞ ∀x∈ℝ <br /> (-∞)+(-∞)=(-∞) <br /> (-∞)+x=-∞ ∀x∈ℝ <br /> the expression (+∞)+(-∞) has no meaning. <br /> the expression (-∞)+(+∞) has no meaning. <br /> We will notice that these last two cases correspond exactly to <input type="button" value="indeterminate forms" onclick="go('suiteslimopalg.html#indsum')" data-inline="true" /> for limits of sums of sequences. <h4>Product</h4> We agree that the product is commutative and that: <br /> (+∞)×(+∞)=(+∞) <br /> (-∞)×(-∞)=(+∞) <br /> (-∞)×(+∞)=(-∞) <br />
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (+\infty )=+\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (-\infty )=-\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (+\infty )=-\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle a\times (-\infty )=+\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p> The expression 0×+∞ has no meaning. <br> The expression 0×-∞ has no meaning. <br> We will nortice that hese last two cases correspond exactly to <input type="button" value="indeterminate forms" onclick="go('suiteslimopalg.html#indprod')" data-inline="true" /> for limits of product sequences <h4>Quotient</h4> For any real a a/+∞=0 <br> For any real a a/-∞=0 <br>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (+\infty )/a=+\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (-\infty )/a=-\infty ~~\forall a\in \mathbb{R}_{+}^{\ast }~~(a> 0) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (+\infty )/a=-\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p>
+          <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle (-\infty )/a=+\infty ~~\forall a\in \mathbb{R}_{-}^{\ast }~~(a< 0) \) <!-- /FORMULE UNIV INLINE-->
+          </p> No expression of the kind b/0 with b &isin; \( \displaystyle \overline{\mathbb{R}} \) has meaning. <br> (+∞)/(+∞) has no meaning. <br> (+∞)/(-∞) has no meaning. <br> (-∞)/(+∞) has no meaning. <br> (-∞)/(-∞) has no meaning. <br> We will notice that these last four cases again correspond to <input type="button" value="indeterminate forms" onclick="go('suiteslimopalg.html#indquot')" data-inline="true" /> for limits of quotient sequences. <h3>Simplification of some statements</h3> We can now say that in the extended real line :
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> Toute suite monotone est convergente (la limite étant éventuellement +∞ ou -∞)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> Every monotonic sequence is convergent (the limit being eventually +∞ or -∞)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 8</div> Toute suite possède une lim sup et une lim inf.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 8</div> Every sequence has a lim sup and a lim inf.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suiteslimsupinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suiteslimsupinf/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

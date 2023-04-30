@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>exo4.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Polynomials</span>
+
+<span class="s2">#formule de récurrence de Bonnet- Bonnet's recursive formula</span>
+<span class="s0">function </span><span class="s1">P(n)</span>
+    <span class="s0">if </span><span class="s1">n==</span><span class="s3">0</span>
+        <span class="s0">return </span><span class="s1">Polynomial([</span><span class="s3">1</span><span class="s1">],:x)</span>
+    <span class="s0">elseif </span><span class="s1">n==</span><span class="s3">1</span>
+        <span class="s0">return </span><span class="s1">Polynomial([</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">],:x)</span>
+    <span class="s0">else</span>
+        <span class="s0">return </span><span class="s1">Polynomial([</span><span class="s3">0</span><span class="s1">,(</span><span class="s3">2</span><span class="s1">n-</span><span class="s3">1</span><span class="s1">)//n],:x)*P(n-</span><span class="s3">1</span><span class="s1">)-Polynomial([(n-</span><span class="s3">1</span><span class="s1">)//n],:x)*P(n-</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:</span><span class="s3">9</span>
+    <span class="s1">println(P(i))</span>
+<span class="s0">end</span>
+
+</pre>
+</body>
+</html>

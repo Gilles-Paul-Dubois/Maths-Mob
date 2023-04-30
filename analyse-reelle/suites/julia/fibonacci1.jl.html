@@ -1,0 +1,30 @@
+<html>
+<head>
+<title>fibonacci1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">genfibo(c::Channel)</span>
+    <span class="s1">a,b=</span><span class="s2">0</span><span class="s1">,</span><span class="s2">1</span>
+    <span class="s1">put!(c,a)</span>
+    <span class="s1">put!(c,b)</span>
+    <span class="s0">while true</span>
+        <span class="s1">a,b=b,a+b</span>
+        <span class="s1">put!(c,b)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">RecDouble= Channel(genfibo)</span>
+
+<span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">0</span><span class="s1">:</span><span class="s2">10</span>
+    <span class="s1">print(</span><span class="s3">&quot;u(&quot;</span><span class="s1">);print(i);print(</span><span class="s3">&quot;)=&quot;</span><span class="s1">);println(take!(RecDouble))</span>
+<span class="s0">end</span></pre>
+</body>
+</html>

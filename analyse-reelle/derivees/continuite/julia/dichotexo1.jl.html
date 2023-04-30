@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>exo1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">fonc(x)=(x-</span><span class="s1">0.5</span><span class="s0">)*(x-</span><span class="s1">1</span><span class="s0">/</span><span class="s1">3</span><span class="s0">)*(x-</span><span class="s1">1</span><span class="s0">)</span>
+
+<span class="s2">function </span><span class="s0">TrouveChangementSigne(f,n)</span>
+	<span class="s2">return </span><span class="s0">[(u[</span><span class="s1">1</span><span class="s0">],u[</span><span class="s1">2</span><span class="s0">]) </span><span class="s2">for </span><span class="s0">u </span><span class="s2">in </span><span class="s0">((k/n,(k+</span><span class="s1">1</span><span class="s0">)/n) </span><span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s0">-n*n:n*n-</span><span class="s1">1</span><span class="s0">) </span><span class="s2">if </span><span class="s0">f(u[</span><span class="s1">1</span><span class="s0">])*f(u[</span><span class="s1">2</span><span class="s0">]) &lt; </span><span class="s1">0 </span><span class="s0">|| f(u[</span><span class="s1">1</span><span class="s0">])==</span><span class="s1">0 </span><span class="s0">]</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">localisation(f,n)</span>
+	<span class="s0">m,L=</span><span class="s1">0</span><span class="s0">,[]</span>
+	<span class="s2">while </span><span class="s0">length(L)&lt;n</span>
+		<span class="s0">m+=</span><span class="s1">1</span>
+		<span class="s0">L=TrouveChangementSigne(f,m)</span>
+	<span class="s2">end</span>
+	<span class="s2">return </span><span class="s0">m,L</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">TrouveRacine(f,a,b,k)</span>
+	<span class="s0">c=(a+b)/</span><span class="s1">2</span>
+	<span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s1">0</span><span class="s0">:k</span>
+		<span class="s2">if </span><span class="s0">f(a)==</span><span class="s1">0 </span><span class="s2">return </span><span class="s0">a	</span><span class="s2">end</span><span class="s0">; </span><span class="s2">if </span><span class="s0">f(c)==</span><span class="s1">0	</span><span class="s2">return </span><span class="s0">c </span><span class="s2">end</span><span class="s0">; </span><span class="s2">if </span><span class="s0">f(b)==</span><span class="s1">0 </span><span class="s2">return </span><span class="s0">b </span><span class="s2">end</span><span class="s0">;		</span>
+		<span class="s0">c=(a+b)/</span><span class="s1">2</span>
+		<span class="s2">if </span><span class="s0">f(a)*f(c) &lt; </span><span class="s1">0</span>
+			<span class="s0">b=c</span>
+		<span class="s2">else</span>
+			<span class="s0">a=c</span>
+		<span class="s2">end</span>
+	<span class="s2">end</span>
+	<span class="s2">return </span><span class="s0">c</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">Resoudre(f,n,e)</span>
+	<span class="s0">L=localisation(f,n)</span>
+	<span class="s0">h=L[</span><span class="s1">1</span><span class="s0">]</span>
+	<span class="s0">K=L[</span><span class="s1">2</span><span class="s0">]</span>
+	<span class="s0">k= floor((log(h)-log(e))/log(</span><span class="s1">2</span><span class="s0">)+</span><span class="s1">1</span><span class="s0">)</span>
+	<span class="s2">for </span><span class="s0">u </span><span class="s2">in </span><span class="s0">K</span>
+		<span class="s0">println(TrouveRacine(f,u[</span><span class="s1">1</span><span class="s0">],u[</span><span class="s1">2</span><span class="s0">],k))</span>
+	<span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">Resoudre(fonc,</span><span class="s1">3</span><span class="s0">,</span><span class="s1">0.001</span><span class="s0">)</span>
+
+</pre>
+</body>
+</html>

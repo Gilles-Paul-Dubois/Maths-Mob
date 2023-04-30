@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fonctions implicites</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contimplicite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contimplicite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le problème</h2> Voici maintenant un théorème extrêmement important. Intuitivement il est assez simple à comprendre, mais sa démonstration présente quelques difficultés techniques. <br /> Tout d'abord il met en jeu des fonctions, <b>non pas d'une seule</b> variable x, mais de <b>deux</b> variables réelles x et y. Ensuite on s'intéresse aux <b>
+            <i>'courbes de niveau'</i>
+          </b> de ces fonctions, c'est à dire aux parties du plan où elles sont constantes. On s'intéresse donc aux sous-ensembles du plan caractérisés par une équation du type f(x,y)=k où k est une constante réelle. On peut d'ailleurs toujours supposer que k=0 en remplaçant au besoin la fonction f:(x,y) → f(x,y) par la fonction g:(x,y) → g(x,y)-k. <br /> Voici quelques exemples simples et connus de tous: <br />
+          <ul>
+            <li>ax+by+c=0 on obtient alors une droite.</li>
+            <li>(x-a)<sup>2</sup>+(y-b)<sup>2</sup>-R<sup>2</sup>=0, le cercle de centre (a,b) et de rayon R. </li>
+            <li>x<sup>2</sup>/a<sup>2</sup>-y<sup>2</sup>/b<sup>2</sup>-1=0, on obtient une hyperbole. </li>
+            <li>x<sup>2</sup>/a<sup>2</sup>+y<sup>2</sup>/b<sup>2</sup>-1=0, on obtient une ellipse </li>
+            <li>xy-1=0, encore une hyperbole</li>
+          </ul> Nous voyons que dans tous ces cas l'ensemble en question (courbe de niveau) correspond bien à notre concept de courbe 'continue' tel que présenté dans <input type="button" value="l'introduction" onclick="go('../continuite/index.html#')" data-inline="true" />. <br /> Il est facile de fabriquer une fonction de deux variables à partir d'une fonction d'une seule variable. En effet si x → φ(x) est une fonction numérique, la fonction f(x,y)=y-φ(x) est une fonction de deux variables et la courbe de niveau f(x,y)=0 n'est rien d'autre que l'ensemble des points vérifiant y-φ(x)=0, c'est à dire y=φ(x), c'est à dire le <input type="button" value="graphe" onclick="go('../../bases/relations/graphe.html#')" data-inline="true" /> de φ. <br /> Dans le cas où f(x,y) peut se mettre sous la forme y-φ(x) on dit qu'on a affaire à une équation 'explicite' c'est à dire que pour la courbe de niveau f(x,y)=0, y peut s'exprimer explicitement en fonction de x. <br /> La question que nous nous posons ici est celle de la réciproque: <br /> Pour une courbe de niveau d'une fonction de deux variables f(x,y)=0 dite équation 'implicite' est-il toujours possible de parvenir à une équation explicite? <br /> Avant d'apporter une réponse (partielle) à ce problème, examinons deux cas particuliers. <br /> Prenons d'abord le cas particulier de la droite ax+by+c=0. On voit que si b≠0 on peut calculer simplement y en fonction de x, on a: y=-(a/b)x-c/b. Mais il est non moins évident que c'est impossible si b=0. <br /> Dans le cas du cercle de centre O et de rayon 1, l'équation x<sup>2</sup>+y<sup>2</sup>-1=0 donne y<sup>2</sup>=1-x<sup>2</sup> donc y=+√(1-x<sup>2</sup>) ou bien y=-√(1-x<sup>2</sup>). Nous voyons donc qu'ici notre problème de résolution de y en fonction de x possède deux solutions distinctes. <br /> En définitive, selon les cas, notre problème d'écriture explicite d'une variable en fonction de l'autre pour une courbe de niveau d'une fonction de deux variables peut posséder exactement une solution, en posséder deux ou ne pas en posséder du tout. <br /> Nous allons voir que pour peu que la fonction f possède quelques propriétés simples, notre problème possède des solutions au moins locales, c'est à dire que si (a,b) est un point de la courbe de niveau f(x,y)=0, c'est à dire vérifie f(a,b)=0, on peut trouver un voisinage de a dans lequel la résolution explicite de y en fonction de x est possible et est unique. Il reste maintenant à préciser quelles sont ces propriétés. <br /> Le théorème dit des 'fonctions implicites' possède de nombreux énoncés dans des contextes divers. Nous choisissons ici une formulation qui ne fait appel qu'à nos connaissances actuelles sur les fonctions d'une seule variable réelle, il est dû à A.S. Besicovitch rapporté par G.H. hardy (A course of pure mathematics) <h2>Galerie des portaits</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The problem</h2> Now here is an extremely important theorem. Intuitively it is quite simple to understand, but its demonstration presents some technical difficulties. <br /> First of all, it involves functions, <b>not of a single</b> variable x, but of <b>two</b> real variables x and y. Then we look at the <b>
+            <i>'level curves'</i>
+          </b> of these functions, ie the parts of the plane where they are constant. We are therefore interested in the subsets of the plane characterized by an equation of the type f(x,y)=k where k is a real constant. We can also always assume that k=0 by replacing, if necessary, the function f:(x,y) → f(x,y) by the function g:(x,y) → g(x,y)-k . <br /> Here are some simple and well-known examples: <br />
+          <ul>
+            <li>ax+by+c=0 we then obtain a straight line.</li>
+            <li>(x-a)<sup>2</sup>+(y-b)<sup>2</sup>-R<sup>2</sup>=0, the circle with center (a,b) and radius R. </li>
+            <li>x<sup>2</sup>/a<sup>2</sup>-y<sup>2</sup>/b<sup>2</sup>-1=0, we get a hyperbole. </li>
+            <li>x<sup>2</sup>/a<sup>2</sup>+y<sup>2</sup>/b<sup>2</sup>-1=0, we get a ellipse </li>
+            <li>xy-1=0, another hyperbole</li>
+          </ul> We see that in all these cases the set in question (level curve) corresponds well to our concept of 'continuous' curve as presented in <input type="button" value="the introduction" onclick="go( '../continuity/index.html#')" data-inline="true" />. <br /> It is easy to make a function of two variables from a function of a single variable. Indeed if x → φ(x) is a numerical function, the function f(x,y)=y-φ(x) is a function of two variables and the level curve f(x,y)=0 n' is nothing but the set of points satisfying y-φ(x)=0, i.e. y=φ(x), i.e. the <input type="button" value="graph " onclick="go('../../bases/relations/graph.html#')" data-inline="true" /> of φ. <br /> In the case where f(x,y) can be put in the form y-φ(x) we say that we are dealing with an 'explicit' equation, i.e. for the level curve f(x, y)=0, y can be expressed explicitly in terms of x. <br /> The question we are asking here is that of the converse : <br /> For a level curve of a function of two variables f(x,y)=0 called 'implicit' equation is it always possible to arrive at an explicit equation ? <br /> Before providing a (partial) answer to this problem, let's look at two special cases. <br /> Let us first take the particular case of the line ax+by+c=0. We see that if b≠0 we can simply calculate y as a function of x, we have: y=-(a/b)xc/b. But it is no less obvious that it is impossible if b=0. <br /> In the case of the circle with center O and radius 1, the equation x<sup>2</sup>+y<sup>2</sup>-1=0 gives y<sup>2</sup>= 1-x<sup>2</sup> so y=+√(1-x<sup>2</sup>) or y=-√(1-x<sup>2</sup>). So we see that here our problem of solving y as a function of x has two distinct solutions. level curve of a function of two variables can have exactly one solution, have two or none at all. <br /> We will see that if the function f has some simple properties, our problem has at least local solutions, i.e. if (a,b) is a point on the level curve f(x,y) =0, ie verifies f(a,b)=0, we can find a neighborhood of a in which the explicit resolution of y as a function of x is possible and is unique. It now remains to specify what these properties are. <br /> The so-called 'implicit functions' theorem has many statements in various contexts. We choose here a formulation which calls only on our current knowledge on the functions of only one real variable, it is due to A.S. Besicovitch as reported by G.H. hardy (A course of pure mathematics) <h2>Gallery of portraits</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font color="#FFFFFF">Abram Besicovitch (1891-1970-RU)</font>
+            </td>
+            <td>
+              <font color="#FFFFFF">Geoffrey Harold Hardy (1877-1947-UK)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/Besicovitch_2.jpeg" width="236" height="326" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/Hardy.jpg" width="301" height="356" border="0" alt="">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <em>
+                <font size="-1" color="#FFFFFF">http://www-history.mcs.st-andrews.ac.uk/PictDisplay/Besicovitch.html</font>
+              </em>
+            </td>
+            <td align="center">
+              <em>
+                <font size="-1" color="#FFFFFF">http://www.twopennies.net/quotes/</font>
+              </em>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Le théorème des fonctions implicites</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit f une fonction de deux variables définie au voisinage d'un point (a,b) sur un 'carré' [a-r,a+r]&times;[b-r,b+r]. <br> On fait les suppositions suivantes: <ol>
+              <li>f(a,b)=0</li>
+              <li>Pour toute valeur x&isin;[a-r,a+r] la fonction y &rarr;f(x,y) est une fonction continue strictement monotone de y sur [b-r,b+r].</li>
+              <li>Pour toute valeur y&isin;[b-r,b+r] la fonction x &rarr; f(x,y) est une fonction continue de x.</li>
+            </ol> Dans ces conditions, il existe un voisinage V de a, et une application continue &phi; :V &rarr; [b-r,b+r] telle que: f(x,y)=0 &hArr; y=&phi;(x) &forall;x&isin;V.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let f be a function of two variables defined in the neighborhood of a point (a,b) on a 'square' [a-r,a+r]&times;[b-r,b+r]. <br> We make the following assumptions: <ol>
+              <li>f(a,b)=0</li>
+              <li>For any value x&isin;[a-r,a+r] the function y &rarr;f(x,y) is a strictly monotone continuous function from y to [b-r,b+r].</li>
+              <li>For any value y&isin;[b-r,b+r] the function x &rarr; f(x,y) is a continuous function of x.</li>
+            </ol> Under these conditions, there exists a neighborhood V of a, and a continuous map &phi; :V &rarr; [b-r,b+r] such that: f(x,y)=0 &hArr; y=&phi;(x) &forall;x&isin;V.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons que pour toute valeur x&isin;[a-r,a+r] la fonction y &rarr;f(x,y) est une fonction continue strictement croissante de y sur [b-r,b+r]. Le cas où il s'agit d'une fonction strictement décroissante est parfaitement symétrique. <br> Sur cette figure le point P est le point de coordonnées(a,b) en lequel la fonction f s'annulle. Le point Q est le point de coordonnées (a,b+r), le point R(a,b-r). <br> On a donc f(Q) &gt; 0 et f(R) &lt; 0 d'après l'hypothèse.
+            <!-- STOP IMAGE -->
+            <p>
+              <img src="images/dessin1.png" width="261" height="314" border="0" alt="">
+            </p>
+            <!-- /STOP IMAGE --> D'après la condition 3. On peut trouver e tels que si Q' et Q" sont à une distance de Q inférieure à e alors f(Q') &gt; 0 et f(Q") &gt; 0. <br> Par ailleurs on peut supposer e suffisamment petit pour que si R' et R" pour que si R' et R" sont à une distance de R inférieure à e, f(R') et f(R") soient &lt; 0. <br> On suppose donc que Q'(a-e,b+r), Q"(a+e,b+r),R'(a-e,b-r),R"(a+e,b-r) et que f(Q') &gt; 0 f(Q") &gt; 0 f(R') &lt; 0 et f(R") &lt; 0. <br> En utilisant la condition 2. conjointement avec le théorème des valeurs intermédiaires on voit qu'il existe un point P' du carré d'abscisse a-e tel que f(P')=0. <br> En outre ce point est unique. En effet l'application y &rarr; f(a-e,y) étant strictement croissante elle est injective sur [b-r,b+r], elle ne peut donc avoir deux annulations. <br> Ce raisonnement vaut non seulement pour le segment [Q'R'] mais pour tout segment d'extrêmités (x,b-r) (x,b+r) où x&isin;[a-e,a+e]. Si donc on désigne par &phi;(x) l'ordonnée de l'unique point de ce segment où f s'annule, nous obtenons donc la première partie de notre affirmation. <br> Il reste à prouver que &phi; est continue. <br> Prenons maintenant x<sub>0</sub> entre a-e et a+e, et montrons la continuité en x<sub>0</sub>. <br> Soit y<sub>0</sub>=&phi;(x<sub>0</sub>), alors f(x<sub>0</sub>,y<sub>0</sub>)=0. <br> Pour tout &epsilon; &gt; 0 on a: <br> f(x<sub>0</sub>,y<sub>0</sub>-&epsilon;) &lt; 0 &lt; f(x<sub>0</sub>,y<sub>0</sub>+&epsilon;) <br> Utilisant la condition 3., c'est à dire la continuité en x<sub>0</sub> de x &rarr;f(x,y) pour y=y<sub>0</sub>-&epsilon; et y=y<sub>0</sub>+&epsilon;, on voit qu'il existe &eta; &gt; 0 tel que si x&isin;[x<sub>0</sub>-&eta;,x<sub>0</sub>+&eta;] on ait: <br> f(x,y<sub>0</sub>-&epsilon;) &lt; 0 &lt; f(x,y<sub>0</sub>+&epsilon;) <br> Mais toujours en vertu de la condition 2. et du théorème des valeurs intermédiaires: <br> &phi;(x) se trouve dans l'intervalle ]y<sub>0</sub>-&epsilon; y<sub>0</sub>+&epsilon;[,CQFD.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose that for any value x&isin;[a-r,a+r] the function y &rarr;f(x,y) is a strictly increasing continuous function of y on [b-r,b+r]. The case where it is a strictly decreasing function is perfectly symmetric. <br> On this figure the point P is the point of coordinates (a,b) in which the function f is null. The point Q is the point of coordinates (a,b+r), the point R(a,b-r). <br> We therefore have f(Q) > 0 and f(R) < 0 according to the hypothesis. <!-- STOP IMAGE -->
+              <p>
+                <img src="images/dessin1.png" width="261" height="314" border="0" alt="">
+              </p>
+              <!-- /STOP IMAGE --> By condition 3. We can find e such that if Q' and Q" are at a distance from Q less than e then f(Q')> 0 and f(Q") > 0. <br> Furthermore, we can assume e small enough so that if R' and R" so that if R' and R" are at a distance from R less than e, f(R') and f(R") are < 0. <br> We therefore assume that Q'(a-e,b+r), Q"(a+e,b+r),R'(a-e,b-r),R"(a+e,b-r) and that f(Q') > 0 f(Q") > 0 f(R') < 0 and f(R") < 0. <br> By using condition 2. together with the intermediate value theorem we see that there exists a point P' of the square of abscissa a-e such that f(P')=0. <br> Moreover, this point is unique. Indeed the application y &rarr; f(a-e,y) being strictly increasing it is injective on [b-r,b+r], so it cannot have two zeros. <br> This reasoning is valid not only for the segment [Q'R'] but for any segment of extremities (x,b-r) (x,b+r) where x&isin;[a-e,a+e]. If therefore we denote by &phi;(x) the ordinate of the unique point of this segment where f vanishes, we therefore obtain the first part of our assertion. <br> It remains to prove that &phi; is continuous. <br> Now take x<sub>0</sub> between a-e and a+e, and show the continuity at x<sub>0</sub>. <br> Let y<sub>0</sub>=&phi;(x<sub>0</sub>), then f(x<sub>0</sub>,y<sub>0</sub>)=0 . <br> For all &epsilon; > 0 we have: <br> f(x<sub>0</sub>,y<sub>0</sub>-&epsilon;) < 0 < f(x<sub>0</sub>,y<sub>0</sub> +&epsilon;) <br> Using condition 3., i.e. the continuity at x<sub>0</sub> of x &rarr;f(x,y) for y=y<sub>0</sub>-&epsilon; and y=y<sub>0</sub>+&epsilon;, we see that there exists &eta; > 0 such that if x&isin;[x<sub>0</sub>-&eta;,x<sub> 0</sub>+&eta;] we have: <br> f(x,y<sub>0</sub>-&epsilon;) < 0 <f(x,y<sub>0</sub>+&epsilon;) <br> But still under condition 2. and the intermediate value theorem: <br> &phi;(x) is in the range ]y<sub>0</sub>-&epsilon; y<sub>0</sub>+&epsilon;[,QED.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contimplicite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contimplicite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

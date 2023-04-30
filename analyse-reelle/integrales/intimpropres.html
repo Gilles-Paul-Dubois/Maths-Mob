@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intégrales impropres</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intimpropres/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intimpropres/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous allons ici étendre la notion d'intégrale au sens de Riemann à des intervalles sur lesquels la fonction n'est pas bornée ou pas entièrement définie ainsi qu'à des intervalles de longueur infinie. <h2>Premier cas: La fonction n'est pas définie sur une des bornes de l'intervalle d'intégration.</h2> Nous nous intéressons au cas d'un intervalle [a,b] et d'une fonction définie et intégrable sur tout intervalle [c,b] avec a&lt;c&lt;b, ou bien une fonction définie et intégrable sur tout intervalle [a,c] avec a&lt;c&lt;b. <br> La fonction est éventuellement non bornée sur ]a,b[. </div>
+        <!-- /fr -->
+        <div lang="en"> We will here extend the notion of integral in the sense of Riemann to intervals on which the function is not bounded or not entirely defined as well as to intervals of infinite length. <h2>First case: The function is not defined on one of the limits of the integration interval.</h2> We are interested in the case of an interval [a,b] and a definite and integrable function on any interval [c,b] with a&lt;c&lt;b, or a definite and integrable function on any interval [a, c] with a&lt;c&lt;b. <br> The function is possibly unbounded on ]a,b[. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Dans ces conditions, si la limite
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{c \to a+}\int_{c}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> existe, nous convenons de la noter
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et de l'appeler encore <strong>
+              <em>"l'intégrale de a à b de la fonction f"</em>
+            </strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Under these conditions, if the limit
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{c \to a+}\int_{c}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> exists, we agree to denote it
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and call it again <strong>
+              <em>"the integral from a to b of the function f"</em>
+            </strong>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples</h3> On vérifie facilement que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{0}^{1}\frac{1}{\sqrt{x}}dx \)
+          <!-- /FORMULE UNIV INLINE--> est convergente, et que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{0}^{1}\frac{1}{{x}}dx \)
+          <!-- /FORMULE UNIV INLINE--> ne l'est pas. <h2>Visualisation d'intégrales convergentes et divergentes du premier type</h2> Voici une appliquette vous permettant de visualiser
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Exemples</h3> You can easily check that
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{0}^{1}\frac{1}{\sqrt{x}}dx \)
+          <!-- /FORMULE UNIV INLINE--> is convergent, and that
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{0}^{1}\frac{1}{{x}}dx \)
+          <!-- /FORMULE UNIV INLINE--> is not. <h2>Visualization of converfgent and divergent integrals of the first kind</h2> Here is an applet allowing you to visualize
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{1}^{x}f(t)dt \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Pour les deux fonctions f(t)=1/√t et f(t)=1/t. Vous pouvez basculer entre les deux fonctions au moyen du bouton 'changer f'. <br> Vous pouvez ajuster x simultanément avec les deux réglettes. <br> Avec le premier curseur vous déterminez un nombre entre 0.01 et 1. <br> Avec le second curseur vous déterminez une puissance négative de 10 entre 0 et -6. <br> La valeur de x est le produit des deux. <br> La valeur minimale que l'on peut atteindre est donc 10<sup>-7</sup>. </div>
+        <!-- /fr -->
+        <div lang="en"> For both functions f(t)=1/√t and f(t)=1/t. You can switch between the two functions by means of the 'change f' button. <br> You can adjust x simultaneously with both sliders. <br> With the first slider you determine a number between 0.01 and 1. <br> With the second slider you determine a negative power of 10 between 0 and -6. <br> The value of x is the product of the two. <br> The minimum value that can be reached is therefore 10<sup>-7</sup>. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton4' onClick='nameSpace1.choicef()'>
+          <div lang="fr">Changer f</div>
+          <!-- /fr -->
+          <div lang="en">change f</div>
+          <!-- /en -->
+        </button>
+        <script src="js/intimp1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Second cas: La fonction n'est définie sur aucune des bornes de l'intervalle d'intégration.</h2> Nous nous intéressons au cas d'un intervalle [a,b] et d'une fonction définie et intégrable sur tout intervalle [c,d] avec a&lt;c&lt;d&lt;b. La fonction est éventuellement non bornée sur ]a,b[.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Second case: The function is not defined on any of the limits of the integration interval.</h2> We are interested in the case of an interval [a,b] and a function defined and integrable on any interval [c,d] with a&lt;c&lt;d&lt;b. The function is possibly unbounded on ]a,b[.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Dans ces conditions s'il existe un point e &isin;]a,b[ tel que, les deux limites
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{c \to a+}\int_{c}^{e}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{d \to b-}\int_{e}^{d}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> existent toutes deux, alors la somme de ces deux limites, <strong>qui ne dépend pas de e</strong>, sera notée
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et appelée <strong>
+              <em>"l'intégrale de f sur [a,b]"</em>
+            </strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> Under these conditions if it exists a point e &isin;]a,b[ such that, both limits
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{c \to a+}\int_{c}^{e}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{d \to b-}\int_{e}^{d}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> exist, then the sum of these two limits, <strong>which does not depend on e</strong>, will be denoted
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and called <strong>
+              <em>"the integral of f over [a,b]"</em>
+            </strong>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On vérifie cela immédiatement grâce à la relation de Chasles pour les intégrales définies. <h2>Troisième cas: Une des bornes de l'intervalle d'intégration est infinie.</h2> Nous nous intéressons aux fonctions définies sur [a,+&infin;[ et intégrables sur tout intervalle [a,b] avec b &ge; a. </div>
+        <!-- /fr -->
+        <div lang="en"> We verify this immediately thanks to the Chasles relation for definite integrals. <h2>Third case: One of the limits of the integration interval is infinite.</h2> We are interested in functions defined on [a,+&infin;[ and integrable on any interval [a,b] with b &ge; a. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Dans ces conditions si la limite
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{b \to +\infty }\int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> existe, nous la notons
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty }f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et l'appelons <strong>
+              <em>"l'intégrale de f sur [a,+&infin;["</em>
+            </strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> Under these conditions, if the limit
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{b \to +\infty }\int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> exists, we denote it
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty }f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and we call it <strong>
+              <em>"the integral of f over [a,+&infin;["</em>
+            </strong>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Les intégrales
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{- \infty }^{b }f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> sont définies de la même manière par passage à la limite.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> The integrals
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{- \infty }^{b }f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> are defined the same way by passing to the limit.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples</h3> On vérifie immédiatemment que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{1}^{+\infty }\frac{1}{x^{2}}dx \)
+          <!-- /FORMULE UNIV INLINE--> existe et que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{1}^{+\infty }\frac{1}{x}dx \)
+          <!-- /FORMULE UNIV INLINE--> n'existe pas.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Exemples</h3> It is easily checked that
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{1}^{+\infty }\frac{1}{x^{2}}dx \)
+          <!-- /FORMULE UNIV INLINE--> exists and that
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{1}^{+\infty }\frac{1}{x}dx \)
+          <!-- /FORMULE UNIV INLINE--> does not exist.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h3>Visualisation d'intégrales convergentes et divergentes du troisième type</h3> Voici une appliquette vous permettant de visualiser
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{1}^{x}f(t)dt \)
+          <!-- /FORMULE UNIV INLINE--> pour les deux fonctions f(t)=1/t et f(t)=1/t<sup>2</sup>. <br> Vous pouvez basculer entre les deux fonctions au moyen du bouton 'changer f'. <br> Vous pouvez ajuster x simultanément avec les deux réglettes. <br> Avec le premier curseur vous déterminez un nombre entre 1 et 10. <br> Avec le second curseur vous déterminez une puissance de 10 entre 0 et 6. <br> La valeur de x est le produit produit des deux. <br> La valeur maximale que l'on peut atteindre est donc 10<sup>7</sup>.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Visualization of convergent and divergent integrals of the third type</h3> Here is an applet allowing you to visualize
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{1}^{x}f(t)dt \)
+          <!-- /FORMULE UNIV INLINE--> for both functions f(t)=1/t and f(t)=1/t<sup>2</sup>. <br> You can switch between the two functions by means of the 'change f' button. <br> You can adjust x simultaneously with both sliders. <br> With the first slider you determine a number between 1 and 10. <br> With the second slider you determine a power of 10 between 0 and 6. <br> The value of x is the product of the two. <br> The maximum value that can be reached is therefore 10<sup>7</sup>.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton5' onClick='nameSpace2.choicef()'>
+          <div lang="fr">Changer f</div>
+          <!-- /fr -->
+          <div lang="en">Change f</div>
+          <!-- /en -->
+        </button>
+        <script src="js/intimp2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Quatrième cas: les deux bornes de l'intervalle d'intégration sont infinies.</h2> On s'intéresse à des fonctions définies sur &reals; et R-intégrables sur tout intervalle [a,b].
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Fourth case: the two limits of the integration interval are infinite.</h2> We are interested in functions defined on &reals; and R-integrable on any interval [a,b].
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> Dans ces conditions, s'il existe un réel e tel que les deux intégrales impropres
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{e}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{e}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> existent toutes les deux, alors leur somme, qui ne dépend pas de e, est notée
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et appelée " <strong>
+              <em>l'intégrale de f sur ℝ</em>
+            </strong>".
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> Under tghese conditions, if it exists a real number e such that the two improper integrals
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{e}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{e}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> both exist, then their sum, which doesn't depend on e, is denoted
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and called " <strong>
+              <em>the integral of f over ℝ</em>
+            </strong>".
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />
+        <div lang="fr"> Cependant ne pas croire qu'une condition suffisante pour l'existence de
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{+\infty}f(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> est que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{a \to \infty}\int_{-a}^{+a}f(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> existe. <br> Il se peut que les deux intégrales
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{0} f(x) dx \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{0}^{+\infty} f(x) dx \)
+          <!-- /FORMULE UNIV INLINE--> divergent toutes deux mais que leurs divergences soient compensées.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Nevertheless do not believe that a sufficient condition for the existence of
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{+\infty}f(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> is that
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{a \to \infty}\int_{-a}^{+a}f(x)dx \)
+          <!-- /FORMULE UNIV INLINE--> exist. <br> It is possible that both integrals
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{0} f(x) dx \)
+          <!-- /FORMULE UNIV INLINE--> and
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{0}^{+\infty} f(x) dx \)
+          <!-- /FORMULE UNIV INLINE--> both diverge but that their divergences compensate each other.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h3>Exemple</h3> Un calcul rapide prouve que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{+\infty} \frac{1}{1+x^{2}} dx=\pi \)
+          <!-- /FORMULE UNIV INLINE-->
+          <h2>Cinquième cas: Une des bornes de l'intervalle d'intégration est infinie et la fonction n'est pas définie sur l'autre borne.</h2> On s'intéresse maintenant à des cas correspondant à des combinaisons des cas précédents. <br> Supposons par exemple que la fonction f soit R-intégrable sur tout intervalle [c,d] avec a &lt; c &le; d;.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Fifth case: One of the limits of the integration interval is infinite and the function is not defined on the other limit.</h2> We are now interested in cases corresponding to combinations of the previous cases. <br> Suppose for example that the function f is R-integrable on any interval [c,d] with a &lt; &le; d;.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 6</div> Dans ces conditions, s'il existe un nombre e > a tel que les deux intégrales impropres
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{e}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{e}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> existent, alors leur somme ,qui ne dépend pas de e, est notée
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et appelée <b>
+              <i>"l'intégrale de f sur [a,+&infin;["</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 6</div> under these con ditions, if it exist a number e > a such that both improper integrals
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{e}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{e}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> exist, then their sum, which doesn't depend on e, is denoted
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and called <b>
+              <i>"the integral of f over [a,+&infin;["</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Intégrales absolument convergentes</h2> Nous allons maintenant développer un parallèle complet avec ce que nous avons vu sur les <input type="button" value="séries absolument convergentes" onclick="go('../series/seriesabsconv.html#def1')" data-inline="true" />. <br> L'inégalité qui était invoquée à répétition dans le cas des séries était
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left | \sum_{n=0}^{\infty} u_{n} \right | \leqslant \sum_{0}^{\infty}\left | u_{n} \right | \)</p>
+          <!-- /FORMULE UNIV INLINE--> Elle sera ici remplacée par
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left | \int_{a}^{b} f(x)dx\right |\leqslant \int_{a}^{b}\left | f(x) \right |dx \)</p>
+          <!-- /FORMULE UNIV INLINE--> Moyennant quoi on obtient dans tous les cas ci-dessus des conditions suffisantes de convergence pour les intégrales impropres. Voici par exemple un énoncé induit (parmi tous ceux que nous pouvons imaginer) dans lequel la fonction peut être définie en a ou ne pas être définie en ce point (ce qui fait en fait deux énoncés distincts).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Absolutely convergent integrals</h2> We will now develop a full parallel with what we have seen on <input type="button" value="absolutely convergent series" onclick="go('../series/seriesabsconv.html#def1')" data-inline="true">. <br> The inequality that was repeatedly invoked in the case of series was
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left | \sum_{n=0}^{\infty} u_{n} \right | \leqslant \sum_{0}^{\infty}\left | u_{n} \right | \)</p>
+          <!-- /FORMULE UNIV INLINE--> It will be here replaced by
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left | \int_{a}^{b} f(x)dx\right |\leqslant \int_{a}^{b}\left | f(x) \right |dx \)</p>
+          <!-- /FORMULE UNIV INLINE--> By means of which we obtain in all the cases above sufficient conditions of convergence for the improper integrals. Here, for example, is an induced statement (among all those we can imagine) in which the function can be defined at a or not be defined at this point (which in fact makes two distinct statements).
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Une condition <b>suffisante</b> pour que l'intégrale
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> existe est que l'intégrale
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}|f(x)|dx \)
+            <!-- /FORMULE UNIV INLINE--> existe. <br> On dit dans ce cas que l'intégrale impropre
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> est <b>
+              <i>'absolument convergente'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> A <b>sufficient</b> condition for the integral
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> to be convergent is that
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}|f(x)|dx \)
+            <!-- /FORMULE UNIV INLINE--> exists. <br> We say in this case that the improper integral
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> is <b>
+              <i>'absolutely convergent'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Remarquons encore que dans le cas d'une fonction positive il y a évidemment équivalence entre intégrale <b>'convergente'</b> et intégrale <b>'absolument convergente'</b> et que certains énoncés faux en toute généralité deviennent vrais pour les fonctions positives, par exemple : </div>
+        <!-- /fr -->
+        <div lang="en"> Note again that in the case of a positive function there is obviously equivalence between <b>'convergent'</b> integral and <b>'absolutely convergent'</b> integral and that certain false statements in all generality become true for positive functions, for example: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si f est partout &ge;0 une condition suffisante pour l'existence de
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> est que la limite
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{a \to \infty}\int_{-a}^{+a}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> existe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If f is everywhere &ge;0 a sufficient condition for the existence of
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty}^{+\infty}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> is that the limit
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{a \to \infty}\int_{-a}^{+a}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> exists.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Extensions des formules de transformations usuelles</h2> On peut se demander si les formules usuelles du calcul intégral (intégration par parties, changement de variable) restent valables pour les intégrales impropres. <br> Le problème est que ces formules conduisent à des égalités n'ayant en général pas de sens (valeur en l'infini d'une fonction...). <br> Nous suggérons donc de revenir à la définition des intégrales impropres comme limites d'intégrales propres, d'appliquer les formules de transformation à ces intégrales puis d'essayer de passer à la limite dans les équations obtenues. <br> En procédant de la sorte on remplace généralement le calcul d'une intégrale impropre par le calcul d'une autre intégrale impropre, mais il se peut que cette autre intégrale soit plus facile à calculer. Donc le recours à ces substitutions peut se révéler utile. Voici par exemple un énoncé possible:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> One can wonder if the usual formulas of integral calculus (integration by parts, substitution of variable) remain valid for improper integrals. <br> The problem is that these formulas lead to equalities that generally have no meaning (value at infinity of a function...). <br> We therefore suggest going back to the definition of improper integrals as limits of proper integrals, applying the transformation formulas to these integrals and then trying to pass to the limit in the equations obtained. <br> By proceeding in this way, the calculation of an improper integral is generally replaced by the calculation of another improper integral, but it may be that this other integral is easier to calculate. So the use of these substitutions can be useful. Here is an example of a possible statement: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Soient f et g continûment dérivables sur tout intervalle [a,x[ avec x&lt;b. <br> On suppose que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to b-}f(x)g(x) \)
+            <!-- /FORMULE UNIV INLINE--> existe. <br> Dans ces conditions
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f'(x)g(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)g'(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> sont de même type (toutes deux convergentes ou toutes deux divergentes). <br> En outre, si elles convergent, on a
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f'(x)g(x)dx=\left [ f(x)g(x) \right ]_{a}^{b-}-\int_{a}^{b}f(x)g'(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE--> où
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left [ f(x)g(x) \right ]_{a}^{b-}=\lim_{x \to b-}f(x)g(x)-f(a)g(a) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> Let f and g two continuously differentiable functions on every interval [a,x[ with x&lt;b. <br> We suppose that
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to b-}f(x)g(x) \)
+            <!-- /FORMULE UNIV INLINE--> exists. <br> Under these conditions
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f'(x)g(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)g'(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> are of the same kind (both of them convergent or divergent). <br> Furthermore if they are convergent , we have
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f'(x)g(x)dx=\left [ f(x)g(x) \right ]_{a}^{b-}-\int_{a}^{b}f(x)g'(x)dx \)</p>
+            <!-- /FORMULE UNIV INLINE--> where
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left [ f(x)g(x) \right ]_{a}^{b-}=\lim_{x \to b-}f(x)g(x)-f(a)g(a) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ici le symbole b peut représenter soit un nombre fini soit le symbole +&infin;. <br> Et voici un autre énoncé possible: </div>
+        <!-- /fr -->
+        <div lang="en"> Here the symbol b can represent either a finite number or the symbol +&infin;. <br> And here is another possible statement: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Soit f une fonction continue sur un intervalle I et u une fonction monotone croissante, continûment dérivable sur [a,b[, telle que u([a,b[) &sube; I et lim<sub>t&rarr;b</sub>u(t)=u(b). <br> Dans ces conditions les intégrales
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(u(t))u'(t)dt \)
+            <!-- /FORMULE UNIV INLINE--> d'une part, et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{u(a)}^{u(b)}f(u)du \)
+            <!-- /FORMULE UNIV INLINE--> d'autre part, sont de même nature, c'est à dire toutes deux convergentes ou divergentes. <br> En outre si elles sont convergentes elles sont égales.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> Let f a continuous function on an interval I and u a monotonic increasing continuously differentiable function on [a,b[, such that u([a,b[) &sube; I eand lim<sub>t&rarr;b</sub>u(t)=u(b). <br> Under these conditions the integrals
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(u(t))u'(t)dt \)
+            <!-- /FORMULE UNIV INLINE--> on one hand and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{u(a)}^{u(b)}f(u)du \)
+            <!-- /FORMULE UNIV INLINE--> on the other hand, are of the same kind, that's to say both convergent or divergent. <br> Furthermore, if they are convergent, they are equal.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ici encore les symboles b et u(b) peuvent représenter soit un nombre fini soit le symbole +∞. </div>
+        <!-- /fr -->
+        <div lang="en"> Here again the quantities b and u(b) can represent a finite value or an infinity symbol. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Certaines intégrales impropres peuvent être calculées avec des modules spécialisés. <br /> Voici un exemple d'utilisation de 'sympy' pour le calcul de l'intégrale de Gauss
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{-\infty }^{+\infty }e^{-x^{2}}dx=\sqrt{\pi } \)
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's corner</h2> Some improper integrals can be calculated with specialized modules. <br /> Here is an example of using 'sympy' for the calculation of the Gaussian integral
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/intimpropre.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2> Et son equivalent Julia 1.6
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> And its equivalent with Julia 1.6
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/impropre.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intimpropres/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intimpropres/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

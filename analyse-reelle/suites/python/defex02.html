@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># -*- coding: utf-8 -*-</span>
+<span class="s0"># python version 3.4</span>
+<span class="s0"># corrigé exercice 02 - solution of exercise 2</span>
+
+<span class="s2">def </span><span class="s1">GenPremiers():</span>
+    <span class="s0">&quot;&quot;&quot;générateur de nombres premiers - generator of prime numbers&quot;&quot;&quot;</span>
+    <span class="s1">P = [</span><span class="s3">2</span><span class="s1">]</span>
+    <span class="s2">yield </span><span class="s3">2  </span><span class="s0"># premier appel - first call</span>
+    <span class="s2">while True</span><span class="s1">:  </span><span class="s0"># autres appels - next calls</span>
+        <span class="s1">x = P[-</span><span class="s3">1</span><span class="s1">] + </span><span class="s3">1  </span><span class="s0"># ajouter 1 au dernier trouvé - add 1 to the last found</span>
+        <span class="s2">while </span><span class="s1">any([x % i == </span><span class="s3">0 </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">P]):  </span><span class="s0"># y-a-til un diviseur premier parmi les précédents ? - any divisor among previous ones ?</span>
+            <span class="s1">x = x + </span><span class="s3">1  </span><span class="s0"># si oui continuer avec le suivant if yes try next one</span>
+        <span class="s1">P.append(x)  </span><span class="s0"># sinon l'ajouter à la liste - if not add to the list</span>
+        <span class="s2">yield </span><span class="s1">(x)  </span><span class="s0"># retourner ce nouveau nombre premier - return this nex prime number</span>
+
+<span class="s2">def </span><span class="s1">p(n):</span>
+    <span class="s1">Premiers = GenPremiers()</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">):</span>
+        <span class="s1">x = next(Premiers)</span>
+    <span class="s2">return </span><span class="s1">x</span>
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s0">&quot;&quot;&quot;affiche les 10 premiers nombres premiers - prints the 10 first prime numbers&quot;&quot;&quot;</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">10</span><span class="s1">):</span>
+        <span class="s1">print(i, </span><span class="s4">&quot;:&quot;</span><span class="s1">, p(i))</span>
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
+</html>

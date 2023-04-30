@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>prim10.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+</span><span class="s0"># ## Calcul de ln(x) à 0.00001 près au moyen de la série ln(1+x)</span><span class="s1"> 
+</span><span class="s0"># ## Computation of ln(x) with precision 0.00001 using the series ln(1+x)</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">u(n, x): 
+    </span><span class="s0">&quot;&quot;&quot;terme général de la série ln(1+x)- general term of the series ln(1+x)&quot;&quot;&quot;</span><span class="s1"> 
+    r = </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n): 
+        r *= x 
+    </span><span class="s2">if </span><span class="s1">n % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">-r / float(n) 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">r / float(n) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">s(n, x): 
+    </span><span class="s0">&quot;&quot;&quot;somme partielle de ln(1+x) - partial sum of ln(1+x)&quot;&quot;&quot;</span><span class="s1"> 
+    s = </span><span class="s3">0</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">): 
+        s += u(k, x) 
+    </span><span class="s2">return </span><span class="s1">s 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">ordre(x): 
+    </span><span class="s0">&quot;&quot;&quot;jusqu'où pousser la sommation pour une erreur inférieure à 0.00001 dans ln(1+x) si -1&lt;x&lt;0&quot;&quot;&quot;</span><span class="s1"> 
+	 </span><span class="s0">&quot;&quot;&quot;Till which rank should we go in partial sums to get an error less than 0.00001 in ln(1+x) if -1&lt;x&lt;0&quot;&quot;&quot;</span><span class="s1">    
+    n = </span><span class="s3">1</span><span class="s1"> 
+    e = </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">while True</span><span class="s1">: 
+        e *= (-x) 
+        </span><span class="s2">if </span><span class="s1">abs(e) / (n * (</span><span class="s3">1 </span><span class="s1">+ x)) &lt; </span><span class="s3">0.00001</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">n 
+        n += </span><span class="s3">1</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">approxlog1(x): 
+    </span><span class="s0">&quot;&quot;&quot;Approximation du logarithme de 1+x pour x dans ]0,1[&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Approximation of the logarithm of 1+x for x in]0,1[&quot;&quot;&quot;</span><span class="s1">    
+    n = ordre(x) 
+    </span><span class="s2">return </span><span class="s1">s(n, x) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">approxlog(x): 
+    </span><span class="s0">&quot;&quot;&quot;Cas général - general case&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">x == </span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">0</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">x &lt; </span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">approxlog1(x - </span><span class="s3">1</span><span class="s1">) 
+    </span><span class="s2">return </span><span class="s1">-approxlog(</span><span class="s3">1.0 </span><span class="s1">/ x)  </span><span class="s0">#cas x&gt;1</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">[k / </span><span class="s3">10.0 </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">21</span><span class="s1">)]: 
+        print(approxlog(x), math.log(x)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

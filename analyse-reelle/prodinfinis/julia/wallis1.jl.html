@@ -1,0 +1,35 @@
+<html>
+<head>
+<title>wallis1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">genw(c::Channel)</span>
+    <span class="s1">k,p=</span><span class="s2">0</span><span class="s1">,</span><span class="s2">2</span>
+    <span class="s1">put!(c,p)</span>
+    <span class="s0">while true</span>
+        <span class="s1">k+=</span><span class="s2">1</span>
+        <span class="s1">v = </span><span class="s2">1 </span><span class="s1">- </span><span class="s2">1</span><span class="s1">/ ((</span><span class="s2">2</span><span class="s1">k + </span><span class="s2">1</span><span class="s1">) * (</span><span class="s2">2</span><span class="s1">k + </span><span class="s2">1</span><span class="s1">))</span>
+        <span class="s1">p*=v</span>
+        <span class="s1">put!(c,p)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">Wallis=Channel(genw)</span>
+    <span class="s1">P=</span><span class="s2">2</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">5000</span>
+        <span class="s1">P=take!(Wallis)</span>
+    <span class="s0">end</span>
+    <span class="s1">println(</span><span class="s2">2</span><span class="s1">P)</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

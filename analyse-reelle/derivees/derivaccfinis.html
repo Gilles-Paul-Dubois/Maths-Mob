@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>tThéorème des accroissements finis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivaccfinis/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivaccfinis/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le théorème</h2> Le théorème des accroissements finis dit en substance que si un mobile se déplace entre deux instants distants t<sub>0</sub> et t<sub>1</sub> et que la vitesse moyenne entre ces deux instants est V alors il existe au moins un instant t strictement entre t<sub>0</sub> et t<sub>1</sub>, telle que la vitesse instantanée à l'instant t soit égale à V. <br> Voici son ennoncé exact:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The theorem</h2> The Mean Value Theorem essentially says that if a mobile moves between two distant instants t<sub>0</sub> and t<sub>1</sub> and that the average speed between these two instants is V then it exists at least one instant t strictly between t<sub>0</sub> and t<sub>1</sub>, such that the instantaneous speed at instant t is equal to V. <br> Here is his exact statement:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit f une fonction continue sur un intervalle compact [a,b] et dérivable sur l'intervalle ouvert ]a,b[ alors il existe c&isin;]a,b[ tel que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f'(c)=\frac{f(b)-f(a)}{b-a} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let f be a continuous function on a compact interval [a,b] and differentiable on the open interval ]a,b[ then there exists c&isin;]a,b[ such that
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f'(c)=\frac{f(b)-f(a)}{b-a} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Considérons la fonction g définie par
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle g(x)=f(b)-f(x)-\frac{f(b)-f(a)}{b-a}\left ( b-x \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Cette fonction s'annule en a et b et elle a pour dérivée
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle g'(x)=\frac{f(b)-f(a)}{b-a}-f'(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> il suffit donc de lui appliquer le <input type="button" value="théorème de Rolle" onclick="go('derivrolle.html#thm1')" data-inline="true" />
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Consider the function g defined by
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle g(x)=f(b)-f(x)-\frac{f(b)-f(a)}{b-a}\left ( b-x \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> This function vanishes at a and b and has the derivative
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle g'(x)=\frac{f(b)-f(a)}{b-a}-f'(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> So just apply the <input type="button" value="Rolle's theorem" onclick="go('derivrolle.html#thm1')" data-inline="true" />
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette vous permettant de visualiser le théorème des accroissements finis. <br> Faire varier les paramètres a et b en tirant les points rouges avec la souris. <br> Le théorème s'applique à l'intervalle [a,b]. <br> Constater qu'à chaque fois il y a (au moins) un point c entre a et b telle que la pente de la tangente en c soit égale au taux d'accroissement de la fonction entre a et b. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet allowing you to visualize the Mean Value Theorem. <br> Vary parameters a and b by dragging the red dots with the mouse. <br> The theorem applies to the interval [a,b]. <br> Note that each time there is (at least) one point c between a and b such that the slope of the tangent at c is equal to the average rate of change of the function between a and b. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/accfinis.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Inégalité des accroissements finis</h2> C'est une conséquence immédiate du théorème ci-dessus
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Mean Value Inequality</h2> This is an immediate consequence of the above theorem
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si f est continue sur [a,b] et dérivable sur ]a,b[. Si en outre |f'| est majorée par M sur ]a,b[, alors |f(a)-f(b)| &le; M|b-a| et plus généralement |f(x<sub>2</sub>)-f(x<sub>1</sub>)| &le; M|x<sub>2</sub>-x<sub>1</sub>| &forall; x<sub>1</sub> &isin; [a,b] et &forall; x<sub>2</sub> &isin; [a,b]
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If f is continuous on [a,b] and differentiable on ]a,b[. If in addition |f'| is bounded by M on ]a,b[, then |f(a)-f(b)| &le; M|b-a| and more generally |f(x<sub>2</sub>)-f(x<sub>1</sub>)| &le; M|x<sub>2</sub>-x<sub>1</sub>| &forall; x<sub>1</sub> &isin; [a,b] and &forall; x<sub>2</sub> &isin; [a,b]
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Autrement dit, dans les hypothèses de l'ennoncé, f est <input type="button" value="M-lipschitzienne" onclick="go('../continuite/contuniforme.html#def2')" data-inline="true" /> sur [a,b]. <br /> Cet énoncé est très intuitif, il dit par exemple que si au cours d'un trajet, la vitesse instantanée d'un mobile ne dépasse jamais V alors sa vitesse moyenne ne peut dépasser V. <h2>Conséquence</h2> l'inégalité des accroissements finis possède une conséquence importante: </div>
+        <!-- /fr -->
+        <div lang="en"> In other words, in the assumptions of the statement, f is <input type="button" value="M-Lipschitzian" onclick="go('../continuite/contuniforme.html#def2')" data-inline="true" /> on [a,b]. <br /> This statement is very intuitive, it says for example that if during a journey, the instantaneous speed of a mobile never exceeds V then its average speed cannot exceed V. <h2>Consequence</h2> the inequality of finite increments has an important consequence: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Si f est une fonction définie et continue sur [a,b] dérivable et de dérivée identiquement nulle sur ]a,b[, alors f est constante sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> If f is a definite and continuous function on [a,b] differentiable and of identically zero derivative on ]a,b[, then f is constant on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat est en fait la réciproque (sur un intervalle) du résultat qui dit que la dérivée d'une fonction constante est nulle. </div>
+        <!-- /fr -->
+        <div lang="en"> This result is in fact the converse (on an interval) of the result which says that the derivative of a constant function is zero. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivaccfinis/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivaccfinis/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

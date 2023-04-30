@@ -1,0 +1,62 @@
+<html>
+<head>
+<title>serprod1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s0"># #illustration séries produits - illustrating product series</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">fact(n): 
+    </span><span class="s0">&quot;&quot;&quot;la factorielle - the factorial&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">n &lt;= </span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x * y, range(</span><span class="s3">1</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">)) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">u(n): 
+    </span><span class="s0">&quot;&quot;&quot;terme général de la série exp(1) - general term of series exp(1)&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s3">1.0 </span><span class="s1">/ fact(n) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">k(u, v, n): 
+    </span><span class="s0">&quot;&quot;&quot;terme général d'une série produit - general term of a product series&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">n == </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">u(</span><span class="s3">0</span><span class="s1">) * v(</span><span class="s3">0</span><span class="s1">) 
+    </span><span class="s2">return </span><span class="s1">sum((u(i) * v(n - i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">))) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">p(u, v, n): 
+    </span><span class="s0">&quot;&quot;&quot;&quot;somme partielle de la série produit - partial sum of product series&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">n == </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">k(u, v, </span><span class="s3">0</span><span class="s1">) 
+    </span><span class="s2">return </span><span class="s1">sum((k(u, v, i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">))) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    print(p(u, u, </span><span class="s3">10</span><span class="s1">))  </span><span class="s0"># somme partielle d'ordre 10 de la série produit exp(1)*exp(1) - partial sum of order 10 for product exp(1)*exp(1)</span><span class="s1"> 
+    </span><span class="s0"># affichera 7.38899470899 - will print 7.38899470899 </span><span class="s1"> 
+    print(math.exp(</span><span class="s3">2</span><span class="s1">)) 
+    </span><span class="s0"># affichera 7.38905609893 - will print 7.38905609893</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

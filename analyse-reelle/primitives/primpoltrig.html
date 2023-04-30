@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intégration des polynômes trigonométriques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/primpoltrig/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Primitives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/primpoltrig/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Primitive functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous allons apprendre ici à intégrer une famille importante de fonctions trigonométriques. <h2>Polynômes à deux variables</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We are going to learn here how to integrate an important family of trigonometric functions. <h2>Polynomials in two variables</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un monôme à deux inconnues X et Y, à coefficients réels, est une expression algébrique formelle de la forme a<sub>i,j</sub>X<sup>i</sup>Y<sup>j</sup>, où i et j représentent deux entiers naturels et le coefficient a<sub>i,j</sub> un nombre réel. <br> i est le degré du monôme en X, j est le degré du monôme en Y.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A monomial in two variabless X and Y, with real coefficients, is a formal algebraic expression of the type a<sub>i,j</sub>X<sup>i</sup>Y<sup>j</sup> , where i and j represent two natural numbers and the coefficient a<sub>i,j</sub> a real number. <br> i is the degree of the monomial in X, j is the degree of the monomial in Y.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Un polynôme à deux inconnues X et Y est une somme (finie) de monômes comme ci-dessus. <br> Un tel polynôme peut donc s'écrire formellement
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle P(X,Y)=\sum_{0\leqslant i\leqslant m,0\leqslant j\leqslant n}^{}a_{i,j}X^{i}Y^{j} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> m est le degré du polynôme en X et n est le degré du polynôme en Y. Le nombre m+n s'appelle le degré total du polynôme à deux inconnues.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A polynomial in two variables X and Y is a (finite) sum of monomials as above. <br> Such a polynomial can therefore be written formally
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle P(X,Y)=\sum_{0\leqslant i\leqslant m,0\leqslant j\leqslant n}^{}a_{i,j}X^{i}Y^{j} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> m is the degree of the polynomial in X and n is the degree of the polynomial in Y. The number m+n is called the total degree of the polynomial in two variables.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Tout polynôme comme ci-dessus définit donc une application p de ℝ×ℝ dans ℝ donnée par
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle p(x,y)=\sum_{0\leqslant i\leqslant m,0\leqslant j\leqslant n}^{}a_{i,j}x^{i}y^{j} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> Any polynomial as above therefore defines a map p from ℝ×ℝ to ℝ given by
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle p(x,y)=\sum_{0\leqslant i\leqslant m,0\leqslant j\leqslant n}^{}a_{i,j}x^{i}y^{j} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous admettrons, cela se démontre facilement par récurrence sur le degré, qu'une telle fonction est entièrement caractérisée par la suite double de ses coefficients a<sub>i,j</sub>, c'est à dire qu'elle ne peut être identiquement nulle que si les a<sub>i,j</sub> sont tous nuls. On vérifie facilement que les polynômes à deux inconnues possèdent une structure <input type="button" value="d'espace vectoriel" onclick="go('../../algebre-lineaire/espaces/defev.html#defax')" data-inline="true" /> et même <input type="button" value="d'algèbre" onclick="go('../../algebre-lineaire/matrices/algmat.html#')" data-inline="true" />. <br> En langage Python une suite double peut-être représentée par un dictionnaire où les clés sont les couples d'entiers, et les valeurs des flottants, le polynôme 1+X+2XY sera donc représenté par le dictionnaire {(0,0):1,(1,0):1 ,(1,1):2}. Voici un programme qui modélise par des objets Python l'algèbre des polynômes à deux variables (à coefficients dans n'importe quel corps usuel). </div>
+        <!-- /fr -->
+        <div lang="en"> We will admit, this is easily demonstrated by induction on the degree, that such a function is entirely characterized by the double sequence of its coefficients a<sub>i,j</sub>, that is to say that it cannot be identically null only if the a<sub>i,j</sub> are all null. It is easy to verify that the polynomials with two unknowns have a structure <input type="button" value="of vector space" onclick="go('../../algebre-lineaire/espaces/defev.html#defax')" data-inline="true" /> and even <input type="button" value="algebra" onclick="go('../../algebre-lineaire/matrices/algmat.html#')" data-inline="true" />. <br> In Python language a double sequence can be represented by a dictionary where the keys are the pairs of integers, and the values of the floats, the polynomial 1+X+2XY will therefore be represented by the dictionary {(0,0):1 ,(1,0):1 ,(1,1):2}. Here is a program which models by Python objects the algebra of polynomials with two variables (with coefficients in any usual field). </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/prim03.html" type="text/html" width="100%" height="300" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici le résultat de l'exécution </div>
+        <!-- /fr -->
+        <div lang="en"> Here is the result of running </div>
+        <!-- /en -->
+        <pre>+1X^0Y^1-1X^1Y^0+1X^0Y^0
++1X^0Y^1+1X^0Y^0
++2X^0Y^1+2X^0Y^0
++3X^0Y^1-1X^1Y^0+3X^0Y^0
+-1X^0Y^1-1X^1Y^0-1X^0Y^0
+-1X^0Y^1+1X^1Y^0-1X^0Y^0
++4X^0Y^1-2X^1Y^0+2X^0Y^0+2X^0Y^2-2X^1Y^1
++2X^0Y^1+1X^0Y^0+1X^0Y^2+1X^2Y^0-2X^1Y^0-2X^1Y^1
+</pre>
+        <div lang="fr"> Avec Julia et le package Nemo on peut traiter les polynômes à un nombre quelconque de variables : </div>
+        <!-- /fr -->
+        <div lang="en"> With Julia and the Nemo package, polynomials in any number of variables can be processed: </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/pol2var.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Polynômes trigonométriques</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Trigonometric polynomials</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Un polynôme trigonométrique est une fonction t de ℝ dans ℝ obtenue en substituant cos(x) à l'inconnue X et sin(x) à l'inconnue Y. <br> D'où l'expression d'une telle fonction :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle t(x)=\sum_{0\leqslant i\leqslant m,0\leqslant j\leqslant n}^{}a_{i,j}cos(x)^{i}sin(x)^{j} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> A trigonometric polynomial is a function t from ℝ to ℝ obtained by substituting cos(x) for the unknown X and sin(x) for the unknown Y. <br> Hence the expression of such a function:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle t(x)=\sum_{0\leqslant i\leqslant m,0\leqslant j\leqslant n}^{}a_{i,j}cos(x)^{i}sin(x)^{j} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Vous pouvez voir ici la représentation graphique du monôme trigonométrique asin<sup>m</sup>(x)cos<sup>n</sup>(x). <br> Vous pouvez faire varier m et n avec les boutons sous la zone graphique . <br> Vous pouvez faire varier a de -2 à 2 avec le curseur en haut à gauche. </div>
+        <!-- /fr -->
+        <div lang="en"> Here you can see the graphical representation of the trigonometric monomial asin<sup>m</sup>(x)cos<sup>n</sup>(x). <br> You can vary m and n with the buttons under the graphics area. <br> You can vary a from -2 to 2 with the top left slider. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width: 500px; height: 500px;"></div>
+        <script src="js/poltrig.js"></script>
+        <button type="button" id="myButton11" onclick="nameSpace1.nextmplus()">m+</button>
+        <button type="button" id="myButton12" onclick="nameSpace1.nextmminus()">m-</button>
+        <button type="button" id="myButton13" onclick="nameSpace1.nextnplus()">n+</button>
+        <button type="button" id="myButton14" onclick="nameSpace1.nextnminus()">n-</button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Remarquons tout de suite que : </div>
+        <!-- /fr -->
+        <div lang="en"> Note immediately that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Les polynômes trigonométriques héritent des polynômes à deux inconnues à partir desquels ils sont construits d'une structure d'algèbre, et que cette algèbre est <input type="button" value="engendrée" onclick="go('../../algebre-lineaire/espaces/generateurs.html#th1')" data-inline="true" />, en tant qu'espace vectoriel par les fonctions du type cos(x)<sup>i</sup>sin(x)<sup>j</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Trigonometric polynomials inherit from an algebra structure via the polynomials with two unknowns from which they are constructed, and t this algebra is <input type="button" value="spanned" onclick="go('../../algebre-lineaire/espaces/generateurs.html#th1e')" data-inline="true" />, as a vector space by simple monomial functions of the type cos(x)<sup>i</sup>sin (x)<sup>j</sup>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une modélisation des polynômes trigonométriques. On dérive l'objet polynôme trigonométrique de l'objet polynôme à 2 variables. On crée une méthode valeur dans la classe parente et on surcharge cette méthode dans la classe dérivée. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is a modeling of the trigonometric polynomials. We derive the trigonometric polynomial object from the polynomial object in 2 variables. We create a value method in the parent class and we overload this method in the derived class. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/prim04.html" type="text/html" width="100%" height="300" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Avec Julia on peut procéder par substitution des variables dans une chaîne, puis en transormant la chaîne en fonction. </div>
+        <!-- /fr -->
+        <div lang="en"> With Julia you can proceed by substituting variables in a string, then transforming the string into a function. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/poltrig.jl.html" type="text/html" width="200%" height="200" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Linéarisation</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Linearization</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> On dit qu'un polynôme trigonométrique est <b>
+              <i>'linéarisé'</i>
+            </b> s'il est <input type="button" value="combinaison linéaire" onclick="go('../../algebre-lineaire/espaces/generateurs.html#comblin')" data-inline="true" /> de fonctions de la forme sin(ax+b) et cos(cx+d) donc du premier degré en sin et cos.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> A trigonometric polynomial is said to be <b>
+              <i>'linearized'</i>
+            </b> if it is <input type="button" value="linear combination" onclick="go('../../algebre-lineaire/espaces/generateurs.html#combline')" data-inline="true" /> of functions of the form sin(ax+b) and cos(cx+d) therefore of the first degree in sin and cos.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous allons voir maintenant un résultat important: </div>
+        <!-- /fr -->
+        <div lang="en"> We will now see an important result: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Tout monôme trigonométrique de la forme cos<sup>m</sup>(x) ou sin<sup>n</sup>(x) peut être linéarisé.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> Any trigonometric monomial of the form cos<sup>m</sup>(x) or sin<sup>n</sup>(x) can be linearized.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Plus précisément : </div>
+        <!-- /fr -->
+        <div lang="en"> More precisely : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Si n=2p avec p ∈ ℕ, alors :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}cos^{n}(x)=\sum_{k=0}^{p-1}\binom{n}{k}cos((n-2k)x)+\frac{1}{2}\binom{n}{p} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}sin^{n}(x)=(-1)^{p}\sum_{k=0}^{p-1}(-1)^{k}\binom{n}{k}cos((n-2k)x)+\frac{1}{2}\binom{n}{p} \)</p>
+            <!-- /FORMULE UNIV INLINE--> si n=2p+1 avec p ∈ ℕ, alors:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}cos^{n}(x)=\sum_{k=0}^{p}\binom{n}{k}cos((n-2k)x) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}sin^{n}(x)=(-1)^{p}\sum_{k=0}^{p}(-1)^{k}\binom{n}{k}sin((n-2k)x) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> If n=2p with p ∈ ℕ, then :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}cos^{n}(x)=\sum_{k=0}^{p-1}\binom{n}{k}cos((n-2k)x)+\frac{1}{2}\binom{n}{p} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}sin^{n}(x)=(-1)^{p}\sum_{k=0}^{p-1}(-1)^{k}\binom{n}{k}cos((n-2k)x)+\frac{1}{2}\binom{n}{p} \)</p>
+            <!-- /FORMULE UNIV INLINE--> if n=2p+1 with p ∈ ℕ, then:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}cos^{n}(x)=\sum_{k=0}^{p}\binom{n}{k}cos((n-2k)x) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle 2^{n-1}sin^{n}(x)=(-1)^{p}\sum_{k=0}^{p}(-1)^{k}\binom{n}{k}sin((n-2k)x) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La démonstration est simple et nous allons la donner pour n=3 pour le cosinus et pour n=4 pour le sinus. Le lecteur pourra se convaincre que la preuve en toute généralité n'est pas plus difficile puisqu'elle repose sur les mêmes astuces de substitution, et de regroupement. <br /> D'une façon générale en utilisant la <input type="button" value="notation exponentielle complexe" onclick="go('../../nombres/complexes/expo.html#')" data-inline="true" />
+            <br /> Nous avons donc toujours <br />
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle cos^{n}(x)=\left (\frac{e^{ix}+e^{-ix}}{2} \right )^{n} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle sin^{n}(x)=\left (\frac{e^{ix}-e^{-ix}}{2} \right )^{n} \)
+            <!-- /FORMULE UNIV INLINE--> donc <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cos^{3}(x)=\frac{1}{8}\left ( e^{ix}+e^{-ix} \right )^{3} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( e^{3ix}+3e^{2ix}e^{-ix}+3e^{ix}e^{-2ix}=e^{-3ix} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( \left ( e^{3ix}+e^{-3ix} \right )+3\left ( e^{ix}+e^{-ix} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( 2cos(3x)+6cos(x) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <p>et pour le sinus :</p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sin^{4}(x)=\frac{1}{16}\left ( e^{ix}-e^{-ix} \right )^{4} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{16}\left ( e^{4ix}-4e^{3ix}e^{-ix}+6e^{2ix}e^{-2ix}-4e^{ix}e^{-3ix} +e^{-4ix}\right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{16}\left ( \left ( e^{4ix}+e^{-4ix} \right ) -4\left ( e^{2ix} +e^{-2ix}\right )+6 \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( cos(4x)-4cos(2x)+3 \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The demonstration is simple and we will give it for n=3 for the cosine and for n=4 for the sine. The reader will be able to convince himself that the proof in all generality is not more difficult since it relies on the same tricks of substitution and grouping. <br /> Generally using the <input type="button" value="complex exponential notation" onclick="go('../../nombres/complexes/expo.html#')" data-inline=" true" />
+            <br /> So we always have <br />
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle cos^{n}(x)=\left (\frac{e^{ix}+e^{-ix}}{2} \right )^{n} \)
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle sin^{n}(x)=\left (\frac{e^{ix}-e^{-ix}}{2} \right )^{n} \)
+            <!-- /FORMULE UNIV INLINE--> hence <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cos^{3}(x)=\frac{1}{8}\left ( e^{ix}+e^{-ix} \right )^{3} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( e^{3ix}+3e^{2ix}e^{-ix}+3e^{ix}e^{-2ix}=e^{-3ix} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( \left ( e^{3ix}+e^{-3ix} \right )+3\left ( e^{ix}+e^{-ix} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( 2cos(3x)+6cos(x) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <p>and for the sine :</p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sin^{4}(x)=\frac{1}{16}\left ( e^{ix}-e^{-ix} \right )^{4} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{16}\left ( e^{4ix}-4e^{3ix}e^{-ix}+6e^{2ix}e^{-2ix}-4e^{ix}e^{-3ix} +e^{-4ix}\right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{16}\left ( \left ( e^{4ix}+e^{-4ix} \right ) -4\left ( e^{2ix} +e^{-2ix}\right )+6 \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle =\frac{1}{8}\left ( cos(4x)-4cos(2x)+3 \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Illustrons cette méthode de linéarisation pour le cosinus par un programme: </div>
+        <!-- /fr -->
+        <div lang="en"> Let's illustrate this linearization method for the cosine by a program: </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/prim02.html" type="text/html" width="100%" height="300" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici le résultat de l'exécution </div>
+        <!-- /fr -->
+        <div lang="en"> Here is the result of running </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <pre>[Fraction(1, 2), 0, Fraction(-1, 2)]
+[0, Fraction(3, 4), 0, Fraction(-1, 4)]
+[Fraction(3, 8), 0, Fraction(-1, 2), 0, Fraction(1, 8)]
+[0, Fraction(5, 8), 0, Fraction(-5, 16), 0, Fraction(1, 16)]
+</pre>
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de là que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from this that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Tout polynôme trigonométrique peut être linéarisé.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> Any trigonometric polynomial can be linearized.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Il suffit évidemment de prouver que tout monôme trigonométrique peut être linéarisé. <br> Pour cela il suffit de prouver que tout monôme de la forme cos<sup>m</sup>(x)sin<sup>n</sup>(x) peut être linéarisé. <br> Mais sachant, d'après le résultat précédent, que cos<sup>m</sup>(x) et sin<sup>n</sup>(x) sont linéarisables, tout revient à montrer que le produit de deux polynômes linéarisables est encore linéarisable. <br> Or le produit de combinaisons linéaires de fonctions cs(ax+b) et cs(cx+d) (cs désigne ici une fonction pouvant être soit sinus soit cosinus) est par développement une combinaison linéaire de produits du type cs(ax+b)cs(cx+d). <br> Il suffit donc de montrer que toute fonction de ce type peut être linéarisée. <br> Mais cela résulte des formules de transformation des produits en sommes : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cos(a)cos(b)=\frac{1}{2}\left ( cos\left ( \frac{a-b}{2} \right )+cos\left ( \frac{a+b}{2} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sin(a)sin(b)=\frac{1}{2}\left ( cos\left ( \frac{a-b}{2} \right )-cos\left ( \frac{a+b}{2} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sin(a)cos(b)=\frac{1}{2}\left ( sin\left ( \frac{a-b}{2} \right )+sin\left ( \frac{a+b}{2} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> It is obviously enough to prove that any trigonometric monomial can be linearized. <br> To do this, it suffices to prove that any monomial of the form cos<sup>m</sup>(x)sin<sup>n</sup>(x) can be linearized. <br> But knowing, from the previous result, that cos<sup>m</sup>(x) and sin<sup>n</sup>(x) are linearizable, it all boils down to showing that the product of two linearizable polynomials is still linearizable. <br> Now the product of linear combinations of functions cs(ax+b) and cs(cx+d) (cs designates here a function which can be either sine or cosine) is by development a linear combination of products of the type cs(ax+b) cs(cx+d). <br> So it suffices to show that any such function can be linearized. <br> But this results from the formulas for transforming the products into sums: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cos(a)cos(b)=\frac{1}{2}\left ( cos\left ( \frac{a-b}{2} \right )+cos\left ( \frac{a+b}{2} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sin(a)sin(b)=\frac{1}{2}\left ( cos\left ( \frac{a-b}{2} \right )-cos\left ( \frac{a+b}{2} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sin(a)cos(b)=\frac{1}{2}\left ( sin\left ( \frac{a-b}{2} \right )+sin\left ( \frac{a+b}{2} \right ) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Application à la recherche de primitives</h2> Il résulte de tout ce qui précède que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Application to search for primitive functions</h2> It follows from all of the above that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Pour intégrer un polynôme trigonométrique il suffit de savoir intégrer les fonctions du type cos(ax+b) et sin(cx+d).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> To integrate a trigonometric polynomial, it suffices to know how to integrate functions of the cos(ax+b) and sin(cx+d) type.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Mais ceci se fait instantanément par les changements de variables u=ax+b et v=cx+d. <br> Une primitive de cos(ax+b) est (1/a)sin(ax+b)+K si a≠0 et K si a=0. <br> une primitive de sin(cx+d) est -(1/c)cos(cx+d)+K si c≠0 et K si c=0. <br>
+          <p>Julia avec le module MTH229 sait calculer les primitives des puissances de cosinus et sinus.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> But this is done instantaneously by substituting the variables u=ax+b and v=cx+d. <br> A primitive function of cos(ax+b) is (1/a)sin(ax+b)+K if a≠0 and K if a=0. <br> a primitive function of sin(cx+d) is -(1/c)cos(cx+d)+K if c≠0 and K if c=0. <br>
+          <p>Julia with the MTH229 module can calculate the antiderivatives of cosine and sine powers.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/linearcos.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/linearsin.jl.html" type="text/html" width="100%" height="100" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/primpoltrig/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Primitives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/primpoltrig/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Primitive functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

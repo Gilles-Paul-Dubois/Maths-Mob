@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sommes de Riemann</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intsommesriemann/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intsommesriemann/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Toutes les fonctions considérées ici sont supposées bornées. <h2>Définition</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> All the functions considered here are assumed to be bounded. <h2>Definition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soit (s,t) une <input type="button" value="subdivision pointée" onclick="go('intsubdiv.html#def2')" data-inline="true" /> de [a,b] et f une fonction numérique définie sur [a,b]. <br /> On suppose s=(x<sub>0</sub>=a,x<sub>1</sub>, ... ,x<sub>n</sub>=b) et t=(t<sub>0</sub>,t<sub>1</sub>, ... ,t<sub>n-1</sub>) avec x<sub>i</sub> ≤ t<sub>i</sub> ≤ x<sub>i+1</sub> ∀ 0 ≤ i ≤ n-1. <br /> On appelle <b>
+              <i>'somme de Riemann associée à f et (s,t)'</i>
+            </b> le nombre :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle S(f,(s,t))=\sum_{k=0}^{n-1}f\left ( t_{k} \right )\left ( x_{k+1}-x_{k} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let (s,t) be an <input type="button" value="tagged partition" onclick="go('intsubdiv.html#')" data-inline="true" /> of [a,b] and f a numeric function defined on [a,b]. <br /> We suppose s=(x<sub>0</sub>=a,x<sub>1</sub>, ... ,x<sub>n</sub>=b) and t=(t<sub>0</sub>,t<sub>1</sub>, ... ,t<sub>n-1</sub>) with x<sub>i</sub> ≤ t<sub>i</sub> ≤ x<sub>i+1</sub> ∀ 0 ≤ i ≤ n-1. <br /> We call <b>
+              <i>'Riemann sum associated with f and (s,t)'</i>
+            </b> the number:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle S(f,(s,t))=\sum_{k=0}^{n-1}f\left ( t_{k} \right )\left ( x_{k+1}-x_{k} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Propriétés</h2> Il résulte immédiatement de la définition qu'on a entre les sommes de Riemann et les <input type="button" value="sommes de Darboux" onclick="go('intsomdarboux.html#def1')" data-inline="true" />, les relations :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Properties</h2> It follows immediately from the definition that we have between the Riemann sums and the <input type="button" value="Darboux sums" onclick="go('intsomdarboux.html#def1')" data-inline=" true" />, relationships:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> d(f,s) &le; S(f,(s,t)) &le; D(f,S) quel que soit le pointage t de s.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> d(f,s) &le; S(f,(s,t)) &le; D(f,S) whatever the tagging t of s.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> En outre si f est monotone sur [a,b] les sommes de Darboux sont des sommes de Riemann particulières ( <input type="button" value="revoir par exemple" onclick="go('intsomdarboux.html#prop4')" data-inline="true" />).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Moreover if f is monotone on [a,b] the Darboux sums are particular Riemann sums ( <input type="button" value="see again for example" onclick="go('intsomdarboux.html#prop4') " data-inline="true" />).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> La proposition précédente vaut également si f est continue sur [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> The previous proposition also holds if f is continuous on [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> C'est une conséquence directe des résultats vus dans <input type="button" value="cette page" onclick="go('../continuite/contimcompact.html#')" data-inline="true" />. <h2>Visualisations de sommes de Riemann</h2> Voici une appliquette qui vous permet de voir des sommes de Riemann pour une fonction continue et des subdivisions particulières. <br /> Les boutons de la première colonne vous permettent de définir la subdivision. <br /> Les boutons de la seconde colonne vous permettent de chosir un pointage particulier. <br /> La fonction étant continue (et uniquement pour cette raison), les deux premiers choix (sup, inf) correspondent à des sommes de Darboux. <br /> Vous voyez apparaître les sommes de Riemann correspondantes et leurs valeurs calculées. </div>
+        <!-- /fr -->
+        <div lang="en"> This is a direct consequence of the results seen in <input type="button" value="this page" onclick="go('../continuite/contimcompact.html#')" data-inline="true" /> . <h2>Visualizations of Riemann sums</h2> Here is an applet that lets you see Riemann sums for a continuous function and particular partitions. <br /> The buttons in the first column allow you to define the partition. <br /> The buttons in the second column allow you to choose a particular tagging. <br /> Since the function is continuous (and only for this reason), the first two choices (sup, inf) correspond to Darboux sums. <br /> You see the corresponding Riemann sums and their calculated values. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <table border="1" width="100%">
+          <tr>
+            <td align="center">
+              <div lang="fr">Subdivision</div>
+              <!-- /fr -->
+              <div lang="en">Partition</div>
+              <!-- /en -->
+              <button type='button' id='myButton1' onClick='nameSpace1.alea()'>
+                <div lang="fr">aléatoire</div>
+                <!-- /fr -->
+                <div lang="en">random</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton2' onClick='nameSpace1.ari()'>
+                <div lang="fr">arithmétique</div>
+                <!-- /fr -->
+                <div lang="en">arithmetic</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton3' onClick='nameSpace1.geo()'>
+                <div lang="fr">géométrique</div>
+                <!-- /fr -->
+                <div lang="en">geometric</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton4' onClick='nameSpace1.plus()'>n+</button>
+              <button type='button' id='myButton5' onClick='nameSpace1.minus()'>n-</button>
+            </td>
+            <td align="center">
+              <div lang="fr">Type Riemann</div>
+              <!-- /fr -->
+              <div lang="en">Riemann type</div>
+              <!-- /en -->
+              <button type='button' id='myButton6' onClick='nameSpace1.riem0()'>sup</button>
+              <button type='button' id='myButton7' onClick='nameSpace1.riem1()'>inf</button>
+              <button type='button' id='myButton8' onClick='nameSpace1.riem2()'>
+                <div lang="fr">gauche</div>
+                <!-- /fr -->
+                <div lang="en">left</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton9' onClick='nameSpace1.riem3()'>
+                <div lang="fr">droite</div>
+                <!-- /fr -->
+                <div lang="en">right</div>
+                <!-- /en -->
+              </button>
+              <button type='button' id='myButton0' onClick='nameSpace1.riem4()'>
+                <div lang="fr">milieu</div>
+                <!-- /fr -->
+                <div lang="en">middle</div>
+                <!-- /en -->
+              </button>
+            </td>
+          </tr>
+        </table>
+        <script src="js/riemann.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Théorème fondamental</h2> Les démonstrations qui suivent s'inspirent du cours d'analyse de Jean-François Burnol. <br> Nous conservons les notations introduites dans <input type="button" value="la page consacrée aux sommes de Darboux" onclick="go('intsomdarboux.html#')" data-inline="true" />. <br> Pour démontrer le résultat principal nous aurons besoin d'un lemme technique:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Fundamental theorem</h2> The following demonstrations are inspired by Jean-François Burnol's calculus course. <br> We keep the notations introduced in <input type="button" value="the page dedicated to Darboux sums" onclick="go('intsomdarboux.html#')" data-inline="true" />. <br> To prove the main result we will need a technical lemma:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si f est Riemann-intégrable sur [a,b], alors ∀ε > 0, il existe δ > 0 tel que :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \delta (s)\leqslant \delta \Rightarrow \int_{a}^{b}f(x)dx-\varepsilon \leqslant d(f,s)\leqslant \int_{a}^{b}f(x)dx\leqslant D(f,s)\leqslant \int_{a}^{b}f(x)dx+\varepsilon \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> SIf f is Riemann-integrable on [a,b], then ∀ε > 0, there exists δ > 0 such that:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \delta (s)\leqslant \delta \Rightarrow \int_{a}^{b}f(x)dx-\varepsilon \leqslant d(f,s)\leqslant \int_{a}^{b}f(x)dx\leqslant D(f,s)\leqslant \int_{a}^{b}f(x)dx+\varepsilon \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit &epsilon;&gt;0. <br> Nous désignons par I(f) l'intégrale de Riemann de f sur [a,b]. <br> D'après la définition de l'intégrabilité au sens de Riemann. <br> &exist;s<sub>1</sub> telle que I(f)-&epsilon;/3 &le; d(f,s<sub>1</sub>) &le; I(f) <br> &exist;s<sub>2</sub> telle que I(f) &le; D(f,s) &le; I(f)+&epsilon;/3 <br> Prenant s = s<sub>1</sub>&or;s<sub>2</sub> on a donc: <br> I(f)-&epsilon;/3 &le; d(f,s) &le; D(f,s) &le; I(f)+&epsilon;/3 <br> On désigne par K le nombre de points de s, par M la borne supérieure de f sur [a,b] et par m la borne inférieure de f sur [a,b]. <br> Soit u une subdivision quelconque et posons v = u&or;s, on a alors: <br> d(f,v) &le; d(f,u)+K&delta;(u)(M-m) et D(f,v) &ge; D(f,u)-K&delta;(u)(M-m) <br> De là nous tirons: <br> &Delta;(u) &le; &Delta;(v)+2K(M-m)&delta;(u) <br> Or &Delta;(v) &le; &Delta;(s) &le;2&epsilon;/3 <br> Supposons &delta;(u) suffisamment petit pour que 2K(M-m)&delta;(u) &le; &epsilon;/3 (Remarquons que M,n,K) ne dépendent pas de u mais seulement de s qui ne dépend que de &epsilon;). <br> On aura alors &Delta;(u) &le; &epsilon; C.Q.F.D.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let &epsilon;&gt;0. <br> We denote by I(f) the Riemann integral of f over [a,b]. <br> According to the definition of integrability in the sense of Riemann. <br> &exist;s<sub>1</sub> such that I(f)-&epsilon;/3 &le; d(f,s<sub>1</sub>) &le; I(f) <br> &exist;s<sub>2</sub> such that I(f) &le; D(f,s) &le; I(f)+&epsilon;/3 <br> Taking s = s<sub>1</sub>&or;s<sub>2</sub> we therefore have: <br> I(f)-&epsilon;/3 &le; d(f,s) &le; D(f,s) &le; I(f)+&epsilon;/3 <br> We denote by K the number of points of s, by M the upper limit of f on [a,b] and by m the lower limit of f on [a,b]. <br> Let u be any partition and let v = u&or;s, we then have: <br> d(f,v) &le; d(f,u)+K&delta;(u)(M-m) and D(f,v)&ge; D(f,u)-K&delta;(u)(M-m) <br> From here we draw: <br> &Delta;(u) &le; &Delta;(v)+2K(M-m)&delta;(u) <br> Gold &Delta;(v) &le; &Delta;(s) &le;2&epsilon;/3 <br> Suppose &delta;(u) small enough that 2K(M-m)&delta;(u) &le; &epsilon;/3 (Note that M,n,K) do not depend on u but only on s which only depends on &epsilon;). <br> We will then have &Delta;(u) &le; &epsilon; Q.E.D..
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si f est Riemann-intégrable sur [a,b] alors pour toute suite de subdivisions pointées (s<sub>m</sub>,t<sub>m</sub>) de [a,b] dont le pas &delta;<sub>m</sub>=&delta;(s<sub>m</sub>) tend vers 0. On a : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)dx=lim_{m \to \infty }S(f,\left ( s_{m},t_{m} \right )) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If f is Riemann-integrable over [a,b] then for any sequence of tagged partitions (s<sub>m</sub>,t<sub>m</sub>) of [ a,b] the step of which &delta;<sub>m</sub>=&delta;(s<sub>m</sub>) tends to 0. We have: <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}f(x)dx=lim_{m \to \infty }S(f,\left ( s_{m},t_{m} \right )) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> I(f) désigne comme dans la précédente démonstration l'intégrale de f sur [a,b]. <br> Soit &epsilon; &gt; 0 et soit &delta; possédant la propriété du lemme précédent. <br> Si &delta;(s) &le; &delta;, comme on a d(f,s) &le; S(f,(s,t)) &le; D(f,S) on a aussi |S(f,(s,t)-I(f)| &le; &epsilon;.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> I(f) denotes, just like in the previous proof the Riemann integral of f on [a,b]. <br> Let &epsilon; &gt; 0 and let &delta; having the property of the previous lemma. <br> If &delta;(s) &le; &delta;, as we have d(f,s) &le; S(f,(s,t)) &le; D(f,S) we also have |S(f,(s,t)-I(f)| &le; &epsilon;.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Conséquence</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Consequence</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Si f est une fonction Riemann-intégrable sur [a,b]. <br> Alors chacune des 2 expressions :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{1}{n}\sum_{i=0}^{n-1}f\left ( a+\frac{i(b-a)}{n} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{1}{n}\sum_{i=1}^{n}f\left ( a+\frac{i(b-a)}{n} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> converge vers
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> quand n tends vers +∞.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> If f is a Riemann-integrable function on [a,b]. <br> Then each of the 2 expressions:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{1}{n}\sum_{i=0}^{n-1}f\left ( a+\frac{i(b-a)}{n} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{1}{n}\sum_{i=1}^{n}f\left ( a+\frac{i(b-a)}{n} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> tends to
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> when n tends to +∞.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit, bien sûr, d'appliquer le théorème fondamental à des progressions arithmétiques. </div>
+        <!-- /fr -->
+        <div lang="en"> It suffices, of course, to apply the fundamental theorem to arithmetic progressions. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intsommesriemann/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intsommesriemann/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

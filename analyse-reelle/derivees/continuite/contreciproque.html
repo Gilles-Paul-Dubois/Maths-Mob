@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Réciproque d'une fonction continue</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contreciproque/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contreciproque/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Cas d'un intervalle compact</h2>
+          <input type="button" value="Nous avons déjà vu" onclick="go('contimcompact.html#')" data-inline="true" /> que l'image par une fonction continue d'un intervalle compact est un intervalle compact. <br /> Plus précisément, si f est continue sur [a,b], l'image de [a,b] par f est l'intervalle [m,M] où: <br /> M=Sup<sub>x∈[a,b]</sub>f(x) <br /> m=Inf<sub>x∈[a,b]</sub>f(x) <br /> Que se passe-t-il maintenant si f est <input type="button" value="strictement croissante" onclick="go('../foncnum/foncnummonotones.html#')" data-inline="true" />? <br /> Dans ce cas bien évidemment: <br /> m=f(a) <br /> M=f(b) <br /> et f est une <input type="button" value="bijection" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" /> de [a,b] sur [f(a),f(b)]. <br /> Et si maintenant f est strictement décroissante? <br /> M=f(a) <br /> m=f(b) <br /> et f est une bijection de [a,b] sur [f(b),f(a)]. <br /> Dans un cas comme dans l'autre f possède une bijection réciproque f<sup>-1</sup>:f([a,b]) →[a,b].<br> Nous affirmons maintenant que:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of a compact interval</h2>
+          <input type="button" value="We have already seen" onclick="go('contimcompact.html#')" data-inline="true" /> that the image by a continuous function of a compact interval is a compact interval. <br /> More precisely, if f is continuous on [a,b], the image of [a,b] by f is the interval [m,M] where: <br /> M=Sup<sub>x∈[a,b]</sub>f(x) <br /> m=Inf<sub>x∈[a,b]</sub>f(x) <br /> What happens now if f is <input type="button" value="strictly increasing" onclick="go('../foncnum/foncnummonotones.html#')" data-inline="true" />? <br /> In this case of course: <br /> m=f(a) <br /> M=f(b) <br /> and f is a <input type="button" value="bijection" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" /> of [ a,b] on [f(a),f(b)]. <br /> What if now f is strictly decreasing? <br /> M=f(a) <br /> m=f(b) <br /> and f is a bijection from [a,b] onto [f(b),f(a)]. <br /> In either case f has an inverse bijection f<sup>-1</sup>:f([a,b]) →[a,b].<br> We now claim that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Dans ce cas précis (f continue et strictement monotone), f<sup>-1</sup> est également continue.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> In this special case (f continuous and strictly monotone), f<sup>-1</sup> is also continuous.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit g la fonction de deux variables donnée par g(x,y)=y-f(x). Il suffit alors d'appliquer à g le <input type="button" value="théorème des fonctions implicites" onclick="go('contimplicite.html#thm1')" data-inline="true" /> en inversant le rôle des deux variables x et y. On voit alors que f est partout 'localement inversible' (au sens de la composition) et que son inverse 'locale' est continue, mais son inverse 'locale' coïncide partout avec sa réciproque 'globale'.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let g be the function of two variables given by g(x,y)=y-f(x). It is then sufficient to apply to g the <input type="button" value="theorem of implicit functions" onclick="go('contimplicite.html#thm1')" data-inline="true" /> by inverting the role of the two variables x and y. We then see that f is everywhere 'locally invertible' (in the sense of composition) and that its 'local' inverse is continuous, but its 'local' inverse everywhere coincides with its 'global' inverse.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Autres intervalles</h2> Considérons maintenant le cas où I=]a,b[ et où f est continue et strictement croissante sur I. <br /> Posons pour tout entier n ≥ 1 I<sub>n</sub>=[a+1/n,b-1/n] et J<sub>n</sub>=[f(a+1/n),f(b-1/n)]. <br /> Alors il est clair que I est la <input type="button" value="réunion" onclick="go('../../bases/ensembles/union.html#')" data-inline="true" /> de tous les I<sub>n</sub> et que J est la réunion <input type="button" value="de tous les J
+												<sub>n</sub>" onclick="go('../../bases/operations/familles.html#')" data-inline="true" />. <br /> Soit f<sub>n</sub>:I<sub>n</sub> → J<sub>n</sub> la restriction de f à I<sub>n</sub>. <br /> Alors, d'après le théorème précédent, chaque fonction f<sub>n</sub> possède une réciproque continue f<sub>n</sub>
+         <sup>-1</sup>:J<sub>n</sub> → I<sub>n</sub>. <br /> On voit en outre que si n &gt; m f<sub>m</sub> est la restriction de f<sub>n</sub> à I<sub>m</sub> et que f<sub>m</sub>
+         <sup>-1</sup> est la restriction de f<sub>n</sub>
+         <sup>-1</sup> à J<sub>m</sub>. <br /> Donc, en définitive, nous avons f<sup>-1</sup>(y)=f<sub>n</sub>
+         <sup>-1</sup>(x) pour tout n tel que y∈J<sub>n</sub>. Toutes les f<sub>n</sub>
+         <sup>-1</sup> étant continues f<sup>-1</sup> est continue. <br /> Nous laissons le lecteur envisager le cas des intervalles semi-ouverts et des intervalles non bornés (voir exercices). <br /> En définitive:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Other intervals</h2> Now consider the case where I=]a,b[ and where f is continuous and strictly increasing on I. <br /> Let for any integer n ≥ 1 I<sub>n</sub>=[a+1/n,b-1/n] and J<sub>n</sub>=[f(a+1/n) ,f(b-1/n)]. <br /> So clearly I is the <input type="button" value="union" onclick="go('../../bases/ensembles/union.html#')" data-inline="true" /> of all the I<sub>n</sub> and that J is the union <input type="button" value="of all the J
+													<sub>n</sub>" onclick="go('../../bases/operations/familles.html#')" data-inline="true" />. <br /> Let f<sub>n</sub>:I<sub>n</sub> → J<sub>n</sub> be the restriction of f to I<sub>n</sub>. <br /> Then, by the previous theorem, every function f<sub>n</sub> has a continuous inverse f<sub>n</sub>
+         <sup>-1</sup>:J<sub>n</sub> → I<sub>n</sub>. <br /> We further see that if n > m f<sub>m</sub> is the restriction of f<sub>n</sub> to I<sub>m</sub> and that f<sub>m</sub>
+         <sup>-1</sup> is the restriction of f<sub>n</sub>
+         <sup>-1</sup> to J<sub>m</sub>. <br /> So ultimately we have f<sup>-1</sup>(y)=f<sub>n</sub>
+         <sup>-1</sup>(x) for all n such that y∈J<sub>n</sub>. All f<sub>n</sub>
+         <sup>-1</sup> being continuous f<sup>-1</sup> is continuous. <br /> We let the reader consider the case of semi-open intervals and unbounded intervals (see exercises). <br /> Ultimately:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Toute fonction continue f et strictement monotone sur un intervalle (quelconque) possède une réciproque elle aussi strictement monotone (de même variation que f) et également continue.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Any continuous function f and strictly monotonic on any interval has an inverse that is also strictly monotonic (with the same variation as f) and also continuous.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser les réciproques de quelques fonctions numériques continues. <br> Cliquer sur le bouton 'Suivant' pour changer la fonction f. <br> le graphe de f est tracé en vert. <br> La réciproque de f, g=f<sup>-1</sup> apparaît en rouge. <br> On constate que les deux graphes sont symétriques par rapport à la droite d'équation y=x, diagonale représentée en couleur bleue. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize the inverses of some continuous numerical functions. <br> Click on the 'Next' button to change the function f. <br> the graph of f is drawn in green. <br> The reciprocal of f, g=f<sup>-1</sup> appears in red. <br> It can be seen that the two graphs are symmetrical with respect to the straight line with equation y=x, the diagonal represented in blue. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace1.next()'>
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <script src="js/contrecip.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contreciproque/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contreciproque/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

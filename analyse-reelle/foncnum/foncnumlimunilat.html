@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limite par valeurs supérieures ou inférieures</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimunilat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimunilat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Limite par valeurs supérieures</h2> Voici l'exemple d'une fonction qui tend vers 2 lorsque x&rarr;+&infin;. <br> Faire varier &epsilon; au moyen du curseur entre 0.5 et 0.07. <br> Vous voyez s'afficher la variation de X correspondante telle que x &gt; X &rArr; f(x) &ge; 2 et f(x)-2 &lt; &epsilon; <br> Remarquez que dans ce cas la courbe est toujours située au dessus de la limite.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Limit by upper values</h2> Here is an example of a function that tends to 2 when x&rarr;+&infin;. <br> Vary &epsilon; using the slider between 0.5 and 0.07. <br> You see the corresponding variation of X such that x > X &rArr; f(x) &ge; 2 and f(x)-2 < &epsilon; <br> Note that in this case the curve is always above the limit.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div class="jxgbox" style="width: 1000px; height: 400px; overflow: scroll; " id="box11"></div>
+        <div lang="fr">Choix de &epsilon;:</div>
+        <!-- /fr -->
+        <div lang="en">Choice of &epsilon;:</div>
+        <!-- /en -->
+        <input type='range' id="myRange11" step='0.01' min='0.07' max='0.5' value="0.5" onchange="nameSpace11.changep(this.value)" />
+        <div lang="fr">Valeur de X(&epsilon;) :</div>
+        <!-- /fr -->
+        <div lang="en">Value of X(&epsilon;) :</div>
+        <!-- /en -->
+        <input type='text' id='myText112'>
+        <script src="js/limparvalsup.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que f tend vers la limite a <b>
+              <i>'par valeurs supérieures'</i>
+            </b> pour x tendant vers +&infin; quand: <br> lim<sub>x&rarr;+&infin;</sub>f(x)=a et f(x) &ge; a pour x suffisamment grand. C'est à dire que pour tout &epsilon; &gt; 0 donné à l'avance, &exist; X&isin; &reals; tel que x &gt; X &rArr; f(x)&isin;[a,a+&epsilon;[. <br> On écrit cela de manière synthétique:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=a+ \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that f tends to the limit a <b>
+              <i>'by higher values'</i>
+            </b> for x tending to +&infin; when: <br> lim<sub>x&rarr;+&infin;</sub>f(x)=a and f(x) &ge; a for x large enough. That is to say that for all &epsilon; > 0 given in advance, &exist; X&isin; &reals; such that x > X &rArr; f(x)&isin;[a,a+&epsilon;[. <br> We write this synthetically:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=a+ \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Naturellement cette définition s'applique 'mutatis mutandis' au cas où la variable tend vers -&infin;. <br> Mais elle s'applique aussi au cas où la variable tend vers une valeur finie: </div>
+        <!-- /fr -->
+        <div lang="en"> Naturally this definition applies 'mutatis mutandis' in the case where the variable tends towards -&infin;. <br> But it also applies to the case where the variable tends to a finite value: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit que f tend vers la limite a <b>
+              <i>'par valeurs supérieures'</i>
+            </b> pour x tendant vers x<sub>0</sub> quand: <br> lim<sub>x&rarr;x<sub>0</sub>
+            </sub>f(x)=a et f(x) &ge; a pour x suffisamment près de x<sub>0</sub>. C'est à dire que pour tout &epsilon; &gt; 0 donné à l'avance, &exist; &eta; &gt; 0 tel que |x-x<sub>0</sub>| &lt; &eta; &rArr; f(x)&isin;[a,a+&epsilon;[. <br> On écrit cela de manière synthétique:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0} }f(x)=a+ \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that f tends to the limit a <b>
+              <i>'by higher values'</i>
+            </b> for x tending to x<sub>0</sub> when: <br> lim<sub>x&rarr;x<sub>0</sub>
+            </sub>f(x)=a and f(x) &ge; a for x close enough to x<sub>0</sub>. That is to say that for all &epsilon; > 0 given in advance, &exist; &eta; > 0 such that |x-x<sub>0</sub>| < &eta; &rArr; f(x)&isin;[a,a+&epsilon;[. <br> We write this synthetically:
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle \lim_{x \to x_{0} }f(x)=a+ \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette convention peut également être combinée avec les notations concernant les limites à gauche et à droite. <br> Par exemple: </div>
+        <!-- /fr -->
+        <div lang="en"> This convention can also be combined with the notations for one-sided (unilateral) limits. <br> For example: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit que f tend vers la limite a <b>
+              <i>'par valeurs supérieures'</i>
+            </b> pour x tendant vers x<sub>0</sub> par valeurs inférieures quand: <br> lim<sub>x&rarr;x<sub>0</sub>- </sub>f(x)=a et f(x) &ge; a pour x suffisamment près de x<sub>0</sub> en étant &lt; x<sub>0</sub>. C'est à dire que pour tout &epsilon; &gt; 0 donné à l'avance, &exist; &eta; &gt; 0 tel que x&isin;]x<sub>0</sub>-&eta;,x<sub>0</sub>] &rArr; f(x)&isin;[a,a+&epsilon;[. <br> On écrit cela de manière synthétique:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0}- }f(x)=a+ \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We say that f tends to the limit a <b>
+              <i>'by higher values'</i>
+            </b> for x tending to x<sub>0</sub> by lower values ​​when: <br> lim<sub>x&rarr;x<sub>0</sub>- </sub>f(x)=a and f(x) &ge; a for x close enough to x<sub>0</sub> being < x<sub>0</sub>. That is to say that for all &epsilon; > 0 given in advance, &exist; &eta; > 0 such that x&isin;]x<sub>0</sub>-&eta;,x<sub>0</sub>] &rArr; f(x)&isin;[a,a+&epsilon;[. <br> We write this synthetically:
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle \lim_{x \to x_{0}- }f(x)=a+ \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Limite par valeurs inférieures</h2> Voici l'exemple d'une fonction qui tend vers 2 lorsque x&rarr;+&infin;. <br> Faire varier &epsilon; au moyen du curseur entre 0.5 et 0.07. <br> Vous voyez s'afficher la variation de X correspondante telle que x &gt; X &rArr; f(x) &le; 2 et 2-f(x) &lt; &epsilon; <br> Remarquez que dans ce cas la courbe est toujours située en dessous de la limite.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Limit by lower values</h2> Here is an example of a function that tends to 2 when x&rarr;+&infin;. <br> Vary &epsilon; using the slider between 0.5 and 0.07. <br> You see the corresponding variation of X such that x > X &rArr; f(x) &le; 2 and 2-f(x) < &epsilon; <br> Note that in this case the curve is always below the limit.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box12" class="jxgbox" style="width:1000px; height:400px;"></div>
+        <div lang="fr">Choix de &epsilon; :</div>
+        <!-- /fr -->
+        <div lang="en">Choice of &epsilon; :</div>
+        <!-- /en -->
+        <input type='range' id="myRange12" step='0.01' min='0.07' value="0.5" max='0.5' onchange="nameSpace12.changep(this.value)" />
+        <div lang="fr">Valeur de X(&epsilon;) :</div>
+        <!-- /fr -->
+        <div lang="en">Value of X(&epsilon;) :</div>
+        <!-- /en -->
+        <input type='text' id='myText122'>
+        <script src="js/limparvalinf.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> On dit que f tend vers la limite a <b>
+              <i>'par valeurs inférieures'</i>
+            </b> pour x tendant vers +&infin; quand: <br> lim<sub>x&rarr;+&infin;</sub>f(x)=a et f(x) &le; a pour x suffisamment grand. C'est à dire que pour tout &epsilon; &gt; 0 donné à l'avance, &exist; X&isin; &reals; tel que x &gt; X &rArr; f(x)&isin;]a-&epsilon;,a]. <br> On écrit cela de manière synthétique:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=a- \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> We say that f tends to the limit a <b>
+              <i>'by lower values'</i>
+            </b> for x tending to +&infin; when: <br> lim<sub>x&rarr;+&infin;</sub>f(x)=a and f(x) &le; a for x large enough. That is to say that for all &epsilon; > 0 given in advance, &exist; X&isin; &reals; such that x > X &rArr; f(x)&isin;]a-&epsilon;,a]. <br> We write this synthetically:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to +\infty }f(x)=a- \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Comme dans le cas précdent cette définition s'applique, en changeant ce qui est à changer, au cas où la variable tend vers -&infin;. <br> Elle s'applique également au cas où la variable tend vers une valeur finie: </div>
+        <!-- /fr -->
+        <div lang="en"> As in the previous case, this definition applies, changing what is to be changed, in case the variable tends to -&infin;. <br> It also applies to the case where the variable tends to a finite value: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> On dit que f tend vers la limite a <b>
+              <i>'par valeurs inférieures'</i>
+            </b> pour x tendant vers x<sub>0</sub> quand: <br> lim<sub>x&rarr;x<sub>0</sub>
+            </sub>f(x)=a et f(x) &le; a pour x suffisamment près de x<sub>0</sub>. c'est à dire que pour tout &epsilon; &gt; 0 donné à l'avance, &exist; &eta; &gt; 0 tel que |x-x<sub>0</sub>| &lt; &eta; &rArr; f(x)&isin;]a-&epsilon;,a]. <br> On écrit cela de manière synthétique:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{x \to x_{0} }f(x)=a- \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> We say that f tends to the limit a <b>
+              <i>'by lower values'</i>
+            </b> for x tending to x<sub>0</sub> when: <br> lim<sub>x&rarr;x<sub>0</sub>
+            </sub>f(x)=a and f(x) &le; a for x close enough to x<sub>0</sub>. ie for all &epsilon; > 0 given in advance, &exist; &eta; > 0 such that |x-x<sub>0</sub>| < &eta; &rArr; f(x)&isin;]a-&epsilon;,a]. <br> We write this synthetically:
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle \lim_{x \to x_{0} }f(x)=a- \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Récapitulation</h2> Nous laissons le lecteur envisager toutes les situations possibles:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Recap</h2> We let the reader consider all possible situations:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <table cellpadding="10" cellspacing="10" border="1">
+          <tbody>
+            <tr>
+              <td align="center" valign="middle">variable x</td>
+              <td align="center" valign="middle">
+                <div lang="fr">fonction</div>
+                <div lang="en">function</div>
+                <!-- /en -->
+                <!-- /fr --> y=f(x)
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;+&infin;</td>
+              <td rowspan="2" align="center" valign="middle">y&rarr;+&infin;</td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;-&infin;</td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;x<sub>0</sub>
+              </td>
+              <td rowspan="2" align="center" valign="middle">y&rarr;-&infin;</td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;x<sub>0</sub>+ </td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;x<sub>0</sub>- </td>
+              <td rowspan="2" align="center" valign="middle">y&rarr;a</td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;x<sub>0</sub>,x&ne;x<sub>0</sub>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;x<sub>0</sub>+,x&ne;x<sub>0</sub>
+              </td>
+              <td align="center" valign="middle">y&rarr;a+</td>
+            </tr>
+            <tr>
+              <td align="center" valign="middle">x&rarr;x<sub>0</sub>-,x&ne;x<sub>0</sub>
+              </td>
+              <td align="center" valign="middle">y&rarr;a-</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- /STOP -->
+        <div lang="fr"> Ce qui doit bien faire une quarantaine de cas. <br> A chaque cas correspond un énoncé du type: <br>
+          <br> &forall; <span style="  ">.....</span> &exist; <span style="  ">.....</span> tel que <span style="  ">.....</span> &rArr; <span style="  ">.....</span>
+          <br>
+          <br> Pour chaque cas nous avons une écriture symbolique synthétique:
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \lim_{x \to ...}f(x)=... \)</p>
+          <!-- /FORMULE UNIV INLINE--> Vous pourrez vous entrainer dans la section des exercices à rédiger: <ul>
+            <li>Les définitions correspondant aux notations de limites ( <input type="button" value="ex01" onclick="go('exercices/foncnumlimunilat/ex01.html#')" data-inline="true" />). </li>
+            <li>Les notations de limites correspondant aux définitions ( <input type="button" value="ex02" onclick="go('exercices/foncnumlimunilat/ex02.html#')" data-inline="true" />). </li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Which must be about forty cases. <br> Each case corresponds to a statement of the type: <br>
+          <br> &forall; <span style=" ">.....</span> &exist; <span style=" ">.....</span> such as <span style=" ">.....</span> &rArr; <span style=" ">.....</span>
+          <br>
+          <br> For each case we have a synthetic symbolic writing:
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \lim_{x \to ...}f(x)=... \)</p>
+          <!-- /FORMULE UNIV INLINE--> You can practice in the section of exercises to write: <ul>
+            <li>Definitions corresponding to limit notations ( <input type="button" value="ex01" onclick="go('exercices/foncnumlimunilat/ex01.html#')" data-inline="true" />) . </li>
+            <li>Notations of limits corresponding to definitions ( <input type="button" value="ex02" onclick="go('exercices/foncnumlimunilat/ex02.html#')" data-inline="true" />) . </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />
+        <div lang="fr"> Tout comme pour la page précédente, notez bien que des symboles tels que a+ ou a-, comme utilisés ici, ne désignent pas des nombres et n'ont aucun sens pris isolément. Ces éxritures n'ont de sens que dans des expressions comportant des limites. </div>
+        <!-- /fr -->
+        <div lang="en"> Just like in previous page, please note that such symbols as a+ or a-, as they are used here, don't designate numbers and have no meaning taken as isolated entities. These writings can be found only in expressions involving limits. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimunilat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimunilat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

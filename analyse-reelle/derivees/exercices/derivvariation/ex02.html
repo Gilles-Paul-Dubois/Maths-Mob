@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
     <link href="../../../../css/myown.css" rel="stylesheet">
     <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <link href="../../../../css/jsxgraph.css" rel="stylesheet">
     <script src="../../../../js/jquery-1.11.3.js"></script>
     <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
     <script src="../../../../js/custom.js"></script>
- 	 <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+    <script src="../../../../js/jsxgraphcore.js"></script>
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
   </head>
   <body style="overflow: auto; " class="fr">
     <script>
@@ -43,7 +45,7 @@
           <div data-role="navbar">
             <ul>
               <li>
-                <input type="button" value="Retour au cours" onclick="go('../../template.html')" data-inline="false" />
+                <input type="button" value="Retour au cours" onclick="go('../../derivvariation.html')" data-inline="false" />
               </li>
               <li>
                 <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
@@ -51,12 +53,23 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>Deux villes A et B sont disposées de part et d'autre d'une rivière supposée couler en ligne droite. <br> La ville A se trouve à distance a de la rivière. <br> La ville B se trouve à la distance b de la rivière. <br> La largeur de la rivière est r. <br> Le décalage entre A et B suivant la direction de la rivière est c. <br> On cherche à construire un pont sur la rivière de façon à minimiser la distance de A à B en franchissant le pont. <br>
+            <strong>Problème: Où placer le pont?</strong>
+            <br> Sur l'appliquette en bas de page vous voyez un exemple où a=1,b=2,c=3,r=1. <br> Nous avons un paramètre X qui est la distance du pont à la projection orthogonale de A sur la rivière. <br> Ce paramètre varie donc entre 0 et c. <br> D(X) représente la distance de A à B en franchissant le pont. <br> Vous pouvez faire varier X avec la souris. <br>
+          </p>
           <div data-role="collapsible">
             <h4>aide</h4>
+            <p>Calculer D(X) en fonction de X et chercher le minimum de D(X) en annulant une dérivée. </p>
           </div>
           <!-- /aide -->
           <div data-role="collapsible">
             <h4>solution</h4>
+            <p>Traitons le problème dans un repère où A(0,-a), B(c,r+b) <br> Alors D(X)=&radic;(X<sup>2</sup>+a<sup>2</sup>)+r+&radic;((c-X)<sup>2</sup>+b<sup>2</sup>) <br> En calculant D'(X) et en résolvant D'(X)=0 on trouve la racine X<sub>0</sub>=ac/(a+b) <br> La fonction est décroissante entre 0 et X<sub>0</sub> et croissante entre X<sub>0</sub> et c <br> Dans notre cas de figure on peut vérifier que 1 est bien la solution. On remarquera que dans tous les cas si X est l'extrêmité du pont du côté de A et si Y est l'extrêmité du pont du côté de B, le vecteur
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{AX} \)
+              <!-- /FORMULE UNIV INLINE--> et le vecteur
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{BY} \)
+              <!-- /FORMULE UNIV INLINE--> sont colinéaires. <br> On pourra essayer de trouver une explication purement géométrique à ce phénomène.
+            </p>
           </div>
           <!-- /solution -->
         </div>
@@ -65,7 +78,7 @@
           <div data-role="navbar">
             <ul>
               <li>
-                <input type="button" value="Back to lesson" onclick="go('../../template.html')" data-inline="false" />
+                <input type="button" value="Back to lesson" onclick="go('../../derivvariation.html')" data-inline="false" />
               </li>
               <li>
                 <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
@@ -73,6 +86,10 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>Two cities A and B are arranged on either side of a river that is supposed to flow in a straight line. <br> City A is at distance a from the river. <br> City B is at distance b from the river. <br> The width of the river is r. <br> The offset between A and B following the direction of the river is c. <br> We are looking to build a bridge over the river so as to minimize the distance from A to B when crossing the bridge. <br>
+            <strong>Problem: Where to place the bridge?</strong>
+            <br> On the applet at the bottom of the page you see an example where a=1,b=2,c=3,r=1. <br> We have a parameter X which is the distance from the bridge to the orthogonal projection of A onto the river. <br> This parameter therefore varies between 0 and c. <br> D(X) represents the distance from A to B when crossing the bridge. <br> You can vary X with the mouse. <br>
+          </p>
           <div data-role="collapsible">
             <h4>hint</h4>
           </div>
@@ -83,6 +100,8 @@
           <!-- /solution -->
         </div>
         <!-- /en -->
+        <div id="box" class="jxgbox" style="width:500px; height:600px;"></div>
+        <script src="../../js/pont.js"></script>
       </div>
       <div data-role="footer">
         <table cellpadding="10">
@@ -98,6 +117,11 @@
             <td>
               <div lang="fr">Version mobile Jquery</div>
               <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
             </td>
           </tr>
         </table>

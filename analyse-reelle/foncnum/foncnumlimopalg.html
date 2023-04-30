@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limites et opérations algébriques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Cette page fait suite à celle consacrée <input type="button" value="au même sujet" onclick="go('../suites/suiteslimopalg.html#')" data-inline="true" /> dans le chapitre des suites. <br /> Nous allons étudier les mêmes situations sauf qu'au lieu de se limiter au cas d'une variable entière tendant vers +∞ nous étudierons le cas d'une variable réelle dans les cas suivant: <ul>
+            <li>x→+∞</li>
+            <li>x→-∞</li>
+            <li>x→x<sub>0</sub> (nombre réel fini) </li>
+            <li>x→x<sub>0</sub>, x≠x<sub>0</sub> (nombre réel fini) </li>
+            <li>x→x<sub>0</sub>+ (x tend vers x<sub>0</sub> et x≥x<sub>0</sub>) </li>
+            <li>x→x<sub>0</sub>-(x tend vers x<sub>0</sub> et x≤x<sub>0</sub>) </li>
+            <li>x→x<sub>0</sub>+, x≠x<sub>0</sub> (x tend vers x<sub>0</sub> et x&gt;x<sub>0</sub>) </li>
+            <li>x→x<sub>0</sub>-, x≠x<sub>0</sub> (x tend vers x<sub>0</sub> et x&lt;x<sub>0</sub>) </li>
+          </ul> Nous allons voir que les résultats sont essentiellement les mêmes avec les mêmes indéterminations, aussi pour éviter la multiplication des énoncés équivalents nous utiliserons la notation x→ ... sachant que ... peut recouvrir n'importe lequel des cas suivants. Cependant lorsque nous étudierons une somme, un produit, un quotient, il sera toujours sous-entendu que le x→... <b>
+            <i>désignera la même situation dans les deux cas</i>
+          </b>, et que si x tend vers une valeur finie ce sera la même dans les deux cas. <br /> nous conservons intégralement le plan d'étude retenu pour les suites. <br /> Il est inutile de (re)donner les démonstrations qui sont les mêmes que pour les suites et qui ont déjà été données soit en cours soit sous forme d'exercices corrigés. <br /> Pour ce qui concerne l'illustration des cas d'indétermination on peut reprendre les exemples des suites en prenant f(x) au lieu de f(n). <br /> Bref, il n'y a aucune différence notoire avec ce qui a déjà été vu, et tout paraitra évident au lecteur ayant lu et assimilé le chapitre correspondant sur les suites. </div>
+        <!-- /fr -->
+        <div lang="en"> This page follows the one devoted to <input type="button" value="on the same subject" onclick="go('../suites/suiteslimopalg.html#')" data-inline="true" /> in the chapter on sequences. <br /> We will study the same situations except that instead of being limited to the case of an integer variable tending towards +∞ we will study the case of a real variable in the following cases: <ul>
+            <li>x→+∞</li>
+            <li>x→-∞</li>
+            <li>x→x<sub>0</sub> ( x<sub>0</sub> real number) </li>
+            <li>x→x<sub>0</sub>, x≠x<sub>0</sub> (same) </li>
+            <li>x→x<sub>0</sub>+ (x tends to x<sub>0</sub> and x≥x<sub>0</sub>) </li>
+            <li>x→x<sub>0</sub>-(x tends to x<sub>0</sub> and x≤x<sub>0</sub>) </li>
+            <li>x→x<sub>0</sub>+, x≠x<sub>0</sub> (x tends to x<sub>0</sub> and x>x<sub>0 </ sub>) </li>
+            <li>x→x<sub>0</sub>-, x≠x<sub>0</sub> (x tends to x<sub>0</sub> and x <x<sub>0 </ sub>) </li>
+          </ul> We will see that the results are essentially the same with the same indeterminacy cases , so to avoid the multiplication of equivalent statements we will use the notation x→ ... knowing that ... can cover any of the following cases. However when we study a sum, a product, a quotient, it will always be understood that the x→... <b>
+            <i>will designate the same situation in both cases</i>
+          </b>, and that if x tends to a finite value it will be the same in both cases. <br /> We fully keep the study plan retained for the sequences. <br /> It is useless to give gain the demonstrations which are the same as for the sequences and which have already been given either in the course or in the form of exercises with solutions. <br /> As far as the illustration of the cases of indeterminacy is concerned, we can take the examples of the sequences by taking f(x) instead of f(n). <br /> In short, there is no noticeable difference with what has already been seen, and everything will seem obvious to the reader having read and assimilated the corresponding chapter on the sequences. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Sommes</h2> Revoir la définition de la <input type="button" value="somme de deux fonctions" onclick="go('foncnumespaces.html#def1')" data-inline="true" />. <br /> On cherche une relation entre lim<sub>x→...</sub>f(x), lim<sub>x→...</sub>g(x) et lim<sub>x→...</sub>(f+g)(x). <h3>Les deux fonctions tendent vers une limite finie</h3> Dans ce cas la somme des deux tend vers la somme des limites. <h3>Les deux fonctions tendent vers le même infini</h3> Alors la somme tend aussi vers cet infini. <h3>Une fonction (f) tend vers un infini l'autre (g) est bornée</h3> Alors f+g tend vers le même infini que f. <h3>
+            <font color="#FF0000">Cas d'indétermination</font>
+          </h3> Il y a un cas principal c'est le cas où f et g tendent vers des infinis distincts. dans ce cas on ne peut rien dire a priori pour la somme. Mais il existe évidemment des techniques pour lever l'indétermination, ce sont essentiellement les mêmes artifices que pour les suites qui sont utilisés.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Sums</h2> Review the definition of the <input type="button" value="sum of two functions" onclick="go('funcnumspaces.html#def1')" data-inline="true" />. <br /> We are looking for a relation between lim<sub>x→...</sub>f(x), lim<sub>x→...</sub>g(x) and lim<sub>x→... </sub>(f+g)(x). <h3>Both functions tend to a finite limit</h3> In this case the sum of the two tends towards the sum of the limits. <h3>The two functions tend to the same infinity</h3> Then the sum also tends towards this infinity. <h3>One function (f) tends to infinity the other (g) is bounded</h3> Then f+g tends to the same infinity as f. <h3>
+            <font color="#FF0000">Cases of Indeterminacy</font>
+          </h3> There is a main case that is the case where f and g tend to distinct infinities. in this case nothing can be said a priori for the sum. But there are obviously techniques to remove the indeterminacy, it is essentially the same tricks as for the sequences that are used.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Produits</h2> Revoir la définition du <input type="button" value="produit de deux fonctions" onclick="go('foncnumespaces.html#def4')" data-inline="true" />. <br /> On cherche une relation entre lim<sub>x→...</sub>f(x), lim<sub>x→...</sub>g(x) et lim<sub>x→...</sub>(f×g)(x). <h3>Les deux fonctions tendent vers une limite finie</h3> Dans ce cas le produit des deux tend vers le produit des limites. <h3>Les deux fonctions tendent vers l'infini</h3> Alors le produit tend vers un infini (règle des signes) <h3>Une fonction tend vers 0 et l'autre est bornée</h3> Dans ce cas le produit tend vers 0. <h3>Une fonction tend vers une limite non nulle et l'autre vers l'infini</h3> Dans ce cas le produit tend vers un infini (règle des signes). <h3>
+            <font color="#FF0000">Cas d'indétermination</font>
+          </h3> L'indétermination majeure correspond au cas du produit d'une fonction qui tend vers zéro par une autre qui tend vers un infini. On peut la lever en utilisant des techniques déjà vues pour les suites ou bien d'autres empruntées au calcul différentiel.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Products</h2> Review the definition of <input type="button" value="product of two functions" onclick="go('foncnumespaces.html#def4')" data-inline="true" />. <br /> We are looking for a relation between lim<sub>x→...</sub>f(x), lim<sub>x→...</sub>g(x) and lim<sub>x→... </sub>(f×g)(x). <h3>The two functions tend to a finite limit</h3> In this case the product of the two tends to the product of the limits. <h3>The two functions tend to infinity</h3> Then the product tends to infinity (rule of signs) <h3>One function tends to 0 and the other is bounded</h3> In this case the product tends to 0. <h3>One function tends to a nonzero limit and the other to infinity</h3> In this case the product tends to infinity (rule of signs). <h3>
+            <font color="#FF0000">Cases of Indeterminacy</font>
+          </h3> The major indeterminacy corresponds to the case of the product of a function which tends towards zero by another which tends towards an infinity. It can be solved by using techniques already seen for sequences or others borrowed from differential calculus.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Produits par un scalaire</h2> Revoir la définition du <input type="button" value="produit d'une fonction par un scalaire" onclick="go('foncnumespaces.html#def3')" data-inline="true" />. <br /> On s'intéresse au cas du produit d'une fonction numérique f par un réel λ. <br /> On cherche une relation entre lim<sub>x→...</sub>f(x) et lim<sub>x→...</sub>(λf)(x). <h3>Le scalaire λ est nul</h3> Dans ce cas λf tend vers 0. <h3>Le scalaire est non nul</h3>
+          <h4>La fonction tend vers une limite finie</h4> Alors λf tend vers une limite finie. <h4>La fonction tend vers un infini</h4> λf tend vers un infini (règle des signes).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Products by a scalar</h2> Review the definition of <input type="button" value="product of a function by a scalar" onclick="go('foncnumespaces.html#def3')" data-inline="true" />. <br /> We are interested in the case of the product of a numerical function f by a real λ. <br /> We are looking for a relation between lim<sub>x→...</sub>f(x) and lim<sub>x→...</sub>(λf)(x). <h3>The scalar λ is zero</h3> In this case λf tends to 0. <h3>The scalar is non-zero</h3>
+          <h4>The function tends to a finite limit</h4> Then λf tends to a finite limit. <h4>The function tends to infinity</h4> λf tends to infinity (rule of signs).
+        </div>
+        <!-- /en -->
+<a name="quot"></a>        
+        <div lang="fr">
+          <h2>Quotients</h2> Revoir la définition du <input type="button" value="quotient de deux fonctions" onclick="go('foncnumespaces.html#def6')" data-inline="true" />. <br /> On cherche une relation entre lim<sub>x→...</sub>f(x), lim<sub>x→...</sub>g(x) et lim<sub>x→...</sub>(f/g)(x). <br /> On s'intéresse au quotient f/g de deux fonctions numériques f et g, là où il est défini (g(x)≠0). <br /> Cependant cela à un sens de se poser la question de l'existence de la limite du quotient pour x tendant vers une valeur pour laquelle g(x)=0. <h3>Les deux fonctions tendent vers des limites finies, la limite de la fonction g étant non nulle</h3> Alors le quotient tend vers une limite finie égale au quotient des limites. <h3>La fonction f est bornée et g tend vers un infini</h3> Alors f/g tend vers 0, mais il n'est pas toujours possible de préciser, sans précisions supplémentaires s'il s'agit de 0+ ou 0-. <h3>La fonction f tend vers une limite non nulle ou un infini et g tend vers 0 unilatéralement</h3> Alors f/g tend vers un infini (règle des signes). <h3>
+            <font color="#FF0000">Cas d'indétermination</font>
+          </h3>
+          <h4>Quotient de deux infinis</h4> On ne peut rien dire en général, l'indétermination peut se lever par des techniques calculatoires simples ou bien il peut être nécessaire d'utiliser des résultats avancés du calcul différentiel. <h4>Quotient de deux limites nulles </h4> Même remarque que précédemment. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Quotients</h2> Review the definition of <input type="button" value="quotient of two functions" onclick="go('foncnumespaces.html#def6')" data-inline="true" />. <br /> We are looking for a relation between lim<sub>x→...</sub>f(x), lim<sub>x→...</sub>g(x) and lim<sub>x→... </sub>(f/g)(x). <br /> We are interested in the quotient f/g of two numerical functions f and g, where it is defined (g(x)≠0). <br /> However, it makes sense to ask the question of the existence of the limit of the quotient for x tending towards a value for which g(x)=0. <h3>The two functions tend to finite limits, the limit of the function g being nonzero</h3> Then the quotient tends to a finite limit equal to the quotient of the limits. <h3>The function f is bounded and g tends to infinity</h3> So f/g tends to 0, but it is not always possible to specify, without additional details, whether it is 0+ or ​​0-. <h3>The function f tends to a non-zero limit or an infinity and g tends to 0 unilaterally</h3> Then f/g tends to infinity (rule of signs). <h3>
+            <font color="#FF0000">Cases of Indeterminacy</font>
+          </h3>
+          <h4>Quotient of two infinities</h4> Nothing can be said in general, the indeterminacy can be removed by simple computational techniques or it may be necessary to use advanced results of differential calculus. <h4>Quotient of two zero limits </h4> Same comment as above. <br />
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumlimopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumlimopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

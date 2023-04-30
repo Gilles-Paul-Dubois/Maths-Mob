@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 01</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="f">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../suitesacceleration.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>Nous avons déjà vu dans <input type="button" value="cet exercice" onclick="go('../suitesmonoetconv/ex01.html#')" data-inline="true" /> que <input type="button" value="la suite définie par" onclick="go('../../suitesconvergentes.html#radic2')" data-inline="true" />:
+          <ol>
+            <li>x<sub>0</sub>=1 </li>
+            <li>x<sub>n</sub>=√(2+x<sub>n-1</sub>) </li>
+          </ol> est convergente et que sa limite est ≤ 2. <br /> Montrer que la limite est 2. <br /> Montrer que la vitesse de convergence est 1/4. <br /> Écrire un programme python et/ou julia qui accélère la vitesse de convergence en utilisant le procédé de Richardson-Romberg. </p>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <p>On admettra que si la suite (x<sub>n</sub>) de nombres positifs tend vers la limite a alors la suite (√(x<sub>n</sub>)) tend vers √a. <br> S'inspirer du programme donné en exemple dans le cours. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4> La suite (x<sub>n</sub>) tend vers a mais aussi vers &radic;(2+a) (indication de l'aide) à cause de la relation de récurrence entre x<sub>n+1</sub> et x<sub>n</sub>. <br> D'où la relation a=&radic;(2+a) qui donne a=2. <br> On a:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{u_{n+1}-2}{u_{n}-2}=\frac{\sqrt{2+u_{n}}-2}{u_{n}-2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> En multipliant le quotient de droite en haut et en bas par &radic;(2+u<sub>n</sub>)+2 , l'expresion dite conjuguée, on obtient.
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{u_{n+1}-2}{u_{n}-2}=\frac{1}{\sqrt{2+u_{n}}+2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Utilisant encore l'indication de l'aide &radic;(2+u<sub>n</sub>)+2 tend vers &radic;4+2=4. <br> La vitesse de convergence est donc 1/4. <p>
+              <object data="../../python/romberg1.html" type="text/html" border="3" height="200" width="100%"></object>
+            </p> Voici le résultat de l'exécution: <table cellpadding="0" cellspacing="0" border="2">
+              <tr>
+                <td> 1 0.0239322565748 <br> 0.267949192431&nbsp;&nbsp;&nbsp; 0.00154806575211 <br> 0.0681483474219&nbsp;&nbsp;&nbsp; 9.75871958844e-05 <br> 0.0171102772524 &nbsp;&nbsp;&nbsp;6.11227959779e-06 <br> 0.00428215352279&nbsp;&nbsp;&nbsp; 3.82222093975e-07 <br> 0.00107082504727 &nbsp;&nbsp;&nbsp;2.38920787599e-08 <br> 0.000267724180876&nbsp;&nbsp;&nbsp; 1.49330503518e-09 </td>
+              </tr>
+            </table>
+            <p>Et voici l'équivalent avec Julia :</p>
+            <p>
+              <object data="../../julia/romberg1.jl.html" type="text/html" border="3" height="200" width="100%"></object>
+            </p>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../suitesacceleration.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>We have already seen in <input data-inline="true" onclick="go('../suitesmonoetconv/ex01.html#')" type="button" value=" this exercise" />that <input data-inline="true" onclick="go('../../suitesconvergentes.html#radic2')" type="button" value=" the sequence defined by" />: </p>
+          <ol>
+            <li>x<sub>0</sub>= 1 </li>
+            <li>x<sub>n</sub>=√(2+x<sub>n-1</sub>) </li>
+          </ol> is convergent and its limit is ≤ 2. <br /> Show that the limit is 2. <br /> Show that the speed of convergence is 1/4. <br /> Write a python and/or julia program which accelerates the speed of convergence using the Richardson-Romberg process. <p></p>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <p>We will admit that if the sequence (x<sub>n</sub>) of positive numbers tends towards the limit a then the sequence (√(x<sub>n</sub>)) tends towards √a. <br /> Take inspiration from the program given as an example in the course. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4> The sequence (x<sub>n</sub>) tends towards a but also towards √(2+a) (indication of the help) because of the recurrence relation between x<sub>n+1</sub>and x<sub>n</sub>. <br /> Hence the relation a=√(2+a) which gives a=2. <br /> We have:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{u_{n+1}-2}{u_{n}-2}=\frac{\sqrt{2+u_{n}}-2}{u_{n}-2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> By multiplying the quotient on the right at the top and at the bottom by √(2+u<sub>n</sub>)+2 , the so-called conjugate expression, we obtain.
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{u_{n+1}-2}{u_{n}-2}=\frac{1}{\sqrt{2+u_{n}}+2} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <font style="vertical-align: inherit;"> Again using the aid indication √(2+u </font>
+           <sub>
+              <font style="vertical-align: inherit;"> n </font>
+            </sub>
+            <font style="vertical-align: inherit;"> )+2 tends to √4+2=4. </font>
+            <br>
+            <font style="vertical-align: inherit;"> The speed of convergence is therefore 1/4. </font>
+            <p>
+              <object data="../../python/romberg1.html" type="text/html" width="100%" height="200" border="3"></object>
+            </p>
+            <font style="vertical-align: inherit;"> Here is the result of the execution: </font>
+            <table cellspacing="0" cellpadding="0" border="2">
+              <tbody>
+                <tr>
+                  <td>
+                    <font style="vertical-align: inherit;">1 0.0239322565748 </font>
+                    <br> 0.267949192431&nbsp;&nbsp;&nbsp; 0.00154806575211 <br> 0.0681483474219&nbsp;&nbsp;&nbsp; 9.75871958844e-05 <br> 0.0171102772524 &nbsp;&nbsp;&nbsp;6.11227959779e-06 <br> 0.00428215352279&nbsp;&nbsp;&nbsp; 3.82222093975e-07 <br> 0.00107082504727 &nbsp;&nbsp;&nbsp;2.38920787599e-08 <br>
+                    <font style="vertical-align: inherit;"> 0.000267724180876&nbsp;&nbsp;&nbsp; 1.49330503518e-09 </font>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <p>Et voici l'équivalent avec Julia :</p>
+            <p>
+              <object data="../../julia/romberg1.jl.html" type="text/html" width="100%" height="200" border="3"></object>
+            </p>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

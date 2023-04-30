@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>montecarlo_plan.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+</span><span class="s2">import </span><span class="s1">random 
+ 
+</span><span class="s3">&quot;&quot;&quot;Mesure d'un quart de cercle de rayon unité par la méthode de Monte-Carlo&quot;&quot;&quot;</span><span class="s1"> 
+</span><span class="s3">&quot;&quot;&quot;Area of quarter of a circle with radius 1 by Monte-Carlo method&quot;&quot;&quot;</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">rand_point(): 
+    </span><span class="s0">&quot;&quot;&quot;point aléatoire dans le carré de côté 1 - random point in square with unit side&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">random.random(), random.random() 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">in_circle(P): 
+    </span><span class="s0">&quot;&quot;&quot;Le point est-il dans le cercle unité? - is the point inside the circle&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">math.sqrt(P[</span><span class="s4">0</span><span class="s1">] * P[</span><span class="s4">0</span><span class="s1">] + P[</span><span class="s4">1</span><span class="s1">] * P[</span><span class="s4">1</span><span class="s1">]) &lt;= </span><span class="s4">1</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">stat(n): 
+    </span><span class="s0">&quot;&quot;&quot;statistique sur n tirs - statistics about n shots&quot;&quot;&quot;</span><span class="s1"> 
+    success = </span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, n): 
+        P = rand_point() 
+        </span><span class="s2">if </span><span class="s1">in_circle(P): 
+            success += </span><span class="s4">1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">success / float(n) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction de test - test function&quot;&quot;&quot;</span><span class="s1"> 
+    S = </span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">10</span><span class="s1">):  </span><span class="s0"># 10 fois - 10 times</span><span class="s1"> 
+        s = </span><span class="s4">4 </span><span class="s1">* stat(</span><span class="s4">10000</span><span class="s1">)  </span><span class="s0">#10000 tirs - 1000 shots</span><span class="s1"> 
+        S += s 
+    print(S / </span><span class="s4">10</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

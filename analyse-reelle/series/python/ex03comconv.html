@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># -*- coding: utf-8 -*-</span>
+<span class="s0"># python version 3.4</span>
+
+<span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce</span>
+
+
+<span class="s2">def </span><span class="s1">u(n):</span>
+    <span class="s0">&quot;&quot;&quot;terme général de la série harmonique alternée&quot;&quot;&quot;</span>
+    <span class="s0">&quot;&quot;&quot;general term of alternating harmonic series&quot;&quot;&quot;</span>    
+    <span class="s2">if </span><span class="s1">n % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s3">1.0 </span><span class="s1">/ (n + </span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">-</span><span class="s3">1.0 </span><span class="s1">/ (n + </span><span class="s3">1</span><span class="s1">)</span>
+
+
+<span class="s2">def </span><span class="s1">genp():</span>
+    <span class="s0">&quot;&quot;&quot;générateur de la suite des indices permutés&quot;&quot;&quot;</span>
+    <span class="s0">&quot;&quot;&quot;generator of the sequence of permuted indices&quot;&quot;&quot;</span>    
+    <span class="s1">p = </span><span class="s3">0</span>
+    <span class="s1">k = </span><span class="s3">1</span>
+    <span class="s2">yield </span><span class="s1">p</span>
+    <span class="s1">lasteven=p</span>
+    <span class="s1">lastodd=-</span><span class="s3">1</span>
+    <span class="s1">last=p</span>
+    <span class="s2">while True</span><span class="s1">:</span>
+        <span class="s1">k=k+</span><span class="s3">1</span>
+        <span class="s2">if </span><span class="s1">last==lasteven:</span>
+            <span class="s2">for </span><span class="s1">h </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,k+</span><span class="s3">1</span><span class="s1">):</span>
+                <span class="s1">p=lastodd+</span><span class="s3">2</span><span class="s1">*h</span>
+                <span class="s2">yield</span><span class="s1">(p)</span>
+            <span class="s1">lastodd=p</span>
+            <span class="s1">last=p</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s2">for </span><span class="s1">h </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">,k+</span><span class="s3">1</span><span class="s1">):</span>
+                <span class="s1">p=lasteven+</span><span class="s3">2</span><span class="s1">*h</span>
+                <span class="s2">yield </span><span class="s1">p</span>
+            <span class="s1">lasteven=p</span>
+            <span class="s1">last=p</span>
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s0">&quot;&quot;&quot;fonction principale - main function&quot;&quot;&quot;</span>
+    <span class="s1">P = genp()</span>
+    <span class="s1">L = [next(P) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">200</span><span class="s1">)]</span>
+    <span class="s1">print(L)  </span><span class="s0"># affichage des indices permutés - displaying permuted indices </span>
+    <span class="s1">M = [u(k) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">L]  </span><span class="s0"># série permutée - permuted series </span>
+    <span class="s1">S = [reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, M[</span><span class="s3">0</span><span class="s1">:k]) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">200</span><span class="s1">)]  </span><span class="s0"># sommes partielles - partial sums</span>
+    <span class="s1">print(S)</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
+</html>

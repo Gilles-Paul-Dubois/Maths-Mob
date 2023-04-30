@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>dichotomie.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">f(x)=x^</span><span class="s1">2</span><span class="s0">-</span><span class="s1">2</span>
+<span class="s2">function </span><span class="s0">dichot(f,a,b,c::Channel)</span>
+    <span class="s0">x0,x1=a,b</span>
+    <span class="s0">x2=(x0+x1)/</span><span class="s1">2</span>
+    <span class="s0">put!(c,x2)</span>
+    <span class="s2">while true</span>
+        <span class="s2">if </span><span class="s0">f(x0)*f(x2)&lt;</span><span class="s1">0</span>
+            <span class="s0">x1=x2</span>
+        <span class="s2">else</span>
+            <span class="s0">x0=x2</span>
+        <span class="s2">end</span>
+        <span class="s0">x2=(x0+x1)/</span><span class="s1">2</span>
+        <span class="s0">put!(c,x2)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">D = Channel( (channel_arg) -&gt; dichot(f,</span><span class="s1">1</span><span class="s0">,</span><span class="s1">2</span><span class="s0">, channel_arg) )</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">9</span>
+        <span class="s0">println(take!(D))</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

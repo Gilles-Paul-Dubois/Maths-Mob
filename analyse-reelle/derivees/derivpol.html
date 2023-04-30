@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dérivées des polynômes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivpol/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivpol/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Expression d'un polynôme suivant les puissances croissantes d'un autre</h2> Le résultat qui suit ressemble fort à la <input type="button" value="l'écriture d'un entier naturel en base b" onclick="go('../../nombres/naturels/bases.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Expression of a polynomial according to the increasing powers of another</h2> The following result is very similar to <input type="button" value="writing a natural integer in base b" onclick="go('../../nombres/naturels/bases.html# ')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit b(x) un polynôme de degré &ge; 1 et soit p(x) un polynôme quelconque. Alors il existe une suite de polynômes a<sub>0</sub>(x),a<sub>1</sub>(x), ...,a<sub>n</sub>(x), tels qu'on ait: <ul>
+              <li>Le degré de chaque a<sub>i</sub>(x) est &lt; degré(b(x)) </li>
+              <li>p(x)=a<sub>0</sub>(x)+a<sub>1</sub>(x)b(x)+a<sub>2</sub>(x)b(x)<sup>2</sup>+ ... +a<sub>n</sub>(x)b(x)<sup>n</sup>
+              </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let b(x) be a polynomial of degree &ge; 1 and let p(x) be any polynomial. Then there is a sequence of polynomials a<sub>0</sub>(x),a<sub>1</sub>(x), ...,a<sub>n</sub>(x), such that we have: <ul>
+              <li>The degree of each a<sub>i</sub>(x) is < degree(b(x)) </li>
+              <li>p(x)=a<sub>0</sub>(x)+a<sub>1</sub>(x)b(x)+a<sub>2</sub>(x) b(x)<sup>2</sup>+ ... +a<sub>n</sub>(x)b(x)<sup>n</sup>
+              </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Le résultat est évident si degré(p) &lt; degré(b), dans ce cas a<sub>0</sub>=p et tous les a<sub>i</sub> pour i &ge; 1 sont nuls. <br> On raisonne par récurrence sur le degré de p. <br> Supposons que degré(p) &ge; degré(b) <br> On commence par faire une division euclidienne de p(x) par b(x). <br> On peut donc écrire: <br> p(x)=a<sub>0</sub>(x)+q(x)b(x) <br> On a bien évidemment degré(a<sub>0</sub>) &lt; degré(b) de sorte qu'il suffit d'appliquer l'hypothèse de récurrence au polynôme q.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The result is obvious if degree(p) < degree(b), in this case a<sub>0</sub>=p and all a<sub>i</sub> for i &ge; 1 are zero. <br> We reason by induction on the degree of p. <br> Suppose that degree(p) &ge; degree(b) <br> We start by doing a Euclidean division of p(x) by b(x). <br> So we can write: <br> p(x)=a<sub>0</sub>(x)+q(x)b(x) <br> We obviously have degree(a<sub>0</sub>) < degree(b) so that it suffices to apply the induction hypothesis to the polynomial q. </div>
+                <!--demo -->
+          </div>
+          <!-- /en -->
+          <!-- /STOP -->
+          <div lang="fr"> Voici un programme Python qui effectue cette décomposition pour des polynômes à coefficients rationnels. </div>
+          <!-- /fr -->
+          <div lang="en"> Here is a Python program that performs this decomposition for polynomials with rational coefficients. </div>
+          <!-- /en -->
+          <!-- STOP CODE -->
+          <p>
+            <object data="python/polrat1.html" type="text/html" border="3" height="300" width="100%"></object>
+          </p>
+          <!-- /STOP  CODE-->
+          <div lang="fr"> Et voici un programme Julia utilisant le package Nemo qui fait la même chose : </div>
+          <!-- /fr -->
+          <div lang="en"> And here is a Julia program using the Nemo package that does the same thing: </div>
+          <!-- /en -->
+          <!-- STOP CODE -->
+          <p>
+            <object data="julia/derivpol.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+          </p>
+          <!-- /STOP  CODE-->
+          <div lang="fr">
+            <h2>Cas où b(x) est de degré 1</h2> Il résulte de ce qui précède que quand b(x) est de degré 1 les polynômes a<sub>i</sub>(x) sont des constantes.
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h2>Case where b(x) is of degree 1</h2> It follows from the above that when b(x) is of degree 1 the polynomials a<sub>i</sub>(x) are constants.
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm2"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 2</div> En particulier si b(x)=x-a, et si p(x) est de degré n, on peut écrire: p(x)=a<sub>0</sub>+a<sub>1</sub>(x-a)+a<sub>2</sub>(x-a)<sup>2</sup>+ ... +a<sub>n</sub>(x-a)<sup>n</sup>
+              <br> où a<sub>0</sub>,a<sub>1</sub>,a<sub>2</sub>, ... ,a<sub>n</sub> sont n+1 constantes réelles.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 2</div> In particular if b(x)=x-a, and if p(x) is of degree n, we can write: p(x)=a<sub>0</sub>+a<sub>1</sub>(x-a)+a<sub>2</sub>(x-a)<sup>2</sup>+ . .. +a<sub>n</sub>(x-a)<sup>n</sup>
+              <br> where a<sub>0</sub>,a<sub>1</sub>,a<sub>2</sub>, ... ,a<sub>n</sub> are n+1 real constants .
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> On peut calculer ces constantes au moyen des dérivées successives de p : </div>
+          <!-- /fr -->
+          <div lang="en"> These constants can be calculated using the successive derivatives of p: </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm3"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 3</div> Pour k entre 0 et n la constante a<sub>k</sub> est donnée par
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle a_{k}=\frac{p^{(k)}(a)}{k!} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 3</div> For k between 0 and n the constant a<sub>k</sub> is given by
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle a_{k}=\frac{p^{(k)}(a)}{k!} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <!-- STOP -->
+          <div lang="fr">
+            <div data-role="collapsible">
+              <h4>démonstration</h4> Si on veut calculer p<sup>(k)</sup>(x) au moyen du développement en somme =a<sub>0</sub>+a<sub>1</sub>(x-a)+a<sub>2</sub>(x-a)<sup>2</sup>+ ... +a<sub>n</sub>(x-a)<sup>n</sup>, on s'aperçoit que les termes d'indice i &lt; k donnent une contribution nulle car à chaque opération de dérivation on tombe le degré d'une unité. <br /> Pour les termes de degré &gt; k il donnent chacun un polynôme multiple de (x-a) ( <input type="button" value="règle de dérivation d'une puissance" onclick="go('derivcalcul.html#prop6')" data-inline="true" />). <br /> Le seul terme suceptible de donner une contribution non nulle à p<sup>(k)</sup>(a) est donc g<sub>k</sub>(x)=a<sub>k</sub>(x-a)<sup>k</sup>. <br /> Mais il est facile de voir que (g<sub>k</sub>)'(x)=ka<sub>k</sub>(x-a)<sup>k-1</sup> , g<sub>k</sub>"(x)=k(k-1)a<sub>k</sub>(x-a)<sup>k-2</sup> et finalement g<sub>k</sub>
+             <sup>(k)</sup>(x)=k(k-1)(k-2)...2.1.a<sub>k</sub>
+              <br /> Donc a<sub>k</sub>=p<sup>(k)</sup>(a)/k!
+            </div>
+            <!--demo -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div data-role="collapsible">
+              <h4>proof</h4> If we want to calculate p<sup>(k)</sup>(x) by means of the sum expansion =a<sub>0</sub>+a<sub>1</sub>(x-a)+a<sub>2</sub>(x-a)<sup>2</sup>+ ... +a<sub>n</sub>(x-a)<sup>n</sup>, we notice that the terms with index i
+              < k give a zero contribution because with each operation of derivation the degree falls by one unit. <br /> For terms of degree > k they each give a multiple polynomial of (x-a) ( <input type="button" value="rule for differentiating a power" onclick="go('derivcalcul.html#prop6')" data-inline="true " />). <br /> The only term likely to give a non-zero contribution to p<sup>(k)</sup>(a) is therefore g<sub>k</sub>(x)=a<sub>k</sub>( x-a)<sup>k</sup>. <br /> But it is easy to see that (g<sub>k</sub>)'(x)=ka<sub>k</sub>(x-a)<sup>k-1</sup> , g<sub> k</sub>"(x)=k(k-1)a<sub>k</sub>(x-a)<sup>k-2</sup> and finally g<sub>k</sub>
+             <sup>(k)</sup>(x)=k(k-1)(k-2)...2.1.a<sub>k</sub>
+              <br /> So a<sub>k</sub>=p<sup>(k)</sup>(a)/k!
+            </div>
+            <!--demo -->
+          </div>
+          <!-- /en -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h2>Conséquence pour les racines multiples</h2>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h2>Consequence for multiple roots</h2>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm4"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 4</div> p(x) désignant un polynôme quelconque à coefficients réels, il y a équivalence entre: <ul>
+                <li>a est <input type="button" value="racine multiple" onclick="go('../../nombres/complexes/fondamental.html#mult')" data-inline="true" /> d'ordre k de p(x) </li>
+                <li>p(a)=p'(a)=p"(a)=...=p<sup>(k-1)</sup>(a)=0 et p<sup>(k)</sup>(a)≠0 </li>
+              </ul>
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 4</div> p(x) being any polynomial with real coefficients, the two following statements are equivalent : <ul>
+                <li>a is <input type="button" value="multiple root" onclick="go('../../nombres/complexes/fondamental.html#multe')" data-inline="true" /> with multiplicity k of p(x) </li>
+                <li>p(a)=p'(a)=p"(a)=...=p<sup>(k-1)</sup>(a)=0 and p<sup>(k)</sup>(a)≠0 </li>
+              </ul>
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> C'est une conséquence immédiate du résultat qui précède et de la définition de la multiplicité d'une racine. </div>
+          <!-- /fr -->
+          <div lang="en"> This is an immediate consequence of the preceding result and of the definition of the multiplicity of a root. </div>
+          <!-- /en -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/derivpol/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/derivpol/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <table cellpadding="10">
+            <tr>
+              <td>
+                <div lang="fr">Création Gilles Dubois</div>
+                <div lang="en">Created by Gilles Dubois</div>
+              </td>
+              <td>
+                <div lang="fr">Janvier 2022</div>
+                <div lang="en">January 2022</div>
+              </td>
+              <td>
+                <div lang="fr">Version mobile Jquery</div>
+                <div lang="en">Mobile Jquery version</div>
+              </td>
+              <td>
+                <a href="https://www.mathjax.org">
+                  <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /footer -->
+        <ul style=list-style-type:'';>
+          <li>
+            <div lang="fr">
+              <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+            <div lang="en">
+              <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+          </li>
+          <li>
+            <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limites et intégrales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intlimites/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intlimites/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> I désigne ici un intervalle [a,b] et on considère des suites de fonctions (f<sub>n</sub>)<sub>n&isin;&naturals;</sub> supposées toutes intégrables sur I au <input type="button" value="sens de Riemann" onclick="go('intriemint.html#def1')" data-inline="true" />. On s'intéresse particulièrement au cas où les f<sub>n</sub> convergent vers une limite f sur I, la question étant de savoir si la fonction limite f est elle-même Riemann-intégrable sur I et si son intégrale s'obtient par passage à la limite, c'est à dire
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\lim_{n \to \infty}\int_{a}^{b}f_{n}(x)dx \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> Nous allons voir que la réponse dépend essentiellement du mode de convergence de la suite (f<sub>n</sub>) ainsi que d'hypothèses supplémentaires faites sur les f<sub>n</sub> ainsi que sur leur limite f. <br /> Nous commencerons par étudier des cas simples, puis nous verrons qu'avec des hypothèses faibles la réponse à notre question est négative. Nous montrerons enfin des conditions suffisantes pour que notre affirmation soit vérifiée. <br />
+          <h2>Cas d'une limite uniforme de fonctions intégrables</h2> Nous disposons du théorème suivant:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> I denotes here an interval [a,b] and we consider sequences of functions (f<sub>n</sub>)<sub>n&isin;&naturals;</sub> all assumed to be integrable over I in the <input type="button" value="Riemann sense" onclick="go('intriemint.html#def1')" data-inline="true" />. We are particularly interested in the case where the f<sub>n</sub> converge to a limit f on I, the question being to know if the limit function f is itself Riemann-integrable on I and if its integral can be obtained by passing to the limit, i.e.
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\lim_{n \to \infty}\int_{a}^{b}f_{n}(x)dx \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> We will see that the answer essentially depends on the mode of convergence of the sequence (f<sub>n</sub>) as well as on additional assumptions made on the f<sub>n</sub> as well as on their limit f. <br /> We will start by studying simple cases, then we will see that with weak hypotheses the answer to our question is negative. Finally, we will show sufficient conditions for our assertion to hold. <br />
+          <h2>Case of a uniform limit of integrable functions</h2> We have the following theorem:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si (f<sub>n</sub>) est une suite de fonctions Riemann-intégrables sur [a,b] <input type="button" value="convergeant uniformément" onclick="go('../suitefonc/suitefonccvuniforme.html#def1')" data-inline="true" /> vers f sur [a,b], alors f est Riemann-intégrable sur [a,b] et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\lim_{n \to \infty}\int_{a}^{b}f_{n}(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If (f<sub>n</sub>) is a sequence of Riemann-integrable functions on [a,b] <input type="button" value="converging uniformly" onclick="go('../suitefonc/suitefonccvuniforme.html#def1')" data-inline="true" /> to f on [a,b], then f is Riemann-integrable on [a,b] and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\lim_{n \to \infty}\int_{a}^{b}f_{n}(x)dx \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Cela résulte du fait qu'une limite uniforme de fonctions Riemann-intégrables est encore Riemann-intégrable. <br> En effet, si &epsilon; est un nombre positif donné et si f<sub>n</sub> est une fonction Riemann-intégrable sur [a,b] telle que Sup<sub>x&isin;[a,b]</sub> |f(x)-f<sub>n</sub>(x)| &lt; &epsilon; alors on peut trouver des fonctions étagées sur [a,b] u<sub>n</sub> et v<sub>n</sub> telles que u<sub>n</sub> majore f<sub>n</sub>, v<sub>n</sub> minore f<sub>n</sub> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\left ( u_{n}(x)-v_{n}(x) \right )dx\leqslant \varepsilon \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Posant alors U<sub>n</sub>=u<sub>n</sub>+&epsilon; et V<sub>n</sub>=v<sub>n</sub>-&epsilon; U<sub>n</sub> majore f et V<sub>n</sub> minore f, et on a en outre
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}\left ( U_{n}(x)-V_{n}(x) \right )dx\leqslant \varepsilon +2\varepsilon (b-a) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Dans l'inégalité ci-dessus le membre de droite peut être rendu aussi petit qu'on veut pourvu que &epsilon; soit suffisamment petit. <br> Ce premier point étant vérifié, nous avons bien entendu: <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\left | f(x)-f_{n}(x) \right |dx\leqslant (b-a)sup_{x\in [a,b]]}\left | f(x)-f_{n} (x)\right | \)
+            <!-- /FORMULE UNIV INLINE--> d'où notre résultat final.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> This follows from the fact that a uniform limit of Riemann-integrable functions is still Riemann-integrable. <br> Indeed, if &epsilon; is a given positive number and if f<sub>n</sub> is a Riemann-integrable function on [a,b] such that Sup<sub>x&isin;[a,b]</sub> |f(x) -f<sub>n</sub>(x)| &lt; &epsilon; then we can find step functions on [a,b] u<sub>n</sub> and v<sub>n</sub> such that u<sub>n</sub> is upper bound for f<sub>n</sub>, v<sub>n</sub> is lower bound for f<sub>n</sub> and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\left ( u_{n}(x)-v_{n}(x) \right )dx\leqslant \varepsilon \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Setting then U<sub>n</sub>=u<sub>n</sub>+&epsilon; and V<sub>n</sub>=v<sub>n</sub>-&epsilon; U<sub>n</sub> upper bound for f and V<sub>n</sub> lower bound for f, and we have furthermore
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \int_{a}^{b}\left ( U_{n}(x)-V_{n}(x) \right )dx\leqslant \varepsilon +2\varepsilon (b-a) \)</p>
+            <!-- /FORMULE UNIV INLINE--> In the above inequality the right hand side can be made as small as we want provided that &epsilon; be small enough. <br> This first point having been verified, we have of course: <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}\left | f(x)-f_{n}(x) \right |dx\leqslant (b-a)sup_{x\in [a,b]]}\left | f(x)-f_{n} (x)\right | \)
+            <!-- /FORMULE UNIV INLINE--> whence our final result.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce théorème s'applique donc au cas particulier des suites de fonctions étagées, réglées ou continues, et dans le cas des fonctions continues nous avons le résultat supplémentaire que la fonction limite f est elle-même continue. <h2>Cas d'une limite simple</h2> Tout d'abord il peut arriver que la <input type="button" value="limite simple" onclick="go('../suitefonc/suitefonccvsimple.html#def1')" data-inline="true" /> d'une suite de fonctions Riemann-intégrables sur un intervalle, ne soit pas elle-même Riemann-intégrable sur cet intervalle (c'est là une des motivations de la théorie de Lebesgue). <br /> Soit n → r<sub>n</sub> une 'énumération' des rationnels de l'intervalle [0,1], c'est à dire une bijection de l'ensemble &naturals; sur ces rationnels qui sont, nous le savons, en infinité <input type="button" value="dénombrable" onclick="go('../../nombres/naturels/denombrable.html#')" data-inline="true" />. <br /> Pour chaque n nous désignons par f<sub>n</sub> la <input type="button" value="fonction caractéristique" onclick="go('../../bases/applications/caracteristique.html#')" data-inline="true" /> de l'ensemble fini {r<sub>0</sub>,r<sub>1</sub>, ..,r<sub>n</sub>}. <br /> La limite simple des f<sub>n</sub> est la fonction caractéristique de [0,1]∩&rationals;, laquelle n'est pas Riemann-intégrable sur [0,1] ( <input type="button" value="revoir ce point" onclick="go('intriemint.html#contrex#')" data-inline="true" />). <br /> Nous allons maintenant illustrer, au moyen d'un contre-exemple, le fait que le résultat précédent n'est plus valable quand la convergence n'est plus uniforme, <strong>même dans le cas où la limite est intégrable</strong>. <br /> Soit I=[0,1] et désignons pour n entier n≥1 par f<sub>n</sub> la fonction caractéristique de l'intervalle ouvert ]0,1/n[ multipliée par n. <br /> Les f<sub>n</sub> sont donc étagées et
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle f_{n}(x)=\left\{\begin{matrix} n~~si~~x\in ]0,1/n[ \\ 0~~sinon \end{matrix}\right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> On vérifie immédiatement que la suite f<sub>n</sub> converge simplement vers la fonction nulle (d'intégrale nulle) sur [0,1]. <br> On vérifie, non moins facilement, que pour tout entier n on a
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \int_{0}^{1}f_{n}(x)dx=1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Voici une appliquette vous permettant de visualiser la situation: <br> Cliquer sur le bouton 'n+' pour augmenter la valeur de n jusqu'à 10 maximum. <br> Cliquer sur le bouton 'n-' pour diminuer la valeur de n.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This theorem therefore applies to the particular case of sequences of stepped, ruled or continuous functions, and in the case of continuous functions we have the additional result that the limit function f is itself continuous. <h2>Case of a simple limit</h2> First of all it can happen that the <input type="button" value="pointwise limit" onclick="go('../suitefonc/suitefonccvsimple.html#def1')" data-inline="true" /> of a sequence of Riemann-integrable functions on an interval, is not itself Riemann-integrable on this interval (this is one of the motivations of Lebesgue's theory). <br /> Let n → r<sub>n</sub> be an 'enumeration' of the rationals of the interval [0,1], ie a bijection of the set &naturals; on these rationals which are, we know, is <input type="button" value="countable" onclick="go('../../nombres/naturels/denombrable.html#')" data-inline="true" />. <br /> For each n we denote by f<sub>n</sub> the <input type="button" value="characteristic function" onclick="go('../../bases/applications/caracteristique.html#')" data-inline="true" /> of the finite set {r<sub>0</sub>,r<sub>1</sub>, ..,r<sub>n</sub>} . <br /> The simple limit of f<sub>n</sub> is the characteristic function of [0,1]∩&rationals;, which is not Riemann-integrable on [0,1] ( <input type="button" value="review this point" onclick="go('intriemint.html#contrexe')" data-inline="true" />). <br /> We will now illustrate, by means of a counter-example, the fact that the previous result is no longer valid when the convergence is no longer uniform, <strong>even in the case where the limit is integrable</strong> . <br /> Let I=[0,1] and denote for n integer n≥1 by f<sub>n</sub> the characteristic function of the open interval ]0,1/n[ multiplied by n. <br /> The f<sub>n</sub> are therefore step functions and
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle f_{n}(x)=\left\{\begin{matrix} n~~if~~x\in ]0,1/n[ \\ 0~~else \end{matrix}\right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> We immediately check that the sequence f<sub>n</sub> simply converges to the zero function (with zero integral) on [0,1]. <br> We verify, no less easily, that for any integer n we have
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \int_{0}^{1}f_{n}(x)dx=1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Here is an applet allowing you to visualize the situation: <br> Click on the 'n+' button to increase the value of n up to a maximum of 10. <br> Click on the 'n-' button to decrease the value of n.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace1.nplus()'>n+</button>
+        <button type='button' id='myButton1' onClick='nameSpace1.nminus()'>n-</button>
+        <script src="js/intlim.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Cas d'une suite monotone</h2> Le résultat suivant s'inspire du théorème dit de 'convergence dominée' de la théorie de l'intégration de Lebesgue (non étudiée ici). Il constitue une forme adaptée aux fonctions Riemann-intégrables. <br /> Dans le contre-exemple donné ci-dessus, tout est fondé sur le fait que les fonctions f<sub>n</sub> montent de plus en plus haut et restent à un niveau élevé de moins en moins longtemps. Nous allons maintenant définir des conditions restrictives pôur étendre le théorème de convergence uax limites simples.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of a monotonic sequence</h2> The following result is inspired by the so-called 'dominated convergence' theorem of Lebesgue's integration theory (not studied here). It constitutes a suitable form for Riemann-integrable functions. <br /> In the counter-example given above, everything is based on the fact that the functions f<sub>n</sub> go higher and higher and remain at a high level for shorter and shorter time. We are now going to define restrictive conditions to extend the validity of the convergence theorem to pointwise limits.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit (f<sub>n</sub>) une suite <strong>croissante majorée</strong> de fonctions numériques définies et Riemann-intégrables sur un <strong>intervalle</strong> [a,b] convergeant simplement vers une fonction f sur [a,b]. <br> Dans ces conditions f est également Riemann-intégrable sur [a,b] et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\lim_{n \to \infty}\int_{a}^{b}f_{n}(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> Le théorème vaut évidemment pour les suites décroissantes minorées.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Let (f<sub>n</sub>) be an <strong>upper bounded increasing</strong> sequence of definite and Riemann-integrable numerical functions on an <strong>interval</strong> [a,b] converging pointwise to a function f on [a,b]. <br> Under these conditions f is also Riemann-integrable on [a,b] and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \int_{a}^{b}f(x)dx=\lim_{n \to \infty}\int_{a}^{b}f_{n}(x)dx \)
+            <!-- /FORMULE UNIV INLINE--> This result is, of course, valid too for decreasing lower bounded sequences.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve résulte du fait qu'un intervalle fermé borné est compact. Il suffit alors d'appliquer le <input type="button" value="premier theorème de Dini" onclick="go('../suitefonc/suitefonccvuniforme.html#thm9')" data-inline="true" />. La convergence est alors uniforme de sorte qu'il suffit d'appliquer le théorème 1. </div>
+        <!-- /fr -->
+        <div lang="en"> The proof result from the fact that a closed bounded interval is compact. It suffices then to apply <input type="button" value="Dini's first theorem" onclick="go('../suitefonc/suitefonccvuniforme.html#thm9')" data-inline="true" />. So the convergence is actually uniform and we can apply theorem 1. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Extension aux intégrales impropres</h2> Les résultats ci-dessus ne s'étendent malheureusement pas aux intégrales sur des intervalles non bornés. <br> Désignons par exemple par f<sub>n</sub> la fonction caractéristique de l'intervalle ]0,n[ multipliée par 1/n.
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle f_{n}(x)=\left\{\begin{matrix} \frac{1}{n} ~~si~~x\in [0,n] \\ 0 ~~sinon \end{matrix}\right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Il est clair que la suite (f<sub>n</sub>) converge uniformément vers 0 sur [0,+&infin;[. <br> Il est non moins clair que
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \int_{0}^{\infty}f_{n}(x)dx=1 \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Extension to improper integrals</h2> The above results unfortunately do not extend to integrals over unbounded intervals. <br> Let us denote for example by f<sub>n</sub> the characteristic function of the interval ]0,n[ multiplied by 1/n.
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle f_{n}(x)=\left\{\begin{matrix} \frac{1}{n} ~~if~~x\in [0,n] \\ 0 ~~else \end{matrix}\right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> It is clear that the sequence (f<sub>n</sub>) converges uniformly to 0 on [0,+&infin;[. <br> It is no less clear that
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \int_{0}^{\infty}f_{n}(x)dx=1 \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intlimites/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intlimites/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

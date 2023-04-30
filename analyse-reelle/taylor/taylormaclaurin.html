@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Formule de Maclaurin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/taylormaclaurin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/taylormaclaurin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Si a=0, alors la formule de Taylor prend le nom de formule de Maclaurin.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> If a=0, then Taylor's formula is renamed Maclaurin's formula.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Dans ce cas l'approximation d'ordre n de Maclaurin est le polynôme </div>
+        <!-- /fr -->
+        <div lang="en"> In this case the Maclaurin approximation of order n is the polynomial </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle T(n,f)(x)=\sum_{k=0}^{n}\frac{f^{k}(0)}{k!}x^{k} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> et le reste de Maclaurin est R(n,f)(x)=f(x)-T(n,f)(x). </div>
+        <!-- /fr -->
+        <div lang="en"> and the Maclaurin remainder is R(n,f)(x)=f(x)-T(n,f)(x). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Dans le cas où f est de classe C<sup>n+1</sup> sur [0,b] (resp. [b,0]) une majoration du reste sur l'intervalle [0,b] (resp [b,0]) est
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left | R(n,f)(x) \right |\leqslant M\frac{|b|^{n+1}}{(n+1)!} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle M=\sup_{x\in [0,b]}\left | f^{(n+1)}(x) \right | \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> In the case where f is of class C<sup>n+1</sup> on [0,b] (resp. [b,0]) an upper bound of the remainder on the interval [0,b] (resp [ b,0]) is
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left | R(n,f)(x) \right |\leqslant M\frac{|b|^{n+1}}{(n+1)!} \)</p>
+            <!-- /INLINE UNIV FORMULA--> where
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle M=\sup_{x\in [0,b]}\left | f^{(n+1)}(x) \right | \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Exemple d'application</h2> a étant un nombre réel quelconque nous cherchons une approximation de la fonction f: x &rarr; (1+x)<sup>a</sup> au voisinage de 0. <br> On a f'(x)=a(1+x)<sup>a-1</sup>. <br> f"(a)=a(a-1)(1+x)<sup>a-2</sup>
+          <br> Et par récurrence f<sup>(n)</sup>(x) = a(a-1)(a-n+1)(1+x)<sup>a-n</sup>. <br> En appliquant au point 0, l'approximation de Maclaurin de f est donc
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Example of application</h2> a being any real number we seek an approximation of the function f: x &rarr; (1+x)<sup>a</sup> close to 0. <br> We have f'(x)=a(1+x)<sup>a-1</sup>. <br> f"(a)=a(a-1)(1+x)<sup>a-2</sup>
+          <br> And by induction f<sup>(n)</sup>(x) = a(a-1)(a-n+1)(1+x)<sup>a-n</sup>. <br> Applying to point 0, the Maclaurin approximation of f is therefore
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle T(x)=1+ax+\frac{a(a-1)}{2!}x^{2}+\frac{a(a-1)(a-2)}{3!}x^{3}+...+\frac{a(a-1)(a-2)...(a-n+1)}{n!}x^{n} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/taylormaclaurin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/taylormaclaurin/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

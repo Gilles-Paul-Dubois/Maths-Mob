@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>foncetagees1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">random 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Subdivision: 
+    </span><span class="s0">&quot;&quot;&quot;Modélisation des subdivisions d'un intervalle &quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, a, b, type, n, points=[]): 
+        </span><span class="s0">&quot;&quot;&quot;le constructeur 
+        a: extrêmité gauche 
+        b:extrêmité droite 
+        type: code type 1 arithmétique, 2 géométrique, 3 aléatoire, 4 précisée 
+        n: nombres de points extrêmités comprises moins une unité 
+        points: éventuellement la suite des points sans a ni b dans le cas du type 4&quot;&quot;&quot;</span><span class="s1"> 
+        self.a = a 
+        self.b = b 
+        self.type = type 
+        self.n = n 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">1</span><span class="s1">:  </span><span class="s0"># arithmétique</span><span class="s1"> 
+            r = (b - a) * (</span><span class="s3">1.0 </span><span class="s1">/ n)  </span><span class="s0">#la raison de la progression arithmétique</span><span class="s1"> 
+            self.points = [a + i * r </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+            self.points += [b] 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">2</span><span class="s1">:  </span><span class="s0"># géométrique</span><span class="s1"> 
+            q = (b * </span><span class="s3">1.0 </span><span class="s1">/ a) ** (</span><span class="s3">1.0 </span><span class="s1">/ n)  </span><span class="s0">#la raison de la progression géométrique</span><span class="s1"> 
+            self.points = [a * (q ** i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+            self.points += [b] 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">3</span><span class="s1">:  </span><span class="s0"># aléatoire</span><span class="s1"> 
+            points = [random.uniform(a, b) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, n)] 
+            points.sort() 
+            self.points = [a] + points + [b] 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">4</span><span class="s1">:  </span><span class="s0"># points fournis sans les extrêmités</span><span class="s1"> 
+            self.points = [a] + points + [b] 
+ 
+    </span><span class="s2">def </span><span class="s1">pas(self): 
+        </span><span class="s0">&quot;&quot;&quot;Calcul du pas&quot;&quot;&quot;</span><span class="s1"> 
+        p = self.b - self.a 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            d = (self.points[i + </span><span class="s3">1</span><span class="s1">] - self.points[i]) 
+            </span><span class="s2">if </span><span class="s1">d &lt; p: 
+                p = d 
+        </span><span class="s2">return </span><span class="s1">p 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;la borne supérieure&quot;&quot;&quot;</span><span class="s1"> 
+        p = [x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">other.points </span><span class="s2">if </span><span class="s1">x </span><span class="s2">not in </span><span class="s1">self.points]  </span><span class="s0"># éviter les doublons</span><span class="s1"> 
+        q = self.points + p  </span><span class="s0"># réunir tous les points</span><span class="s1"> 
+        q.sort()  </span><span class="s0"># trier</span><span class="s1"> 
+        q = q[</span><span class="s3">1</span><span class="s1">:-</span><span class="s3">1</span><span class="s1">] 
+        </span><span class="s2">return </span><span class="s1">Subdivision(self.a, self.b, </span><span class="s3">4</span><span class="s1">, len(q) + </span><span class="s3">1</span><span class="s1">, q) 
+ 
+    </span><span class="s2">def </span><span class="s1">ordre(self, x):  </span><span class="s0"># trouve dans quel sous-intervalle se trouve x</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n + </span><span class="s3">1</span><span class="s1">): 
+            </span><span class="s2">if </span><span class="s1">x &lt;= self.points[k]: 
+                </span><span class="s2">return </span><span class="s1">k - </span><span class="s3">1</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">FonctionEtagee(): 
+    </span><span class="s0">&quot;&quot;&quot;Modélisation des fonctions étagées - Model for step functions &quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, S, V): 
+        self.S = S  </span><span class="s0"># la subdivision - the partition</span><span class="s1"> 
+        self.V = V  </span><span class="s0"># la liste des valeurs - the list of values</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">valeur(self, x):  </span><span class="s0"># valeur de la fonction en x - value of the function at x</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.V[(self.S).ordre(x)] 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, y):  </span><span class="s0"># produit par un scalaire product by a scalar</span><span class="s1"> 
+        W = [y * v </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.V] 
+        </span><span class="s2">return </span><span class="s1">FonctionEtagee(self.S, W) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other):  </span><span class="s0"># somme de deux fonctions étagées - sum of two step functions</span><span class="s1"> 
+        T = self.S + other.S 
+        M = [(T.points[i] + T.points[i + </span><span class="s3">1</span><span class="s1">]) / </span><span class="s3">2 </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, T.n)]  </span><span class="s0">#les milieux des segments the middle point of the segments </span><span class="s1"> 
+        W = [self.valeur(m) + other.valeur(m) </span><span class="s2">for </span><span class="s1">m </span><span class="s2">in </span><span class="s1">M]  </span><span class="s0">#valeurs aux milieux</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">FonctionEtagee(T, W) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function &quot;&quot;&quot;</span><span class="s1"> 
+    C = Subdivision(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">10</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)  </span><span class="s0"># arithmétique milieu - arithmetic middle point</span><span class="s1"> 
+    E = FonctionEtagee(C, [i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">10</span><span class="s1">)]) 
+    print(E.valeur(</span><span class="s3">0.5</span><span class="s1">)) 
+    F = </span><span class="s3">2 </span><span class="s1">* E 
+    print(F.valeur(</span><span class="s3">0.5</span><span class="s1">)) 
+    G = E + E 
+    print(G.valeur(</span><span class="s3">0.5</span><span class="s1">)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">&quot;__main__&quot;</span><span class="s1">: 
+    main(); 
+ 
+ 
+ 
+ 
+</span></pre>
+</body>
+</html>

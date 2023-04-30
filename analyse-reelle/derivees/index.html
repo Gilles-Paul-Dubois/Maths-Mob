@@ -1,114 +1,442 @@
-
-
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="utf-8" />
-      <title>Dérivées</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="../../css/themes/myown.css" />
-      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
-      <link href="../../css/myown.css" rel="stylesheet">
-      <script src="../../js/jquery-1.11.3.js"></script>
-      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-      <script src="../../js/custom.js"></script>
-
- 
-   </head>
-   <body style="overflow: auto; "class="fr">
-      <script> window.onload=get();</script>
-      <a name="beg"></a>
-      <div data-role="page" data-theme="f">
-         <div data-role="header">
-            <table>
-               <tr>
-                  <td>Choisissez votre langue !</td>
-                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-                  <td>Choose your language !</td>
-                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-               </tr>
-            </table>
-         </div>
-         <!-- /header -->
-         <div style="overflow: auto; "  data-role="content" data-theme="f">
-            <div lang="fr">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Liens externes" onclick="go('liens.html')" /></li>
-                     <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
- 
-            </div>
-            <div lang="en">
-               <div>
-                  <ul style=list-style-type:'';>
-                  
-                      <li><input type="button" value="External links" onclick="go('liens.html')" /></li>
-                     <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-  
-             
-            </div>
-            
-            <div lang="fr">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
-                     <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-            </div>
-            <!-- /fr --> 
-          <div lang="en">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
-                     <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-            </div>
-            <!-- /en -->                               
-         </div>
-         <!-- /content -->
-         <div data-role="footer">
-            <table cellpadding="10">
-               <tr>
-                  <td>
-                     <div lang="fr">Création Gilles Dubois</div>
-                     <div lang="en">Created by Gilles Dubois</div>
-                  </td>
-                  <td>
-                     <div lang="fr">Janvier 2022</div>
-                     <div lang="en">January 2022</div>
-                  </td>
-                  <td>
-                     <div lang="fr">Version mobile Jquery</div>
-                     <div lang="en">Mobile Jquery version</div>
-                  </td>
-               </tr>
-            </table>
-         </div>
-         <!-- /footer -->
-         <ul style=list-style-type:'';>
-            <li>
-               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-            </li>
-            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-         </ul>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dérivées</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
       </div>
-      <!-- /page -->
-   </body>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Coefficient dérivé en un point" onclick="go('derivcoef.html')" />
+              </li>
+              <li>
+                <input type="button" value="Fonction dérivée" onclick="go('derivfoncderiv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Calcul des dérivées" onclick="go('derivcalcul.html')" />
+              </li>
+              <li>
+                <input type="button" value="Dérivée d'une réciproque" onclick="go('derivreciproque.html')" />
+              </li>
+              <li>
+                <input type="button" value="Détermination des extrema" onclick="go('derivextrema.html')" />
+              </li>
+              <li>
+                <input type="button" value="Théorème de Rolle" onclick="go('derivrolle.html')" />
+              </li>
+              <li>
+                <input type="button" value="Théorème des accroissements finis" onclick="go('derivaccfinis.html')" />
+              </li>
+              <li>
+                <input type="button" value="Théorème de Cauchy" onclick="go('derivcauchy.html')" />
+              </li>
+              <li>
+                <input type="button" value="Etude des variations" onclick="go('derivvariation.html')" />
+              </li>
+              <li>
+                <input type="button" value="Théorème de Darboux" onclick="go('derivdarboux.html')" />
+              </li>
+              <li>
+                <input type="button" value="Dérivées d'ordres supérieurs" onclick="go('derivordsup.html')" />
+              </li>
+              <li>
+                <input type="button" value="Règle de l'Hospital" onclick="go('derivlhospital.html')" />
+              </li>
+              <li>
+                <input type="button" value="Formule de Leibniz" onclick="go('derivleibniz.html')" />
+              </li>
+              <li>
+                <input type="button" value="Dérivées des polynômes" onclick="go('derivpol.html')" />
+              </li>
+              <li>
+                <input type="button" value="Dérivée d'une limite" onclick="go('derivsuite.html')" />
+              </li>
+              <li>
+                <input type="button" value="Dérivée d'une série" onclick="go('derivserie.html')" />
+              </li>
+              <li>
+                <input type="button" value="Liens externes" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Derivative at a point" onclick="go('derivcoef.html')" />
+              </li>
+              <li>
+                <input type="button" value="Derivative function" onclick="go('derivfoncderiv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Computation of derivatives" onclick="go('derivcalcul.html')" />
+              </li>
+              <li>
+                <input type="button" value="Derivative of an inverse function" onclick="go('derivreciproque.html')" />
+              </li>
+              <li>
+                <input type="button" value="Finding extrema" onclick="go('derivextrema.html')" />
+              </li>
+              <li>
+                <input type="button" value="Rolle's theorem" onclick="go('derivrolle.html')" />
+              </li>
+              <li>
+                <input type="button" value="Mean Value theorem" onclick="go('derivaccfinis.html')" />
+              </li>
+              <li>
+                <input type="button" value="Cauchy's Mean Value theorem" onclick="go('derivcauchy.html')" />
+              </li>
+              <li>
+                <input type="button" value="Study of variations" onclick="go('derivvariation.html')" />
+              </li>
+              <li>
+                <input type="button" value="Darboux's theorem " onclick="go('derivdarboux.html')" />
+              </li>
+              <li>
+                <input type="button" value="Successive differentiation" onclick="go('derivordsup.html')" />
+              </li>
+              <li>
+                <input type="button" value="L'Hospital's rule" onclick="go('derivlhospital.html')" />
+              </li>
+              <li>
+                <input type="button" value="Leibniz (product) rule" onclick="go('derivleibniz.html')" />
+              </li>
+              <li>
+                <input type="button" value="Derivatives of polynomials" onclick="go('derivpol.html')" />
+              </li>
+              <li>
+                <input type="button" value="Derivative of a limit" onclick="go('derivsuite.html')" />
+              </li>
+              <li>
+                <input type="button" value="Derivative of a series" onclick="go('derivserie.html')" />
+              </li>
+              <li>
+                <input type="button" value="External links" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <div lang="fr">
+          <h2> Galerie des portraits</h2> Voici les deux contributeurs principaux au calcul différentiel, du moins à ses débuts.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Portrait Gallery</h2> Here are the two main contributors to differential calculus, at least in its early days.
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font color="#FFFFFF">Isaac Newton (1643/1727-UK)</font>
+            </td>
+            <td>
+              <font color="#FFFFFF">Wilhelm Leibniz (1646/1716-DE)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/GodfreyKneller-IsaacNewton-1689.jpg" width="203" height="280" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/200px-Gottfried_Wilhelm_von_Leibniz.jpg" width="200" height="253" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Approche intuitive</h2>
+          <h3>Notion de vitesse moyenne</h3> Considérons un point mobile M(t) en mouvement rectiligne, qui se déplace donc sur un axe orienté. Sa position est repérée à tout instant t par son abscisse x(t) sur cet axe.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Intuitive approach</h2>
+          <h3>Notion of average speed</h3> Consider a mobile point M(t) in rectilinear motion, which therefore moves on an oriented axis. Its position is identified at any instant t by its abscissa x(t) on this axis.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> La <b>
+              <i>'distance algébrique'</i>
+            </b> parcourue entre les instants t<sub>0</sub> et t est donc:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle x\left ( t \right )-x\left ( t_{0} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> The <b>
+              <i>'algebraic distance'</i>
+            </b> traveled between times t<sub>0</sub> and t is therefore:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle x\left ( t \right )-x\left ( t_{0} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> La <b>
+              <i>'vitesse moyenne'</i>
+            </b> du mobile entre les instants t<sub>0</sub> et t est donc:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{x\left ( t \right )-x\left ( t_{0} \right )}{t-t_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> The <b>
+              <i>'average speed'</i>
+            </b> of the mobile between times t<sub>0</sub> and t is therefore:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{x\left ( t \right )-x\left ( t_{0} \right )}{t-t_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Exemple</h4> Simulation de la chute d'un corps dans le vide. <br> En abscisses l'axe des temps gradué en secondes. <br> En ordonnées les distances en mètres. <br> La loi est x(t)=-(1/2)gt<sup>2</sup> où (g est l'accélération de la pesanteur soit environ 9.81 m/s<sup>2</sup>) <br> Appuyer sur le bouton 'Go' pour simuler le lâcher du corps. <br> Appuyer sur 'Stop/Restart' si vous voulez arrêter le processus de chute pour voir les paramètres. <br> Appuyer sur 'Stop/Restart' pour reprendre le processus de chute où vous l'avez arrêté. <br> Le bouton 'Go' vous permet également de recommencer un nouveau lâcher, après la fin du processus. <br> L'abscisse du mobile en m et sa vitesse moyenne en m/s depuis le départ sont affichés pour les temps correspondant à des secondes. <br> Cette vitesse moyenne est la pente de la droite tracée en rouge.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Example</h4> Simulation of the fall of a body on earth in the void. <br> On the abscissa the time axis graduated in seconds. <br> In ordinates the distances in meters. <br> The law is x(t)=-(1/2)gt<sup>2</sup> where (g is the acceleration due to gravity or approximately 9.81 m/s<sup>2</sup>) <br> Press the 'Go' button to simulate letting go of the body. <br> Press 'Stop/Restart' if you want to stop the dropping process to see the settings. <br> Press 'Stop/Restart' to resume the dropping process where you left off. <br> The 'Go' button also allows you to start a new release, after the process is complete. <br> The abscissa of the mobile in m and its average speed in m/s since the start are displayed for the times corresponding to seconds. <br> This average speed is the slope of the line drawn in red.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/deriv1.js"></script>
+        <button type='button' id='myButton11' onClick='nameSpace1.go()'>Go!</button>
+        <button type='button' id='myButton12' onClick='nameSpace1.pause()'>Stop/Restart</button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Même chose que la précédente, mais cette fois ce sont les vitesses moyennes entre deux instants consécutifs t et t+&delta;t qui s'affichent. <br> Ces vitesses moyennes sont les pentes des sécantes à la courbe représentative de x(t) passant par les points (t,x(t)),(t+&delta;,x(t+&delta;)). <br> Vous pouvez fixer &delta; au début de la descente avec le curseur entre 0.2 et 1. <br> Nous sommes ici en présence d'un mouvement à vitesse non constante, ou encore d'un mouvement accéléré. </div>
+        <!-- /fr -->
+        <div lang="en"> Same thing as the previous one, but this time it is the average speeds between two consecutive times t and t+&delta;t that are displayed. <br> These average velocities are the slopes of the secants to the representative curve of x(t) passing through the points (t,x(t)),(t+&delta;,x(t+&delta;)). <br> You can set &delta; at the beginning of the descent with the cursor between 0.2 and 1. <br> We are here in the presence of a movement at a non-constant speed, or a so-called 'accelerated' movement. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/deriv2.js"></script>
+        <button type='button' id='myButton21' onClick='nameSpace2.go()'>Go!</button>
+        <button type='button' id='myButton22' onClick='nameSpace2.pause()'>stop/restart</button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Notons qu'une vitesse moyenne correspond exactement à un <input type="button" value="taux de variation" onclick="go('../foncnum/foncnummonotones.html#def6')" data-inline="true" />. <h3>Vitesse instantanée</h3> Nous voulons maintenant, donner un sens à la vitesse précise <strong>
+            <em>'à l'instant t<sub>0</sub>' </em>
+          </strong> de notre mobile en chute libre. <br /> Il est donc logique de calculer la vitesse moyenne entre l'instant t<sub>0</sub> et un instant t de plus en plus rappoché de t<sub>0</sub>. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Note that an average speed corresponds exactly to a <input type="button" value="rate of change" onclick="go('../foncnum/foncnummonotones.html#def6')" data-inline="true" />. <h3>Instant speed</h3> We now want to make sense of the precise speed <strong>
+            <em>'at instant t<sub>0</sub>' </em>
+          </strong> of our mobile in free fall. <br /> It is therefore logical to calculate the average speed between the instant t<sub>0</sub> and an instant t increasingly closer to t<sub>0</sub>. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Sachant que la vitesse moyenne est un taux de variation, la vitesse instantanée apparaîtra donc comme la limite d'un taux de variation entre deux instants (si cette limite existe, bien sûr).
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v\left ( t_{0} \right )= \lim_{t \to t_{0},t\neq t_{0}}\frac{x\left ( t \right )-x\left ( t_{0} \right )}{t-t_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> Knowing that the average speed is a rate of change, the instantaneous speed will therefore appear as the limit of a rate of change between two instants (if this limit exists, of course).
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v\left ( t_{0} \right )= \lim_{t \to t_{0},t\neq t_{0}}\frac{x\left ( t \right )-x\left ( t_{0} \right )}{t-t_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Calculer une vitesse instantanée revient donc à <input type="button" value="lever une indétermination" onclick="go('../foncnum/foncnumlimopalg.html#quot')" data-inline="true" /> de la forme \( \frac{0}{0} \). <br> Dans notre cas si g désigne l'accélération de la pesanteur g=9.81.. \( \Delta x\left ( t_{0},t \right )=\frac{1}{2}g\left ( t_{0}+t \right ) \) d'où \( v(t_{0})=g\times t_{0}\) </div>
+        <!-- /fr -->
+        <div lang="en"> Calculating an instantaneous speed therefore amounts to <input type="button" value="raising an indeterminacy" onclick="go('../foncnum/foncnumlimopalg.html#quot')" data-inline="true" /> of the form \( \frac{0}{0} \). <br> In our case if g designates the acceleration of gravity g=9.81.. \( \Delta x\left ( t_{0},t \right )=\frac{1}{2}g\left ( t_{0}+t \right ) \) hence \( v(t_{0})=g\times t_{0}\) </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Graphiquement, la vitesse instantanée sera représentée par la pente de la position limite de la sécante à la courbe x(t) entre les points d'abscisse t et t<sub>0</sub> lorsque t tend vers t<sub>0</sub>, c'est exactement ce qu'on appelle une 'tangente'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> Graphically, the instantaneous speed will be represented by the slope of the limit position of the secant to the curve x(t) between the points of abscissa t and t<sub>0</sub> when t tends towards t<sub>0 </sub> is exactly what is called a 'tangent'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Même utilisation que les deux précédentes, mais cette fois ce sont les vitesses instantanées (pentes des tangentes tracées en rouge) qui s'affichent. </div>
+        <!-- /fr -->
+        <div lang="en"> Same use as the two previous ones, but this time it is the instantaneous velocities (slopes of the tangents drawn in red) that are displayed. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/deriv3.js"></script>
+        <button type='button' id='myButton31' onClick='nameSpace3.go()'>Go!</button>
+        <button type='button' id='myButton32' onClick='nameSpace3.pause()'>Stop/Restart</button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Il peut être intéressant de comparer les résultats affichés pour les vitesses par cette appliquette (vitesses instantanées) et l'appliquette précédente (vitesses moyennes entre deux instants distants d'une seconde). <br> On constatera que plus t augmente et plus la différence relative entre la vitesse moyenne et la vitesse instantanée diminue. <br> Cela est dû au fait que pour des valeurs de t de plus en plus grandes la courbure de la parabole diminue et, de ce fait, la sécante entre deux instants qui diffèrent d'une unité tend à se confondre avec la tangente. <h2>Généralisation</h2> La dérivée, que nous allons présenter dans les pages qui suivent, est un outil pour modéliser des taux de variation instantanés, comme: <ul>
+            <li>la vitesse d'un mobile (exemple que nous avons développé ci-dessus)</li>
+            <li>une accélération (comme variation instantanée d'une vitesse)</li>
+            <li>le débit d'un fleuve ou d'un robinet</li>
+            <li>une intensité électrique (variation instantanée d'une quantité d'électricté)</li>
+            <li>la pente d'une tangente</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It may be interesting to compare the results displayed for the speeds by this applet (instantaneous speeds) and the previous applet (average speeds between two instants one second apart). <br> It will be seen that the more t increases, the more the relative difference between the average speed and the instantaneous speed decreases. <br> This is due to the fact that for larger and larger values ​​of t the curvature of the parabola decreases and, as a result, the secant between two instants which differ by one unit tends to merge with the tangent. <h2>Generalization</h2> The derivative, which we will present in the following pages, is a tool for modeling instantaneous rates of change, such as: <ul>
+            <li>the speed of a mobile (example we developed above)</li>
+            <li>an acceleration (as an instantaneous variation of a speed)</li>
+            <li>the flow of a river or a tap</li>
+            <li>an electrical intensity (instantaneous variation of a quantity of electricity)</li>
+            <li>the slope of a tangent</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
 </html>
-

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Règle de Raabe-Duhamel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seriesraabe/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seriesraabe/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Historique</h2> La paternité de ce résultat est fort discutée (disputée). Certains l'attribuent à De Morgan (UK-1806-1871), d'autres à Darboux (FR-1842-1917), d'autres enfin à Kummer (DE-1810-1893 ), mais on le rencontre le plus souvent sous le nom de <b>
+            <i>'règle (ou test) de Raabe-Duhamel'</i>
+          </b>. Nous avons choisi de nous conformer à l'usage le plus répandu. Il est d'ailleurs tout à fait possible que tous ces mathématiciens aient trouvé ce résultat, qui est essentiellement un lemme technique pour l'étude des séries hypergéométriques, indépendamment les uns des autres et sans avoir connaissance de résultats antérieurs. <h2>Galerie des portraits</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>History</h2> The paternity of this result is highly debated (disputed). Some attribute it to De Morgan (UK-1806-1871), others to Darboux (FR-1842-1917), others finally to Kummer (DE-1810-1893), but it is most often found under the name of <b>
+            <i>'Raabe-Duhamel rule (or test)'</i>
+          </b>. We have chosen to conform to the most widespread usage. It is also quite possible that all these mathematicians found this result, which is essentially a technical lemma for the study of hypergeometric series, independently of each other and without knowledge of previous results. <h2>Portrait gallery</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <div style="overflow: scroll; ">
+          <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+            <tr>
+              <td>
+                <font color="#FFFFFF">
+                  <div align="center">Jean-Marie Duhamel (FR -1797-1872)</div>
+                </font>
+              </td>
+              <td>
+                <font color="#FFFFFF">
+                  <div align="center">Joseph Raabe (CH-1801-1859)</div>
+                </font>
+              </td>
+              <td>
+                <font color="#FFFFFF">
+                  <div align="center">Gaston Darboux (FR-1842-1917)</div>
+                </font>
+              </td>
+              <td>
+                <font color="#FFFFFF">
+                  <div align="center">Ernst Kummer (DE-1810-1893)</div>
+                </font>
+              </td>
+              <td>
+                <font color="#FFFFFF">
+                  <div align="center">Auguste de Morgan (UK-1806-1871)</div>
+                </font>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">
+                <img src="images/duhamel.jpg" width="268" height="326" border="0" alt="">
+              </td>
+              <td align="center">
+                <img src="images/Joseph_Ludwig_Raabe.jpeg" width="220" height="316" border="0" alt="">
+              </td>
+              <td align="center">
+                <img src="images/250px-Darboux.jpg" width="250" height="335" border="0" alt="">
+              </td>
+              <td align="center">
+                <img src="images/Ernst_Eduard_Kummer.jpg" width="245" height="326" border="0" alt="">
+              </td>
+              <td align="center">
+                <img src="images/180px-De_Morgan_Augustus.jpg" width="180" height="216" border="0" alt="">
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Le théorème</h2> Nous commençons par le résultat préliminaire suivant:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The theorem</h2> We start with the following preliminary result:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit (s,u) la série de terme général: u<sub>n</sub>=1/n<sup>s</sup> (n&ge;1) <br> Alors (s,u) converge si s&gt;1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let (s,u) be the series of general term: u<sub>n</sub>=1/n<sup>s</sup> (n&ge;1) <br> Then (s,u) converges if s>1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve résulte d'une application directe du <input type="button" value="test de condensation" onclick="go('seriescondensation.html#')" data-inline="true" /> de Cauchy. <br /> Nous aurons également besoin du résultat suivant: </div>
+        <!-- /fr -->
+        <div lang="en"> The proof results from a direct application of Cauchy's <input type="button" value="condensation test" onclick="go('seriescondensation.html#')" data-inline="true" />. <br /> We will also need the following result: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Pour n&rarr;&infin; on a: <br> (1+1/n)<sup>-k</sup>=1-k/n+O(1/n²)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> For n&rarr;&infin; we have: <br> (1+1/n)<sup>-k</sup>=1-k/n+O(1/n²)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat est facile à montrer avec peu de moyens lorsque k est entier. Pour le démontrer en toute généralité il faut faire appel à des théorèmes élémentaires de calcul différentiel non encore développés dans ce cours. Nous admettrons donc ce résultat dont la preuve ne présente aucune difficulté quand on connait la notion de dérivée. <br> La règle de Raabe-Duhamel est essentiellement un test de comparaison avec les séries 1/n<sup>s</sup>. Nous l'énonçons maintenant: </div>
+        <!-- /fr -->
+        <div lang="en"> This result is easy to show with few means when k is an integer. To demonstrate it in all generality, it is necessary to appeal to elementary theorems of differential calculus not yet developed in this course. We will therefore accept this result, the proof of which presents no difficulty when we know the notion of derivative. <br> The Raabe-Duhamel rule is essentially a comparison test with the 1/n<sup>s</sup> series. We now state it: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Soit (s,u) une série pour laquelle lim<sub>n&rarr;&infin;</sub> |u<sub>n+1</sub>/u<sub>n</sub>|=1 <br> (s,u) sera absolument convergente s'il existe un réel strictement positif c tel que:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \limsup_{n \to \infty }n\left ( \left| \frac{u_{n+1}}{u_{n}}-1\right| \right )=-1-c \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> Let (s,u) be a series for which lim<sub>n&rarr;&infin;</sub> |u<sub>n+1</sub>/u<sub>n</sub>|=1 <br> (s,u) will be absolutely convergent if there exists a strictly positive real c such that:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \limsup_{n \to \infty }n\left ( \left| \frac{u_{n+1}}{u_{n}}-1\right| \right )=-1-c \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Considérons la série (t,v) de terme général: <br> v<sub>n</sub>=An<sup>-1-c/2</sup>
+            <br> où A est une constante quelconque. <br> Compte tenu de la remarque préliminaire nous avons: <br> v<sub>n+1</sub>/v<sub>n</sub>=1-(1+c/2)/n+O(1/n²) <br> Lorsque n → ∞ nous avons: <br> n(v<sub>n+1</sub>/v<sub>n</sub>-1) → -1-c/2 <br> Nous pouvons donc trouver N tel que pour n &gt;m <br> |u<sub>n+1</sub>/u<sub>n</sub>| ≤ v<sub>n+1</sub>/v<sub>n</sub>
+            <br> Un choix convenable de la constante A nous permet d'assurer que: <br> |u<sub>n</sub>| &lt; v<sub>n</sub>
+            <br> Et la convergence absolue de la série (s,u) résulte de la convergence de la série (t,v).
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Consider the series (t,v) with general term: <br> v<sub>n</sub>=An<sup>-1-c/2</sup>
+            <br> where A is any constant. <br> Given the preliminary remark we have: <br> v<sub>n+1</sub>/v<sub>n</sub>=1-(1+c/2)/n+O(1/n²) <br> When n → ∞ we have: <br> n(v<sub>n+1</sub>/v<sub>n</sub>-1) → -1-c/2 <br> So we can find N such that for n >m <br> |u<sub>n+1</sub>/u<sub>n</sub>| ≤ v<sub>n+1</sub>/v<sub>n</sub>
+            <br> A suitable choice of the constant A allows us to ensure that: <br> |u<sub>n</sub>| < v<sub>n</sub>
+              <br> And the absolute convergence of the series (s,u) results from the convergence of the series (t,v).
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous avons donc le corollaire suivant (en pratique plus utile que le résultat lui-même): </div>
+        <!-- /fr -->
+        <div lang="en"> So we have the following corollary (in practice more useful than the result itself): </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Si |u<sub>n+1</sub>/u<sub>n</sub>|=1+k/n+O(1/n²) pour n &rarr; &infin; où k est une constante vérifiant k&lt;-1, alors la série (s,u) est absolument convergente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> If |u<sub>n+1</sub>/u<sub>n</sub>|=1+k/n+O(1/n²) for n &rarr; &infin; where k is a constant verifying k<-1, then the series (s,u) is absolutely convergent. </div>
+              <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/seriesraabe/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/seriesraabe/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <table cellpadding="10">
+            <tr>
+              <td>
+                <div lang="fr">Création Gilles Dubois</div>
+                <div lang="en">Created by Gilles Dubois</div>
+              </td>
+              <td>
+                <div lang="fr">Janvier 2022</div>
+                <div lang="en">January 2022</div>
+              </td>
+              <td>
+                <div lang="fr">Version mobile Jquery</div>
+                <div lang="en">Mobile Jquery version</div>
+              </td>
+              <td>
+                <a href="https://www.mathjax.org">
+                  <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /footer -->
+        <ul style=list-style-type:'';>
+          <li>
+            <div lang="fr">
+              <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+            <div lang="en">
+              <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+          </li>
+          <li>
+            <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /page -->
+  </body>
+</html>

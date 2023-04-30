@@ -1,0 +1,38 @@
+<html>
+<head>
+<title>romberg1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+.s4 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">genS(c::Channel)</span>
+    <span class="s1">u=</span><span class="s2">1</span>
+    <span class="s1">put!(c,u)</span>
+    <span class="s0">while true</span>
+        <span class="s1">u=sqrt(</span><span class="s2">2</span><span class="s1">+u)</span>
+        <span class="s1">put!(c,u)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+    
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">S=Channel(genS)</span>
+    <span class="s1">S1=[]</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span>
+        <span class="s1">push!(S1,take!(S))</span>
+    <span class="s0">end</span>
+    <span class="s1">S2=[(</span><span class="s2">4</span><span class="s1">*S1[i+</span><span class="s2">1</span><span class="s1">]-S1[i])/</span><span class="s2">3 </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">9</span><span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">7</span>
+        <span class="s1">print(</span><span class="s2">2</span><span class="s1">-S1[i],</span><span class="s3">&quot; : &quot;</span><span class="s1">,</span><span class="s2">2</span><span class="s1">-S2[i],</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

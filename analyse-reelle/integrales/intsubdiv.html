@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Subdivisions d'un intervalle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intsubdiv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intsubdiv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une <strong>
+              <em>'subdivision'</em>
+            </strong> d'un intervalle réel [a,b] consiste en une <input type="button" value="suite finie" onclick="go('../../nombres/naturels/suites.html#')" data-inline="true" /> de points s=(x<sub>0</sub>,x<sub>1</sub>, ..., x<sub>n</sub>) vérifiant: <ul>
+              <li>x<sub>0</sub>=a </li>
+              <li>x<sub>n</sub>=b </li>
+              <li>la suite est <input type="button" value="strictement croissante" onclick="go('../suites/suitesmonotones.html#def2')" data-inline="true" /> x<sub>0</sub> &lt; x<sub>1</sub> &lt; x<sub>2</sub> &lt; ... &lt; x<sub>n</sub>
+              </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A <strong>
+              <em>'partition or subdivision'</em>
+            </strong> of a real interval [a,b] consists of a <input type="button" value="finite sequence" onclick="go('../../nombres/naturels/suites.html#')" data-inline="true" /> of points s=(x<sub>0</sub>,x<sub>1</sub> , ..., x<sub>n</sub>) checking: <ul>
+              <li>x<sub>0</sub>=a </li>
+              <li>x<sub>n</sub>=b </li>
+              <li>the sequence is <input type="button" value="strictly increasing" onclick="go('../suites/suitesmonotones.html#def2')" data-inline="true" /> x<sub>0</sub> &lt; x<sub>1</sub> &lt; x<sub>2</sub> &lt; ... &lt; x<sub>n</sub>
+              </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Une <strong>
+              <em>'subdivision pointée'</em>
+            </strong> consiste en la donnée d'une subdivision s de [a,b] et pour chaque intervalle [x<sub>k</sub>,x<sub>k+1</sub>] un point quelconque t<sub>k</sub> &isin; [x<sub>k</sub>,x<sub>k+1</sub>]. <br> Nous noterons une telle subdivision pointée (s,t) s étant une application de {0,1,...,n} dans [a,b] et t une application de {0, ..,n-1} dans [a,b] telle que x(k) &le; t(k) &le; x(k+1) &forall;k&isin;{0, ...,n-1}.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A <strong>
+              <em>'tagged partition'</em>
+            </strong> consists of the data of a partition s of [a,b] and for each subinterval [x<sub>k</sub>,x<sub>k+1</sub>] any point t<sub>k</sub> &isin; [x<sub>k</sub>,x<sub>k+1</sub>]. <br> We will denote such a tagged partition (s,t) s being a partition (ie an application of {0,1,.. .,n} in [a,b]) and t an application of {0, ..,n-1} in [a,b] such that x(k) &le; t(k) &le; x(k+1) &forall;k&isin;{0, ...,n-1} and determining which point to choose.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cas classiques de subdivisions pointées: <ul>
+            <li>t<sub>k</sub>=x<sub>k</sub> &forall; k &isin; {0,n-1} (bornes gauches) </li>
+            <li>t<sub>k</sub>=x<sub>k+1</sub> &forall; k &isin; {0,n-1} (bornes droites) </li>
+            <li>t<sub>k</sub>=(x<sub>k</sub>+x<sub>k+1</sub>)/2 &forall; k &isin; {0,n-1} (milieux) </li>
+          </ul>
+          <h2>Pas d'une subdivision</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Classical examples of tagged partitions: <ul>
+            <li>t<sub>k</sub>=x<sub>k</sub> &forall; k &isin; {0,n-1} (left bounds) </li>
+            <li>t<sub>k</sub>=x<sub>k+1</sub> &forall; k &isin; {0,n-1} (right bounds) </li>
+            <li>t<sub>k</sub>=(x<sub>k</sub>+x<sub>k+1</sub>)/2 &forall; k &isin; {0,n-1} (middle points) </li>
+          </ul>
+          <h2>Step of a partition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Le <strong>
+              <em>'pas'</em>
+            </strong> d'une subdivision est la plus grande des distances entre deux points consécutifs x<sub>k</sub>, x<sub>k+1</sub> de la subdivision s=(x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>). <br> Notation: p=&delta;(s)=Sup<sub>k&isin;{0,n-1}</sub> (x<sub>k+1</sub>-x<sub>k</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> The <strong>
+              <em>'norm or mesh'</em>
+            </strong> of a partition is the greatest among the distances between two consecutive points x<sub>k</sub>, x<sub>k+1</sub> of partition s=(x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>). <br> Notation: p=&delta;(s)=Sup<sub>k&isin;{0,n-1}</sub> (x<sub>k+1</sub>-x<sub>k</sub>) .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/800px-Integral_Riemann_sum.png" width="500" height="500" alt="">
+          <br>
+          <em>
+           <span style="font-size: smaller;">https://en.wikipedia.org/wiki/Partition_of_an_interval#/media/File:Integral_Riemann_sum.png</span>
+          </em>
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Ordre sur les subdivisions d'un même intervalle</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Order on the partitions of the same interval</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Soient s<sub>1</sub>=(x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>) et s<sub>2</sub>=(y<sub>0</sub>,y<sub>1</sub>, ... , y<sub>m</sub>) deux subdivisions d'un même intervalle [a,b] (donc x<sub>0</sub>=y<sub>0</sub>=a et x<sub>n</sub>=y<sub>m</sub>=b). <br /> On dit que s<sub>1</sub> est <strong>
+              <em>'plus fine'</em>
+            </strong> que s<sub>2</sub> si s<sub>2</sub> est une <input type="button" value="suite extraite" onclick="go('../../nombres/naturels/suites.html#ext')" data-inline="true" /> de s<sub>1</sub>, autrement dit si tout y<sub>j</sub> est un x<sub>i</sub>, où bien encore s'il existe une <input type="button" value="injection" onclick="go('../../bases/applications/injections.html#')" data-inline="true" /> p:{0,1, ... ,m} → {0,1, ..., n} telle que y<sub>j</sub>=x<sub>p(j)</sub> ∀ j ∈ {0,1, ..., m}.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> Let s<sub>1</sub>=(x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>) and s<sub>2</sub>=(y<sub>0</sub>,y<sub>1</sub>, ... , y<sub>m</sub>) two subdivisions of the same interval [ a,b] (so x<sub>0</sub>=y<sub>0</sub>=a and x<sub>n</sub>=y<sub>m</sub>=b) . <br /> We say that s<sub>1</sub> is a <strong>
+              <em>'refinement'</em>
+            </strong> of s<sub>2</sub> if s<sub>2</sub> is a <input type="button" value="subsequence" onclick="go('../../nombres/naturels/suites.html#exte')" data-inline="true" /> from s<sub>1</sub>, in other words if all y<sub>j</sub> is an x<sub>i</sub>, or even if there is an <input type="button" value="injection" onclick="go('../../bases/applications/injections.html#')" data-inline="true" /> p:{0,1, ... ,m} → {0,1, ..., n} such that y<sub>j</sub>=x<sub>p(j)</sub> ∀ j ∈ {0,1, ..., m} .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il est facile de voir que : </div>
+        <!-- /fr -->
+        <div lang="en"> It is easily seen that : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> La <input type="button" value="relation binaire" onclick="go('../../bases/relations/binaires.html#')" data-inline="true" /> définie ci-dessus entre les subdivisions de [a,b] est une <input type="button" value="relation d'ordre" onclick="go('../../bases/relations/ordre.html#')" data-inline="true" />. Nous la notons s<sub>2</sub> ≤ . s<sub>1</sub> .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> The <input type="button" value="binary relation" onclick="go('../../bases/relations/binaires.html#')" data-inline="true" /> defined above between the partitions of [a,b] is an <input type="button" value="order" onclick="go('../../bases/relations/ordre.html#')" data-inline="true" />. We denote it s<sub>2</sub> ≤ s<sub>1</sub> .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Notons tout de suite quelques propriétés: </div>
+        <!-- /fr -->
+        <div lang="en"> Let's note immediately a few properties: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Il existe un <input type="button" value="plus petit élément" onclick="go('../../bases/relations/plusgrand.html#')" data-inline="true" /> pour cette relation c'est la subdivision à deux éléments (a,b) (les seules extrêmités).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> There is an <input type="button" value="smallest element" onclick="go('../../bases/relations/plusgrand.html#')" data-inline="true" /> for this relation is the subdivision with two elements (a,b) (the only extremities).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cependant, </div>
+        <!-- /fr -->
+        <div lang="en"> Nevertheless, </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Il n'existe pas de plus grand élément dans l'ensemble de toutes les subdivisions de [a,b].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> There is no greatest element in the set of all partitions of [a,b].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> car pour toute subdivision, il est possible de construire une subdivision strictement plus fine par ajout de points. <br> Un résultat intéressant est le suivant : </div>
+        <!-- /fr -->
+        <div lang="en"> because for any partition, it is possible to construct a strictly finer partition by adding points. <br> An interesting result is the following: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Tout couple de subdivisions (s<sub>1</sub>,s<sub>2</sub>) possède une <input type="button" value="borne supérieure" onclick="go('../../bases/relations/bornes.html#')" data-inline="true" />, c'est la subdivision que nous noterons s<sub>1</sub>&or;s<sub>2</sub> formée en prenant la suite ordonnée de tous les points de s<sub>1</sub>, et tous les points de s<sub>2</sub>, sans répétitions.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> Any pair of partitions (s<sub>1</sub>,s<sub>2</sub>) has an <input type="button" value="supremum" onclick="go('../../bases/relations/bornes.html#')" data-inline="true" />, this is the partition that we will denote s<sub>1</sub>&or;s<sub>2</sub>, often called <strong>
+              <em>'common refinement'</em>
+            </strong> of s<sub>1</sub> and s<sub>2</sub>, formed by taking the ordered sequence of all the points of s<sub>1</sub>, and all the points of s<sub>2</sub>, without repetitions.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Cas particuliers</h2>
+          <h3>Progression arithmétiques</h3> Nous avons déjà rencontré de <input type="button" value="telles suites" onclick="go('../suites/suitesdef.html#ari#')" data-inline="true" />. <br /> Dans ce cas l'écart entre deux points consécutifs est constant et est égal au pas. On parle encore de subdivision <b>
+            <i>'régulière'</i>
+          </b>. <h3>Progressions géométriques</h3> Nous avons déjà rencontré de <input type="button" value="telles suites" onclick="go('../suites/suitesdef.html#geo#')" data-inline="true" />. <br /> Dans ce cas le pas est égal à l'écart entre les deux derniers points. <h2>Le coin de python</h2>
+          <input type="button" value="Voir les exercices" onclick="go('exercices/intsubdiv/menu.html#')" data-inline="true" />. <h2>Visualisation de quelques subdivisions</h2> Voici une appliquette vous permettant de voir certaines subdivisions de l'intervalle [1,8] ainsi que leur pas. <br /> Vous pouvez sélectionner un type (aléatoire, arithmétique ou géométrique) au moyen des boutons. <br /> Vous pouvez également augmenter ou diminuer le nombre de points avec les boutons 'n+' et 'n-'. <br /> Notez que pour les progressions régulières (ari. et géo. plus le nombre de points augmente et plus le pas diminue. <br /> Ceci n'est plus vrai dans le cas des suites aléatoires dans l'absolu, mais cela reste vrai statistiquement. <br /> Plus le nombre de points est elevé et plus la probabilité que deux points voisins soient très éloignés diminue.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Special cases</h2>
+          <h3>Arithmetic progression</h3> We have already encountered <input type="button" value="such sequences" onclick="go('../suites/suitesdef.html#ari#')" data-inline="true" />. <br /> In this case the difference between two consecutive points is constant and is equal to the pitch. This is still referred to as a <b>
+            <i>'regular'</i>
+          </b> subdivision. <h3>Geometric progressions</h3> We have already encountered <input type="button" value="such sequences" onclick="go('../suites/suitesdef.html#geo#')" data-inline="true" />. <br /> In this case the step is equal to the difference between the last two points. <h2>Python's Corner</h2>
+          <input type="button" value="View exercises" onclick="go('exercices/intsubdiv/menu.html#')" data-inline="true" />. <h2>Visualization of some partitions</h2> Here is an applet allowing you to see some partitions of the interval [1,8] as well as their mesh. <br /> You can select a type (random, arithmetic or geometric) using the buttons. <br /> You can also increase or decrease the number of stitches with the 'n+' and 'n-' buttons. <br /> Note that for regular progressions (ari. and geo. the more the number of points increases, the more the mesh decreases. <br /> This is no longer true in the case of absolutely random sequences, but it remains true statistically. <br /> The higher the number of points, the more the probability that two neighboring points are very far apart decreases.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:200px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace1.alea()'>
+          <div lang="fr">aléatoire</div>
+          <!-- /fr -->
+          <div lang="en">random</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton2' onClick='nameSpace1.ari()'>
+          <div lang="fr">arithmétique</div>
+          <!-- /fr -->
+          <div lang="en">arithmetic</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton3' onClick='nameSpace1.geo()'>
+          <div lang="fr">géométrique</div>
+          <!-- /fr -->
+          <div lang="en">geometric</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton4' onClick='nameSpace1.plus()'>n+</button>
+        <button type='button' id='myButton5' onClick='nameSpace1.minus()'>n-</button>
+        <script src="js/subdiv.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intsubdiv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intsubdiv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

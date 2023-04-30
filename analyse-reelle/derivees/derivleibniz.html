@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Formule de Leibniz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivleibniz/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivleibniz/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> La formule de Leibniz ressemble à la formule du développement du binôme de Newton.
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left ( a+b \right )^{n}=\sum_{k=0}^{n}\binom{n}{k}a^{k}b^{n-k} \)</p>
+          <!-- /FORMULE UNIV INLINE--> où les
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \binom{n}{k} \)
+          <!-- /FORMULE UNIV INLINE--> sont les <input type="button" value="coefficients binomiaux" onclick="go('../../bases/ensembles/cpn.html#cpn')" data-inline="true" /> Elle concerne les dérivées d'ordre supérieur d'un produit de deux fonctions et peut s'énoncer ainsi:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Leibniz's formula is similar to Newton's binomial expansion formula.
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left ( a+b \right )^{n}=\sum_{k=0}^{n}\binom{n}{k}a^{k}b^{n-k} \)</p>
+          <!-- /FORMULE UNIV INLINE--> where the
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \binom{n}{k} \)
+          <!-- /FORMULE UNIV INLINE--> are the <input type="button" value="binomial coefficients" onclick="go('../../bases/ensembles/cpn.html#cpn')" data-inline="true" />
+          <br> It concerns the higher order derivatives of a product of two functions and can be stated as follows:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left ( f\times g \right )^{(n)}=\sum_{k=0}^{n}\binom{n}{k}f^{(k)}\times g^{(n-k)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left ( f\times g \right )^{(n)}=\sum_{k=0}^{n}\binom{n}{k}f^{(k)}\times g^{(n-k)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> La preuve s'obtient en utilisant un <input type="button" value="raisonnement par récurrence" onclick="go('../../bases/logique/recurrence.html#')" data-inline="true" />, conjointement avec la <input type="button" value="formule de dérivation d'un produit" onclick="go('derivcalcul.html#prop2')" data-inline="true" />. <br /> La formule est vraie pour n=0 et n=1 n=0 and n=1. <br /> De plus, d'après la définition des dérivées d'ordre supérieur
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\left ( (f\times g)^{(n)} \right )^{(1)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Utilisant la formule ci-dessus conjointement avec l'hypothèse de récurrence et la formule de dérivée simple d'un produit, il vient :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=0}^{n}\binom{n}{k}\left ( \left (f^{(k)} \right )^{(1)}\times g^{\left (n-k \right )}+f^{(k)}\times \left (g^{(n-k)} \right )^{(1)} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=0}^{n}\binom{n}{k}\left ( f^{(k+1)} \times g^{(n-k)}+f^{(k)}\times g^{(n+1-k)} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=0}^{n}\binom{n}{k}f^{(k+1)}\times g^{(n+1-(k+1))} +\sum_{k=0}^{n}\binom{n}{k}f^{(k)}\times g^{(n+1-k)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=1}^{n}\binom{n}{k-1}f^{(k)}\times g^{(n+1-k)} +\sum_{k=1}^{n}\binom{n}{k}f^{(k)}\times g^{n+1-k} +f^{(n+1)}\times g+f\times g^{n+1} \)</p>
+            <!-- /FORMULE UNIV INLINE--> et finalement
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left ( f\times g \right )^{(n+1)}=\sum_{k=0}^{n}\binom{n+1}{k}f^{(k)}\times g^{(n+1-k)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> parce que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \binom{n+1}{k}=\binom{n}{k}+\binom{n}{k-1} ~~pour~~1\leqslant k\leqslant n \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The proof is obtained by using a <input type="button" value="induction reasoning" onclick="go('../../bases/logique/recurrence.html#')" data-inline="true" />, together with <input type="button" value="the differentiation formula of a product" onclick="go('derivcalcul.html#prop2')" data-inline="true" />. <br /> The formula is true for n=0 and n=1. <br /> Moreover according definition of successive derivatives :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\left ( (f\times g)^{(n)} \right )^{(1)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Using the above formula, together with induction hypothesis and the formula for simple derivative of a product, we get :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=0}^{n}\binom{n}{k}\left ( \left (f^{(k)} \right )^{(1)}\times g^{\left (n-k \right )}+f^{(k)}\times \left (g^{(n-k)} \right )^{(1)} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=0}^{n}\binom{n}{k}\left ( f^{(k+1)} \times g^{(n-k)}+f^{(k)}\times g^{(n+1-k)} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=0}^{n}\binom{n}{k}f^{(k+1)}\times g^{(n+1-(k+1))} +\sum_{k=0}^{n}\binom{n}{k}f^{(k)}\times g^{(n+1-k)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle (f\times g)^{n+1}=\sum_{k=1}^{n}\binom{n}{k-1}f^{(k)}\times g^{(n+1-k)} +\sum_{k=1}^{n}\binom{n}{k}f^{(k)}\times g^{n+1-k} +f^{(n+1)}\times g+f\times g^{n+1} \)</p>
+            <!-- /FORMULE UNIV INLINE--> and finally
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left ( f\times g \right )^{(n+1)}=\sum_{k=0}^{n}\binom{n+1}{k}f^{(k)}\times g^{(n+1-k)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> because
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \binom{n+1}{k}=\binom{n}{k}+\binom{n}{k-1} ~~for~~1\leqslant k\leqslant n \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivleibniz/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivleibniz/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Règle de l'Hospital</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivlhospital/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivlhospital/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Galerie des portraits</h2> Le théorème qui suit permet de lever des <input type="button" value="indéterminations" onclick="go('../foncnum/foncnumlimopalg.html#quot')" data-inline="true" /> dans le cas de quotients de la forme 0/0 ou ∞/∞. <br /> Ce résultat est attribué au mathématicien français Guillaume de l'Hospital (ou de l'Hôpital) parce qu'il est le premier à l'avoir publié. <br /> Il y a de sérieuses raisons de penser que l'auteur véritable est le suisse Jean Bernoulli. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Portrait gallery</h2> The following theorem makes it possible to remove <input type="button" value="indeterminacies" onclick="go('../foncnum/foncnumlimopalg.html#quot')" data-inline="true" /> in the case of quotients of the form 0/0 or ∞/∞. <br /> This result is attributed to the French mathematician Guillaume de l'Hospital (or de l'Hôpital) because he was the first to have published it. <br /> There are serious reasons to believe that the real author is the Swiss Jean Bernoulli. <br />
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td>
+              <font color="#FFFFFF">Guillaume de l'Hospital (1661/1704-FR)</font>
+            </td>
+            <td>
+              <font color="#FFFFFF">Jean Bernoulli (1667/1748-CH)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/Guillaume_de_l'Hôpital.jpg" width="268" height="326" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/220px-Johann_Bernoulli.jpg" width="220" height="304" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Enoncé du théorème initial</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Statement of the initial theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soient f et g deux fonctions dérivables sur ]a,b[, et tendant vers 0 toutes les deux pour x&rarr;a+. <br> On suppose que g'(x) ne s'annule pas dans un voisinage de a et que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to a+,x> a }\frac{f'(x)}{g'(x)}=L \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>Dans ces conditions
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to a+,x> a }\frac{f(x)}{g(x)}=L \)
+            <!-- /FORMULE UNIV INLINE--> aussi. <br> Ce résultat vaut que L soit un nombre réel ou +&infin; ou -&infin;
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let f and g be two differentiable functions on ]a,b[, and both tending to 0 for x&rarr;a+. <br> We assume that g'(x) does not vanish in a neighborhood of a and that
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to a+,x> a }\frac{f'(x)}{g'(x)}=L \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>Under these conditions
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to a+,x> a }\frac{f(x)}{g(x)}=L \)
+            <!-- /FORMULE UNIV INLINE--> as well. <br> This result holds whether L is a real number or +&infin; or -&infin;.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve résulte immédiatement du <input type="button" value="théorème de Cauchy" onclick="go('derivcauchy.html#')" data-inline="true" />, sachant que f et g peuvent être prolongées par continuité en a en posant f(a)=g(a)=0. <br /> Il va de soi que par symétrie: </div>
+        <!-- /fr -->
+        <div lang="en"> The proof follows immediately from <input type="button" value="Cauchy's Mean Value Theorem" onclick="go('derivcauchy.html#')" data-inline="true" />, knowing that f and g can be extended by continuity at a by setting f(a)=g(a)=0. <br /> It goes without saying that by symmetry: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Le théorème reste valable quand f et g deux fonctions dérivables sur ]b,a[, et tendant vers 0 toutes les deux pour x&rarr;a-.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> The theorem remains valid when f and g are two differentiable functions on ]b,a[, and both tending to 0 for x&rarr;a-.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Première généralisation</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>First generalization</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Le théorème précédent s'applique à des fonctions dont la limite en a est infinie.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> The previous theorem applies to functions the limit of which at a is infinite.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Les hypothèses faites permettent de supposer que g'(x) ne s'annulent pas sur ]a,b[, on peut donc appliquer le <input type="button" value="théorème de Cauchy" onclick="go('derivcauchy.html#')" data-inline="true" /> à tout intervalle [x,y]⊆ ]a,b[. <br /> Donc, ∃ c ∈ ]x,y[ tel que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{f(x)-f(y)}{g(x-g(y))}=\frac{f'(c)}{g'(c)} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Puisque la limite de g en a+ est infinie, quitte à prendre b plus près de a on peut supposer que g ne s'annule pas sur ]a,b[. <br> L'égalité ci-dessus peut être réécrite
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{f(x)}{g(x)}=\left ( 1-\frac{g(y)}{g(x)} \right )\times \frac{f'(c)}{g'(c)}+\frac{f(y)}{g(x)} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Comme
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to a+,x> a}\frac{f'(x)}{g'(x)}=L \)
+            <!-- /FORMULE UNIV INLINE--> et que c ∈]a,y[ on peut toujours choisir y tel que f'(c)/g'(c) soit aussi proche qu'on veut de L. Comme la limite de g(x) pour x→a+ est infinie, Les quotients g(y)/g(x) et f(y)/g(x) sont aussi près de 0 qu'on veut pourvu que x soit suffisamment près de a, d'où notre résultat.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The assumptions made allow us to assume that g'(x) do not cancel on ]a,b[, so we can apply the <input type="button" value="Cauchy's theorem" onclick="go('derivcauchy.html#')" data-inline="true" /> at any interval [x,y]⊆ ]a,b[. <br /> So, ∃ c ∈ ]x,y[ such that
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{f(x)-f(y)}{g(x-g(y))}=\frac{f'(c)}{g'(c)} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Since the limit of g at a+ is infinite, even if it means taking b closer to a, we can assume that g does not vanish on ]a,b[. <br> The above equality can be rewritten
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{f(x)}{g(x)}=\left ( 1-\frac{g(y)}{g(x)} \right )\times \frac{f'(c)}{g'(c)}+\frac{f(y)}{g(x)} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Since
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to a+,x> a}\frac{f'(x)}{g'(x)}=L \)
+            <!-- /FORMULE UNIV INLINE--> and that c ∈]a,y[ we can always choose y such that f'(c)/g'(c) is as close as we want to L. As the limit of g(x) for x→a+ is infinite, The quotients g(y)/g(x) and f(y)/g(x) are as close to 0 as we want provided that x is sufficiently near a, hence our result.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Seconde généralisation</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Second generalization</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Les résultats précédents sont valables pour x tendant vers un infini.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> The previous results remain valid for x tending to infinity.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Pour x &rarr; +&infin; par exemple posons F(x)=f(1/x) et G(x)=g(1/x). On a
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle F'(x)=f'(x)\times \frac{-1}{x^{2}} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle G'(x)=g'(x)\times \frac{-1}{x^{2}} \)
+            <!-- /FORMULE UNIV INLINE--> . <br> Donc
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{F'(x)}{G'(x)}=\frac{f'(x)}{g'(x)} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> de sorte qu'il suffit d'appliquer le théorème en 0 aux fonctions F et G.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> For x &rarr; +&infin; for example let F(x)=f(1/x) and G(x)=g(1/x). We have
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle F'(x)=f'(x)\times \frac{-1}{x^{2}} \)
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle G'(x)=g'(x)\times \frac{-1}{x^{2}} \)
+            <!-- /FORMULE UNIV INLINE--> . <br> Hence
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{F'(x)}{G'(x)}=\frac{f'(x)}{g'(x)} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> so that it suffices to apply the theorem at 0 to the functions F and G.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Itérations</h2> La règle de L'Hospital quelle que soit sa forme peut être itérée. <br> En effet, cette règle dit en substance, que pour calculer la limite d'un quotient on peut remplacer les fonctions par leurs dérivées. Mais à leur tour on peut remplacer ces dérivées par leurs propres dérivées, c'est à dire par les dérivées secondes des fonctions initiales, et ainsi de suite. <h2>Exemples d'application</h2> Avant toute chose on remarquera que la règle de l'Hospital donne des conditions suffisantes pour l'existence de la limite d'un quotient mais ces conditions ne sont nullement nécessaires. <br> Prenons par exemple f(x)=x<sup>2</sup>sin(1/x) et g(x)=x. On voit immédiatement que lim<sub>x&rarr;0</sub>f(x)/g(x)=0. Cependant le quotient des dérivées est f'(x)/g'x)=2xsin(1/x)-cos(1/x) n'admet pas de limite en 0. <br> Attention, donc à ne pas utiliser la règle de l'Hospital 'à l'envers' en concluant que lim f(x)/g(x) n'existe pas parce que lim f'(x)/g'(x) n'existe pas. <br> On veut maintenant calculer
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to 0, x\neq 0}\frac{cos(2x)-1}{x^{3}+5x^{2}} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> On remplace dividende et diviseur par leurs dérivées, on obtient une nouvelle indétermination
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to 0, x\neq 0}\frac{-2sin(2x)}{3x^{2}+10x} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> On remplace à nouveau par les dérivées pour obtenir
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to 0, x\neq 0}\frac{-4cos(2x)}{6x+10} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> Cette fois il n'y a plus d'indétermination la limite est -2/5.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Iterations</h2> L'Hospital's rule in any form can be iterated. <br> Indeed, this rule says in essence, that to calculate the limit of a quotient one can replace the functions by their derivatives. But in turn we can replace these derivatives by their own derivatives, ie by the second derivatives of the initial functions, and so on. <h2>Examples of application</h2> First of all, we will notice that L'Hospital's rule gives sufficient conditions for the existence of the limit of a quotient, but these conditions are not at all necessary. <br> Take for example f(x)=x<sup>2</sup>sin(1/x) and g(x)=x. We immediately see that lim<sub>x&rarr;0</sub>f(x)/g(x)=0. However the quotient of the derivatives is f'(x)/g'x)=2xsin(1/x)-cos(1/x) does not admit a limit at 0. <br> Be careful, therefore, not to use l'Hospital's rule 'backwards' by concluding that lim f(x)/g(x) does not exist because lim f'(x)/g'(x) does not exist. <br> We now want to calculate
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to 0, x\neq 0}\frac{cos(2x)-1}{x^{3}+5x^{2}} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> We replace dividend and divisor by their derivatives, we obtain a new indeterminacy
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to 0, x\neq 0}\frac{-2sin(2x)}{3x^{2}+10x} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> Substitute again with the derivatives to get
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{x \to 0, x\neq 0}\frac{-4cos(2x)}{6x+10} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> This time there is no more indeterminacy the limit is -2/5.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivlhospital/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivlhospital/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

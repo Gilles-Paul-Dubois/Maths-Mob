@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dérivée d'une limite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivsuite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivsuite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Quelques exemples</h2> Voici une suite de fonctions (f<sub>n</sub>) définies sur &reals; par: f<sub>n</sub>(x)=(1/n)sin(nx) pour n &ge; 1 (graphes verts). <br> On voit également la suite des dérivées f<sub>n</sub>' de f<sub>n</sub> (graphes bleus). <br> Au début n=1. Appuyer sur le bouton 'n+' pour augmenter la valeur de n. <br> Appuyer sur le bouton 'n-' pour diminuer la valeur de n.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Some examples</h2> Here is a sequence of functions (f<sub>n</sub>) defined on &reals; by: f<sub>n</sub>(x)=(1/n)sin(nx) for n &ge; 1 (green graphs). <br> We also see the sequence of derivatives f<sub>n</sub>' of f<sub>n</sub> (blue graphs). <br> At the beginning n=1. Press the 'n+' button to increase the value of n. <br> Press the 'n-' button to decrease the value of n.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/suitefoncder.js"></script>
+        <button type='button' id='myButton21' onClick='nameSpace2.nextplus()'>n+</button>
+        <button type='button' id='myButton22' onClick='nameSpace2.nextminus()'>n-</button>
+        <br>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> On remarque que bien qu'il s'agisse d'une suite de fonctions continues convergeant uniformément vers la fonction continue nulle, la suite des dérivées f<sub>n</sub>'(x)=cos(nx) ne converge en aucun point. <br> Considérons inversement la suite des fonctions constantes f<sub>n</sub>(x)=n. Cette suite ne converge ni simplement ni uniformément. <br> Considérons maintenant la suite des dérivées de cette suite. On a f<sub>n</sub>'=0, les dérivées sont donc toutes nulles, elles forment une suite qui converge uniformément vers la fonction nulle. <br> Ainsi nous voyons qu'a priori, il n'existe aucun lien évident entre la convergence d'une suite de fonctions dérivables et la convergence de la suite des dérivées. <br> Nous allons voir maintenant dans quelles circonstances nous pouvons établir une relation. <h2>Théorème fondamental</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Note that although it is a sequence of continuous functions converging uniformly towards the zero continuous function, the sequence of derivatives f<sub>n</sub>'(x)=cos(nx) does not converge at no points. <br> Conversely, consider the sequence of constant functions f<sub>n</sub>(x)=n. This sequence converges neither simply nor uniformly. <br> Now consider the sequence of derivatives of this sequence. We have f<sub>n</sub>'=0, so the derivatives are all zero, they form a sequence that converges uniformly to the zero function. <br> Thus we see that a priori, there is no obvious link between the convergence of a sequence of differentiable functions and the convergence of the sequence of derivatives. <br> We will now see under what circumstances we can establish a relationship. <h2>Fundamental theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit (f<sub>n</sub>) une <input type="button" value="suite de fonctions numériques" onclick="go('../suitefonc/suitefoncdef.html#')" data-inline="true" /> définies sur un intervalle I. On suppose que: <ul>
+              <li>Il existe un point x<sub>0</sub>∈I tel que la <input type="button" value="suite f
+																													<sub>n</sub>(x
+																													<sub>0</sub>) converge" onclick="go('../suites/suitesconvergentes.html#def1')" data-inline="true" />. </li>
+              <li>Chaque f<sub>n</sub> est <input type="button" value="dérivable sur I" onclick="go('derivfoncderiv.html#')" data-inline="true" />, de dérivée g<sub>n</sub>. </li>
+              <li>Pour tout c de I il existe r &gt; 0 tel que la suite g<sub>n</sub>
+                <input type="button" value="converge uniformément" onclick="go('../suitefonc/suitefonccvuniforme.html#')" data-inline="true" /> sur [c-r,c+r]∩I
+              </li>
+            </ul> Dans ces conditions: <br />
+            <ul>
+              <li>Pour tout c ∈ I la suite (f<sub>n</sub>) converge uniformément sur [c-r,c+r]∩I. </li>
+              <li>Si nous désignons par g la limite de la suite (g<sub>n</sub>) et par f la limite de la suite (f<sub>n</sub>), f est dérivable en tout x de I et f'(x)=g(x). </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let (f<sub>n</sub>) be a <input data-inline="true" onclick="go('../suitefonc/suitefoncdef.html#')" type="button" value="sequence of numerical functions" />defined on an interval I. We assume that: <ul>
+              <li>There exists a point x<sub>0</sub>∈I such that the <input data-inline="true" onclick="go('../suites/suitesconvergentes.html#def1')" type="button" value=" f&lt;sub&gt;n&lt;/sub&gt;(x&lt;sub&gt;0&lt;/sub&gt;) converges" />. </li>
+              <li>Each f<sub>n</sub> is <input data-inline="true" onclick="go('derivfoncderiv.html#')" type="button" value=" differentiable on I" />, with derivative g<sub>n</sub>. </li>
+              <li>For all c of I there exists r > 0 such that the sequence g<sub>n</sub>
+                <input data-inline="true" onclick="go('../suitefonc/suitefonccvuniforme.html#')" type="button" value=" converges uniformly" />on [c-r,c+r]∩I
+              </li>
+            </ul> In these conditions: <br />
+            <ul>
+              <li>For all c ∈ I the sequence (f<sub>n</sub>) converges uniformly on [c-r,c+r]∩I. </li>
+              <li>If we denote by g the limit of the sequence (g<sub>n</sub>) and by f the limit of the sequence (f<sub>n</sub>), f is differentiable at all x from I and f'(x)=g(x). </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons pour commencer que I est un intervalle ouvert ]a,b[. <br /> Soit r tel que (g<sub>n</sub>) soit uniformément convergente sur [c-r,c+r] ⊆ I. <br /> D'après <input type="button" value="l'inégalité des accroissement finis" onclick="go('derivaccfinis.html#thm2')" data-inline="true" />, on a pour tout d et tout x ∈ [c-r,c+r] |f<sub>n</sub>(x)-f<sub>m</sub>(x)-(f<sub>n</sub>(d)-f<sub>m</sub>(d))| ≤ rSup<sub>
+             <sub>z∈]c-r,c+r[</sub>; </sub>|g<sub>n</sub>(z)-g<sub>m</sub>(z)| <br /> Ce qui fait qu'en utilisant le <input type="button" value="critère de Cauchy de convergence uniforme" onclick="go('../suitefonc/suitefonccvuniforme.html#def2')" data-inline="true" />, si la suite (f<sub>n</sub>) est convergente en un seul point d de [c-r,c+r] elle est uniformément convergente sur [c-r,c+r]. <br /> Soit maintenant C le sous-ensemble de I=]a,b[ tel que f<sub>n</sub>(x) converge pour tout x de C. <br /> C n'est pas vide puisque x<sub>0</sub> ∈C, donc C admet une borne inférieure m et une borne supérieure M. <br /> Il s'agit de montrer que m=a et M=b. <br /> Supposons que M soit &lt; b alors ce qui est vrai pour tout c s'applique à M. Il existe donc un intervalle de la forme [M-r,M+r] tel que f<sub>n</sub>'=g<sub>n</sub> converge uniformément sur [M-r,M+r]. Mais d'après la définition d'une borne supérieure, il existe des points de C aussi près de M qu'on veut. Il existe donc des points d de [M-r,M+r] où la suite f<sub>n</sub>(d) converge. La remarque qui précède contredit alors la définition de M. On démontre de la même façon par l'absurde que m=a. <br /> Supposons maintenant que I soit fermé en b, c'est à dire I=]a,b] ou I=[a,b] <br /> La dérivabilité des f<sub>n</sub> en b signifie alors une dérivabilité à gauche. <br /> On raisonne de la même façon en considérant des intervalles [b-r,b] où la convergence des g<sub>n</sub> est uniforme par hypothèse. Le théorème des accroissements finis s'applique encore dans ce cas.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose to start that I is an open interval ]a,b[. <br /> Let r be such that (g<sub>n</sub>) is uniformly convergent on [c-r,c+r] ⊆ I. <br /> According to <input type="button" value="mean value inequality" onclick="go('derivaccfinis.html#thm2')" data-inline="true" />, we have for all d and all x ∈ [c-r,c+r] |f<sub>n</sub>(x)-f<sub>m</sub>(x)-(f<sub>n</sub>(d)-f<sub>m</sub> (d))| ≤ rSup<sub>
+             <sub>z∈]c-r,c+r[</sub>; </sub>|g<sub>n</sub>(z)-g<sub>m</sub>( z)| <br /> Which means that by using the <input type="button" value="Cauchy criterion for uniform convergence" onclick="go('../suitefonc/suitefonccvuniforme.html#def2')" data-inline="true " />, if the sequence (f<sub>n</sub>) is convergent at a single point d of [c-r,c+r] it is uniformly convergent on [c-r,c+r]. <br /> Let C be the subset of I=]a,b[ such that f<sub>n</sub>(x) converges for all x of C. <br /> C is not empty since x<sub>0</sub> ∈C, so C has a lower bound m and an upper bound M. <br /> This is to show that m=a and M=b. <br /> Suppose M is < b then what is true for all c applies to M. There thus exists an interval of the form [M-r,M+r] such that f<sub>n</sub>'=g<sub>n</sub> converges uniformly on [M-r,M+r]. But according to the definition of an upper bound, there are points of C as close to M as we want. There therefore exist points d of [M-r,M+r] where the sequence f<sub>n</sub>(d) converges. The preceding remark then contradicts the definition of M. We prove in the same way by reductio ad absurdum that m=a. <br /> Suppose now that I is closed at b, i.e. I=]a,b] or I=[a,b] <br /> The differentiability of the f<sub>n</sub> in b then means a left differentiability. <br /> We reason in the same way by considering intervals [b-r,b] where the convergence of the g<sub>n</sub> is uniform by hypothesis. The mean value theorem still applies in this case.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Evidemment ce résultat a pour conséquence, ce corollaire: </div>
+        <!-- /fr -->
+        <div lang="en"> Obviously, this result has the following corollary: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si (f<sub>n</sub>) est une suite de fonctions définies sur [a,b], telle que: <ul>
+              <li>Toutes les f<sub>n</sub> sont dérivables sur [a,b]. </li>
+              <li>La suite des dérivées g<sub>n</sub>=f<sub>n</sub>' converge uniformément vers une fonction g sur [a,b] </li>
+              <li>Il existe un point x<sub>0</sub> &isin; [a,b] tel que la suite f<sub>n</sub>(x<sub>0</sub>) converge. </li>
+            </ul> Alors la suite (f<sub>n</sub>) converge uniformément sur [a,b] vers une fonction dérivable f et f'=g.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If (f<sub>n</sub>) is a sequence of functions defined on [a,b], such that: <ul>
+              <li>All f<sub>n</sub> are differentiable on [a,b]. </li>
+              <li>The sequence of derivatives g<sub>n</sub>=f<sub>n</sub>' converges uniformly to a function g on [a,b] </li>
+              <li>There is a point x<sub>0</sub> &isin; [a,b] such that the sequence f<sub>n</sub>(x<sub>0</sub>) converges. </li>
+            </ul> Then the sequence (f<sub>n</sub>) converges uniformly on [a,b] to a differentiable function f and f'=g.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Notons que l'existence de x<sub>0</sub> est essentielle comme le montre le contre-exemple formé des fonctions constantes f<sub>n</sub>=n. </div>
+        <!-- /fr -->
+        <div lang="en"> Note that the existence of x<sub>0</sub> is essential as shown by the counter-example formed by the constant functions f<sub>n</sub>=n. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivsuite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivsuite/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

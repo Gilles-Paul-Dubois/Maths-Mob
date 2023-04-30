@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>devlim1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">DevLim: 
+    </span><span class="s2">def </span><span class="s1">__init__(self, n, a, f, C): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur admettant en paramètre l'ordre, le point, la fonction et la suite des coefficients&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s0">&quot;&quot;&quot;constructor taking as parameters theorder, the point, the function, and the sequence of coefficients&quot;&quot;&quot;</span><span class="s1">         
+        self.n = n 
+        self.a = a 
+        self.f = f 
+        self.C = C 
+ 
+    </span><span class="s2">def </span><span class="s1">approx(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;Approximation polynomiale de f - Polynomial approximation of f&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">sum([self.C[k] * x ** k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(self.n + </span><span class="s3">1</span><span class="s1">)]) 
+ 
+    </span><span class="s2">def </span><span class="s1">reste(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;erreur commise - the error&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.f(x) - self.approx(x) 
+ 
+    </span><span class="s2">def </span><span class="s1">epsilon(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;relativisation par rapport à (x-a)^n - comparison with(x-a)^n  &quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.reste(x) / ((x - self.a) ** self.n) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0"># Développement limité d'ordre 4 de la fonction sinus au voisinage de 0</span><span class="s1"> 
+    </span><span class="s0"># F.T.E. 4th order for  sine function in the neighborhood of 0 </span><span class="s1">     
+    DL = DevLim(</span><span class="s3">4</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, math.sin, [</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, -</span><span class="s3">1 </span><span class="s1">/ </span><span class="s3">6.0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">]) 
+    S = [</span><span class="s3">0.1</span><span class="s1">, </span><span class="s3">0.01</span><span class="s1">, </span><span class="s3">0.001</span><span class="s1">] 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">S: 
+        print(DL.approx(x), DL.reste(x), DL.epsilon(x)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span><span class="s4">&quot;&quot;&quot; 
+résultat de l'exécution - result of running: 
+0.09983333333333334 8.331349481138783e-08 0.0008331349481138782 
+0.009999833333333333 8.333316675601665e-13 8.333316675601665e-05 
+0.0009999998333333334 8.239936510889834e-18 8.239936510889832e-06 
+&quot;&quot;&quot;</span></pre>
+</body>
+</html>

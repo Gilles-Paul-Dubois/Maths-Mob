@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>TOpérations avec les développements limités</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/taylordlop/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/taylordlop/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Dans toute cette page nous supposerons que nous avons affaire à deux fonctions numériques f et g, définies au voisinage d'un <strong>même</strong> point a. Les ordres peuvent être différents disons que f admet en a un développement d'ordre m et g un développement d'ordre n. Nous aurons à faire intervenir le minimum des deux nombres m et n soit r=inf(m,n). <br /> Nous cherchons à construire un D.L. pour des fonctions construites à partir de f et g en utilisant les opérations élémentaires (somme, produit par un scalaire, produit, quotient, composée). <br /> Nous suggérons au lecteur de revoir éventuellement les pages sur les <input type="button" value="opérations algébriques sur les fonctions numériques" onclick="go('../foncnum/foncnumespaces.html#')" data-inline="true" /> ainsi que la <input type="button" value="composition des applications" onclick="go('../foncnum/foncnumcomposition.html#')" data-inline="true" />. <h2>D.L. d'une somme</h2> Supposons pour fixer les idées que f possède un D.L. d'ordre 2 et g un D.L. d'ordre 3 au voisinage d'un même point x<sub>0</sub>. <br /> On peut donc écrire : <br /> f(x)=a<sub>0</sub>+a<sub>1</sub>(x-x<sub>0</sub>)+a<sub>2</sub>(x-x<sub>0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br /> g(x)=b<sub>0</sub>+b<sub>1</sub>(x-x<sub>0</sub>)+b<sub>2</sub>(x-x<sub>0</sub>)<sup>2</sup>+b<sub>3</sub>(x-x<sub>0</sub>)<sup>3</sup>+o((x-x<sub>0</sub>)<sup>3</sup>) <br /> Remarquons maintenant que toute puissance de (x-x<sub>0</sub>) strictement supérieure à 2 est o((x-x<sub>0</sub>)<sup>2</sup>), et que toute fonction qui est o((x-x<sub>0</sub>)<sup>k</sup>) avec k &gt; 2 est a fortiori o((x-x<sub>0</sub>)<sup>2</sup>). <br /> Il en résulte qu'à partir d'un D.L. d'ordre k &gt; 2 on peut obtenir un développement d'ordre 2 pour g en oubliant le terme de degré 3. <br /> Plus généralement si m &lt; n un D.L. d'ordre m s'obtient à partir d'un D.L. d'ordre n en oubliant tous les termes d'ordre k &gt; m. <br /> Nous avons donc : <br /> f(x)=a<sub>0</sub>+a<sub>1</sub>(x-x<sub>0</sub>)+a<sub>2</sub>(x-x<sub>0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br /> g(x)=b<sub>0</sub>+b<sub>1</sub>(x-x<sub>0</sub>)+b<sub>2</sub>(x-x<sub>0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br /> Compte tenu du fait évident que o((x-x<sub>0</sub>)<sup>2</sup>)+o((x-x<sub>0</sub>)<sup>2</sup>)=o((x-x<sub>0</sub>)<sup>2</sup>), nous obtenons par addition : <br /> (f+g)(x)=(a<sub>0</sub>+b<sub>0</sub>) + (a<sub>1</sub>+b<sub>1</sub>)(x-x<sub>0</sub>) +(a<sub>2</sub>+b<sub>2</sub>)(x-x<sub>0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>). <br /> C'est à dire un D.L. d'ordre 2 pour la fonction f+g au voisinage de x<sub>0</sub>. <br /> Tout ceci se généralise bien entendu sans difficulté: </div>
+        <!-- /fr -->
+        <div lang="en"> Throughout this page we will assume that we are dealing with two numerical functions f and g, defined in the neighborhood of a <strong>same</strong> point a. The orders can be different let us say that f admits at a an expansion of order m and g an expansion of order n. We will have to involve the minimum of the two numbers m and n let r=inf(m,n). <br /> We seek to construct a F.T.E. for functions constructed from f and g using elementary operations (sum, product by a scalar, product, quotient, composite). <br /> We suggest that the reader possibly review the pages on <input type="button" value="algebraic operations on numeric functions" onclick="go('../foncnum/foncnumespaces.html#')" data-inline="true" /> as well as the <input type="button" value="composition of applications" onclick="go('../foncnum/foncnumcomposition.html#')" data-inline="true" />. <h2>F.T.E. of a sum</h2> Suppose to fix the ideas that f has a F.T.E. of order 2 and g a F.T.E. of order 3 in the vicinity of the same point x<sub>0</sub>. <br /> So we can write: <br /> f(x)=a<sub>0</sub>+a<sub>1</sub>(x-x<sub>0</sub>)+a<sub>2</sub>(x-x<sub> 0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br /> g(x)=b<sub>0</sub>+b<sub>1</sub>(x-x<sub>0</sub>)+b<sub>2</sub>(x-x<sub> 0</sub>)<sup>2</sup>+b<sub>3</sub>(x-x<sub>0</sub>)<sup>3</sup>+o((x-x<sub>0</sub>)<sup>3</sup>) <br /> Note now that any power of (x-x<sub>0</sub>) strictly greater than 2 is o((x-x<sub>0</sub>)<sup>2</sup>), and that any function which is o((x-x<sub>0</sub>)<sup>k</sup>) with k &gt; 2 is a fortiori o((x-x<sub>0</sub>)<sup>2</sup>). <br /> It follows that from a F.T.E. of order k &gt; 2 we can obtain an expansion of order 2 for g by forgetting the term of degree 3. <br /> More generally if m &lt; n a F.T.E. of order m is obtained from a F.T.E. of order n by forgetting all the terms of order k &gt; Mr. <br /> So we have: <br /> f(x)=a<sub>0</sub>+a<sub>1</sub>(x-x<sub>0</sub>)+a<sub>2</sub>(x-x<sub> 0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br /> g(x)=b<sub>0</sub>+b<sub>1</sub>(x-x<sub>0</sub>)+b<sub>2</sub>(x-x<sub> 0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br /> Given the obvious fact that o((x-x<sub>0</sub>)<sup>2</sup>)+o((x-x<sub>0</sub>)<sup>2</sup> )=o((x-x<sub>0</sub>)<sup>2</sup>), we obtain by addition: <br /> (f+g)(x)=(a<sub>0</sub>+b<sub>0</sub>) + (a<sub>1</sub>+b<sub>1</sub>)(x-x<sub>0</sub>) +(a<sub>2</sub>+b<sub>2</sub>)(x-x<sub>0</sub>)<sup>2 </sup>+o((x-x<sub>0</sub>)<sup>2</sup>). <br /> That is to say a F.T.E. of order 2 for the function f+g in the neighborhood of x<sub>0</sub>. <br /> All this can be generalized of course without difficulty: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> A partir d'un D.L. d'ordre m pour f et d'ordre n pour g au <strong>même</strong> point x<sub>0</sub>, on obtient un développement d'ordre r=inf(m,n) en ce point pour la fonction f+g par simple addition des coefficients d'ordre k &le; r deux à deux.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> From a F.T.E. of order m for f and of order n for g at the <strong>same</strong> point x<sub>0</sub>, we obtain an expansion of order r=inf( m,n) for the function f+g at this point by simple addition of the coefficients of order k &le; r two by two.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Et dans le cas où m=n l'approximation de Taylor de f+g est exactement la somme (en tant que polynômes) de l'approximation de Taylor de f avec l'approximation de Taylor de g. <h3>D.L. d'un produit</h3> Supposons cette fois encore, pour un exemple simple que f possède un D.L. d'ordre 2 et g un D.L. d'ordre 3 au voisinage d'un même point x<sub>0</sub>. <br> C'est à dire : <br> f(x)=a<sub>0</sub>+a<sub>1</sub>(x-x<sub>0</sub>)+a<sub>2</sub>(x-x<sub>0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br> g(x)=b<sub>0</sub>+b<sub>1</sub>(x-x<sub>0</sub>)+b<sub>2</sub>(x-x<sub>0</sub>)<sup>2</sup>+b<sub>3</sub>(x-x<sub>0</sub>)<sup>3</sup>+o((x-x<sub>0</sub>)<sup>3</sup>) <br> Si nous effectuons terme à terme le produit du D.L. de f par le D.L. de g, nous obtenons un polynôme de degré m+n ainsi qu'une somme de termes qui sont tous des produits de la forme o((x-x<sub>0</sub>)<sup>m</sup>) par une puissance de (x-x<sub>0</sub>) soit des produits de la forme o((x-x<sub>0</sub>)<sup>n</sup>) par une puissance de (x-x<sub>0</sub>). Chacun de ces termes, donc aussi leur somme, est un o((x-x<sub>0</sub>)<sup>r</sup>). <br> Cependant dans le développement du produit de l'approximation de Taylor de f par l'approximation de Taylor de g, tous les monômes de degré &gt; r sont des o((x-x<sub>0</sub>)<sup>r</sup>). Il en résulte qu'en prenant seulement les termes du produit dont le degré est &le; r on obtient un D.L. d'ordre r pour le produit f&times;g. Cela se généralise facilement : </div>
+        <!-- /fr -->
+        <div lang="en"> And in the case where m=n the Taylor approximation of f+g is exactly the sum (as polynomials) of the Taylor approximation of f with the Taylor approximation of g. <h2>F.T.E. of a product</h2> Suppose once again, for a simple example, that f has a F.T.E. of order 2 and g a F.T.E. of order 3 in the neighborhood of the same point x<sub>0</sub>. <br> That is to say: <br> f(x)=a<sub>0</sub>+a<sub>1</sub>(x-x<sub>0</sub>)+a<sub>2</sub>(x-x<sub> 0</sub>)<sup>2</sup>+o((x-x<sub>0</sub>)<sup>2</sup>) <br> g(x)=b<sub>0</sub>+b<sub>1</sub>(x-x<sub>0</sub>)+b<sub>2</sub>(x-x<sub> 0</sub>)<sup>2</sup>+b<sub>3</sub>(x-x<sub>0</sub>)<sup>3</sup>+o((x-x<sub>0</sub>)<sup>3</sup>) <br> If we carry out term by term the product of the F.T.E. of f by the F.T.E. of g, we obtain a polynomial of degree m+n as well as a sum of terms which are all products of the form o((x-x<sub>0</sub>)<sup>m</sup>) by a power of (x-x<sub>0</sub>) or products of the form o( (x-x<sub>0</sub>)<sup>n</sup>) by a power of (x-x<sub>0</sub>). Each of these terms, therefore also their sum, is an o((x-x<sub>0</sub>)<sup>r</sup>). <br> However in the development of the product of the Taylor approximation of f by the Taylor approximation of g, all monomials of degree &gt; r are o((x-x<sub>0</sub>)<sup>r</sup>). It follows that taking only the terms of the product whose degree is &le; r we obtain a F.T.E. of order r for the product f&times;g. This generalizes easily: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Pour obtenir le D.L. d'ordre r du produit de f et g au point a il suffit de faire le produit de T(f,m,a,x) pat T(g,n,a,x) et de délaisser tous les termes de degré &gt; r.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> To obtain the F.T.E. of order r of the product of f and g at point a, it suffices to take the product of T(f,m,a,x) pat T(g,n,a,x) and to abandon all the degree terms &gt; r.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple d'application</h3> Trouver le développement d'ordre 3 de la fonction sin(x)cos(x) au voisinage de 0. <br> On part de : <br> sin(x)=x-x<sup>3</sup>/6 + o(x<sup>3</sup>) et cos(x)=1-x<sup>2</sup>/2+o(x<sup>3</sup>) <br> En appliquant la règle du produit ci-dessus et en développant il vient: <br> sin(x)cos(x)=x -2x<sup>3</sup>/3 + o(x<sup>3</sup>). <br> On peut d'ailleurs retrouver ce résultat directement en utilisant la formule sin(x)cos(x)=sin(2x)/2 <h3>Cas particulier</h3> Un cas particulier intéressant est celui où la fonction g est une constante &alpha;. On obtient alors la règle suivante:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example of application</h3> Find the expansion of order 3 of the function sin(x)cos(x) in the neighborhood of 0. <br> We start from: <br> sin(x)=x-x<sup>3</sup>/6 + o(x<sup>3</sup>) and cos(x)=1-x<sup>2</sup>/2+o (x<sup>3</sup>) <br> Applying the product rule above and expanding it comes: <br> sin(x)cos(x)=x -2x<sup>3</sup>/3 + o(x<sup>3</sup>). <br> We can find this result directly by using the formula sin(x)cos(x)=sin(2x)/2 <h3>Special case</h3> An interesting special case is when the function g is a constant &alpha;. We then get the following rule:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Un D.L. d'ordre n de la fonction &alpha;f s'obtient en multipliant par la constante &alpha; tous les coefficients d'un D.L. d'ordre n de la fonction f.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> A F.T.E. of order n of the function &alpha;f is obtained by multiplying by the constant &alpha; all the coefficients of a D.L. of order n of the function f.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On peut d'ailleurs combiner cette règle avec la précédente sur les sommes pour obtenir la suivante concernant les <input type="button" value="combinaisons linéaires" onclick="go('../../algebre-lineaire/espaces/generateurs.html#comblin')" data-inline="true" /> de fonctions. </div>
+        <!-- /fr -->
+        <div lang="en"> We can also combine this rule with the previous one on sums to obtain the following one concerning <input type="button" value="linear combinations" onclick="go('../../algebre-lineaire/espaces/generateurs.html#combline')" data-inline="true" /> of functions. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Si f et g sont deux fonctions définies au voisinage d'un même point x<sub>0</sub> et si f et g possèdent toutes deux en x<sub>0</sub> des D.L. d'ordre n et si en outre &alpha; et &beta; sont des constantes, alors la fonction &alpha;f+&beta;g possède également un développement d'ordre n au voisinage de x<sub>0</sub> et les coefficients de ce développement sont obtenus à partir de ceux de f et g par la même relation linéaire, c'est à dire: <br> c<sub>k</sub>=&alpha;a<sub>k</sub>+&beta;b<sub>k</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> If f and g are two functions defined in the neighborhood of the same point x<sub>0</sub> and if f and g both have at x<sub>0</sub> F.T.E. of order n and if in addition &alpha; and &beta; are constants, then the function &alpha;f+&beta;g also has an expansion of order n in the neighborhood of x<sub>0</sub> and the coefficients of this expansion are obtained from those of f and g by the same linear relation, i.e.: <br> c<sub>k</sub>=&alpha;a<sub>k</sub>+&beta;b<sub>k</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>D.L. d'une composée</h2> Pour énoncer simplement et correctement le résultat principal, il faut commencer par préciser ce qu'on entend par 'composé de deux polynômes'. <br> Soit F et G deux polynômes à une variable réelle. Nous utiliserons l'inconnue Y pour l'écriture de F et l'inconnue X pour le polynôme G de sorte que
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>F.T.E. of a composite</h2> To simply and correctly state the main result, we must begin by specifying what is meant by 'composite of two polynomials'. <br> Let F and G be two polynomials in one real variable. We will use the unknown Y for writing F and the unknown X for the polynomial G so that
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle F(Y) = {\sum\limits_{k = 0}^{m}a_{k}}Y^{k} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> et </div>
+        <!-- /fr -->
+        <div lang="en"> and </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle G(X) = {\sum\limits_{k = 0}^{n}b_{k}}X^{k} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Le polynôme F<font size="-1">o</font>G, dénommé <strong>
+              <em>'composé de F et G'</em>
+            </strong>, est le polynôme obtenu en substituant G(X) à l'inconnue Y dans l'expression de F.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> The polynomial denoted F<font size="-1">o</font>G, named <strong>
+              <em>'composite of F and G'</em>
+            </strong>, is the polynomial obtained by substituting G( X) to the unknown Y in the expression of F.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On notera la similitude avec la composition des fonctions. Il se trouve que dans le cas des polynômes à coefficients réels il y a bijection entre les polynômes formels et les fonctions polynômes et les deux notions coïncident. <br> Voyons maintenant ce qu'on appelle 'troncature' d'un polynôme. </div>
+        <!-- /fr -->
+        <div lang="en"> Note the similarity with the composition of functions. It so happens that in the case of polynomials with real coefficients there is a bijection between the formal polynomials and the polynomial functions and the two notions coincide. <br> Now let's see what is called 'truncation' of a polynomial. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Soit P(X) un polynôme de degré q &ge; r (r et q étant deux entiers). On appelle ' <strong>
+              <em>tronqué de P au niveau r'</em>
+            </strong>, le polynôme formé à partir de P en annulant tous les coefficients de rang &gt; r.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> Let P(X) be a polynomial of degree q &ge; r (r and q being two integers). We call ' <strong>
+              <em>truncated of P at level r</em>
+            </strong>' the polynomial formed from P by canceling all the coefficients of rank &gt; r.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Tous les monômes d'ordre &gt; r disparaissent donc de sorte que le résultat est de degré au plus égal à r. <br> Nous avons maintenant tout ce qu'il faut pour énoncer notre résultat. </div>
+        <!-- /fr -->
+        <div lang="en"> All monomials of order &gt; r therefore disappear so that the result is of degree at most equal to r. <br> We now have everything we need to state our result. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Si g admet un D.L. d'ordre n en x<sub>0</sub>, et si f admet un D.L. d'ordre m au point y<sub>0</sub>=f(x<sub>0</sub>), alors f<font size="-1">o</font>g admet un D.L. d'ordre r=inf(m,n) au point x<sub>0</sub>, et ce D.L. n'est autre que le tronqué au niveau r du composé du D.L. de f avec le D.L. de g (lequel est de degré m+n).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> If g admits a F.T.E. of order n at x<sub>0</sub>, and if f admits a F.T.E. of order m at the point y<sub>0</sub>=f(x<sub>0</sub>), then f<font size="-1">o</font>g admits a F.T.E. of order r=inf(m,n) at the point x<sub>0</sub>, and this F.T.E. is none other than the truncated at level r of the composite of the F.T.E. of f with the F.T.E. of g (which is of degree m+n).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En gros ce résultat dit que, tout comme dans le cas des dérivées, les D.L. se composent comme les applications à ceci près qu'il faut délaisser les termes de degrés insignifiants par rapport à un certain ordre. </div>
+        <!-- /fr -->
+        <div lang="en"> Basically, this result says that, just as in the case of derivatives, the F.T.E.s are composed like the maps except that we must abandon the terms of insignificant degrees with respect to a certain order. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Pour ne pas trop alourdir l'exposé nous effectuons la démonstration dans le cas particulier où m=n et où x0=y0=0. <br> On peut montrer que ces hypothèses ne sont nullement réductrices. <br> Ce qui fait que si F est le D.L. de f à l'ordre n et si G est le D.L. de g au même ordre, comme écrit plus haut on a :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\lim\limits_{y\rightarrow 0}\epsilon_{1}}(y) = 0 \)</p>
+            <!-- /FORMULE UNIV INLINE--> g(x)=G(x)+x<sup>n</sup>&epsilon;<sub>1</sub>(x) où
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\lim\limits_{x\rightarrow 0}\epsilon_{2}}(x) = 0 \)</p>
+            <!-- /FORMULE UNIV INLINE--> En outre les hypothèses faites sur x<sub>0</sub> et y<sub>0</sub> (nuls tous deux) entrainent que a<sub>0</sub>=b<sub>0</sub>=0, de sorte que la sommation commence à l'indice 1 dans les polynômes F et G. <br> De là nous tirons :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f\left( g(x) \right) = F\left( G(x) + x^{n}\epsilon_{2}(x) \right) + \left( G(x) + x^{n}\epsilon_{2}(x) \right)^{n}\epsilon_{1}\left( G(x) + x^{n}\epsilon_{2}(x) \right) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Mais nous avons :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\left( G(x) + x^{n}\epsilon_{2}(x) \right)^{n} = x^{n}\left( b_{1} + b_{2}x + ... + b_{n}x^{n - 1} + x^{n - 1}\epsilon_{2}(x) \right)^{n} = x^{n}}h(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> où h est une fonction bornée au voisinage de 0. <br> Mais nous avons aussi :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F\left( G(x) + x^{n}\epsilon_{2}(x) \right) - F\left( G(x) \right) = {\sum\limits_{k = 1}^{n}a_{k}\left( {\left( G(x) + x^{n}\epsilon_{2}(x) \right)^{k} - {G(x)}^{k}} \right)} = {\sum\limits_{k = 1}^{n}a_{k}x^{n}\epsilon_{2}(x)u_{k}(x)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où les u<sub>k</sub> sont des fonctions bornées au voisinage de 0. <br> Donc
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F\left( G(x) + x^{n}\epsilon_{2}(x) \right) = F\left( G(x) \right) + x^{n}\epsilon_{4}(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> On obtient donc pour finir : <br> f(g(x))=F(G(x))+x<sup>n</sup>&epsilon;<sub>5</sub>(x) où
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\lim\limits_{x\rightarrow 0}\epsilon_{5}}(x) = 0 \)</p>
+            <!-- /FORMULE UNIV INLINE--> C.Q.F.D.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> In order not to overburden the exposition, we carry out the demonstration in the particular case where m=n and where x0=y0=0. <br> It can be shown that these assumptions are in no way reductive. <br> So that if F is the F.T.E. of f at order n and if G is the F.T.E. of g at the same order, as written above we have:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {\lim\limits_{y\rightarrow 0}\epsilon_{1}}(y) = 0 \)</p>
+            <!-- /INLINE UNIV FORMULA--> g(x)=G(x)+x<sup>n</sup>&epsilon;<sub>1</sub>(x) where
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {\lim\limits_{x\rightarrow 0}\epsilon_{2}}(x) = 0 \)</p>
+            <!-- /INLINE UNIV FORMULA--> Furthermore, the assumptions made on x<sub>0</sub> and y<sub>0</sub> (both zero) lead to a<sub>0</sub>=b<sub>0</sub> =0, so summation starts at index 1 in polynomials F and G. <br> From there we get:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle f\left( g(x) \right) = F\left( G(x) + x^{n}\epsilon_{2}(x) \right) + \left( G(x) + x^ {n}\epsilon_{2}(x) \right)^{n}\epsilon_{1}\left( G(x) + x^{n}\epsilon_{2}(x) \right) \)</p>
+            <!-- /INLINE UNIV FORMULA--> But we have :
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {\left( G(x) + x^{n}\epsilon_{2}(x) \right)^{n} = x^{n}\left( b_{1} + b_{2}x + ... + b_{n}x^{n - 1} + x^{n - 1}\epsilon_{2}(x) \right)^{n} = x^{n}}h(x) \)</p>
+            <!-- /INLINE UNIV FORMULA--> where h is a function bounded near 0. <br> But we also have:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle F\left( G(x) + x^{n}\epsilon_{2}(x) \right) - F\left( G(x) \right) = {\sum\limits_{k = 1} ^{n}a_{k}\left( {\left( G(x) + x^{n}\epsilon_{2}(x) \right)^{k} - {G(x)}^{k }} \right)} = {\sum\limits_{k = 1}^{n}a_{k}x^{n}\epsilon_{2}(x)u_{k}(x)} \)</p>
+            <!-- /INLINE UNIV FORMULA--> where the u<sub>k</sub> are functions bounded around 0. <br> So
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle F\left( G(x) + x^{n}\epsilon_{2}(x) \right) = F\left( G(x) \right) + x^{n}\epsilon_{4} (x) \)</p>
+            <!-- /INLINE UNIV FORMULA--> So we end up with: <br> f(g(x))=F(G(x))+x<sup>n</sup>&epsilon;<sub>5</sub>(x) where
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {\lim\limits_{x\rightarrow 0}\epsilon_{5}}(x) = 0 \)</p>
+            <!-- /INLINE UNIV FORMULA--> Q.E.D.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple</h3> Pour un exemple d'application voir le programme python dans la section ci-dessous qui calcule un D.L. de exp(sin(x)) au voisinage de 0. <h2>D.L. d'une fonction inverse</h2> Remarquons tout d'abord que la fonction
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{1 - x} \)
+          <!-- /FORMULE UNIV INLINE--> possède au voisinage de 0 et pour tout entier n un D.L. d'ordre n qui est
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle 1 + x + x^{2} + ... + x^{n} + o\left( x^{n} \right) \)
+          <!-- /FORMULE UNIV INLINE--> Par composition il en est de même de la fonction 1/x au voisinage de 1 puisque 1/x est composée de la fonction précédente avec la fonction (1-x), en clair pour x voisin de 1:
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle {\frac{1}{x} = \frac{1}{1 - \left( {1 - x} \right)} = {1 + \left( {1 - x} \right) + \left( {1 - x} \right)^{2} + ... + \left( {1 - x} \right)^{n}}} + o\left( \left( {1 - x} \right)^{n} \right) \)</p>
+          <!-- /FORMULE UNIV INLINE--> Cette formule nous donne donc au voisinage de y<sub>0</sub>
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle {\frac{1}{y} = \frac{1}{y_{0}}}\left( {1 + \left( {1 - \frac{y}{y_{0}}} \right) + ... + \left( {1 - \frac{y}{y_{0}}} \right)^{n}} \right) + o\left( \left( {y - y_{0}} \right)^{n} \right) \)</p>
+          <!-- /FORMULE UNIV INLINE--> Il résulte de tout cela en appliquant le résultat sur la composition que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example</h3> For an example application see the python program in the section below which calculates a D.L. of exp(sin(x)) in the vicinity of 0. <h2>F.T.E. of a (multiplicative) inverse function</h2> Note first that the function
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \frac{1}{1 - x} \)
+          <!-- /INLINE UNIV FORMULA--> has in the neighborhood of 0 and for any integer n a F.T.E. of order n which is
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle 1 + x + x^{2} + ... + x^{n} + o\left( x^{n} \right) \)
+          <!-- /INLINE UNIV FORMULA--> By composition it is the same for the function 1/x in the neighborhood of 1 since 1/x is composed of the previous function with the function (1-x), in plain English for x close to 1:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle {\frac{1}{x} = \frac{1}{1 - \left( {1 - x} \right)} = {1 + \left( {1 - x} \right) + \left ( {1 - x} \right)^{2} + ... + \left( {1 - x} \right)^{n}}} + o\left( \left( {1 - x} \right )^{n} \right) \)</p>
+          <!-- /INLINE UNIV FORMULA--> This formula therefore gives us in the neighborhood of y<sub>0</sub>
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle {\frac{1}{y} = \frac{1}{y_{0}}}\left( {1 + \left( {1 - \frac{y}{y_{0}}} \right ) + ... + \left( {1 - \frac{y}{y_{0}}} \right)^{n}} \right) + o\left( \left( {y - y_{0} } \right)^{n} \right) \)</p>
+          <!-- /INLINE UNIV FORMULA--> It follows from all this by applying the result to the composition that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Si la fonction f possède un D.L. d'ordre n en x<sub>0</sub> et si f(x<sub>0</sub>) n'est pas nul, alors la fonction 1/f qui est composée de f avec 1/x possède également un D.L. d'ordre n au voisinage de x<sub>0</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> If the function f has a F.T.E. of order n at x<sub>0</sub> and if f(x<sub>0</sub>) is not zero, then the function 1/f which is composed of f with 1/x also has a F.T.E. of order n in the neighborhood of x<sub>0</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple d'application</h3> Sachant que le développement limité de cosinus au voisinage de 0 est cos(x)=1-x²/2+o(x²), trouver le développement de 1/cos(x). <br> Il suffit donc de remplacer y par 1-x²/2 dans la formule ci-dessus avec x<sub>0</sub>=0 et y<sub>0</sub>=1. <br> Il vient
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example of application</h3> Knowing that the limited cosine expansion in the neighborhood of 0 is cos(x)=1-x²/2+o(x²), find the expansion of 1/cos(x). <br> So just replace y with 1-x²/2 in the above formula with x<sub>0</sub>=0 and y<sub>0</sub>=1. <br> It comes
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle {\frac{1}{\cos(x)} = {1 + \frac{x^{2}}{2}}} + o\left( x^{2} \right) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr">
+          <h2>D.L. d'un quotient</h2> En écrivant
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{f}{g} = {f \times \frac{1}{g}} \)
+          <!-- /FORMULE UNIV INLINE--> et en appliquant conjointement le résultat sur le D.L. d'un produit et le D.L. de l'inverse d'une fonction on obtient un théorème sur le D.L. d'un quotient f/g au voisinage d'un point x<sub>0</sub> où g(x<sub>0</sub>) ≠ 0. <h3>Exemple d'application</h3> Cherchons le développement de la fonction tan(x) au voisinage de 0 en partant de la définition tan(x)=sin(x)/cos(x). <br /> On part des développements des sinus et cosinus à l'ordre 3 : <br /> sin(x)=x-x<sup>3</sup>/6+o(x<sup>3</sup>) <br /> cos(x)=x-x<sup>2</sup>/2+o(x<sup>3</sup>) <br /> On calcul le D.L. à l'ordre 3 de l'inverse de cosinus comme ci-dessus, puis par produit on obtient : <br /> tan(x)=x-2x<sup>3</sup>/3+o(x<sup>3</sup>) au voisinage de 0. <br /> Un calcul direct par Taylor-Young est possible en calculant les dérivées successives de la fonction tangente tan', tan" , etc... et leurs valeurs au point 0, mais c'est plus long. <h2>Le coin de Python</h2> Voici une modification d'un <input type="button" value="programme précédent" onclick="go('python/devlim1.html#')" data-inline="true" /> qui permet le calcul des D.L. des sommes et des produits par surcharge d'opérateurs :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>F.T.E. of a quotient</h2> In writing
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \frac{f}{g} = {f \times \frac{1}{g}} \)
+          <!-- /INLINE UNIV FORMULA--> and by jointly applying the result on the F.T.E. of a product and the F.T.E. of the multiplicative inverse of a function we obtain a theorem on the F.T.E. of a quotient f/g in the neighborhood of a point x<sub>0</sub> where g(x<sub>0</sub>) ≠ 0. <h3>Example of application</h3> Let us look for the development of the function tan(x) in the neighborhood of 0 starting from the definition tan(x)=sin(x)/cos(x). <br /> We start from the expansions of the sines and cosines of order 3: <br /> sin(x)=x-x<sup>3</sup>/6+o(x<sup>3</sup>) <br /> cos(x)=x-x<sup>2</sup>/2+o(x<sup>3</sup>) <br /> We calculate the F.T.E. to order 3 of the inverse cosine as above, then by product we obtain: <br /> tan(x)=x-2x<sup>3</sup>/3+o(x<sup>3</sup>) in the neighborhood of 0. <br /> A direct calculation by Taylor-Young is possible by calculating the successive derivatives of the tangent function tan', tan" , etc... and their values at point 0, but it takes longer. <h2>Python's Corner</h2> Here is a modification of a <input type="button" value="previous program" onclick="go('python/devlim1.html#')" data-inline="true" /> which allows the calculation of F.T.E. sums and products by overloading operators:
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/devlim2.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici maintenant une classe de polynômes implémentant la composition pour déterminer le développement limité d'une fonction composée ; ici nous avons pris comme exemple la fonction exp(sin(x)) au voisinage de 0. </div>
+        <!-- /fr -->
+        <div lang="en"> Now here is a class of polynomials implementing composition to determine the bounded expansion of a composite function; here we have taken as an example the function exp(sin(x)) in the vicinity of 0. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/comppoly.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Equivalent avec Julia 1.6</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>Equivalent with Julia 1.6</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/expand3.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <p>
+          <object data="julia/expand4.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/taylordlop/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/taylordlop/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

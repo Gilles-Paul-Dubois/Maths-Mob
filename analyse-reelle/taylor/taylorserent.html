@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Développement en série entière</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/taylorserent/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/taylorserent/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> La lecture de la présente page suppose un pré-requis. Il faut connaître la définition des séries entières et certaines de leurs propriétés relatives à la convergence. <br /> On pourra trouver toute l'information nécessaire <input type="button" value="ici" onclick="go('../suitefonc/suitefoncserent.html#def1')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> Reading this page assumes a prerequisite. It is necessary to know the definition of power series and some of their properties relating to convergence. <br /> You can find all the necessary information <input type="button" value="here" onclick="go('../suitefonc/suitefoncserent.html#def1')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que la fonction f définie au voisinage de x<sub>0</sub> est <strong>
+              <em>'développable en série entière en x<sub>0</sub>' </em>
+            </strong> (ou encore <strong>
+              <em>'analytique'</em>
+            </strong> en x<sub>0</sub>), s'il existe une suite de coefficients réels a<sub>0</sub>, a<sub>1</sub>, .., a<sub>n</sub>, ..., telle que :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f(x) = {\sum\limits_{n = 0}^{\infty}a_{n}\left( {x - x_{0}} \right)^{n}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that the function f defined in the neighborhood of x<sub>0</sub> is <strong>
+              <em>'expandable as a power series at x<sub>0</sub>' </em>
+            </strong> (or else <strong>
+              <em>'analytical'</em>
+            </strong> at x<sub>0</sub>), if there exists a sequence of real coefficients a<sub>0</sub> , a<sub>1</sub>, .., a<sub>n</sub>, ..., such that:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle f(x) = {\sum\limits_{n = 0}^{\infty}a_{n}\left( {x - x_{0}} \right)^{n}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Il résulte de cette définition, ainsi que des propriétés des séries entières, que si f est analytique en x<sub>0</sub>, f possède en ce point des D.L. d'ordre n, pour n entier quelconque et que la suite (a<sub>n</sub>)<sub>n &isin; &naturals; </sub> est unique, que f est indéfiniment dérivable en x<sub>0</sub> et que les coefficients a<sub>n</sub> sont donnés par :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle a_{n} = \frac{f^{(n)}\left( x_{0} \right)}{n!} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> It follows from this definition, as well as from the properties of power series, that if f is analytic at x<sub>0</sub>, f has at this point F.T.E.s of order n, for any integer n and that the sequence (a<sub>n</sub>)<sub>n &isin; &naturals; </sub> is unique, that f is indefinitely differentiable at x<sub>0</sub> and that the coefficients a<sub>n</sub> are given by:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle a_{n} = \frac{f^{(n)}\left( x_{0} \right)}{n!} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Fonctions usuelles</h2> Les développements en séries entières des fonctions usuelles à l'origine seront obtenues à partir de leurs développements limités à l'origine rassemblés dans <input type="button" value="cette page" onclick="go('taylordlus.html#')" data-inline="true" />. <br /> Le rayon de convergence, noté R, des séries sera obtenu par des majorations du reste, du type de celle présentée dans <input type="button" value="cette page" onclick="go('taylorlagrange.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Usual functions</h2> The expansions into power series of the usual functions at the origin will be obtained from their originally Finite Taylor Expansions collected in <input type="button" value="this page" onclick="go('taylordlus.html#')" data-inline="true" />. <br /> The radius of convergence, denoted R, of the series will be obtained by upper bounds for the remainder, of the type of the one presented in <input type="button" value="this page" onclick="go('taylorlagrange.html#')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <table border="1" width="100%">
+          <tr align="center">
+            <td>
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{1 - x} = {\sum\limits_{k = 0}^{\infty}x^{k}} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </td>
+            <td align="center">R=1</td>
+          </tr>
+          <tr>
+            <td align="center">
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{1 + x} = {\sum\limits_{k = 0}^{\infty}{\left( {- 1} \right)^{k}x}^{k}} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </td>
+            <td align="center">R=1</td>
+          </tr>
+          <tr>
+            <td align="center">
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{1 + x^{2}} = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}x^{2k}} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </td>
+            <td align="center">R=1</td>
+          </tr>
+          <tr>
+            <td align="center">
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \ln\left( {1 + x} \right) = {\sum\limits_{k = 1}^{\infty}\left( {- 1} \right)^{k - 1}\frac{x^{k}}{k}} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </td>
+            <td align="center">R=1</td>
+          </tr>
+          <tr>
+            <td align="center">
+              <div lang="fr">
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle arctan(x) = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}\frac{x^{2k + 1}}{2k + 1}} \)
+                <!-- /FORMULE UNIV INLINE-->
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle atan(x) = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}\frac{x^{2k + 1}}{2k + 1}} \)
+                <!-- /FORMULE UNIV INLINE-->
+              </div>
+      </div>
+      <!-- /en -->
+      </td>
+      <td align="center">R=1</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \sin(x) = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}\frac{x^{2k + 1}}{\left( {2k + 1} \right)!}} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=+&infin;</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \sinh(x) = {\sum\limits_{k = 0}^{\infty}\frac{x^{2k + 1}}{\left( {2k + 1} \right)!}} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=+&infin;</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \cos(x) = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}\frac{x^{2k}}{\left( {2k} \right)!}} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=+&infin;</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \cosh(x) = {\sum\limits_{k = 0}^{\infty}\frac{x^{2k}}{\left( {2k} \right)!}} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=+&infin;</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \operatorname{}e^{x} = \sum\limits_{k = 0}^{\infty}\frac{x^{k}}{k!} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=+&infin;</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div lang="fr">
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \operatorname{}{argth}(x) = \sum\limits_{k = 0}^{\infty}\frac{x^{2k + 1}}{2k + 1} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \operatorname{}{arth}(x) = \sum\limits_{k = 0}^{\infty}\frac{x^{2k + 1}}{2k + 1} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </td>
+        <td align="center">R=1</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left( {1 + x} \right)^{a} = 1 + {\sum\limits_{k = 1}^{\infty}\frac{a\left( {a - 1} \right)...\left( {a - k + 1} \right)}{k!}x^{k}} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=1</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{\sqrt{1 - x^{2}}} = {\sum\limits_{k = 0}^{\infty}\frac{1.3.5...\left( {2k - 1} \right)}{2.4.6...2k}x^{2k}} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=1</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{\sqrt{1 + x^{2}}} = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}\frac{1.3.5...\left( {2k - 1} \right)}{2.4.6...2k}x^{2k}} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </td>
+        <td align="center">R=1</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div lang="fr">
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \arcsin(x) = {\sum\limits_{k = 0}^{\infty}\frac{1.3.5...\left( {2k - 1} \right)}{2.4.6...\left( {2k + 1} \right)}x^{2k + 1}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle asin(x) = {\sum\limits_{k = 0}^{\infty}\frac{1.3.5...\left( {2k - 1} \right)}{2.4.6...\left( {2k + 1} \right)}x^{2k + 1}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </td>
+        <td align="center">R=1</td>
+      </tr>
+      <tr>
+        <td align="center">
+          <div lang="fr">
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle argsh(x) = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}\frac{1.3.5...\left( {2k - 1} \right)}{2.4.6...\left( {2k + 1} \right)}x^{2k + 1}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle arsh(x) = {\sum\limits_{k = 0}^{\infty}\left( {- 1} \right)^{k}\frac{1.3.5...\left( {2k - 1} \right)}{2.4.6...\left( {2k + 1} \right)}x^{2k + 1}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </td>
+        <td align="center">R=1</td>
+      </tr>
+      </table>
+      <div lang="fr">
+        <h2>Le coin de Python</h2> Voici un programme Python d'application de ce qui précède:
+      </div>
+      <!-- /fr -->
+      <div lang="en">
+        <h2>Python's Corner</h2> Here is a Python application of the above:
+      </div>
+      <!-- /en -->
+      <!-- STOP CODE -->
+      <p>
+        <object data="python/taylorserent1.html" type="text/html" border="3" height="250" width="100%"></object>
+      </p>
+      <!-- /STOP  CODE-->
+      <div lang="fr">
+        <h2>Le coin de Julia</h2>
+        <p>Et voici l'équivalent avec Julia 1.6 :</p>
+      </div>
+      <!-- /fr -->
+      <div lang="en">
+        <h2>Julia's corner</h2>
+        <p>And here is the equivalent with Julia 1.6:</p>
+      </div>
+      <!-- /en -->
+      <!-- STOP CODE -->
+      <p>
+        <object data="julia/serent.jl.html" type="text/html" border="3" height="150" width="100%"></object>
+      </p>
+      <!-- /STOP  CODE-->
+      <div lang="fr">
+        <div>
+          <ul style=list-style-type:'';>
+            <li>
+              <input type="button" value="Exercices" onclick="go('exercices/taylorserent/menu.html')" />
+            </li>
+            <li>
+              <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+            </li>
+            <li>
+              <input type="button" value="Retour au menu 'Séries de Taylor'" onclick="go('index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+            </li>
+          </ul>
+        </div>
+        <!-- /navbar -->
+      </div>
+      <!-- /fr -->
+      <div lang="en">
+        <div>
+          <ul style=list-style-type:'';>
+            <li>
+              <input type="button" value="Exercises" onclick="go('exercices/taylorserent/menu.html')" />
+            </li>
+            <li>
+              <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+            </li>
+            <li>
+              <input type="button" value="Back to 'Taylor series'" onclick="go('index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+            </li>
+            <li>
+              <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /en -->
+    </div>
+    <!-- /content -->
+    <div data-role="footer">
+      <table cellpadding="10">
+        <tr>
+          <td>
+            <div lang="fr">Création Gilles Dubois</div>
+            <div lang="en">Created by Gilles Dubois</div>
+          </td>
+          <td>
+            <div lang="fr">Janvier 2022</div>
+            <div lang="en">January 2022</div>
+          </td>
+          <td>
+            <div lang="fr">Version mobile Jquery</div>
+            <div lang="en">Mobile Jquery version</div>
+          </td>
+          <td>
+            <a href="https://www.mathjax.org">
+              <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- /footer -->
+    <ul style=list-style-type:'';>
+      <li>
+        <div lang="fr">
+          <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+        <div lang="en">
+          <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+        </div>
+      </li>
+      <li>
+        <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+      </li>
+    </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

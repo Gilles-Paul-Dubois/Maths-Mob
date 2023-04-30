@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Fonctions hyperboliques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/transchyper/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions transcendantes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/transchyper/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Transcendental functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Nous donnons tout d'abord les définitions de ces fonctions liées à l'exponentielle. <br> Nous listons ensuite leurs propriétés, sans démonstrations. Les preuves ne présentent aucune difficulté et sont de simples vérifications. <br> Nous observerons une grande similitude au niveau des formules (dérivation, formules d'addition de duplication) avec les fonctions trigonométriques, d'où leurs noms. <br> Le qualificatif d'hyperbolique est lié au fait que si t &rarr; (a&times;cos(t),b&times;sin(t)) est un paramétrage classique de l'ellipse d'équation </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>We first give the definitions of these functions related to the exponential. <br> We then list their properties, without proofs. The proofs do not present any difficulty and are simple verifications. <br> We will observe a great similarity at the level of the formulas (derivation, duplication addition formulas) with the trigonometric functions, hence their names. <br> The qualifier of hyperbolic is linked to the fact that if t &rarr; (a&times;cos(t),b&times;sin(t)) is a classical parameterization of the equation ellipse </p>
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1 \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> alors t &rarr; (a&times;cosh(t),b&times;sinh(t)) est un paramétrage d'une branche de l'hyperbole d'équation </div>
+        <!-- /fr -->
+        <div lang="en"> then t &rarr; (a&times;cosh(t),b&times;sinh(t)) is a parametrization of a branch of the hyperbola of equation </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{x^{2}}{a^{2}}-\frac{y^{2}}{b^{2}}=1 \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> l'autre branche étant paramétrée par t &rarr; (-a&times;cosh(t),b&times;sinh(t)). <h2>Définitions</h2>
+          <h3>Sinus hyperbolique</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> the other branch being parameterized by t &rarr; (-a&times;cosh(t),b&times;sinh(t)). <h2>Definitions</h2>
+          <h3>Hyperbolic sine</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Pour tout x réel nous posons :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sinh(x)=\frac{e^{x}-e^{-x}}{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Nous définissons ainsi une fonction de &reals; sur &reals; appelée <b>
+              <i>'sinus hyperbolique'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> For all real x we set:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle sinh(x)=\frac{e^{x}-e^{-x}}{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> We thus define a function of &reals; onto &reals; called <b>
+              <i>'hyperbolic sine'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Graphe de la fonction sinus hyperbolique. </div>
+        <!-- /fr -->
+        <div lang="en"> Graph of the hyperbolic sine function. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/sh.png" width="400" height="402" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> La fonction sinh est impaire et strictement croissante de &reals; dans &reals;.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> The function sinh is odd and strictly increasing from &reals; to &reals;.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Cosinus hyperbolique</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Hyperbolic cosine</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Pour tout x réel nous posons :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cosh(x)=\frac{e^{x}+e^{-x}}{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Nous définissons ainsi une fonction de &reals; sur 1,+&infin;[ appelée <b>
+              <i>'cosinus hyperbolique'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> For all real x we set:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle cosh(x)=\frac{e^{x}+e^{-x}}{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> We thus define a function of &reals; onto [1,+&infin;[ called <b>
+              <i>'hyperbolic cosine'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Graphe de la fonction cosinus hyperbolique. </div>
+        <!-- /fr -->
+        <div lang="en"> Graph of the hyperbolic cosine function. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/ch.png" width="396" height="399" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> La fonction cosh est paire, strictement décroissante de ]-&infin;,0[ sur [1,+&infin;[, strictement croissante de [0,+&infin;[ sur [1,+&infin;[.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> The cosh function is even, strictly decreasing from ]-&infin;,0[ onto [1,+&infin;[, strictly increasing from [0,+&infin;[ onto [1,+&infin;[.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Tangente hyperbolique</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Hyperbolic tangent</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Pour tout x réel nous posons :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle tanh(x)=\frac{sinh(x)}{cosh(x)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Nous définissons ainsi une fonction de &reals; sur ]-1,+1[ appelée <b>
+              <i>'tangente hyperbolique'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> For all real x we set:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle tanh(x)=\frac{sinh(x)}{cosh(x)} \)</p>
+            <!-- /INLINE UNIV FORMULA--> We thus define a function of &reals; onto ]-1,+1[ called <b>
+              <i>'hyperbolic tangent'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Graphe de la fonction tangente hyperbolique. </div>
+        <!-- /fr -->
+        <div lang="en"> Graph of the hyperbolic tangent function. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/tanh.png" width="394" height="400" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> La fonction tanh est impaire et strictement croissante de &reals; sur ]-1,+1[.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> The tanh function is odd and strictly increasing from &reals; onto ]-1,+1[.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Cotangente hyperbolique</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Hyperbolic cotangent</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Pour tout x réel nous posons :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cotanh(x)=\frac{cosh(x)}{sinh(x)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Nous définissons ainsi une fonction de &reals;-{0} sur ]-&infin;,-1[ &cup; ]1,+&infin;[ appelée <b>
+              <i>'cotangente hyperbolique'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> For all real x we set:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle cotanh(x)=\frac{cosh(x)}{sinh(x)} \)</p>
+            <!-- /INLINE UNIV FORMULA--> We thus define a function from &reals;-{0} onto ]-&infin;,-1[ &cup; ]1,+&infin;[ called <b>
+              <i>'hyperbolic cotangent'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Graphe de la fonction cotangente hyperbolique </div>
+        <!-- /fr -->
+        <div lang="en"> Graph of the hyperbolic cotangent function </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/cotanh.png" width="398" height="396" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> La fonction cotanh est impaire et strictement décroissante de ]-&infin;,0[ sur ]-&infin;,-1[ et strictement décroissante de ]0,+&infin;[ sur ]1,+&infin;[.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> The function cotanh is odd and strictly decreasing from ]-&infin;,0[ onto ]-&infin;,-1[ and strictly decreasing from ]0,+&infin;[ onto ]1,+&infin;[.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Dérivation</h2> Il résulte de la définition même des fonctions hyperboliques que ce sont des fonctions continues et indéfiniment dérivables sur leurs domaines comme quotient de sommes de fonctions indéfiniment dérivables. On a les formules suivantes (à comparer avec les fonctions trigonométriques) :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Differentiation</h2> It follows from the very definition of hyperbolic functions that they are continuous and indefinitely differentiable functions over their domains as a quotient of sums of indefinitely differentiable functions. We have the following formulas (to be compared with the trigonometric functions):
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div>
+            <ul>
+              <li>sinh'=cosh</li>
+              <li>cosh'=sinh</li>
+              <li>tanh'=1/cosh<sup>2</sup>=1-tanh<sup>2</sup>
+              </li>
+              <li>cotanh'=-1/sinh<sup>2</sup>=1-cotanh<sup>2</sup>
+              </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div>
+            <ul>
+              <li>sinh'=cosh</li>
+              <li>cosh'=sinh</li>
+              <li>tanh'=1/cosh<sup>2</sup>=1-tanh<sup>2</sup>
+              </li>
+              <li>cotanh'=-1/sinh<sup>2</sup>=1-cotanh<sup>2</sup>
+              </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Développement en séries entières</h2> On les obtient pour sinh et cosh à partir du développement de l'exponentielle.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Expansions into power series</h2> They are obtained for sinh and cosh from the expansion of the exponential.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sinh(x)=\sum_{n=0}^{\infty}\frac{x^{2n+1}}{(2n+1)!} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cosh(x)=\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sinh(x)=\sum_{n=0}^{\infty}\frac{x^{2n+1}}{(2n+1)!} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cosh(x)=\sum_{n=0}^{\infty}\frac{x^{2n}}{(2n)!} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Formules usuelles</h2> Voici quelques équations satisfaites par les fonctions hyperboliques. On remarquera la similitude (souvent à un signe près) avec les fonctions trigonométriques.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Usual formulas</h2> Here are some equations satisfied by the hyperbolic functions. Note the similarity (often up to a sign) with trigonometric functions.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> cosh<sup>2</sup>(x)-sinh<sup>2</sup>(x)=1
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> cosh<sup>2</sup>(x)-sinh<sup>2</sup>(x)=1
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Formules d'addition </div>
+        <!-- /fr -->
+        <div lang="en"> Addition formulas </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 8</div> sinh(x+y)=sinh(x)cosh(y)+cosh(x)sinh(y) <br> cosh(x+y)=cosh(x)cosh(y)+sinh(x)sinh(y)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 8</div> sinh(x+y)=sinh(x)cosh(y)+cosh(x)sinh(y) <br> cosh(x+y)=cosh(x)cosh(y)+sinh(x)sinh(y)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Formules d'angle moitié : </div>
+        <!-- /fr -->
+        <div lang="en"> Half angle formulas: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 9</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cosh(\frac{x}{2})=\sqrt{\frac{cosh(x)+1}{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sinh(\frac{x}{2})=\sqrt{\frac{cosh(x)-1}{2}}~~si~~x\geqslant 0 \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 9</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle cosh(\frac{x}{2})=\sqrt{\frac{cosh(x)+1}{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle sinh(\frac{x}{2})=\sqrt{\frac{cosh(x)-1}{2}}~~if~~x\geqslant 0 \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Formules impliquant la tangente hyperbolique : </div>
+        <!-- /fr -->
+        <div lang="en"> Formulas involving the hyperbolic tangent: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop10"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 10</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle tanh^{2}(x)=1-\frac{1}{cosh^{2}(x)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle tanh(x+y)=\frac{tanh(x)-tanh(y)}{1+tanh(x)tanh(y)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle tanh\left ( \frac{x}{2} \right )=\sqrt{\frac{cosh(x)-1}{cosh(x)+1}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 10</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle tanh^{2}(x)=1-\frac{1}{cosh^{2}(x)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle tanh(x+y)=\frac{tanh(x)-tanh(y)}{1+tanh(x)tanh(y)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle tanh\left ( \frac{x}{2} \right )=\sqrt{\frac{cosh(x)-1}{cosh(x)+1}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/transchyper/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions transcendantes'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/transchyper/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Transcendental functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

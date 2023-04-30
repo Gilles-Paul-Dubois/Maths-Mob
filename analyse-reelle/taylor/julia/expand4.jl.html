@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>expand4.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Polynomials</span>
+<span class="s0">using </span><span class="s1">MTH229</span>
+
+<span class="s1">x=symbols(</span><span class="s2">&quot;x&quot;</span><span class="s1">)</span>
+<span class="s1">f(x)=sin(x)</span>
+<span class="s1">g(x)=exp(x)</span>
+<span class="s1">h(x)=g(f(x))</span>
+
+<span class="s3">#substituer le polynôme q(x) à la variable x dans le polynome p(x)</span>
+<span class="s3">#substitute  q(x) to the  variable x in the polynomial p(x)</span>
+<span class="s0">function </span><span class="s1">subst(q,p)</span>
+    <span class="s1">C=p.coeffs</span>
+    <span class="s1">R=Polynomial([</span><span class="s4">0</span><span class="s1">],:x)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s4">1</span><span class="s1">:length(C)</span>
+        <span class="s1">R=R+C[i]*q^(i-</span><span class="s4">1</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">R</span>
+<span class="s0">end</span>
+
+<span class="s3">#composer deux développements limités - compose two F.T.E.s</span>
+<span class="s0">function </span><span class="s1">compose(DL1,DL2,n)</span>
+    <span class="s1">R=subst(DL2,DL1)</span>
+    <span class="s1">p(n)=Polynomial([</span><span class="s4">0</span><span class="s1">,</span><span class="s4">1</span><span class="s1">],:h)^n</span>
+    <span class="s0">return </span><span class="s1">rem(R,p(n+</span><span class="s4">1</span><span class="s1">))</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">DL(g,a,n)</span>
+    <span class="s1">fact(n)=reduce(*,</span><span class="s4">1</span><span class="s1">:n)</span>
+    <span class="s1">cnf(g,a,i)=diff(g,i)(a)/fact(i)</span>
+    <span class="s1">C=[cnf(g,a,i) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s4">0</span><span class="s1">:n]</span>
+    <span class="s0">return </span><span class="s1">Polynomial(C,:h)</span>
+<span class="s0">end</span>
+
+<span class="s3">#vérifier notre proposition - check our assertion </span>
+<span class="s1">println(DL(h,</span><span class="s4">0</span><span class="s1">,</span><span class="s4">5</span><span class="s1">))</span>
+<span class="s1">println(compose(DL(g,</span><span class="s4">0</span><span class="s1">,</span><span class="s4">5</span><span class="s1">),DL(f,</span><span class="s4">0</span><span class="s1">,</span><span class="s4">5</span><span class="s1">),</span><span class="s4">5</span><span class="s1">),</span><span class="s4">5</span><span class="s1">)</span></pre>
+</body>
+</html>

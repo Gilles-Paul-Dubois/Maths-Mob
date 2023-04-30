@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>tri_a_bulles.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #dd6718;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">random_list(n)=[rand(</span><span class="s1">1</span><span class="s0">:n) </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:n]</span>
+
+<span class="s2">function </span><span class="s0">tri_a_bulles(L)</span>
+    <span class="s0">en_ordre=</span><span class="s2">false</span>
+    <span class="s2">while </span><span class="s0">en_ordre==</span><span class="s2">false</span>
+        <span class="s0">en_ordre=</span><span class="s2">true</span>
+        <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:length(L)-</span><span class="s1">1</span>
+            <span class="s2">if </span><span class="s0">L[i]&gt;L[i+</span><span class="s1">1</span><span class="s0">]</span>
+                <span class="s0">en_ordre=</span><span class="s2">false</span>
+                <span class="s0">L[i], L[i + </span><span class="s1">1</span><span class="s0">] = L[i + </span><span class="s1">1</span><span class="s0">], L[i]</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">test1(n)</span>
+    <span class="s0">L=random_list(n)</span>
+    <span class="s3">@timed </span><span class="s0">tri_a_bulles(L)</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">algotime()</span>
+    <span class="s2">for </span><span class="s0">n </span><span class="s2">in </span><span class="s0">[</span><span class="s1">100</span><span class="s0">,</span><span class="s1">1000</span><span class="s0">,</span><span class="s1">10000</span><span class="s0">,</span><span class="s1">30000</span><span class="s0">,</span><span class="s1">40000</span><span class="s0">,</span><span class="s1">50000</span><span class="s0">]</span>
+        <span class="s0">println(test1(n).time*</span><span class="s1">10</span><span class="s0">^</span><span class="s1">8</span><span class="s0">/(n*n))</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">algotime()</span>
+
+        
+    
+        </pre>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Continuité uniforme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contuniforme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contuniforme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Si nous reprenons la définition de la continuité d'une fonction f au point x<sub>0</sub>, nous avons: <br /> ∀ ε&gt;0 ∃ η tel que |x-x<sub>0</sub>| &lt; η ⇒ |f(x)-f(x<sub>0</sub>)| &lt; ε <br /> Donc, de fait, le η dépend de ε mais aussi de x<sub>0</sub>, et <input type="button" value="nous avons déjà remarqué" onclick="go('../foncnum/foncnumlimpoint.html#def1')" data-inline="true" />, qu'il devrait en toute rigueur être noté η(ε,x<sub>0</sub>), nous ne l'avons pas fait pour alléger les écritures. <br /> Nous allons maintenant présenter une nouvelle notion, plus forte, de continuité globale sur un domaine :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> If we take the definition of the continuity of a function f at the point x<sub>0</sub>, we have: <br /> ∀ ε>0 ∃ η such that |x-x<sub>0</sub>| < η ⇒ |f(x)-f(x<sub>0</sub>)|
+            < ε <br /> So, in fact, the η depends on ε but also on x<sub>0</sub>, and <input type="button" value="we have already noticed" onclick="go('../foncnum/ funcnumlimpoint.html#def1')" data-inline="true" />, that it should strictly be denoted η(ε,x<sub>0</sub>), we did not do it to make writings lighter. <br /> We will now present a new, stronger, notion of global continuity on a domain:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Nous dirons que f est <b>
+              <i>'uniformément continue sur D'</i>
+            </b> si &forall;&epsilon; &gt; 0 &exist;&eta;(&epsilon;) &gt; 0 tel que |x-x<sub>0</sub>| &lt; &eta; &rArr; |f(x)-f(x<sub>0</sub>)| &lt; &epsilon;. <br> C'est à dire que le &eta; ne dépend <span style="text-decoration: underline; ">que de &epsilon;</span> et non plus de x<sub>0</sub>. <br> Notons que cette définition est parfaitement symétrique en x et x<sub>0</sub>, et qu'elle peut être reformulée ainsi: <br> Il existe &eta; tel que dès que la distance de deux points est inférieure à &eta; la distance de leurs images est inférieure à &epsilon;.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that f is <b>
+              <i>'uniformly continuous on D'</i>
+            </b> if &forall;&epsilon; > 0 &exist;&eta;(&epsilon;) > 0 such that |x-x<sub>0</sub>| < &eta; &rArr; |f(x)-f(x<sub>0</sub>)| < &epsilon;. <br> That is, the &eta; depends <span style="text-decoration: underline; ">only on &epsilon;</span> and no longer on x<sub>0</sub>. <br> Note that this definition is perfectly symmetric in x and x<sub>0</sub>, and that it can be reformulated as follows: <br> There is &eta; such that as soon as the distance between two points is less than &eta; the distance of their images is less than &epsilon;.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous allons par la suite voir des exemples de fonctions uniformément continues sur leur domaine et des contre-exemples. <br /> Voici tout d'abord un: <h2>Théorème important</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We will then see examples of uniformly continuous functions on their domain and counter-examples as well. <br /> First here is one: <h2>Important theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Toute fonction continue sur un intervalle <input type="button" value="compact" onclick="go('../../nombres/reels/compactes.html')" data-inline="true" /> [a,b] est uniformément continue sur cet intervalle.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Any continuous function on a <input type="button" value="compact" onclick="go('../../nombres/reels/compactes.html')" data-inline="true" /> interval [a,b] is uniformly continuous on this interval.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat est très souvent utile, particulièrement en théorie de l'intégration. </div>
+        <!-- /fr -->
+        <div lang="en"> This result is very often useful, particularly in integration theory. </div>
+        <!-- /en -->
+        <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />
+        <div lang="fr"> Avant de passer à la démontration nous insistons sur l'importance du fait que l'intervalle est fermé et borné. <br> Voici en effet un contre exemple simple : <br> Considérons la fonction x &rarr; 1/x. Cette fonction est continue sur l'intervalle ]0,1] mais n'est pas uniformément continue sur ce même intervalle. En effet posant x<sub>n</sub>=1/n on a toujours f(x<sub>n+1</sub>)-f(x<sub>n</sub>)=1 mais pour n grand x<sub>n</sub> et x<sub>n+1</sub> peuvent être tous deux aussi voisins de 0 qu'on veut donc aussi proches l'un de l'autre qu'on veut. Ce qui montre que l'hypothèse 'intervalle fermé' est bien nécessaire. <br> Et en voici un autre : <br> Par ailleurs, la fonction x &rarr; x<sup>2</sup> est continue sur l'intervalle fermé [0,+&infin;[, mais elle n'est pas uniformément continue sur ce même intervalle. En effet, si on pose x<sub>n</sub>=n et x'<sub>n</sub>=n+1/n la différence |x<sub>n</sub>-x'<sub>n</sub>| tend vers 0, alors que |f(x<sub>n</sub>)-f(x'<sub>n</sub>)| &ge; 2 &forall;n. <br> Nous pouvons maintenant passer à la preuve de notre assertion. </div>
+        <!-- /fr -->
+        <div lang="en"> Before moving on to the proof, we insist on the importance of the fact that the interval is closed and bounded. <br> Here is indeed a simple counterexample : <br> Consider the function x &rarr; 1/x. This function is continuous on the interval ]0,1] but is not uniformly continuous on this same interval. Indeed setting x<sub>n</sub>=1/n we always have f(x<sub>n+1</sub>)-f(x<sub>n</sub>)=1 but for n large x<sub>n</sub> and x<sub>n+1</sub> can both be as close to 0 as we want, so as close to each other as we want. Which shows that the 'closed interval' hypothesis is indeed necessary. <br> And here's another one : <br> Moreover, the function x &rarr; x<sup>2</sup> is continuous on the closed interval [0,+&infin;[, but it is not uniformly continuous on this same interval. Indeed, if we set x<sub>n</sub>=n and x'<sub>n</sub>=n+1/n the difference |x<sub>n</sub>-x'< sub>n </sub>| tends to 0, while |f(x<sub>n</sub>)-f(x'<sub>n</sub>)| &ge; 2 &forall;n. <br> We can now move on to the proof of our assertion. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Supposons que f ne soit pas uniformément continue sur [a,b]. Alors il existerait un nombre ε &gt; 0 tel que ∀n∈&naturals; on puisse trouver deux points x<sub>n</sub> x'<sub>n</sub> vérifiant |x<sub>n</sub>-x'<sub>n</sub>|&lt;1/n et |f(x<sub>n</sub>)-f(x'<sub>n</sub>)| ≥ ε. On peut organiser les nombres x<sub>n</sub>, x'<sub>n</sub> ∈[a,b] en une suite unique en posant: <br /> u<sub>0</sub>=x<sub>0</sub>, u<sub>1</sub>=x'<sub>0</sub>,u<sub>2</sub>=x<sub>1</sub>,u<sub>3</sub>=x'<sub>1</sub>,u<sub>4</sub>=x<sub>2</sub>, ... Donc u<sub>2n</sub>=x<sub>n</sub> et u<sub>2n+1</sub>=x'<sub>n</sub>. <br /> On a donc |u<sub>2n</sub>-u<sub>2n+1</sub>|&lt;1/n et |f(u<sub>2n</sub>)-f(u<sub>2n+1</sub>)| ≥ ε (ε est ici une constante). De la suite (u<sub>n</sub>) on peut extraire une suite partielle convergente vers une limite c∈[a,b] par le théorème de <input type="button" value="Bolzano-Weierstrass" onclick="go('../suites/suitesaccumulation.html#thm1')" data-inline="true" />. Or f est continue en c. On peut donc dire que ∀μ &gt; 0 il existe un voisinage V de c tel que x,x'∈V ⇒ |f(x)-f(x')| &lt; μ. <br /> Soit (u<sub>p(n)</sub> )une suite extraite de (u<sub>n</sub>) tendant vers c. Alors pour tout voisinage V de c, tous les u<sub>p(n)</sub> sont dans V pour n suffisamment grand. Mais la distance |u<sub>p(n)</sub>-u<sub>p(n+1)</sub>| est &lt; 1/p(n) donc &lt; 1/n, donc cette distance tend vers 0. <br /> Pour n suffisamment grand on aura donc pour tout voisinage V de c u<sub>p(n)</sub> et u<sub>p(n+1)</sub> dans V. Il suffit donc de choisir un réel μ &lt; ε pour une contradiction.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Suppose f not uniformly continuous on [a,b]. In this case we could find a number ε &gt; 0 such that ∀n∈&naturals; we could find two numbers x<sub>n</sub> x'<sub>n</sub> verifying |x<sub>n</sub>-x'<sub>n</sub>|&lt;1/n and |f(x<sub>n</sub>)-f(x'<sub>n</sub>)| ≥ ε. We can organize the numbers x<sub>n</sub>, x'<sub>n</sub> ∈[a,b] in a unique sequence setting <br /> u<sub>0</sub>=x<sub>0</sub>, u<sub>1</sub>=x'<sub>0</sub>,u<sub>2</sub>=x<sub>1</sub>,u<sub>3</sub>=x'<sub>1</sub>,u<sub>4</sub>=x<sub>2</sub>, ... Hence u<sub>2n</sub>=x<sub>n</sub> et u<sub>2n+1</sub>=x'<sub>n</sub>. <br /> So we have |u<sub>2n</sub>-u<sub>2n+1</sub>|&lt;1/n and |f(u<sub>2n</sub>)-f(u<sub>2n+1</sub>)| ≥ ε (ε is here a constant). From the sequence (u<sub>n</sub>) we can extract a subsequence converging vto a limit c∈[a,b] by the theorem of <input type="button" value="Bolzano-Weierstrass" onclick="go('../suites/suitesaccumulation.html#thm1')" data-inline="true" />. But f is continuous at c. So we can say that ∀μ &gt; 0 it exists a neighborhood V of c such that x,x'∈V ⇒ |f(x)-f(x')| &lt; μ. <br /> Let (u<sub>p(n)</sub>)a subsequence of (u<sub>n</sub>) converging towards c. Then for any neighborhood V of c, all the u<sub>p(n)</sub> are in V for n large enough. But the distance |u<sub>p(n)</sub>-u<sub>p(n+1)</sub>| is &lt; 1/p(n) hence &lt; 1/n, si this distance tends to 0. <br /> For n large enough we will have for any neighborhood V of c u<sub>p(n)</sub> and u<sub>p(n+1)</sub> in V. So it suffices to choose a real μ &lt; ε for a contradiction.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <a name="lipschitz"></a>
+        <div lang="fr">
+          <h2>Fonctions lipschitziennes</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The Lipschitz condition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td>
+              <font color="#FFFFFF">Rudolph Lipschitz-(1832-1903)-DE</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/RLipschitz.jpeg" width="268" height="326" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Nous allons maintenant donner un exemple important de fonctions uniformément continues sur leur domaine. Ce sont les fonctions vérifiant une condition de Lipschitz. </div>
+        <!-- /fr -->
+        <div lang="en"> We will now give an important example of uniformly continuous functions over their domain. These are the functions satisfying a Lipschitz condition. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit que f est k-lipschitzienne sur son domaine s'il existe une constante réelle positive k telle que: <br> |f(x)-f(x')| &le; k|x-x'| &forall;(x,x')&isin;D&times;D
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that f is k-Lipschitzian over its domain if there exists a positive real constant k such that: <br> |f(x)-f(x')| &le; k|x-x'| &forall;(x,x')&isin;D&times;D
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ces fonctions sont évidemment uniformément continues sur leur domaine. Mais il existe des fonctions uniformément continues sur leur domaine sans être pour autant lipschitziennes, il s'agit donc d'une condition suffisante sans être nécessaire (voir <input type="button" value="exercice 02" onclick="go('exercices/contuniforme/ex02.html#')" data-inline="true" />). </div>
+        <!-- /fr -->
+        <div lang="en"> These functions are obviously uniformly continuous over their domain. But there are uniformly continuous functions on their domain without being Lipschitzian, so it is a sufficient condition without being necessary (see <input type="button" value="exercise 02" onclick="go('exercices/contuniforme/ex02.html#')" data-inline="true" />). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Un cas particulier important est quand la constante k vérifie k&lt;1. On dit alors que f est <b>
+              <i>'contractante'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> An important special case is when the constant k verifies k <1. We then say that f is <b>
+              <i>'a contraction</i>
+              </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On a alors un théorème important concernant les <input type="button" value="points fixes" onclick="go('../../bases/applications/fixes.html#')" data-inline="true" /> de telles applications: </div>
+        <!-- /fr -->
+        <div lang="en"> We have an important heorem concerning the <input type="button" value="fixed points" onclick="go('../../bases/applications/fixes.html#')" data-inline="true" /> of such mappings. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit f une application contractante définie sur un fermé D et vérifiant f(D)&sube;D. <ol>
+              <li>Il existe un unique point fixe a de f sur D.</li>
+              <li>Pour tout x<sub>0</sub>&isin;D la suite récurrente (u<sub>n</sub>)<sub>n&isin;&naturals;</sub> définie par u<sub>n+1</sub>=f(u<sub>n</sub>) converge vers a. </li>
+            </ol>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Let f be a contraction defined on a closed set D and satisfying f(D)&sube;D. <ol>
+              <li>There is a unique fixed point a of f in D.</li>
+              <li>For all x<sub>0</sub>&isin;D the recurrent sequence (u<sub>n</sub>)<sub>n&isin;&naturals;</sub> defined by u<sub>n+ 1</sub>=f(u<sub>n</sub>) converges to a. </li>
+            </ol>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> On voit de suite qu'il ne peut exister deux points fixes distincts a et b car on a |f(b)-f(a)| ≤ k|b-a| &lt; |b-a|. <br /> Toute suite (u<sub>n</sub>) telle que définie dans l'enoncé vérifie: <br /> |u<sub>n+1</sub>-u<sub>n</sub>| ≤ k|u<sub>n</sub>-u<sub>n-1</sub>| <br /> Et donc par récurrence: |u<sub>n+1</sub>-u<sub>n</sub>| ≤ k<sup>n</sup>|u<sub>1</sub>-u<sub>0</sub>| <br /> On voit donc que c'est une suite de Cauchy, de sorte qu'il suffit d'appliquer le résultat enoncé <input type="button" value="ici" onclick="go('contsurdom.html#thm2')" data-inline="true" />.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> We see immediately that there cannot exist two distinct fixed points a and b because we have |f(b)-f(a)| ≤ k|b-a|
+            < |b-a|. <br /> Any sequence (u<sub>n</sub>) as defined in the statement satisfies: <br /> |u<sub>n+1</sub>-u<sub>n</sub>| ≤ k|u<sub>n</sub>-u<sub>n-1</sub>| <br /> And so by recurrence: |u<sub>n+1</sub>-u<sub>n</sub>| ≤ k<sup>n</sup>|u<sub>1</sub>-u<sub>0</sub>| <br /> We can therefore see that it is a Cauchy sequence, so that it suffices to apply the result stated <input type="button" value="here" onclick="go('contsurdom.html#thm2')" data-inline="true" />.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contuniforme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contuniforme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

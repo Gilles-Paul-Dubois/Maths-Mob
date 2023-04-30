@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Théorème de Cauchy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivcauchy/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivcauchy/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Tout comme les deux théorèmes précédents, le théorème de Cauchy concerne les fonctions définies et continues sur un <input type="button" value="intervalle compact" onclick="go('../../nombres/reels/compactes.html#')" data-inline="true" /> [a,b] et dérivables sur son <input type="button" value="intérieur" onclick="go('../../nombres/reels/ouverts.html#int')" data-inline="true" /> ]a,b[. <br /> De fait il s'agit d'une généralisation du <input type="button" value="théorème des accroissements finis" onclick="go('derivaccfinis.html#')" data-inline="true" />, et comme lui c'est une conséquence directe du <input type="button" value="théorème de Rolle" onclick="go('derivrolle.html#thm1')" data-inline="true" />. <br /> Voici son énoncé précis: </div>
+        <!-- /fr -->
+        <div lang="en"> Just like the two previous theorems, Cauchy's Mean Value Theorem concerns continuous functions defined on a <input type="button" value="compact interval" onclick="go('../../nombres/reels/compactes.html#')" data-inline="true" /> [a,b] and derivable on its <input type="button" value="interior" onclick="go('../../nombres/reels/ouverts.html#inte')" data-inline="true" /> ]a,b[. <br /> In fact it is a generalization of the <input type="button" value="usual Mean Value Theorem" onclick="go('derivaccfinis.html#')" data-inline="true" />, and like it it is a direct consequence of <input type="button" value="Rolle's theorem" onclick="go('derivrolle.html#thm1')" data-inline="true" />. <br /> Here is its precise statement: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soient f et g deux fonctions définies sur un même intervalle [a,b] b &gt; a. <br> On suppose de plus que: <ol>
+              <li>f et g sont <input type="button" value="continues" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> sur [a,b] b &gt; a </li>
+              <li>f et g sont <input type="button" value="dérivables" onclick="go('derivfoncderiv.html#')" data-inline="true" /> sur ]a,b[ </li>
+              <li>g(b)≠g(a)</li>
+              <li>g' ne s'annule pas.</li>
+            </ol> Dans ces conditions il existe un nombre c &isin; ]a,b[ tel que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let f and g be two functions defined on the same interval [a,b] b > a. <br> We further assume that: <ol>
+              <li>f and g are <input type="button" value="continuous" onclick="go('../continuity/contsurdom.html#')" data-inline="true" /> on [a, b] b>a </li>
+              <li>f and g are <input type="button" value="differentiable" onclick="go('derivfoncderiv.html#')" data-inline="true" /> on ]a,b[ </li>
+              <li>g(b)≠g(a)</li>
+              <li>g' does not cancel.</li>
+            </ol> Under these conditions there exists a number c &isin; ]a,b[ such that
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cet énoncé porte également le nom de théorème des accroissements finis généralisés. En effet le théorème des accroissements finis classique correspond au cas particulier où g est la fonction identique. Le théorème de Rolle correspond au cas où f(a)=f(b). </div>
+        <!-- /fr -->
+        <div lang="en"> This statement is also called the Generalized Mean Value Theorem. The usual Mean Value Theorem corresponds to the case where g is the identity function. Rolle can be deduced when f(a)=f(b). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit h la fonction ainsi définie :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle h(x)=f(b)-f(x)-\frac{f(b)-f(a)}{g(b)-g(a)}\left ( g(b)-g(x) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Elle est continue sur [a,b] et dérivable sur ]a,b[. <br> Par le théorème de Rolle, sa dérivée s'annule en un point c de ]a,b[, donc :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f'(c)=\frac{f(b)-f(a)}{g(b)-g(a)}g'(c) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Le théorème s'obtient alors en divisant les deux membres par g'(c)&ne; 0.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let h be the function thus defined:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle h(x)=f(b)-f(x)-\frac{f(b)-f(a)}{g(b)-g(a)}\left ( g(b)-g(x) \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> It is continuous on [a,b] and differentiable on ]a,b[. <br> By Rolle's theorem, its derivative vanishes at a point c of ]a,b[, so:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f'(c)=\frac{f(b)-f(a)}{g(b)-g(a)}g'(c) \)</p>
+            <!-- /FORMULE UNIV INLINE--> The theorem is then obtained by dividing the two members by g'(c)&ne; 0.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui permet de visualiser ce théorème. <br> On peut faire varier a et b avec les curseurs en haut et à gauche de la zone graphique. <br> On peut changer les fonctions f et g avec les boutons du dessous. <br> Pour toutes les couples (a,b) un point c correspondant est calculé. <br> Visuellement le quotient (f(b)-f(a))/(g(b)-g(a)) est la pente de la droite (corde) joignant les points M(a)=(f(a),g(a)) et M(b)=(f(b),g(b)). <br> La tangente à la courbe x &rarr; M(x)=(f(x),g(x)) au point de paramètre c a pour vecteur directeur (f'(c),g'(c)). <br> Notre théorème affirme le parallélisme entre cette tangente et cette corde. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize this theorem. <br> You can vary a and b with the sliders at the top and left of the graphics area. <br> You can change the functions f and g with the buttons below. <br> For all pairs (a,b) a corresponding point c is calculated. <br> Visually the quotient (f(b)-f(a))/(g(b)-g(a)) is the slope of the line (chord) joining the points M(a)=(f(a),g(a)) and M(b)=(f(b),g(b)). <br> The tangent to the curve x &rarr; M(x)=(f(x),g(x)) at the parameter point c a for direction vector (f'(c),g'(c)). <br> Our theorem affirms the parallelism between this tangent and this chord. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" id="myButton1" onClick="nameSpace1.selectf()">
+          <div lang="fr">Choix de f</div>
+          <!-- /fr -->
+          <div lang="en">Choice of f</div>
+          <!-- /en -->
+        </button>
+        <button type="button" id="myButton2" onClick="nameSpace1.selectg()">
+          <div lang="fr">Choix de g</div>
+          <!-- /fr -->
+          <div lang="en">Choice of g</div>
+          <!-- /en -->
+        </button>
+        <script src="js/theocauchy.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivcauchy/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivcauchy/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>partprop.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">f(x): 
+    </span><span class="s0">&quot;&quot;&quot;On cherche une annulation de cette fonction - We are looking for a value where this function vanishes&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">x * x - </span><span class="s3">2</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Partprop(f, a, b): 
+    </span><span class="s0">&quot;&quot;&quot;La méthode des parties proportionnelles - Method of proportional parts&quot;&quot;&quot;</span><span class="s1"> 
+    x0, x1 = a, b 
+    x2 = (x0 * f(x1) - x1 * f(x0)) / (f(x1) - f(x0)) 
+    </span><span class="s2">yield </span><span class="s1">x2 
+    </span><span class="s2">while True</span><span class="s1">: 
+        </span><span class="s2">if </span><span class="s1">f(x2) * f(x0) &lt; </span><span class="s3">0</span><span class="s1">: 
+            x1 = x2 
+        </span><span class="s2">else</span><span class="s1">: 
+            x0 = x2 
+        x2 = (x0 * f(x1) - x1 * f(x0)) / (f(x1) - f(x0)) 
+        </span><span class="s2">yield </span><span class="s1">x2 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;on applique la méthode des parties proportionnelles entre 1 et 2 - We apply the method between 1 and 2&quot;&quot;&quot;</span><span class="s1"> 
+    D = Partprop(f, </span><span class="s3">1.0</span><span class="s1">, </span><span class="s3">2.0</span><span class="s1">) 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">10</span><span class="s1">): 
+        print(next(D)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span><span class="s4">&quot;&quot;&quot;résultat 
+1.3333333333333333 
+1.4 
+1.411764705882353 
+1.4137931034482758 
+1.414141414141414 
+1.4142011834319526 
+1.41421143847487 
+1.4142131979695434 
+1.4142134998513232 
+&quot;&quot;&quot;</span><span class="s1"> 
+</span></pre>
+</body>
+</html>

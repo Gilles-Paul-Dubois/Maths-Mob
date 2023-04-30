@@ -1,0 +1,37 @@
+<html>
+<head>
+<title>exo1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+.s5 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">Prodinf</span>
+    <span class="s1">v::Function</span>
+    <span class="s1">p::Function</span>
+<span class="s0">end</span>
+
+<span class="s2">#constructeur à partir du facteur général de la forme 1+v - constructor from genral factor 1+v</span>
+<span class="s0">function </span><span class="s1">Prodinf(v)</span>
+     <span class="s1">p(x,n)=reduce(*,(</span><span class="s3">1</span><span class="s1">+v(x,k) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:n))</span>
+     <span class="s0">return </span><span class="s1">Prodinf(v,p)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">v(x,n)= n==</span><span class="s3">0 </span><span class="s1">? </span><span class="s3">0 </span><span class="s1">: -x*x/(n*n*pi*pi)</span>
+    <span class="s1">P=Prodinf(v)</span>
+    <span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">(k*</span><span class="s3">0.1 </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:</span><span class="s3">20</span><span class="s1">)</span>
+        <span class="s1">print(P.p(x,</span><span class="s3">100</span><span class="s1">),</span><span class="s4">&quot; : &quot;</span><span class="s1">,sin(x)/x, </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

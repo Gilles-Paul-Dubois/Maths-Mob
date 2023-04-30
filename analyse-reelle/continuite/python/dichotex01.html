@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>ex01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">math  </span><span class="s0"># pour log</span><span class="s1"> 
+ 
+</span><span class="s3">&quot;&quot;&quot;Application du théorème de la valeur intermédiaire&quot;&quot;&quot;</span><span class="s1"> 
+</span><span class="s3">&quot;&quot;&quot;Applying the theorem of intermediate values&quot;&quot;&quot;</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">fonc(x): 
+    </span><span class="s0">&quot;&quot;&quot;le polynôme dont on cherche les zéros&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;The polynomial, the roots of which we are looking for&quot;&quot;&quot;</span><span class="s1">     
+    </span><span class="s2">return </span><span class="s1">(x - </span><span class="s4">0.5</span><span class="s1">) * (x - </span><span class="s4">1.0 </span><span class="s1">/ </span><span class="s4">3</span><span class="s1">) * (x - </span><span class="s4">1</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">TrouveChangementSigne(f, n): 
+    </span><span class="s0">&quot;&quot;&quot;repère les changements de signe de la fonction f sur l'intervalle [-n,+n] avec une progression arithmétique de pas 1/n- trying to find out changes of sign with an arithmetic progression step 1/n&quot;&quot;&quot;</span><span class="s1"> 
+    I = [(u[</span><span class="s4">0</span><span class="s1">], u[</span><span class="s4">1</span><span class="s1">]) </span><span class="s2">for </span><span class="s1">u </span><span class="s2">in </span><span class="s1">((k / n, (k + </span><span class="s4">1</span><span class="s1">) / n) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(-n * n, n * n)) </span><span class="s2">if</span><span class="s1"> 
+         f(u[</span><span class="s4">0</span><span class="s1">]) * f(u[</span><span class="s4">1</span><span class="s1">]) &lt; </span><span class="s4">0 </span><span class="s2">or </span><span class="s1">f(u[</span><span class="s4">0</span><span class="s1">]) == </span><span class="s4">0</span><span class="s1">] 
+    </span><span class="s2">return </span><span class="s1">I 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">localisation(f, n): 
+    </span><span class="s0">&quot;&quot;&quot;localisation des racines d'une équation - Location of roots&quot;&quot;&quot;</span><span class="s1"> 
+    m = </span><span class="s4">0</span><span class="s1"> 
+    L = [] 
+    </span><span class="s2">while </span><span class="s1">len(L) &lt; n: 
+        m = m + </span><span class="s4">1</span><span class="s1"> 
+        L = TrouveChangementSigne(f, m) 
+    </span><span class="s2">return </span><span class="s1">m, L 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">TrouveRacine(f, a, b, k): 
+    </span><span class="s0">&quot;&quot;&quot;k itérations de la dichotomie pour trouver une racine de f entre a et b iterate k times dichotomy to find root in [a,b]&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">f(a) == </span><span class="s4">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">a 
+    </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, k): 
+        </span><span class="s2">if </span><span class="s1">f(a) == </span><span class="s4">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">a 
+        c = (a + b) / </span><span class="s4">2</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">f(a) * f(c) &lt; </span><span class="s4">0</span><span class="s1">: 
+            b = c 
+        </span><span class="s2">else</span><span class="s1">: 
+            a = c 
+    </span><span class="s2">return </span><span class="s1">c 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Resoudre(f, n, e): 
+    </span><span class="s0">&quot;&quot;&quot;résolution de f(x)=0 à e près - solving f(x)=0 with precision e&quot;&quot;&quot;</span><span class="s1"> 
+    L = localisation(f, n) 
+    h = L[</span><span class="s4">0</span><span class="s1">] 
+    K = L[</span><span class="s4">1</span><span class="s1">] 
+    k = (int)((math.log(h) - math.log(e)) / math.log(</span><span class="s4">2</span><span class="s1">)) + </span><span class="s4">1</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">u </span><span class="s2">in </span><span class="s1">K: 
+        print(TrouveRacine(f, u[</span><span class="s4">0</span><span class="s1">], u[</span><span class="s4">1</span><span class="s1">], k)) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    Resoudre(fonc, </span><span class="s4">3</span><span class="s1">, </span><span class="s4">0.001</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

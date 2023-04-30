@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>exo1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">Serie</span>
+    <span class="s1">u::Function</span>
+    <span class="s1">s::Function</span>
+<span class="s0">end</span>
+
+<span class="s2">#constructeur à partir du terme général - constructor from the general term</span>
+<span class="s0">function </span><span class="s1">Serie(u)</span>
+     <span class="s1">s(x,n)=reduce(+,(u(x,k) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:n))</span>
+     <span class="s0">return </span><span class="s1">Serie(u,s)</span>
+<span class="s0">end</span>
+
+<span class="s2">#somme de deux séries - sum of two series</span>
+<span class="s1">Base.:+(S1::Serie, S2::Serie) = Serie((x,n)-&gt;S1.u(x,n)+S2.u(x,n))</span>
+
+<span class="s2">#produit d'une série par un scalaire - product by a scalar</span>
+<span class="s0">function </span><span class="s1">Base.:*(y::Float64,S::Serie)</span>
+    <span class="s1">u=S.u</span>
+    <span class="s0">return </span><span class="s1">Serie((x,n)-&gt;y*u(x,n))</span>
+<span class="s0">end</span>
+
+<span class="s2">#produit de convolution - convolution product</span>
+<span class="s0">function </span><span class="s1">Base.:*(S1::Serie,S2::Serie)</span>
+    <span class="s1">u , v = S1.u , S2.u</span>
+    <span class="s1">w(k,x) = reduce(+,(u(x,j)*v(x,k-j) </span><span class="s0">for </span><span class="s1">j </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:k))</span>
+    <span class="s1">z(n,x) = reduce(+,(w(x,k) </span><span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s3">0</span><span class="s1">:n))</span>
+    <span class="s0">return </span><span class="s1">Serie(z)</span>
+<span class="s0">end</span>
+
+
+<span class="s1">fact(n)=reduce(*,</span><span class="s3">1</span><span class="s1">:n) </span><span class="s2">#la fonction factorielle</span>
+
+<span class="s2">#construction d'une série entière - construction of a power series</span>
+<span class="s1">serent(a)= Serie((x,n)-&gt;a(n)*x^n)</span>
+
+<span class="s1">expo=serent(n-&gt;</span><span class="s3">1</span><span class="s1">/fact(n))</span>
+<span class="s1">geo=serent(n-&gt;</span><span class="s3">1</span><span class="s1">)</span>
+<span class="s1">println(expo.s(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">10</span><span class="s1">))</span>
+<span class="s1">println(geo.s(</span><span class="s3">0.5</span><span class="s1">,</span><span class="s3">10</span><span class="s1">))</span>
+</pre>
+</body>
+</html>

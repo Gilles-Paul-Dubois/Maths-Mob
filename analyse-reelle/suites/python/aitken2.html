@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>aitken2.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s0"># ## procédé d'Aitken d'accélération</span><span class="s1"> 
+</span><span class="s0"># ## Aitken acceleration process</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">gens(): 
+    </span><span class="s0">&quot;&quot;&quot;périmètre du polygone régulier inscrit&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;perimeter of inscribed polygon&quot;&quot;&quot;</span><span class="s1">    
+    n = </span><span class="s3">4</span><span class="s1"> 
+    u = </span><span class="s3">2 </span><span class="s1">* math.sqrt(</span><span class="s3">2</span><span class="s1">) 
+    </span><span class="s2">yield </span><span class="s1">u 
+    </span><span class="s2">while True</span><span class="s1">: 
+        u = math.sqrt(</span><span class="s3">2</span><span class="s1">) * n * math.sqrt(</span><span class="s3">1 </span><span class="s1">- math.sqrt(</span><span class="s3">1 </span><span class="s1">- (u / n) * (u / n))) 
+        n = n * </span><span class="s3">2</span><span class="s1"> 
+        </span><span class="s2">yield </span><span class="s1">u 
+ 
+ 
+S = gens() 
+suiteu = [next(S) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">10</span><span class="s1">)]  </span><span class="s0"># contiendra les 10 premiers termes de la suite</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">u(n): 
+    </span><span class="s0">&quot;&quot;&quot;suite d'Archimède - Archimedes sequence&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">suiteu[n] 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">delta(u, n): 
+    </span><span class="s0">&quot;&quot;&quot;le delta de Aitken - Aitken's delta&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">u(n + </span><span class="s3">1</span><span class="s1">) - u(n) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">delta2(u, n): 
+    </span><span class="s0">&quot;&quot;&quot;le delta2 de Aitken- Aitken delta2&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">u(n + </span><span class="s3">2</span><span class="s1">) - </span><span class="s3">2 </span><span class="s1">* u(n + </span><span class="s3">1</span><span class="s1">) + u(n) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">aitken(u): 
+    </span><span class="s0">&quot;&quot;&quot;Accélérée de u par la méthode de Aitken&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;u as accelerated by Aitken&quot;&quot;&quot;</span><span class="s1">  
+    </span><span class="s2">def </span><span class="s1">v(n): 
+        </span><span class="s2">return </span><span class="s1">u(n - </span><span class="s3">1</span><span class="s1">) - (delta(u, n - </span><span class="s3">1</span><span class="s1">) * delta(u, n - </span><span class="s3">1</span><span class="s1">)) / delta2(u, n - </span><span class="s3">1</span><span class="s1">) 
+ 
+    </span><span class="s2">return </span><span class="s1">v 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;2 itérations du procédé de Aitken&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;2 repetitions of the process&quot;&quot;&quot;</span><span class="s1">     
+    v1 = aitken(u) 
+    v2 = aitken(v1) 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">6</span><span class="s1">): 
+        print(math.pi - u(i), math.pi - v1(i), math.pi - v2(i), end=</span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>prodinf1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">prod0(L) </span><span class="s2">#itératif simple</span>
+    <span class="s1">P=</span><span class="s3">1</span>
+    <span class="s0">for </span><span class="s1">f </span><span class="s0">in </span><span class="s1">L</span>
+        <span class="s1">P*=f</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">P</span>
+<span class="s0">end</span>
+
+<span class="s1">prod1(L)= isempty(L) ? </span><span class="s3">1 </span><span class="s1">: reduce(*,L) </span><span class="s2">#itératif via reduce</span>
+
+<span class="s1">prod2(L)= isempty(L) ? </span><span class="s3">1 </span><span class="s1">: pop!(L)*prod2(L) </span><span class="s2">#récursif</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">println(</span><span class="s4">&quot;test-prod0&quot;</span><span class="s1">)</span>
+    <span class="s1">println(prod0([]))  </span><span class="s2"># liste vide</span>
+    <span class="s1">println(prod0([</span><span class="s3">1</span><span class="s1">]))  </span><span class="s2"># un seul facteur</span>
+    <span class="s1">L = [i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:</span><span class="s3">4</span><span class="s1">]  </span><span class="s2"># factorielle 4</span>
+    <span class="s1">println(prod0(L))</span>
+    <span class="s1">println(</span><span class="s4">&quot;test-prod1&quot;</span><span class="s1">)</span>
+    <span class="s1">println(prod1([]))  </span><span class="s2"># liste vide</span>
+    <span class="s1">println(prod1([</span><span class="s3">1</span><span class="s1">]))  </span><span class="s2"># un seul facteur</span>
+    <span class="s1">L = [i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:</span><span class="s3">4</span><span class="s1">]  </span><span class="s2"># factorielle 4</span>
+    <span class="s1">println(prod1(L))</span>
+    <span class="s1">println(</span><span class="s4">&quot;test-prod2&quot;</span><span class="s1">)</span>
+    <span class="s1">println(prod2([]))  </span><span class="s2"># liste vide</span>
+    <span class="s1">println(prod2([</span><span class="s3">1</span><span class="s1">]))  </span><span class="s2"># un seul facteur</span>
+    <span class="s1">L = [i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s3">1</span><span class="s1">:</span><span class="s3">4</span><span class="s1">]  </span><span class="s2"># factorielle 4</span>
+    <span class="s1">println(prod2(L))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

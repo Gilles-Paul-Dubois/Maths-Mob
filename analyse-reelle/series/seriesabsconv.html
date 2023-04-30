@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Séries absolument convergentes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seriesabsconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seriesabsconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit qu'une série (s,u) est <b>
+              <i>'absolument convergente'</i>
+            </b> si la série à termes positifs de terme général |u<sub>n</sub>| est convergente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that a series (s,u) is <b>
+              <i>'absolutely convergent'</i>
+            </b> if the series with positive terms of general term |u<sub>n</sub>| is convergent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Propriétés</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Properties</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Pour qu'une série soit convergente, <input type="button" value="il suffit" onclick="go('../../bases/logique/implication.html#term')" data-inline="true" /> qu'elle soit absolument convergente.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> For a series to be convergent, <input type="button" value="it is sufficient" onclick="go('../../bases/logique/implication.html#term')" data-inline=" true" /> that it is absolutely convergent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet, on a |s<sub>p</sub>-s<sub>q</sub>|= |u<sub>q+1</sub>+ ...+u<sub>p</sub>| ≤ |u<sub>q+1</sub>|+ ... +|u<sub>p</sub>|. De sorte que si la série de terme général |u<sub>n</sub>| converge ses sommes partielles forment une <input type="button" value="suite de Cauchy" onclick="go('../suites/suitescauchy.html#')" data-inline="true" />. Il en résulte que les sommes partielles de la série s forment également une suite de Cauchy, donc que s est convergente. <br /> Voyons encore quelques propriétés importantes des séries absolument convergentes: </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, we have |s<sub>p</sub>-s<sub>q</sub>|= |u<sub>q+1</sub>+ ...+u<sub>p</sub>/sub>| ≤ |u<sub>q+1</sub>|+ ... +|u<sub>p</sub>|. So that if the series of general term |u<sub>n</sub>| converges its partial sums form a <input type="button" value="Cauchy sequence" onclick="go('../suites/suitescauchy.html#')" data-inline="true" />. It follows that the partial sums of the series s also form a Cauchy sequence, so that s is convergent. <br /> Let us see again some important properties of absolutely convergent series: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si (s,u) est absolument convergente, alors toute série dont le terme général est une suite extraite de u est également absolument convergente (donc convergente).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If (s,u) is absolutely convergent, then any series whose general term is a subsequence of u is also absolutely convergent (therefore convergent).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte immédiatement <input type="button" value="du résultat" onclick="go('seriespos.html#prop6')" data-inline="true" /> sur les séries extraites des séries à termes positifs. <h2>Séries semi-convergentes</h2> Remarquons pour commencer que: </div>
+        <!-- /fr -->
+        <div lang="en"> This results immediately <input type="button" value="of the theorem" onclick="go('seriespos.html#prop6')" data-inline="true" /> on the subseries of the series with positive terms. <h2>Semi-convergent series</h2> Note to begin with that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> La condition suffisante ci-dessus n'est nullement <input type="button" value="nécessaire" onclick="go('../../bases/logique/implication.html#term')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> The above sufficient condition is by no means <input type="button" value="necessary" onclick="go('../../bases/logique/implication.html#term')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet la série harmonique alternée de terme général u<sub>n</sub>=(-1)<sup>n</sup>/n est convergente ( <input type="button" value="voir ici" onclick="go('../suites/suitesmonoetconv.html#harmalt')" data-inline="true" />), mais la série harmonique de terme général |(-1)<sup>n</sup>/n|=1/n n'est pas convergente (voir <input type="button" value="cette page" onclick="go('../suites/suitesliminfinies.html#harm')" data-inline="true" />). </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed the alternating harmonic series of general term u<sub>n</sub>=(-1)<sup>n</sup>/n is convergent ( <input type="button" value="see here" onclick="go('../suites/suitesmonoetconv.html#harmalt')" data-inline="true" />), but the general term harmonic series |(-1)<sup>n</sup>/ n|=1/n is not convergent (see <input type="button" value="this page" onclick="go('../suites/suitesliminfinies.html#harme')" data-inline=" true" />). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Une série qui est convergente sans être absolument convergente est dite <b>
+              <i>'semi-convergente'</i>
+            </b> ou encore <b>
+              <i>'conditionellement convergente'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A series which is convergent without being absolutely convergent is said to be <b>
+              <i>'semi-convergent'</i>
+            </b> or <b>
+              <i>'conditionally convergent'</i>
+            </b> .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous allons voir dans les pages qui suivent que la semi-convergence est une propriété beaucoup plus faible que la convergence, notamment pour ce qui concerne la propriété de commutativité. Mais commençons par une propriété très simple des séries semi-convergentes. </div>
+        <!-- /fr -->
+        <div lang="en"> We will see in the following pages that semi-convergence is a much weaker property than convergence, especially with regard to the property of commutative property. But let's start with a very simple property of semi-convergent series. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Toute série semi-convergente possède une infinité de termes positifs et une infinité de termes négatifs. Ou bien, pour être plus précis, il existe une infinité de valeurs de n pour lesquelles u<sub>n</sub>&gt;0 et une infinité de valeurs de n pour lesquelles u<sub>n</sub> &lt;0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> Any semi-convergent series has an infinity of positive terms and an infinity of negative terms. Or, to be more precise, there are infinitely many values ​​of n for which u<sub>n</sub>>0 and infinitely many values ​​of n for which u<sub>n</sub>
+            < 0. </div>
+              <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> En effet, il revient au même de dire que: <ul>
+              <li>(s,u) est absolument convergente</li>
+              <li>(-s,-u) est absolument convergente</li>
+              <li>(s,u) est absolument convergente à partir d'un certain rang</li>
+            </ul> De sorte que si (s,u) ne comportait qu'un nombre fini de termes négatifs (s,u) serait absolument convergente à partir d'un certain rang, donc absolument convergente. Si (s,u) ne comportait qu'un nombre fini de termes positifs, on pourrait dire la même chose de (-s,-u) donc de (s,u). <br> Il résulte donc de ce qui précède que: </div>
+          <!-- /fr -->
+          <div lang="en"> Indeed, it amounts to the same thing to say that: <ul>
+              <li>(s,u) is absolutely convergent</li>
+              <li>(-s,-u) is absolutely convergent</li>
+              <li>(s,u) is absolutely convergent from a certain rank</li>
+            </ul> So that if (s,u) includes only a finite number of negative terms (s,u) would be absolutely convergent from a certain rank, therefore absolutely convergent. If (s,u) had only a finite number of positive terms, the same could be said of (-s,-u) and therefore of (s,u). <br> It therefore follows from the above that: </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm5"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 5</div> Si (s,u) est semi-convergente on peut en extraire deux séries infinies à termes positifs: <br>
+              <ul>
+                <li>Une série (s+,u+) dont le terme général est la suite extraite de u formée des termes strictement positifs dans l'ordre dans lequel ils se présentent.</li>
+                <li>Une série (s-,u-) dont le terme général est la suite extraite de u formée des opposés des termes négatifs ou nuls dans l'ordre dans lequel ils se présentent.</li>
+              </ul>
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 5</div> If (s,u) is semi-convergent, we can extract two infinite subseries with positive terms: <br>
+              <ul>
+                <li>A series (s+,u+) whose general term is the sequence extracted from u formed of strictly positive terms in the order in which they occur.</li>
+                <li>A series (s-,u-) whose general term is the sequence extracted from u formed by the opposites of the negative or zero terms in the order in which they occur.</li>
+              </ul>
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Comme nous l'avons vu <input type="button" value="précédemment" onclick="go('seriesconv.html#ext')" data-inline="true" />: </div>
+          <!-- /fr -->
+          <div lang="en"> As we have seen <input type="button" value="earlier" onclick="go('seriesconv.html#ext')" data-inline="true" />: </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm6"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 6</div> Ces deux séries ont chacune un terme général qui tend vers 0.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 6</div> These two series each have a general term which tends to 0.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Notons maintenant que: </div>
+          <!-- /fr -->
+          <div lang="en"> Notice now that : </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm7"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 7</div> Chacune des deux séries s+, s- est nécessairement divergente vers +&infin;.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 7</div> Each of the two series s+, s- is necessarily divergent towards +&infin;.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> En effet, supposons par exemple que s- converge, alors ses sommes partielles seraient bornées. Comme les sommes partielles de s sont elles mêmes bornées, les sommes partielles de s+ seraient aussi bornées et s serait absolument convergente, contrairement à l'hypothèse. </div>
+          <!-- /fr -->
+          <div lang="en"> Indeed, suppose for example that s- converges, then its partial sums would be bounded. As the partial sums of s are themselves bounded, the partial sums of s+ would also be bounded and s would be absolutely convergent, contrary to the hypothesis. </div>
+          <!-- /en -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/seriesabsconv/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/seriesabsconv/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <table cellpadding="10">
+            <tr>
+              <td>
+                <div lang="fr">Création Gilles Dubois</div>
+                <div lang="en">Created by Gilles Dubois</div>
+              </td>
+              <td>
+                <div lang="fr">Janvier 2022</div>
+                <div lang="en">January 2022</div>
+              </td>
+              <td>
+                <div lang="fr">Version mobile Jquery</div>
+                <div lang="en">Mobile Jquery version</div>
+              </td>
+              <td>
+                <a href="https://www.mathjax.org">
+                  <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /footer -->
+        <ul style=list-style-type:'';>
+          <li>
+            <div lang="fr">
+              <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+            <div lang="en">
+              <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+          </li>
+          <li>
+            <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /page -->
+  </body>
+</html>

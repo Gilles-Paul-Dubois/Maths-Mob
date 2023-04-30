@@ -1,0 +1,47 @@
+<html>
+<head>
+<title>ex03.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s0"># # l'algorithme dit de la 'sécante' - The 'secant' algorithm</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">func(x): 
+    </span><span class="s0">&quot;&quot;&quot;la fonction dont on cherche l'annulation - function we a looking for a vanishing&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">x * x - x - </span><span class="s3">1</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">gensec(x0, x1, f): 
+    </span><span class="s0">&quot;&quot;&quot;générateur de la méthode de la sécante - generator of the method&quot;&quot;&quot;</span><span class="s1"> 
+    a = x0 
+    b = x1 
+    </span><span class="s2">while True</span><span class="s1">: 
+        a, b = b, (a * f(b) - b * f(a)) / (f(b) - f(a)) 
+        </span><span class="s2">yield </span><span class="s1">b 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    L = gensec(</span><span class="s3">3.0</span><span class="s1">, </span><span class="s3">2.0</span><span class="s1">, func) 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">6</span><span class="s1">): 
+        print(next(L)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">&quot;__main__&quot;</span><span class="s1">: 
+    main(); 
+</span></pre>
+</body>
+</html>

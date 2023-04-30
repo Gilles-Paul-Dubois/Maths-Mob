@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Sommes de Darboux</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intsomdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intsomdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Galerie des portraits</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Portrait gallery</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td>
+              <font color="#FFFFFF">Gaston Darboux (1842/1917-FR)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/250px-Darboux.jpg" width="250" height="335" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Définitions</h2> On suppose, dans tout ce qui suit que f est une <input type="button" value="fonction bornée" onclick="go('../foncnum/foncnumbornees.html#def3')" data-inline="true" /> sur [a,b].
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2> We assume, in what follows, that f is a <input type="button" value="bounded function" onclick="go('../foncnum/foncnumbornees.html#def3')" data-inline="true " /> on [a,b].
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soit s=(x<sub>0</sub>,x<sub>1</sub>, ..., x<sub>n</sub>) une <input type="button" value="subdivision" onclick="go('intsubdiv.html#')" data-inline="true" /> de [a,b]. On pose : <br />
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle d(f,s)=\sum_{i=0}^{n-1}m_{i}\left ( x_{i+1}-x_{i} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle D(f,s)=\sum_{i=0}^{n-1}M_{i}\left ( x_{i+1}-x_{i} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> où :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m_{i}=Inf_{x\in \left [ x_{i},x_{i+1} \right ]}f(x) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle M_{i}=Sup_{x\in \left [ x_{i},x_{i+1} \right ]}f(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> d(f,s) s'appelle la <b>
+              <i>'somme de Darboux inférieure'</i>
+            </b> relativement à s. <br> D(f,s) s'appelle la <b>
+              <i>'somme de Darboux supérieure'</i>
+            </b> relativement à s. <br> Enfin on pose &Delta;(f,s)=D(f,s)-d(f,s).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let s=(x<sub>0</sub>,x<sub>1</sub>, ..., x<sub>n</sub>) be a <input type="button" value="partition " onclick="go('intsubdiv.html#')" data-inline="true" /> of [a,b]. We set : <br />
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle d(f,s)=\sum_{i=0}^{n-1}m_{i}\left ( x_{i+1}-x_{i} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle D(f,s)=\sum_{i=0}^{n-1}M_{i}\left ( x_{i+1}-x_{i} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> where:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m_{i}=Inf_{x\in \left [ x_{i},x_{i+1} \right ]}f(x) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle M_{i}=Sup_{x\in \left [ x_{i},x_{i+1} \right ]}f(x) \)</p>
+            <!-- /FORMULE UNIV INLINE--> d(f,s) is called the <b>
+              <i>'lower Darboux sum'</i>
+            </b> with respect to s. <br> D(f,s) is called the <b>
+              <i>'upper Darboux sum'</i>
+            </b> with respect to s. <br> Finally we set &Delta;(f,s)=D(f,s)-d(f,s).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <b>Remarque:</b> Dans le cas où f est positive et où nous pouvons attribuer une mesure à <input type="button" value="l'hypographe" onclick="go('../continuite/contconvexes.html#def2')" data-inline="true" /> de f, l'intervalle [d(f,s), D(f,s)] donne clairement un encadrement de la mesure de cet hypographe. <h2>Propriétés</h2> Les résultats suivants serviront de lemmes techniques pour des résultats ultérieurs.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <b>Note:</b> In case f is positive and we can assign a measure to <input type="button" value="the hypograph" onclick="go('../continuite/contconvexes.html#def2')" data-inline="true" /> of f, the interval [d(f,s), D(f,s)] clearly gives a bounding of the measure of this hypograph. <h2>Properties</h2> The following results will serve as technical lemmas for later results.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Si s' est une subdivision <input type="button" value="plus fine" onclick="go('intsubdiv.html#def4')" data-inline="true" /> que s alors D(f,s') ≤ D(f,s) et d(f,s') ≥ d(f,s).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> If s' is a <input type="button" value="refinement" onclick="go('intsubdiv.html#def4')" data-inline="true" /> of s then D(f,s') ≤ D(f,s) and d(f,s') ≥ d(f,s).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Voyons ce qui se passe quand on intercale un point supplémentaire y disons entre x<sub>0</sub>=a et x<sub>1</sub>. Dans ce cas s=(x<sub>0</sub>,x<sub>1</sub>,x<sub>2</sub>, ... ,x<sub>n</sub>) s'=(x<sub>0</sub>,y,x<sub>1</sub>, ... ,x<sub>n</sub>). <br> Si on compare les sommes de Darboux supérieures pour s et s', on a: <br> D(f,s)=Sup<sub>x&isin;[x<sub>0</sub>,x<sub>1</sub>] </sub>f(x)(x<sub>1</sub>-x<sub>0</sub>)+S <br> et <br> D(f,s')=Sup<sub>x&isin;[x<sub>0</sub>,y] </sub>f(x)(y-x<sub>0</sub>)+Sup<sub>x&isin;[y,x<sub>1</sub>] </sub>f(x)(x<sub>1</sub>-y)+S. <br> où S est une somme de Darboux supérieure pour f restreinte à l'intervalle [x<sub>1</sub>,x<sub>n</sub>] <br> De sorte que notre inégalité résulte de <br> Sup<sub>x&isin;[x<sub>0</sub>,y] </sub>f(x) &le; Sup<sub>x&isin;[x<sub>0</sub>,x<sub>1</sub>] </sub>f(x) <br> et <br> Sup<sub>x&isin;[y,x<sub>1</sub>] </sub>f(x) &le; Sup<sub>x&isin;[x<sub>0</sub>,x<sub>1</sub>] </sub>f(x). <br> Il suffit ensuite d'utiliser le fait que si s' est plus fine que s on passe de s à s' par intercalage d'un nombre fini de points à partir des points de s. <br> Il suffit donc d'utiliser le raisonnement qui précède à répétition, un nombre fini de fois. <br> On raisonne de même pour les sommes de Darboux inférieures.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let's see what happens when we insert an extra point y between say x<sub>0</sub>=a and x<sub>1</sub>. In this case s=(x<sub>0</sub>,x<sub>1</sub>,x<sub>2</sub>, ... ,x<sub>n</sub>) s'=(x<sub>0</sub>,y,x<sub>1</sub>, ... ,x<sub>n</sub>). <br> If we compare the upper Darboux sums for s and s', we have: <br> D(f,s)=Sup<sub>x&isin;[x<sub>0</sub>,x<sub>1</sub>] </sub>f(x)(x<sub>1</sub>-x<sub>0</sub>)+S <br> and <br> D(f,s')=Sup<sub>x&isin;[x<sub>0</sub>,y] </sub>f(x)(y-x<sub>0</sub>)+Sup<sub>x&isin;[y,x<sub>1</sub>] </sub>f(x)(x<sub>1</sub>-y)+S. <br> where S is an upper Darboux sum for f restricted to the interval [x<sub>1</sub>,x<sub>n</sub>] <br> So our inequality follows from <br> Sup<sub>x&isin;[x<sub>0</sub>,y] </sub>f(x) &le; Sup<sub>x&isin;[x<sub>0</sub>,x<sub>1</sub>] </sub>f(x) <br> and <br> Sup<sub>x&isin;[y,x<sub>1</sub>] </sub>f(x) &le; Sup<sub>x&isin;[x<sub>0</sub>,x<sub>1</sub>] </sub>f(x). <br> It then suffices to use the fact that if s' is finer than s we pass from s to s' by inserting a finite number of points between the points of s. <br> So just use the above reasoning repeatedly, a finite number of times. <br> We reason in the same way for the lower Darboux sums.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Le résultat qui précède entraîne bien évidemment : </div>
+        <!-- /fr -->
+        <div lang="en"> The above result obviously leads to: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Si s' est plus fine que s alors Δ(f,s') ≤ Δ(f,s).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> If s' is finer than s then Δ(f,s') ≤ Δ(f,s).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Si s<sub>1</sub> et s<sub>2</sub> sont des subdivisions quelconques de [a,b], on a toujours: d(f,s<sub>1</sub>) &le; Df(s<sub>2</sub>)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> If s<sub>1</sub> and s<sub>2</sub> are arbitrary subdivisions of [a,b], we always have: d(f,s<sub>1</sub>) &le; Df(s<sub>2</sub>)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet, si on pose s=s<sub>1</sub>&or;s<sub>2</sub> on a d'après ce qui précède: <br> d(f,s<sub>1</sub>) &le;d(f,s) &le; D(f,s) &le; D(f,s<sub>2</sub>) <h2>Visualisation des sommes de Darboux</h2> Voici une appliquette vous permettant de voir certaines subdivisions de l'intervalle [1,8] ainsi que des fonctions étagées relatives à ces subdivisions et qui encadrent une fonction f donnée <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, if we set s=s<sub>1</sub>&or;s<sub>2</sub> we have according to the above: <br> d(f,s<sub>1</sub>) &le;d(f,s) &le; D(f,s) &le; D(f,s<sub>2</sub>) <h2>Visualization of Darboux sums</h2> Here is an applet allowing you to see certain subdivisions of the interval [1,8] as well as step functions relative to these subdivisions and which surround a given function f <br>
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{4}{1+(x-3)^{2}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Vous allez générer des subdivisions de l'intervalle [1,8]. <br> Vous pouvez sélectionner un type (aléatoire, arithmétique ou géométrique) au moyen des boutons. <br> Vous pouvez également sélectionner faire varier le nombre de points avec les boutons 'n+' et 'n-'. <br> Vous voyez apparaître les sommes de Darboux supérieures et inférieures sur le graphique. <br> Les sommes supérieures apparaissent en rouge. <br> Les sommes inférieures sont représentées en bleu. </div>
+        <!-- /fr -->
+        <div lang="en"> You will generate partitions of the interval [1,8]. <br> You can select a type (random, arithmetic or geometric) using the buttons. <br> You can also vary the number of points with the 'n+' and 'n-' buttons. <br> You see the upper and lower Darboux sums appear on the graph. <br> Higher sums appear in red. <br> Lower sums are shown in blue. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace1.alea()'>
+          <div lang="fr">aléatoire</div>
+          <!-- /fr -->
+          <div lang="en">random</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton2' onClick='nameSpace1.ari()'>
+          <div lang="fr">arithmétique</div>
+          <!-- /fr -->
+          <div lang="en">arithmetic</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton3' onClick='nameSpace1.geo()'>
+          <div lang="fr">géométrique</div>
+          <!-- /fr -->
+          <div lang="en">geometric</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton4' onClick='nameSpace1.plus()'>n+</button>
+        <button type='button' id='myButton5' onClick='nameSpace1.minus()'>n-</button>
+        <script src="js/darboux.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Cas des fonctions monotones</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of monotonic functions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Si f est croissante sur [a,b] et si S est une subdivision quelconque de [a,b] S=x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>, on a bien évidemment:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle d(f,s)=\sum_{k=0}^{n-1}f\left ( x_{k} \right )\left ( x_{k+1}-x_{k} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle D(f,s)=\sum_{k=0}^{n-1}f\left ( x_{k+1} \right )\left ( x_{k+1}-x_{k} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> If f is increasing on [a,b] and if S is any subdivision of [a,b] S=x<sub>0</sub>,x<sub>1</sub>, ... ,x<sub>n</sub>, we obviously have:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle d(f,s)=\sum_{k=0}^{n-1}f\left ( x_{k} \right )\left ( x_{k+1}-x_{k} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle D(f,s)=\sum_{k=0}^{n-1}f\left ( x_{k+1} \right )\left ( x_{k+1}-x_{k} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/intsomdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Intégrales'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/intsomdarboux/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Integrals'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

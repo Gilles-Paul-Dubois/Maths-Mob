@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># -*- coding: utf-8 -*-</span>
+<span class="s0"># python version 3.4</span>
+
+<span class="s2">import </span><span class="s1">math</span>
+<span class="s2">import </span><span class="s1">time</span>
+
+
+<span class="s2">def </span><span class="s1">time_this(func):</span>
+    <span class="s0">&quot;&quot;&quot;Le décorateur qui mesure le temps mis&quot;&quot;&quot;</span>
+
+    <span class="s2">def </span><span class="s1">decorated(*args, **kwargs):</span>
+        <span class="s1">start = time.time()</span>
+        <span class="s1">result = func(*args, **kwargs)</span>
+        <span class="s1">print(</span><span class="s3">&quot;Exécuté en&quot;</span><span class="s1">, time.time() - start, </span><span class="s3">&quot;secondes&quot;</span><span class="s1">)</span>
+        <span class="s2">return </span><span class="s1">result</span>
+
+    <span class="s2">return </span><span class="s1">decorated</span>
+
+
+<span class="s1">X = math.pi</span>
+
+
+<span class="s1">@time_this</span>
+<span class="s2">def </span><span class="s1">loop1():</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">100000</span><span class="s1">):</span>
+        <span class="s1">Y = math.pow(X, </span><span class="s4">2.0</span><span class="s1">)</span>
+
+
+<span class="s1">@time_this</span>
+<span class="s2">def </span><span class="s1">loop2():</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">100000</span><span class="s1">):</span>
+        <span class="s1">Y = X * X</span>
+
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">loop1()</span>
+    <span class="s1">loop2()</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main() </span></pre>
+</body>
+</html>

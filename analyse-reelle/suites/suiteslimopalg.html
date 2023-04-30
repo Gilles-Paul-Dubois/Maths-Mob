@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limites et opérations algébriques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suiteslimopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suiteslimopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous avons vu, par exemple dans <input type="button" value="cet exercice" onclick="go('exercices/suitesdef/ex01.html#')" data-inline="true" />, que les suites de nombres réels s'organisent en un <input type="button" value="espace vectoriel réel" onclick="go('../../algebre-lineaire/espaces/defev.html#')" data-inline="true" />. De plus avec la loi produit on a même une structure <input type="button" value="d'algèbre" onclick="go('../../algebre-lineaire/matrices/algmat.html#')" data-inline="true" />. <br /> Nous nous proposons ici d'examiner le lien entre le comportement asymptotique des suites ( <input type="button" value="être bornée" onclick="go('suitesbornees.html#')" data-inline="true" />, <input type="button" value="tendre vers un infini" onclick="go('suitesliminfinies.html#')" data-inline="true" />, tendre vers une <input type="button" value="limite" onclick="go('suitesconvergentes.html#')" data-inline="true" />) et les opérations algébriques (somme, produit, etc.). <br /> Ainsi nous nous poserons des questions simples du genre: <br /> Si u et v convergent vers des limites finies en est-il de même pour leur somme, leur produit? <br /> Nous verrons que la plupart des questions naturelles qu'on peut se poser admettent des réponses simples dont la preuve est aisée, mais qu'il existe un certain nombre de cas où on ne peut pas trancher simplement. Ce sont ces cas que nous avons appelé ' <strong>indéterminations</strong>'. Ces cas nécessitent un étude spéciale et parfois l'utilisation de théorèmes plus fins. Nous verrons comment, dans la page suivante on peut lever facilement l'indétermination dans des cas simples. <br /> Il est important de bien comprendre cet exposé parce que sa structure sera reprise pour <b>l'étude locale</b> (au voisinage d'un point) des fonctions numériques, ainsi que pour leur <b>comportement asymptotique</b> (ce qui se passe quand la variable réelle x tend vers un infini). <br /> Certaines démonstrations simples seront omises. D'autres seront proposées en exercice. <h2>Sommes</h2>
+          <h3> Cas 1 : Les deux suites tendent vers une limite finie</h3>
+          </td>
+          </tr>
+          </tbody>
+          </table>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have seen, for example in <input data-inline="true" onclick="go('exercices/suitesdef/ex01.html#')" type="button" value=" this exercise" />, that the sequences of real numbers are organized into a <input data-inline="true" onclick="go('../../algebre-lineaire/espaces/defev.html#')" type="button" value=" real vector space" />. Moreover, with the product law, we even have a structure of <input data-inline="true" onclick="go('../../algebre-lineaire/matrices/algmat.html#')" type="button" value="algebra" />. <br /> We propose here to examine the link between the asymptotic behavior of sequences ( <input data-inline="true" onclick="go('suitesbornees.html#')" type="button" value=" be bounded" />, <input data-inline="true" onclick="go('suitesliminfinies.html#')" type="button" value=" tend towards an infinite" />, tend towards a <input data-inline="true" onclick="go('suitesconvergentes.html#')" type="button" value=" limit" />) and algebraic operations (sum, product, etc.). <br /> So we will ask ourselves simple questions like: <br /> If u and v converge towards finite limits is it the same for their sum, their product? <br />We will see that most of the natural questions that we can ask admit simple answers the proof of which is easy, but that there are a certain number of cases where we cannot simply decide at first sight. These are the cases that we have called ' <strong>indeterminate forms</strong>'. These cases require a special study and sometimes the use of finer theorems. We will see how, in the next page, we can easily remove the indeterminacy in simple cases. <br /> It is important to understand this presentation well because its structure will be taken up again for <b> the local study </b> (near a point) of numerical functions, as well as for their <b> asymptotic behavior </b> (what happens when the real variable x tends towards a infinite). <br />Some simple proofs will be omitted. Others will be offered as exercises. <h2>Sums </h2>
+          <h3>Case 1 : The two sequences tend to a finite limit </h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soient u=(u<sub>n</sub>) une suite tendant vers une limite finie a et v=(v<sub>n</sub>) une suite tendant vers une limite finie b. Dans ces conditions la suite u+v=(u<sub>n</sub>+v<sub>n</sub>) converge vers la limite a+b.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let u=(u<sub>n</sub>) be a sequence tending to a finite limit a and v=(v<sub>n</sub>) a sequence tending to a finite limit b. Under these conditions the sequence u+v=(u<sub>n</sub>+v<sub>n</sub>) converges towards the limit a+b.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> |(u<sub>n</sub>+v<sub>n</sub>)-(a+b)|≤ |u<sub>n</sub>-a|+|u<sub>n</sub>-b|. <br> Soit ε<sub>1</sub>&gt;0, ∃N<sub>1</sub> | n&gt;N<sub>1</sub> ⇒ |u<sub>n</sub>-a|≤ ε<sub>1</sub>. <br> Soit ε<sub>2</sub>&gt;0, ∃N<sub>2</sub> | n&gt;N<sub>2</sub> ⇒ |v<sub>n</sub>-b|&lt; ε<sub>2</sub>. <br> Posons N=Sup(N<sub>1</sub>,N<sub>2</sub>), alors si n&gt;N, on a; <br> |(u<sub>n</sub>+v<sub>n</sub>)-(a+b)|&lt;ε<sub>1</sub>+ε<sub>2</sub>
+            <br> Soit maintenant ε&gt;0 donné. <br> Choisissons ε<sub>1</sub> et ε<sub>2</sub> tels que ε<sub>1</sub>+ε<sub>2</sub>≤ε par exemple ε<sub>1</sub>=ε<sub>2</sub>=ε/2 <br> Soient N<sub>1</sub>,N<sub>2</sub> et N construits comme précédemment, alors: <br> n&gt;N ⇒ |(u<sub>n</sub>+v<sub>n</sub>)-(a+b)|&lt; ε, CQFD.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> |(u<sub>n</sub>+v<sub>n</sub>)-(a+b)|≤ |u<sub>n</sub>-a|+|u<sub>n</sub>-b|. <br />Let ε<sub>1</sub>>0, ∃N<sub>1</sub>| n>N<sub>1</sub>⇒ |u<sub>n</sub>-a|≤ ε<sub>1</sub>. <br />Let ε<sub>2</sub>>0, ∃N<sub>2</sub>| n>N<sub>2</sub>⇒ |v<sub>n</sub>-b|< ε<sub>2</sub>. <br /> Let N=Sup(N<sub>1</sub>,N<sub>2</sub>), then if n>N, we have; <br /> |(u<sub>n</sub>+v<sub>n</sub>)-(a+b)|<ε<sub>1</sub>+ε<sub>2</sub>
+                <br /> Now let ε>0 be given. <br /> Let us choose ε<sub>1</sub>and ε<sub>2</sub>such that ε<sub>1</sub>+ε<sub>2</sub>≤ε for example ε<sub>1</sub>=ε<sub>2</sub>=ε/2 <br /> Let N<sub>1</sub>,N<sub>2</sub>and N be constructed as before, then: <br /> n>N ⇒ |(u<sub>n</sub>+v<sub>n</sub>)-(a+b)|< ε, QED. </div>
+                  <!--demo -->
+          </div>
+          <!-- /en -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <p>L'appliquette suivante montre les termes successifs d'une suite u, d'une suite v et de la suite somme w. <br> La suite u est représentée avec la couleur bleue, v en vert et w en rouge. <br> Nous sommes dans le cas où u tend vers 2 et v vers 3. <br> Nous devons donc observer la convergence de w vers 5. <br> Au début, il n'y a que les deux premiers termes, appuyez sur le bouton 'Suivant' pour en voir un de plus. <br> Appuyez sur le bouton '+10' pour en voir 10 de plus d'un seul coup. <br> Utilisez le menu en bas à droite pour zoomer et se déplacer sur le graphique. <br> Appuyez sur 'Recommencer' pour recommencer depuis le début. </p>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <p>The following applet shows the successive terms of a sequence u, of a sequence v and of the sum sequence w. <br /> The sequence u is represented with the color blue, v with green and w with red. <br /> We are in the case where u tends to 2 and v to 3. <br /> We must therefore observe the convergence of w towards 5. <br /> At first there are only the first two terms, press the 'Next' button to see one more. <br /> Press the '+10' button to see 10 more at once. <br /> Use the menu at the bottom right to zoom and move around the graph. <br /> Press 'Restart' to start over from the beginning. </p>
+          </div>
+          <!-- /en -->
+          <!-- STOP  APPLET-->
+          <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+          <button type="button" onclick="nameSpace1.next()">
+            <div lang="fr">Suivant</div>
+            <!-- /fr -->
+            <div lang="en">Next</div>
+            <!-- /en -->
+          </button>
+          <button type="button" onclick="nameSpace1.plus10()"> +10 </button>
+          <button type="button" onclick="nameSpace1.restart()">
+            <div lang="fr">Recommencer</div>
+            <!-- /fr -->
+            <div lang="en">Restart</div>
+            <!-- /en -->
+          </button>
+          <br />
+          <script src="js/oplimsum.js"></script>
+          <!-- /STOP  APPLET-->
+          <div lang="fr">
+            <p>Voici un programme illustrant la convergence de la somme de deux suites:</p>
+            <h4>code Python :</h4>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <p>Here is a program illustrating the convergence of the sum of two sequences: </p>
+            <h4>Python code : </h4>
+          </div>
+          <!-- /en -->
+          <!-- STOP CODE -->
+          <p>
+            <object data="python/suiteslimsom.html" type="text/html" width="100%" height="200" border="3"></object>
+          </p>
+          <!-- /STOP  CODE-->
+          <div lang="fr">
+            <table cellspacing="0" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td>Résultat de l'exécution: <br> 0.0909082005955 : 0.0909082005955 : 0.181816401191 <br> 0.00447550284335 : 0.00447550284335 : 0.0089510056867 <br> 0.00091907152606 : 0.00091907152606 : 0.00183814305212 <br> 9.66238650577e-05 : 9.66238650575e-05 : 0.000193247730115 </td>
+                </tr>
+              </tbody>
+            </table>
+            <h4>code julia :</h4>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <table cellspacing="0" cellpadding="2" border="1">
+              <tbody>
+                <tr>
+                  <td>Result of execution: <br> 0.0909082005955 : 0.0909082005955 : 0.181816401191 <br> 0.00447550284335 : 0.00447550284335 : 0.0089510056867 <br> 0.00091907152606 : 0.00091907152606 : 0.00183814305212 <br> 9.66238650577e-05 : 9.66238650575e-05 : 0.000193247730115 </td>
+                </tr>
+              </tbody>
+            </table>
+            <h4>Julia code :</h4>
+          </div>
+          <!-- /en -->
+          <!-- STOP CODE -->
+          <p>
+            <object data="julia/suiteslimsom.jl.html" type="text/html" width="100%" height="80" border="3"></object>
+          </p>
+          <!-- /STOP  CODE-->
+          <div lang="fr">
+            <h3>Cas 2 : Les deux suites tendent vers le même infini</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Case 2 : The two sequences tend to the same infinity </h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm2"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 2</div> Soient u=(u<sub>n</sub>) une suite tendant vers +∞ et v=(v<sub>n</sub>) une suite tendant vers +∞ également. Dans ces conditions la suite u+v=(u<sub>n</sub>+v<sub>n</sub>) tend aussi vers +∞.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 2</div> Let u=(u<sub>n</sub>) be a sequence tending to +∞ and v=(v<sub>n</sub>) a sequence tending to +∞ as well. Under these conditions the sequence u+v=(u<sub>n</sub>+v<sub>n</sub>) also tends to +∞.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Et on a, bien sûr, également: </div>
+          <!-- /fr -->
+          <div lang="en"> And we have, of course, also: </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm3"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 3</div> Soient u=(u<sub>n</sub>) une suite tendant vers -∞ et v=(v<sub>n</sub>) une suite tendant vers -∞ également. Dans ces conditions la suite u+v=(u<sub>n</sub>+v<sub>n</sub>) tend aussi vers -∞.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 3</div> Let u=(u<sub>n</sub>) be a sequence tending towards -∞ and v=(v<sub>n</sub>) a sequence tending towards -∞ also. Under these conditions the sequence u+v=(u<sub>n</sub>+v<sub>n</sub>) also tends towards -∞.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h3>Cas 3 : Une suite tend vers un infini l'autre est bornée</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Case 3 : A sequence tends to infinity the other is bounded </h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm4"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 4</div> Soient u=(u<sub>n</sub>) une suite tendant vers un infini (+∞ ou -∞) et v=(v<sub>n</sub>) une suite bornée. Dans ces conditions la suite u+v=(u<sub>n</sub>+v<sub>n</sub>) tend aussi vers le même infini que u.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 4</div> Let u=(u<sub>n</sub>) be a sequence tending to an infinity (+∞ or -∞) and v=(v<sub>n</sub>) a bounded sequence. Under these conditions the sequence u+v=(u<sub>n</sub>+v<sub>n</sub>) also tends towards the same infinity as u.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Remarque: Cela s'applique au cas où v tend vers une limite finie, puisque dans ce cas elle est bornée. </div>
+          <!-- /fr -->
+          <div lang="en"> Note: This applies to the case where v tends to a finite limit, since in this case it is bounded. </div>
+          <!-- /en -->
+          <a name="indsum"></a>
+          <div lang="fr">s <h3>Cas 4 : Indétermination</h3> Le seul cas d'indétermination pour les sommes concerne les suites qui sont sommes d'une suite tendant vers un infini avec une autre tendant vers un infini opposé. <br> Dans ce cas on ne peut rien dire a priori. <br> Voici quelques exemples: <ul>
+              <li>Supposons que u<sub>n</sub>=n² et v<sub>n</sub>=-n, alors il est clair que u<sub>n</sub>+v<sub>n</sub> → +∞. </li>
+              <li>Si maintenant u<sub>n</sub>=n et v<sub>n</sub>=-n², alors u<sub>n</sub>+v<sub>n</sub> → -∞. </li>
+              <li>Si u<sub>n</sub>=n et v<sub>n</sub>=a-n alors u<sub>n</sub>+v<sub>n</sub> → a. </li>
+            </ul>
+            <h2>Produits</h2>
+            <h3>Cas 1 : Les deux suites tendent vers une limite finie</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Case 4 : Indeterminate form </h3> The only case of indeterminacy for sums concerns sequences which are sums of a sequence tending towards an infinity with another tending towards an opposite infinity. <br /> In this case nothing can be said a priori. <br /> Here are some examples: <ul>
+              <li>Suppose that u<sub>n</sub>=n² and v<sub>n</sub>=-n, then it is clear that u<sub>n</sub>+v<sub>n</sub>→ +∞. </li>
+              <li>If now u<sub>n</sub>=n and v<sub>n</sub>=-n², then u<sub>n</sub>+v<sub>n</sub>→ -∞. </li>
+              <li>If u<sub>n</sub>=n and v<sub>n</sub>=an then u<sub>n</sub>+v<sub>n</sub>→ a. </li>
+            </ul>
+            <h2>Products </h2>
+            <h3>Case 1 : The two sequences tend to a finite limit </h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="thm5"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">théorème 5</div> Soient u=(u<sub>n</sub>) une suite tendant vers une limite finie a et v=(v<sub>n</sub>) une suite tendant vers une limite finie b. Dans ces conditions la suite uv=(u<sub>n</sub>v<sub>n</sub>) converge vers la limite ab.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">theorem 5</div> Let u=(u<sub>n</sub>) be a sequence tending to a finite limit a and v=(v<sub>n</sub>) a sequence tending to a finite limit b. Under these conditions the sequence uv=(u<sub>n</sub>v<sub>n</sub>) converges to the limit ab.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <!-- STOP -->
+          <div lang="fr">
+            <div data-role="collapsible">
+              <h4>démonstration</h4> (u<sub>n</sub>v<sub>n</sub>-ab)=(u<sub>n</sub>-a)b+(v<sub>n</sub>-b)a+(u<sub>n</sub>-a)(v<sub>n</sub>-b) <br> Soit ε<sub>1</sub>&gt;0, ∃N<sub>1</sub> | n&gt;N<sub>1</sub> ⇒ |u<sub>n</sub>-a|≤ ε<sub>1</sub>. <br> Soit ε<sub>2</sub>&gt;0, ∃N<sub>2</sub> | n&gt;N<sub>2</sub> ⇒ |v<sub>n</sub>-b|&lt; ε<sub>2</sub>. <br> Posons N=Sup(N<sub>1</sub>,N<sub>2</sub>), alors si n&gt;N, on a; <br> |u<sub>n</sub>v<sub>n</sub>-ab|≤|bε<sub>1</sub>|+|aε<sub>2</sub>|+|ε<sub>1</sub>ε<sub>2</sub>| <br> ε&gt;0 étant donné on peut toujours trouver ε<sub>1</sub>et ε<sub>2</sub> tels que: <br> |bε<sub>1</sub>|+|aε<sub>2</sub>|+|ε<sub>1</sub>ε<sub>2</sub>|≤ε <br> Il suffit par exemple de prendre ε<sub>1</sub>=ε<sub>2</sub>=ε/k <br> où k est un entier positif tel que |a|/k+|b|/k+1/k²|&lt;1 <br> Prenant alors N<sub>1</sub>,N<sub>2</sub> et N comme ci-dessus,on a: <br> n &gt; N ⇒ |u<sub>n</sub>v<sub>n</sub>-ab| &lt;ε
+            </div>
+            <!--demo -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div data-role="collapsible">
+              <h4>proof</h4> (u<sub>n</sub>v<sub>n</sub>-ab)=(u<sub>n</sub>-a)b+(v<sub>n</sub>-b)a+(u<sub>n</sub>-a)(v<sub>n</sub>-b) <br />Let ε<sub>1</sub>>0, ∃N<sub>1</sub>| n>N<sub>1</sub>⇒ |u<sub>n</sub>-a|≤ ε<sub>1</sub>. <br />Let ε<sub>2</sub>>0, ∃N<sub>2</sub>| n>N<sub>2</sub>⇒ |v<sub>n</sub>-b|< ε<sub>2</sub>. <br /> Let N=Sup(N<sub>1</sub>,N<sub>2</sub>), then if n>N, we have; <br /> |u<sub>n</sub>v<sub>n</sub>-ab|≤|bε<sub>1</sub>|+|aε<sub>2</sub>|+|ε<sub>1</sub>ε<sub>2</sub>| <br /> ε>0 given we can always find ε<sub>1</sub>and ε<sub>2</sub>such that: <br /> |bε<sub>1</sub>|+|aε<sub>2</sub>|+|ε<sub>1</sub>ε<sub>2</sub>|≤ε <br /> It suffices for example to take ε<sub>1</sub>=ε<sub>2</sub>=ε/k <br /> where k is a positive integer such that |a|/k+|b|/k+1/k²|
+                <1 <br /> Then taking N<sub>1</sub>,N<sub>2</sub>and N as above, we have: <br /> n > N ⇒ |u<sub>n</sub>v<sub>n</sub>-ab| <ε </div>
+                  <!--demo -->
+            </div>
+            <!-- /en -->
+            <!-- /STOP -->
+            <div lang="fr"> L'appliquette suivante montre les termes successifs d'une suite u, d'une suite v et de la suite produit w. <br> Fonctionnement identique à la précédente. </div>
+            <!-- /fr -->
+            <div lang="en"> The following applet shows the successive terms of a sequence u, of a sequence v and of the product sequence w. Interface identical to the previous one. </div>
+            <!-- /en -->
+            <!-- STOP  APPLET-->
+            <div id="box2" class="jxgbox" style="width: 500px; height: 500px;"></div>
+            <button type="button" onclick="nameSpace2.next()">
+              <div lang="fr">Suivant</div>
+              <!-- /fr -->
+              <div lang="en"></div>
+              <!-- /en -->
+            </button>
+            <button type="button" onclick="nameSpace2.plus10()"> +10 </button>
+            <button type="button" onclick="nameSpace2.restart()">
+              <div lang="fr">Recommencer</div>
+              <!-- /fr -->
+              <div lang="en">Restart</div>
+              <!-- /en -->
+            </button>
+            <br>
+            <script src="js/oplimprod.js"></script>
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+              <p>Voici un programme illustrant la convergence du produit de deux suites:</p>
+              <h4>code Python :</h4>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <p>Here is a program illustrating the convergence of the product of two sequences: </p>
+              <h4>Python code : </h4>
+            </div>
+            <!-- /en -->
+            <!-- STOP CODE -->
+            <p>
+              <object data="python/suiteslimprod.html" type="text/html" width="100%" height="200" border="3"></object>
+            </p>
+            <!-- /STOP  CODE-->
+            <div lang="fr">
+              <table cellspacing="0" cellpadding="2" border="1">
+                <tbody>
+                  <tr>
+                    <td>Résultat de l'exécution: <br> 0.0909082005955 : 0.0909082005955 : 0.446276702042 <br> 0.00447550284335 : 0.00447550284335 : 0.0223975443425 <br> 0.00091907152606 : 0.00091907152606 : 0.00459620232277 <br> 9.66238650577e-05 : 9.66238650575e-05 : 0.000483109989116 </td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>code Julia :</h4>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <table cellspacing="0" cellpadding="2" border="1">
+                <tbody>
+                  <tr>
+                    <td>Result of execution: <br> 0.0909082005955 : 0.0909082005955 : 0.446276702042 <br> 0.00447550284335 : 0.00447550284335 : 0.0223975443425 <br> 0.00091907152606 : 0.00091907152606 : 0.00459620232277 <br> 9.66238650577e-05 : 9.66238650575e-05 : 0.000483109989116 </td>
+                  </tr>
+                </tbody>
+              </table>
+              <h4>Julia code :</h4>
+            </div>
+            <!-- /en -->
+            <!-- STOP CODE -->
+            <p>
+              <object data="julia/suiteslimprod.jl.html" type="text/html" width="100%" height="80" border="3"></object>
+            </p>
+            <!-- /STOP  CODE-->
+            <div lang="fr">
+              <h3>Cas 2 : Les deux suites tendent vers l'infini</h3>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <h3>Case 2 : The two sequences tend to infinity </h3>
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm6"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 6</div> Soient u=(u<sub>n</sub>) et v=(v<sub>n</sub>) deux suites divergeant vers l'infini. Dans ces conditions la suite uv=(u<sub>n</sub>v<sub>n</sub>) diverge aussi vers l'infini (règle des signes).
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 6</div> Let u=(u<sub>n</sub>) and v=(v<sub>n</sub>) be two sequences diverging towards infinity. Under these conditions the sequence uv=(u<sub>n</sub>v<sub>n</sub>) also diverges towards infinity (rule of signs).
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr"> Cela veut dire par exemple que si u tend vers +∞ et v tend vers -∞ alors uv tend vers -∞ <h3>Cas 3 : Une suite tend vers 0 et l'autre est bornée</h3>
+            </div>
+            <!-- /fr -->
+            <div lang="en"> This means for example that if u tends to +∞ and v tends to -∞ then uv tends to -∞ <h3>Case 3 : A sequence tends to 0 and the other is bounded </h3>
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm7"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 7</div> Si u tend vers 0 et que v est bornée alors uv tend vers 0.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 7</div> If u tends to 0 and v is bounded then uv tends to 0.
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+              <h3>Cas 4 : Une suite tend vers une limite non nulle et l'autre vers l'infini</h3>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <h3>Case 4 : A sequence tends to a nonzero limit and the other to infinity </h3>
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm8"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 8</div> Soit u une suite tendant vers une limite finie a ≠0 et v tendant vers l'infini, alors uv tend vers l'infini (règle des signes).
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 8</div> Let u be a sequence tending to a finite limit a ≠0 and v tending to infinity, then uv tends to infinity (sign rule).
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <a name="indprod"></a>
+            <div lang="fr"> Cela veut dire, par exemple que si a&lt;0 et v →-∞ alors uv →+∞ <h3>Cas 5 : Indétermination</h3> Le seul cas d'indétermination pour les produits concerne les suites qui sont produits d'une suite tendant vers zéro avec une autre tendant vers un infini quelconque. <br> Dans ce cas on ne peut rien dire a priori. <br> Voici quelques exemples: <ul>
+                <li>Supposons que u<sub>n</sub>=n² et v<sub>n</sub>=1/n, alors il est clair que u<sub>n</sub>v<sub>n</sub> → +∞. </li>
+                <li>Si maintenant u<sub>n</sub>=n et v<sub>n</sub>=1/n², alors u<sub>n</sub>v<sub>n</sub> → 0;. </li>
+                <li>Si u<sub>n</sub>=n et v<sub>n</sub>=a/n alors u<sub>n</sub>v<sub>n</sub> → a. </li>
+              </ul>
+              <h2>Produits par un scalaire</h2>
+              <p>Le produit d'une suite u par un scalaire λ peut être considéré comme un cas particulier du produit de deux suites quand l'une est 'stationnaire' (constante). Une suite constante converge évidemment vers son terme initial. Les résultats seront donc des spécialisations des résultats du paragraphe précédent sur les produits de deux suites.</p>
+              <h3>Cas 1 : Le scalaire λ est nul</h3> Dans ce cas λu est stationnaire nulle. <h3> Cas 2 :Le scalaire est non nul</h3>
+              <h4>La suite tend vers une limite finie.</h4>
+            </div>
+            <!-- /fr -->
+            <div lang="en"> This means, for example, that if a&lt;0 and v →-∞ then uv →+∞ <h3>Case 5 : Indeterminate form </h3> The only case of indeterminacy for products concerns sequences which are the product of a sequence tending to zero with another tending to any infinity. <br /> In this case nothing can be said directly. <br /> Here are some examples: <ul>
+                <li>Suppose that u<sub>n</sub>=n² and v<sub>n</sub>=1/n, then it is clear that u<sub>n</sub>v<sub>n</sub>→ +∞. </li>
+                <li>If now u<sub>n</sub>=n and v<sub>n</sub>=1/n², then u<sub>n</sub>v<sub>n</sub>→ 0;. </li>
+                <li>If u<sub>n</sub>=n and v<sub>n</sub>=a/n then u<sub>n</sub>v<sub>n</sub>→ a. </li>
+              </ul>
+              <h2>Products by a scalar </h2>
+              <p>The product of a sequence u by a scalar λ can be considered as a special case of the product of two sequences when one is constant. A constant sequence obviously converges to its initial term. The results will therefore be specializations of the results of the previous paragraph on the products of two sequences. </p>
+              <h3>Case 1 : The scalar λ is zero </h3> In this case λu is constant null. <h3>Case 2 : The scalar is non-zero </h3>
+              <h4>The sequence tends to a finite limit. </h4>
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm9"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 9</div> Si u tend vers une limite finie a, alors λu tend vers λa.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 9</div> If u tends to a finite limit a, then λu tends to λa.
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+              <h4>La suite tend vers un infini.</h4>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <h4>The sequence tends to an infinity.</h4>
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm10"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 10</div> Si u tend vers un infini, alors λu tend vers un infini (règle des signes).
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 10</div> If u tends to infinity, then λu tends to infinity (rule of signs).
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+              <p>Cela veut dire, par exemple, que si λ est &gt;0 et si u tend vers -∞ alors λu tend vers -∞.</p>
+            </div>
+            <!-- /fr -->
+            <div lang="en"> This means, for example, that if λ is >0 and if u tends to -∞ then λu tends to -∞. </div>
+            <!-- /en -->
+            <a name="limquot"></a>
+            <div lang="fr">
+              <h2>Quotients</h2>
+              <p>On considère des suites quotients u/v. A priori le quotient de deux telles suites n'existe que quand la suite v est partout non nulle (v<sub>n</sub>≠0 ∀ n∈ℕ), mais dans la mesure où on s'intéresse seulement à ce qui se passe quand n devient très grand on pourra faire l'hypothèse moins restrictive que v<sub>n</sub>≠0 à partir d'un certain rang seulement (ie: Il existe un entier N tel que n&gt;N ⇒ v<sub>n</sub>≠0). </p>
+              <h3>Cas 1 :Les deux suites tendent vers des limites finies, la limite de la suite v étant non nulle</h3>
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <h2>Quotients </h2>
+              <p>We consider quotient sequences u/v. A priori the quotient of two such sequences only exists when the sequence v is non-zero everywhere (v<sub>n</sub>≠0 ∀ n∈ℕ), but insofar as we are only interested in what happens when n becomes very large we can make the less restrictive hypothesis that v<sub>n</sub>≠0 only from a certain rank (ie: There exists an integer N such that n>N ⇒ v<sub>n</sub>≠0). </p>
+              <h3>Case 1 : The two sequences tend to finite limits, the limit of the sequence v being nonzero </h3>
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm11"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 11</div> Soient u=(u<sub>n</sub>) une suite tendant vers une limite finie a et v=(v<sub>n</sub>) une suite tendant vers une limite finie b≠0. Dans ces conditions la suite u/v=(u<sub>n</sub>/v<sub>n</sub>) converge vers la limite a/b.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 11</div> Let u=(u<sub>n</sub>) be a sequence tending to a finite limit a and v=(v<sub>n</sub>) a sequence tending to a finite limit b≠0. Under these conditions the sequence u/v=(u<sub>n</sub>/v<sub>n</sub>) converges towards the limit a/b.
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP -->
+            <div lang="fr">
+              <div data-role="collapsible">
+                <h4>démonstration</h4> On a <br>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{u_{n}}{v_{n}}-\frac{a}{b}=\frac{u_{n}b-av_{n}}{v_{n}b} \)
+                <!-- /FORMULE UNIV INLINE-->
+                <br>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{u_{n}b-av_{n}}{v_{n}b}=\frac{\left ( u_{n}a \right )b+\left ( v_{n}-b \right )a}{v_{n}b} \)
+                <!-- /FORMULE UNIV INLINE-->
+                <br> Ces égalités on un sens pour v<sub>n</sub>b≠0 mais on a par hypothèse b≠0 et v<sub>n</sub> → b. <br> Nous en concluons que pour n suffisamment grand (disons n &gt; N<sub>3</sub>) le produit bv<sub>n</sub> est non nul. <br> Supposons |u<sub>n</sub>-a|&lt;ε<sub>1</sub> et |v<sub>n</sub>-b|&lt;ε<sub>2</sub>
+                <br> Alors |u<sub>n</sub>/v<sub>n</sub>-a/b| ≤ (|b|ε<sub>1</sub>+|a|ε<sub>2</sub>)/|v<sub>n</sub>b| <br> Pour n suffisamment grand (disons n&gt;N<sub>4</sub>) on a |b|/2 ≤|v<sub>n</sub>|≤ |3b/2| <br> Donc |v<sub>n</sub>b|≥b²/2 et: <br> |u<sub>n</sub>/v<sub>n</sub>-a/b| ≤ 2(|b|ε<sub>1</sub>+|a|ε<sub>2</sub>)/|b²| <br> ε &gt;0 étant donné on peut toujours trouver ε<sub>1</sub> et ε<sub>2</sub> tels que: <br> 2(|b|ε<sub>1</sub>+|a|ε<sub>2</sub>)/|b²|&lt; ε <br> Il suffit de prendre ε<sub>1</sub>&lt;ε|b|/4 et ε<sub>2</sub> &lt; ε|b|²/4|a| si a≠0. <br> Soit alors N<sub>1</sub> tel que |u<sub>n</sub>-a|&lt;ε<sub>1</sub>
+                <br> Et soit N<sub>2</sub> tel que |v<sub>n</sub>-b|&lt;ε<sub>2</sub>
+                <br> Posons N=Sup(N<sub>1</sub>,N<sub>2</sub>,N<sub>3</sub>,N<sub>4</sub>) <br> Si n&gt;N on a |u<sub>n</sub>/v<sub>n</sub>-a/b|&lt;ε.
+              </div>
+              <!--demo -->
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+              <div data-role="collapsible">
+                <h4>proof</h4> We have <br>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{u_{n}}{v_{n}}-\frac{a}{b}=\frac{u_{n}b-av_{n}}{v_{n}b} \)
+                <!-- /FORMULE UNIV INLINE-->
+                <br>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{u_{n}b-av_{n}}{v_{n}b}=\frac{\left ( u_{n}a \right )b+\left ( v_{n}-b \right )a}{v_{n}b} \)
+                <!-- /FORMULE UNIV INLINE-->
+                <br> These equalities have a meaning for v<sub>n</sub>b≠0 but we have by hypothesis b≠0 and v<sub>n</sub>→ b. <br />We conclude that for n sufficiently large (say n > N<sub>3</sub>) the product bv<sub>n</sub> is non-zero. <br /> Assume |u<sub>n</sub>-a|<ε<sub>1</sub> and |v<sub>n</sub>-b|<ε<sub>2</sub>
+                    <br /> Alors |u<sub>n</sub>/v<sub>n</sub>-a/b| ≤ (|b|ε<sub>1</sub>+|a|ε<sub>2</sub>)/|v<sub>n</sub>b| <br /> For n sufficiently large (say n>N<sub>4</sub>) we have |b|/2 ≤|v<sub>n</sub>|≤ |3b/2| <br /> So |v<sub>n</sub>b|≥b²/2 and: <br /> |u<sub>n</sub>/v<sub>n</sub>-a/b| ≤ 2(|b|ε<sub>1</sub>+|a|ε<sub>2</sub>)/|b²| <br /> ε >0 given we can always find ε<sub>1</sub> and ε<sub>2</sub> such that: <br /> 2(|b|ε<sub>1</sub>+|a|ε<sub>2</sub>)/|b²|
+                    < ε <br />It suffices to take ε<sub>1</sub>
+                    <ε|b| /4 and ε<sub>2</sub>
+                      < ε|b|²/4|a| if a≠0. <br /> Let N<sub>1</sub>be such that |u<sub>n</sub>-a|<ε<sub>1</sub>
+                        <br /> And let N<sub>2</sub>such that |v<sub>n</sub>-b|<ε<sub>2</sub>
+                          <br /> Let N=Sup(N<sub>1</sub>,N<sub>2</sub>,N<sub>3</sub>,N<sub>4</sub>) <br /> If n>N we have |u<sub>n</sub>/v<sub>n</sub>-a/b|<ε. </div>
+                            <!--demo -->
+              </div>
+              <!-- /en -->
+              <!-- /STOP -->
+              <div lang="fr">
+                <p>L'appliquette suivante montre les termes successifs d'une suite u, d'une suite v et de la suite quotient. Au début, il n'y a que les deux premiers termes, appuyez sur le bouton 'Suiv' pour en voir un de plus. Appuyez sur 'Rec' pour recommencer depuis le début.</p>
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <p>The following applet shows the successive terms of a sequence u, of a sequence v and of the quotient sequence. At first there are only the first two terms, press the 'Next' button to see one more. Press 'Rec' to start over from the beginning. </p>
+              </div>
+              <!-- /en -->
+              <!-- STOP  APPLET-->
+              <div id="box3" class="jxgbox" style="width: 500px; height: 500px;"></div>
+              <button type="button" onclick="nameSpace3.next()">
+                <div lang="fr">Suivant</div>
+                <!-- /fr -->
+                <div lang="en">Next</div>
+                <!-- /en -->
+              </button>
+              <button type="button" onclick="nameSpace3.plus10()"> +10 </button>
+              <button type="button" onclick="nameSpace3.restart()">
+                <div lang="fr">Recommencer </div>
+                <!-- /fr -->
+                <div lang="en">Restart</div>
+                <!-- /en -->
+              </button>
+              <script src="js/oplimquot.js"></script>
+              <!-- /STOP  APPLET-->
+              <div lang="fr">
+                <p>Voici un programme illustrant la convergence du quotient de deux suites:</p>
+                <h4>code Python :</h4>
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <p>Here is a program illustrating the convergence of the quotient of two sequences: </p>
+                <h4>Python code: </h4>
+              </div>
+              <!-- /en -->
+              <!-- STOP CODE -->
+              <p>
+                <object data="python/suiteslimquot.html" type="text/html" width="100%" height="200" border="3"></object>
+              </p>
+              <!-- /STOP  CODE-->
+              <div lang="fr">
+                <table cellspacing="0" cellpadding="2" border="1">
+                  <tbody>
+                    <tr>
+                      <td>Résultat de l'exécution: <br> 0.0909082005955 : 0.0909082005955 : 0.0104165614636 <br> 0.00447550284335 : 0.00447550284335 : 0.000496537342277 <br> 0.00091907152606 : 0.00091907152606 : 0.000102087783126 <br> 9.66238650577e-05 : 9.66238650575e-05 : 1.07363308017e-05 </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4>code Julia :</h4>
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <table cellspacing="0" cellpadding="2" border="1">
+                  <tbody>
+                    <tr>
+                      <td>Result of execution: <br> 0.0909082005955 : 0.0909082005955 : 0.0104165614636 <br> 0.00447550284335 : 0.00447550284335 : 0.000496537342277 <br> 0.00091907152606 : 0.00091907152606 : 0.000102087783126 <br> 9.66238650577e-05 : 9.66238650575e-05 : 1.07363308017e-05 </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <h4>Julia code :</h4>
+              </div>
+              <!-- /en -->
+              <!-- STOP CODE -->
+              <p>
+                <object data="julia/suiteslimquot.jl.html" type="text/html" width="100%" height="80" border="3"></object>
+              </p>
+              <!-- /STOP  CODE-->
+              <div lang="fr">
+                <h3>Cas 2 : La suite u est bornée et v tend vers un infini.</h3>
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <h3>Case 2 : The sequence u is bounded and v tends to some infinityi.</h3>
+              </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="thm12"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">théorème 12</div> Si u est bornée et v tend vers un infini alors u/v tend vers 0.
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">theorem 12</div> If u is bounded and v goes to infinity then u/v goes to 0.
+                </div>
+                <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr">
+                <h3>Cas 3 : La suite u tend vers une limite non nulle et v tend vers 0 unilatéralement</h3>
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <h3>Case 3 : The sequence u tends to a nonzero limit and v tends to 0 unilaterally </h3>
+              </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="thm13"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">théorème 13</div> Si u tend vers a&gt;0 et si v → 0+, alors u/v → +∞. <br> Si u tend vers a&gt;0 et si v → 0-, alors u/v → -∞. <br> Si u tend vers a&lt;0 et si v → 0+, alors u/v → -∞. <br> Si u tend vers a&lt;0 et si v → 0-, alors u/v → +∞.
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">theorem 13</div> If u tends to a&gt;0 and if v → 0+, then u/v → +∞. <br /> If u tends to a>0 and if v → 0-, then u/v → -∞. <br /> If u tends to a
+                  <0 and if v → 0+, then u/v → -∞. <br /> If u tends to a <0 and if v → 0-, then u/v → +∞. </div>
+                    <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <div lang="fr">
+                  <h3>Cas 4 : La suite u tend vers un infini et la suite v tend vers 0 unilatéralement</h3>
+                </div>
+                <!-- /fr -->
+                <div lang="en">
+                  <h3>Case 4 : The sequence u tends to infinity and the sequence v tends to 0 unilaterally </h3>
+                </div>
+                <!-- /en -->
+                <!-- STOP -->
+                <a name="thm14"></a>
+                <div id="container">
+                  <div lang="fr">
+                    <div id="label">théorème 14</div> Si u tend vers +∞ et si v → 0+, alors u/v → +∞. <br> Si u tend vers +∞ et si v → 0-, alors u/v → -∞. <br> Si u tend vers -∞et si v → 0+, alors u/v → -∞. <br> Si u tend vers -∞ et si v → 0-, alors u/v → +∞.
+                  </div>
+                  <!--/fr-->
+                  <div lang="en">
+                    <div id="label">theorem 14</div> If u tends to +∞ and if v → 0+, then u/v → +∞. <br> If u tends to +∞ and if v → 0-, then u/v → -∞. <br> If u tends to -∞ and if v → 0+, then u/v → -∞. <br> If u tends to -∞ and if v → 0-, then u/v → +∞.
+                  </div>
+                  <!-- /en -->
+                </div>
+                <!-- /cont -->
+                <!-- /STOP -->
+                <a name="indquot"></a>
+                <div lang="fr">
+                  <h3>Cas 5 : Indéterminations</h3>
+                  <h4>Quotient de deux infinis</h4> On ne peut rien dire a priori du quotient de deux suites tendant vers l'infini. <br> Voici quelques exemples: <ul>
+                    <li>Supposons que u<sub>n</sub>=n² et v<sub>n</sub>=n, alors il est clair que u<sub>n</sub>/v<sub>n</sub> → +∞. </li>
+                    <li>Si maintenant u<sub>n</sub>=n et v<sub>n</sub>=n², alors u<sub>n</sub>/v<sub>n</sub> → 0. </li>
+                    <li>Si u<sub>n</sub>=n et v<sub>n</sub>=n/a alors u<sub>n</sub>/v<sub>n</sub> → a. </li>
+                  </ul>
+                  <h4>Quotient de deux limites nulles</h4> On ne peut rien dire a priori du quotient de deux suites tendant vers zéro. <br> Voici quelques exemples: <ul>
+                    <li>Supposons que u<sub>n</sub>=1/n² et v<sub>n</sub>=1/n, alors il est clair que u<sub>n</sub>/v<sub>n</sub> → 0. </li>
+                    <li>Si maintenant u<sub>n</sub>=1/n et v<sub>n</sub>=1/n², alors u<sub>n</sub>/v<sub>n</sub> → +∞. </li>
+                    <li>Si u<sub>n</sub>=1/n et v<sub>n</sub>=1/(na) alors u<sub>n</sub>/v<sub>n</sub> → a. </li>
+                  </ul>
+                </div>
+                <!-- /fr -->
+                <div lang="en">
+                  <h3>Case 5 : Indeterminate forms </h3>
+                  <h4>Quotient of two infinities </h4> Nothing can be said directly about the quotient of two sequences each of them tending to some infinity. <br /> Here are some examples: <ul>
+                    <li>Suppose that u<sub>n</sub>=n² and v<sub>n</sub>=n, then it is clear that u<sub>n</sub>/v<sub>n</sub>→ +∞. </li>
+                    <li>If now u<sub>n</sub>=n and v<sub>n</sub>=n², then u<sub>n</sub>/v<sub>n</sub>→ 0. </li>
+                    <li>If u<sub>n</sub>=n and v<sub>n</sub>=n/a then u<sub>n</sub>/v<sub>n</sub>→ a. </li>
+                  </ul>
+                  <h4>Quotient of two zero limits </h4> Nothing can be said a priori about the quotient of two sequences both tending to zero. <br /> Here are some examples: <ul>
+                    <li>Suppose that u<sub>n</sub>=1/n² and v<sub>n</sub>=1/n, then it is clear that u<sub>n</sub>/v<sub>n</sub>→ 0. </li>
+                    <li>If now u<sub>n</sub>=1/n and v<sub>n</sub>=1/n², then u<sub>n</sub>/v<sub>n</sub>→ +∞. </li>
+                    <li>If u<sub>n</sub>=1/n and v<sub>n</sub>=1/(na) then u<sub>n</sub>/v<sub>n</sub>→ a. </li>
+                  </ul>
+                </div>
+                <!-- /en -->
+                <div lang="fr">
+                  <div>
+                    <ul style=list-style-type:'';>
+                      <li>
+                        <input type="button" value="Exercices" onclick="go('exercices/suiteslimopalg/menu.html')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- /navbar -->
+                </div>
+                <!-- /fr -->
+                <div lang="en">
+                  <div>
+                    <ul style=list-style-type:'';>
+                      <li>
+                        <input type="button" value="Exercises" onclick="go('exercices/suiteslimopalg/menu.html')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                      </li>
+                      <li>
+                        <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- /en -->
+              </div>
+              <!-- /content -->
+              <div data-role="footer">
+                <table cellpadding="10">
+                  <tr>
+                    <td>
+                      <div lang="fr">Création Gilles Dubois</div>
+                      <div lang="en">Created by Gilles Dubois</div>
+                    </td>
+                    <td>
+                      <div lang="fr">Janvier 2022</div>
+                      <div lang="en">January 2022</div>
+                    </td>
+                    <td>
+                      <div lang="fr">Version mobile Jquery</div>
+                      <div lang="en">Mobile Jquery version</div>
+                    </td>
+                    <td>
+                      <a href="https://www.mathjax.org">
+                        <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <!-- /footer -->
+              <ul style=list-style-type:'';>
+                <li>
+                  <div lang="fr">
+                    <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+                  </div>
+                  <div lang="en">
+                    <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+                  </div>
+                </li>
+                <li>
+                  <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+                </li>
+              </ul>
+            </div>
+            <!-- /page -->
+  </body>
+</html>

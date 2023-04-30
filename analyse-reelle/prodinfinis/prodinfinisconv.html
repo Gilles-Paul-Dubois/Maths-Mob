@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Convergence des produits infinis</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/prodinfinisconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Produits infinis'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/prodinfinisconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Infinite products'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous avons vu en introduction avec la <input type="button" value="formule de Wallis" onclick="go('index.html#wallis')" data-inline="true" /> un premier exemple de produit infini convergent. En voici un second un peu plus complexe parce qu'il nécessite le calcul de racines carrées à répétition, mais un peu plus convaincant du point de vue de l'efficacité. Cet algorithme est très voisin de <input type="button" value="l'algorithme d'Archimède pour le calcul de π" onclick="go('../suites/suitesvitesse.html#')" data-inline="true" />. <h2>Un exemple historique</h2> L'exemple est emprunté à François Viète (1540-1603-FR) <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We saw in the introduction with the <input type="button" value="Wallis formula" onclick="go('index.html#wallis')" data-inline="true" /> a first example of an infinite product converge. Here is a second one that is a little more complex because it requires the calculation of square roots repeatedly, but a little more convincing from the point of view of efficiency. This algorithm is very similar to <input type="button" value="Archimedes' algorithm for calculating π" onclick="go('../suites/suitesvitesse.html#')" data-inline="true" />. <h2>A historical example</h2> The example is borrowed from François Viète (1540-1603-FR) <br />
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/Francois_Viete.jpeg" width="147" height="200" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Considérons la suite donnée par: <br> v<sub>n</sub>=cos(&pi;/(2<sup>n+1</sup>) pour n&ge;1 <br> Un rapide calcul de trigonométrie nous dit que cette suite est la suite récurrente donnée par: </div>
+        <!-- /fr -->
+        <div lang="en"> Consider the sequence given by: <br> v<sub>n</sub>=cos(&pi;/(2<sup>n+1</sup>) for n&ge;1 <br> A quick trigonometry calculation tells us that this sequence is the recursive sequence given by: </div>
+        <!-- /en -->
+        <ul>
+          <li>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle v_{1}=\frac{2}{\sqrt{2}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </li>
+          <li>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle v_{n+1}=\sqrt{\frac{1+v_{n}}{2}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </li>
+        </ul>
+        <div lang="fr"> La formule sin(x)=2sin(x/2)cos(x/2) <br> nous permet d'établir par récurrence que si x<sub>n</sub>=&pi;/2<sup>n+1</sup> et p<sub>n</sub>=v<sub>1</sub>&times;v<sub>2</sub>&times; ... &times;v<sub>n</sub> : <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The formula sin(x)=2sin(x/2)cos(x/2) <br> allows us to establish by induction that if x<sub>n</sub>=&pi;/2<sup>n+1</sup> and p<sub>n</sub>=v<sub>1< /sub>&times;v<sub>2</sub>&times; ... &times;v<sub>n</sub>: <br>
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{2}{\pi }=\frac{sin\left ( x_{n} \right )}{x_{n}}\times p_{n} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Mais quand n&rarr;&infin; on a x<sub>n</sub>&rarr;0, et lim<sub>n&rarr;&infin;</sub>sin(x<sub>n</sub>)/x<sub>n</sub>=1 <br> Nous en concluons que: </div>
+        <!-- /fr -->
+        <div lang="en"> But when n&rarr;&infin; we have x<sub>n</sub>&rarr;0, and lim<sub>n&rarr;&infin;</sub>sin(x<sub>n</sub>)/x<sub>n</sub>= 1 <br> We conclude that: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{n \to \infty }p_{n}=\frac{2}{\pi } \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Ce qui peut encore s'écrire : </div>
+        <!-- /fr -->
+        <div lang="en"> Which can still be written: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{2}{\pi }=\frac{\sqrt{2}}{2}\times \frac{2+\sqrt{2}}{2}\times \frac{\sqrt{2+\sqrt{2+\sqrt{2}}}}{2}\times ... \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Voici un programme Python calculant les produits partiels p<sub>n</sub> et les comparant avec 2/&pi;: </div>
+        <!-- /fr -->
+        <div lang="en"> Here is a Python program calculating the partial products p<sub>n</sub> and comparing them with 2/&pi;: </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/viete.html" type="text/html" border="3" height="150" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Et voici l'équivalent Julia 1.6. </div>
+        <!-- /fr -->
+        <div lang="en"> And here is the Julia 1.6 equivalent. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/viete.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici une appliquette pour visualiser les produits successifs de la suite de Viète. <br> Au début n=0. <br> Appuyez sur le bouton 'suivant' pour augmenter n d'une unité. <br> Appuyez sur 'recommencer' pour recommencer depuis le début. <br /> le bouton '+10' vous permet de voir 10 itérations successives. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet to visualize the successive products of the Viète suite. <br> At the beginning n=0. <br> Press the 'next' button to increase n by one. <br> Press 'restart' to start over again from the beginning. <br /> the '+10' button allows you to see 10 successive iterations. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace1.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace1.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace1.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <input type='text' id='myText1'>
+        <script src="js/viete.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Définition</h2> Comme <input type="button" value="dans le cas des séries" onclick="go('../series/seriesconv.html#')" data-inline="true" />, nous pouvons définir les produits infinis convergents:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> Like <input type="button" value="in the case of series" onclick="go('../series/seriesconv.html#')" data-inline="true" />, we can define the convergent infinite products:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soit (p,v) un produit infini. On dit que (p,v) <strong>
+              <em>'converge vers la limite P'</em>
+            </strong> si la suite des produits partiels <input type="button" value="converge" onclick="go('../suites/suitesconvergentes.html#def1')" data-inline="true" /> vers P. <br /> Dans ce cas on écrit: <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle P=\prod_{n=0}^{\infty }v_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let (p,v) be an infinite product. We say that (p,v) <strong>
+              <em>'converges to the limit P'</em>
+            </strong> if the sequence of partial products <input type="button" value="converge" onclick=" go('../suites/suitesconvergentes.html#def1')" data-inline="true" /> to P. <br /> In this case we write: <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle P=\prod_{n=0}^{\infty }v_{n} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples triviaux</h3> Les résultats suivants se vérifient immédiatement:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Trivial examples</h3> The following results are verified immediately:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Si un seul des v<sub>n</sub> est nul le produit infini converge vers 0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> If only one of v<sub>n</sub> is zero, the infinite product converges to 0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Si la suite (v<sub>n</sub>) tend vers 0, alors le produit infini (p,v) tend également vers 0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> If the sequence (v<sub>n</sub>) tends to 0, then the infinite product (p,v) also tends to 0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On pourra donc, en pratique, se concentrer sur les cas où tous les v<sub>n</sub> sont non nuls. </div>
+        <!-- /fr -->
+        <div lang="en"> We can therefore, in practice, concentrate on the cases where all the v<sub>n</sub> are non-zero. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> On peut cependant avoir une convergence vers 0 sans que le facteur général tende vers 0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> We can however have a convergence towards 0 without the general factor tending towards 0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Par exemple: <br> v<sub>n</sub>=(1-1/n) n&ge;2 <br> On remarque que v<sub>n</sub> &rarr; 1 et p<sub>n</sub>=1-n/(n+1) donc p<sub>n</sub> &rarr; 0. </div>
+        <!-- /fr -->
+        <div lang="en"> For example: <br> v<sub>n</sub>=(1-1/n) n&ge;2 <br> Note that v<sub>n</sub> &rarr; 1 and p<sub>n</sub>=1-n/(n+1) so p<sub>n</sub> &rarr; 0. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit que le produit infini (p,v) converge <strong>
+              <em>'strictement'</em>
+            </strong> s'il converge vers une limite P avec P&ne;0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that the infinite product (p,v) converges <strong>
+              <em>'strictly'</em>
+            </strong> if it converges to a limit P with P&ne;0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Condition nécessaire de convergence</h2> De la même façon que nous avons vu qu'une condition nécessaire de convergence pour la série (s,u) était lim<sub>n→∞</sub>u<sub>n</sub>=0, il est facile de constater que:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Necessary condition for convergence of a product</h2> In the same way that we saw that a necessary convergence condition for the series (s,u) was lim<sub>n→∞</sub>u<sub>n</sub>=0, it is easy to note that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Une condition nécessaire pour la convergence stricte du produit infini (p,v) est: <br> lim<sub>n&rarr;&infin;</sub>v<sub>n</sub>=1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> A necessary condition for the strict convergence of the infinite product (p,v) is: <br> lim<sub>n&rarr;&infin;</sub>v<sub>n</sub>=1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cependant, cette condition nécessaire n'est nullement suffisante, comme le montre l'exemple suivant: <br> v<sub>n</sub>=(1+1/n) n&ge;1 <br> On a en effet: <br> p<sub>n</sub>=n+1 <br> (p<sub>n</sub>) diverge donc vers +&infin; bien que v<sub>n</sub> &rarr;1 <br> Il résulte de cette remarque qu'on écrira souvent le facteur général d'un produit infini sous la forme: <br> v<sub>n</sub>=1+u<sub>n</sub>
+          <br> et qu'une condition nécessaire, mais non suffisante, de convergence du produit infini (p,v) est donc lim<sub>n&rarr;&infin;</sub>u<sub>n</sub>=0. <br> La convergence du produit infini dépendra en fait de la vitesse de convergence de la suite (u<sub>n</sub>) vers 0. <br> Dans la page suivante, nous allons établir une condition suffisante sur la suite (u<sub>n</sub>) pour que le produit infini (p,v) soit convergent.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> However, this necessary condition is by no means sufficient, as the following example shows: <br> v<sub>n</sub>=(1+1/n) n&ge;1 <br> We have indeed: <br> p<sub>n</sub>=n+1 <br> (p<sub>n</sub>) therefore diverges to +&infin; although v<sub>n</sub> &rarr;1 <br> It follows from this remark that we will often write the general factor of an infinite product in the form: <br> v<sub>n</sub>=1+u<sub>n</sub>
+          <br> and that a necessary, but not sufficient, condition for the convergence of the infinite product (p,v) is therefore lim<sub>n&rarr;&infin;</sub>u<sub>n</sub>=0. <br> The convergence of the infinite product will in fact depend on the speed of convergence of the sequence (u<sub>n</sub>) towards 0. <br> In the next page, we will establish a sufficient condition on the sequence (u<sub>n</sub>) for the infinite product (p,v) to be convergent.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/prodinfinisconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Produits infinis'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/prodinfinisconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Infinite products'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

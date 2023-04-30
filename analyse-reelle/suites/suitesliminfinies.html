@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Limites infinies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesliminfinies/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesliminfinies/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> Nous nous intéressons ici à des cas comme: <ul>
+            <li>
+              <input type="button" value="La suite de Fibonacci" onclick="go('suitesdef.html#fibo')" data-inline="true" />
+            </li>
+            <li>
+              <input type="button" value="La suite des nombres premiers" onclick="go('suitesdef.html#prem')" data-inline="true" />
+            </li>
+            <li>
+              <input type="button" value="les progressions arithmétiques" onclick="go('suitesdef.html#ari')" data-inline="true" />de raison r&gt;0
+            </li>
+            <li>
+              <input type="button" value="Les progressions géométriques" onclick="go('suitesdef.html#geo')" data-inline="true" /> de raison q&gt;1 et à termes positifs
+            </li>
+          </ul> Toutefois, les exemples donnés plus haut correspondent à des suites qui sont toutes croissantes, mais ce n'est pas cet aspect des choses qui nous concerne. Ce qui nous intéresse c'est que le terme général de la suite devient de plus en plus grand <b>'jusqu'à dépasser n'importe quel nombre donné à l'avance (aussi grand soit-il)'</b>. <br /> Contrairement à ce que l'intuition pourrait suggérer, ce phénomène est indépendant de la croissance et peut se produire avec d'autres suites, comme celle-ci: la suite u<sub>n</sub>=n+(-1)<sup>n</sup>×2: <br /> L'appliquette suivante montre les termes successifs d'une telle suite. <br> Au début, il n'y a que les deux premiers, appuyez sur le bouton 'Suivant' pour en voir un de plus. <br> Appuyez sur le bouton '+10' pour en voir 10 de plus. <br /> Appuyez sur 'Recommencer' pour recommencer depuis le début.</br>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions </h2> Here we are interested in cases like: <ul>
+            <li>
+              <input data-inline="true" onclick="go('suitesdef.html#fibo')" type="button" value=" The Fibonacci sequence" />
+            </li>
+            <li>
+              <input data-inline="true" onclick="go('suitesdef.html#prem')" type="button" value=" The sequence of prime numbers" />
+            </li>
+            <li>
+              <input data-inline="true" onclick="go('suitesdef.html#ari')" type="button" value=" Arithmetic" />ratio r>0
+            </li>
+            <li>
+              <input data-inline="true" onclick="go('suitesdef.html#geo')" type="button" value=" progressions Geometric progressions" />with ratio q>1 and in positive terms
+            </li>
+          </ul>However, the examples given above correspond to sequences which are all increasing, but it is not this aspect of things that concerns us. What interests us is that the general term of the sequence becomes larger and larger <b> 'until it exceeds any number given in advance (however large)' </b> . <br /> Contrary to what intuition might suggest, this phenomenon is independent of growth and can occur with other sequences, such as this: the sequence u<sub>n</sub>=n+(-1)<sup>n</sup>×2: <br /> The following applet shows the successive terms of such a sequence. <br /> At first there are only the first two, press the 'Next' button to see one more. <br /> Press the '+10' button to see 10 more. <br /> Press 'Restart' to start over from the beginning. <br />
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace2.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace2.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace2.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/liminfinie2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Il est maintenant grand temps de formaliser cette définition. </div>
+        <!-- /fr -->
+        <div lang="en"> It is now time to formalize this definition. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit qu'une suite (u<sub>n</sub>) <b>
+              <i>'tend vers l'infini'</i>
+            </b> (positif), et on écrit: <br>
+            <!-- FORMULE UNIV CENTRE --> \[ \displaystyle \lim_{n \to \infty }u_{n}=+\infty \]
+            <!-- /FORMULE UNIV CENTRE--> Si ∀M∈R ∃N ∈ N tel que n>N ⇒ u<sub>n</sub>>M
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that a sequence (u<sub>n</sub>) <b>
+              <i> 'tends to infinity' </i>
+            </b> (positive), and we write:
+            <!-- FORMULE UNIV CENTRE --> \[ \displaystyle \lim_{n \to \infty }u_{n}=+\infty \]
+            <!-- /FORMULE UNIV CENTRE--> If ∀M∈R ∃N ∈ N such that n>N ⇒ u<sub>n</sub>>M
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette terminologie est fâcheuse car l'expression 'tend vers' suggère l'existence d'une limite au sens du paragraphe précédent, ce qui n'est pas le cas ici. <br> Aussi au lieu de <b>
+            <i>'tend vers +&infin;'</i>
+          </b> on dit plus justement <b>
+            <i>'diverge vers +&infin;'</i>
+          </b>. <br> De la même façon nous définissons les suites <b>
+            <i>'tendant vers -&infin;'</i>
+          </b> ou <b>
+            <i>'divergeant vers -&infin;'</i>
+          </b>: </div>
+        <!-- /fr -->
+        <div lang="en"> This terminology is annoying because the expression 'tends towards' suggests the existence of a limit in the sense of the preceding paragraph, which is not the case here. <br /> Also instead of <b>
+            <i> 'tends towards +∞' </i>
+          </b> we more precisely say <b>
+            <i> 'diverges towards +∞' </i>
+          </b> . <br /> In the same way we define the sequences <b>
+            <i> 'tending towards -∞' </i>
+          </b> or <b>
+            <i> 'diverging towards -∞' </i>
+          </b> : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit qu'une suite (u<sub>n</sub>) <b>
+              <i>'tend vers l'infini'</i>
+            </b> (négatif), et on écrit: <br>
+            <!-- FORMULE UNIV CENTRE --> \[ \displaystyle \lim_{n \to \infty }u_{n}=-\infty \]
+            <!-- /FORMULE UNIV CENTRE--> Si ∀m∈R ∃N ∈ N tel que n>N ⇒ u<sub>n</sub>&lt;m
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that a sequence (u<sub>n</sub>) <b>
+              <i> 'tends to infinity' </i>
+            </b> (negative), and we write:
+            <!-- FORMULE UNIV CENTRE --> \[ \displaystyle \lim_{n \to \infty }u_{n}=-\infty \]
+            <!-- /FORMULE UNIV CENTRE--> If ∀m∈R ∃N ∈ N such that n>N ⇒ u<sub>n</sub>&lt;m
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'appliquette suivante montre les termes successifs d'une telle suite. <br /> Au début, il n'y a que les deux premiers, appuyez sur le bouton 'Suivant' pour en voir un de plus. <br /> Appuyez sur le bouton '+10' pour en voir 10 de plus. <br /> Appuyez sur 'Recommencer' pour recommencer depuis le début. </div>
+        <!-- /fr -->
+        <div lang="en"> The following applet shows the successive terms of such a sequence. <br /> At first there are only the first two, press the 'Next' button to see one more. <br /> Press the '+10' button to see 10 more. <br /> Press 'Restart' to start over from the beginning. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace1.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace1.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace1.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/liminfinie1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Remarques concernant les définitions.</h2>
+          <h3>Formalisation totale</h3> Avant de continuer effectuons quelques remarques: <br /> On pourra réviser les <input type="button" value="notions de logique élémentaire" onclick="go('../../bases/logique/index.html#')" data-inline="true" />. <br /> Le N dont est annoncée l'existence dépend bien évidemment de M, il faudrait donc en toute rigueur le noter N(M). <br /> La définition de la divergence vers +∞ s'écrit donc, en langage formalisé: <br /> ∀M(∃N(M)(n&gt;N⇒u<sub>n</sub>&gt;M) <br /> Désignons maintenant par R(n,N) la relation n&gt;N et par S(n,M,u) la relation u<sub>n</sub>&gt;M. <br /> Sachant que R⇒S équivaut à S∨¬R, (voir <input type="button" value="implication" onclick="go('../../bases/logique/implication.html#')" data-inline="true" />) nous obtenons: <br /> ∀M(∃N(M)(∀n(S(n,u,M)∨¬R(n,N)))) <br />
+          <h3>Négation </h3> Partons de la formalisation totale pour exprimer qu'une suite ne diverge pas vers +∞. <br /> Ecrivons donc sa <input type="button" value="négation" onclick="go('../../bases/logique/negation.html#')" data-inline="true" />: <br /> ∃M(∀N(∃n(¬S(n,u,M)∧R(n,N)))) <br /> qui se traduit en langage semi-formalisé par: <br /> Il existe un nombre M, tel que pour tout entier N, on peut trouver n&gt;N vérifiant u<sub>n</sub>≤M. <br /> En regardant de près cette formulation on voit qu'on peut l'exprimer ainsi:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Notes on definitions. </h2>
+          <h3>Total formalization </h3> Before continuing, let us make a few remarks: <br /> We can revise the <input data-inline="true" onclick="go('../../bases/logique/index.html#')" type="button" value="notions of elementary logic" />. <br /> The N of which the existence is announced obviously depends on M, it would thus be necessary in all rigor to note it N(M). <br /> The definition of the divergence towards +∞ is therefore written, in formal language: <br /> ∀M(∃N(M)(n>N⇒u<sub>n</sub>>M) <br /> Let us now denote by R(n,N) the relation n>N and by S(n,M,u) the relation u<sub>n</sub>>M. <br />Knowing that R⇒S is equivalent to S∨¬R, (see <input data-inline="true" onclick="go('../../bases/logique/implication.html#')" type="button" value="implication" />) we obtain: <br /> ∀M(∃N(M)(∀n(S(n,u,M)∨¬R(n,N)))) <br />
+          <h3>Negation </h3> Let us start from the total formalization to express that a sequence does not diverge towards +∞. <br />So let's write this <input data-inline="true" onclick="go('../../bases/logique/negation.html#')" type="button" value="negation" />: <br /> ∃M(∀N(∃n(¬S(n,u,M)∧R(n,N)))) <br /> which translates into semi-formal language as: <br /> There exists a number M, such that for any integer N, we can find n>N satisfying u<sub>n</sub>≤M. <br /> Looking closely at this formulation we see that it can be expressed as follows:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Une suite ne tend pas vers +∞ si elle possède une suite extraite bornée.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> A sequence does not tend to +∞ if it has a bounded subsequence.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Le symbole ∞</h3> Nous avons vu intervenir le symbole ∞ dans des formules telles que:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have seen the symbol ∞ appearing in formulas such as: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV CENTRE --> \[ \displaystyle \lim_{n \to \infty }u_{n}=a \]
+        <!-- /FORMULE UNIV CENTRE-->
+        <div lang="fr"> Nous avons vu qu'il s'agit là d'un raccourci pour exprimer ce qui se passe quand n devient de plus en plus grand ( n→∞). <br> Mais également à droite du signe d'égalité dans une écriture comme: <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have seen that this is a shorthand for expressing what happens when n gets bigger and bigger ( n→∞). But also to the right of the equals sign in a script like: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV CENTRE --> \[ \displaystyle \lim_{n \to \infty }u_{n}=+\infty \]
+        <!-- /FORMULE UNIV CENTRE-->
+        <div lang="fr"> pour exprimer que le terme général lui-même devenait de plus en plus grand. <br /> Dans un cas comme dans l'autre, <strong> le symbole ∞ n'a (pour le moment) aucun sens pris isolément</strong>. En particulier il ne désigne pas un nombre particulier. <h4>Remarque concernant la forme générale de l'assertion</h4> Les deux définitions (convergence vers une limite finie et divergence vers l'infini) ont une même structure logique que l'on peut schématiser par: <br /> ∀ .... ; ∃ .... | ...... ⇒ ..... C'est un schéma auquel il faut s'habituer parce que nous le retrouverons dans beaucoup d'autres situations: <ul>
+            <li>limites unilatérales de suites</li>
+            <li>limites finies et infinies de fonctions</li>
+            <li>limites à gauche et à droite pour une fonction</li>
+            <li>continuité uniforme d'une fonction sur un intervalle</li>
+          </ul>
+          <h3>Remarque concernant les symboles M,m</h3> Nous pouvons faire en ce qui concerne le symbole M dans le cas de la divergence vers +∞ à peu près les mêmes remarques que pour ε dans le cas des limites finies. <br /> En particulier on peut supposer que N est positif, car si la propriété est vraie pour tout M positif elle est vraie à plus forte raison pour tout entier M (positif ou négatif). <br /> On peut, si on veut supposer que M&gt;100 ou bien que M&gt;10000. Une fois de plus, cela ne restreint en rien la généralité. <br /> Bien que cela ne soit pas forcément d'une grande utilité pour les démonstrations, on peut également supposer que M est entier. <br /> Les mêmes remarques s'appliquent (mutatis mutandis) au symbole m dans le cas de la divergence vers -∞. <h4>Type des inégalités</h4> Exactement comme dans le cas de la convergence vers une limite finie, on peut remplacer les inégalités strictes par des inégalités larges. L'énoncé obtenu: <br /> ∀M∈$\mathbb{R}$ ∃N tel que n≥N ⇒ u<sub>n</sub>≥M <br /> étant strictement équivalent à l'énoncé initial. <h2>Quelques propriétés</h2> Nous allons examiner cette nouvelle notion (suites tendant vers un infini) et la confronter avec les notions vues précédemment, pour écrirer quelques résultats qui sont presque tous des évidences.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> to express that the general term itself was getting bigger and bigger. <br />In either case, <strong> the symbol ∞ has (for the moment) no meaning taken in isolation </strong> . In particular, it does not designate a particular number. <h4>Note on the general form of the assertion </h4> The two definitions (convergence towards a finite limit and divergence towards infinity) have the same logical structure which can be schematized by: <br />∀ ....; ∃ .... | ...... ⇒ ..... This is a pattern to get used to because we will find it in many other situations: <ul>
+            <li>unilateral limits of sequences </li>
+            <li>finite and infinite limits of functions </li>
+            <li>left and right limits for a function </li>
+            <li>uniform continuity of a function over an interval </li>
+          </ul>
+          <h3>Note on M,m symbols </h3> We can make about the symbol M in the case of divergence towards +∞ nearly the same remarks as for ε in the case of finite limits. <br /> In particular, we can assume that N is positive, because if the property is true for any positive M, it is even more true for any integer M (positive or negative). <br />We can, if we want to suppose that M>100 or that M>10000. Again, this in no way restricts the generality. <br /> Although this is not necessarily of much use for proofs, one can also assume that M is an integer. <br /> The same remarks apply (mutatis mutandis) to the symbol m in the case of the divergence towards -∞. <h4>Type of inequalities </h4>Exactly as in the case of convergence towards a finite limit, one can replace the strict inequalities by wide inequalities. The resulting statement: <br /> ∀M∈$\mathbb{R}$ ∃N such that n≥N ⇒ u<sub>n</sub>≥M <br /> being strictly equivalent to the initial statement. <h2>Some properties </h2> We will examine this new notion (sequences tending to infinity) and compare it with the notions seen previously, to write some results which are almost all obvious.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Une suite bornée ne peut pas tendre vers un infini.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> A bounded sequence cannot tend to infinity.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Supposons en effet |u<sub>n</sub>|&lt;B &forall;n avec B&gt;0. Soit M=2B, on ne peut avoir à la fois |u<sub>n</sub>|&lt;B et u<sub>n</sub> &gt;M. </div>
+        <!-- /fr -->
+        <div lang="en"> Suppose indeed |u<sub>n</sub>|&lt;B ∀n with B &gt;0. Let M=2B, we cannot have both |u<sub>n</sub>|&ĺt;B and u<sub>n</sub>>M. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Toute suite extraite d'une suite tendant vers un infini tend vers le même infini.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> Any sequence extracted from a sequence tending to infinity tends to the same infinity.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte du fait que si u<sub>p(n)</sub> est une suite extraite de u<sub>n</sub> alors p est par définition une application croissante vérifiant p(n)&ge;n. </div>
+        <!-- /fr -->
+        <div lang="en"> This results from the fact that if u<sub>p(n)</sub>is a sequence extracted from u<sub>n</sub>then p is by definition an increasing map satisfying p(n)≥n. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Une suite périodique ne peut pas tendre vers un infini.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> A periodic sequence cannot tend to any infinity.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Sinon, en vertu de de qui précède on pourrait en extraire une suite constante tendant vers l'infini. <br /> Cependant on peut extraire d'une suite ne tendant pas vers l'infini une sous-suite tendant vers l'infini <input type="button" value="(voir exercice)" onclick="go('exercices/suitesliminfinies/ex01.html#')" data-inline="true" />. <h2>Exemples traités</h2>
+          <ol>
+            <li>La suite des nombres premiers tend vers +∞ parce que si p(n) désigne le nombre premier de rang n on a p(n)&gt;n.</li>
+            <li>La suite de Fibonacci tend vers +∞ parce que u<sub>n</sub> ≥ n pour n≥2, ce qui peut se démontrer facilement par récurrence. </li>
+            <a name="harm"></a>
+            <li>Montrons que <input type="button" value="la suite" onclick="go('suitesdef.html#harm')" data-inline="true" /> définie par u<sub>0</sub>=0 u<sub>n</sub>=u<sub>n-1</sub>+1/n pour n≥1 tend vers +∞ On peut écrire: <br /> u<sub>0</sub>=0 <br /> u<sub>1</sub>=1 <br /> u<sub>3</sub>=1+(1/2+1/3) ≥ 1+(1/4+1/4)=1+1/2=3/2 <br /> u<sub>7</sub>=u<sub>3</sub>+(1/4+1/5+1/6+1/7) ≥ 3/2+(1/8+1/8+1/8+1/8)=4/2 <br /> u<sub>15</sub>=u<sub>7</sub>+(1/8+1/9+1/10+1/11+1/12+1/13+1/14+15) ≥ 5/2 <br /> et plus généralement: <br />
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{2^{n}-1}\geqslant \frac{n+1}{2} \)
+              <!-- /FORMULE UNIV INLINE-->
+              <br> que l'on montre facilement par récurrence. <br /> Si on se donne maintenant un nombre M &gt;0 quelconque, il existe un entier k tel que (k+1)/2 &gt; M (à savoir k=2M-1). <br /> Posons alors N(M)=2<sup>k</sup>-1. <br /> Si n&gt;N(M), comme (u<sub>n</sub>) est croissante on a u<sub>n</sub>&gt;M.
+            </li>
+            <li>Montrons que <input type="button" value="la suite" onclick="go('suitesdef.html#invcar')" data-inline="true" /> définie par u<sub>0</sub>=0 u<sub>n</sub>=u<sub>n-1</sub>+1/n² pour n≥1 ne tend pas vers +∞ <br /> Montrons par récurrence que u<sub>n</sub>≤2-1/n <br /> C'est vrai pour n=1. Supposons que u<sub>n</sub>≤2-1/n alors <br>
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}+\frac{1}{(n+1)^{2}}< 2-\frac{1}{n}+\frac{1}{(n+1)^{2}} \) <!-- /FORMULE UNIV INLINE-->
+                <br> il suffit donc de montrer que: <br />
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle 2-\frac{1}{n}+\frac{1}{(n+1)^{2}}< 2-\frac{1}{n+1} \) <!-- /FORMULE UNIV INLINE-->
+                  <br> ce qui se ramène imédiatement à (n+2)n ≤(n+1)² <br /> Il en résulte que la suite est bornée par 2 et qu'elle ne peut donc pas tendre vers +∞ </li>
+          </ol>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Otherwise, by virtue of what precedes, one could extract from it a constant sequence tending towards infinity. <br /> However we can extract from a sequence not tending to infinity a subsequence tending to infinity <input data-inline="true" onclick="go('exercices/suitesliminfinies/ex01.html#')" type="button" value="(see exercise)" />. <h2>Examples treated </h2>
+          <ol>
+            <li>The sequence of prime numbers tends to +∞ because if p(n) designates the prime number of rank n then we have p(n)>n. </li>
+            <li>The Fibonacci sequence tends to +∞ because u<sub>n</sub>≥ n for n≥2, which can be easily demonstrated by induction. </li>
+            <a  name="harme"></a>
+            <li>Let's show that <input data-inline="true" onclick="go('suitesdef.html#harm')" type="button" value="the following sequence" />defined by u<sub>0</sub>=0 u<sub>n</sub>=u<sub>n-1</sub>+1/n for n≥1 tends to +∞ We can write: <br /> u<sub>0</sub>=0 <br /> in<sub>1</sub>=1 <br /> u<sub>3</sub>=1+(1/2+1/3) ≥ 1+(1/4+1/4)=1+1/2=3/2 <br /> u<sub>7</sub>= u<sub>3</sub>+(1/4+1/5+1/6+1/7) ≥ 3/2+(1/8+1/8+1/8+1/8)=4/2 <br /> u<sub>15</sub>= u<sub>7</sub>+(1/8+1/9+1/10+1/11+1/12+1/13+1/14+15) ≥ 5/2 <br /> and more generally: <br />
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{2^{n}-1}\geqslant \frac{n+1}{2} \)
+              <!-- /FORMULE UNIV INLINE-->
+              <br> which can easily be shown by induction. <br /> If we now give ourselves any number M >0, there exists an integer k such that (k+1)/2 > M (namely k=2M-1). <br /> Let us then set N(M)=2<sup>k</sup>-1. <br /> If n>N(M), as (u<sub>n</sub>) is increasing we have u<sub>n</sub>>M.
+            <li>Let's show that <input data-inline="true" onclick="go('suitesdef.html#invcar')" type="button" value="this other one" /> defined by u<sub>0</sub>=0 u<sub>n</sub>=u<sub>n-1</sub>+1/n² for n≥1 does not tend to +∞ <br /> Let us show by induction that u<sub>n</sub>≤2-1/n <br />This is true for n=1. Suppose that u<sub>n</sub>≤2-1/n then <br>
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle u_{n}+\frac{1}{(n+1)^{2}}< 2-\frac{1}{n}+\frac{1}{(n+1)^{2}} \) <!-- /FORMULE UNIV INLINE-->
+                <br> so it suffices to show that: <br>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle 2-\frac{1}{n}+\frac{1}{(n+1)^{2}}< 2-\frac{1}{n+1} \) <!-- /FORMULE UNIV INLINE-->
+                  <br> which immediately reduces to (n+2)n ≤(n+1)² <br /> It follows that the sequence is bounded by 2 and therefore cannot tend to +∞. </li>
+          </ol>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesliminfinies/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesliminfinies/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<html>
+<head>
+<title>exo1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">Subdivision</span>
+    <span class="s1">a::Float64</span>
+    <span class="s1">b::Float64</span>
+    <span class="s1">n::Int64</span>
+    <span class="s1">t::Int8</span>
+    <span class="s1">r::Float64</span>
+    <span class="s1">q::Float64</span>
+    <span class="s1">points::Vector{Float64}</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Subdivision(a,b,n,t)</span>
+    <span class="s1">a,b=Float64(a), Float64(b)</span>
+    <span class="s0">if </span><span class="s1">t==</span><span class="s2">1</span>
+        <span class="s1">r=(b-a)/n</span>
+        <span class="s1">q=</span><span class="s2">0</span>
+        <span class="s1">points=[a+i*r </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">0</span><span class="s1">:n-</span><span class="s2">1</span><span class="s1">]</span>
+        <span class="s1">push!(points,b)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">t==</span><span class="s2">2 </span><span class="s3">#a diffÃ©rent de 0 </span>
+        <span class="s1">q=(b/a)^(</span><span class="s2">1</span><span class="s1">/n)</span>
+        <span class="s1">r=</span><span class="s2">0</span>
+        <span class="s1">points=[a*q^i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">0</span><span class="s1">:n-</span><span class="s2">1</span><span class="s1">]</span>
+        <span class="s1">push!(points,b)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">t==</span><span class="s2">3</span>
+        <span class="s1">r,q=</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span>
+        <span class="s1">points=[a]</span>
+        <span class="s1">rd= sort!([a+(b-a)*rand() </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n-</span><span class="s2">1</span><span class="s1">])</span>
+        <span class="s1">append!(points,rd)</span>
+        <span class="s1">push!(points,b)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Subdivision(a,b,n,t,r,q,points)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Subdivision(L::Vector{Float64})</span>
+    <span class="s1">a, b, n=L[</span><span class="s2">1</span><span class="s1">],L[</span><span class="s0">end</span><span class="s1">],length(L)-</span><span class="s2">1</span>
+    <span class="s1">t,r,q = </span><span class="s2">3</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span>
+    <span class="s1">points=L</span>
+    <span class="s0">return </span><span class="s1">Subdivision(a,b,n,t,r,q,points)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:+(S1::Subdivision,S2::Subdivision)</span>
+    <span class="s1">a1,a2 =S1.a, S2.a</span>
+    <span class="s1">b1,b2=S1.b,S2.b</span>
+    <span class="s1">(a1 != a2 ) || (b1 != b2) &amp;&amp; </span><span class="s0">return </span><span class="s1">nothing</span>
+    <span class="s1">L=S2.points[</span><span class="s2">2</span><span class="s1">:end-</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s1">C=copy(S1.points)</span>
+    <span class="s0">for </span><span class="s1">l </span><span class="s0">in </span><span class="s1">L</span>
+        <span class="s0">if </span><span class="s1">!(l </span><span class="s0">in </span><span class="s1">C)</span>
+            <span class="s1">push!(C,l)</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s1">sort!(C)</span>
+    <span class="s0">return </span><span class="s1">Subdivision(C)</span>
+<span class="s0">end</span>
+
+
+<span class="s0">function </span><span class="s1">ordre(x::Float64,S::Subdivision)</span>
+    <span class="s0">for </span><span class="s1">k </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:S.n+</span><span class="s2">1</span>
+        <span class="s1">x&lt;=S.points[k] &amp;&amp; </span><span class="s0">return </span><span class="s1">k-</span><span class="s2">1</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">struct </span><span class="s1">FonctionEtagee</span>
+    <span class="s1">S::Subdivision</span>
+    <span class="s1">V::Vector{Float64}</span>
+<span class="s0">end</span>
+
+<span class="s1">valeur(FE::FonctionEtagee,x::Float64)=FE.V[ordre(x,FE.S)]</span>
+
+<span class="s0">function </span><span class="s1">Base.:*(y,FE::FonctionEtagee)</span>
+    <span class="s0">return </span><span class="s1">FonctionEtagee(FE.S,[y*v </span><span class="s0">for </span><span class="s1">v </span><span class="s0">in </span><span class="s1">FE.V])</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Base.:+(FE1::FonctionEtagee,FE2::FonctionEtagee)</span>
+    <span class="s1">S=FE1.S+FE2.S</span>
+    <span class="s1">M=[(S.points[i]+S.points[i+</span><span class="s2">1</span><span class="s1">])/</span><span class="s2">2 </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:S.n]</span>
+    <span class="s1">W=[valeur(FE1,m)+valeur(FE2,m) </span><span class="s0">for </span><span class="s1">m </span><span class="s0">in </span><span class="s1">M]</span>
+    <span class="s0">return </span><span class="s1">FonctionEtagee(S,W)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">C=Subdivision(</span><span class="s2">0</span><span class="s1">,</span><span class="s2">1</span><span class="s1">,</span><span class="s2">10</span><span class="s1">,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">E=FonctionEtagee(C,collect(</span><span class="s2">0</span><span class="s1">:</span><span class="s2">9</span><span class="s1">))</span>
+    <span class="s1">println(valeur(E,</span><span class="s2">0.5</span><span class="s1">))</span>
+    <span class="s1">F=</span><span class="s2">2</span><span class="s1">*E</span>
+    <span class="s1">println(valeur(F,</span><span class="s2">0.5</span><span class="s1">))</span>
+    <span class="s1">println(valeur(E+F,</span><span class="s2">0.5</span><span class="s1">))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

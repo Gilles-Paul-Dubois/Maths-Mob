@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Continuité et opérations algébriques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Cette page suppose connus les résultats sur les <input type="button" value="limites et les opérations algébriques" onclick="go('../foncnum/foncnumlimopalg.html#')" data-inline="true" />. Les résultats sur la continuité découlent immédiatement des résultats sur les limites. </p> D déigne ici une partie de &reals;. On rappelle que si &reals;<sup>D</sup> désigne l'ensemble de toutes les fonctions numériques admettant D pour domaine (définies sur D) et si &lambda;.f désigne le produit de la fonction f par le scalaire &lambda; . <br>
+          <ul>
+            <li>(&reals;<sup>D</sup>, +) est un groupe abélien </li>
+            <li>(&reals;<sup>D</sup>, +, .) est un espace vectoriel </li>
+            <li>(&reals;<sup>D</sup>, +, .,&times;) est une algèbre </li>
+          </ul> Ce point étant rappelé on désigne par C<sup>0</sup>(D), l'ensemble des fonctions numériques définies et <input type="button" value="continues sur D tout entier" onclick="go('contsurdom.html#')" data-inline="true" />. <h2>Somme de deux fonctions continues</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>This page assumes known results on <input type="button" value="limits and algebraic operations" onclick="go('../foncnum/foncnumlimopalg.html#')" data-inline="true" />. The results concerning continuity follow immediately from the corresponding results concerning limits. </p> D here denotes a subset of &reals;. Remind that if &reals;<sup>D</sup> denotes the set of all numerical functions having D as domain (defined on D) and if &lambda;.f denotes the product of the function f by the scalar &lambda; . <br>
+          <ul>
+            <li>(&reals;<sup>D</sup>, +) is an abelian group </li>
+            <li>(&reals;<sup>D</sup>, +, .) is a vector space </li>
+            <li>(&reals;<sup>D</sup>, +, .,&times;) is an algebra </li>
+          </ul> This point being in mind, we denote by C<sup>0</sup>(D), the set of numeric functions and <input type="button" value="defined and continuous on D" onclick="go('contsurdom.html#')" data-inline="true" />. <h2>Sum of two continuous functions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Soient f et g deux fonctions définies sur D et x<sub>0</sub> &isin; D. Si f et g sont continues en x<sub>0</sub> (resp. continues à gauche en x<sub>0</sub>, continues à droite en x<sub>0</sub>, continues sur D), alors f+g est continue en x<sub>0</sub> (resp. continue à gauche en x<sub>0</sub>, continue à droite en x<sub>0</sub>, continue sur D).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> Let f and g be two functions defined on D and x<sub>0</sub> &isin; D. If f and g are continuous at x<sub>0</sub> (resp. left continuous at x<sub>0</sub>, right continuous at x<sub>0</sub>, continuous on D), then f+g is continuous at x<sub>0</sub> (resp. left continuous at x<sub>0</sub>, right continuous at x<sub>0</sub> , continuous on D).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte évidemment des résultats sur la limite d'une somme. En conséquence (C<sup>0</sup>(D),+) est un sous-groupe abélien de (&reals;<sup>D</sup>,+). <h2>Produit d'une fonction continue par un scalaire</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This obviously follows from the results on the limit of a sum. Consequently (C<sup>0</sup>(D),+) is an Abelian subgroup of (&reals;<sup>D</sup>,+). <h2>Product of a continuous function by a scalar</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Soient f une fonctions définie sur D, &lambda; un réel quelconque et x<sub>0</sub> &isin; D. Si f est continue en x<sub>0</sub> (resp. continue à gauche en x<sub>0</sub>, continue à droite en x<sub>0</sub>, continue sur D), alors &lambda;.f est continue en x<sub>0</sub> (resp. continue à gauche en x<sub>0</sub>, continue à droite en x<sub>0</sub>, continue sur D).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Let f be a function defined on D, &lambda; any real number and x<sub>0</sub> &isin; D. If f is continuous at x<sub>0</sub> (resp. left continuous at x<sub>0</sub>, right continuous at x<sub>0</sub>, continuous on D ), then &lambda;.f is continuous at x<sub>0</sub> (resp.left continuous at x<sub>0</sub>, right continuous at x<sub>0</sub>, continuous on D).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela découle des résultats sur les limites et le produit des fonctions par un scalaire. En conséquence (C<sup>0</sup>(D),+,.) est un sous-espace vectoriel de (&reals;<sup>D</sup>,+,.). <h2>Produit de deux fonctions continues</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This follows from the results on limits and the product of functions by a scalar. Consequently (C<sup>0</sup>(D),+,.) is a vector subspace of (&reals;<sup>D</sup>,+,.). <h2>Product of two continuous functions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Soient f et g deux fonctions définies sur D et x<sub>0</sub> &isin; D. Si f et g sont continues en x<sub>0</sub> (resp. continues à gauche en x<sub>0</sub>, continues à droite en x<sub>0</sub>, continues sur D), alors f&times;g est continue en x<sub>0</sub> (resp. continue à gauche en x<sub>0</sub>, continue à droite en x<sub>0</sub>, continue sur D).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> Let f and g be two functions defined on D and x<sub>0</sub> &isin; D. If f and g are continuous at x<sub>0</sub> (resp. left continuous at x<sub>0</sub>, right continuous at x<sub>0</sub>, continuous on D), then f&times;g is continuous at x<sub>0</sub> (resp. left continuous at x<sub>0</sub>, right continuous at x<sub>0</sub> , continuous on D).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela découle des résultat sur les limites d'un produit. En conséquence (C<sup>0</sup>(D) ,+,.,&times;) est une sous-algèbre de (&reals;<sup>D</sup>,+,.,&times;). <h2>Quotient de deux fonctions continues</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This follows from the results on the limits of a product. Consequently (C<sup>0</sup>(D) ,+,.,&times;) is a subalgebra of (&reals;<sup>D</sup>,+,.,&times;). <h2>Quotient of two continuous functions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Soient f et g deux fonctions définies sur D et x<sub>0</sub> &isin; D. Si f et g sont continues en x<sub>0</sub> avec g(x<sub>0</sub>)&ne;0 (resp. continues à gauche en x<sub>0</sub>, continues à droite en x<sub>0</sub>, continues sur D et g non nulle sur D), alors f/g est continue en x<sub>0</sub> (resp. continue à gauche en x<sub>0</sub>, continue à droite en x<sub>0</sub>, continue sur D).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> Let f and g be two functions defined on D and x<sub>0</sub> &isin; D. If f and g are continuous at x<sub>0</sub> with g(x<sub>0</sub>)&ne;0 (resp. left continuous at x<sub>0</sub> , right continuous at x<sub>0</sub>, continuous on D ), then f/g is continuous at x<sub>0</sub> (resp. left continuous at x<sub>0</sub>, right continuous at x<sub>0</sub>, continuous on D).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En conséquence si g ne s'annule pas sur D f/g est continue sur D et appartient donc à C<sup>0</sup>(D). <h2>Continuité des fonctions usuelles</h2> L'application des théorèmes précédents permettent de conclure rapidement à la continuité de nombreuses fonctions numériques définies par des formules mettant en jeu les opérations ci-dessus, en particulier les polynômes, les fonctions rationnelles. <br> Nous renvoyons le lecteur intéressé aux exercices. </div>
+        <!-- /fr -->
+        <div lang="en"> Consequently if g does not vanish on D f/g is continuous on D and therefore belongs to C<sup>0</sup>(D). <h2>Continuity of usual functions</h2> The application of the previous theorems makes it possible to quickly conclude the continuity of many numerical functions defined by formulas involving the operations above, in particular polynomials, rational functions. <br> We refer the interested reader to the exercises. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contopalg/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

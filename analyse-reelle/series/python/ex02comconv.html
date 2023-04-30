@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>ex02comconv.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s0"># réarrangement de la série harmonique alternée pour diverger vers l'infini</span><span class="s1"> 
+</span><span class="s0"># rearrangge alternating harmonic series to diverge to +&infin;</span><span class="s1"> 
+</span><span class="s0">#exercice 02 - exercise 2</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">u(n): 
+    </span><span class="s0">&quot;&quot;&quot;terme général de la série harmonique alternée- general term of alt. harmonic series&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">n % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">1.0 </span><span class="s1">/ (n + </span><span class="s3">1</span><span class="s1">) 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1.0 </span><span class="s1">/ (n + </span><span class="s3">1</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">v(n): 
+    </span><span class="s0">&quot;&quot;&quot;suite extraite des termes positifs - subsequence of positive terms&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s3">1.0 </span><span class="s1">/ (</span><span class="s3">2 </span><span class="s1">* n + </span><span class="s3">1</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">w(n): 
+    </span><span class="s0">&quot;&quot;&quot;suite extraite des termes négatifs - subsequence of negative terms &quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1.0 </span><span class="s1">/ (</span><span class="s3">2 </span><span class="s1">* (n + </span><span class="s3">1</span><span class="s1">)) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">genp(): 
+    </span><span class="s0">&quot;&quot;&quot;générateur de la permutation p telle que la série de terme général u(p(n)) converge vers +&infin;&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;generator of  permutation p we are looking for&quot;&quot;&quot;</span><span class="s1">     
+    n = </span><span class="s3">1</span><span class="s1"> 
+    m = </span><span class="s3">0</span><span class="s1"> 
+    s = </span><span class="s3">1</span><span class="s1"> 
+    p = </span><span class="s3">0</span><span class="s1"> 
+    k = </span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">yield </span><span class="s1">p 
+    </span><span class="s2">while True</span><span class="s1">: 
+        k = k + </span><span class="s3">1  </span><span class="s0"># k augmente à chaque fois - k increases every time</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">s &lt; k:  </span><span class="s0"># tant que s est inférieure à k, ajouter un positif - add a positive as long as s &lt; k</span><span class="s1"> 
+            s += v(n) 
+            p = </span><span class="s3">2 </span><span class="s1">* n 
+            n = n + </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">yield </span><span class="s1">p 
+        </span><span class="s2">else</span><span class="s1">:  </span><span class="s0">#sinon ajouter un négatif - else add a negative</span><span class="s1"> 
+            s += w(m) 
+            p = </span><span class="s3">2 </span><span class="s1">* m + </span><span class="s3">1</span><span class="s1"> 
+            m = m + </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">yield </span><span class="s1">p 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function &quot;&quot;&quot;</span><span class="s1"> 
+    P = genp() 
+    L = (next(P) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">40000</span><span class="s1">))  </span><span class="s0">#expression génératrice - Python generator</span><span class="s1"> 
+    M = (u(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">L)  </span><span class="s0">#expression génératrice - same</span><span class="s1"> 
+    print(reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, M))  </span><span class="s0">#affiche 6.28.., la croissance est très lente - prints 6, 28, increasing speed is very low</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

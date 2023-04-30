@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Théorème de Rolle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivrolle/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivrolle/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Le résultat qui suit a été publié initialement en 1690 par le mathématicien français Michel Rolle.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>The following result was originally published in 1690 by the French mathematician Michel Rolle.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/Michel_Rolle_-_Traité_d'algèbre.jpg" width="303" height="413" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Soit f une fonction numérique définie et <input type="button" value="continue" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> sur l'intervalle compact [a,b] on suppose en outre que f est <input type="button" value="dérivable" onclick="go('derivfoncderiv.html#')" data-inline="true" /> en tout point de ]a,b[. </div>
+        <!-- /fr -->
+        <div lang="en"> Let f be a <input type="button" value="continuous" onclick="go('../continuite/contsurdom.html#')" data-inline="true" /> numeric function defined over the compact interval [a,b] further assume that f is <input type="button" value="differentiable" onclick="go('derivfoncderiv.html#')" data-inline="true" /> at all points of ]a,b[. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Dans ces conditions, si f(a)=f(b) il existe au moins un point x<sub>0</sub>&isin;]a,b[ tel que f'(x<sub>0</sub>)=0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Under these conditions, if f(a)=f(b) there exists at least one point x<sub>0</sub>&isin;]a,b[ such that f'(x<sub>0</sub> )=0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est immédiate: <br /> Soit f est constante sur [a,b] auquel cas f'(x)=0 ∀x∈]a,b[. <br /> Soit f prend des valeurs &gt; f(a), dans ce cas f admet sur [a,b] un maximum (absolu) ( <input type="button" value="revoir ce résultat" onclick="go('../continuite/contimcompact.html#')" data-inline="true" />) et ce maximum ne peut être f(a), il est donc atteint en un point x<sub>0</sub>∈]a,b[. <br /> Soit f prend des valeurs &lt; f(a), dans ce cas f admet sur [a,b] un minimum (absolu) ( <input type="button" value="revoir ce résultat" onclick="go('../continuite/contimcompact.html#')" data-inline="true" />) et ce minimum ne peut être f(a), il est donc atteint en un point x<sub>0</sub>∈]a,b[. <br /> De sorte qu'il suffit d'appliquer la <input type="button" value="condition nécessaire pour un extremum local" onclick="go('derivextrema.html#')" data-inline="true" />. <br /> Voici une appliquette vous permettant de visualiser le théorème de Rolle. <br /> Déplacer la droite horizontale rouge en l'attrapant avec la souris par le point rouge situé sur l'axe des ordonnées. <br /> Le théorème s'applique aux intervalles [a,b] et [b,c]. <br /> Constater qu'à chaque fois il y a (au moins) une annulation de la dérivée à l'intérieur de chaque intervalle. </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is immediate: <br /> Either f is constant over [a,b] in which case f'(x)=0 ∀x∈]a,b[. <br /> Either f take values ​​> f(a), in this case f admits on [a,b] an (absolute) maximum ( <input type="button" value="review this result" onclick="go('../continuite/contimcompact.html#')" data-inline="true" />) and this maximum cannot be f(a), so it is reached at a point x<sub>0</sub>∈]a,b[. <br /> Or f take values ​​
+          < f(a), in this case f admits on [a,b] an (absolute) minimum ( <input type="button" value="review this result" onclick="go('../continuite/contimcompact.html#')" data-inline="true" />) and this minimum cannot be f(a), so it is reached at a point x<sub>0</sub>∈]a,b[. <br /> So it suffices to apply the <input type="button" value="necessary condition for a local extremum" onclick="go('derivextrema.html#')" data-inline="true" />. <br /> Here is an applet allowing you to visualize Rolle's theorem. <br /> Move the red horizontal line by grabbing it with the mouse by the red point located on the y-axis. <br /> The theorem applies to the intervals [a,b] and [b,c]. <br /> Note that each time there is (at least) one cancellation of the derivative inside each interval.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/rolle.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivrolle/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivrolle/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

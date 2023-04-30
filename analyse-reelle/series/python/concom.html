@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>concom.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s0"># réarrangement de la série harmonique alternée pour converger vers 1</span><span class="s1"> 
+</span><span class="s0"># Rearrange the alternating harmonic series for a convergence to limit 1</span><span class="s1">
+ 
+</span><span class="s2">def </span><span class="s1">u(n): 
+    </span><span class="s0">&quot;&quot;&quot;terme général de la série harmonique alternée - general term of the series&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">n % </span><span class="s3">2 </span><span class="s1">== </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s3">1.0 </span><span class="s1">/ (n + </span><span class="s3">1</span><span class="s1">) 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1.0 </span><span class="s1">/ (n + </span><span class="s3">1</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">v(n): 
+    </span><span class="s0">&quot;&quot;&quot;suite extraite des termes positifs - subseries of positive terms&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s3">1.0 </span><span class="s1">/ (</span><span class="s3">2 </span><span class="s1">* n + </span><span class="s3">1</span><span class="s1">) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">w(n): 
+    </span><span class="s0">&quot;&quot;&quot;suite extraite des termes négatifs - subseries of negative terms&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1.0 </span><span class="s1">/ (</span><span class="s3">2 </span><span class="s1">* (n + </span><span class="s3">1</span><span class="s1">)) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">genp(): 
+    </span><span class="s0">&quot;&quot;&quot;générateur de la permutation p telle que la série de terme général u(p(n)) converge vers 1&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;generator of permutation p &quot;&quot;&quot;</span><span class="s1">     
+    n = </span><span class="s3">1</span><span class="s1"> 
+    m = </span><span class="s3">0</span><span class="s1"> 
+    s = </span><span class="s3">1</span><span class="s1"> 
+    p = </span><span class="s3">0</span><span class="s1"> 
+    </span><span class="s2">yield </span><span class="s1">p 
+    </span><span class="s2">while True</span><span class="s1">: 
+        </span><span class="s2">if </span><span class="s1">s &lt; </span><span class="s3">1</span><span class="s1">:  </span><span class="s0"># si s est inférieure à 1, ajouter un positif - if s <1 add a positive</span><span class="s1"> 
+            s += v(n) 
+            p = </span><span class="s3">2 </span><span class="s1">* n 
+            n = n + </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">yield </span><span class="s1">p 
+        </span><span class="s2">else</span><span class="s1">:  </span><span class="s0">#sinon ajouter un négatif else add a negative</span><span class="s1"> 
+            s += w(m) 
+            p = </span><span class="s3">2 </span><span class="s1">* m + </span><span class="s3">1</span><span class="s1"> 
+            m = m + </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">yield </span><span class="s1">p 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function &quot;&quot;&quot;</span><span class="s1"> 
+    P = genp() 
+    L = [next(P) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">300</span><span class="s1">)] 
+    M = [u(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">L] 
+    print(sum(M)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dichotomie</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contdichot/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contdichot/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>L'algorithme</h2> Voici une application directe du théorème de la valeur intermédiaire : <br> On cherche à résoudre en x une équation du type f(x)=0. <br> On sait que f(a) &lt; 0 et f(b)&gt;0 (ou bien le contraire), c'est à dire que f change de signe entre a et b. On suppose de plus f monotone strictement. <br> Dans ces conditions f doit s'annuler une fois et une seule entre a et b. <br> On calcule f((a+b)/2) si cette valeur est négative c'est que la racine de f(x)=0 est entre (a+b)/2 et b sinon elle est entre a et (a+b)/2. <br> On itère le processus. <br> A chaque étape on divise par 2 l'intervalle où est localisée la racine. <br> Il suffit d'itérer le processus un nombre de fois n suffisant pour que (b-a)/2<sup>n</sup> &lt; &epsilon; où &epsilon; est la précision voulue. <br> Voici une appliquette illustrant cet algorithme. <br> Cliquez sur 'Suivant' pour chaque nouvelle itération. <br> Cliquez sur 'Recommencer' pour recommencer depuis le début. <br> A chaque fois s'affiche la valeur de f(c) jusqu'à la cinquième décimale. <br> Utilisez le menu de navigation en bas à droite pour zoomer et voir ce qui se passe après plusieurs itérations.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The algorithm - sometimes know as 'bisection'</h2> Here is a direct application of the Intermediate Value Theorem : <br> We want to solve in x an equation of the type f(x)=0. <br> We know that f(a) < 0 and f(b) > 0 (or quite the opposite), that is to say that f changes sign between a and b. We further assume f strictly monotonic. <br> Under these conditions f must vanish once and only once between a and b. <br> We calculate f((a+b)/2) if this value is negative it means that the root of f(x)=0 is between (a+b)/2 and b otherwise it is between a and (a+ b)/2. <br> We iterate the process. <br> At each step, the interval where the root is located is divided by 2. <br> It suffices to iterate the process a number of times n sufficient for (b-a)/2<sup>n</sup>
+            < &epsilon; where &epsilon; is the desired precision. <br> Here is an applet illustrating this algorithm. <br> Click 'Next' for each new iteration. <br> Click 'Restart' to start over from the beginning. <br> Each time the value of f(c) is displayed up to the fifth decimal place. <br> Use the navigation menu at the bottom right to zoom in and see what happens after several iterations.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace1.next()'>
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton2' onClick='nameSpace1.restart()'>
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">estart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/dichot.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un petit programme réalisant cette itération 9 fois pour calculer une approximation de &radic;2 :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> Here is a small program performing this iteration 9 times to calculate an approximation of &radic;2:
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/dichotomie.html" type="text/html" border="3" height="250" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2> Voici l'équivalent avec Julia 1.6 :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> Here is the equivalent with Julia 1.6:
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/dichotomie.jl.html" type="text/html" border="3" height="250" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/contdichot/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Continuité'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/contdichot/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Continuity'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

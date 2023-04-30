@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intégration des fractions rationnelles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/primfoncrat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Primitives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/primfoncrat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Primitive functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Généralités et premières réductions</h2> Pour bien comprendre ce paragraphe il faut connaître le contenu de <input type="button" value="cette page" onclick="go('../../nombres/complexes/polynomes.html#')" data-inline="true" /> et de <input type="button" value="cette autre page" onclick="go('../../nombres/complexes/fondamental.html#')" data-inline="true" />. <br /> Nous avons déjà vu que toutes les fonctions polynomiales étaient intégrables et que leurs primitives étaient des polynomes de degré immédiatement supérieur. <br /> On se pose maintenant la question de chercher les primitives des fractions rationnelles qui sont, par définition, les quotients de polynômes.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Generalities and first reductions</h2> To fully understand this paragraph, you must know the content of <input type="button" value="this page" onclick="go('../../nombres/complexes/polynomes.html#')" data-inline="true" /> and <input type="button" value="this other page" onclick="go('../../nombres/complexes/fondamental.html#')" data-inline=" true" />. <br /> We have already seen that all polynomial functions are integrable and that their primitive functions are polynomials of the next higher degree. <br /> We now ask ourselves the question of looking for the inverse derivatives of the rational fractions which are, by definition, the quotients of polynomials.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une telle <b>
+              <i>'fraction rationnelle'</i>
+            </b> s'écrit donc sous la forme
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{p(x)}{q(x)} \)
+            <!-- /FORMULE UNIV INLINE--> où p(x) et q(x) sont des polynômes et où q est non nul.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Such a <b>
+              <i>'rational fraction'</i>
+            </b> can therefore be written in the form
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{p(x)}{q(x)} \)
+            <!-- /FORMULE UNIV INLINE--> where p(x) and q(x) are polynomials and where q is nonzero.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il va de soi qu'une fonction rationnelle n'est pas définie partout. Elle n'est pas définie en particulier sur l'ensemble des racines de q. Cependant, il est possible qu'elle soit prolongeable par continuité en de tels points. Cela n'arrive qu'en un point x<sub>1</sub>, racine de q(x), que si x<sub>1</sub> est également racine de p(x), sinon la limite pour x&rarr;x<sub>1</sub>, x&ne;x<sub>1</sub> est infinie. Mais dans ce cas p(x) et q(x) sont divisibles tous deux par (x-x<sub>1</sub>) et la fraction p(x)/q(x) peut être simplifiée par (x-x<sub>1</sub>). Nous pouvons donc faire l'hypothèse supplémentaire que la fraction p(x)/q(x) est irréductible c'est à dire que p(x) et q(x) ne possèdent aucun diviseur commun de degré &gt;0. Dans ce cas les racines de q(x) constituent un ensemble fini de n points (n étant le degré de q) appelés les <strong>
+            <em>pôles</em>
+          </strong> de la fraction. et f n'est prolongeable en aucun de ces points par continuité. </div>
+        <!-- /fr -->
+        <div lang="en"> It goes without saying that a rational function is not defined everywhere. It is not defined in particular on the set of roots of q. However, it is possible that it can be extended by continuity at such points. This only happens at a point x<sub>1</sub>, root of q(x), if x<sub>1</sub> is also root of p(x), otherwise the limit for x&rarr;x<sub>1</sub>, x&ne;x<sub>1</sub> is infinite. But in this case p(x) and q(x) are both divisible by (x-x<sub>1</sub>) and the fraction p(x)/q(x) can be simplified by (x-x<sub> 1</sub>). We can therefore make the additional hypothesis that the fraction p(x)/q(x) is irreducible, ie that p(x) and q(x) have no common divisor of degree &gt;0. In this case the roots of q(x) constitute a finite set of n points (n being the degree of q) called the <strong>
+            <em>poles</em>
+          </strong> of the fraction. and f is not extendable at any of these points by continuity. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Donc dans ce cas l'ensemble de définition D de f est de la forme: <br> D= ]-&infin;,x<sub>1</sub>[ &cup; ]x<sub>1</sub>,x<sub>2</sub>[ &cup; .... &cup; ]x<sub>n-1</sub>,x<sub>n</sub>[ &cup; ]x<sub>n</sub>,+&infin;[ <br> où x<sub>1</sub>,x<sub>2</sub>, ..., x<sub>n</sub> sont les <b>
+              <i>'pôles'</i>
+            </b> de f, c'est à dire les racines de q.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> So in this case the definition set D of f is of the form: <br> D= ]-&infin;,x<sub>1</sub>[ &cup; ]x<sub>1</sub>,x<sub>2</sub>[ &cup; .... &cup; ]x<sub>n-1</sub>,x<sub>n</sub>[ &cup; ]x<sub>n</sub>,+&infin;[ <br> where x<sub>1</sub>,x<sub>2</sub>, ..., x<sub>n</sub> are the <b>
+              <i>'poles'</i>
+            </b> of f, ie the roots of q.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La recherche de primitive pour f se fait donc intervalle par intervalle il est clair que si f est une primitive sur D la fonction définie par g=f+K<sub>1</sub> sur ]-&infin;,x<sub>1</sub>[ g=f+K<sub>2</sub> sur ]x<sub>1</sub>,x<sub>2</sub>[, ...., g=f+K<sub>n</sub> sur ]x<sub>n-1</sub>,x<sub>n</sub>[ g=f+K<sub>n+1</sub> sur ]x<sub>n</sub>,+&infin;[ où K<sub>1</sub>, ..,K<sub>n+1</sub> sont n+1 constantes réelles est encore une primitive de f et que toutes les primitives de f s'obtiennent de cette façon. <br> On peut encore supposer que degré(p) &lt; degré(q). Sinon on fait une division euclidienne de p par q on écrit p(x)=a(x)s(x)+r(x) s(x) étant le quotient de p par q et r(x) le reste de degré strictement inférieur au degré de q. et on foit qu'alors f est somme de s(x) et de la fraction r(x)/q(x) avec degré(r) &lt; degré(q) et comme on sait trouver une primitive de s(x) qui est un polynôme il suffit de savoir intégrer r(x)/q(x). <br> Nous pouvons donc faire, pour notre problème, les hypothèses réductrices suivantes: <ul>
+            <li>q est un polynôme non constant </li>
+            <li>p et q sont premiers entre eux, c'est à dire qu'ils ne possèdent aucun diviseur commun de degré positif.</li>
+            <li>d°(p) &lt; d°(q)</li>
+          </ul> q comme tout polynôme est décomposable en produit de facteurs irréductibles. Or nous savons que les polynômes irréductibles sur le corps &reals; sont: <ul>
+            <li>Les polynôme du premier degré de la forme ax+b avec a&ne;0.</li>
+            <li>Les polynômes de degré 2 de la forme ax<sup>2</sup>+bx+c avec &Delta;=b<sup>2</sup>-4ac &lt; 0 </li>
+          </ul> à l'exclusion de toute autre possibilité. <br> Cela dit, les pôles de f sont les racines des polynômes irréductibles du premier degré entrant dans la décomposition de q, et on peut supposer que ces nombres ne sont pas racines de p. <br> Nous allons donc commencer par l'étude de quelques cas particuliers de cette situation. <h2>Eléments simples</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The search for primitive functions for f is therefore done interval by interval it is clear that if f is a primitive on D the function defined by g=f+K<sub>1</sub> on ]-&infin;,x<sub>1 </sub>[ g=f+K<sub>2</sub> on ]x<sub>1</sub>,x<sub>2</sub>[, ...., g=f+ K<sub>n</sub> on ]x<sub>n-1</sub>,x<sub>n</sub>[ g=f+K<sub>n+1</sub> on ] x<sub>n</sub>,+&infin;[ where K<sub>1</sub>, ..,K<sub>n+1</sub> are n+1 real constants is still a primitive of f and that all the primitives of f are obtained in this way. <br> We can still assume that degree(p) &lt; degree(q). Otherwise we do a Euclidean division of p by q we write p(x)=a(x)s(x)+r(x) s(x) being the quotient of p by q and r(x) the remainder of degree strictly less than the degree of q. and we say that then f is sum of s(x) and of the fraction r(x)/q(x) with degree(r) &lt; degree(q) and since we know how to find a primitive of s(x) which is a polynomial, we just need to know how to integrate r(x)/q(x). <br> We can therefore make, for our problem, the following reducing hypotheses: <ul>
+            <li>q is a non constant polynomial </li>
+            <li>p and q are coprime, ie they have no common divisor of positive degree.</li>
+            <li>d°(p) &lt; d°(q)</li>
+          </ul> q like any polynomial is decomposable into a product of irreducible factors. Now we know that the irreducible polynomials over the field &reals; are: <ul>
+            <li>The first degree polynomials of the form ax+b with a&ne;0.</li>
+            <li>Polynomials of degree 2 of the form ax<sup>2</sup>+bx+c with &Delta;=b<sup>2</sup>-4ac &lt; 0 </li>
+          </ul> to the exclusion of any other possibility. <br> That said, the poles of f are the roots of the irreducible polynomials of the first degree entering the decomposition of q, and we can assume that these numbers are not roots of p. <br> We are therefore going to begin by studying a few particular cases of this situation. <h2>Partial fractions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit qu'une fraction rationnelle f(x)=p(x)/q(x) est un <strong>
+              <em>'élément simple'</em>
+            </strong> si: <ul>
+              <li>q(x) ne possède qu'un seul facteur irréductible.</li>
+              <li>p(x) est de degré strictement inférieur au degré de l'unique facteur irréductible de q</li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> A rational fraction f(x)=p(x)/q(x) is said to be a <strong>
+              <em>'partial fraction'</em>
+            </strong> if: <ul>
+              <li>q(x) has only one irreducible factor.</li>
+              <li>p(x) is of degree strictly less than the degree of the unique irreducible factor of q</li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de cette définition que: </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from this definition that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Il n'existe pour les éléments simples que 3 possibilités: <ol>
+              <li>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{A}{\left ( ax+b \right )^{r}} \)
+                <!-- /FORMULE UNIV INLINE--> où A est une constante et r un entier &gt; 0 , (première espèce)
+              </li>
+              <li>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{A}{\left ( ax^{2}+bx+c \right )^{r}} \)
+                <!-- /FORMULE UNIV INLINE--> où A est une constante et r un entier &gt; 0 ,avec b<sup>2</sup>-4ac&lt;0 (seconde espèce)
+              </li>
+              <li>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{Ax+B}{\left ( ax^{2}+bx+c \right )^{r}} \)
+                <!-- /FORMULE UNIV INLINE--> où A et B sont des constantes et r un entier &gt; 0 ,avec b<sup>2</sup>-4ac&lt;0 (troisième espèce)
+              </li>
+            </ol>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> It exists for partial fractions only 3 possibilities: <ol>
+              <li>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{A}{\left ( ax+b \right )^{r}} \)
+                <!-- /FORMULE UNIV INLINE--> where A is a constant and r an integer &gt; 0 , (first kind)
+              </li>
+              <li>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{A}{\left ( ax^{2}+bx+c \right )^{r}} \)
+                <!-- /FORMULE UNIV INLINE--> where A is a constant and r an integer &gt; 0 , with b<sup>2</sup>-4ac&lt;0 (second kind)
+              </li>
+              <li>
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\frac{Ax+B}{\left ( ax^{2}+bx+c \right )^{r}} \)
+                <!-- /FORMULE UNIV INLINE--> where A and B are constants and r an integer &gt; 0, with b<sup>2</sup>-4ac&lt;0 (third kind)
+              </li>
+            </ol>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> En outre, quitte à mettre a en facteur au dénominateur et à diviser les constantes A et B par a<sup>r</sup> au numérateur on peut supposer que a=1 dans tous les cas.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Moreover, even if it means factoring a in the denominator and dividing the constants A and B by a<sup>r</sup> in the numerator, we can assume that a=1 in all cases.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Visualisation des éléments simples des 3 espèces</h2> Vous pouvez voir ici des éléments simples de première espèce A/(x-a)<sup>r</sup>. <br> Vous pouvez faire varier r de 1 à 5 , a de -2 à 2, A de -2 à 2 avec les curseurs.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Visualization of the partial fractions of the 3 kinds</h2> Here you can see partial fractions of the first kind A/(x-a)<sup>r</sup>. <br> You can vary r from 1 to 5 , a from -2 to 2, A from -2 to 2 with the sliders.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/primfracrat1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Vous pouvez voir ici des éléments simples de seconde espèce A/(x<sup>2</sup>+bx+c)<sup>r</sup>. <br> Vous pouvez faire varier r de 1 à 5, b de -2 à 2, c de 2 à 5, A de -4 à 4 avec les curseurs. </div>
+        <!-- /fr -->
+        <div lang="en"> Here you can see partial fractions of the second kind A/(x<sup>2</sup>+bx+c)<sup>r</sup>. <br> You can vary r from 1 to 5, b from -2 to 2, c from 2 to 5, A from -4 to 4 with the sliders. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/primfracrat2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Vous pouvez voir ici des éléments simples de seconde espèce (Ax+B)/(x<sup>2</sup>+bx+c)<sup>r</sup>. <br> Vous pouvez faire varier r de 1 à 5, b de -2 à 2, c de 2 à 5, A et B de -4 à 4 avec les curseurs. </div>
+        <!-- /fr -->
+        <div lang="en"> Here you can see partial fractions of the second kind (Ax+B)/(x<sup>2</sup>+bx+c)<sup>r</sup>. <br> You can vary r from 1 to 5, b from -2 to 2, c from 2 to 5, A and B from -4 to 4 with the sliders. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/primfracrat3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Intégration des éléments simples</h2>
+          <h3>Première espèce</h3> Le cas r=1, a déjà été traité <input type="button" value="ici" onclick="go('primusuelles.html#prop6')" data-inline="true" />. <br /> Le cas r&gt;1 se traite par le changement de variable u=ax+b. On obtient donc comme primitive
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Integration of partial fractions</h2>
+          <h3>First kind</h3> The case r=1, has already been processed <input type="button" value="here" onclick="go('primusuelles.html#prop6')" data-inline="true" />. <br /> The case r&gt;1 is treated by the substitution u=ax+b. We therefore obtain as a primitive
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{a(r-1)(ax+b)^{r-1}} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> pour x≠-b/a <h3>Seconde espèce</h3> Le cas r=1, a déjà été traité <input type="button" value="ici" onclick="go('primusuelles.html#prop10')" data-inline="true" />. <br /> Il suffit donc de traiter le cas r&gt; 1. Comme on l'a vu précédemment on peut supposer que a=1. <br /> Mais alors A n'intervient que comme une constante multiplicative, on peut supposer également que A=1. <br /> Tout revient donc à intégrer les fractions rationnelles de la forme </div>
+        <!-- /fr -->
+        <div lang="en"> for x≠-b/a <h3>Second kind</h3> The case r=1, has already been processed <input type="button" value="here" onclick="go('primusuelles.html#prop10')" data-inline="true" />. <br /> It is therefore sufficient to treat the case r &gt; 1. As we saw previously, we can assume that a=1. <br /> But then A only intervenes as a multiplicative constant, we can also assume that A=1. <br /> Everything therefore comes down to integrating the rational fractions of the form </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{\left ( x^{2}+bx+c \right )^{r}}=\frac{1}{\left ( \left ( x+b/2 \right )^{2}+K \right )^{r}} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où la constante K est la constante strictement positive </div>
+        <!-- /fr -->
+        <div lang="en"> where the constant K is the strictly positive constant </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle K=\frac{4c-b^{2}}{4} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Mais alors mettant K en facteur au dénominateur on est ramené à l'intégration (à une constante multiplicative près) de </div>
+        <!-- /fr -->
+        <div lang="en"> But then factoring K into the denominator, we are reduced to the integration (within a multiplicative constant) of </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{\left ( (\alpha x+\beta )^{2}+1 \right )^{r}} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où &alpha;=1/&radic;K et &beta;=b/2&radic;K <br> Mais à nouveau par un changement de variable linéaire en remplaçant x par &alpha;x+&beta; à une constante multiplicative près on est ramené au calcul de la primitive de: </div>
+        <!-- /fr -->
+        <div lang="en"> where &alpha;=1/&radic;K and &beta;=b/2&radic;K <br> But again by a linear substitution replacing x by &alpha;x+&beta; except for a multiplicative constant, we are reduced to the calculation of the antiderivative of: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{\left (x^{2}+1 \right )^{r}} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> l est temps maintenant d'utiliser en les combinant les règles du changement de variable et de l'intégration par parties. <br> Posant x=tan(t) on peut écrire, sachant que 1+tan<sup>2</sup>=1/cos<sup>2</sup> et (tan)'=1/cos<sup>2</sup>
+          <br> Tout revient à calculer pour tout r&gt;1 l'intégrale I(r) définie par:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Now is the time to use the rules of substitution and integration by parts in combination. <br> Setting x=tan(t) we can write, knowing that 1+tan<sup>2</sup>=1/cos<sup>2</sup> and (tan)'=1/cos<sup>2< /sup>
+              <br> It all amounts to calculating for all r&gt;1 the integral I(r) defined by: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle I(r)=\int \frac{1}{\left ( 1+x^{2} \right )^{r}}dx=\int cos^{2(r-1)}(t)dt \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Nous allons raisonner par récurrence sur r sachant que I(1)=atan(x). <br> Nous utilisons d'abord une formule d'intégration par parties: <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We will reason by induction on r knowing that I(1)=atan(x). <br> We first use an integration-by-parts formula: <br>
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(r)=\int cos^{2r-3}(t)sin'(t)dt=sin(t)cos^{2r-3}(t)-\int (2r-3)cos^{2r-4}(t)(-sin(t))sin(t)dt \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(r)=\int cos^{2r-3}(t)sin'(t)dt=sin(t)cos^{2r-3}(t)+\int (2r-3)cos^{2r-4}(t)\left ( 1-cos^{2}(t) \right )dt \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(r)=sin(t)cos^{2r-3}(t)+(2r-3)\left ( \int cos^{2r-2}(t)dt -\int cos^{2r-1}(t)dt \right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle (2r-2)I(r)=sin(t)cos^{2r-3}(t)+(2r-3)I(r-1) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Et finalement notre relation de récurrence: </div>
+        <!-- /fr -->
+        <div lang="en"> And finally our recurrence relation: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(r)=\frac{1}{2r-2}\left ( \frac{x}{\left ( 1+x^{2} \right )^{r-1}}+(2r-3)I(r-1) \right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr">
+          <h3>Troisième espèce</h3> Nous supposons donc que a=1, il faut calculer:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Third kind</h3> We assume that a=1, we must calculate:
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int \frac{Ax+B}{\left (x^{2}+bx+c \right )^{r}}dx=\int \frac{Ax+b}{\left (\left ( x+b/2 \right )^{2}+K \right )^{r}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où K=(4c-b<sup>2</sup>)/4 <br> La dernière intégrale vaut: </div>
+        <!-- /fr -->
+        <div lang="en"> where K=(4c-b<sup>2</sup>)/4 <br> The last integral is: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int \frac{Cx+D}{\left ( \left ( \alpha x + \beta \right )^{2}+1 \right )^{r}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où &alpha;=1/&radic;K &beta;=1/2&radic;K C=A/K<sup>r</sup> D=B/K<sup>r</sup>
+          <br> Elle se scinde alors en une somme:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> where &alpha;=1/&radic;K &beta;=1/2&radic;K C=A/K<sup>r</sup> D=B/K<sup>r</sup>
+          <br> It then splits into a sum:
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int \frac{Cx}{\left ( \left ( \alpha x + \beta \right )^{2}+1 \right )^{r}}dx+ \int \frac{D}{\left ( \left ( \alpha x + \beta \right )^{2}+1 \right )^{r}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Le second terme de la somme est de la seconde espèce nous savons l'intégrer. <br> Quand au premier terme il peut se réécrire: </div>
+        <!-- /fr -->
+        <div lang="en"> The second term of the sum is of the second kind we know how to integrate it. <br> When in the first term it can be rewritten: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{C}{\alpha }\int \frac{\alpha x}{\left ( \left ( \alpha x + \beta \right )^{2}+1 \right )^{r}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> et par un changement de variable u=&alpha;x+&beta; on est ramené à la seconde espèce. <h2>Cas particuliers</h2>
+          <h3>Premier cas</h3> Nous cherchons maintenant à intégrer les fractions rationnelles du type f(x)=p(x)/q(x) où degré(p(x)) &lt; degré(q(x)) et où q(x) est une puissance d'un seul polynôme irréductible de premier degré q(x)=(x-a<sub>1</sub>)<sup>r<sub>1</sub>
+          </sup>.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> and by a change of variable u=&alpha;x+&beta; we are reduced to the second species. <h2>Special cases</h2>
+          <h3>First case</h3> We now seek to integrate rational fractions of the type f(x)=p(x)/q(x) where degree(p(x)) &lt; degree(q(x)) and where q(x) is a power of a single irreducible polynomial of first degree q(x)=(x-a<sub>1</sub>)<sup>r<sub>1</sub>
+          </sup>.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Dans ce cas f(x) est décomposable en une somme d'éléments simples de la première espèce.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> In this case f(x) is decomposable into a sum of partial fractions of the first kind.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet il suffit pour le voir de décomposer le polynôme p suivant les puissances croissantes de (x-a<sub>1</sub>) ( <input type="button" value="revoir ce point" onclick="go('../derivees/derivpol.html#')" data-inline="true" />). <br /> Nous connaissons la forme de la décomposition: </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, to see it, it suffices to decompose the polynomial p according to the increasing powers of (x-a<sub>1</sub>) ( <input type="button" value="review this point" onclick="go('../derivees/derivpol.html#')" data-inline="true" />). <br /> We know the form of the decomposition: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\sum_{i=1}^{r}\frac{A_{i}}{\left ( x-a_{i} \right )^{i}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> où les A<sub>i</sub> sont des constantes facilement calculables ( <input type="button" value="revoir ce point" onclick="go('../derivees/derivpol.html#thm3')" data-inline="true" />). A<sub>i</sub>=p<sup>(n)</sup>(a<sub>1</sub>)/n! <h4>Second cas</h4> Nous cherchons maintenant à intégrer les fractions rationnelles du type f(x)=p(x)/q(x) où degré(p(x)) &lt; degré(q(x)) et où q(x) est une puissance d'un seul polynôme irréductible de second degré q(x)=(ax<sup>2</sup>+bx+c)<sup>r<sub>1</sub>
+          </sup>. </div>
+        <!-- /fr -->
+        <div lang="en"> where the A<sub>i</sub> are easily computable constants ( <input type="button" value="review this point" onclick="go('../derivees/derivpol.html#thm3')" data-inline="true" />). A<sub>i</sub>=p<sup>(n)</sup>(a<sub>1</sub>)/n! <h4>Second case</h4> We now seek to integrate rational fractions of the type f(x)=p(x)/q(x) where degree(p(x)) &lt; degree(q(x)) and where q(x) is a power of a single irreducible polynomial of second degree q(x)=(ax<sup>2</sup>+bx+c)<sup>r<sub>1</sub>
+          </sup>. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Dans ce cas f(x) est décomposable en une somme d'éléments simples de seconde et de troisième espèce.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> In this case f(x) can be decomposed into a sum of partial fractions of the second and third kind.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette fois encore, il suffit pour le voir de décomposer p suivant les puissances croissantes de ax<sup>2</sup>+bx+c. <br> Nous obtenons donc la forme décomposée de f: </div>
+        <!-- /fr -->
+        <div lang="en"> This time again, to see it, it suffices to decompose p according to the increasing powers of ax<sup>2</sup>+bx+c. <br> So we get the decomposed form of f: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\sum_{i=1}^{r}\frac{A_{i}(x)}{\left ( ax^{2}+bx+c \right )^{i}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Ici les A<sub>i</sub>(x) sont des polynômes de degré 0 (des constantes A<sub>i</sub>, seconde espèce donc) ou des monômes du premier degré A<sub>i</sub>x+B<sub>i</sub> (donc dans ce cas, troisième espèce). <h2>Cas général</h2> Dans le cas général q(x) n'est pas une puissance d'un seul polynôme irréductible mais se décompose en un produit de telles puissances. <br> q(x)=q<sub>1</sub>(x)...q<sub>k</sub>(x) où chaque q<sub>i</sub> est de la forme (t<sub>i</sub>(x))<sup>r<sub>i</sub>
+          </sup> où t<sub>i</sub>(x) est un polynôme irréductible à coefficients réels c'est à dire un binôme du premier degré ou un trinôme du second degré à discrimant négatif. <br> Examinons le cas où q est un produit de deux tels facteurs le cas général n'étant guère plus compliqué. On a donc: </div>
+        <!-- /fr -->
+        <div lang="en"> Here the A<sub>i</sub>(x) are polynomials of degree 0 (constants A<sub>i</sub>, therefore second kind) or monomials of the first degree A<sub>i</sub>x+B<sub>i</sub> (so in this case, third kind). <h2>General case</h2> In the general case q(x) is not a power of a single irreducible polynomial but decomposes into a product of such powers. <br> q(x)=q<sub>1</sub>(x)...q<sub>k</sub>(x) where each q<sub>i</sub> is of the form (t<sub>i</sub>(x))<sup>r<sub>i</sub>
+          </sup> where t<sub>i</sub>(x) is an irreducible polynomial with real coefficients that is to say a binomial of the first degree or a trinomial of the second degree with negative discriminant. <br> Let us examine the case where q is a product of two such factors, the general case being hardly more complicated. So we have: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{p(x)}{q_{1}(x)q_{2}(x)} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Où les polynômes q<sub>1</sub> et q<sub>2</sub> sont <input type="button" value="premiers entre eux" onclick="go('../../nombres/relatifs/prementreux.html#')" data-inline="true" /> (la théorie de la divisibilité dans les anneaux de polynômes est la même que dans l'anneau &integers;) <br /> A l'instar des <input type="button" value="entiers de Bézout" onclick="go('../../nombres/relatifs/bezout.html#')" data-inline="true" /> et par le même algorithme, on peut trouver deux polynômes de Bézout h<sub>1</sub> et h<sub>2</sub> tels que: 1=h<sub>1</sub>(x)q<sub>1</sub>(x)+h<sub>2</sub>(x)q<sub>2</sub>(x) On peut alors écrire f sous la forme: </div>
+        <!-- /fr -->
+        <div lang="en"> Where the polynomials q<sub>1</sub> and q<sub>2</sub> are <input type="button" value="coprime" onclick="go('../../nombres/relatifs/prementreux.html#')" data-inline="true" /> (the theory of divisibility in rings of polynomials is the same as in the ring &integers;) <br /> Like the <input type="button" value="Bézout integers" onclick="go('../../nombres/relatifs/bezout.html#')" data-inline="true" /> and by the same algorithm, we can find two Bézout polynomials h<sub>1</sub> and h<sub>2</sub> such that: 1=h<sub>1</sub>(x)q<sub>1</sub>(x)+h<sub>2</sub>(x)q<sub>2</sub>(x) We can then write f in the form: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{h_{1}(x)q_{1}(x)p(x)+h_{2}(x)q_{2}(x)p(x)}{q_{1}(x)q_{2}(x)} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle (x)=\frac{h_{1}(x)p(x)}{q_{2}(x)}+\frac{h_{2}(x)p(x)}{q_{1}(x)} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Et on voit que f est la somme de deux fractions rationnelles ayant la forme d'un cas simple étudié précédemment. <br /> On voit aussi que si q est le produit de trois quatre ou plusieurs puissances de polynômes irréductible on peut procéder comme ci-dessus de proche en proche en appliquant à répétition le théorème de Bézout pour décomposer la fraction rationnelle f en une sommes de cas particuliers comme ci-dessus. <br /> Le problème de l'intégration de toutes les fractions rationnelles est donc <b>
+            <i>'en principe'</i>
+          </b> résolu. Mais il faut considérer que ce problème est résolu dès qu'on a une forme factorisée du polynôme dénominateur. Or si on sait qu'une telle décomposition existe toujours ( <input type="button" value="théorème fondamental de l'algèbre" onclick="go('../../nombres/complexes/fondamental.html#')" data-inline="true" />) quand le degré de q dépasse 4 on ne dispose d'aucune méthode de résolution par radicaux pour isoler les facteurs irréductibles de q(x). Il faut donc refréner notre enthousiasme. <br /> Par ailleurs même dans le cas où nous disposons d'une décomposition de q, l'intégration de p(x)/q(x) nécessite plusieurs étapes: <ul>
+            <li>Trouver des polynômes de Bézout</li>
+            <li>Effectuer des divisions suivant les puissances croissantes</li>
+            <li>Calculer des coefficients</li>
+            <li>Intégrer avec de multiples changements de variable à répétition</li>
+            <li>Appliquer des formules de récurrence</li>
+          </ul> Bref il s'agit d'un exercice techniquement difficile où les sources d'erreur sont nombreuses et variées. <br /> Il existe néammoins quelques trucs et astuces permettant de simplifier les calculs pratiques quand les expressions ne sont pas trop compliquées. <br /> Toutes ces astuces reposent sur le fait que la forme du résultat est connue dans la décomposition en éléments simples et que les coefficients à déterminer qui sont des constantes peuvent être obtenues par identifications ou autres méthodes en donnant à l'inconnue des valeurs particulières permettant d'obtenir des relations linéaires simples entre les constantes inconnues. <h2>Quelques exemples de calcul</h2>
+          <h3>Cas particulier (éléments simples de première espèce)</h3> On cherche à intégrer la fraction rationnelle
+        </div>
+        <!-- /fr -->
+        <div lang="en"> And we see that f is the sum of two rational fractions having the form of a simple case studied previously. <br /> We also see that if q is the product of three four or more powers of irreducible polynomials, we can proceed as above step by step by repeatedly applying Bézout's theorem to decompose the rational fraction f into a sum of particular cases as above. <br /> The problem of integrating all rational fractions is thus <b>
+            <i>'in principle'</i>
+          </b> solved. But we must consider that this problem is solved as soon as we have a factorized form of the denominator polynomial. But if we know that such a decomposition still exists ( <input type="button" value="fundamental theorem of algebra" onclick="go('../../nombres/complexes/fondamental.html#' )" data-inline="true" />) when the degree of q exceeds 4, there is no method of resolution by radicals to isolate the irreducible factors of q(x). So we have to curb our enthusiasm. <br /> Moreover, even in the case where we have a decomposition of q, the integration of p(x)/q(x) requires several steps: <ul>
+            <li>Finding Bézout polynomials</li>
+            <li>Performing divisions according to increasing powers</li>
+            <li>Calculate coefficients</li>
+            <li>Integrate with multiple repetitive variable changes</li>
+            <li>Apply recurrence formulas</li>
+          </ul> In short, it is a technically difficult exercise where the sources of error are many and varied. <br /> There are, however, a few tips and tricks to simplify practical calculations when the expressions are not too complicated. <br /> All these tricks are based on the fact that the form of the result is known in the decomposition into simple elements and that the coefficients to be determined which are constants can be obtained by identifications or other methods by giving the unknown particular values making it possible to obtain simple linear relationships between unknown constants. <h2>Some calculation examples</h2>
+          <h3>Special case (partial fractions of the first kind)</h3> We seek to integrate the rational fraction
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{2x^{2}-3x+4}{(x-1)^{3}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> On connaît la forme du résultat: </div>
+        <!-- /fr -->
+        <div lang="en"> We know the form of the result: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{A}{x-1}+\frac{B}{(x-1)^{2}}+\frac{C}{(x-1)^{3}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> On calcule les coefficients A,B, C. C'est le moment ou jamais d'utiliser notre programme Python de décomposition (mais cela se fait très bien à la main). </div>
+        <!-- /fr -->
+        <div lang="en"> We calculate the coefficients A, B, C. Now is the time to use our Python decomposition program (but this is done very well by hand). </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/prim06.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Julia fait également l'affaire : </div>
+        <!-- /fr -->
+        <div lang="en"> Julia does the job as well : </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/decomp1.jl.html" type="text/html" border="3" height="70" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Qui nous donne A=2,B=1,C=3 <br> D'où une primitive: </div>
+        <!-- /fr -->
+        <div lang="en"> Which gives us A=2,B=1,C=3 <br> Hence a primitive function : </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle 2ln\left ( \left | x-1 \right | \right )-\frac{1}{x-1}-\frac{3}{2(x-1)^{2}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Vérification avec Julia 1.6 </div>
+        <!-- /fr -->
+        <div lang="en"> Checking with Julia 1.6 </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/verif1.jl.html" type="text/html" border="3" height="90" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h4>Cas particulier (éléments simples de seconde et troisième espèce)</h4> On reprend l'exemple ci dessus mais en remplaçant (x-1) par (x<sup>2</sup>+1) comme facteur irréductible unique de q. <br> Il faut donc calculer l'intégrale de la fration rationnelle:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Special case (simple elements of second and third kind)</h4> We take the example above but replace (x-1) by (x<sup>2</sup>+1) as the unique irreducible factor of q. <br> We must therefore calculate the integral function of the rational fraction:
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{2x^{2}-3x+4}{\left ( x^{2}+1 \right )^{3}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> On peut s'attendre a priori à une décomposition du type: </div>
+        <!-- /fr -->
+        <div lang="en"> We can expect a priori a decomposition of the type: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{Ax+B}{x^{2}+1}+\frac{Cx+D}{\left ( x^{2}+1 \right )^{2}}+\frac{Ex+F}{\left ( x^{2}+1 \right )^{3}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Là encore nous pouvons calculer les 6 coefficients à la main, mais notre programme Python nous donne instantanément A=B=D=0,C=2 E=-3,F=2. </div>
+        <!-- /fr -->
+        <div lang="en"> Here again we can calculate the 6 coefficients by hand, but our Python program instantly gives us A=B=D=0,C=2 E=-3,F=2. French comments have been translated in similar program above. Just main functions differ between the two of them. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/prim07.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> On peut également demander l'aide de Julia : </div>
+        <!-- /fr -->
+        <div lang="en"> You can also ask Julia for help: </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/decomp2.jl.html" type="text/html" border="3" height="70" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Notre fraction rationnelle s'écrit donc: </div>
+        <!-- /fr -->
+        <div lang="en"> Our rational fraction is therefore written: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{2}{\left ( x^{2}+1 \right )^{2}}+\frac{-3x+2}{\left ( x^{2}+1 \right )^{3}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> La primitive cherchée apparaît donc comme somme de </div>
+        <!-- /fr -->
+        <div lang="en"> The primitive function sought therefore appears as the sum of </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int \frac{2}{\left ( 1+x^{2} \right )^{2}}dx=2\int \frac{1}{\left ( 1+x^{2} \right )^{2}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> qui a été calculée plus haut et vaut </div>
+        <!-- /fr -->
+        <div lang="en"> which was calculated above and has value </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{x}{1+x^{2}}+atan(x) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> et de </div>
+        <!-- /fr -->
+        <div lang="en"> and of </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int \frac{-3x+2}{\left ( x^{2}+1 \right )^{2}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Cette dernière intégrale peut être écrite </div>
+        <!-- /fr -->
+        <div lang="en"> This last integral function can be written </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle -\frac{2}{3}\int \frac{2x}{\left ( x^{2} +1\right )^{2}}dx+2\int \frac{1}{\left ( x^{2}+1 \right )^{2}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Soit encore avec le changement de variable u=x<sup>2</sup>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Either again with the substitution u=x<sup>2</sup>
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle -\frac{3}{2}\int \frac{1}{\left ( u+1 \right )^{2}}du+2\int \frac{1}{\left ( x^{2}+1 \right )^{3}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> soit encore </div>
+        <!-- /fr -->
+        <div lang="en"> or even </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{3}{4\left ( 1+x^{2} \right )^{2}}+2\int \frac{1}{\left ( x^{2} +1\right )^{3}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> De sorte que la primitive que nous cherchons vaut </div>
+        <!-- /fr -->
+        <div lang="en"> So that the primitive function we are looking for is </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{3}{1+x^{2}}+atan(x)+\frac{3}{4\left ( 1+x^{2} \right )^{2}}+2\int \frac{1}{\left ( 1+x^{2} \right )^{3}}dx \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Mais le dernier terme de la somme n'est autre que 2I(3) de notre formule de récurrence, et puisque nous connaissons I(1) et I(2) en remplaçant on a : </div>
+        <!-- /fr -->
+        <div lang="en"> But the last term of the sum is none other than 2I(3) of our recurrence formula, and since we know I(1) and I(2) by replacing we have: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle 2I(3)=\frac{x}{2\left ( 1+x^{2} \right )^{2}}+\frac{3x}{4\left ( 1+x^{2} \right )}+\frac{3}{4}atan(x) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> D'où notre réponse finale: </div>
+        <!-- /fr -->
+        <div lang="en"> Hence our final answer: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int f(x)dx=\frac{7x}{4\left ( 1+x^{2} \right )}+\frac{7atan(x)}{4}+\frac{3}{4\left ( 1+x^{2} \right )^{2}}+\frac{x}{2\left ( 1+x^{2} \right )^{2}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int f(x)dx=\frac{7atan(x)}{4}+\frac{7x}{4\left ( 1+x^{2} \right )}+\frac{2x+3}{4\left ( 1+x^{2} \right )^{2}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Vérification avec Julia 1.6 </div>
+        <!-- /fr -->
+        <div lang="en"> Checking with Julia 1.6 </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/verif2.jl.html" type="text/html" border="3" height="90" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h3>Cas général (le quotient est produit de deux facteurs irreductibles distincts)</h3> On cherche une primitive de la fraction rationnelle
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>General case (the quotient is the product of two distinct irreducible factors)</h3> We are looking for a primitive function of the rational fraction
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{2x^{2}-2x+4}{\left ( x^{2}+1 \right )\left ( x-1 \right )} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Nous commençons par chercher deux polynômes de Bézout pour le couple ((x<sup>2</sup>+1), (x-1)). Nous trouvons que : </div>
+        <!-- /fr -->
+        <div lang="en"> We start by looking for two Bézout polynomials for the pair ((x<sup>2</sup>+1), (x-1)). We find that: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle 1=\frac{1}{2}\left ( x^{2}+1 \right )-\frac{x+1}{2}\left ( x-1 \right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Ce qui nous permet de réécrire f(x) </div>
+        <!-- /fr -->
+        <div lang="en"> Which allows us to rewrite f(x) </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{x^{2}-x+2}{x-1}-\frac{x^{3}+x+2}{x^{2}+1} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Soit encore après deux divisions euclidiennes : </div>
+        <!-- /fr -->
+        <div lang="en"> Or after two Euclidean divisions: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle f(x)=\frac{2}{x-1}-\frac{2}{x^{2}+1} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> D'où notre réponse définitive : </div>
+        <!-- /fr -->
+        <div lang="en"> Hence our final answer: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \int f(x)dx=2ln\left ( \left | x-1 \right | \right )-2atan(x) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/primfoncrat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Primitives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/primfoncrat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Primitive functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

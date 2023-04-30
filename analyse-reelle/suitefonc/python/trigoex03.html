@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>ex03.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">math 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">SerieFonc: 
+    </span><span class="s2">def </span><span class="s1">__init__(self, f): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur à partir du terme général - constructor from the general term&quot;&quot;&quot;</span><span class="s1"> 
+        self.u = f 
+ 
+    </span><span class="s2">def </span><span class="s1">SomPart(self, n, x): 
+        </span><span class="s0">&quot;&quot;&quot;Somme partielle d'indice n calculée en x - partial sum of index n computed at x&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">n == </span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">self.u(</span><span class="s3">0</span><span class="s1">, x) 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, (self.u(i, x) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">))) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;Somme de deux séries de fonctions - sum of two series of functions&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">SerieFonc(self.u + other.u) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+        </span><span class="s0">&quot;&quot;&quot;Produit par un scalaire - product by a scalar&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">SerieFonc(</span><span class="s2">lambda </span><span class="s1">n, x: k * self.u(n, x)) 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;produit de convolution - convolution product&quot;&quot;&quot;</span><span class="s1"> 
+ 
+        </span><span class="s2">def </span><span class="s1">f(n, x): 
+            </span><span class="s2">if </span><span class="s1">n == </span><span class="s3">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">self.u(</span><span class="s3">0</span><span class="s1">, x) * other.u(</span><span class="s3">0</span><span class="s1">, x) 
+            </span><span class="s2">else</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, (self.u(i, x) * other.u(n - i, x) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n + </span><span class="s3">1</span><span class="s1">))) 
+ 
+        </span><span class="s2">return </span><span class="s1">SerieFonc(f) 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">SerieTrigo(SerieFonc): 
+    </span><span class="s0">&quot;&quot;&quot;Modélisation des séries trigonométriques, classe dérivée de la précédente - Model for trigonometric series inheritance from from previous class&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, a, b): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur au moyen des deux suites des coefficients - constructor from sequences of coefficients&quot;&quot;&quot;</span><span class="s1"> 
+ 
+        </span><span class="s2">def </span><span class="s1">f(n, x): 
+            </span><span class="s2">return </span><span class="s1">a(n) * math.cos(n * x) + b(n) * math.sin(n * x) 
+ 
+        self.u = f 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">test4(): 
+    </span><span class="s0">&quot;&quot;&quot;tester la somme de la seconde série trigonométrique - check the sum of the second series&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">a4(n): 
+        </span><span class="s2">if </span><span class="s1">n == </span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">math.pi 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s3">0</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">b4(n): 
+        </span><span class="s2">if </span><span class="s1">n == </span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s3">0</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">-</span><span class="s3">2.0 </span><span class="s1">/ n 
+ 
+    T4 = SerieTrigo(a4, b4) 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">[k * </span><span class="s3">0.1 </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">30</span><span class="s1">)]: 
+        print(T4.SomPart(</span><span class="s3">1000</span><span class="s1">, x), x) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    test4() 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+ 
+ 
+</span></pre>
+</body>
+</html>

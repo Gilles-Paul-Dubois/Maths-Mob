@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>séries convergentes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seriesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seriesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une série (s,u) est dite <b>
+              <i>'convergente'</i>
+            </b>, si la suite (s<sub>n</sub>) de ses <input type="button" value="sommes partielles" onclick="go('seriesdef.html#')" data-inline="true" /> est <input type="button" value="convergente" onclick="go('../suites/suitesconvergentes.html#')" data-inline="true" />. <br /> La <b>
+              <i>'limite'</i>
+            </b> de la série est la limite des sommes partielles. <br />
+            <p>Si S est cette limite elle se note
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle S=\sum_{i=0}^{\infty }u_{i} \)
+              <!-- /FORMULE UNIV INLINE--> et elle s'appelle la ' <strong>
+                <em>somme</em>
+              </strong>' de la série.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A series (s,u) is said to be <b>
+              <i>'convergent'</i>
+            </b>, if the sequence (s<sub>n</sub>) of its <input type="button" value="partial sums" onclick="go('seriesdef.html#')" data-inline="true" /> is <input type="button" value="convergent" onclick="go('../suites/suitesconvergentes.html#')" data-inline="true" />. <br /> The <b>
+              <i>'limit'</i>
+            </b> of the series is the limit of the partial sums. <br />
+            <p>If S is this limit, it is written
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle S=\sum_{i=0}^{\infty }u_{i} \)
+              <!-- /INLINE UNIV FORMULA--> and it is called the ' <strong>
+                <em>sum</em>
+              </strong>' of the series.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Une série non convergente est dite ' <strong>
+              <em>divergente</em>
+            </strong>'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A non-convergent series is said to be ' <strong>
+              <em>divergent</em>
+            </strong>'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Exemples</h2> Nous avons déjà vu des séries convergentes, par exemple: <ol>
+            <li>Dans <input type="button" value="cet exercice" onclick="go('../suites/exercices/suitesmonoetconv/ex03.html#')" data-inline="true" />. </li>
+            <li>Egalement dans <input type="button" value="cet exemple" onclick="go('../suites/suitesmonoetconv.html#harmalt')" data-inline="true" />. On appelle cette série la série <b>
+                <i>'harmonique alternée'</i>
+              </b>
+            </li>
+          </ol> L'appliquette suivante montre les termes de la série de terme général (-1)<sup>n-1</sup>/n ainsi que les sommes partielles s(n) de cette série. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have already seen convergent series, for example: <ol>
+            <li>In <input type="button" value="this exercise" onclick="go('../suites/exercices/suitesmonoetconv/ex03.html#')" data-inline="true" />. </li>
+            <li>Also in <input type="button" value="this example" onclick="go('../suites/suitesmonoetconv.html#harmalt')" data-inline="true" />. This series is called the <b>
+                <i>'alternating harmonic'</i>
+              </b>
+            </li> series.
+          </ol> The following applet shows the terms of the general term series (-1)<sup>n-1</sup>/n as well as the partial sums s(n) of this series. <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width: 500px; height: 500px; "></div>
+        <button type="button" onclick="nameSpace2.next()">
+          <div lang="fr">Suivant</div>
+          <!-- /fr -->
+          <div lang="en">Next</div>
+          <!-- /en -->
+        </button>
+        <button type="button" onclick="nameSpace2.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace2.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/serie-harmo-alt.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Et nous avons aussi rencontré des séries non convergentes, par exemple: <ul>
+            <li>La série harmonique <input type="button" value="voir cette page" onclick="go('../suites/suitesliminfinies.html#harm')" data-inline="true" />
+            </li>
+          </ul> L'appliquette suivante montre les termes de la série de terme général 1/n, pour ≥ 1 (série dite harmonique) ainsi que les sommes partielles s(n) de cette série. <br /> Au début, il n'y a que le premier terme, appuyez sur le bouton 'suivant' pour en voir un de plus. <br /> Appuyer sur '+10' pour en voir 10 de plus d'un seul coup. <br /> Appuyez sur 'recommencer' pour recommencer depuis le début. </div>
+        <!-- /fr -->
+        <div lang="en"> And we have also encountered non-convergent series, for example: <ul>
+            <li>The harmonic series <input type="button" value="see this page" onclick="go('../suites/suitesliminfinies.html#harme')" data-inline="true" />
+              </ li>
+          </ul> The following applet shows the terms of the series with general term 1/n, for ≥ 1 (so-called harmonic series) as well as the partial sums s(n) of this series. <br /> At the beginning there is only the first term, press the 'next' button to see one more. <br /> Press '+10' to see 10 more at once. <br /> Press 'Restart' to start over from the beginning. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width: 500px; height: 500px; "></div>
+        <button type="button" onclick="nameSpace1.next()"> Suivant </button>
+        <button type="button" onclick="nameSpace1.plus10()"> +10 </button>
+        <button type="button" onclick="nameSpace1.restart()"> Recommencer </button>
+        <script src="js/serie-harmo.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <p>Le cas des séries dont le terme général est une progression classique est simple et intéressant.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>The case of series the general term of which is a classical progression is simple and interesting.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Aucune série dont le terme général est une <input type="button" value="progression arithmétique" onclick="go('../suites/suitesdef.html#ari')" data-inline="true" /> ne converge, sauf si sa raison est nulle.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> No series the general term of which is an <input type="button" value="arithmetic progression" onclick="go('../suites/suitesdef.html#ari')" data-inline="true" /> converges, unless its common ratio is zero.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Toute série dont le terme général est une <input type="button" value="progression géométrique" onclick="go('../suites/suitesdef.html#geo')" data-inline="true" /> dont la raison q vérifie -1&lt;q&lt;1 converge vers u<sub>0</sub>/(1-q).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Any series the general term of whoch is a <input type="button" value="geometric progression" onclick="go('../suites/suitesdef.html#geo')" data-inline="true" /> whose reason q verifies -1&lt;q&lt;1 converges to u<sub>0</sub>/(1-q).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <a name="sercauch"></a>
+        <div lang="fr"> La preuve réside dans le calcul explicite des sommes partielles de ces séries qui a été fait <input type="button" value="ici" onclick="go('seriesdef.html#calex#')" data-inline="true" />. <h2>Critère de Cauchy</h2> Le critère de Cauchy pour la suite des sommes partielles d'une série, peut s'énoncer ainsi: </div>
+        <!-- /fr -->
+        <div lang="en"> The proof lies in the explicit calculation of the partial sums of these series which was done <input type="button" value="here" onclick="go('seriesdef.html#calex#')" data-inline="true " />. <h2>Cauchy criterion</h2> The Cauchy criterion for the sequence of partial sums of a series can be stated as follows: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Une condition nécessaire et suffisante pour que la série (s,u) converge est que pour tout ε&gt;0 il existe un entier m tel que p&gt;q&gt;n implique: |u<sub>q</sub>+u<sub>q+1</sub>+ ... + u<sub>p-1</sub>+u<sub>p</sub>|&lt;ε
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> A necessary and sufficient condition for the series (s,u) to converge is that for all ε>0 there exists an integer m such that p>q>n implies: |u<sub>q</sub>+u<sub>q+1</sub>+ ... + u<sub>p-1</sub>+u<sub>p</sub>|&lt ;ε
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Condition nécessaire de convergence</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Necessary convergence condition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Une condition <input type="button" value="nécessaire" onclick="go('../../bases/logique/implication.html#term')" data-inline="true" /> pour qu'une série converge est que son terme général tende vers 0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> A <input type="button" value="required" onclick="go('../../bases/logique/implication.html#term')" data-inline="true" /> condition so that a convergent series is that its general term tends to 0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet, si la série converge, la <input type="button" value="suite extraite" onclick="go('../suites/suitesextraites.html#')" data-inline="true" /> (s<sub>n+1</sub>) de (s<sub>n</sub>) converge évidemment aussi vers la somme de la série. La différence s<sub>n+1</sub>-s<sub>n</sub>=u<sub>n+1</sub> converge donc vers 0. <br /> Cependant cette condition n'est nullement <input type="button" value="suffisante" onclick="go('../../bases/logique/implication.html#term')" data-inline="true" /> (revoir par exemple <input type="button" value="ce cas" onclick="go('../suites/suitesliminfinies.html#harm')" data-inline="true" />). <h2>Vitesse de convergence</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, if the series converges, the <input type="button" value="subsequence" onclick="go('../suites/suitesextraites.html#')" data-inline="true" /> ( s<sub>n+1</sub>) of (s<sub>n</sub>) obviously also converges to the sum of the series. The difference s<sub>n+1</sub>-s<sub>n</sub>=u<sub>n+1</sub> therefore converges to 0. <br /> Nevertheless this condition is by no means <input type="button" value="sufficient" onclick="go('../../bases/logique/implication.html#term')" data-inline="true" /> (review for example <input type="button" value="this case" onclick="go('../suites/suitesliminfinies.html#harme')" data-inline="true" />). <h2>Convergence speed</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> La <b>
+              <i>'vitesse de convergence'</i>
+            </b> de la série (s,u) est définie comme la <input type="button" value="vitesse de convergence" onclick="go('../suites/suitesvitesse.html#')" data-inline="true" /> de la série (s<sub>n</sub>) des sommes partielles.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> The <b>
+              <i>'convergence speed'</i>
+            </b> of the series (s,u) is defined as the <input type="button" value="convergence speed" onclick="go ('../suites/suitesvitesse.html#')" data-inline="true" /> of the series (s<sub>n</sub>) of partial sums.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <a name="ext"></a>
+        <div lang="fr"> Il résulte des résultats vus précédemment que l'étude du rapport |u<sub>n+1</sub>/u<sub>n</sub>| et particulièrement de sa limite (lorsqu'elle existe) donne une indication de cette vitesse. <h2>Séries extraites et convergence </h2> Il est remarquable qu'alors qu'il existe un lien fort entre la notion de suite extraite et la notion de suite convergente, il n'en est pas de même pour les séries. <br /> En effet une série non convergente peut avoir une série extraite convergente (exemple série harmonique et série des inverses carrés). <br /> Mais le contraire est possible, c'est à dire qu'il est possible d'extraire d'une série convergente, des séries non convergentes, par exemple la série des termes pairs de la série harmonique alternée est non convergente. <br /> Cependant: </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from the results seen previously that the study of the ratio |u<sub>n+1</sub>/u<sub>n</sub>| and particularly its limit (when it exists) gives an indication of this speed. <h2>Subseries and convergence </h2> It is remarkable that while there is a strong link between the notion of subsequence and the notion of convergent sequence, the same is not true for series. <br /> Indeed a non convergent series can have a convergent extracted series (example harmonic series and series of square inverses). <br /> But the opposite is possible, that is to say that it is possible to extract from a convergent series, non-convergent series, for example the series of even terms of the alternating harmonic series is non-convergent. <br /> However: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Pour toute série extraite d'une série convergente, le terme général tend vers 0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> For any series extracted from a convergent series, the general term tends to 0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte immédiatement de la <input type="button" value="définition des suites extraites" onclick="go('../suites/suitesextraites.html#')" data-inline="true" /> et de la condition nécessaire pour les séries convergentes. </div>
+        <!-- /fr -->
+        <div lang="en"> This immediately results from the <input type="button" value="definition of subsequences" onclick="go('../suites/suitesextraites.html#')" data-inline="true" /> and the necessary condition for convergent series. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seriesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seriesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

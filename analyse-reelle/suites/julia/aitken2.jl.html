@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>aitken2.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">genS(c::Channel)</span>
+    <span class="s1">n,u=</span><span class="s2">4</span><span class="s1">,</span><span class="s2">2</span><span class="s1">*sqrt(</span><span class="s2">2</span><span class="s1">)</span>
+    <span class="s1">put!(c,u)</span>
+    <span class="s0">while true</span>
+        <span class="s1">u = sqrt(</span><span class="s2">2</span><span class="s1">) * n * sqrt(</span><span class="s2">1 </span><span class="s1">- sqrt(</span><span class="s2">1 </span><span class="s1">- (u / n) * (u / n)))</span>
+        <span class="s1">n = n * </span><span class="s2">2</span>
+        <span class="s1">put!(c,u)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">S = Channel(genS)</span>
+<span class="s1">suiteu = [take!(S) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span><span class="s1">]</span>
+<span class="s1">u(n)=suiteu[n]</span>
+
+<span class="s0">function </span><span class="s1">aitken(u)</span>
+    <span class="s1">delta(u,n)=u(n + </span><span class="s2">1</span><span class="s1">) - u(n)</span>
+    <span class="s1">delta2(u,n)=u(n + </span><span class="s2">2</span><span class="s1">) - </span><span class="s2">2 </span><span class="s1">* u(n + </span><span class="s2">1</span><span class="s1">) + u(n)</span>
+    <span class="s0">function </span><span class="s1">v(n)</span>
+        <span class="s0">return </span><span class="s1">u(n - </span><span class="s2">1</span><span class="s1">) - (delta(u, n - </span><span class="s2">1</span><span class="s1">) * delta(u, n - </span><span class="s2">1</span><span class="s1">)) / delta2(u, n - </span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">v</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">v1=aitken(u)</span>
+    <span class="s1">v2=aitken(v1)</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">3</span><span class="s1">:</span><span class="s2">6</span>
+        <span class="s1">print(pi - u(i),</span><span class="s3">&quot; &quot;</span><span class="s1">, pi - v1(i),</span><span class="s3">&quot; &quot;</span><span class="s1">, pi - v2(i), </span><span class="s3">'\n'</span><span class="s1">)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

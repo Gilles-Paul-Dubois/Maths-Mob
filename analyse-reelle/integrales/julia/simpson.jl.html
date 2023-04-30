@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>simpson.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">simpson(a,b,n,f)</span>
+    <span class="s1">S=</span><span class="s2">0</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">0</span><span class="s1">:n-</span><span class="s2">1</span>
+        <span class="s1">x1=a+(b-a)*i/n</span>
+        <span class="s1">x2=a+(b-a)*(i+</span><span class="s2">1</span><span class="s1">)/n</span>
+        <span class="s1">S+=(f(x1) + </span><span class="s2">4 </span><span class="s1">* f((x1 + x2) / </span><span class="s2">2</span><span class="s1">) + f(x2)) * (x2 - x1) / </span><span class="s2">6</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">S</span>
+<span class="s0">end</span>
+
+<span class="s1">fonc(x)=</span><span class="s2">4</span><span class="s1">/(</span><span class="s2">1</span><span class="s1">+(x-</span><span class="s2">3</span><span class="s1">)*(x-</span><span class="s2">3</span><span class="s1">))</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">t = </span><span class="s2">4 </span><span class="s1">* (atan(</span><span class="s2">5</span><span class="s1">) + atan(</span><span class="s2">2</span><span class="s1">))</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">10</span><span class="s1">:</span><span class="s2">19</span>
+        <span class="s1">s = simpson(</span><span class="s2">1</span><span class="s1">, </span><span class="s2">8</span><span class="s1">, i, fonc)</span>
+        <span class="s1">print(s);print(</span><span class="s3">&quot;  :  &quot;</span><span class="s1">);println(t - s)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+ 
+<span class="s1">main()</span></pre>
+</body>
+</html>

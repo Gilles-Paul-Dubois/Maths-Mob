@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Dérivées d'ordre supérieur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivordsup/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivordsup/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Dérivée seconde</h2> Soit D une partie de &reals; et f une fonction définie et dérivable sur D de dérivée f'.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Second derivative</h2> Let D be a subset of &reals; and f a definite and differentiable function on D with derivative f'.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Il se peut qu'à son tour la fonction f' soit dérivable sur D. Dans ce cas la dérivée de cette dérivée soit (f')' se note f" et s'appelle la <b>
+              <i>'dérivée seconde'</i>
+            </b> de f
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> It may be that in turn the function f' is differentiable on D. In this case the derivative of this derivative is (f')' is noted f" and is called the <b>
+              <i>'second derivative' </i>
+            </b> of f
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Que mesure la dérivée seconde et à quoi sert-elle? Reprenons <input type="button" value="l'exemple" onclick="go('index.html#def2')" data-inline="true" />, emprunté à la cinématique, d'un point en mouvement. La dérivée première x'(t) représente la vitesse instantanée v(t) du mobile. Le rapport
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{v(t_{0}+h)-v(t_{0})}{h} \)
+          <!-- /FORMULE UNIV INLINE--> représente la variation moyenne de cette vitesse entre les instants t<sub>0</sub> et t<sub>0</sub>+h. <br> Ainsi si ce taux de variation est négatif c'est que la vitesse décroît, s'il est positif c'est qu'elle croît. Ce taux représente ce que nous appelons couramment <b>
+            <i>"l'accélération moyenne"</i>
+          </b> entre les instants t<sub>0</sub> et t<sub>0</sub>+h. <br> Ainsi, la dérivée seconde, si elle existe, représentera <b>
+            <i>"l'accélération instantanée"</i>
+          </b> du mobile. <br> Si la dérivée seconde s'annule, cela veut dire que le mobile cesse d'accélérer (ou de décélérer). Suite à un tel évènement la vitesse peut varier dans l'autre sens ou reprendre sa variation dans le même sens. <br> Les annulations de la dérivée seconde serviront donc à déceler les extrema de la vitesse, sachant qu'il s'agit une fois encore d'une condition nécessaire. <br> Reprenons le cas de la chute d'un corps, x(t)=-(1/2)gt<sup>2</sup>. Dans ce cas x'(t)=-gt et x"=-g. Il s'agit donc d'un mouvement à accélération constante dit <b>
+            <i>'uniformément accéléré'</i>
+          </b>. Pour un mouvement dit <b>
+            <i>'uniforme'</i>
+          </b> x(t)=vt, la vitesse est constante et l'accélération est nulle. <br> Nous avons vu que les extrema locaux d'une fonction correspondent aux annulations de sa dérivée avec changement de signe. Donc, au cas où la dérivée elle-même ne présente pas un extremum. Ainsi une dérivée première nulle, conjointement avec une dérivée seconde non nulle, nous garantit un extremum de la fonction. <br> Réciproquement une inflexion force une dérivée seconde nulle, mais cette fois encore il s'agit d'une condition nécessaire, d'où la nécessite de dériver encore une fois si possible, etc... ce qui justifie la suite. <br> Voici une appliquette qui montre une fonction f (graphe vert), sa dérivée (graphe bleu), sa dérivée seconde (graphe marron). <br> Cliquer sur 'Autre exemple' pour changer de fonction. <br> Cliquer sur 'Stop/Restart' pour arrêter et redémarrer l'animation.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> What does the second derivative measure and what is it used for? Let's take the <input type="button" value="example" onclick="go('index.html#def2')" data-inline="true" />, borrowed from kinematics, of a moving point . The first derivative x'(t) represents the instantaneous speed v(t) of the mobile. The ratio
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{v(t_{0}+h)-v(t_{0})}{h} \)
+          <!-- /FORMULE UNIV INLINE--> represents the average variation of this speed between times t<sub>0</sub> and t<sub>0</sub>+h. <br> Thus if this rate of variation is negative it is that the speed decreases, if it is positive it is that it increases. This rate represents what we commonly call <b>
+            <i>"the average acceleration"</i>
+          </b> between the instants t<sub>0</sub> and t<sub>0</sub>+h. <br> Thus, the second derivative, if it exists, will represent <b>
+            <i>"the instantaneous acceleration"</i>
+          </b> of the mobile. <br> If the second derivative vanishes, this means that the mobile stops accelerating (or decelerating). Following such an event, the speed may vary in the other direction or resume its variation in the same direction. <br> The cancellations of the second derivative will therefore be used to detect the extrema of the speed, knowing that this is once again a necessary condition. <br> Let's take the case of the fall of a body, x(t)=-(1/2)gt<sup>2</sup>. In this case x'(t)=-gt and x"=-g. It is therefore a movement with constant acceleration called <b>
+            <i>'uniformly accelerated'</i>
+          </b>. For a movement called <b>
+            <i>'uniform'</i>
+          </b> x(t)=vt, the speed is constant and the acceleration is zero. <br> We have seen that the local extrema of a function correspond to the cancellations of its derivative with change of sign. So in case the derivative itself does not have an extremum. Thus a zero first derivative, together with a non-zero second derivative, guarantees us an extremum of the function. <br> Conversely, an inflection forces a zero second derivative, but this time again it is a necessary condition, hence the need to derive once again if possible, etc... which justifies the following. <br> Here is an applet that shows a function f (green graph), its derivative (blue graph), its second derivative (brown graph). <br> Click on 'Other example' to change function. <br> Click on 'Stop/Restart' to stop and restart the animation.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" id="myButton21" onClick="nameSpace2.next()">
+          <div lang="fr">Autre exemple</div>
+          <!-- /fr -->
+          <div lang="en">Other example</div>
+          <!-- /en -->
+        </button>
+        <button type='button' id='myButton22' onClick='nameSpace2.pause()'>Stop/Restart</button>
+        <script src="js/dersup.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Dérivées d'ordre n.</h2> On peut, bien sûr, définir la dérivée troisième f''' de f qui est la dérivée de la dérivée seconde, et ainsi de suite, par récurrence:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Derivatives of order n.</h2> We can, of course, define the third derivative f''' of f which is the derivative of the second derivative, and so on, by induction:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> La dérivée n-ième de f est la dérivée (si elle existe) de la dérivée n-1-ième de f.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> The n-th derivative of f is the derivative (if it exists) of the n-1-th derivative of f.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="not1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">notation 1</div> On utilise couramment la notation f<sup>(n)</sup>(x) pour la dérivée n-ième de f en x, pour ne pas confondre avec les puissances de f, mais on utilise également
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{d^{n}f}{dx^{n}}\left ( x \right ) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">notation 1</div> We commonly use the notation f<sup>(n)</sup>(x) for the n-th derivative of f at x, not to confuse with powers of f, but we also use
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{d^{n}f}{dx^{n}}\left ( x \right ) \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Il résulte de la définition que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle f^{(n)}(x)=\left ( f^{(n-1)} \right )'(x)=\left ( f' \right )^{(n-1)}(x) \)
+            <!-- /FORMULE UNIV INLINE--> et plus généralement que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( f^{(p)} \right )^{(q)}(x)=f^{(p+q)}(x) \)
+            <!-- /FORMULE UNIV INLINE--> .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> It follows from the definition that
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle f^{(n)}(x)=\left ( f^{(n-1)} \right )'(x)=\left ( f' \right )^{(n-1)}( x) \)
+            <!-- /INLINE UNIV FORMULA--> and more generally than
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( f^{(p)} \right )^{(q)}(x)=f^{(p+q)}(x) \)
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Fonctions de classe C<sup>n</sup>
+          </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2> Functions of class C<sup>n</sup>
+          </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit que f est de classe C<sup>n</sup> sur D ou encore appartient à C<sup>n</sup>(D) si f est n fois dérivable sur D et si f<sup>(n)</sup> est continue sur D.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We say that f is of class C<sup>n</sup> on D or even belongs to C<sup>n</sup>(D) if f is n times differentiable on D and if f<sup>(n )</sup> is continuous on D.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Par convention les fonctions de C<sup>0</sup>(D) sont tout simplement les fonctions continues sur D.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> By convention the functions of C<sup>0</sup>(D) are simply the continuous functions on D.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> On dit que f est de classe C<sup>&infin;</sup> sur D ou encore appartient à C<sup>&infin;</sup>(D) si f &isin; f<sup>n</sup>(D) &forall;n &isin; &naturals;.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> We say that f is of class C<sup>&infin;</sup> on D or else belongs to C<sup>&infin;</sup>(D) if f &isin; f<sup>n</sup>(D) &forall;n &isin; &naturals;.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> On vérifie facilement que si n est un entier naturel quelconque et si f &isin; C<sup>n</sup>(D) et g &isin; C<sup>n</sup>(D) alors: <ul>
+              <li>f+g &isin; C<sup>n</sup>(D) </li>
+              <li>f-g &isin; C<sup>n</sup>(D) </li>
+              <li>&lambda;f &isin; C<sup>n</sup>(D) &forall;&lambda;&isin;&reals; </li>
+              <li>f&times;g &isin; C<sup>n</sup>(D) </li>
+              <li>f/g &isin; C<sup>n</sup>(D) si g ne s'annule pas sur D. </li>
+            </ul> Le même résultat vaut si on remplace partout n par &infin;.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> It is easy to check that if n is any natural number and if f &isin; C<sup>n</sup>(D) and g &isin; C<sup>n</sup>(D) then: <ul>
+              <li>f+g &isin; C<sup>n</sup>(D) </li>
+              <li>f-g &isin; C<sup>n</sup>(D) </li>
+              <li>&lambda;f &isin; C<sup>n</sup>(D) &forall;&lambda;&isin;&reals; </li>
+              <li>f&times;g &isin; C<sup>n</sup>(D) </li>
+              <li>f/g &isin; C<sup>n</sup>(D) if g does not vanish on D. </li>
+            </ul> The same result holds if we replace n everywhere by &infin;.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de ce qui précède que: </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from the above that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Pour tout entier n, C<sup>n</sup>(D) est muni d'une structure d' <input type="button" value="espace vectoriel" onclick="go('../../algebre-lineaire/espaces/defev.html#defax')" data-inline="true" /> réel (et même d'algèbre). On peut évidemment dire la même chose de C<sup>∞</sup>(D).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> For all n, C<sup>n</sup>(D) has a structure of real <input type="button" value="vector space" onclick="go('../../algebre-lineaire/espaces/defev.html#defax')" data-inline="true" /> (and even algebra). Of course, the same can be said of C<sup>∞</sup>(D).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En outre, </div>
+        <!-- /fr -->
+        <div lang="en"> Furthermore, </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Si m ≥ n C<sup>m</sup>(D) est un sous-espace de C<sup>n</sup>(D) et l'application f → f' est une <input type="button" value="application linéaire" onclick="go('../../algebre-lineaire/applicalin/defapplin.html#')" data-inline="true" /> de C<sup>n+1</sup>(D) dans C<sup>n</sup>(D)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> If m≥n C<sup>m</sup>(D) is a subspace of C<sup>n</sup>(D) and the application f → f' is a <input type="button" value="linear map" onclick="go('../../algebre-lineaire/applicalin/defapplin.html#')" data-inline="true" /> from C<sup>n+1</sup>(D) to C<sup>n</sup>(D)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Il résulte en outre du <input type="button" value="théorème des accroissements finis" onclick="go('derivaccfinis.html#')" data-inline="true" /> que si D est un intervalle I, le <input type="button" value="noyau" onclick="go('../../algebre-lineaire/applicalin/noyau.html#')" data-inline="true" /> de cette application linéaire est exactement le <input type="button" value="sous-espace" onclick="go('../../algebre-lineaire/espaces/sousev.html#')" data-inline="true" /> des fonctions constantes sur I.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> It further follows from the <input type="button" value="Mean Value Theorem" onclick="go('derivaccfinis.html#')" data-inline="true" /> that if D is an interval I, the <input type="button" value="kernel" onclick="go('../../algebre-lineaire/applicalin/noyau.html#')" data-inline="true" /> of this linear map is exactly the <input type="button" value="subspace" onclick="go('../../algebre-lineaire/espaces/sousev.html#')" data-inline="true" /> of functions constant on I.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples</h3>
+          <ol>
+            <li>Les fonctions polynomiales sont de classe C<sup>&infin;</sup> sur &reals; en outre si p(x) est un polynôme de degré n toutes ses dérivées d'ordre m avec m > n sont nulles. </li>
+            <li>Si F est un ensemble fini de points de &reals;, les fonctions rationelles qui ne s'annulent pas en dehors de F sont de classe C<sup>&infin;</sup> sur &reals;-F. </li>
+          </ol>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Examples</h3>
+          <ol>
+            <li>Polynomial functions are class C<sup>&infin;</sup> on &reals; moreover if p(x) is a polynomial of degree n all its derivatives of order m with m > n are zero. </li>
+            <li>If F is a finite set of points of &reals;, rational functions that do not vanish outside F are of class C<sup>&infin;</sup> on &reals;-F. </li>
+          </ol>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Il existe un module faisant du calcul symbolique. Il s'agit du module 'sympy'. <br /> Voici quelques exemples d'utilisation.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> There is a module doing symbolic calculation. This is the 'sympy' module. <br /> Here are some examples of use.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/derivsup.html" type="text/html" border="3" height="220" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de julia</h2>
+          <p>Avec Julia c'est le package MTH229</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>With Julia it's the MTH229 package</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/dersec.jl.html" type="text/html" border="3" height="120" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivordsup/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivordsup/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

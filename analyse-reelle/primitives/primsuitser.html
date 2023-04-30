@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Primitive d'une limite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/primsuitser/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Primitives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/primsuitser/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Primitive functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Théorèmes généraux</h2> Il est maintenant temps de revenir sur les résultats concernant la relation de la dérivation avec les suites et séries de fonctions définies sur un même intervalle. <br /> Les principaux résultats sont rassemblés dans <input type="button" value="cette page" onclick="go('../derivees/derivsuite.html#')" data-inline="true" /> et encore <input type="button" value="cette autre" onclick="go('../derivees/derivserie.html#')" data-inline="true" />. <br /> Traduisons les résultats dans le langage des primitives:
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It is now time to come back to the results concerning the relation between differentiation and the sequences and series of functions defined on the same interval. <br /> The main results are collected in <input type="button" value="this page" onclick="go('../derivees/derivsuite.html#')" data-inline="true" /> and again <input type="button" value="this other one" onclick="go('../derivees/derivserie.html#')" data-inline="true" />. <br /> Let's translate the results into the language of antiderivatives: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit (f<sub>n</sub>)<sub>n&isin;&naturals;</sub> une suite de fonctions définies sur un mếme intervalle I. On suppose que pour tout point x &isin; I il existe un voisinage V de x, tel que la suite (f<sub>n</sub>) converge uniformément vers f sur V, d'une part. <br> On suppose en outre que chaque f<sub>n</sub> possède sur I une primitive F<sub>n</sub> et qu'il existe un point x<sub>0</sub> de I tel que la suite F<sub>n</sub>(x<sub>0</sub>) converge. <br> Alors dans ces conditions F<sub>n</sub>(x) converge pour tout x &isin; I et si F est la limite des F<sub>n</sub>, F est dérivable et de dérivée f où f est la limite des f<sub>n</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let (f<sub>n</sub>)<sub>n&isin;&naturals;</sub> be a sequence of functions defined on the same interval I. We assume that for any point x &isin; I there exists a neighborhood V of x, such that the sequence (f<sub>n</sub>) converges uniformly to f on V, on the one hand. <br> We further suppose that each f<sub>n</sub> has on I a primitive F<sub>n</sub> and that there exists a point x<sub>0</sub> of I such that the sequence F<sub>n</sub>(x<sub>0</sub>) converges. <br> Then under these conditions F<sub>n</sub>(x) converges for all x &isin; I and if F is the limit of F<sub>n</sub>, F is differentiable and of derivative f where f is the limit of f<sub>n</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Et voici le corollaire dans le cas des séries: </div>
+        <!-- /fr -->
+        <div lang="en"> And here is the corollary in the case of series: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit une série de fonctions de terme général u<sub>n</sub>(x) définies sur un même intervalle I. <br> On suppose que pour chaque x de I il existe un voisinage V de x tel que la série
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \)
+            <!-- /FORMULE UNIV INLINE--> converge normalement sur V. <br> On suppose en outre, que pour chaque n, u<sub>n</sub> possède une primitive U<sub>n</sub> sur I et qu'il existe au moins un point x<sub>0</sub> de I, tel que la suite U<sub>n</sub>(x<sub>0</sub>) converge. <br>Dans ces conditions
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle F(x)=\sum_{n=0}^{\infty }U_{n}(x) \)
+            <!-- /FORMULE UNIV INLINE--> converge pour tout x de I et F est une primitive de f sur I.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Consider a series of functions of general term u<sub>n</sub>(x) defined on the same interval I. <br> We assume that for each x of I there exists a neighborhood V of x such that the series
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle f(x)=\sum_{n=0}^{\infty }u_{n}(x) \)
+            <!-- /FORMULE UNIV INLINE--> normally converges on V. <br> We further assume that for every n, u<sub>n</sub> has a primitive function U<sub>n</sub> on I and that there is at least one point x<sub>0</sub> of I, such that the sequence U<sub>n</sub>(x<sub>0</sub>) converges. <br>Under these conditions
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle F(x)=\sum_{n=0}^{\infty }U_{n}(x) \)
+            <!-- /FORMULE UNIV INLINE--> converges for all x of I and F is a primitive function of f on I.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <a name="caspart"></a>
+        <div lang="fr">
+          <h2>Applications à quelques cas particuliers</h2>
+          <h3>Développement en série du logarithme népérien au voisinage de 1</h3> Prenons comme intervalle l'intervalle ouvert I=]-1,+1[ et considérons la série géométrique :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Applications to some special cases</h2>
+          <h3>Expansion in power series of the natural logarithm in the neighborhood of 1</h3> Let us take as interval the open interval I=]-1,+1[ and consider the geometric series:
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{1}{1-x}=\sum_{n=0}^{\infty }x^{n} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Intégrons cette série terme à terme on obtient la série </div>
+        <!-- /fr -->
+        <div lang="en"> Integrating this series term by term, we obtain the series </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle \sum_{n=0}^{\infty }\frac{x^{n+1}}{n+1} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Cette série a une <input type="button" value="rayon de convergence" onclick="go('../suitefonc/suitefoncserent.html#def2')" data-inline="true" /> égal à 1 et converge vers une fonction ayant pour dérivée </div>
+        <!-- /fr -->
+        <div lang="en"> This series has an <input type="button" value="convergence radius" onclick="go('../suitefonc/suitefoncserent.html#def2')" data-inline="true" /> equal to 1 and converges to a function having derivative </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{1}{1-x} \)
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Par un changement de variable x &rarr; 1-x, cela nous permet de conclure à l'existence d'une primitive de la fonction 1/x au voisinage de 1 dans l'intervalle ]0,2[, et prenant la valeur 0 en 1. <br> C'est cette fonction que nous avons désignée un peu plus tôt sous le nom de <strong>
+              <em>'logarithme népérien'</em>
+            </strong> et notée ln. <br> En outre on a la formule (en changeant x en son opposé): <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle ln(1+x)=\sum_{n=1}^{\infty }(-1)^{n+1}\frac{x^{n}}{n} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Nous verrons par la suite que cette fonction peut-être prolongée sur tout l'intervalle ]0,+∞[
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> By a substitution x &rarr; 1-x, this allows us to conclude that there is a primitive function of the function 1/x in the neighborhood of 1 in the interval ]0,2[, and taking the value 0 at 1. <br> This is that function we referred to earlier as the <strong>
+              <em>'natural logarithm'</em>
+            </strong> and denoted ln. <br> Furthermore we have the formula (changing x to its opposite): <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle ln(1+x)=\sum_{n=1}^{\infty }(-1)^{n+1}\frac{x^{n}}{n} \)</p>
+            <!-- /FORMULE UNIV INLINE--> We will see later that this function can be extended over the entire interval ]0,+∞[
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous verrons par la suite que cette fonction peut-être prolongée sur tout l'intervalle ]0,+&infin;[ <br> Voici une appliquette vous permettant de visualiser la convergence de série ln(1+x) dansl'intervalle ]-1,1[. <br> Faire varier n avec les boutons '+' pour monter et '-' pour descendre. <br> En vert la somme partielle de la série d'ordre n. <br> En rouge la fonction logarithme népérien de 1+x </div>
+        <!-- /fr -->
+        <div lang="en"> We will see later that this function can be extended over the entire interval ]0,+&infin;[ <br> Here is an applet allowing you to visualize the convergence of the series ln(1+x) in the interval ]-1,1[. <br> Vary n with the buttons '+' to go up and '-' to go down. <br> In green the partial sum of the series of order n. <br> In red the natural logarithm function of 1+x </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/primser1.js"></script>
+        <button type='button' id='myButton11' onClick='nameSpace1.nextplus()'>n+</button>
+        <button type='button' id='myButton12' onClick='nameSpace1.nextminus()'>n-</button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> On observera le comportement au voisinage de 1. <br> La théorie ici exposée ne nous dit rien en ce point situé sur la frontière (rayon de convergence égal à 1). <br> Par contre nous savons que la série converge parce qu'elle est alternée à terme décroissant. <br> Nous prouverons ultérieurement, ce que nous observons, c'est à dire qu'il y a bien convergence vers ln(2) pour x&rarr;1-, extrêmement lente toutefois. <br> Par contre pour x&rarr;1+, il y a clairement divergence. <h3>Développement en série de la fonction arctangente au voisinage de 0</h3> Changeons maintenant x en -x dans la formule </div>
+        <!-- /fr -->
+        <div lang="en"> We will observe the behavior in the neighborhood of 1. <br> The theory exposed here tells us nothing at this point located on the border (radius of convergence equal to 1). <br> On the other hand, we know that the series converges because it is alternating with decreasing term. <br> We will prove later, what we observe, that is to say that there is indeed convergence towards ln(2) for x&rarr;1-, extremely slow however. <br> On the other hand, for x&rarr;1+, there is clearly a divergence. <h3>Series expansion of the arctangent function near 0</h3> Now let's change x to -x in the formula </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{1}{1-x}=\sum_{n=0}^{\infty }x^{n} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Nous obtenons </div>
+        <!-- /fr -->
+        <div lang="en"> We get </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{1}{1+x}=\sum_{n=0}^{\infty }(-1)^{n}x^{n} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> En remplaçant x par x<sup>2</sup>, il vient </div>
+        <!-- /fr -->
+        <div lang="en"> By replacing x by x<sup>2</sup>, it comes </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \frac{1}{1+x^{2}}=\sum_{n=0}^{\infty }(-1)^{n}x^{2n} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Mais dans cette formule, on reconnaît à gauche la dérivée de la fonction arctangente. <br> Nous obtenons donc en passant aux primitives: </div>
+        <!-- /fr -->
+        <div lang="en"> But in this formula, we recognize on the left the derivative of the arctangent function. <br> So we get by passing to the primitive functions: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Dans l'intervalle ]-1,+1[ (domaine de convergence normale de la série) la fonction arctangente est représentée par
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle atan(x)=\sum_{n=0}^{\infty }(-1)^{n}\frac{x^{2n+1}}{2n+1}=x-\frac{x^{3}}{3}+\frac{x^{5}}{5}-.... \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> In the interval ]-1,+1[ (domain of normal convergence of the series) the arctangent function is represented by
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle atan(x)=\sum_{n=0}^{\infty }(-1)^{n}\frac{x^{2n+1}}{2n+1}=x-\frac{x^{3}}{3}+\frac{x^{5}}{5}-.... \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette vous permettant de visualiser la convergence de série arctan(x) dansl'intervalle ]-1,+1[. <br> Faire varier n avec les boutons '+' pour monter et '-' pour descendre. <br> En vert la somme partielle de la série d'ordre n pour n impair. <br> En rouge la fonction arctangente. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet allowing you to visualize the convergence of series arctan(x) in the interval ]-1,+1[. <br> Vary n with the buttons '+' to go up and '-' to go down. <br> In green the partial sum of the series of order n for odd n. <br> In red the arctangent function. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/primser2.js"></script>
+        <button type='button' id='myButton21' onClick='nameSpace2.nextplus()'>n+</button>
+        <button type='button' id='myButton22' onClick='nameSpace2.nextminus()'>n-</button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Observer, cette fois encore, le comportement au voisinage des extrêmités -1 et +1. </div>
+        <!-- /fr -->
+        <div lang="en"> Observe, this time again, the behavior in the neighborhood of the extremities -1 and +1. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/primsuitser/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Primitives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/primsuitser/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Primitive functions'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

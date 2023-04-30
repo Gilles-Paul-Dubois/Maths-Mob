@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Coefficient dérivé en un point</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivcoef/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivcoef/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Nombre dérivé de f en x<sub>0</sub>
+          </h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Derivative of f at x<sub>0</sub>
+          </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Si f est une fonction numérique définie <input type="button" value="au voisinage de x
+												<sub>0</sub>" onclick="go('../../nombres/reels/voisinages.html#')" data-inline="true" /> on appelle <strong>
+              <em>'nombre dérivé'</em>
+            </strong> ou encore <strong>
+              <em>'coefficient dérivé'</em>
+            </strong> de f en x<sub>0</sub>, le nombre:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f'\left ( x_{0} \right )= \lim_{ x\to x_{0},x\neq x_{0}}\frac{f\left ( x \right )-f\left ( x_{0} \right )}{x-x_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> si ce nombre existe, bien entendu.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> If f is a numeric function defined <input type="button" value="on a neighborhood of x
+													<sub>0</sub>" onclick="go('../../nombres/reels/voisinages.html#')" data-inline="true" /> we call <strong>
+              <em>'derivative'</em>
+            </strong> of f at x<sub>0</sub>, the number:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle f'\left ( x_{0} \right )= \lim_{ x\to x_{0},x\neq x_{0}}\frac{f\left ( x \right )-f\left ( x_{0} \right )}{x-x_{0}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> If this number exists of course.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il s'agit donc bien de la limite d'un taux de variation, donc de la limite de la pente d'une sécante, donc de la pente d'une tangente si nous convenons d'appeler <b>
+            <i>'tangente'</i>
+          </b> en x<sub>0</sub> la position limite de la sécante passant par les points (x<sub>0</sub>,f(x<sub>0</sub>)) et (x,f(x)) lorsque x tend vers x<sub>0</sub>. </div>
+        <!-- /fr -->
+        <div lang="en"> It is therefore indeed the limit of a rate of change, therefore the limit of the slope of a secant, therefore the slope of a tangent if we agree to call <b>
+            <i>'tangent '</i>
+          </b> in x<sub>0</sub> the limit position of the secant passing through the points (x<sub>0</sub>,f(x<sub>0</sub>)) and (x,f(x)) as x tends to x<sub>0</sub>. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Si le coefficient f'(x<sub>0</sub>) existe on dit que f est <strong>
+              <em>'dérivable'</em>
+            </strong> en x<sub>0</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> If the number f'(x<sub>0</sub>) exists we say that f is <strong>
+              <em>'differentiable'</em>
+            </strong> at x<sub>0</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Exemples</h2>
+          <ul>
+            <li>Le calcul que nous avons fait sur la <input type="button" value="page d'introduction" onclick="go('index.html#')" data-inline="true" /> montre que f(x)=x<sup>2</sup> est dérivable en tout point et que f'(x<sub>0</sub>)=2x<sub>0</sub>. </li>
+            <li>La fonction f(x)=|x| n'est pas dérivable en x<sub>0</sub>=0, car
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{ x\to 0,x> 0 }\frac{f\left ( x \right )-f\left ( 0 \right )}{x-0}=+1 \)
+              <!-- /FORMULE UNIV INLINE--> et
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{ x\to 0,x< 0 }\frac{f\left ( x \right )-f\left ( 0 \right )}{x-0}=-1 \) <!-- /FORMULE UNIV INLINE--> et si
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{ x\to 0,x \ne 0 }\frac{f\left ( x \right )-f\left ( 0 \right )}{x-0} \)
+                <!-- /FORMULE UNIV INLINE--> existait, les deux limites seraient égales.
+            </li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Examples</h2>
+          <ul>
+            <li>The calculation we did on the <input type="button" value="intro page" onclick="go('index.html#')" data-inline="true" /> shows that f(x)=x<sup>2</sup> is differentiable at any point and f'(x<sub>0</sub>)=2x<sub>0</sub>. </li>
+            <li>The function f(x)=|x| is not differentiable at x<sub>0</sub>=0, because
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{ x\to 0,x> 0 }\frac{f\left ( x \right )-f\left ( 0 \right )}{x-0}=+1 \)
+              <!-- /FORMULE UNIV INLINE--> and
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{ x\to 0,x< 0 }\frac{f\left ( x \right )-f\left ( 0 \right )}{x-0}=-1 \) <!-- /FORMULE UNIV INLINE--> and if
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{ x\to 0,x \ne 0 }\frac{f\left ( x \right )-f\left ( 0 \right )}{x-0} \)
+                <!-- /FORMULE UNIV INLINE--> would exist, both limits would be the same.
+            </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Notations</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Notations</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td>
+              <font color="#FFFFFF">Joseph-Louis Lagrange (1736/1813-FR/IT)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/220px-Joseph_Louis_Lagrange.jpg" width="220" height="276" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="not1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">notation 1</div> La notation que nous avons utilisée pour désigner le nombre dérivé de f en x<sub>0</sub>, soit f'(x<sub>0</sub>), est connue sous le nom de <b>
+              <i>'notation de Lagrange'</i>
+            </b>. <br> Parallèlement à la notation de Lagrange la notation dite <b>
+              <i>'de Leibniz'</i>
+            </b> soit
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{df}{dx}\left ( x_{0} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> est également d'un usage courant.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">notation 1</div> The notation we used to designate the derivative of f at x<sub>0</sub>, i.e. f'(x<sub>0</sub>), is known as <b>
+              <i>'Lagrange notation'</i>
+            </b>. <br> Parallel to Lagrange's notation, the notation known as <b>
+              <i>'Leibniz's '</i>
+            </b>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{df}{dx}\left ( x_{0} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> is currently in use as well.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Autre expression du nombre dérivé en un point</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Another expression of the derivative at a point</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Le nombre dérivé de f en x<sub>0</sub> peut également s'écrire comme limite en faisant intervenir la différence h=x-x<sub>0</sub>:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{h \to 0, h\neq 0}\frac{f\left ( x_{0}+h \right )-f\left ( x_{0} \right )}{h} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> The derivative of f at x<sub>0</sub> can also be written as a limit by involving the difference h=xx<sub>0</sub>:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \lim_{h \to 0, h\neq 0}\frac{f\left ( x_{0}+h \right )-f\left ( x_{0} \right )}{h} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Application interactive</h2> Voici une appliquette vous montrant une certaine courbe (y=0.4x<sup>2</sup>): <ul>
+            <li>La tangente au point d'abscisse x<sub>0</sub> (en rouge). </li>
+            <li>La sécante passant par les points d'abscisses x<sub>0</sub> et x<sub>0</sub>+h (en bleu). </li>
+            <li>Vous pouvez faire varier x<sub>0</sub> entre -3 et +3 avec la souris (tirer le point rouge sur l'axe des abscisses). </li>
+            <li>Vous pouvez faire varier h entre x<sub>0</sub>-2 et x<sub>0</sub>-2 avec la souris (tirer le point rouge sur l'axe des abscisses). </li>
+            <li>La valeur de h est mise à jour en même temps que les pentes de la tangente et de la sécante.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Interactive app</h2> Here is an applet showing you a certain curve (y=0.4x<sup>2</sup>): <ul>
+            <li>The tangent to the point with abscissa x<sub>0</sub> (in red). </li>
+            <li>The secant passing through the points with abscissae x<sub>0</sub> and x<sub>0</sub>+h (in blue). </li>
+            <li>You can vary x<sub>0</sub> between -3 and +3 with the mouse (drag red dot on the x-axis). </li>
+            <li>You can vary h between x<sub>0</sub>-2 and x<sub>0</sub>-2 with the mouse (drag red dot on the x-axis). </li>
+            <li>The value of h is updated along together with the tangent and secant slopes.</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/nombdev1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Dérivée à droite à gauche</h2> Il se peut, comme dans le cas de la fonction valeur absolue, que la dérivée en x<sub>0</sub> n'existe pas cependant que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{h \to 0, h > 0}\frac{f\left ( x_{0}+h \right )-f\left ( x_{0} \right )}{h} \)
+          <!-- /FORMULE UNIV INLINE--> existe
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Right and left derivatives</h2> It may be, as in the case of the absolute value function, that the derivative at x<sub>0</sub> does not exist, but
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim_{h \to 0, h > 0}\frac{f\left ( x_{0}+h \right )-f\left ( x_{0} \right )}{h} \)
+          <!-- /FORMULE UNIV INLINE--> exists.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit dans ce cas que f est <b>
+              <i>'dérivable à droite'</i>
+            </b> en x<sub>0</sub>, et cette limite s'appelle le <b>
+              <i>'nombre dérivé à droite'</i>
+            </b> de f en x<sub>0</sub> et se note \( f'_{d}\left ( x_{0} \right )\).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> In this case, we say that f is <b>
+              <i>'right differentiable'</i>
+            </b> at x<sub>0</sub>, and this limit is called the <b>
+              <i>'right derivative'</i>
+            </b> of f at x<sub>0</sub> and is written \( f'_{r}\left ( x_{0} \right )\) .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> De la même façon si \( \displaystyle \lim_{h \to 0, h < 0}\frac{f\left ( x_{0}+h \right )-f\left ( x_{0} \right )}{h} \) existe, on dit que f est <strong>
+              <em>'dérivable à gauche'</em>
+              </strong> en x<sub>0</sub> et cette limite se note \( f'_{g}\left ( x_{0} \right )\).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> Similarly if \( \displaystyle \lim_{h \to 0, h < 0}\frac{f\left ( x_{0}+h \right )-f\left ( x_{0} \right )}{h} \) exists, we say that f is <strong>
+              <em>'left differentiable'</em>
+              </strong> at x<sub>0</sub> and this limit is written \( f'_{l }\left ( x_{0} \right )\).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte évidemment des théorèmes sur les <input type="button" value="limites unilatérales" onclick="go('../foncnum/foncnumlimagauche.html#def2')" data-inline="true" /> que: </div>
+        <!-- /fr -->
+        <div lang="en"> It obviously follows from the theorems on <input type="button" value="one-sided limits" onclick="go('../foncnum/foncnumlimagauche.html#def2')" data-inline="true" /> that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Une condition nécéssaire et suffisante pour que f soit dérivable en x<sub>0</sub> est que f soit dérivable à gauche et à droite en x<sub>0</sub> et que \( f'_{g}\left ( x_{0} \right )\) et \( f'_{d}\left ( x_{0} \right )\) soient égales.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> A necessary and sufficient condition for f to be differentiable at x<sub>0</sub> is that f is left and right differentiable at x<sub>0</sub> and that \( f'_{l}\left ( x_{0} \right )\) and \( f'_{r}\left ( x_{0} \right )\) are equal.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Equation de la tangente</h2> On suppose f dérivable en x<sub>0</sub>. On sait que l'équation d'une droite est de la forme y=ax+b. <br> On sait aussi que la tangente au point (x<sub>0</sub>,f(x<sub>0</sub>): <ul>
+            <li>a pour pente f'(x<sub>0</sub>) </li>
+            <li>passe par le point (x<sub>0</sub>,f(x<sub>0</sub>) </li>
+          </ul> Il en résulte que a=f'(x<sub>0</sub>) et b=f(x<sub>0</sub>)-f'(x<sub>0</sub>).x<sub>0</sub> Nous avons donc:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Equation of a tangent</h2> Suppose f is differentiable at x<sub>0</sub>. We know that the equation of a straight line is of the form y=ax+b. <br> We also know that the tangent at the point (x<sub>0</sub>,f(x<sub>0</sub>): <ul>
+            <li>has slope f'(x<sub>0</sub>) </li>
+            <li>passes through the point (x<sub>0</sub>,f(x<sub>0</sub>) </li>
+          </ul> It follows that a=f'(x<sub>0</sub>) and b=f(x<sub>0</sub>)-f'(x<sub>0</sub>).x<sub>0</sub> So we have:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> L'équation de la tangente à la coube représentative de la fonction f au point d'abscisse x<sub>0</sub> est y=f'(x<sub>0</sub>)x+f(x<sub>0</sub>)-f'(x<sub>0</sub>)x<sub>0</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> The equation of the tangent to the curve representative of the function f at the point wit abscissa x<sub>0</sub> is y=f'(x<sub>0</sub>)x+f(x< sub>0 </sub>)-f'(x<sub>0</sub>)x<sub>0</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Approximation affine de f au voisinage de x<sub>0</sub>
+          </h2> L'assimilation de la courbe à sa tangente au voisinage de x<sub>0</sub> donne:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Affine approximation of f in the neighborhood of x<sub>0</sub>
+          </h2> The assimilation of the curve to its tangent in the neighborhood of x<sub>0</sub> gives:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> f(x)&asymp;f(x<sub>0</sub>)+f'(x<sub>0</sub>)(x-x<sub>0</sub>)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> f(x)&asymp;f(x<sub>0</sub>)+f'(x<sub>0</sub>)(x-x<sub>0</sub>)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit encore: </div>
+        <!-- /fr -->
+        <div lang="en"> Or again: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> f(x<sub>0</sub>+h)&asymp;f(x<sub>0</sub>)+f'(x<sub>0</sub>)h
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> f(x<sub>0</sub>+h)&asymp;f(x<sub>0</sub>)+f'(x<sub>0</sub>)h
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela dit, si on veut un ordre de grandeur de la différence &delta;(h)=f(x<sub>0</sub>+h)-f(x<sub>0</sub>)-f'(x<sub>0</sub>)h, on voit que par définition même de la dérivée en x<sub>0</sub>, on a lim<sub>
+            <font size="-1">h&rarr;0</font>
+          </sub>&delta;(h)/h=0, donc: </div>
+        <!-- /fr -->
+        <div lang="en"> That said, if we want an order of magnitude of the difference &delta;(h)=f(x<sub>0</sub>+h)-f(x<sub>0</sub>)-f'( x<sub>0</sub>)h, we see that by very definition of the derivative at x<sub>0</sub>, we have lim<sub>
+            <font size="-1">h&rarr;0 </font>
+          </sub>&delta;(h)/h=0, so: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> δ(h)=o(h) pour h→0 avec les <input type="button" value="notations de Landau" onclick="go('../foncnum/foncnumlandau.html#def1')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> δ(h)=o(h) for h→0 using the <input type="button" value="Landau symbols" onclick="go('../foncnum/foncnumlandau.html#def1')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <a name="app2"></a>
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser &delta;(h)/h en fonction de h quand h varie f étant une fonction du second degré. <br> Le fonctionnement est identique à celui de la précédente. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize &delta;(h)/h as a function of h when h varies f being a quadratic function. <br> The operation is identical to that of the previous one. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/nombdev2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Lien entre dérivabilité et continuité</h2> Si h est dérivable en x<sub>0</sub> alors
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Link between differentiability and continuity</h2> If h is differentiable at x<sub>0</sub> then
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV CENTRE --> \[ \displaystyle \lim_{ h\to 0,h\neq 0}\left ( f\left ( x_{0}+h \right )-f\left ( x_{0} \right ) \right )= \displaystyle \lim_{h \to 0, h\neq 0} \frac{\left ( f\left ( x_{0}+h \right )-f\left ( x_{0} \right ) \right )}{h}\times h=f'\left ( x_{0} \right )\times 0=0 \]
+        <!-- /FORMULE UNIV CENTRE-->
+        <!-- STOP -->
+        <div lang="fr"> Il s'en suit que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows that: </div>
+        <!-- /en -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> Si f est dérivable en x<sub>0</sub> alors f est continue en x<sub>0</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> If f is differentiable at x<sub>0</sub> then f is continuous at x<sub>0</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La réciproque est fausse comme le montre une fois encore l'étude de la fonction valeur absolue au voisinage du point x<sub>0</sub>=0. </div>
+        <!-- /fr -->
+        <div lang="en"> The converse is false as shown once again by the study of the absolute value function in the neighborhood of the point x<sub>0</sub>=0. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Voici un programme utilisant le package MTH229 pour calculer un taux de variation.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>Here is a program using the MTH229 package to calculate a rate of change.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/tauxvar.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Voici un programme utilisant le package MTH229 pour un calcul automatique de dérivée en un point.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here is a program using the MTH229 package for an automatic calculation of derivative at a point.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/automaticder.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Voici un programme utilisant le package MTH229 et le package Plots pour calculer les équations de sécantes et les représenter graphiquement.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here is a program using the MTH229 package and the Plots package to calculate secant equations and plot them.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/secantes.jl.html" type="text/html" border="3" height="80" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Et voici le résultat :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"></div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <img src="images/secantes.png" width="588" height="396" alt="" />
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/derivcoef/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Dérivées'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/derivcoef/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Derivatives'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

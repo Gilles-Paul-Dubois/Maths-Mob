@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Techniques de démonstration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/suitesdemontrer/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/suitesdemontrer/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous allons dans cette page traiter un peu de méthodologie. <br /> Il s'agit d'une page pratique consacrée à la résolution des exercices et problèmes que l'on peut rencontrer sur les suites dans les épreuves d'examens et de concours. La plupart des questions tournent autour de la question de convergence, mais il est possible également que des questions annexes visent à établir que certaines suites sont <input type="button" value="bornées" onclick="go('suitesbornees.html#')" data-inline="true" /> ou <input type="button" value="monotones" onclick="go('suitesmonotones.html#')" data-inline="true" /> ou <input type="button" value="périodiques" onclick="go('suitesperiodiques.html#')" data-inline="true" />. Ces questions sont en général des préliminaires. Dans tous les cas pour démontrer qu'une suite est monotone ou bornée, le <input type="button" value="raisonnement par récurrence" onclick="go('../../bases/logique/recurrence.html#')" data-inline="true" /> est un outil privilégié, particulièrement si la suite elle-même est donnée par une relation de récurrence. <br /> Les questions sur la convergence peuvent être formulées de diverses manières, mais très souvent le raisonnement est fait en deux temps: <ul>
+            <li>Montrer que la suite possède une limite d'abord.</li>
+            <li>Trouver sa limite ensuite.</li>
+          </ul> Trouver la valeur de la limite est en général plus difficile qu'établir que la limite existe, particulièrement si aucune indication n'est fournie. Fort heureusement de nombreux énoncés donnent la valeur de la limite et il suffit alors de démontrer que la suite converge vers la valeur donnée. Mais ce n'est pas toujours le cas. Dans le cas le plus défavorable où la valeur de la limite n'est pas donnée l'emploi de la calculatrice (pour localiser la limite) n'est que d'un intérêt très faible sauf si cette limite est entière. Très souvent les suites 'classiques' convergent vers des valeurs qui sont commensurables à des constantes mathématiques célèbres comme π ou le nombre d'Euler e. Il est donc peu vraisemblable que vous reconnaissiez une fraction ou une puissance d'une telle constante. <br />
+          <b>La calculatrice vous servira par contre à vérifier que votre conjecture est correcte</b>. Si vous avez pu, par des méthodes déductives, établir que la limite de la suite est π/4 ou π<sup>2</sup>/6, il n'est pas inutile de programmer le calcul de quelques termes d'indices élevés pour vous conforter dans votre conviction, ceci n'ayant évidemment aucune valeur de démonstration. <h2>Démontrer qu'une suite est convergente</h2> On cherchera autant que possible à utiliser un <strong>
+            <em>'critère de convergence'</em>
+          </strong>. <br />Nous rappelons ici les principaux: <ul>
+            <li>Toute suite <input type="button" value="croissante et majorée" onclick="go('suitesmonoetconv.html#theofond')" data-inline="true" /> est convergente </li>
+            <li>Toute suite <input type="button" value="décroissante et minorée" onclick="go('suitesmonoetconv.html#theofond')" data-inline="true" /> est convergente </li>
+            <li>Toute suite satisfaisant au <input type="button" value="critère de Cauchy" onclick="go('suitescauchy.html#')" data-inline="true" /> est convergente </li>
+          </ul> Vous disposez également de techniques d'encadrement, connues sous le nom de <b>
+            <i>'lemmes des gendarmes'</i>
+          </b>: <ul>
+            <li>Le <b>
+                <i>'lemme des gendarmes classique'</i>
+              </b>, correspondant à l'encadrement par deux <input type="button" value="suites adjacentes" onclick="go('suitesmonoetconv.html#adja')" data-inline="true" />. </li>
+            <li>Le <b>
+                <i>'lemme des gendarmes-bis'</i>
+              </b> correspondant aux suites 'coincées' entre deux suites (non nécessairement monotones) qui convergent vers une limite commune. </li>
+          </ul> Vous disposez enfin de quelques tests, comme: <ul>
+            <li>
+              <input type="button" value="Le test de d'Alembert" onclick="go('suitesvitesse.html#testal')" data-inline="true" />. Ceci concerne l'étude du taux d'accroissement de la suite soit (u<sub>n+1</sub>-u<sub>n</sub>)/(u<sub>n</sub>-u<sub>n-1</sub>)
+            </li>
+            <li>Le 'test de Cauchy' ou 'règle de Cauchy' (pour ne pas confondre avec le critère précédent), qui peut s'énoncer ainsi:</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> In this page, we are going to deal with a bit of methodology. <br />This is a practical page dedicated to the resolution of exercises and problems that can be encountered for examinations and competitions purposes. Most of the questions concern the convergence, but it is also possible that additional questions aim to establish that certain sequences are <input data-inline="true" onclick="go('suitesbornees.html#')" type="button" value=" bounded" /> or <input data-inline="true" onclick="go('suitesmonotones.html#')" type="button" value=" monotone" /> or <input data-inline="true" onclick="go('suitesperiodiques.html#')" type="button" value=" periodic" />. These questions are usually preliminaries. In all cases to prove that a sequence is monotone or bounded, the <input data-inline="true" onclick="go('../../bases/logique/recurrence.html#')" type="button" value="induction method" />is a privileged tool, particularly if the sequence itself is given by a recurrence relation. <br /> Convergence questions can be formulated in various ways, but very often the reasoning is done in two stages: <ul>
+            <li>Show that the sequence has a limit first. </li>
+            <li>Then find this limit. </li>
+          </ul>Finding the value of the limit is generally more difficult than establishing that the limit exists, especially if no indication is provided. Fortunately, many statements give the value of the limit and it suffices to demonstrate that the sequence converges to the given value. But it's not always the case. In the most unfavorable case where the value of the limit is not given the use of the calculator (to locate the limit) is only of very little interest unless this limit is an integer. Very often 'usual' sequences converge to values ​​that are commensurable with famous mathematical constants like π or Euler's number e. It is therefore unlikely that you will recognize a fraction or a power of such a constant. <br />
+          <b>The calculator will, however, be used to verify that your guess is correct </b> . If you have been able, by deductive methods, to establish that the limit of the sequence is π/4 or π<sup>2/6</sup>, it is not useless to program the calculation of a few high index terms to confirm your conviction , this obviously having no demonstration value. <h2>Prove that a sequence is convergent </h2> We will try as much as possible to use a <strong>
+            <em> 'convergence criterion' </em>
+          </strong> . <br />Here we recall the main ones: <ul>
+            <li>Every sequence <input data-inline="true" onclick="go('suitesmonoetconv.html#theofond')" type="button" value="increasing and upper bounded" />is convergent </li>
+            <li>Every sequence <input data-inline="true" onclick="go('suitesmonoetconv.html#theofond')" type="button" value=" decreasing and lower bounded" />is convergent </li>
+            <li>Any sequence satisfying the <input data-inline="true" onclick="go('suitescauchy.html#')" type="button" value=" Cauchy criterion" />is convergent </li>
+          </ul> You also have framing techniques, known as <b>
+            <i> 'squeeze lemmas' </i>
+          </b> : <ul>
+            <li>The <b>
+                <i> usual 'squeeze' lemma' or ('sandwich' lemma) </i>
+              </b> , corresponding to the framing by two <input data-inline="true" onclick="go('suitesmonoetconv.html#adja')" type="button" value=" adjacent sequences" />. </li>
+            <li>The <b>
+                <i> 'advanced squeeze lemma' </i>
+              </b> corresponding to sequences 'stuck' between two sequences (not necessarily monotonous) which converge towards a common limit. </li>
+          </ul> Finally, you have some tests, like: <ul>
+            <li>
+              <input data-inline="true" onclick="go('suitesvitesse.html#testal')" type="button" value="The d'Alembert test" />. This concerns the study of the rate of increase of the sequence, i.e. (u<sub>n+1</sub>-u<sub>n</sub>)/(u<sub>n</sub>-u<sub>n-1</sub>)
+            </li>
+            <li>The 'Cauchy test' or 'Cauchy rule' (not to be confused with the previous criterion), which can be stated as follows: </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Une condition suffisante pour la suite (u<sub>n</sub>) converge est que lim sup<sub>n→∞</sub> |u<sub>n+1</sub>-u<sub>n</sub>|<sup>1/n</sup> = q avec q&lt;1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> A sufficient condition for the sequence (u<sub>n</sub>) to converge is that lim sup<sub>n→∞</sub>|u<sub>n+1</sub>-u<sub>n</sub>|<sup> 1/n</sup>= q with q <1. </div>
+              <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Remarque: La preuve de la validité de la règle de Cauchy réside dans le fait que toute suite satisfaisant à la règle de Cauchy satisfait aussi au critère de Cauchy. Cela se fait par sommation au moyen de <input type="button" value="l'inégalité triangulaire" onclick="go('../../nombres/reels/metrique.html#')" data-inline="true" />. <br /> L'arsenal présenté ici contient tout l'équipement de base pour décider de la convergence des suites. Il existe naturellement des tests plus élaborés qui sont des raffinements des règles de Cauchy et d'Alembert, mais ces tests nécessitent des connaissances d'analyse mathématique plus poussés. Pour des raisons pédagogiques ils ne seront donc pas présentés ici. <h2>Démontrer qu'une suite converge vers une valeur a</h2> Autant que possible on essaiera de décomposer le terme général de la suite en sommes, produits, quotients d'expressions plus simples ayant des limites connues ou évidentes pour appliquer les différents théorèmes sur les <input type="button" value="limites et les opérations algébriques" onclick="go('suiteslimopalg.html#')" data-inline="true" />. <br /> Si cette stratégie échoue, et si la limite est connue ou donnée, il sera alors nécessaire de <input type="button" value="revenir à la définition" onclick="go('suitesconvergentes.html#deflim#')" data-inline="true" />, et donc de démontrer des inégalités. <br /> Lorsque la limite n'est pas connue, on peut quelquefois la déterminer en levant des indéterminantions (voir <input type="button" value="indéterminations des sommes" onclick="go('suiteslimopalg.html#indsum#')" data-inline="true" />, <input type="button" value="indéterminations des produits" onclick="go('suiteslimopalg.html#indprod#')" data-inline="true" />, <input type="button" value="indéterminations des quotients" onclick="go('suiteslimopalg.html#indquot#')" data-inline="true" />). <br /> Quand rien de tout cela fonctionne, il faut le plus souvent utiliser des techniques plus élaborées et qui seront étudiées par la suite. Ces techniques font une large utilisation des 'développements limités'. En gros il s'agit de remplacer certains termes par des équivalents au sens des <input type="button" value="notations de Landau" onclick="go('suiteslandau.html#')" data-inline="true" />. <br /> Dans les cas les plus difficiles, la connaissance d'un grand nombre de limites usuelles peut également être d'un grand secours, mais il s'agit là de posséder une véritable 'culture mathématique' que les débutants, en général, n'ont pas. <h2>Démontrer qu'une suite ne converge pas </h2> On peut par exemple montrer que la suite n'est pas <input type="button" value="bornée" onclick="go('suitesbornees.html#')" data-inline="true" />. <br /> Une autre technique consiste à extraire de la suite une <input type="button" value="suite partielle" onclick="go('suitesextraites.html#')" data-inline="true" /> divergente ou bien deux suites partielles convergeant vers des limites distinctes. <br />
+          </div>
+          <!-- /fr -->
+          <div lang="en"> Remark: The proof of the validity of the Cauchy rule lies in the fact that any sequence satisfying the Cauchy rule also satisfies the Cauchy criterion. This is done by summation using <input data-inline="true" onclick="go('../../nombres/reels/metrique.html#')" type="button" value="triangle inequality" />. <br />The arsenal presented here contains all the basic equipment to decide on the convergence of the suites. There are naturally more elaborate tests which are refinements of the rules of Cauchy and d'Alembert, but these tests require knowledge of more advanced mathematical analysis. For pedagogical reasons they will therefore not be presented here. <h2>Prove that a sequence converges to a value a </h2> As much as possible we will try to decompose the general term of the sequence into sums, products, quotients of simpler expressions having known or obvious limits to apply the different theorems on <input data-inline="true" onclick="go('suiteslimopalg.html#')" type="button" value=" limits and algebraic operations" />. <br /> If this strategy fails, and the limit is known or given, then it will be necessary to go <input data-inline="true" onclick="go('suitesconvergentes.html#deflim#')" type="button" value=" back to definition" />, and thus to prove inequalities. <br /> When the limit is not known, it can sometimes be determined by resolving indeterminate forms (see <input data-inline="true" onclick="go('suiteslimopalg.html#indsum#')" type="button" value="indeterminate forms of sums of sums" />, <input data-inline="true" onclick="go('suiteslimopalg.html#indprod#')" type="button" value=" indeterminate forms of products" />, <input data-inline="true" onclick="go('suiteslimopalg.html#indquot#')" type="button" value=" indeterminate forms of quotients" />). <br />When none of this works, it is usually necessary to use more elaborate techniques which will be studied later. These techniques make extensive use of 'Taylor expansions'. Basically, it involves replacing certain terms with equivalents as specified by the <input data-inline="true" onclick="go('suiteslandau.html#')" type="button" value=" Landau symbols" />. <br /> In the most difficult cases, the knowledge of a large number of usual limits can also be of great help, but it is a question of having a real 'mathematical background' which beginners, in general, seldom have. <h2>Prove that a sequence does not converge </h2> We can for example show that the sequence is not <input data-inline="true" onclick="go('suitesbornees.html#')" type="button" value=" bounded" />. <br /> Another technique consists in extracting from the sequence a divergent <input data-inline="true" onclick="go('suitesextraites.html#')" type="button" value="subsequence" /> or two subsequences converging towards distinct limits. <br />
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/suitesdemontrer/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Suites'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/suitesdemontrer/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to 'Sequences'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <table cellpadding="10">
+            <tr>
+              <td>
+                <div lang="fr">Création Gilles Dubois</div>
+                <div lang="en">Created by Gilles Dubois</div>
+              </td>
+              <td>
+                <div lang="fr">Janvier 2022</div>
+                <div lang="en">January 2022</div>
+              </td>
+              <td>
+                <div lang="fr">Version mobile Jquery</div>
+                <div lang="en">Mobile Jquery version</div>
+              </td>
+              <td>
+                <a href="https://www.mathjax.org">
+                  <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /footer -->
+        <ul style=list-style-type:'';>
+          <li>
+            <div lang="fr">
+              <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+            <div lang="en">
+              <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+          </li>
+          <li>
+            <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /page -->
+  </body>
+</html>

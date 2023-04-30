@@ -1,0 +1,153 @@
+<html>
+<head>
+<title>prim06.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+</span><span class="s0"># ************************polynôme à coefficients rationnels- polynomials with rational coefficients**********************</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">ajoute(u, v): 
+    </span><span class="s0">&quot;&quot;&quot;somme de deux listes éventuellement de longueurs différentes - add two lists with different lengths&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">u == []: 
+        </span><span class="s2">return </span><span class="s1">v 
+    </span><span class="s2">if </span><span class="s1">v == []: 
+        </span><span class="s2">return </span><span class="s1">u 
+    </span><span class="s2">return </span><span class="s1">[u[</span><span class="s3">0</span><span class="s1">] + v[</span><span class="s3">0</span><span class="s1">]] + ajoute(u[</span><span class="s3">1</span><span class="s1">:], v[</span><span class="s3">1</span><span class="s1">:]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">soustrait(u, v): 
+    </span><span class="s0">&quot;&quot;&quot;différence de deux listes éventuellement de longueurs différentes - subtract two lists with possible different lengths&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">u == []: 
+        </span><span class="s2">return </span><span class="s1">[-x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">v] 
+    </span><span class="s2">if </span><span class="s1">v == []: 
+        </span><span class="s2">return </span><span class="s1">u 
+    </span><span class="s2">return </span><span class="s1">[u[</span><span class="s3">0</span><span class="s1">] - v[</span><span class="s3">0</span><span class="s1">]] + soustrait(u[</span><span class="s3">1</span><span class="s1">:], v[</span><span class="s3">1</span><span class="s1">:]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">facteur(u, v, n): 
+    </span><span class="s0">&quot;&quot;&quot;coefficient d'indice n du produit de convolution - n-th coeff. of convolution product &quot;&quot;&quot;</span><span class="s1"> 
+    r = [u[i] * v[j] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, len(u)) </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, len(v)) </span><span class="s2">if </span><span class="s1">i + j == n] 
+    </span><span class="s2">if </span><span class="s1">len(r) == </span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">Fraction(</span><span class="s3">0</span><span class="s1">) 
+    </span><span class="s2">if </span><span class="s1">len(r) == </span><span class="s3">1</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">r[</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">return </span><span class="s1">reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, r) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">multiplie(u, v): 
+    </span><span class="s0">&quot;&quot;&quot; produit de convolution de deux listes -convolution product of two lists&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">[facteur(u, v, n) </span><span class="s2">for </span><span class="s1">n </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, len(u) + len(v))] 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Polrat: 
+    </span><span class="s0">&quot;&quot;&quot; la classe des polynômes à coefficients rationnels - class of rational polynomials&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, listrat):  </span><span class="s0">#constructeur - constructor</span><span class="s1"> 
+        n = </span><span class="s3">0</span><span class="s1"> 
+        listrat.reverse() 
+        </span><span class="s2">if </span><span class="s1">len(listrat) &gt;= </span><span class="s3">1</span><span class="s1">: 
+            </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">listrat: 
+                </span><span class="s2">if </span><span class="s1">x == </span><span class="s3">0</span><span class="s1">: 
+                    n += </span><span class="s3">1</span><span class="s1"> 
+                    </span><span class="s2">continue</span><span class="s1"> 
+                </span><span class="s2">else</span><span class="s1">: 
+                    </span><span class="s2">break</span><span class="s1"> 
+        listrat = listrat[n:] 
+        listrat.reverse() 
+        self.a = listrat 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self):  </span><span class="s0">#représentation externe pour print, etc..- conversion to string</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">str([x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.a]) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other):  </span><span class="s0">#addition</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Polrat(ajoute(self.a, other.a)) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other):  </span><span class="s0">#soustraction - subtraction</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Polrat(soustrait(self.a, other.a)) 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self, other):  </span><span class="s0">#produit de 2 polynômes - product of polynomials</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Polrat(multiplie(self.a, other.a)) 
+ 
+    </span><span class="s2">def </span><span class="s1">degre(self):  </span><span class="s0">#degré d'un polynôme - degree of a polynomial</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.a == []: 
+            </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">len(self.a) - </span><span class="s3">1</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">coeffdom(self):  </span><span class="s0">#coefficient dominant - leading coefficient</span><span class="s1"> 
+        d = self.degre() 
+        </span><span class="s2">if </span><span class="s1">d &lt; </span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s3">0</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">self.a[d] 
+ 
+    </span><span class="s2">def </span><span class="s1">__truediv__(self, other):  </span><span class="s0"># quotient division euclidienne - quotient in Euclidean division</span><span class="s1"> 
+        m = self.degre() 
+        n = other.degre() 
+        x = self.coeffdom() 
+        y = other.coeffdom() 
+        d = m - n 
+        </span><span class="s2">if </span><span class="s1">d &lt; </span><span class="s3">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">Polrat([]) 
+        r = x / y 
+        q = [Fraction(</span><span class="s3">0</span><span class="s1">)] * (d + </span><span class="s3">1</span><span class="s1">) 
+        q[d] = r 
+        T1 = Polrat(q) 
+        P = self - (T1 * other) 
+        T2 = P / other 
+        </span><span class="s2">return </span><span class="s1">T2 + T1 
+ 
+    </span><span class="s2">def </span><span class="s1">__mod__(self, other):  </span><span class="s0"># reste division euclidienne - remainder in Euclidean division</span><span class="s1"> 
+        q = self / other 
+        </span><span class="s2">return </span><span class="s1">self - other * q 
+ 
+    </span><span class="s2">def </span><span class="s1">decompose(self, other):  </span><span class="s0">#décomposition suivant les puissances croissantes - decomposition according increasing powers</span><span class="s1"> 
+        m = self.degre() 
+        n = other.degre() 
+        </span><span class="s2">if </span><span class="s1">m &lt; n: 
+            </span><span class="s2">return </span><span class="s1">[self] 
+        q = self / other 
+        r = self % other 
+        </span><span class="s2">return </span><span class="s1">[r] + q.decompose(other) 
+ 
+</span><span class="s0">#************************fin de la classe Polrat - end of definition of class**********************</span><span class="s1"> 
+</span><span class="s0">#variables globales - glob al variables</span><span class="s1"> 
+zero=Fraction(</span><span class="s3">0</span><span class="s1">) 
+un=Fraction(</span><span class="s3">1</span><span class="s1">) 
+deux=Fraction(</span><span class="s3">2</span><span class="s1">) 
+trois=Fraction(</span><span class="s3">3</span><span class="s1">) 
+quatre=Fraction(</span><span class="s3">4</span><span class="s1">) 
+cinq=Fraction(</span><span class="s3">5</span><span class="s1">) 
+six=Fraction(</span><span class="s3">6</span><span class="s1">) 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    c1=[-un,un] 
+    q1=Polrat(c1) 
+    q=q1*q1*q1 
+ 
+    c2=[quatre, -trois, deux ] 
+    p=Polrat(c2) 
+    </span><span class="s2">for </span><span class="s1">h </span><span class="s2">in </span><span class="s1">p.decompose(q1): 
+        print (h) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

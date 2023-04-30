@@ -1,114 +1,495 @@
-
-
 <!DOCTYPE html>
 <html>
-   <head>
-      <meta charset="utf-8" />
-      <title>Intégrales</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="../../css/themes/myown.css" />
-      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
-      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
-      <link href="../../css/myown.css" rel="stylesheet">
-      <script src="../../js/jquery-1.11.3.js"></script>
-      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
-      <script src="../../js/custom.js"></script>
-
- 
-   </head>
-   <body style="overflow: auto; "class="fr">
-      <script> window.onload=get();</script>
-      <a name="beg"></a>
-      <div data-role="page" data-theme="f">
-         <div data-role="header">
-            <table>
-               <tr>
-                  <td>Choisissez votre langue !</td>
-                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
-                  <td>Choose your language !</td>
-                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
-               </tr>
-            </table>
-         </div>
-         <!-- /header -->
-         <div style="overflow: auto; "  data-role="content" data-theme="f">
-            <div lang="fr">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Liens externes" onclick="go('liens.html')" /></li>
-                     <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
- 
-            </div>
-            <div lang="en">
-               <div>
-                  <ul style=list-style-type:'';>
-                  
-                      <li><input type="button" value="External links" onclick="go('liens.html')" /></li>
-                     <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-  
-             
-            </div>
-            
-            <div lang="fr">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
-                     <li><input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-            </div>
-            <!-- /fr --> 
-          <div lang="en">
-               <div>
-                  <ul style=list-style-type:'';>
-                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
-                     <li><input type="button" value="Back to Calculus" onclick="go('../index.html')" /></li>
-                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
-                  </ul>
-               </div>
-               <!-- /navbar -->
-            </div>
-            <!-- /en -->                               
-         </div>
-         <!-- /content -->
-         <div data-role="footer">
-            <table cellpadding="10">
-               <tr>
-                  <td>
-                     <div lang="fr">Création Gilles Dubois</div>
-                     <div lang="en">Created by Gilles Dubois</div>
-                  </td>
-                  <td>
-                     <div lang="fr">Janvier 2022</div>
-                     <div lang="en">January 2022</div>
-                  </td>
-                  <td>
-                     <div lang="fr">Version mobile Jquery</div>
-                     <div lang="en">Mobile Jquery version</div>
-                  </td>
-               </tr>
-            </table>
-         </div>
-         <!-- /footer -->
-         <ul style=list-style-type:'';>
-            <li>
-               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
-               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
-            </li>
-            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
-         </ul>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intégrales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
       </div>
-      <!-- /page -->
-   </body>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Subdivisions d'un intervalle" onclick="go('intsubdiv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Fonctions étagées" onclick="go('intetagees.html')" />
+              </li>
+              <li>
+                <input type="button" value="Intégrale d'une fonction étagée" onclick="go('integretagees.html')" />
+              </li>
+              <li>
+                <input type="button" value="Sommes de Darboux" onclick="go('intsomdarboux.html')" />
+              </li>
+              <li>
+                <input type="button" value="Fonctions riemann-intégrables" onclick="go('intriemint.html')" />
+              </li>
+              <li>
+                <input type="button" value="Cas des fonctions continues" onclick="go('intfonccont.html')" />
+              </li>
+              <li>
+                <input type="button" value="Sommes de Riemann" onclick="go('intsommesriemann.html')" />
+              </li>
+              <li>
+                <input type="button" value="Méthodes d'approximation" onclick="go('intapprox.html')" />
+              </li>
+              <li>
+                <input type="button" value="Transformations usuelles" onclick="go('inttransfos.html')" />
+              </li>
+              <li>
+                <input type="button" value="Intégrales impropres" onclick="go('intimpropres.html')" />
+              </li>
+              <li>
+                <input type="button" value="Comparaison séries-intégrales" onclick="go('intcomparaison.html')" />
+              </li>
+              <li>
+                <input type="button" value="Intégrale d'une limite" onclick="go('intlimites.html')" />
+              </li>
+              <li>
+                <input type="button" value="Intégrale d'une série" onclick="go('intserie.html')" />
+              </li>
+              <li>
+                <input type="button" value="Intégrale dépendant d'un paramètre" onclick="go('intparam.html')" />
+              </li>
+              <li>
+                <input type="button" value="Autres mesures" onclick="go('intautresmesures.html')" />
+              </li>
+              <li>
+                <input type="button" value="Liens externes" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Partitions of an interval" onclick="go('intsubdiv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Step (staircase)) functions" onclick="go('intetagees.html')" />
+              </li>
+              <li>
+                <input type="button" value="Integral of a step function" onclick="go('integretagees.html')" />
+              </li>
+              <li>
+                <input type="button" value="Darboux sums" onclick="go('intsomdarboux.html')" />
+              </li>
+              <li>
+                <input type="button" value="Riemann integrable functions" onclick="go('intriemint.html')" />
+              </li>
+              <li>
+                <input type="button" value="Case of continuous functions" onclick="go('intfonccont.html')" />
+              </li>
+              <li>
+                <input type="button" value="Riemann sums" onclick="go('intsommesriemann.html')" />
+              </li>
+              <li>
+                <input type="button" value="Approximation methods" onclick="go('intapprox.html')" />
+              </li>
+              <li>
+                <input type="button" value="Usual transformations" onclick="go('inttransfos.html')" />
+              </li>
+              <li>
+                <input type="button" value="Improper integrals" onclick="go('intimpropres.html')" />
+              </li>
+              <li>
+                <input type="button" value="Integral test" onclick="go('intcomparaison.html')" />
+              </li>
+              <li>
+                <input type="button" value="Integral of a limit" onclick="go('intlimites.html')" />
+              </li>
+              <li>
+                <input type="button" value="Integral of a series" onclick="go('intserie.html')" />
+              </li>
+              <li>
+                <input type="button" value="Integrals depending on a parameter" onclick="go('intparam.html')" />
+              </li>
+              <li>
+                <input type="button" value="Other measures" onclick="go('intautresmesures.html')" />
+              </li>
+              <li>
+                <input type="button" value="External links" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <a name="debut"></a>
+        <div lang="fr">
+          <h2>Motivation </h2> Tout comme nous avons réussi à donner une interprétation graphique à la fonction dérivée (pente de la tangente), nous cherchons ici à donner une interprétation graphique à la notion de primitive. <br> Cela ne peut se faire de façon satisfaisante qu'au moyen de la notion de <strong>
+            <em>'surface'</em>
+          </strong> ou <strong>
+            <em>"d'aire"</em>
+          </strong> d'une partie du plan. <br> Cela pose d'entrée certains problèmes théoriques du type: "Quelles sont les parties du plan, susceptibles de se voir attribuer une aire? <br> La croyance 'naïve' que toute partie est 'mesurable' se heurte très vite à des difficultés théoriques qui ne sont pas forcément liées à la notion de dimension. On rencontre les mêmes problèmes avec la longueur des courbes et la mesure des volumes dans l'espace. <br> Ces problèmes sont aujourd'hui à peu près résolus, mais il n'y a pas une approche unique de la théorie de la mesure. <br>
+          <h2>Galerie des portraits</h2> Nous suivrons ici les traces de Bernhard Riemann qui a poursuivi le travail de Cauchy dans cette direction et dont la pensée se résume simplement
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Motivation </h2> Just as we succeeded in giving a graphical interpretation to the derivative function (slope of the tangent), we seek here to give a graphical interpretation to the notion of primitive. <br> This can only be done satisfactorily by means of the notion of <strong>
+            <em>'surface'</em>
+          </strong> or <strong>
+            <em>"area"</em>
+          </strong> of a subset of the plan. <br> This immediately poses certain theoretical problems such as: "What are the parts of the plane, likely to be assigned an area ? <br> The 'naive' belief that any part is 'measurable' very quickly comes up against theoretical difficulties which are not necessarily linked to the notion of dimension. We encounter the same problems with the length of curves and the measurement of volumes in space. <br> These problems are now more or less solved, but there is no single approach to measure theory. <br>
+          <h2>Portrait gallery</h2> We will follow here in the footsteps of Bernhard Riemann who continued Cauchy's work in this direction and whose thought can be summed up simply
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td>
+              <font color="#FFFFFF">Bernhard Riemann (1826/1866-DE)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/250px-Georg_Friedrich_Bernhard_Riemann.jpeg" width="250" height="273" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <a name="method"></a>
+        <div lang="fr">
+          <h2>Mesure des surfaces au sens de Riemann</h2> Il est logique de prendre comme 'briques de base' les rectangles. Les rectangles sont mesurables et ont une aire égale au produit de leur longueur par leur largeur. Cela dit, une fonction de mesure, si on veut qu'elle se comporte comme on est en droit de l'attendre, doit posséder la propriété <b>
+            <i>"d'additivité"</i>
+          </b> (finie), c'est à dire que la mesure de la réunion disjointe de deux parties mesurables doit être mesurable et avoir pour mesure la somme des mesures de chacun d'eux. <br> Il est donc logique d'accepter comme mesurables les <b>
+            <i>'sommes de rectangles'</i>
+          </b> (réunions finies de rectangles disjoints) et d'associer à de tels ensembles une mesure qui sera la somme des mesures des rectangles constituants. <br> Pour finir, on qualifiera un ensemble de <b>
+            <i>'mesurable'</i>
+          </b> si pour tout réel &epsilon; &gt;0, on peut le "coincer" entre deux sommes de rectangles, la première contenue dans lui et la seconde le contenant et telles que la différence de leurs mesures est &le; &epsilon;. <br> On voit que dans ces conditions que si S est un ensemble ainsi défini, les sommes de rectangles incluses dans S ont une borne supérieure, les sommes de rectangles contenant S ont une borne inférieure et les deux bornes sont égales. C'est justement cette valeur commune que nous appelerons l'aire de S. <br> Voici maintenant une appliquette qui encadre la surface d'une ellipse de grand axe 4 et de petit axe 2 (surface théorique=2&pi;&asymp;6.28) au moyen de recouvrements par des sommes de carrés de côté 1/2<sup>n </sup>pour n variant entre 1 et 5. <br> Cliquer sur le bouton '+' pour augmenter la valeur de n jusqu'à 5. <br> Cliquer sur le bouton '-' pour diminuer la valeur de n jusqu'à 1. <br> S1 est une approximation par défaut (surface grise). <br> S2 est une approximation par excès (surface bleue). <br> Notons que la moyenne des deux n'est pas très éloignée de la valeur théorique qui vaut 2&pi;. <br> Un délai peut être demandé pour la valeur 5 de n.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Measurement of areas in the sense of Riemann</h2> It is logical to take rectangles as 'base bricks'. Rectangles are measurable and have an area equal to the product of their length by their width. That said, a measurement function, if we want it to behave as we are entitled to expect, must possess the property <b>
+            <i>"additivity"</i>
+          </b> ( finite), that is to say that the measure of the disjoint union of two measurable parts must be measurable and have as measure the sum of the measures of each of them. <br> It is therefore logical to accept as measurable the < b>
+            <i>'sums of rectangles'</i>
+            </b> (finite reunions of disjoint rectangles) and to associate to such sets a measure which will be the sum of the measures of the constituent rectangles. <br> Finally, we will qualify a set as <b>
+              <i>'measurable'</i>
+            </b> if for all real &epsilon; &gt;0, it can be "stuck" between two sums of rectangles, the first contained in it and the second containing it and such that the difference of their measures is &le; &epsilon;. <br> We see that under these conditions that if S is a set thus defined, the sums of rectangles included in S have an upper bound, the sums of rectangles containing S have a lower bound and the two bounds are equal. It is precisely this common value that we will call the area of S. <br> Here is now an applet which frames the surface of an ellipse with major axis 4 and minor axis 2 (theoretical surface=2&pi;&asymp;6.28) by means of coverings by sums of squares of side 1/2<sup>n </sup>for n varying between 1 and 5. <br> Click on the '+' button to increase the value of n up to 5. <br> Click on the '-' button to decrease the value of n down to 1. <br> S1 is a default approximation (grey surface). <br> S2 is an excess approximation (blue area). <br> Note that the average of the two is not very far from the theoretical value which is equal to 2&pi;. <br> A waiting time can be asked for value 5 of n.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:640px; height:384px;"></div>
+        <script src="js/integ1.js"></script>
+        <button type='button' id='myButton11' onClick='nameSpace1.nextplus()'>n+</button>
+        <button type='button' id='myButton12' onClick='nameSpace1.nextminus()'>n-</button>
+        <!-- /STOP  APPLET-->
+        <a name="pytex"></a>
+        <div lang="fr"> Voici un programme Python qui calcule des approximations par défaut et par excès de la surface de la même ellipse, par la même méthode. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is a Python program that computes default and excess approximations of the area of the same ellipse, by the same method. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/integ01.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Résultat de l'exécution </div>
+        <!-- /fr -->
+        <div lang="en"> Result of running </div>
+        <!-- /en -->
+        <pre>
+5.67 6.92 6.295 6.28318530718
+5.965 6.58 6.2725 6.28318530718
+6.06444444444 6.47111111111 6.26777777778 6.28318530718
+6.16 6.4016 6.2808 6.28318530718
+6.2208 6.3412 6.281 6.28318530718
+</pre>
+        <div lang="fr">
+          <h2>Hypographe d'une fonction positive</h2> Tout comme, dans le cadre des <input type="button" value="fonctions convexes" onclick="go('../continuite/contconvexes.html#')" data-inline="true" />, nous avons défini l'épigraphe d'une fonction, nous posons la définition suivante:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Hypograph of a positive function</h2> Just like, in the context of <input type="button" value="convex functions" onclick="go('../continuite/contconvexes.html#')" data-inline="true" />, we have defined the epigraph of a function, we pose the following definition:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On désigne par <b>
+              <i>'hypographe'</i>
+            </b> de f (f est supposée positive) l'ensemble des points (x,y) définis par x &isin; D (domaine de f) et 0 &le; y &le; f(x).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We denote by <b>
+              <i>'hypograph or subgraph'</i>
+            </b> of f (f is assumed to be positive) the set of points (x,y) defined by x &isin; D (domain of f) and 0 &le; y &le; f(x)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Vous pouvez, avec l'appliquette ci-dessous, visualiser quelques hypographes. <br> Appuyer sur le bouton 'choix fonction' pour changer de fonction. </div>
+        <!-- /fr -->
+        <div lang="en"> You can, with the applet below, visualize some hypographs. <br> Press the 'choose function' button to change function. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick='nameSpace2.choicef()'>
+          <div lang="fr">Choix fonction</div>
+          <!-- /fr -->
+          <div lang="en">choose function</div>
+          <!-- /en -->
+        </button>
+        <script src="js/hypograph1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Calculs 'directs' de certaines aires d'hypographes de fonctions continues positives.</h2> Voici un exemple de calcul direct d'une mesure d'aire d'hypographe de la fonction f(x)=x<sup>s</sup> (s entier &gt;=0) entre 0 et 1. <br /> Faire varier les valeurs de s avec le curseur et n avec les boutons.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>'Direct' calculations of certain areas of hypographs of positive continuous functions.</h2> Here is an example of a direct calculation of a hypograph area measure of the function f(x)=x<sup>s</sup> (integer s &gt;=0) between 0 and 1. <br /> Vary the values of s with the slider and n with the buttons.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton31' onClick='nameSpace3.nextplus()'>n+</button>
+        <button type='button' id='myButton32' onClick='nameSpace3.nextminus()'>n-</button>
+        <button type='button' id='myButton33' onClick='nameSpace3.restart()'>
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/caldirectint.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> La méthode consiste à construire une suite x<sub>0</sub>=1/n, x<sub>1</sub>=r/n, x<sub>2</sub>,..., x<sub>n</sub> =1 avec x<sub>k</sub>=x<sub>0</sub>r<sup>k</sup> où r = n<sup>1/n</sup>
+          <br> Posons I(n,s) la mesure de la somme des rectangles telle qu'elle apparaît sur l'appliquette.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The method consists in constructing a sequence x<sub>0</sub>=1/n, x<sub>1</sub>=r/n, x<sub>2</sub>,..., x<sub>n</sub> =1 with x<sub>k</sub>=x<sub>0</sub>r<sup>k</sup> where r = n<sup>1/n</sup>
+          <br> Let I(n,s) be the measure of the sum of the rectangles as it appears on the applet.
+        </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(n,s)=\sum_{k=0}^{n-1}x_{k}^{s}\left ( x_{k+1}-x_{k} \right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(n,s)=\sum_{k=0}^{n-1}\frac{r^{ks}}{n^{s}}\left ( \frac{r^{k+1}}{n}-\frac{r^{k}}{n} \right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(n,s)=\frac{1}{n^{s+1}}\sum_{k=0}^{n-1}\left ( r^{ks+k+1} -r^{ks+k}\right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(n,s)=\frac{1}{n^{s+1}}\left ( \sum_{k=0}^{n-1}r\left ( r^{s+1} \right )^{k}-\sum_{k=0}^{n-1} r^{k(s+1)}\right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(n,s)=\frac{1}{n^{s+1}}\left ( r\frac{1-n^{s+1}}{1-r^{s+1}}-\frac{1-n^{s+1}}{1-r^{s+1}} \right ) \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle I(n,s)=\frac{1-n^{s+1}}{n^{s+1}}\times \frac{r-1}{1-r^{s+1}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> mais on a </div>
+        <!-- /fr -->
+        <div lang="en"> but we have </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{n \to\infty }\frac{1-n^{s+1}}{n^{s+1}}=-1 \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> donc </div>
+        <!-- /fr -->
+        <div lang="en"> hence </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{n \to\infty }I(n,s)=\lim_{n \to \infty }\frac{1-r}{1-r^{s+1}}=\frac{1}{\lim_{n \to \infty }\frac{r^{s+1}-1}{r-1}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Mais <input type="button" value="nous avons déjà constaté " onclick="go('../suites/suitesconvergentes.html#ex6')" data-inline="true" /> que : </div>
+        <!-- /fr -->
+        <div lang="en"> But <input type="button" value="we already observed that " onclick="go('../suites/suitesconvergentes.html#ex6')" data-inline="true" /> that : </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{n \to \infty }r=1 \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> Cela se démontre instantanément quand on connaît les fonctions ln et exp et leurs propriétés. </div>
+        <!-- /fr -->
+        <div lang="en"> This is demonstrated instantly when we know the functions ln and exp and their properties. </div>
+        <!-- /en -->
+        <div lang="fr"> Nous en tirons immédiatement </div>
+        <!-- /fr -->
+        <div lang="en"> We draw immediately </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{n \to \infty }I(n,s)=\frac{1}{\lim_{r \to 1 }\frac{r^{s+1}-1}{r-1}} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> mais </div>
+        <!-- /fr -->
+        <div lang="en"> but </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{r \to 1 }\frac{r^{s+1}-1}{r-1} \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div lang="fr"> est par définition la valeur de la dérivée en 1 de la fonction f(x)=x<sup>s+1</sup>. <br> D'où le résultat final : </div>
+        <!-- /fr -->
+        <div lang="en"> is by definition the value of the derivative at 1 of the function f(x)=x<sup>s+1</sup>. <br> Hence the final result: </div>
+        <!-- /en -->
+        <!-- FORMULE UNIV INLINE -->
+        <p>\( \displaystyle \lim_{n \to \infty }I(n,s)=\frac{1}{s+1 } \)</p>
+        <!-- /FORMULE UNIV INLINE-->
+        <div divlang="fr">
+          <h2>Résultat fondamental</h2> Nous revenons maintenant à notre point de départ, à notre motivation. <br> Le résultat essentiel que nous allons établir dans ce chapitre est le suivant:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Fundamental result</h2> Now we come back to our starting point, our motivation. <br> The essential result that we will establish in this chapter is the following:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si f est une fonction continue positive sur un intervalle [a,b] et si pour tout x &isin; [a,b], nous posons F(x)= l'aire de l'hypographe de f entre les points d'abscisses a et x, alors F est une primitive de f sur [a,b]. plus précisément F est la primitive de f qui s'annule en a.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If f is a positive continuous function on an interval [a,b] and if for all x &isin; [a,b], we set F(x)= the area of the hypograph of f between the abscissa points a and x, then F is a primitive function of f on [a,b]. more precisely F is the antiderivative of f which vanishes at a.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous traiterons ensuite le cas des fonctions non partout positives pour une généralisation de ce résultat. <br> Voici maintenant une appliquette qui vous permet de visualiser graphiquement certaines primitives. <br> Vous pouvez changer de fonction avec le bouton 'Autre exemple'. <br> Vous pouvez faire varier x entre 0 et 5 avec la souris en tirant le point rouge . </div>
+        <!-- /fr -->
+        <div lang="en"> We will then deal with the case of non-everywhere positive functions for a generalization of this result. <br> Here is now an applet that allows you to visualize certain primitive functions graphically. <br> You can change the function with the 'Other example' button. <br> You can vary x between 0 and 5 with the mouse by dragging the red point. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton41' onClick='nameSpace4.choicef()'>
+          <div lang="fr">Autre exemple</div>
+          <!-- /fr -->
+          <div lang="en">Other example</div>
+          <!-- /en -->
+        </button>
+        <script src="js/showintegrals.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
 </html>
-

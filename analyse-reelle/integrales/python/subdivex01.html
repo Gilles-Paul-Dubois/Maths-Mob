@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>subdivision1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">random 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Subdivision: 
+    </span><span class="s0">&quot;&quot;&quot;Modélisation des subdivisions d'un intervalle - Model for partitions of an interval &quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, a, b, type, n, points=[]): 
+        </span><span class="s0">&quot;&quot;&quot;le constructeur - the constructor
+        a: extrêmité gauche - left bound
+        b:extrêmité droite  - right bound
+        type: code type 1 arithmétique, 2 géométrique, 3 aléatoire, 4 précisée - codes for kind 1=arithmetic, 2=geometric, 3=random, 4=specified
+        n: nombres de points extrêmités comprises moins une unité - total number of points including bounds minus one unit 
+        points: éventuellement la suite des points sans a ni b dans le cas du type 4 eventually the list of points a and b omitted in case of type 4&quot;&quot;&quot;</span><span class="s1"> 
+        self.a = a 
+        self.b = b 
+        self.type = type 
+        self.n = n 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">1</span><span class="s1">:  </span><span class="s0"># arithmétique - arithmùetic</span><span class="s1"> 
+            r = (b - a) * (</span><span class="s3">1.0 </span><span class="s1">/ n)  </span><span class="s0">#la raison de la progression arithmétique - ratio of the progression</span><span class="s1"> 
+            self.points = [a + i * r </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+            self.points += [b] 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">2</span><span class="s1">:  </span><span class="s0"># géométrique - geometric</span><span class="s1"> 
+            q = (b * </span><span class="s3">1.0 </span><span class="s1">/ a) ** (</span><span class="s3">1.0 </span><span class="s1">/ n)  </span><span class="s0">#la raison de la progression géométrique - ratio for geometric progression</span><span class="s1"> 
+            self.points = [a * (q ** i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+            self.points += [b] 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">3</span><span class="s1">:  </span><span class="s0"># aléatoire - random</span><span class="s1"> 
+            points = [random.uniform(a, b) </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">1</span><span class="s1">, n)] 
+            points.sort() 
+            self.points = [a] + points + [b] 
+        </span><span class="s2">if </span><span class="s1">type == </span><span class="s3">4</span><span class="s1">:  </span><span class="s0"># points fournis sans les extrêmités - points given except bounds</span><span class="s1"> 
+            self.points = [a] + points + [b] 
+ 
+    </span><span class="s2">def </span><span class="s1">pas(self): 
+        </span><span class="s0">&quot;&quot;&quot;Calcul du pas - computation of the norm (mesh)&quot;&quot;&quot;</span><span class="s1"> 
+        p = self.b - self.a 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+            d = (self.points[i + </span><span class="s3">1</span><span class="s1">] - self.points[i]) 
+            </span><span class="s2">if </span><span class="s1">d &lt; p: 
+                p = d 
+        </span><span class="s2">return </span><span class="s1">p 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;la borne supérieure the common partition&quot;&quot;&quot;</span><span class="s1"> 
+        p = [x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">other.points </span><span class="s2">if </span><span class="s1">x </span><span class="s2">not in </span><span class="s1">self.points]  </span><span class="s0"># éviter les doublons - avoid doubles</span><span class="s1"> 
+        q = self.points + p  </span><span class="s0"># réunir tous les points - take all points together</span><span class="s1"> 
+        q.sort()  </span><span class="s0"># trier</span><span class="s1"> 
+        q = q[</span><span class="s3">1</span><span class="s1">:-</span><span class="s3">1</span><span class="s1">] 
+        </span><span class="s2">return </span><span class="s1">Subdivision(self.a, self.b, </span><span class="s3">4</span><span class="s1">, len(q) + </span><span class="s3">1</span><span class="s1">, q) 
+ 
+    </span><span class="s2">def </span><span class="s1">ordre(self, x):  </span><span class="s0"># trouve dans quel sous-intervalle se trouve x - finds in which interval x lies</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n + </span><span class="s3">1</span><span class="s1">): 
+            </span><span class="s2">if </span><span class="s1">x &lt;= self.points[k]: 
+                </span><span class="s2">return </span><span class="s1">k - </span><span class="s3">1</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    A = Subdivision(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">, </span><span class="s3">5</span><span class="s1">)  </span><span class="s0"># aléatoire -random</span><span class="s1"> 
+    print(A.points) 
+    print(A.pas()) 
+    B = Subdivision(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">4</span><span class="s1">, </span><span class="s3">3</span><span class="s1">, [</span><span class="s3">1.6</span><span class="s1">])  </span><span class="s0"># précisée - specified</span><span class="s1"> 
+    print(B.points) 
+    S = Subdivision(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">)  </span><span class="s0"># arithmétique -arithmetic</span><span class="s1"> 
+    print(S.points) 
+    T = Subdivision(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)  </span><span class="s0"># géométrique - geometric</span><span class="s1"> 
+    print(T.points) 
+    V = S + T  </span><span class="s0"># calcule la borne sup. des deux dernières - computes the supremum of last two</span><span class="s1"> 
+    print(V.points) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>subdivision2.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">Subdivision</span>
+    <span class="s1">a::Float64</span>
+    <span class="s1">b::Float64</span>
+    <span class="s1">n::Int64</span>
+    <span class="s1">t::Int8</span>
+    <span class="s1">r::Float64</span>
+    <span class="s1">q::Float64</span>
+    <span class="s1">points::Vector{Float64}</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Subdivision(a,b,n,t)</span>
+    <span class="s1">a,b=Float64(a), Float64(b)</span>
+    <span class="s0">if </span><span class="s1">t==</span><span class="s2">1</span>
+        <span class="s1">r=(b-a)/n</span>
+        <span class="s1">q=</span><span class="s2">0</span>
+        <span class="s1">points=[a+i*r </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">0</span><span class="s1">:n-</span><span class="s2">1</span><span class="s1">]</span>
+        <span class="s1">push!(points,b)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">t==</span><span class="s2">2 </span><span class="s3">#a différent de 0 </span>
+        <span class="s1">q=(b/a)^(</span><span class="s2">1</span><span class="s1">/n)</span>
+        <span class="s1">r=</span><span class="s2">0</span>
+        <span class="s1">points=[a*q^i </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">0</span><span class="s1">:n-</span><span class="s2">1</span><span class="s1">]</span>
+        <span class="s1">push!(points,b)</span>
+    <span class="s0">end</span>
+    <span class="s0">if </span><span class="s1">t==</span><span class="s2">3</span>
+        <span class="s1">r,q=</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span>
+        <span class="s1">points=[a]</span>
+        <span class="s1">rd= sort!([a+(b-a)*rand() </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n-</span><span class="s2">1</span><span class="s1">])</span>
+        <span class="s1">append!(points,rd)</span>
+        <span class="s1">push!(points,b)</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Subdivision(a,b,n,t,r,q,points)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">Subdivision(L::Vector{Float64})</span>
+    <span class="s1">a, b, n=L[</span><span class="s2">1</span><span class="s1">],L[</span><span class="s0">end</span><span class="s1">],length(L)</span>
+    <span class="s1">t,r,q = </span><span class="s2">3</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">0</span>
+    <span class="s1">points=L</span>
+    <span class="s0">return </span><span class="s1">Subdivision(a,b,n,t,r,q,points)</span>
+<span class="s0">end</span>
+    
+<span class="s0">struct </span><span class="s1">SubdivisionPointee</span>
+    <span class="s1">S::Subdivision</span>
+    <span class="s1">sorte::Int8</span>
+    <span class="s1">selection::Vector{Float64}</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">SubdivisionPointee(S::Subdivision,s::Int64)</span>
+    <span class="s1">sorte=Int8(s)</span>
+    <span class="s1">n=S.n</span>
+    <span class="s0">if </span><span class="s1">sorte==</span><span class="s2">1</span>
+        <span class="s1">selection=[S.points[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n]</span>
+    <span class="s0">elseif </span><span class="s1">sorte==</span><span class="s2">2</span>
+        <span class="s1">selection=[S.points[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">2</span><span class="s1">:n+</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s0">elseif </span><span class="s1">sorte==</span><span class="s2">3</span>
+        <span class="s1">selection = [(S.points[i]+S.points[i+</span><span class="s2">1</span><span class="s1">])/</span><span class="s2">2 </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n]</span>
+    <span class="s0">else</span>
+        <span class="s1">p(i)=S.points[i]+rand()*(S.points[i+</span><span class="s2">1</span><span class="s1">]-S.points[i])</span>
+        <span class="s1">selection = [p(i) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n]</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">SubdivisionPointee(S,sorte,selection)</span>
+<span class="s0">end</span>
+
+
+<span class="s0">function </span><span class="s1">SubdivisionPointee(S::Subdivision ,P::Vector{Float64})</span>
+    <span class="s1">sorte=Int8(</span><span class="s2">5</span><span class="s1">)</span>
+    <span class="s0">return </span><span class="s1">SubdivisionPointee(S,sorte,P)</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">S=Subdivision(</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">,</span><span class="s2">10</span><span class="s1">,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">SP1=SubdivisionPointee(S,</span><span class="s2">1</span><span class="s1">)</span>
+    <span class="s1">println(S.points)</span>
+    <span class="s1">println(SP1.selection)</span>
+    <span class="s1">SP2=SubdivisionPointee(S,</span><span class="s2">2</span><span class="s1">)</span>
+    <span class="s1">println(SP2.selection)</span>
+    <span class="s1">SP3=SubdivisionPointee(S,</span><span class="s2">3</span><span class="s1">)</span>
+    <span class="s1">println(SP3.selection)</span>
+    <span class="s1">SP4=SubdivisionPointee(S,</span><span class="s2">4</span><span class="s1">)</span>
+    <span class="s1">println(SP4.selection)</span>
+    <span class="s1">P=[S.points[i]+</span><span class="s2">0.01 </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:S.n] </span>
+    <span class="s1">SP5=SubdivisionPointee(S,P)</span>
+    <span class="s1">println(SP5.selection)</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span></pre>
+</body>
+</html>

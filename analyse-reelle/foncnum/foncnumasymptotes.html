@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Asymptotes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/foncnumasymptotes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/foncnumasymptotes/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition générale</h2> Voici une appliquette qui vous permet de visualiser deux graphes de fonctions f et g. <br> Le graphe de f est représenté en vert et celui de g en bleu. <br> En rouge on voit la verticale d'abscisse x qui coupe chaque graphe en un point I<sub>1</sub> et I<sub>2</sub> respectivement. <br> la quantité &delta;(x) qui s'affiche en rouge en haut est la mesure algébtique du segment [I<sub>1</sub>I<sub>2</sub>]. <br> Vous pouvez déplacer cette verticale en la tirant par le point rouge avec la souris. <br> Cliquez sur 'Zoom-' pour augmenter l'échelle. <br> Cliquez sur 'Zoom-' pour revenir en arrière. <br> Remarquez que plus x grandit et plus les courbes représentant f et g tendent à se confondre.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>General definition</h2> Here is an applet that allows you to visualize two graphs of functions f and g. <br> The graph of f is shown in green and that of g in blue. <br> In red we see the vertical of abscissa x which intersects each graph at a point I<sub>1</sub> and I<sub>2</sub> respectively. <br> the quantity &delta;(x) displayed in red at the top is the algebtic measure of the segment [I<sub>1</sub>I<sub>2</sub>]. <br> You can move this vertical by dragging it by the red dot with the mouse. <br> Click 'Zoom-' to increase the scale. <br> Click 'Zoom-' to go back. <br> Note that the more x grows, the more the curves representing f and g tend to merge.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton1' onClick="nameSpace1.zoomplus()">Zoom-</button>
+        <button type='button' id='myButton2' onClick="nameSpace1.zoommoins()">Zoom+</button>
+        <script src="js/asymp1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> C'est cette situation que l'on décrit par le mot 'asymptote' </div>
+        <!-- /fr --> . <div lang="en"> It is this situation that is described by the word 'asymptote'. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soient f et g deux fonctions numériques définies dans des intervalles de la forme ]a,+&infin;[ on dit que f et g sont <b>
+              <i>'asymptotes'</i>
+            </b> l'une de l'autre pour x tendant vers +&infin; si leurs représentations graphiques tendent à se confondre quand x devient de plus en plus grand, formellement si: \(\lim_{x \to +\infty }\left ( f(x)-g(x) \right )=0\)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let f and g be two numerical functions defined in intervals of the form ]a,+&infin;[ we say that f and g are <b>
+              <i>'asymptotes'</i>
+            </b> one of the 'other for x tending to +&infin; if their graphical representations tend to merge when x becomes larger and larger, formally if: \(\lim_{x \to +\infty }\left ( f(x)-g(x) \right )=0\)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Evidemment, de façon symétrique, on peut également avoir deux courbes asymptotes pour x&rarr;-&infin;. <h2>Asymptote horizontale</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Obviously, symmetrically, we can also have two asymptote curves for x&rarr;-&infin;. <h2>Horizontal asymptote</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> L'asymptote <b>
+              <i>'horizontale'</i>
+            </b> correspond à la situation précédente quand une des deux fonctions est constante.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> The <b>
+              <i>'horizontal'</i>
+            </b> asymptote corresponds to the previous situation when one of the two functions is constant.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici un exemple d'asymptote horizontale. <br> Le fonctionnement de l'appliquette est identique à celui de la précédente. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an example of a horizontal asymptote. <br> The operation of the applet is identical to that of the previous one. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton21' onClick="nameSpace2.zoomplus()">Zoom-</button>
+        <button type='button' id='myButton22' onClick="nameSpace2.zoommoins()">Zoom+</button>
+        <script src="js/asymp2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Asymptote oblique</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Oblique asymptote </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On dit qu'on a affaire à une asymptote <b>
+              <i>'oblique'</i>
+            </b> quand une des deux fonctions est une fonction affine (du type x&rarr; ax+b) non constante (a&ne;0).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We say that we are dealing with an <b>
+              <i>'oblique'</i>
+            </b> asymptote when one of the two functions is an affine function (of the type x&rarr; ax+b) which is not constant (a&ne; 0).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser une asymptote oblique y=x. <br> Fonctionnement identique aux deux précédentes. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize an oblique asymptote y=x. <br> Operation identical to the two previous ones. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton31' onClick="nameSpace3.zoomplus()">Zoom-</button>
+        <button type='button' id='myButton32' onClick="nameSpace3.zoommoins()">Zoom+</button>
+        <script src="js/asymp3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Asymptote verticale</h2> L'asymptote dite verticale ne correspond pas exactement au formalisme développé précédemment dans la mesure où une droite verticale n'est jamais le graphe d'une fonction. Cependant on utilise cette terminologie quand la fonction tend vers un infini lorsque la variable tend vers une valeur finie. <br> Dans l'exemple ci-dessus, la courbe dont le graphe est tracé en rouge (f(x)=x+1/x) possède une <b>
+            <i>'asymptote verticale' </i>
+          </b>pour x&rarr;o+.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Vertical asymptote</h2> The so-called vertical asymptote does not correspond exactly to the formalism developed previously insofar as a vertical line is never the graph of a function. However, this terminology is used when the function tends to infinity when the variable tends to a finite value. <br> In the example above, the curve whose graph is drawn in red (f(x)=x+1/x) has a <b>
+            <i>'vertical asymptote' </i>
+          </b>for x&rarr;o+.
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/hyper.png" width="225" height="224" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Direction asymptotique</h2> Nous traitons seulement le cas x&rarr;+&infin;, le cas x&rarr;-&infin; étant parfaitement symétrique.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Asymptotic direction</h2> We only deal with the case x&rarr;+&infin;, the case x&rarr;-&infin; being perfectly symmetrical.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Une condition nécessaire pour que la courbe représentative de la fonction y=f(x) admette une droite asymptote d'équation y=ax+b est que lim<sub>x&rarr;+&infin;</sub> f(x)/x=a existe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> A necessary condition for the curve representative of the function y=f(x) to admit an asymptote line with equation y=ax+b is that lim<sub>x&rarr;+&infin;</sub> f(x)/x =a exists.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte du théorème sur la limite des quotients. Si lim<sub>x&rarr;+&infin;</sub>(f(x)-ax-b)=0 alors a plus forte raison lim<sub>x&rarr;+&infin;</sub>(f(x)-ax-b)/x=0. Comme lim<sub>x&rarr;+&infin;</sub>;b/x=0 il vient a=lim<sub>x&rarr;+&infin;</sub>f(x)/x. <br> Les exemples qui suivent montrent que cette condition n'est pas suffisante. </div>
+        <!-- /fr -->
+        <div lang="en"> This follows from the theorem on the limit of quotients. If lim<sub>x&rarr;+&infin;</sub>(f(x)-ax-b)=0 then a fortiori lim<sub>x&rarr;+&infin;</sub>(f(x)- ax-b)/x=0. As lim<sub>x&rarr;+&infin;</sub>;b/x=0 it comes a=lim<sub>x&rarr;+&infin;</sub>f(x)/x. <br> The following examples show that this condition is not sufficient. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> On dit que la représentation graphique de la courbe d'équation y=f(x) admet une <b>
+              <i>'direction asymptotique'</i>
+            </b> pour x&rarr;+&infin; si la direction du vecteur \(\overrightarrow{OM(x)}\)) où M(x) est le point de coordonnées (x,y=f(x)) tend vers une limite.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> We say that the graphical representation of the curve with equation y=f(x) admits an <b>
+              <i>'asymptotic direction'</i>
+            </b> for x&rarr;+&infin; if the direction of the vector \(\overrightarrow{OM(x)}\)) where M(x) is the point of coordinates (x,y=f(x)) tends towards a limit.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Notons que cette direction est caractérisée par la pente de la droite (OM(x)). <br> Voici une appliquette qui vous permet de visualiser une direction asymptotique avec asymptote oblique. </div>
+        <!-- /fr -->
+        <div lang="en"> Note that this direction is characterized by the slope of the line (OM(x)). <br> Here is an applet that allows you to visualize an asymptotic direction with an oblique asymptote. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton41' onClick="nameSpace4.zoommoins()">Zoom-</button>
+        <button type='button' id='myButton42' onClick="nameSpace4.zoomplus()">Zoom+</button>
+        <script src="js/asymp4.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser une direction asymptotique nulle SANS asymptote horizontale. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize a zero asymptotic direction WITHOUT any horizontal asymptote. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box5" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton51' onClick="nameSpace5.zoommoins()">Zoom-</button>
+        <button type='button' id='myButton52' onClick="nameSpace5.zoomplus()">Zoom+</button>
+        <script src="js/asymp5.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser un cas où il n'existe pas de direction asymptotique. <br> Cliquez sur 'Zoom-' pour diminuer l'échelle. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize a case where there is no asymptotic direction. <br> Click on 'Zoom-' to decrease the scale. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box6" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton61' onClick="nameSpace6.zoommoins()">Zoom-</button>
+        <button type='button' id='myButton62' onClick="nameSpace6.zoomplus()">Zoom+</button>
+        <button type='button' id='myButton62' onClick="nameSpace6.Paint()">Restart</button>
+        <script src="js/asymp6.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Détermination d'une asymptote oblique</h2> Cette fois encore, nous traitons seulement le cas x&rarr;+&infin;, le cas x&rarr;-&infin; étant parfaitement symétrique. <br> Nous nous plaçons dans l'hypothèse où une direction asymptotique a été décelée. <br> Nous supposons donc que lim<sub>x&rarr;+&infin;</sub>f(x)/x=a existe.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Determination of an oblique asymptote</h2> This time again, we only deal with the case x&rarr;+&infin;, the case x&rarr;-&infin; being perfectly symmetrical. <br> We assume that an asymptotic direction has been detected. <br> We therefore assume that lim<sub>x&rarr;+&infin;</sub>f(x)/x=a exists.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Dans ces conditions la droite d'équation y=ax+b est asymptote à la courbe représentative y=f(x) si et seulement si lim<sub>x&rarr;+&infin;</sub>(f(x)-ax) existe. Cette limite vaut alors b.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Under these conditions the straight line with equation y=ax+b is asymptote to the representative curve y=f(x) if and only if lim<sub>x&rarr;+&infin;</sub>(f(x)-ax) exist. This limit is then equal to b.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette propriété résulte simplement de la définition d'une asymptote oblique. <h2>Position de la courbe par rapport à son asymptote</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This property simply results from the definition of an oblique asymptote. <h2>Position of the curve with respect to its asymptote</h2>
+        </div>
+        <!-- /en -->
+        <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />
+        <div lang="fr"> Notons que rien n'empêche une courbe de traverser son asymptote, et cela même une infinité de fois. Voici une appliquette qui vous permet de visualiser un tel cas. <br> Cliquez sur 'Zoom-' pour diminuer l'échelle. <br> Vous pouvez déplacer la verticale en l'attrapant avec la souris par le point rouge. </div>
+        <!-- /fr -->
+        <div lang="en"> Note that nothing prevents a curve from crossing its asymptote, even an infinite number of times. Here is an applet that allows you to visualize such a case. <br> Click 'Zoom-' to decrease the scale. <br> You can move the vertical by grabbing it with the mouse by the red dot. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box7" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type='button' id='myButton71' onClick="nameSpace7.zoomplus()">Zoom-</button>
+        <button type='button' id='myButton72' onClick="nameSpace7.zoommoins()">Zoom+</button>
+        <script src="js/asymp7.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Quand l'asymptote oblique ou horizontale existe d'équation y=ax+b, les points d'intersection de la courbe avec son asymptote ont des abscisses solutions de l'équation f(x)=ax+b.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> When the oblique or horizontal asymptote exists with equation y=ax+b, the points of intersection of the curve with its asymptote have abscissa solutions of the equation f(x)=ax+b.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Quand l'asymptote oblique ou horizontale existe d'équation y=ax+b, les points de la courbe situés au dessus de l'asymptote ont des abscisses solutions de l'inéquation f(x) &gt; ax+b.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> When the oblique or horizontal asymptote exists with equation y=ax+b, the points of the curve located above the asymptote have abscissa solutions of the inequality f(x) > ax+b.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Quand l'asymptote oblique ou horizontale existe d'équation y=ax+b, les points de la courbe situés en dessous de l'asymptote ont des abscisses solutions de l'inéquation f(x)&lt;ax+b.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> When the oblique or horizontal asymptote exists with equation y=ax+b, the points of the curve located below the asymptote have abscissa solutions of the inequality f(x) < ax+b. </div>
+              <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Toutes ces propriétés résultent de la définition d'une asymptote oblique (ou horizontale). <br> Etudier la position de la courbe par rapport à son asymptote reviendra donc, comme toujours en analyse, à résoudre des équations et des inéquations (ce qui n'est pas toujours simple). <h2>Branches paraboliques</h2>
+          </div>
+          <!-- /fr -->
+          <div lang="en"> All these properties result from the definition of an oblique (or horizontal) asymptote. <br> Studying the position of the curve with respect to its asymptote will therefore come down, as always in analysis, to solving equations and inequalities (which is not always simple). <h2>Parabolic branches</h2>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def5"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 5</div> Lorsque qu'on a limx&rarr;+&infin;f(x)=+&infin; et qu'on détecte une direction asymptotique de pente a sans trouver d'asymptote, on dit parfois que la représentation graphique de f présente une <b>
+                <i>'branche parabolique'</i>
+              </b> dans la direction de la droite y=ax.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 5</div> When we have limx&rarr;+&infin;f(x)=+&infin; and we detect an asymptotic direction with slope a without finding an asymptote, we sometimes say that the graphical representation of f has a <b>
+                <i>'parabolic branch'</i>
+              </b> in the direction of the line y=ax.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />
+          <div lang="fr"> Cette définition ne signifie nullement que la courbe possède une parabole pour asymptote, c'est tout simplement parce qu'historiquement la parabole d'équation y=x<sup>2</sup> est un des tout premier exemple de cette situation. cette courbe possède une direction asymptotique verticale sans pour autant posséder une droite asymptote. En somme, détecter une 'branche parabolique', c'est dire qu'on ne peut faire mieux, c'est un constat d'échec du point de vue de la recherche de droites asymptotes. </div>
+          <!-- /fr -->
+          <div lang="en"> This definition does not mean that the curve has a parabola for asymptote, it is quite simply because historically the parabola with equation y=x<sup>2</sup> is one of the very first example of this situation. this curve has a vertical asymptotic direction without however having a line as an asymptote. In short, detecting a 'parabolic branch' is to say that one cannot do better, it is an acknowledgment of failure from the point of view of the search for straight asymptotes. </div>
+          <!-- /en -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/foncnumasymptotes/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Fonctions numériques'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/foncnumasymptotes/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to 'Functions of a real variable'" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /content -->
+        <div data-role="footer">
+          <table cellpadding="10">
+            <tr>
+              <td>
+                <div lang="fr">Création Gilles Dubois</div>
+                <div lang="en">Created by Gilles Dubois</div>
+              </td>
+              <td>
+                <div lang="fr">Janvier 2022</div>
+                <div lang="en">January 2022</div>
+              </td>
+              <td>
+                <div lang="fr">Version mobile Jquery</div>
+                <div lang="en">Mobile Jquery version</div>
+              </td>
+              <td>
+                <a href="https://www.mathjax.org">
+                  <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                </a>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /footer -->
+        <ul style=list-style-type:'';>
+          <li>
+            <div lang="fr">
+              <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+            <div lang="en">
+              <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+            </div>
+          </li>
+          <li>
+            <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          </li>
+        </ul>
+      </div>
+      <!-- /page -->
+  </body>
+</html>

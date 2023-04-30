@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>ex01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">math 
+step=math.pi/</span><span class="s3">100 </span><span class="s0"># raison de la progression géométrique - step of arithmetic progression</span><span class="s1"> 
+TabX=[step*i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">51</span><span class="s1">)] </span><span class="s0">#progression arithmétique de raison step entre 0 et pi/2 - arithmetic progression step by step between 0 and &pi;/2</span><span class="s1"> 
+TabY=[math.cos(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">TabX] </span><span class="s0"># tableau des images de la suite précédente - table of images of the previous sequence</span><span class="s1"> 
+TabDa=[(TabY[i+</span><span class="s3">1</span><span class="s1">]-TabY[i])/(TabX[i+</span><span class="s3">1</span><span class="s1">]-TabX[i]) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">50</span><span class="s1">)]</span><span class="s0">#tableau des coeff a où y=ax+b est un segment de droite approx. le cosinus - table of coefficients a where y=ax+b approximates cosine</span><span class="s1"> 
+TabDb=[TabY[i]-TabDa[i]*TabX[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">50</span><span class="s1">)] </span><span class="s0"># tableau des b tels que  y=ax+b est un segment de droite aprox. le cosinus - Same for ceofficients b</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">inter(x): 
+    </span><span class="s0">&quot;&quot;&quot;détermination de l'intervalle dans lequel se trouve x - finding interval in which x lies.&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">global </span><span class="s1">TabX 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">51</span><span class="s1">): 
+        </span><span class="s2">if </span><span class="s1">TabX[i]&gt;x: 
+            </span><span class="s2">return </span><span class="s1">i-</span><span class="s3">1</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">f1(x): 
+    </span><span class="s0">&quot;&quot;&quot;approximation du cosinus par interpolation pour x entre 0 et pi/2 - approx. of cosine for x between 0 and &pi;/2&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">global </span><span class="s1">TabDa,TabDb 
+    k=inter(x) 
+    a=TabDa[k] 
+    b=TabDb[k] 
+    </span><span class="s2">return </span><span class="s1">a*x+b 
+     
+</span><span class="s2">def </span><span class="s1">f2(x): 
+    </span><span class="s0">&quot;&quot;&quot;approximation du cosinus pour x entre 0 et pi - approx. of cosine for x between 0 and &pi;&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">x &lt;math.pi/</span><span class="s3">2</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">f1(x) 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">-f1(math.pi-x) 
+</span><span class="s2">def </span><span class="s1">f3(x): 
+    </span><span class="s0">&quot;&quot;&quot;approximation du cosinus pour x entre -pi det +pi; approx. of cosine for x between -&pi; and +&pi;&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">x&gt;=</span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">f2(x) 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">f2(-x) 
+</span><span class="s2">def </span><span class="s1">f4(x): 
+    </span><span class="s0">&quot;&quot;&quot;approximation du cosinus pour x quelconque - approx. of cosine for any x&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">#on se ramène entre -pi et pi - go to the case where x between -&pi; and +&pi;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">x&gt;=</span><span class="s3">0</span><span class="s1">: 
+        </span><span class="s2">while </span><span class="s1">x &gt;=-math.pi: 
+            x=x-</span><span class="s3">2</span><span class="s1">*math.pi 
+        </span><span class="s2">return </span><span class="s1">f3(x+</span><span class="s3">2</span><span class="s1">*math.pi) 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">f4(-x) 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(-</span><span class="s3">10</span><span class="s1">,</span><span class="s3">11</span><span class="s1">): 
+        print (f4(i),math.cos(i)) 
+     
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+</span></pre>
+</body>
+</html>

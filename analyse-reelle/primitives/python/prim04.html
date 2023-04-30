@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>prim04.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Pol2Var(): 
+    </span><span class="s0">&quot;&quot;&quot;Modélisation des polynômes à deux variables&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">&quot;&quot;&quot;Constructeur à partir d'un dictionnaire&quot;&quot;&quot;</span><span class="s1"> 
+        self.coeffs = L 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">&quot;&quot;&quot;représentation externe pour print, etc...&quot;&quot;&quot;</span><span class="s1"> 
+        K = self.coeffs.keys() 
+        S = </span><span class="s3">&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K: 
+            </span><span class="s2">if </span><span class="s1">self.coeffs[k] &gt; </span><span class="s4">0</span><span class="s1">: 
+                S += </span><span class="s3">&quot;+&quot; </span><span class="s1">+ str(self.coeffs[k]) + </span><span class="s3">&quot;X^&quot; </span><span class="s1">+ str(k[</span><span class="s4">0</span><span class="s1">]) + </span><span class="s3">&quot;Y^&quot; </span><span class="s1">+ str(k[</span><span class="s4">1</span><span class="s1">]) 
+            </span><span class="s2">else</span><span class="s1">: 
+                S += str(self.coeffs[k]) + </span><span class="s3">&quot;X^&quot; </span><span class="s1">+ str(k[</span><span class="s4">0</span><span class="s1">]) + </span><span class="s3">&quot;Y^&quot; </span><span class="s1">+ str(k[</span><span class="s4">1</span><span class="s1">]) 
+        </span><span class="s2">if </span><span class="s1">S == </span><span class="s3">&quot;&quot;</span><span class="s1">: 
+            S = </span><span class="s3">&quot;0&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">S 
+ 
+    </span><span class="s2">def </span><span class="s1">simplif(self): 
+        </span><span class="s0">&quot;&quot;&quot;enlever tous les coefficients nuls&quot;&quot;&quot;</span><span class="s1"> 
+        L = {} 
+        </span><span class="s2">for </span><span class="s1">k, v </span><span class="s2">in </span><span class="s1">self.coeffs.items(): 
+            </span><span class="s2">if </span><span class="s1">v != </span><span class="s4">0</span><span class="s1">: 
+                L[k] = v 
+        </span><span class="s2">return </span><span class="s1">Pol2Var(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;multiplication par un scalaire&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">x == </span><span class="s4">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">Pol2Var({}) 
+        </span><span class="s2">else</span><span class="s1">: 
+            L = self.coeffs 
+            </span><span class="s2">for </span><span class="s1">k, v </span><span class="s2">in </span><span class="s1">L.items(): 
+                L[k] = v * x 
+            </span><span class="s2">return </span><span class="s1">Pol2Var(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;produit d'un polynôme par un autre&quot;&quot;&quot;</span><span class="s1"> 
+        L = {} 
+        </span><span class="s2">for </span><span class="s1">k1, v1 </span><span class="s2">in </span><span class="s1">self.coeffs.items(): 
+            </span><span class="s2">for </span><span class="s1">k2, v2 </span><span class="s2">in </span><span class="s1">other.coeffs.items(): 
+                k = (k1[</span><span class="s4">0</span><span class="s1">] + k2[</span><span class="s4">0</span><span class="s1">], k1[</span><span class="s4">1</span><span class="s1">] + k2[</span><span class="s4">1</span><span class="s1">]) 
+                </span><span class="s2">if </span><span class="s1">k </span><span class="s2">in </span><span class="s1">L.keys(): 
+                    L[k] += v1 * v2 
+                </span><span class="s2">else</span><span class="s1">: 
+                    L[k] = v1 * v2 
+        P = Pol2Var(L) 
+        </span><span class="s2">return </span><span class="s1">P.simplif() 
+ 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;addition de deux polynomes&quot;&quot;&quot;</span><span class="s1"> 
+        L1 = self.coeffs 
+        L2 = other.coeffs 
+        K1 = self.coeffs.keys() 
+        K2 = other.coeffs.keys() 
+        I = [k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K1 </span><span class="s2">if </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K2]  </span><span class="s0"># indices communs</span><span class="s1"> 
+        K1 = [k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K1 </span><span class="s2">if </span><span class="s1">k </span><span class="s2">not in </span><span class="s1">I] 
+        K2 = [k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K2 </span><span class="s2">if </span><span class="s1">k </span><span class="s2">not in </span><span class="s1">I] 
+        L = {} 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">I: 
+            L[k] = L1[k] + L2[k] 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K1: 
+            L[k] = L1[k] 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K2: 
+            L[k] = L2[k] 
+        P = Pol2Var(L) 
+        </span><span class="s2">return </span><span class="s1">P.simplif() 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;soustraction de deux polynomes&quot;&quot;&quot;</span><span class="s1"> 
+        L1 = self.coeffs 
+        L2 = other.coeffs 
+        K1 = self.coeffs.keys() 
+        K2 = other.coeffs.keys() 
+        I = [k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K1 </span><span class="s2">if </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K2]  </span><span class="s0"># indices communs</span><span class="s1"> 
+        K1 = [k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K1 </span><span class="s2">if </span><span class="s1">k </span><span class="s2">not in </span><span class="s1">I] 
+        K2 = [k </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K2 </span><span class="s2">if </span><span class="s1">k </span><span class="s2">not in </span><span class="s1">I] 
+        L = {} 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">I: 
+            L[k] = L1[k] - L2[k] 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K1: 
+            L[k] = L1[k] 
+        </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">K2: 
+            L[k] = -L2[k] 
+        P = Pol2Var(L) 
+        </span><span class="s2">return </span><span class="s1">P.simplif() 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">&quot;&quot;&quot;opposé d'un polynôme&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Pol2Var({}) - self 
+ 
+    </span><span class="s2">def </span><span class="s1">__pow__(self, n): 
+        </span><span class="s0">&quot;&quot;&quot;puissance entière d'un polynôme&quot;&quot;&quot;</span><span class="s1"> 
+        P = Pol2Var({(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">0</span><span class="s1">): </span><span class="s4">1</span><span class="s1">}) 
+        </span><span class="s2">if </span><span class="s1">n == </span><span class="s4">0</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">P 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, n + </span><span class="s4">1</span><span class="s1">): 
+                P = P * self 
+        </span><span class="s2">return </span><span class="s1">P 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">PolTrig(Pol2Var): 
+    </span><span class="s2">def </span><span class="s1">valeur(self, x): 
+        </span><span class="s0">&quot;&quot;&quot;surcharge de la méthode homonyme dans la classe parent&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">Pol2Var.valeur(self, math.cos(x), math.sin(x))  </span><span class="s0"># appel de la méthode homonyme dans la classe parent</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    P1 = Pol2Var({(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">0</span><span class="s1">): </span><span class="s4">1</span><span class="s1">, (</span><span class="s4">1</span><span class="s1">, </span><span class="s4">0</span><span class="s1">): -</span><span class="s4">1</span><span class="s1">, (</span><span class="s4">0</span><span class="s1">, </span><span class="s4">1</span><span class="s1">): </span><span class="s4">1</span><span class="s1">}) 
+    print(P1) 
+    print(P1.valeur(</span><span class="s4">3</span><span class="s1">, </span><span class="s4">2</span><span class="s1">)) 
+    f = PolTrig({(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">0</span><span class="s1">): </span><span class="s4">1</span><span class="s1">, (</span><span class="s4">1</span><span class="s1">, </span><span class="s4">0</span><span class="s1">): -</span><span class="s4">1</span><span class="s1">, (</span><span class="s4">0</span><span class="s1">, </span><span class="s4">1</span><span class="s1">): </span><span class="s4">1</span><span class="s1">}) 
+    print(f.valeur(math.pi / </span><span class="s4">2</span><span class="s1">)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

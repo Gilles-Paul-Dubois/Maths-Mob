@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Série double</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="f">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="f">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button> 
+         <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/seriesdouble/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/seriesdouble/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> On peut généraliser la notion de série de réels en ajoutant des dimensions. <br> La plupart des résultats relatifs aux séries 'simples' ont leur équivalent pour les séries multiples moyennant des adaptations au contexte. <br> C'est ce que nous allons voir en détail dans cette page. <h2>Galerie des portraits</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We can generalize the notion of series of real numbers by adding dimensions. <br> Most of the results relating to 'single' series have their equivalent for multiple series with adaptations to the context. <br> This is what we will see in detail on this page. <h2>Portrait gallery</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <div style="overflow: scroll; ">
+          <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+            <tr>
+              <td>
+                <font color="#FFFFFF">Otto Stolz (1842-1905-AU)</font>
+              </td>
+              <td>
+                <font color="#FFFFFF">Alfred Pringsheim (1850-1941-DE)</font>
+              </td>
+              <td>
+                <font color="#FFFFFF">Guido Fubini (1879-1943-I)</font>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <img src="images/Stolz_2.jpeg" width="281" height="326" border="0" alt="">
+              </td>
+              <td>
+                <img src="images/pringsheim_alfred.jpg" width="268" height="326" border="0" alt="">
+              </td>
+              <td>
+                <img src="images/fubini.jpg" width="200" height="271" border="0" alt="">
+              </td>
+            </tr>
+          </table>
+        </div>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Définitions</h2> Les termes d'une série simple constituent une suite, c'est à dire une <input type="button" value="application" onclick="go('../../bases/applications/definition.html#')" data-inline="true" /> de &naturals; dans &reals; et peuvent être représentés par un tableau (infini) à une dimension: <br /> u<sub>0</sub>,u<sub>1</sub>,u<sub>2</sub>, ... , u<sub>n</sub>, ....
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2> The terms of a simple series constitute a sequence, i.e. a <input type="button" value="mapping" onclick="go('../../bases/applications/definition.html#' )" data-inline="true" /> from &naturals; in &reals; and can be represented by a one-dimensional (infinite) array: <br /> u<sub>0</sub>,u<sub>1</sub>,u<sub>2</sub>, ... , u<sub>n</sub>, ....
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Le terme général d'une <b>
+              <i>'série double'</i>
+            </b> correspond à une application de ℕ × ℕ dans ℝ. <br> Ainsi on pourra écrire ce terme général sous la forme: <br> (u<sub>m,n</sub>)<sub>(m,n) ∈ ℕ × ℕ</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> The general term for a <b>
+              <i>'double series'</i>
+            </b> corresponds to a map of ℕ × ℕ in ℝ. <br> Thus we can write this general term in the form: <br> (u<sub>m,n</sub>)<sub>(m,n) ∈ ℕ × ℕ</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Une telle série peut donc être représentée par une <input type="button" value="matrice" onclick="go('../../algebre-lineaire/matrices/defmat.html#')" data-inline="true" /> infinie: <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Such a series can therefore be represented by an infinite <input type="button" value="matrix" onclick="go('../../algebre-lineaire/matrices/defmat.html#')" data-inline="true" /> : <br />
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="0" border="0">
+          <tr>
+            <td>u<sub>0,0</sub>
+            </td>
+            <td>u<sub>0,1</sub>
+            </td>
+            <td>u<sub>0,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>0,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td>u<sub>1,0</sub>
+            </td>
+            <td>u<sub>1,1</sub>
+            </td>
+            <td>u<sub>1,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>1,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td>u<sub>2,0</sub>
+            </td>
+            <td>u<sub>2,1</sub>
+            </td>
+            <td>u<sub>2,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>2,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td>u<sub>m,0</sub>
+            </td>
+            <td>u<sub>m,1</sub>
+            </td>
+            <td>u<sub>m,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>m,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Une série double peut encore être vue comme une série de séries, chaque série correspondant à une ligne (ou à une colonne) du tableau. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> A double series can still be seen as a series of series, each series corresponding to a row (or a column) of the table. <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2">
+          <tr>
+            <td>
+              <div lang="fr">Visualisation de la série</div>
+              <!-- /fr -->
+              <div lang="en">Visualization of the series</div>
+              <!-- /en -->
+              <div lang="fr">correspondant à la ligne d'indice 1:</div>
+              <!-- /fr -->
+              <div lang="en">corresponding to the row with index 1:</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <div lang="fr">Visualisation de la série </div>
+              <!-- /fr -->
+              <div lang="en">visualization of the series </div>
+              <!-- /en -->
+              <div lang="fr">correspondant à la colonne d'indice 2:</div>
+              <!-- /fr -->
+              <div lang="en">corresponding to the column with index 2:</div>
+              <!-- /en -->
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <table cellpadding="0" border="0">
+                <tr>
+                  <td>u<sub>0,0</sub>
+                  </td>
+                  <td>u<sub>0,1</sub>
+                  </td>
+                  <td>u<sub>0,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>0,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr bgcolor="#00FF00">
+                  <td>u<sub>1,0</sub>
+                  </td>
+                  <td>u<sub>1,1</sub>
+                  </td>
+                  <td>u<sub>1,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>1,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>u<sub>2,0</sub>
+                  </td>
+                  <td>u<sub>2,1</sub>
+                  </td>
+                  <td>u<sub>2,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>2,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>u<sub>m,0</sub>
+                  </td>
+                  <td>u<sub>m,1</sub>
+                  </td>
+                  <td>u<sub>m,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>m,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+              </table>
+            </td>
+            <td align="center">
+              <table cellpadding="0" border="0">
+                <tr>
+                  <td>u<sub>0,0</sub>
+                  </td>
+                  <td>u<sub>0,1</sub>
+                  </td>
+                  <td bgcolor="#00FF00">u<sub>0,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>0,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>u<sub>1,0</sub>
+                  </td>
+                  <td>u<sub>1,1</sub>
+                  </td>
+                  <td bgcolor="#00FF00">u<sub>1,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>1,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>u<sub>2,0</sub>
+                  </td>
+                  <td>u<sub>2,1</sub>
+                  </td>
+                  <td bgcolor="#00FF00">u<sub>2,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>2,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center" bgcolor="#00FF00">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center" bgcolor="#00FF00">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center" bgcolor="#00FF00">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>u<sub>m,0</sub>
+                  </td>
+                  <td>u<sub>m,1</sub>
+                  </td>
+                  <td bgcolor="#00FF00">u<sub>m,2</sub>
+                  </td>
+                  <td>...</td>
+                  <td>u<sub>m,n</sub>
+                  </td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center" bgcolor="#00FF00">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center" bgcolor="#00FF00">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td align="center" bgcolor="#00FF00">.</td>
+                  <td align="center">.</td>
+                  <td align="center">.</td>
+                  <td>...</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Définissons encore un <b>
+            <i>'rectangle'</i>
+          </b> de dimensions m et n (d'origine 0,0) comme la matrice finie des termes ui,j avec 0&le;i&le;m et 0&le;j&le;n. <br> Nous colorions ci-dessous, le rectangle de dimensions 3,2: <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let us further define a <b>
+            <i>'rectangle'</i>
+          </b> of dimensions m and n (of origin 0,0) as the finite matrix of the terms ui,j with 0&le;i&le;m and 0&le ;j&le;n. <br> We color below, the rectangle of dimensions 3.2: <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="0" border="0">
+          <tr>
+            <td bgcolor="#00FF00">u<sub>0,0</sub>
+            </td>
+            <td bgcolor="#00FF00">u<sub>0,1</sub>
+            </td>
+            <td>u<sub>0,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>0,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td bgcolor="#00FF00">u<sub>1,0</sub>
+            </td>
+            <td bgcolor="#00FF00">u<sub>1,1</sub>
+            </td>
+            <td>u<sub>1,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>1,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td bgcolor="#00FF00">u<sub>2,0</sub>
+            </td>
+            <td bgcolor="#00FF00">u<sub>2,1</sub>
+            </td>
+            <td>u<sub>2,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>2,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td>u<sub>m,0</sub>
+            </td>
+            <td>u<sub>m,1</sub>
+            </td>
+            <td>u<sub>m,2</sub>
+            </td>
+            <td>...</td>
+            <td>u<sub>m,n</sub>
+            </td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+          <tr>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td align="center">.</td>
+            <td>...</td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div>
+            <p>Pour un tel rectangle nous désignerons par s<sub>m,n</sub> la somme de tous les termes du rectangle de dimensions m+1,n+1: </p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle s_{m,n}=\sum_{i=0,j=0}^{i=m,j=n}u_{i,j} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <p>C'est l'équivalent des sommes partielles pour les séries simples</p>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div>
+            <p>For such a rectangle we will designate by s<sub>m,n</sub> the sum of all the terms of the rectangle of dimensions m+1,n+1: </p>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle s_{m,n}=\sum_{i=0,j=0}^{i=m,j=n}u_{i,j} \)
+            <!-- /INLINE UNIV FORMULA-->
+            <p>This is the equivalent of partial sums for simple series</p>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <p>Voici un exemple de programme Python calculant des sommes partielles:</p>
+          <p>
+            <object data="python/seriedouble1.html" type="text/html" border="3" height="150" width="100%"></object>
+          </p>
+          <p>Même chose avec Julia 1.6 :</p>
+          <p>
+            <object data="julia/seriedouble1.jl.html" type="text/html" border="3" height="150" width="100%"></object>
+          </p>
+          <h2>Convergence des séries doubles</h2> Commençons par la convergence d'une suite double:
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here is an example Python program calculating partial sums:</p>
+          <p>
+            <object data="python/seriedouble1.html" type="text/html" border="3" height="150" width="100%"></object>
+          </p>
+          <p>Same thing with Julia 1.6 :</p>
+          <p>
+            <object data="julia/seriedouble1.jl.html" type="text/html" border="3" height="150" width="100%"></object>
+          </p>
+          <h2>Convergence of double series</h2> Let's start with the convergence of a double sequence:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Soit (u<sub>m,n</sub>) une suite double. On dit que cette suite converge vers le réel a, si pour tout ε&gt;0 il existe des entiers M et N tels que m&gt;M et n&gt;N implique |a-u<sub>m,n</sub>| &lt; ε.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> Let (u<sub>m,n</sub>) be a double sequence. We say that this sequence converges to the real a, if for all ε>0 there exist integers M and N such that m>M and n>N implies |a-u<sub>m,n</sub>| < ε. </div>
+              <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Voici la définition de la convergence d'une série double (à rapprocher de <input type="button" value="celle d'une série simple" onclick="go('seriesconv.html#')" data-inline="true" />) </div>
+          <!-- /fr -->
+          <div lang="en"> Here is the definition of the convergence of a double series (to be compared to <input type="button" value="that of a simple series" onclick="go('seriesconv.html#')" data-inline=" true" />) </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def4"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 4</div> On dit que la série double de terme général u<sub>m,n</sub> et de sommes partielles s<sub>m,n</sub> converge vers la limite S si: <br> ∀ ε ∈ ℝ, ε&gt;0 ∃ (M,N) ∈ ℕ × ℕ | ∀ (m,n)∈ ℕ × ℕ vérifiant m&gt;M et n&gt;N on ait: <br> |s<sub>m,n</sub>-S|&lt;ε
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 4</div> We say that the double series with general term u<sub>m,n</sub> and partial sums s<sub>m,n</sub> converges to the limit S if: <br> ∀ ε ∈ ℝ, ε>0 ∃ (M,N) ∈ ℕ × ℕ | ∀ (m,n)∈ ℕ × ℕ satisfying m>M and n>N we have: <br> |s<sub>m,n</sub>-S|<ε </div>
+                <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr"> Autrement dit la convergence de la série double équivaut à la convergence de la suite double des sommes partielles. <br>
+              <h3>Exemples:</h3> Il est assez simple de fabriquer des séries doubles à partir de séries simples. Si (s,u) est une série simple de terme général u<sub>n</sub>, on peut lui associer la série de terme général v<sub>m,n</sub> où v<sub>m,n</sub>=0 si m≠n et v<sub>n,n</sub>=u<sub>n</sub>. Cette série double sera convergente ou divergente selon que (s,u) l'est.
+            </div>
+            <!-- /fr -->
+            <div lang="en"> In other words, the convergence of the double series is equivalent to the convergence of the double sequence of partial sums. <br>
+              <h3>Examples:</h3> It is quite simple to make double series from single series. If (s,u) is a simple series of general term u<sub>n</sub>, we can associate to it the series of general term v<sub>m,n</sub> where v<sub>m, n</sub>=0 if m≠n and v<sub>n,n</sub>=u<sub>n</sub>. This double series will be convergent or divergent depending on whether (s,u) is.
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm1"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 1</div> Il est assez clair qu'une condition nécessaire et suffisante pour qu'une série double à termes positifs, soit convergente est que ses sommes partielles soient bornées. La limite est alors la borne supérieure de ces sommes partielles.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 1</div> It is quite clear that a necessary and sufficient condition for a double series with positive terms to be convergent is that its partial sums are bounded. The limit is then the upper bound of these partial sums.
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr"> La preuve est en tout point analogue au cas des séries simples. <br>
+              <h2>Condition nécessaire de convergence</h2> Remarquons encore que:
+            </div>
+            <!-- /fr -->
+            <div lang="en"> The proof is completely analogous to the case of simple series. <br>
+              <h2>Necessary convergence condition</h2> Note again that:
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="thm2"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">théorème 2</div> Une condition nécessaire pour que la série double de terme général u<sub>m,n</sub> soit convergente est que lim<sub>(m,n)→∞</sub> u<sub>m,n</sub>=0.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">theorem 2</div> A necessary condition for the double series with general term u<sub>m,n</sub> to be convergent is that lim<sub>(m,n)→∞</sub> u<sub>m,n</sub>=0.
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr"> La preuve résulte de: u<sub>m,n</sub>=s<sub>m,n</sub> - s<sub>m-1,n</sub> - s<sub>m,n-1</sub>+s<sub>m-1,n-1 </sub>
+              <br> Toutefois cette condition nécessaire n'est nullement suffisante. Considérons par exemple la série double construite à partir de la série harmonique par le procédé ci-dessus. <h2>Séries doubles absolument convergentes</h2> Comme pour le cas des séries simples:
+            </div>
+            <!-- /fr -->
+            <div lang="en"> The proof results from: u<sub>m,n</sub>=s<sub>m,n</sub> - s<sub>m-1,n</sub> - s<sub>m,n-1</sub>+s<sub>m-1,n-1 </sub>
+              <br> However, this necessary condition is by no means sufficient. Consider for example the double series constructed from the harmonic series by the above process. <h2>Absolutely convergent double series</h2> As for the case of simple series:
+            </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="def5"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">définition 5</div> On dit qu'une série double de terme général u<sub>m,n</sub> est <strong>
+                  <em>'absolument convergente'</em>
+                </strong> si la série double de terme général |u<sub>m,n</sub>| est convergente.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">definition 5</div> A dual series with general term u<sub>m,n</sub> is said to be <strong>
+                  <em>'absolutely convergent'</em>
+                </strong> if the double series with general term |u<sub>m,n</sub>| is convergent.
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr"> Compte tenu de la remarque précédente, une série double est absolument convergente si et seulement si les sommes partielles de la série |u<sub>m,n</sub>| sont bornées. <h2>Le critère de Stolz</h2> Le critère de Stolz est l'équivalent du critère de Cauchy pour les séries doubles. Il peut s'énoncer ainsi: </div>
+            <!-- /fr -->
+            <div lang="en"> Taking into account the previous remark, a dual series is absolutely convergent if and only if the partial sums of the series |u<sub>m,n</sub>| are bounded. <h2>The Stolz criterion</h2> The Stolz criterion is the equivalent of the Cauchy criterion for double series. It can be stated as follows: </div>
+            <!-- /en -->
+            <!-- STOP -->
+            <a name="def6"></a>
+            <div id="container">
+              <div lang="fr">
+                <div id="label">définition 6</div> Quel que soit ε &gt; 0. Il existe deux entiers p et q, tels que si m&gt;p et n&gt;q on a: <br> |s<sub>m+i,n+j</sub> - s<sub>m,n</sub>| &lt; ε ∀ (i,j) ∈ ℕ×ℕ.
+              </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">definition 6</div> Whatever ε > 0. There are two integers p and q, such that if m>p and n>q we have: <br> |s<sub>m+i,n+j</sub> - s<sub>m,n</sub>| < ε ∀ (i,j) ∈ ℕ×ℕ. </div>
+                  <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr"> On a alors le résultat suivant: </div>
+              <!-- /fr -->
+              <div lang="en"> We then have the following result: </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="thm3"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">théorème 3</div> La satisfaction du critère de Stolz est une condition nécessaire et suffisante de convergence pour les séries doubles.
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">theorem 3</div> The satisfaction of the Stolz criterion is a necessary and sufficient condition of convergence for double series.
+                </div>
+                <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr"> Le fait qu'il s'agisse d'une condition nécessaire est à peu près évident compte tenu de la définition de la convergence d'une série double et de l'inégalité du triangle. <br /> Montrons maintenant qu'il s'agit d'une condition suffisante: <br /> Il résulte du <input type="button" value="critère de Cauchy pour les séries simples" onclick="go('seriesconv.html#sercauch')" data-inline="true" /> que si le critère de Stolz est vérifié la série simple de terme général u<sub>n,n</sub> est convergente. Soit a sa limite. Faisant alors tendre i et j vers l'infini de sorte que m+i=n+j, nous voyons que |a-s<sub>m,n</sub>|&lt;ε si m&gt;p et n&gt;q, d'où la convergence de la série double. <br /> Le critère de Stolz entraîne la conséquence importante qui suit: </div>
+              <!-- /fr -->
+              <div lang="en"> That this is a necessary condition is pretty much obvious given the definition of convergence of a double series and the triangle inequality. <br /> Let us now show that this is a sufficient condition: <br /> It follows from the <input type="button" value="Cauchy criterion for simple series" onclick="go('seriesconv.html#sercauch')" data-inline="true" /> that if the Stolz criterion is verified the simple series of general term u<sub>n,n</sub> is convergent. Or at its limit. Then letting i and j tend to infinity so that m+i=n+j, we see that |a-s<sub>m,n</sub>|<ε if m>p and n>q, d 'where the convergence of the double series. <br /> The Stolz criterion has the following important consequence: </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="thm4"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">théorème 4</div> Toute série double absolument convergente est convergente.
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">theorem 4</div> Any absolutely convergent double series is convergent.
+                </div>
+                <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr"> En effet, soit (s,u) une série absolument convergente et (t,v) la série à termes positifs où v=|u|. <br> (t,v) est donc par hypothèse convergente, mais de plus: |s<sub>p,q</sub>-s<sub>m,n</sub>| ≤ t<sub>p,q</sub>-t<sub>m,n</sub>
+                <br> Il résulte donc que (s,u) satisfait au critère de Stolz si (t,v) y satisfait. <h2>La théorème de Pringsheim</h2> Soit (s,u) une série double de sorte que u est une fonction de 2 variables u=(u<sub>m,n</sub>)<sub>(m,n) ∈ℕ×ℕ</sub>
+                <br> On fait sur u les suppositions suivantes: <br> On suppose que pour tout m la série simple de terme général u<sub>m,n</sub> n∈ℕ (série ligne) est convergente et de somme h<sub>m</sub>. <br> On suppose que pour tout n la série simple de terme général u<sub>m,n</sub> m∈ℕ (série colonne) est convergente et de somme v<sub>n</sub>. <br> Voici maintenant l'énoncé du Théorème de Pringsheim:
+              </div>
+              <!-- /fr -->
+              <div lang="en"> Indeed, let (s,u) be an absolutely convergent series and (t,v) the series with positive terms where v=|u|. <br> (t,v) is therefore by convergent hypothesis, but moreover: |s<sub>p,q</sub>-s<sub>m,n</sub>| ≤ t<sub>p,q</sub>-t<sub>m,n</sub>
+                <br> It therefore follows that (s,u) satisfies the Stolz criterion if (t,v) satisfies it. <h2>Pringsheim's theorem</h2> Let (s,u) be a double series such that u is a function of 2 variables u=(u<sub>m,n</sub>)<sub>(m,n) ∈ℕ×ℕ</sub>
+                <br> We make the following assumptions on u: <br> We assume that for all m the simple series with general term u<sub>m,n</sub> n∈ℕ (line series) is convergent and has sum h<sub>m</sub>. <br> We assume that for all n the simple series of general term u<sub>m,n</sub> m∈ℕ (column series) is convergent and of sum v<sub>n</sub>. <br> Here is now the statement of Pringsheim's Theorem:
+              </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="thm5"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">théorème 5</div> Si la série double (s,u) est convergente et de somme S <br> Si la série de terme général h<sub>m</sub> est convergente et de somme H. <br> Si la série de terme général v<sub>n</sub> est convergente et de somme V. <br> Alors H=V=S
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">theorem 5</div> If the double series (s,u) is convergent and has sum S <br> If the series of general term h<sub>m</sub> is convergent and of sum H. <br> If the series of general term v<sub>n</sub> is convergent and of sum V. <br> Then H=V=S
+                </div>
+                <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr"> Avant de passer à la démonstration de ce théorème nous attirons l'attention du lecteur sur les conditions extrêmement précises et très restrictives d'application. L'existence de H et celle de V n'implique ni leur égalité ni l'existence de S. <br> Cela veut dire simplement que si on sait a priori qu'une série double est convergente, on peut calculer sa somme par la série des sommes des lignes ou par la série des sommes des colonnes. <br> Prenons par exemple la suite définie par s<sub>m,n</sub> = (m-n)/(m+n+3). <br> Le terme général de cette suite double est donc u<sub>m,n</sub>=s<sub>m,n</sub> - s<sub>m-1,n</sub> - s<sub>m,n-1</sub>+s<sub>m-1,n-1 </sub>
+                <br> En faisant une sommation par les lignes on trouve une limite égale à -1. <br> En faisant une sommation par les colonnes on trouve une limite égale à +1. <br> La série double, elle-même n'a pas de limite. <br> Passons donc à la preuve de ce théorème: <br>
+              </div>
+              <!-- /fr -->
+              <div lang="en"> Before proceeding to the proof of this theorem, we draw the reader's attention to the extremely precise and very restrictive conditions of application. The existence of H and that of V does not imply their equality nor the existence of S. <br> This simply means that if we know a priori that a double series is convergent, we can calculate its sum by the series of the sums of the rows or by the series of the sums of the columns. <br> Take for example the sequence defined by s<sub>m,n</sub> = (m-n)/(m+n+3). <br> The general term of this double sequence is therefore u<sub>m,n</sub>=s<sub>m,n</sub> - s<sub>m-1,n</sub> - s<sub>m,n-1</sub>+s<sub>m-1,n-1 </sub>
+                <br> Doing a summation by the rows we find a limit equal to -1. <br> By summing up the columns, we find a limit equal to +1. <br> The double series, itself has no limit. <br> So let's move on to the proof of this theorem: <br>
+              </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <div lang="fr">
+                <div data-role="collapsible">
+                  <h4>démonstration</h4> Puisque S existe pour tout ε&gt;0 donné nous pouvons trouver n tel que pour p&gt;n et q&gt;n on a : |s<sub>p,q</sub>-S|&lt;ε <br> Et puisque lim<sub>q→∞</sub>s<sub>p,q</sub>=h<sub>0</sub>+h<sub>1</sub>+ ... +h<sub>p</sub> existe <br> |(h<sub>0</sub>+h<sub>1</sub>+ ... +h<sub>p</sub>)-S|≤ε <br> Et donc par passage à la limite H=S. <br> On montre de la même façon que V=S.
+                </div>
+                <!--demo -->
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <div data-role="collapsible">
+                  <h4>proof</h4> Since S exists for any given ε>0 we can find n such that for p>n and q>n we have: |s<sub>p,q</sub>-S|<ε <br> And since lim<sub>q→∞</sub>s<sub>p,q</sub>=h<sub>0</sub>+h<sub>1</sub>+ ... +h<sub>p</sub> exists <br> |(h<sub>0</sub>+h<sub>1</sub>+ ... +h<sub>p</sub>)-S|≤ε <br> And therefore by passing to the limit H=S. <br> We show in the same way that V=S.
+                </div>
+                <!--demo -->
+              </div>
+              <!-- /en -->
+              <!-- /STOP -->
+              <div lang="fr">
+                <h2>Convergence commutative des séries doubles absolument convergentes</h2> Dans le cas des séries doubles absolument convergentes nous avons de plus le résultat suivant qui est un cas perticulier d'un résultat plus général de la théorie de l'intégration connu sous le nom de théorème de Fubini.
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <h2>Commutative convergence of absolutely convergent dual series</h2> In the case of absolutely convergent dual series we also have the following result which is a particular case of a more general result from the theory of integration known as Fubini's theorem.
+              </div>
+              <!-- /en -->
+              <!-- STOP -->
+              <a name="thm6"></a>
+              <div id="container">
+                <div lang="fr">
+                  <div id="label">théorème 6</div> Soit (s,u) une série double absolument convergente, alors: <ol>
+                    <li>La somme de chaque série ligne existe.</li>
+                    <li>la somme de chaque série colonne existe.</li>
+                    <li>La série des sommes des lignes converge vers une limite H.</li>
+                    <li>La série des sommes des colonnes converge vers une limite V.</li>
+                    <li>Si S est la somme de la série H=V=S.</li>
+                  </ol>
+                </div>
+                <!--/fr-->
+                <div lang="en">
+                  <div id="label">theorem 6</div> Let (s,u) be an absolutely convergent double series, then: <ol>
+                    <li>The sum of each row series exists.</li>
+                    <li>the sum of each column series exists.</li>
+                    <li>The series of line sums converges to a limit H.</li>
+                    <li>The series of column sums converges to a limit V.</li>
+                    <li>If S is the sum of the series H=V=S.</li>
+                  </ol>
+                </div>
+                <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <!-- STOP -->
+              <div lang="fr">
+                <div data-role="collapsible">
+                  <h4>démonstration</h4> Il résulte de l'hypothèse que chaque série ligne et chaque série colonne est une série absolument convergente, donc convergente, ce qui établit les points 1 et 2. <br> Considérons maintenant la série des valeurs absolues des sommes des lignes. C'est une série à termes positifs majorée par:
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\( \displaystyle M=\sum_{i=0,j=0}^{i=\infty ,j=\infty }\left| u_{i,j}\right| \)</p>
+                  <!-- /FORMULE UNIV INLINE--> Elle est donc convergente. <br> Donc la série des sommes des lignes est absolument convergente, donc convergente, ce qui établit le point n°3. <br> Le point n°4 se démontre de la même manière. <br> Enfin, le point n°5 découle du théorème de Pringsheim, puisque (s,u) étant absolument convergente est en particulier convergente.
+                </div>
+                <!--demo -->
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <div data-role="collapsible">
+                  <h4>proof</h4> It results from the assumption that each row series and each column series is an absolutely convergent series, therefore convergent, which establishes points 1 and 2. <br> Now consider the series of absolute values ​​of row sums. It is a series with positive terms bounded by:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\( \displaystyle M=\sum_{i=0,j=0}^{i=\infty ,j=\infty }\left| u_{i,j}\right| \)</p>
+                  <!-- /INLINE UNIV FORMULA--> It is therefore convergent. <br> So the series of the sums of the rows is absolutely convergent, therefore convergent, which establishes point n°3. <br> Point n°4 is demonstrated in the same way. <br> Finally, point n°5 follows from Pringsheim's theorem, since (s,u) being absolutely convergent is in particular convergent.
+                </div>
+                <!--demo -->
+              </div>
+              <!-- /en -->
+              <!-- /STOP -->
+              <div lang="fr">
+                <h2>Séries multiples</h2> Après les séries doubles, nous pouvons définir les séries <b>
+                  <i>'triples'</i>
+                </b> dont le terme général s'écrit u<sub>m,n,p</sub> et est une fonction de 3 variables entières. <br> Nous laissons au lecteur le soin d'énoncer la définition de la convergence d'une telle série, de donner l'équivalent des critères de Cauchy et de Stolz, de donner la définition de la convergence absolue, et de citer un théorème de convergence commutative concernant ces séries triples. <br> D'une façon générale, on peut définir les séries à p dimensions et énoncer les analogues des théorèmes vus en dimensions 1 et 2.
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <h2>Multiple series</h2> After the double series, we can define the <b>
+                  <i>'triple'</i>
+                </b> series whose general term is written u<sub>m,n,p</sub> and is a function of 3 integer variables. <br> We leave it to the reader to state the definition of the convergence of such a series, to give the equivalent of the Cauchy and Stolz criteria, to give the definition of absolute convergence, and to cite a commutative convergence theorem regarding these triple series. <br> In a general way, we can define the p-dimensional series and state the analogs of the theorems seen in dimensions 1 and 2.
+              </div>
+              <!-- /en -->
+              <div lang="fr">
+                <div>
+                  <ul style=list-style-type:'';>
+                    <li>
+                      <input type="button" value="Exercices" onclick="go('exercices/seriesdouble/menu.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour au menu 'Séries'" onclick="go('index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour au menu 'Analyse réelle'" onclick="go('../index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                    </li>
+                  </ul>
+                </div>
+                <!-- /navbar -->
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <div>
+                  <ul style=list-style-type:'';>
+                    <li>
+                      <input type="button" value="Exercises" onclick="go('exercices/seriesdouble/menu.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to 'Series'" onclick="go('index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to Calculus" onclick="go('../index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /en -->
+            </div>
+            <!-- /content -->
+            <div data-role="footer">
+              <table cellpadding="10">
+                <tr>
+                  <td>
+                    <div lang="fr">Création Gilles Dubois</div>
+                    <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                    <div lang="fr">Janvier 2022</div>
+                    <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                    <div lang="fr">Version mobile Jquery</div>
+                    <div lang="en">Mobile Jquery version</div>
+                  </td>
+                  <td>
+                    <a href="https://www.mathjax.org">
+                      <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- /footer -->
+            <ul style=list-style-type:'';>
+              <li>
+                <div lang="fr">
+                  <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+                </div>
+                <div lang="en">
+                  <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+                </div>
+              </li>
+              <li>
+                <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+              </li>
+            </ul>
+          </div>
+          <!-- /page -->
+  </body>
+</html>
