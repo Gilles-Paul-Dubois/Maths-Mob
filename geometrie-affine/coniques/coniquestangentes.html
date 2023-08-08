@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Tangentes à une conique</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../../css/themes/myown.css" />
+      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+      <link href="../../css/myown.css" rel="stylesheet">
+      <link href="../../css/jsxgraph.css" rel="stylesheet">
+      <script src="../../js/jquery-1.11.3.js"></script>
+      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+      <script src="../../js/custom.js"></script>
+      <script src="../../js/jsxgraphcore.js"></script>
+      <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>     
+   </head>
+   <body style="overflow: auto; "class="fr">
+      <script> window.onload=get();</script>
+      <a name="beg"></a>
+      <div data-role="page" data-theme="e">
+         <div data-role="header">
+            <table>
+               <tr>
+                  <td>Choisissez votre langue !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+                  <td>Choose your language !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+               </tr>
+            </table>
+         </div>
+         <!-- /header -->
+         <div style="overflow: auto; "  data-role="content" data-theme="e">
+            <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+               <div lang="fr">revenir au point de départ après retour à cette page</div>
+               <!-- /fr -->
+               <div lang="en">come back to starting point after return to this page</div>
+               <!-- /en -->
+            </button>
+            <script>
+               showscroll();
+            </script>
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/coniquestangentes/menu.html')" /></li>
+                     <li><input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/coniquestangentes/menu.html')" /></li>
+                     <li><input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               Le but de cette page est de généraliser la notion de 'tangente' déjà rencontrée pour les <input type="button" value="cercles" onclick="go('../plan/plancercles.html#')" data-inline="true" />.<br/>
+               Si dans le cas de l'ellipse on peut tout simplement copier cette définition, il n'en va pas de même pour les paraboles et les hyperboles pour lesquelles on peut trouver des droites n'ayant qu'un point commun avec la conique et ne correspondant pas à la notion de tangente.<br/>
+               Dans tout ce paragraphe il est important de garder à l'esprit que toute conique est l'image d'un ou deux cercles dans une projection centrale.<br/>
+               Cela résulte évidemment de la définition 'historique' des sections coniques. On voit que la conique est l'image de chaque cercle de contact d'une sphère de Dandelin avec le cône dans une projection centrale ayant pour centre le sommet S du cône.
+               <h2>Intersection d'une conique avec une droite</h2>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The purpose of this page is to generalize the notion of 'tangent' already encountered for <input type="button" value="circles" onclick="go('../plan/plancercles.html#')" data-inline="true" />.<br/>
+               If in the case of the ellipse we can quite simply copy this definition, it is not the same for parabolas and hyperbolas for which we can find straight lines having only one point in common with the conic and does not correspond to the notion of tangent.<br/>
+               Throughout this paragraph it is important to keep in mind that any conic is the image of one or two circles in a central projection.<br/>
+               This obviously results from the 'historical' definition of conic sections. We see that the conic is the image of each circle of contact of a Dandelin sphere with the cone in a central projection having as its center the vertex S of the cone.
+               <h2>Intersection of a conic section with a line</h2>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm1"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 1</div>
+                  Etant donné qu'une conique peut être définie comme une courbe algébrique du second degré, les abscisses des points d'intersection d'une droite (équation de degré 1) avec une conique (degré 2) seront solutions d'une équation de degré au plus égal à 2.<br>
+                  Il peut donc y avoir a priori :
+                  <ul>
+                     <li>aucun point d'intersection</li>
+                     <li>un point d'intersection</li>
+                     <li>deux points d'intersection</li>
+                  </ul>
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 1</div>
+                  Given that a conic can be defined as an algebraic curve of the second degree, the abscissas of the points of intersection of a line (equation of degree 1) with a conic (degree 2) will be solutions of an equation of degree at most equal to 2.<br>
+                  There can therefore be a priori:
+                  <ul>
+                     <li>no intersection point</li>
+                     <li>one point of intersection</li>
+                     <li>two points of intersection</li>
+                  </ul>
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h3>Quelques illustrations</h3>
+               Nous avons représenté par des droites bleues certains cas particuliers qui nous intéressent.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Some illustrations</h3>
+               We have represented by blue lines some special cases that interest us.
+            </div>
+            <!-- /en --> 
+            <!-- STOP IMAGE -->
+            <table>
+               <tr>
+                  <td>
+                     <strong>
+                        <div lang="fr">Parabole</div>
+                        <!-- /fr --> 
+                        <div lang="en">Parabola</div>
+                        <!-- /en --> 
+                     </strong>
+                  </td>
+               </tr>
+               <tr>
+                  <td><img src="images/paratans1.png" width="389" height="408" border="0" alt=""></td>
+               </tr>
+               <tr>
+                  <td>
+                     <ul>
+                        <li>
+                           <div lang="fr">Aucun point d'intersection: D<sub>3</sub></div>
+                           <!-- /fr -->
+                           <div lang="en">No intersection : D<sub>3</sub></div>
+                           <!-- /en -->  
+                        </li>
+                        <li>
+                           <div lang="fr">Un point d'intersection: D<sub>1</sub>, D<sub>4</sub>, D<sub>5</sub></div>
+                           <!-- /fr --> 
+                           <div lang="en">One intersection point: D<sub>1</sub>, D<sub>4</sub>, D<sub>5</sub></div>
+                           <!-- /en --> 
+                        </li>
+                        <li>
+                           <div lang="fr">Deux points d'intersection: D<sub>2</sub></div>
+                           <!-- /fr --> 
+                           <div lang="en">Two intersection points: D<sub>2</sub></div>
+                           <!-- /en --> 
+                        </li>
+                     </ul>
+                  </td>
+               </tr>
+            </table>
+            <!-- /STOP IMAGE -->
+            <!-- STOP IMAGE -->
+            <table>
+               <tr>
+                  <td><strong>Ellipse</strong></td>
+               </tr>
+               <tr>
+                  <td><img src="images/ellipsetans1.png" width="374" height="384" border="0" alt=""></td>
+               </tr>
+               <tr>
+                  <td>
+                     <ul>
+                        <li>
+                           <div lang="fr">Aucun point d'intersection: D<sub>2</sub></div>
+                           <!-- /fr -->
+                           <div lang="en">No intersection point: D<sub>2</sub></div>
+                           <!-- /en -->  
+                        </li>
+                        <li>
+                           <div lang="fr">Un point d'intersection: D<sub>3</sub>, D<sub>4</sub></div>
+                           <!-- /fr -->
+                           <div lang="en">One intersection point: D<sub>3</sub>, D<sub>4</sub></div>
+                           <!-- /en -->  
+                        </li>
+                        <li>
+                           <div lang="fr">Deux points d'intersection: D<sub>1</sub></div>
+                           <!-- /fr -->
+                           <div lang="en">Two intersection points: D<sub>1</sub></div>
+                           <!-- /en -->  
+                        </li>
+                     </ul>
+                  </td>
+               </tr>
+            </table>
+            <!-- /STOP IMAGE -->
+            <!-- STOP IMAGE -->
+            <table>
+               <tr>
+                  <td>
+                     <strong>
+                        <div lang="fr">Hyperbole</div>
+                        <!-- /fr -->
+                        <div lang="en">Hyperbola</div>
+                        <!-- /en -->  
+                     </strong>
+                  </td>
+               </tr>
+               <tr>
+                  <td><img src="images/hypertans1.png" width="408" height="468" border="0" alt=""></td>
+               </tr>
+               <tr>
+                  <td>
+                     <ul>
+                        <li>
+                           <div lang="fr">Aucun point d'intersection: D<sub>1</sub></div>
+                           <!-- /fr -->
+                           <div lang="en">No intersection point: D<sub>1</sub></div>
+                           <!-- /en -->  
+                        </li>
+                        <li>
+                           <div lang="fr">Un point d'intersection: D<sub>3</sub>, D<sub>2</sub></div>
+                           <!-- /fr -->
+                           <div lang="en">One intersection point: D<sub>3</sub>, D<sub>2</sub></div>
+                           <!-- /en -->  
+                        </li>
+                        <li>
+                           <div lang="fr">Deux points d'intersection: D<sub>4</sub>, D<sub>5</sub></div>
+                           <!-- /fr --> 
+                           <div lang="en">Two intersection points: D<sub>4</sub>, D<sub>5</sub></div>
+                           <!-- /en --> 
+                        </li>
+                     </ul>
+                  </td>
+               </tr>
+            </table>
+            <!-- /STOP IMAGE -->
+            <div lang="fr">
+               <em><font size="-1">Les images ont toutes été générées avec GeoGebra.</font></em><br>
+               <h2>Définition des tangentes (approche historique)</h2>
+               Nous voyons maintenant que dans chaqu'un des 3 cas possibles, par tout point d'une conique il peut passer une, deux ou même trois droites ne coupant la conique qu'en cet unique point.<br>
+               Nous précisons dans chaque cas ce qu'il convient d'appeler 'tangente', nous en déduirons par la suite quelques propriéts immédiates.<br>
+               Nous confronterons également ce point de vue à d'autres approches possibles, pour obtenir plusieurs significations possibles de la tangente en un point à une conique.
+               <h3>Ellipse</h3>
+               Le cas de l'ellipse est sans doute le plus simple.<br>
+               Cliquez l'image ci-après pour ouvrir une appliquette dans une nouvelle fenêtre.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <em><font size="-1">The images were all generated with GeoGebra.</font></em><br>
+               <h2>Definition of tangents (historical approach)</h2>
+               We now see that in each of the 3 possible cases, through any point of a conic there can pass one, two or even three straight lines intersecting the conic only at this single point.<br>
+               We specify in each case what should be called 'tangent', we will then deduce some immediate properties.<br>
+               We will also confront this point of view with other possible approaches, to obtain several possible meanings of the tangent at a point to a conic.
+               <h3>Ellipse</h3>
+               The case of the ellipse is probably the simplest.<br>
+               Click the image below to open an applet in a new window.
+            </div>
+            <!-- /en --> 
+            <input type="image" name="iconapplet1" src="images/applet.png" onclick="go('coniquestan1.html#')" data-inline="false">
+            <!-- STOP -->
+            <a name="def1"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 1</div>
+                  Il est clair que pour chaque point M de L'ellipse il existe une est une seule droite coupant cette ellipse en l'unique point M. Cette droite, qui est l'image de N dans la projection centre de centre S de E sur P est appelée <b><i>'tangente'</i></b> en M à l'ellipse.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 1</div>
+                  It is clear that for each point M of the ellipse there exists a single straight line intersecting this ellipse at the unique point M. This straight line, which is the image of N in the projection center of center S of E onto P is called <b><i>'tangent'</i></b> in M to the ellipse.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h3>Parabole</h3>
+               Cliquez l'image ci-après pour ouvrir une appliquette dans une nouvelle fenêtre.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Parabola</h3>
+               Click the image below to open an applet in a new window.
+            </div>
+            <!-- /en --> 
+            <input type="image" name="iconapplet2" src="images/applet.png" onclick="go('coniquestan2.html#')" data-inline="false">
+            <!-- STOP -->
+            <a name="def2"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 2</div>
+                  Il est clair que pour chaque point M de la parabole il existe deux droites coupant cette parabole en l'unique point M.<br> Nous appelons  <b><i>'tangente'</i></b> en M à la parabole celle des deux qui n'est pas parallèle à l'axe de symétrie de la parabole.<br>
+                  Cette droite est encore image dans la projection de centre S de E sur P de la tangente en A à &Gamma;.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 2</div>
+                  It is clear that for each point M of the parabola there exist two straight lines intersecting this parabola at the unique point M.<br> We call <b><i>'tangent'</i></b> in M at the parabola that of the two which is not parallel to the axis of symmetry of the parabola.<br>
+                  This straight line is still an image in the projection with center S of E on P of the tangent in A at &Gamma;.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h3>Hyperbole</h3>
+               Cliquez l'image ci-après pour ouvrir une appliquette dans une nouvelle fenêtre.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Hyperbola</h3>
+               Click the image below to open an applet in a new window.
+            </div>
+            <!-- /en --> 
+            <input type="image" name="iconapplet3" src="images/applet.png" onclick="go('coniquestan3.html#')" data-inline="false">
+            <!-- STOP -->
+            <a name="def3"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 3</div>
+                  Il est clair que pour chaque point M de la l'hyperbole il existe trois droites coupant cette parabole en l'unique point M.<br> Nous appelons  <b><i>'tangente'</i></b> en M à la parabole celle des trois qui n'est parallèle à aucune asymptote de l'hyperbole.<br>
+                  Cette droite est encore image dans la projection de centre S de E sur P de la tangente en N à &Gamma;.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 3</div>
+                  It is clear that for each point M of the hyperbola there exist three straight lines intersecting this parabola at the unique point M.<br> We call <b><i>'tangent'</i></b> in M to the parabola that of the three which is not parallel to any asymptote of the hyperbola.<br>
+                  This straight line is still an image in the projection with center S of E on P of the tangent in N at &Gamma;.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               Une conséquence de ces premières définitions est la suivante :
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               A consequence of these first definitions is the following:
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm2"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 2</div>
+                  Localement (au voisinage du point M) la tangente en M à la conique C se trouve toujours du même côté de sa tangente en M. C'est à dire que les coniques sont des courbes très régulières pour lesquelles on ne peut avoir de singularité (ni point d'inflexion ni point de rebroussement).
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 2</div>
+                  Locally (in the vicinity of the point M) the tangent in M to the conic C is always on the same side of its tangent in M. That is to say that the conics are very regular curves for which one cannot have any singularity ( neither point of inflection nor cusp).
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP IMAGE -->
+            <div lang="fr">
+               <p><img src="images/Rebrou3.gif" width="597" height="294" border="0" alt=""></p>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <p><img src="images/Rebrou3e.gif" width="597" height="294" border="0" alt=""></p>
+            </div>
+            <!-- /en --> 
+            <!-- /STOP IMAGE -->
+            <em><font size="-1">Image:http://serge.mehl.free.fr/anx/Rebroussement.html</font></em><br>
+            <div lang="fr">
+               La raison en est que c'est le cas du cercle et que les singularités sont conservées par projection centrale.
+               <h2>Définition des tangentes (approche algébrique)</h2>
+               Comme nous l'avons vu plus haut, une droite D passant par un point P d'une conique C coupe C en un ou deux points,
+               l'équation aux abscisses des points d'intersection étant de degré 2 au plus.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The reason is that it is the case of the circle and the singularities are conserved by central projection.
+               <h2>Definition of tangents (algebraic approach)</h2>
+               As we have seen above, a straight line D passing through a point P of a conic section C intersects C in one or two points,
+               the equation at the abscissae of the points of intersection being of degree 2 at most.
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def4"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 4</div>
+                  Les 'tangentes' à C correspondent précisément au cas où l'équation est de degré 2 avec deux racines confondues (un discrimant nul).
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 4</div>
+                  The 'tangents' to C correspond precisely to the case where the equation is of degree 2 with two repeated roots (a null discrimant).
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               Avec les applets suivantes vous pouvez déplacer les points sur les coniques, les tangentes s'affichent instantanément.
+               <h3>Cas de l'ellipse</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               With the following applets you can move the points on the conics, the tangents are displayed instantly.
+               <h3>Case of the ellipse</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan4.js"></script>
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Cas de la parabole</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the parabola</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box6" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan6.js"></script>        
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Cas de l'hyperbole</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the hyperbola</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box5" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan5.js"></script>
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h2>Définition des tangentes (approche différentielle)</h2>
+               Soit M(x<sub>0</sub>,y<sub>0</sub>) un point d'une conique C et soit h un réel non nul.<br/>
+               On désigne par M'(h) le point de C d'abscisse x<sub>0</sub>+h.
+               on désigne par D(h) la sécante (MM').
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Definition of tangents (differential approach)</h2>
+               Let M(x<sub>0</sub>,y<sub>0</sub>) be a point of a conic section C and let h be a nonzero real number.<br/>
+               We denote by M'(h) the point of C with abscissa x<sub>0</sub>+h.
+               D(h) denotes the secant (MM').
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def5"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 5</div>
+                  La <b><i>'tangente'</i></b> T correspond à la position limite de la droite D(h) quand h tend vers 0 par valeurs différentes de 0.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 5</div>
+                  The <b><i>'tangent'</i></b> T corresponds to the limit position of the line D(h) when h tends to 0 by values different from 0.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               En pratique cette définition n'est utile que quand on dispose d'un paramétrage de la conique.
+               <h3>Exemple de calcul</h3>
+               Calcul de la tangente à l'ellipse
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {x = 2\cos(t)} \\
+                  {y = \sin(t)} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               au point de paramètre &pi;/4<br>
+               Le point M de paramètre &pi;/4 a pour coordonnées (2/&radic;2,1/&radic;2).<br>
+               Le point M' de paramètre &pi;/4+h a pour coordonnées 
+               &nbsp;<!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \left( \frac{2}{\sqrt{2}}\left( \cos(h) - \sin(h) \right),\frac{1}{\sqrt{2}}\left( \cos(h) + \sin(h) \right) \right)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               &nbsp;<br>
+               La pente de la sécante (MM') est
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle p = {\lim\limits_{h\rightarrow{0,h \neq 0}}\frac{\frac{1}{\sqrt{2}}\left( \cos(h) + \sin(h) - 1 \right)}{\frac{2}{\sqrt{2}}\left( \cos(h) - \sin(h) - 1 \right)}}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               A priori la limite est une indétermination mais l'application de la <input type="button" value="règle de l'Hospital" onclick="go('../../analyse-reelle/derivees/derivlhospital.html#thm1')" data-inline="true" /> donne immédiatement <br/>
+               p=-1/2 <br/>
+               L'équation de la tangente s'obtient alors en utlisant le fait qu'elle passe par M.
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle T:y = - \frac{1}{2}x + \sqrt{2}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               <h3>Visualisation</h3>
+               Avec l'applet suivante vous pouvez faire varier x<sub>0</sub>et déplacer M sur la parabole P.<br>
+               Vous pouvez de la même façon faire varier x<sub>0</sub>+h, donc faire varier h et voir varier la sécante (MM') et sa position par rapport à la tangente T
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               In practice, this definition is only useful when a parameterization of the conic is available.
+               <h3>Example of calculation</h3>
+               Calculation of the tangent to the ellipse
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {x = 2\cos(t)} \\
+                  {y = \sin(t)} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               at parameter point &pi;/4<br>
+               The point M with parameter &pi;/4 has coordinates (2/&radic;2,1/&radic;2).<br>
+               The point M' with parameter &pi;/4+h has coordinates
+               &nbsp;<!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \left( \frac{2}{\sqrt{2}}\left( \cos(h) - \sin(h) \right),\frac{1}{\sqrt{2}}\left( \cos(h) + \sin(h) \right) \right)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               &nbsp;<br>
+               The slope of the secant (MM') is
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle p = {\lim\limits_{h\rightarrow{0,h \neq 0}}\frac{\frac{1}{\sqrt{2}}\left( \cos(h) + \sin(h ) - 1 \right)}{\frac{2}{\sqrt{2}}\left( \cos(h) - \sin(h) - 1 \right)}}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               A priori the limit is an indeterminacy but the application of the <input type="button" value="rule of l' Hospital" onclick="go('../../analyse-reelle/derivees/derivlhospital.html#thm1')" data-inline="true" /> immediately gives <br/>
+               p=-1/2 <br/>
+               The equation of the tangent is then obtained by using the fact that it passes through M.
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle T:y = - \frac{1}{2}x + \sqrt{2}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               <h3>Visualization</h3>
+               With the following applet you can vary x<sub>0</sub> and move M on the parabola P.<br>
+               You can vary x<sub>0</sub>+h in the same way, so vary h and see the secant (MM') and its position relative to the tangent T vary.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box7" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan7.js"></script>
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h2>Equations des tangentes</h2>
+               Il va de soi que toutes les approches développées ci-dessus conduisent aux mêmes objets, les tangentes définies par l'une ou l'autre des méthodes sont les mêmes.<br/>
+               Nous passons maintenant au calcul pratique des équations.
+               <h3>Cas de la parabole</h3>
+               L'approche différentielle nous donne immédiatement la solution.<br/>
+               La courbe est paramètrable par l'abscisse :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle y = f(x) = \frac{1}{2p}x^{2}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Ce qui nous donne tout de suite la pente de la tangente au point M<sub>0</sub> d'abscisse x<sub>0</sub> :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \alpha = f'\left( x_{0} \right) = \frac{x_{0}}{p}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Si l'équation de la tangente est y=&alpha;x+&beta;<br>
+               &beta; s'obtient en écrivant que la tangente passe par M<sub>0</sub>
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \beta = y_{0} - \alpha x_{0}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Equations of tangents</h2>
+               It goes without saying that all the approaches developed above lead to the same objects, the tangents defined by one or the other of the methods are the same.<br/>
+               We now move on to the practical calculation of the equations.
+               <h3>Case of the parabola</h3>
+               The differential approach immediately gives us the solution.<br/>
+               The curve is parameterizable by the abscissa:
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle y = f(x) = \frac{1}{2p}x^{2}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               Which immediately gives us the slope of the tangent at point M<sub>0</sub> of abscissa x<sub>0</sub>:
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \alpha = f'\left(x_{0} \right) = \frac{x_{0}}{p}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               If the tangent equation is y=&alpha;x+&beta;<br>
+               &beta; is obtained by writing that the tangent passes through M<sub>0</sub>
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \beta = y_{0} - \alpha x_{0}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm3"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 3</div>
+                  On obtient donc l'équation de la tangente au point M<sub>0</sub> :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle x_{0}x - {py} - {x_{0}}^{2} + py_{0} = 0
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 3</div>
+                  We therefore obtain the equation of the tangent at the point M<sub>0</sub>:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle x_{0}x - {py} - {x_{0}}^{2} + py_{0} = 0
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               L'applet ci-après vous permet de faire varier le paramètre p de la parabole et le point M de la parabole au moyen des curseurs.<br>
+               La tangente apparait, sa pente est affichée.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The applet below allows you to vary the parameter p of the parabola and the point M of the parabola using the cursors.<br>
+               The tangent appears, its slope is displayed.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box8" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan8.js"></script> 
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Ellipses et hyperboles</h3>
+               <input type="button" value="L'équation réduite" onclick="go('coniquesalg.html#thm6')" data-inline="true" /> est de la forme f(x,y)=0 où f remplit les conditions du théorème des <input type="button" value="fonctions implicites" onclick="go('../../analyse-reelle/continuite/contimplicite.html#thm1')" data-inline="true" />.<br/>
+               En fait dans chaque cas
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \frac{x^{2}}{a^{2}} \pm \frac{y^{2}}{b^{2}} = 1
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               On peut extraire des formules explicites :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle y = \pm \varphi(x)
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               où excepté pour les sommets A(a,0) et B(-a,0) &phi; est une fonction dérivable de la variable x.<br>
+               Nous laisserons donc pour le moment ces points de côté, sachant qu'il est évident qu'il y a en chacun d'eux une tangente verticale.<br>
+               Par dérivation sachant que la dérivée de y² est 2yy' on obtient la pente de la tangente au point M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle {y'}_{0} = \pm \frac{b^{2}x_{0}}{a^{2}y_{0}}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               où y'<sub>0</sub>=&phi;'(x<sub>0</sub>)<br>
+               Puis en écrivant que :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle {y'}_{0}\left( {x - x_{0}} \right) = y - y_{0}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               En dévelopant et en simplifiant il vient :
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Ellipses and hyperbolas</h3>
+               <input type="button" value="The reduced equation" onclick="go('coniquesalg.html#thm6')" data-inline="true" /> is of the form f(x,y)=0 where f fulfills the conditions of the <input type="button" value="implicit functions" theorem onclick="go('../../analyse-reelle/continuite/contimplicite.html#thm1')" data-inline ="true" />.<br/>
+               In fact in each case
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \frac{x^{2}}{a^{2}} \pm \frac{y^{2}}{b^{2}} = 1
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               We can extract explicit formulas:
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle y = \pm \varphi(x)
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               where except for vertices A(a,0) and B(-a,0) &phi; is a differentiable function of the variable x.<br>
+               We will therefore leave these points aside for the moment, knowing that it is obvious that in each of them there is a vertical tangent.<br>
+               By derivation knowing that the derivative of y² is 2yy' we obtain the slope of the tangent at point M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) :
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle {y'}_{0} = \pm \frac{b^{2}x_{0}}{a^{2}y_{0}}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               where y'<sub>0</sub>=&phi;'(x<sub>0</sub>)<br>
+               Then writing that:
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle {y'}_{0}\left( {x - x_{0}} \right) = y - y_{0}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               By expanding and simplifying it comes:
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm4"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 4</div>
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \frac{xx_{0}}{a^{2}} \pm \frac{yy_{0}}{b^{2}} = 1
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  qui constitue donc l'équation de la tangente en M<sub>0</sub> à la conique (valable encore si x=a ou x=-a comme on le vérifiera).
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 4</div>
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \frac{xx_{0}}{a^{2}} \pm \frac{yy_{0}}{b^{2}} = 1
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  which therefore constitutes the equation of the tangent at M<sub>0</sub> to the conic (still valid if x=a or x=-a as we will verify).
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               L'applet  suivante vous permet de faire varier les paramètres a et b de l'ellipse et le point M<sub>0</sub> de l'ellipse, au moyen des 3 curseurs.<br>
+               Vous voyez l'équation de la tangente T<sub>0</sub> au point M<sub>0</sub> à l'ellipse.<br>
+               Vous remarquerez que l'intersection de T<sub>0</sub> avec l'axe des x est indépendante du paramètre b et que de la même façon l'intersection de T<sub>0</sub> avec l'axe des y est indépendante du paramètre a.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The following applet allows you to vary the parameters a and b of the ellipse and the point M<sub>0</sub> of the ellipse, using the 3 cursors.<br>
+               You see the equation for the tangent T<sub>0</sub> at the point M<sub>0</sub> at the ellipse.<br>
+               You will notice that the intersection of T<sub>0</sub> with the x-axis is independent of the parameter b and that similarly the intersection of T<sub>0</sub> with the x-axis des y is independent of the parameter a.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box9" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan9.js"></script> 
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               L'applet suivante vous permet de faire varier les paramètres a et b de l'hyperbole et le point M<sub>0</sub> sur une branche.<br>
+               Les équations de la  tangente T<sub>0</sub>  en M<sub>0</sub> et M<sub>1</sub> figure.<br>
+               Vous remarquerez que l'intersection des tangentes avec l'axe des x est indépendante du paramètre b et que de la même façon l'intersection de T<sub>0</sub> avec l'axe des y est indépendante du paramètre a.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The following applet allows you to vary the a and b parameters of the hyperbola and the point M<sub>0</sub>  on a branch.<br>
+               The equations of the tangent T<sub>0</sub> at M<sub>0</sub> is shown.<br>
+               You will notice that the intersection of the tangents with the x-axis is independent of the parameter b and likewise the intersection of T<sub>0</sub> with the y-axis is independent of the parameter a.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box10" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan10.js"></script> 
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h2>Equation des tangentes à une conique passant par un point donné</h2>
+               <h3>Cas de l'ellipse</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>Dans ce paragraphe p ne désigne pas le paramètre de l'ellipse mais la pente d'une droite.<br/>
+               Prenons une droite D(u,v) d'équation
+               &nbsp;<!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \frac{x}{u} + \frac{y}{v} = 1
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               &nbsp;<br>
+               où les deux constantes u et v sont les coordonnées des points d'intersection avec les axes.<br>
+               Posons
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {u = \frac{a^{2}}{x_{0}}} \\
+                  {v = \frac{b^{2}}{y_{0}}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Alors D(u,v) est une tangente (en M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>)) si x<sub>0</sub> et y<sub>0</sub> satisfont l'équation de l'ellipse.<br>
+               Ce qui nous donne :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \frac{a^{2}}{u^{2}} + \frac{b^{2}}{v^{2}} = 1
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Comme <b><i>'condition de contact'</i></b>.<br>
+               Appliquons à la droite d'équation y=px+q, qui peut encore s'écrire
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \frac{x}{- \frac{q}{p}} + \frac{y}{q} = 1
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               qui nous donne comme condition de contact
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle a^{2}p^{2} + b^{2} - q^{2} = 0
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Une droite passant par M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) a une équation générale
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle y - y_{0} = p\left( {x - x_{0}} \right)
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               soit <br>
+               y=px+(y<sub>0</sub>-px<sub>0</sub>)<br>
+               La condition de contact s'écrit donc :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle a^{2}p^{2} + b^{2} - \left( y_{0} - px_{0} \right)^{2} = 0
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               ou bien
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} + \left( b^{2} - {y_{0}}^{2} \right) = 0
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               D'où le résultat final :
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Equation of the tangents to a conic passing through a given point</h2>
+               <h3>Case of the ellipse</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>In this paragraph p does not designate the parameter of the ellipse but the slope of a straight line.<br/>
+               Take a straight line D(u,v) with equation
+               &nbsp;<!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \frac{x}{u} + \frac{y}{v} = 1
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               &nbsp;<br>
+               where the two constants u and v are the coordinates of the points of intersection with the axes.<br>
+               Let's pose
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {u = \frac{a^{2}}{x_{0}}} \\
+                  {v = \frac{b^{2}}{y_{0}}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               Then D(u,v) is a tangent (at M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>)) if x<sub>0</sub> and y<sub>0</sub> satisfy the ellipse equation.<br>
+               Which gives us :
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \frac{a^{2}}{u^{2}} + \frac{b^{2}}{v^{2}} = 1
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               Like <b><i>'contact condition'</i></b>.<br>
+               Let us apply to the line of equation y=px+q, which can still be written
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \frac{x}{- \frac{q}{p}} + \frac{y}{q} = 1
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               which gives us as a contact condition
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle a^{2}p^{2} + b^{2} - q^{2} = 0
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               A straight line through M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) has a general equation
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle y - y_{0} = p\left( {x - x_{0}} \right)
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               either <br>
+               y=px+(y<sub>0</sub>-px<sub>0</sub>)<br>
+               The  contact condition is thus written:
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle a^{2}p^{2} + b^{2} - \left( y_{0} - px_{0} \right)^{2} = 0
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               or
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} + \left( b^{2} - {y_ {0}}^{2} \right) = 0
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               Hence the end result:
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm5"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 5</div>
+                  Si E est l'ellipse d'équation x²/a²+y²/b²=1 et si M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) est un point quelconque (n'appartenant pas forcément à E), les pentes p des tangentes en M<sub>0</sub> à E sont solutions de l'équation :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} + \left( b^{2} - {y_{0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 5</div>
+                  If E is the ellipse with equation x²/a²+y²/b²=1 and if M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) is any point (not necessarily belonging to E), the slopes p of the tangents at M<sub>0</sub> to E are solutions of the equation:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} + \left( b^{2} - {y_ {0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               L'applet qui suit vous permet de déplacer le point M<sub>0</sub> dans le plan et de voir l'existence de tangentes à l'ellipse de demi-axes a et b en fonction de la position de M<sub>0</sub>.<br>
+               Vous pouvez également faire varier a et b.<br>
+               M<sub>1</sub> est un point variable appartenant à l'ellipse.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The following applet allows you to move the point M<sub>0</sub> in the plane and see the existence of tangents to the ellipse with semi-axes a and b depending on the position of M< sub>0</sub>.<br>
+               You can also vary a and b.<br>
+               M<sub>1</sub> is a variable point belonging to the ellipse.
+            </div>
+            <!-- /en --> 
+            <a name="ext2"></a>
+            <!-- STOP  APPLET-->
+            <div id="box11" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan11.js"></script> 
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Cas de l'hyperbole</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>Dans ce paragraphe p ne désigne pas le paramètre de l'hyperbole mais la pente d'une droite.<br>
+               Un calcul analogue pour les hyperboles donne
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the hyperbola</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>In this paragraph p does not designate the parameter of the hyperbola but the slope of a straight line.<br>
+               An analogous calculation for the hyperbolas gives
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm6"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 6</div>
+                  Si H est l'hyperbole d'équation 
+                  x²/a²-y²/b²=1 et si M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) est un point quelconque (n'appartenant pas forcément à H), les pentes p des tangentes en M<sub>0</sub> à H sont solutions de l'équation :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} - \left( b^{2} + {y_{0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 6</div>
+                  If H is the hyperbola with equation
+                  x²/a²-y²/b²=1 and if M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) is any point (not belonging necessarily to H), the slopes p of the tangents at M<sub>0</sub> to H are solutions of the equation:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} - \left( b^{2} + {y_ {0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               L'application qui suit vous permet de déplacer un point M<sub>0</sub> extérieur à l'hyperbole, et de voir les tangentes à l'hyperbole passant par ce point. <br>
+               Observez ce qui se passe quand le point se déplace dans les 4 secteurs angulaires formés par les deux asymptotes tracées en vert.<br>
+               On notera en particulier la position des points de contact (sur quelle branche se trouvent-ils ?.<br>
+               Obesrvez également ce qui se passe quand M<sub>0</sub> est sur une asymptote.<br>
+               Vous pouvez faire varier également les paramètres a et b avec les curseurs.<br>
+               M<sub>1</sub> est un point courant de l'hyperbole et en le déplaçant on voit la tangente en M<sub>1</sub> à la parabole. <br>
+               Toutes les tangentes sont traçées en rouge.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The following application allows you to move a point M<sub>0</sub> outside the hyperbola, and see the tangents to the hyperbola passing through this point. <br>
+               Observe what happens when the point moves in the 4 angular sectors formed by the two asymptotes drawn in green.<br>
+               Note in particular the position of the contact points (on which branch are they?.<br>
+               Also observe what happens when M<sub>0</sub> is on an asymptote.<br>
+               You can also vary parameters a and b with the sliders.<br>
+               M<sub>1</sub> is a running point of the hyperbola and by moving it we see the tangent in M<sub>1</sub> to the parabola. <br>
+               All tangents are drawn in red.
+            </div>
+            <!-- /en --> 
+            <a href="ext3"></a>
+            <!-- STOP  APPLET-->
+            <div id="box12" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan12.js"></script> 
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Cas de la parabole</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>Dans ce paragraphe p désigne le paramètre de la parabole, c'est à dire que l'équation de la parabole P est 2py=x².<br>
+               Une droite D<sub>0</sub> de pente &alpha; passant par M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) aura une équation :<br>
+               y-y<sub>0</sub>=&alpha;(x-x<sub>0</sub>)<br>
+               Les points d'intersection de P et D<sub>0</sub> sont solutions du système :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {y = \frac{1}{2p}x^{2}} \\
+                  {y = {\alpha x} - \alpha x_{0} + y_{0}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Donc leurs abscisses sont solutions de l'équation du second degré :
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \frac{1}{2p}x^{2} - {\alpha x} + \alpha x_{0} - y_{0} = 0
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               ou encore
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle x^{2} - 2{p\alpha x} + 2p\left( \alpha x_{0} - y_{0} \right) = 0
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Le discriminant réduit de cette équation est
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \Delta' = p^{2}\alpha^{2} - 2p\left( \alpha x_{0} - y_{0} \right)
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               D'où le résultat :
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the parabola</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>In this paragraph p designates the parameter of the parabola, c ie the equation of the parabola P is 2py=x².<br>
+               A line D<sub>0</sub> with slope &alpha; passing through M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) will have an equation:<br>
+               y-y<sub>0</sub>=&alpha;(x-x<sub>0</sub>)<br>
+               The points of intersection of P and D<sub>0</sub> are solutions of the system:
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {y = \frac{1}{2p}x^{2}} \\
+                  {y = {\alpha x} - \alpha x_{0} + y_{0}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               So their abscissas are solutions of the quadratic equation:
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \frac{1}{2p}x^{2} - {\alpha x} + \alpha x_{0} - y_{0} = 0
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               or
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle x^{2} - 2{p\alpha x} + 2p\left( \alpha x_{0} - y_{0} \right) = 0
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               The reduced discriminant of this equation is
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \Delta' = p^{2}\alpha^{2} - 2p\left( \alpha x_{0} - y_{0} \right)
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               Hence the result:
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm7"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 7</div>
+                  Les pentes &alpha; des droites passant par M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) et tangentes à la parabole P d'équation 2py=x²  sont solutions de l'équation :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle p\alpha^{2} - 2x_{0}\alpha + 2y_{0} = 0
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 7</div>
+                  The slopes &alpha; of lines passing through M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) and tangent to the parabola P with equation 2py=x² are solutions of equation:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle p\alpha^{2} - 2x_{0}\alpha + 2y_{0} = 0
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <a name="ext1"></a>
+            <div lang="fr">
+               Sur l'application qui suit, vous voyez une parabole de paramètre P un point M<sub>0</sub> du plan et un point courant M<sub>1</sub> de la parabole.<br>
+               Vous pouvez faire varier le paramètre p avec un curseur. <br>
+               Vous pouvez également déplacer les points M<sub>0</sub> et M<sub>1</sub> avec la souris. <br>
+               Quand elles existent les deux tangentes passant par M<sub>0</sub> sont représentées.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               On the map below, you see a parabola of parameter P, a point M<sub>0</sub> of the plane and a current point M<sub>1</sub> of the parabola.<br>
+               You can vary the parameter p with a slider. <br>
+               You can also move the M<sub>0</sub> and M<sub>1</sub> points with the mouse. <br>
+               When they exist the two tangents passing through M<sub>0</sub> are represented.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box13" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan13.js"></script>  
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h2>Tangentes à une conique de pente donnée</h2>
+               On cherche les tangentes à une conique C dont l'équation est du type 
+               y=px+q où p est un nombre fixe donné à l'avance
+               <h3>Cas de l'ellipse</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>Dans ce paragraphe p ne désigne pas le paramètre de l'ellipse mais la pente d'une droite.<br>
+               La condition de contact nous donne<br>
+               q<sup>2</sup>=a<sup>2</sup>p<sup>2</sup>+b<sup>2</sup><br>
+               donc deux valeurs possibles pour q 
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle q = \pm \sqrt{a^{2}p^{2} + b^{2}}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               et deux droites
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {y = {px} + \sqrt{a^{2}p^{2} + b^{2}}} \\
+                  {y = {px} - \sqrt{a^{2}p^{2} + b^{2}}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               L'applet suivante vous permet de vérifier le résultat ci-dessus, en faisant varier a,b et p.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Tangents to a conic with given slope</h2>
+               We are looking for the tangents to a conic C whose equation is of the type
+               y=px+q where p is a fixed number given in advance
+               <h3>Case of the ellipse</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>In this paragraph p does not designate the parameter of the ellipse but the slope of a straight line.<br>
+               The contact condition gives us<br>
+               q<sup>2</sup>=a<sup>2</sup>p<sup>2</sup>+b<sup>2</sup><br>
+               so two possible values for q
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle q = \pm \sqrt{a^{2}p^{2} + b^{2}}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               and two straight
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {y = {px} + \sqrt{a^{2}p^{2} + b^{2}}} \\
+                  {y = {px} - \sqrt{a^{2}p^{2} + b^{2}}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               The following applet allows you to check the above result, by varying a,b and p.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box14" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan14.js"></script>
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Cas de l'hyperbole</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>Dans ce paragraphe p ne désigne pas le paramètre de l'hyperbole mais la pente d'une droite.<br>
+               La condition de contact nous donne<br>
+               q<sup>2</sup>=a<sup>2</sup>p<sup>2</sup>-b<sup>2</sup><br>
+               donc deux valeurs possibles pour q quand -b/a &lt; p &lt; b/a
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle q = \pm \sqrt{a^{2}p^{2} - b^{2}}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               et deux droites
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {y = {px} + \sqrt{a^{2}p^{2} - b^{2}}} \\
+                  {y = {px} - \sqrt{a^{2}p^{2} - b^{2}}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               L'applet suivante vous permet de vérifier le résultat ci-dessus, en faisant varier a,b et p.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the hyperbola</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>In this paragraph p does not designate the parameter of the hyperbola but the slope of a straight line.<br>
+               The contact condition gives us<br>
+               q<sup>2</sup>=a<sup>2</sup>p<sup>2</sup>-b<sup>2</sup><br>
+               so two possible values for q when -b/a &lt; p &lt; b/a
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle q = \pm \sqrt{a^{2}p^{2} - b^{2}}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               and two straight
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle \left\{ \begin{matrix}
+                  {y = {px} + \sqrt{a^{2}p^{2} - b^{2}}} \\
+                  {y={px}-\sqrt{a^{2}p^{2}-b^{2}}} \\
+                  \end{matrix} \right.
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               The following applet allows you to check the above result, by varying a,b and p.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box15" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan15.js"></script>
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Cas de la parabole</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>Dans ce paragraphe p désigne le paramètre de la parabole, c'est à dire que l'équation de la parabole est 2py=x².<br>
+               D'après ce qui précède dire que la droite de pente &alpha; est tangente à P au point M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>), revient à dire que &alpha; est solution de
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle p\alpha^{2} - 2x_{0}\alpha + \frac{{x_{0}}^{2}}{p} = 0
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Soit encore
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle p^{2}\alpha^{2} - 2x_{0}{p\alpha} + {x_{0}}^{2} = \left( x_{0} - {p\alpha} \right)^{2} = 0
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Il y a donc une solution unique x<sub>0</sub>=p&alpha; et un unique point de tangence 
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle M_{0}\left( {p\alpha},\frac{p\alpha^{2}}{2} \right)
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               L'applet suivante vous permet de vérifier le résultat ci-dessus, en faisant varier p et &alpha;.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the parabola</h3>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>In this paragraph p designates the parameter of the parabola, c ie the equation of the parabola is 2py=x².<br>
+               From what precedes, say that the line with slope &alpha; is tangent to P at point M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>), which means that &alpha; is solution of
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle p\alpha^{2} - 2x_{0}\alpha + \frac{{x_{0}}^{2}}{p} = 0
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               Either still
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle p^{2}\alpha^{2} - 2x_{0}{p\alpha} + {x_{0}}^{2} = \left( x_{0} - {p\alpha} \right )^{2} = 0
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               So there is a unique solution x<sub>0</sub>=p&alpha; and a single point of tangency
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle M_{0}\left( {p\alpha},\frac{p\alpha^{2}}{2} \right)
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               The following applet allows you to verify the above result, by varying p and &alpha;.
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div id="box16" class="jxgbox" style="width:500px; height:500px;"></div>
+            <script src="js/coniquestan16.js"></script>      
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h2>Intérieur d'une conique</h2>
+               <h3>Parabole</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Interior of a conic</h2>
+               <h3>Parabola</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def6"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 6</div>
+                  <b><i>L'intérieur</i></b>" d'une parabole est l'image par projection centrale de l'intérieur du cercle qui lui correspond dans une projection centrale.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 6</div>
+                  <b><i>The interior</i></b>" of a parabola is the image by central projection of the interior of the circle which corresponds to it in a central projection.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               On pourra par exemple revoir cette applet
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               We can for example review this applet
+            </div>
+            <!-- /en --> 
+            <input type="image" name="iconapplet4" src="images/applet.png" onclick="go('coniquestan2.html#')" data-inline="false">
+            <div lang="fr">
+               On voit ici, colorié en vert pâle, l'intérieur d'une parabole.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               We see here, colored in pale green, the interior of a parabola.
+            </div>
+            <!-- /en --> 
+            <!-- STOP IMAGE -->
+            <p><img src="images/intpara.png" width="474" height="375" border="0" alt=""></p>
+            <!-- /STOP IMAGE -->
+            <div lang="fr">
+               <h3>Ellipse</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Ellipse</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def7"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 7</div>
+                  "<b><i>L'intérieur</i></b>" d'une ellipse est l'image par projection centrale de l'intérieur de l'un quelconque des cercles qui lui correspondent dans une projection centrale.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 7</div>
+                  "<b><i>The interior</i></b>" of an ellipse is the central projection image of the interior of any of its corresponding circles in a central projection.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               On pourra par exemple revoir cette applet
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               We can for example review this applet
+            </div>
+            <!-- /en --> 
+            <input type="image" name="iconapplet5" src="images/applet.png" onclick="go('coniquestan1.html#')" data-inline="false">
+            <div lang="fr">
+               On voit ici, colorié en vert pâle, l'intérieur d'une ellipse.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               We see here, colored in pale green, the interior of an ellipse.
+            </div>
+            <!-- /en --> 
+            <!-- STOP IMAGE -->
+            <p><img src="images/intellipse.png" width="318" height="224" border="0" alt=""></p>
+            <!-- /STOP IMAGE -->
+            <div lang="fr">
+               <h3>Hyperbole</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Hyperbola</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def8"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 8</div>
+                  "<b><i>L'intérieur</i></b>" d'une hyperbole est l'image par projection centrale de l'intérieur de l'un quelconque des cercles qui lui correspondent dans une projection centrale.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 8</div>
+                  "<b><i>The interior</i></b>" of a hyperbola is the central projection image of the interior of any of its corresponding circles in a central projection.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               On pourra par exemple revoir cette applet
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               We can for example review this applet
+            </div>
+            <!-- /en --> 
+            <input type="image" name="iconapplet6" src="images/applet.png" onclick="go('coniquestan3.html#')" data-inline="false">
+            <div lang="fr">
+               On voit ici, colorié en vert pâle, l'intérieur d'une hyperbole.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               We see here, colored in pale green, the interior of a hyperbola.
+            </div>
+            <!-- /en --> 
+            <!-- STOP IMAGE -->
+            <p><img src="images/inthyper.png" width="468" height="256" border="0" alt=""></p>
+            <!-- /STOP IMAGE -->
+            <!-- STOP -->
+            <a name="def9"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 9</div>
+                  A contrario, le complémentaire de l'intérieur d'une conique est appelé son <b><i>'extérieur'</i></b>.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 9</div>
+                  Conversely, the complement of the interior of a conic is called its <b><i>'exterior'</i></b>.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               Il reste à s'assurer que ces définitions sont indépendantes de la représentation d'une conique comme section de cône. C'est pourquoi il est bon de caractériser ces régions en fonction des paramètres intrinsèques de la conique.
+               <h3>Cas de la parabole</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               It remains to ensure that these definitions are independent of the representation of a conic as a section of a cone. This is why it is good to characterize these regions according to the intrinsic parameters of the conic.
+               <h3>Case of the parabola</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm8"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 8</div>
+                  L'intérieur de la parabole correspond à l'ensemble des points M tels que d(M,F) &lt; d(M,D) où F est le foyer et D la directrice de la parabole. <br>
+                  En outre si la parabole a, dans un repère orthonormé, pour équation 2py=x<sup>2</sup>, l'intérieur est l'ensemble des points vérifiant <br>y &gt; (1/2p)x<sup>2</sup>.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 8</div>
+                  The interior of the parabola corresponds to the set of points M such that d(M,F) &lt; d(M,D) where F is the focus and D the directrix of the parabola. <br>
+                  Moreover if the parabola has, in an orthonormal frame, for equation 2py=x<sup>2</sup>, the interior is the set of points satisfying <br>y &gt; (1/2p)x<sup>2</sup>.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h3>Cas de l'ellipse</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the ellipse</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm9"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 9</div>
+                  L'intérieur de l'ellipse correspond à l'ensemble des points M tels que MF+MF' &lt; 2a où F et F' sont les foyers de l'ellipse. <br>
+                  En outre si l'ellipse a, dans un repère orthonormé, pour équation 
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} + \frac{y^{2}}{b^{2}} = 1
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  l'intérieur est l'ensemble des points vérifiant
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} + \frac{y^{2}}{b^{2}} < 1
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 9</div>
+                  The interior of the ellipse corresponds to the set of points M such that MF+MF' &lt; 2a where F and F' are the foci of the ellipse. <br>
+                  Moreover if the ellipse has, in an orthonormal frame, for equation
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} + \frac{y^{2}}{b^{2}} = 1
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  the interior is the set of points satisfying
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} + \frac{y^{2}}{b^{2}} < 1
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h3>Cas de l'hyperbole</h3>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Case of the hyperbola</h3>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm10"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 10</div>
+                  L'intérieur de l'hyperbole correspond à l'ensemble des points M tels que |MF-MF'| &gt; 2a où F et F' sont les foyers de l'hyperbole. <br>
+                  En outre si l'hyperbole a, dans un repère orthonormé, pour équation 
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} - \frac{y^{2}}{b^{2}} = 1
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  l'intérieur est l'ensemble des points vérifiant
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} - \frac{y^{2}}{b^{2}} > 1
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 10</div>
+                  The interior of the hyperbola corresponds to the set of points M such that |MF-MF'| &gt; 2a where F and F' are the foci of the hyperbola. <br>
+                  Moreover if the hyperbola has, in an orthonormal frame, for equation
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} - \frac{y^{2}}{b^{2}} = 1
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  the interior is the set of points satisfying
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \frac{x^{2}}{a^{2}} - \frac{y^{2}}{b^{2}} > 1
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               Il résulte des définitions que :
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               It follows from the definitions that:
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm11"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 11</div>
+                  L'intérieur d'une conique est <input type="button" value="convexe" onclick="go('../affines/affinesconv.html#def2')" data-inline="true" />, son extérieur ne l'est pas.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 11</div>
+                  The interior of a conic is <input type="button" value="convex" onclick="go('../affines/affinesconv.html#def2')" data-inline="true" />, its exterior is not.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h2>Lien avec les tangentes</h2>
+               On pourra préalablement revoir les applets ci-dessus correspondant à l'existence de tangentes à une conique donnée passant par un point donné.
+               <input type="button" value="Ici" onclick="go('#ext1')" data-inline="true"/>,
+               <input type="button" value="là" onclick="go('#ext2')" data-inline="true"/>,
+               et
+               <input type="button" value="là" onclick="go('#ext3')" data-inline="true"/>;<br>
+               Vous pouvez constater que : 
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Link with the tangents</h2>
+               We can first review the applets above corresponding to the existence of tangents to a given conic passing through a given point.
+               <input type="button" value="Here" onclick="go('#ext1')" data-inline="true"/>,
+               <input type="button" value="there" onclick="go('#ext2')" data-inline="true"/>,
+               and
+               <input type="button" value="there" onclick="go('#ext3')" data-inline="true"/>.<br>
+               You can see that:
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="thm12"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">théorème 12</div>
+                  <ul>
+                     <li>L'extérieur (strict) d'une conique est le lieu des points tels qu'il est possible de mener de ce point deux tangentes distinctes à la conique.</li>
+                     <li>La conique elle-même est le lieu des points par lesquels passe une et une seule tangente à la conique.</li>
+                     <li>L'intérieur (strict) de la conique est le lieu des points tels qu'il ne passe par ces points aucune tangente à la conique. </li>
+                  </ul>
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">theorem 12</div>
+                  <ul>
+                     <li>The exterior (strict) of a conic is the locus of points such that it is possible to lead from this point two distinct tangents to the conic.</li>
+                     <li>The conic itself is the locus of the points through which passes one and only one tangent to the conic.</li>
+                     <li>The (strict) interior of the conic is the locus of points such that no tangent to the conic passes through these points. </li>
+                  </ul>
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP -->
+            <div lang="fr">
+               <div data-role="collapsible">
+                  <h4>démonstration</h4>
+                  En effet, nous avons vu que si E est l'ellipse d'équation x²/a²+y²/b²=1 et si M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) est un point quelconque (n'appartenant pas forcément à E), les pentes p des tangentes en M<sub>0</sub> à E sont solutions de l'équation :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} + \left( b^{2} - {y_{0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  Le discriminant réduit de cette équation du second degré en p est
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \Delta' = {x_{0}}^{2}{y_{0}}^{2} - \left( a^{2} - {x_{0}}^{2} \right)\left( b^{2} - {y_{0}}^{2} \right)
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  et &Delta;' &gt; 0 équivaut à
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \frac{{x_{0}}^{2}}{a^{2}} + \frac{{y_{0}}^{2}}{b^{2}} > 1
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  Si H est l'hyperbole d'équation 
+                  x²/a²-y²/b²=1 et si M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) est un point quelconque (n'appartenant pas forcément à H), les pentes p des tangentes en M<sub>0</sub> à H sont solutions de l'équation :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} - \left( b^{2} + {y_{0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  De la même façon en écrivant que le déterminant réduit de cette équation est &gt; 0 on trouve la condition caractéristique de l'extérieur de l'hyperbole.<br>
+                  Enfin pour la parabole on s'intéresse au cas où l'équation en &alpha;
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle p\alpha^{2} - 2x_{0}\alpha + 2y_{0} = 0
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  possède deux solutions.<br>
+                  La condition est équivalente à
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle y_{0} < \frac{1}{2p}{x_{0}}^{2}
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+               </div>
+               <!--demo -->
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+               <div data-role="collapsible">
+                  <h4>proof</h4>
+                  Indeed, we have seen that if E is the ellipse with equation x²/a²+y²/b²=1 and if M<sub>0</sub>(x<sub>0</sub>,y<sub >0</sub>) is any point (not necessarily belonging to E), the slopes p of the tangents at M<sub>0</sub> to E are solutions of the equation:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} + \left( b^{2} - {y_ {0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  The reduced discriminant of this quadratic equation in p is
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \Delta' = {x_{0}}^{2}{y_{0}}^{2} - \left( a^{2} - {x_{0}}^{2} \right)\left( b^{2} - {y_{0}}^{2} \right)
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  and &Delta;' &gt; 0 equals
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \frac{{x_{0}}^{2}}{a^{2}} + \frac{{y_{0}}^{2}}{b^{2}} > 1
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  If H is the hyperbola with equation
+                  x²/a²-y²/b²=1 and if M<sub>0</sub>(x<sub>0</sub>,y<sub>0</sub>) is any point (not belonging necessarily to H), the slopes p of the tangents at M<sub>0</sub> to H are solutions of the equation:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle p^{2}\left( a^{2} - {x_{0}}^{2} \right) + 2px_{0}y_{0} - \left( b^{2} + {y_ {0}}^{2} \right) = 0
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  In the same way by writing that the reduced determinant of this equation is &gt; 0 we find the characteristic condition of the exterior of the hyperbola.<br>
+                  Finally for the parabola we are interested in the case where the equation in &alpha;
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle p\alpha^{2} - 2x_{0}\alpha + 2y_{0} = 0
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  has two solutions.<br>
+                  The condition is equivalent to
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle y_{0} < \frac{1}{2p}{x_{0}}^{2}
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+               </div>
+               <!--demo -->
+            </div>
+            <!-- /en -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/coniquestangentes/menu.html')" /></li>
+                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/coniquestangentes/menu.html')" /></li>
+                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /en --> 
+         </div>
+         <!-- /content -->
+         <div data-role="footer">
+            <table cellpadding="10">
+               <tr>
+                  <td>
+                     <div lang="fr">Création Gilles Dubois</div>
+                     <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Janvier 2022</div>
+                     <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Version mobile Jquery</div>
+                     <div lang="en">Mobile Jquery version</div>
+                  </td>
+                  <td><a href="https://www.mathjax.org">
+                     <img title="Powered by MathJax"
+                        src="https://www.mathjax.org/badge/badge.gif"
+                        border="0" alt="Powered by MathJax" />
+                     </a>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <!-- /footer -->
+         <ul style=list-style-type:'';>
+            <li>
+               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+            </li>
+            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+         </ul>
+      </div>
+      <!-- /page -->
+   </body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>exo4.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #0033b3;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">E(a,b)=sqrt(a*a-b*b)/a</span>
+
+<span class="s1">function </span><span class="s0">source(a,b,chnl)</span>
+    <span class="s0">n=</span><span class="s2">1</span>
+    <span class="s0">e=E(a,b)</span>
+    <span class="s0">u=-e^</span><span class="s2">2</span><span class="s0">/</span><span class="s2">4</span>
+    <span class="s0">s=</span><span class="s2">1</span><span class="s0">+u</span>
+    <span class="s0">put!(chnl,s)</span>
+    <span class="s1">while true</span>
+        <span class="s0">n=n+</span><span class="s2">2</span>
+        <span class="s0">u=u*((n/(n+</span><span class="s2">1</span><span class="s0">))^</span><span class="s2">2</span><span class="s0">)*e^</span><span class="s2">2</span>
+        <span class="s0">s+=u/n</span>
+        <span class="s0">put!(chnl,s)</span>
+    <span class="s1">end</span>
+<span class="s1">end</span>
+
+<span class="s1">for </span><span class="s0">a </span><span class="s1">in </span><span class="s2">2</span><span class="s0">:</span><span class="s2">20</span>
+    <span class="s0">L=</span><span class="s2">0</span>
+    <span class="s1">for </span><span class="s0">b </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:a-</span><span class="s2">1</span>
+        <span class="s0">channel=Channel((channel_arg)-&gt;source(a,b,channel_arg))</span>
+        <span class="s1">for </span><span class="s0">i </span><span class="s1">in </span><span class="s2">1</span><span class="s0">:</span><span class="s2">20</span>
+            <span class="s0">L=take!(channel)</span>
+        <span class="s1">end</span>
+        <span class="s0">L=</span><span class="s2">2</span><span class="s0">*pi*a*L</span>
+        <span class="s0">print(L);print(</span><span class="s3">&quot;------&quot;</span><span class="s0">);print(pi*sqrt(</span><span class="s2">2</span><span class="s0">*(a*a+b*b)));print(</span><span class="s3">&quot;------&quot;</span><span class="s0">);println(pi*(</span><span class="s2">3</span><span class="s0">(a+b)-sqrt((</span><span class="s2">3</span><span class="s0">a+b)*(a+</span><span class="s2">3</span><span class="s0">b))))</span>
+
+    <span class="s1">end</span>
+<span class="s1">end</span>
+</pre>
+</body>
+</html>

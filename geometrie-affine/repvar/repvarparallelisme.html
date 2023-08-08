@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Parallélisme</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarparallelisme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarparallelisme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Nous avons déjà vu la notion de <input type="button" value="parallélisme" onclick="go('../affines/affinesinter.html#def1')" data-inline="true" /> pour les variétés linéaires. <br /> Nous avons vu dans ce chapitre les différentes possibilités de représentation analytique des variétés linéaires. <br /> Le problème se pose de savoir reconnaître rapidement le parallélisme directement sur ces représentations. <br /> Dans toute cette page on suppose qu'on a un espace affine A de dimension finie n rapporté à un repère R. Les points sont donc caractérisés par leurs coordonnées relativement à ce repère. </p>
+          <h2>Cas des hyperplans</h2> Les hyperplans sont représentés par une équation cartésienne. <br /> Deux hyperplans sont parallèles s'ils ont le même hyperplan vectoriel directeur.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>We have already seen the notion of <input type="button" value="parallelism" onclick="go('../affines/affinesinter.html#def1')" data-inline="true" /> for linear varieties. <br /> We have seen in this chapter the different possibilities of analytical representation of linear varieties. <br /> The problem arises of knowing how to quickly recognize parallelism directly on these representations. <br /> Throughout this page we assume that we have an affine space A of finite dimension n referred to a frame R. The points are therefore characterized by their coordinates relative to this frame. </p>
+          <h2>Case of hyperplanes</h2> Hyperplanes are represented by a Cartesian equation. <br /> Two hyperplanes are parallel if they have the same directing vector hyperplane.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Il résulte de la caractérisation des hyperplans vectoriels comme noyaux de formes linéaires non nulles que si 2 hyperplans affines H <sub>1</sub> et H <sub>2</sub> représentés par des équations : <br> (H <sub>1</sub>) a <sub>1,1</sub>x <sub>1</sub>+a <sub>1,2</sub>x <sub>2</sub>+ ... + a <sub>1,n</sub>x <sub>n</sub>=b <sub>1</sub>
+            <br> (H <sub>2</sub>) a <sub>2,1</sub>x <sub>1</sub>+a <sub>2,2</sub>x <sub>2</sub>+ ... + a <sub>2,n</sub>x <sub>n</sub>=b <sub>2</sub>
+            <br> Le parallélisme de H <sub>1</sub> et H <sub>2</sub> revient à l'existence d'un coefficient k non nul tel que : <br> (a <sub>2,1</sub>,a <sub>2,2</sub>, ... ,a <sub>2,n</sub>)=k(a <sub>1,1</sub>,a <sub>1,2</sub>, ... ,a <sub>1,n</sub>) <br> En outre H <sub>1</sub> et H <sub>2</sub> sont confondus si on a également b <sub>2</sub>=kb <sub>1</sub>, strictement parallèles et donc disjoints dans le cas contraire.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> It follows from the characterization of vector hyperplanes as kernels of non-zero linear forms that if 2 affine hyperplanes H <sub>1</sub> and H <sub>2</sub> represented by equations: <br> (H <sub>1</sub>) a <sub>1.1</sub>x <sub>1</sub>+a <sub>1.2</sub>x <sub>2</sub>+ ... + a <sub>1,n</sub>x <sub>n</sub>=b <sub>1</sub>
+            <br> (H <sub>2</sub>) a <sub>2.1</sub>x <sub>1</sub>+a <sub>2.2</sub>x <sub>2</sub>+ ... + a <sub>2,n</sub>x <sub>n</sub>=b <sub>2</sub>
+            <br> The parallelism of H <sub>1</sub> and H <sub>2</sub> comes down to the existence of a nonzero coefficient k such that: <br> (a <sub>2,1</sub>,a <sub>2,2</sub>, ... ,a <sub>2,n</sub>)=k(a <sub>1, 1</sub>,a <sub>1,2</sub>, ... ,a <sub>1,n</sub>) <br> Moreover H <sub>1</sub> and H <sub>2</sub> are coincident if we also have b <sub>2</sub>=kb <sub>1</sub>, strictly parallel and therefore disjoint otherwise.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Par ailleurs, il est facile de décider si un vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> de coordonnées (u <sub>1</sub>, ...,u <sub>n</sub>) est un vecteur directeur de l'hyperplan H d'équation : <br> a <sub>1</sub>x <sub>1</sub>+a <sub>2</sub>x <sub>2</sub>+ ... + a <sub>n</sub>x <sub>n</sub>=b <br> Il suffit de vérifier que ses coordonnées satisfont l'équation : <br> a <sub>1</sub>u <sub>1</sub>+a <sub>2</sub>u <sub>2</sub>+ ... + a <sub>n</sub>u <sub>n</sub>=0 <br> La proposition suivante résulte immédiatement de la définition du parallélisme.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Moreover, it is easy to decide whether a vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> of coordinates (u <sub>1</sub>, ...,u <sub>n</sub>) is a direction vector of the hyperplane H with equation: <br> a <sub>1</sub>x <sub>1</sub>+a <sub>2</sub>x <sub>2</sub>+ ... + a <sub>n</sub>x <sub>n</sub>=b <br> Just check that its coordinates satisfy the equation: <br> a <sub>1</sub>u <sub>1</sub>+a <sub>2</sub>u <sub>2</sub>+ ... + a <sub>n</sub>u <sub>n</sub>=0 <br> The following proposition follows immediately from the definition of parallelism.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Une variété V est parallèle à l'intersection de 2 hyperplans affines H <sub>1</sub> et H <sub>2</sub> si et seulement elle est parallèle à chacun d'eux.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> A manifold V is parallel to the intersection of 2 affine hyperplanes H <sub>1</sub> and H <sub>2</sub> if and only it is parallel to each of them.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Et elle se généralise immédiatement à un nombre fini quelconque d'hyperplans. <h3>Exemple 1</h3> Dans l'espace &reals; <sup>3</sup>
+          <br> le plan H <sub>1</sub> défini par 2x-3y+z=1 <br> et le plan H <sub>2</sub> défini par 4x-6y+2z=3 <br> sont strictement parallèles <h3>Exemple 2</h3> Dans l'espace &reals; <sup>3</sup>
+          <br> le plan H <sub>1</sub> défini par 2x-3y+z=1 <br> et le plan H <sub>2</sub> défini par 4x-6y+2z=2 <br> sont confondus <h3>Exemple 3</h3> Dans l'espace &reals; <sup>3</sup>
+          <br> Toute droite affine de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}(3,-2,0) \)
+          <!-- /FORMULE UNIV INLINE--> est parallèle au plan d'équation 2x-3y+z=1. <h2>Cas où une des variétés est représentée par un système d'équations cartésiennes et l'autre par une représentation paramétrique</h2> Soit V de dimension p et W une variété de dimension q &le; p. <br> On suppose que V est représentée comme intersection d'hyperplans H <sub>1</sub>, ... H <sub>n-p</sub> par un système d'équations :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\alpha_{1,1}x_{1} + ... + \alpha_{1,n - p}x_{n - p} + \alpha_{1,n - p + 1}x_{n - p + 1} + ... + \alpha_{1,n}x_{n} = \gamma_{1}} \\ {\alpha_{2,1}x_{1} + ... + \alpha_{2,n - p}x_{n - p} + \alpha_{2,n - p + 1}x_{n - p + 1} + ... + \alpha_{2,n}x_{n} = \gamma_{2}} \\ {.... = ...} \\ {{\alpha_{n - p}x}_{1} + ... + \alpha_{n - p,n - p}x_{n - p} + \alpha_{n - p,n - p + 1}x_{n - p + 1} + ... + \alpha_{n - p,n}x_{n} = \gamma_{n}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> et que W est représentée par une représentation paramétrique :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x_{1} = a_{1} + k_{1}\beta_{1,1} + ... + k_{q}\beta_{1,q}} \\ {x_{2} = a_{2} + k_{1}\beta_{2,1} + ... + k_{q}\beta_{2,q}} \\ {... = ...} \\ {x_{n} = a_{n} + k_{1}\beta_{n,1} + ... + k_{q}\beta_{n,q}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> De sorte que les
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /FORMULE UNIV INLINE--> (&beta; <sub>1,j</sub>, &beta; <sub>2,j</sub>, ... ,&beta; <sub>n,j</sub>) sont autant de vecteurs directeurs de W. <br> Pour montrer que W est parallèle à V il suffit de montrer que chaque vecteur
+          <!-- /FORMULE UNIV INLINE--> De sorte que les
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /FORMULE UNIV INLINE--> est un vecteur directeur de chacun des hyperplans H <sub>i</sub>, donc de montrer que les m&times;p équations : <br> &alpha; <sub>i,1</sub>&beta; <sub>1,j</sub>+ ... +&alpha; <sub>i,n</sub>&beta; <sub>n,j</sub> = 0 <br> pour 1 &le; i &le; n et 1 &le; j &le; p sont toutes vérifiées. <h3>Exemple</h3> Dans l'espace &reals; <sup>3</sup>
+          <br> La droite définie par le système : <br> 2x-3y+z=1 <br> x+y-z=2 <br> est parallèle à toute droite de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}(2,3,5) \)
+          <!-- /FORMULE UNIV INLINE-->
+          <h2>Autre cas</h2> Il n'est en général pas facile de voir directement le parallélisme de deux variétés linéaires si elles sont données toutes les deux par des systèmes d'équations cartésiennes ou bien toutes les deux par des représentations paramétriques. <br> Il peut arriver toutefois que les vecteurs directeurs de l'une apparaissent facilement comme combinaisons linéaires des vecteurs directeurs de l'autre, auquel cas le parallélisme s'en suit. <br> Faute de solution rapide évidente nous proposons donc d'appliquer la méthode ci-dessus en déterminant une représentation paramétrique pour la variété de plus petite dimension et une représentation cartésienne pour celle de plus grande dimension. <h3>Exemple 1</h3> Dans l'espace &reals; <sup>3</sup>
+          <br> Toute droite de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}(1,2,3) \)
+          <!-- /FORMULE UNIV INLINE--> est parallèle à Toute droite de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v}(2,4,6) \)
+          <!-- /FORMULE UNIV INLINE-->
+          <h3>Exemple 2</h3> Dans l'espace &reals; <sup>3</sup>
+          <br> Tout plan de vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}(1,1,1) \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v}(0,1,0) \)
+          <!-- /FORMULE UNIV INLINE--> est parallèle à tout plan de vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u'}(1,2,1) \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v'}(1,0,1) \)
+          <!-- /FORMULE UNIV INLINE-->. <br> En effet, les deux derniers vecteurs sont la somme et la différence des deux premiers.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> And it generalizes immediately to any finite number of hyperplanes. <h3>Example 1</h3> In space &reals; <sup>3</sup>
+          <br> the plane H <sub>1</sub> defined by 2x-3y+z=1 <br> and the plane H <sub>2</sub> defined by 4x-6y+2z=3 <br> are strictly parallel <h3>Example 2</h3> In space &reals; <sup>3</sup>
+          <br> the plane H <sub>1</sub> defined by 2x-3y+z=1 <br> and the plane H <sub>2</sub> defined by 4x-6y+2z=2 <br> are confused <h3>Example 3</h3> In space &reals; <sup>3</sup>
+          <br> Any affine line with direction vector
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}(3,-2,0) \)
+          <!-- /FORMULE UNIV INLINE--> is parallel to the plane d equation 2x-3y+z=1. <h2>Case where one of the varieties is represented by a system of Cartesian equations and the other by a parametric representation</h2> Let V of dimension p and W be a manifold of dimension q &le; p. <br> We assume that V is represented as the intersection of hyperplanes H <sub>1</sub>, ... H <sub>n-p</sub> by a system of equations:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\alpha_{1,1}x_{1} + ... + \alpha_{1,n - p}x_{n - p} + \alpha_{1,n - p + 1}x_{n - p + 1} + ... + \alpha_{1,n}x_{n} = \gamma_{1}} \\ {\alpha_{2,1}x_{1} + ... + \alpha_{2,n - p}x_{n - p} + \alpha_{2,n - p + 1}x_{n - p + 1} + ... + \alpha_{2,n}x_{n} = \gamma_{2}} \\ {....=...} \\ {{\alpha_{n - p}x}_{1} + ... + \alpha_{n - p,n - p}x_{n - p} + \alpha_{n - p,n - p + 1 }x_{n - p + 1} + ... + \alpha_{n - p,n}x_{n} = \gamma_{n}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> and that W is represented by a parametric representation:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x_{1} = a_{1} + k_{1}\beta_{1,1} + ... + k_{q}\beta_{1,q}} \\ {x_{2} = a_{2} + k_{1}\beta_{2,1} + ... + k_{q}\beta_{2,q}} \\ {...=...} \\ {x_{n} = a_{n} + k_{1}\beta_{n,1} + ... + k_{q}\beta_{n,q}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> So that the
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /INLINE UNIV FORMULA--> (&beta; <sub>1,j</sub>, &beta; <sub>2,j</sub>, ... ,&beta; <sub>n,j</sub>) are all direction vectors of W. <br> To show that W is parallel to V it suffices to show that each vector
+          <!-- /INLINE UNIV FORMULA--> So that the
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /FORMULA UNIV INLINE--> is a direction vector of each of the hyperplanes H <sub>i</sub>, so to show that the m&times;p equations: <br> &alpha; <sub>i,1</sub>&beta; <sub>1,j</sub>+ ... +&alpha; <sub>i,n</sub>&beta; <sub>n,j</sub>=0 <br> for 1 &the; island; n and 1 &le; j &le; p are all checked. <h3>Example</h3> In space &reals; <sup>3</sup>
+          <br> The system-defined line: <br> 2x-3y+z=1 <br> x+y-z=2 <br> is parallel to any straight line with direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u}(2,3,5) \)
+          <!-- /UNIV INLINE FORMULA-->
+          <h2>Other case</h2> It is in general not easy to directly see the parallelism of two linear manifolds if they are both given by systems of Cartesian equations or both by parametric representations. <br> It may happen, however, that the direction vectors of one easily appear as linear combinations of the direction vectors of the other, in which case parallelism follows. <br> In the absence of an obvious quick solution, we therefore propose to apply the above method by determining a parametric representation for the variety of lower dimension and a Cartesian representation for that of higher dimension. <h3>Example 1</h3> In space &reals; <sup>3</sup>
+          <br> Any straight line with direction vector
+          <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{u}(1,2,3) \)
+          <!-- /UNIV INLINE FORMULA--> is parallel to any straight line with direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v}(2,4,6) \)
+          <!-- /UNIV INLINE FORMULA-->
+          <h3>Example 2</h3> In space &reals; <sup>3</sup>
+          <br> Any plane of direction vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u}(1,1,1) \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{v}(0,1,0) \)
+          <!-- /UNIV INLINE FORMULA--> is parallel to any direction vector plane
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u'}(1,2,1) \)
+          <!-- /UNIV INLINE FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v'}(1,0,1) \)
+          <!-- /UNIV INLINE FORMULA-->. <br> Indeed, the last two vectors are the sum and the difference of the first two.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarparallelisme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarparallelisme/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

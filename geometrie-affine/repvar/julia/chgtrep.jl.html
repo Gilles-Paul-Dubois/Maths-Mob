@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>chgtrep.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">include(</span><span class="s1">&quot;reperes.jl&quot;</span><span class="s0">)</span>
+
+<span class="s2">function </span><span class="s0">changement_origine()</span>
+    <span class="s0">P=QP([</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">,</span><span class="s3">3</span><span class="s0">])</span>
+    <span class="s0">Q=QP([</span><span class="s3">2</span><span class="s0">,</span><span class="s3">1</span><span class="s0">,-</span><span class="s3">3</span><span class="s0">])</span>
+    <span class="s0">u=[</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]</span>
+    <span class="s0">v=[</span><span class="s3">0</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">3</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]</span>
+    <span class="s0">w=[</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">0</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]</span>
+    <span class="s0">S=VSQ([u,v,w])</span>
+    <span class="s0">REP1=OVS{Rational{Int64}}(P,S)</span>
+    <span class="s0">REP2=OVS{Rational{Int64}}(Q,S)</span>
+    <span class="s0">M=QP([</span><span class="s3">7</span><span class="s0">,</span><span class="s3">8</span><span class="s0">,</span><span class="s3">9</span><span class="s0">])</span>
+    <span class="s0">println(coords(REP1,M))</span>
+    <span class="s0">println(coords(REP2,M))</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">changement_base()</span>
+    <span class="s0">M=QP([</span><span class="s3">7</span><span class="s0">,</span><span class="s3">8</span><span class="s0">,</span><span class="s3">9</span><span class="s0">])</span>
+    <span class="s0">P=QP([</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">,</span><span class="s3">3</span><span class="s0">])</span>
+    <span class="s0">u=[</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]</span>
+    <span class="s0">v=[</span><span class="s3">0</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">3</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]</span>
+    <span class="s0">w=[</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">0</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]</span>
+    <span class="s0">S1=VSQ([u,v,w])</span>
+    <span class="s0">REP1=OVS{Rational{Int64}}(P,S1)</span>
+    <span class="s0">U,V,W=</span><span class="s3">2</span><span class="s0">u,</span><span class="s3">3</span><span class="s0">v,</span><span class="s3">4</span><span class="s0">w</span>
+    <span class="s0">S2=VSQ([U,V,W])</span>
+    <span class="s0">REP2=OVS{Rational{Int64}}(P,S2)</span>
+    <span class="s0">println(coords(REP1,M))</span>
+    <span class="s0">println(coords(REP2,M))</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">test()</span>
+    <span class="s0">changement_origine()</span>
+    <span class="s0">changement_base()</span>
+<span class="s2">end</span>
+
+<span class="s0">test()</span>
+
+</pre>
+</body>
+</html>

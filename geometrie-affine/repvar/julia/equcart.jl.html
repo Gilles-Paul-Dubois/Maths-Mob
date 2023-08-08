@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>equcart.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">include(</span><span class="s1">&quot;reperes.jl&quot;</span><span class="s0">)</span>
+
+<span class="s0">delcol(M,j)=hcat([[M[i,h] </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:size(M,</span><span class="s3">1</span><span class="s0">)] </span><span class="s2">for </span><span class="s0">h </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:size(M,</span><span class="s3">2</span><span class="s0">) </span><span class="s2">if </span><span class="s0">h !=j]...) </span><span class="s4">#suppresion colonne j</span>
+<span class="s4"># l'hyperplan est donné par un repère affine, une structure de type OVS - hyperplane is given by a frame , an OVS structure</span>
+<span class="s2">function </span><span class="s0">equart(HP::OVS{T}) </span><span class="s2">where </span><span class="s0">T</span>
+    <span class="s0">O=HP.O</span>
+    <span class="s0">VS=HP.VS</span>
+    <span class="s0">M=matrice(VS)</span>
+    <span class="s0">s1,s2=size(M,</span><span class="s3">1</span><span class="s0">),size(M,</span><span class="s3">2</span><span class="s0">)</span>
+    <span class="s0">F=[det(delcol(M,j)) </span><span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:s2]</span>
+    <span class="s0">E=[ j%</span><span class="s3">2</span><span class="s0">!=</span><span class="s3">0 </span><span class="s0">? F[j] : -F[j]  </span><span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:s2]</span>
+    <span class="s0">CO=O.C</span>
+    <span class="s0">G=[E[j]*CO[j] </span><span class="s2">for </span><span class="s0">j </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:s2]</span>
+    <span class="s0">k=reduce(+,G)</span>
+    <span class="s0">push!(E,-k)</span>
+    <span class="s2">return </span><span class="s0">E </span><span class="s4">#retourne sous forme de liste les coeffs de x,y,z, etc... le dernier est le terme constant - returns as a list the coeffs, the last one is the constant.</span>
+<span class="s2">end</span>
+
+<span class="s4">#retourne Rational{Int64}[2//1, -4//1, 2//1, -4//1]</span>
+<span class="s4">#qu'il faut comprendre ici comme 2x-4y+2z-4=0 - must be understood here as 2x-4y+2z-4=0 </span>
+<span class="s2">function </span><span class="s0">testequart()</span>
+    <span class="s0">P=QP([</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">,</span><span class="s3">3</span><span class="s0">])</span>
+    <span class="s0">dirs=VSQ([[</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">3</span><span class="s0">//</span><span class="s3">1</span><span class="s0">],[</span><span class="s3">0</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">4</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]])</span>
+    <span class="s0">HP=OVS{Rational{Int64}}(P,dirs)</span>
+    <span class="s0">println(equart(HP))</span>
+<span class="s2">end</span>
+
+<span class="s0">testequart()</span></pre>
+</body>
+</html>

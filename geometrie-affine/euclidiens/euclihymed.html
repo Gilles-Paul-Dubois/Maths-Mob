@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hyperplan médiateur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/euclihymed/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/euclihymed/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Soit P et Q deux points distincts d'un espace affine euclidien A de dimension finie. <br> Nous cherchons l'ensemble (ou encore <b>
+            <i>'lieu géométrique'</i>
+          </b> selon une terminologie ancienne) des points M <b>
+            <i>'équidistants'</i>
+          </b> de P et Q, c'est à dire situés à même distance de P que de Q. <br> Cherchons à résoudre ce problème analytiquement, en introduisant un repère R. <br> Dans ce repère le point P a des coordonnées (a<sub>1</sub>, ... ,a<sub>n</sub>) et le point Q des coordonnées (b<sub>1</sub>, ... ,b<sub>n</sub>). <br> Les distances étant des nombres positifs nous avons : <br> d(M,P)=d(M,Q) &hArr; d(M,P)<sup>2</sup>=d(M,Q)<sup>2</sup>
+          <br> En traduisant cette dernière égalité au moyen des coordonnées on obtient, si les x<sub>i</sub> sont les coordonnées de M :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle {\sum\limits_{i = 1}^{n}\left( x_{i} - a_{i} \right)^{2}} = {\sum\limits_{i = 1}^{n}\left( {x_{i} - b_{i}} \right)^{2}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> En développant et en éliminant les carrés on tombe sur l'équation cartésienne d'un hyperplan, car il existe au moins un indice i tel que a<sub>i</sub> &ne; b<sub>i</sub> puisque P &ne; Q. <br> Il est évident que cet hyperplan passe par le milieu I du segment [PQ]. <br> Le triangle MPQ est alors isocèle de sommet M et (MI) en est une médiane, donc aussi une hauteur et (MI) est orthogonale à [PQ]. <br> Il en résulte que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> Let P and Q be two distinct points of a finite dimensional Euclidean affine space A. <br> We are looking for the set (or still <b>
+            <i>'geometric locus'</i>
+          </b> according to old terminology) of points M <b>
+            <i>'equidistant'</i>
+          </b> of P and Q, i.e. located at the same distance from P as from Q. <br> Let's try to solve this problem analytically, by introducing a benchmark R. <br> In this frame, point P has coordinates (a<sub>1</sub>, ... ,a<sub>n</sub>) and point Q has coordinates (b<sub>1</sub> , ... ,b<sub>n</sub>). <br> The distances being positive numbers we have: <br> d(M,P)=d(M,Q) &hArr; d(M,P)<sup>2</sup>=d(M,Q)<sup>2</sup>
+          <br> By translating this last equality by means of the coordinates we obtain, if the x<sub>i</sub> are the coordinates of M:
+          <!-- FORMULA UNIV INLINE -->
+          <p>\( \displaystyle {\sum\limits_{i = 1}^{n}\left( x_{i} - a_{i} \right)^{2}} = {\sum\limits_{i = 1}^{n }\left( {x_{i} - b_{i}} \right)^{2}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> By expanding and eliminating the squares we get the Cartesian equation of a hyperplane, because there exists at least one index i such that a<sub>i</sub> &ne; b<sub>i</sub> since P &ne; Q. <br> It is obvious that this hyperplane passes through the middle I of the segment [PQ]. <br> The triangle MPQ is then isosceles with vertex M and (MI) is a median of it, therefore also a height and (MI) is orthogonal to [PQ]. <br> It follows that :
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Le lieu des points équidistants de deux points distincts P et Q est un hyperplan passant par le milieu de [PQ] et orthogonal à [PQ].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> The locus of points equidistant from two distinct points P and Q is a hyperplane passing through the midpoint of [PQ] and orthogonal to [PQ].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Cet hyperplan s'appelle l'hyperplan <strong>
+              <em>'médiateur'</em>
+            </strong> de [PQ].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> This hyperplane is called the <strong>
+              <em>'perpendicular bisector'</em>
+            </strong> hyperplane of [PQ].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Illustrations</h2>
+          <h3>Cas du plan</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Illustrations</h2>
+          <h3>Case of the plane</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/hymed1.png" width="331" height="234" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <a name="constmed"></a>
+        <div lang="fr">
+          <h4>Construction de la médiatrice d'un segment</h4>
+          <p> Appuyer sur les boutons 'Etape 1', 'Etape 2',..., dans l'ordre suggéré.</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Construction of the perpendicular bisector of a segment</h4>
+          <p> Push buttons 'Step 1', 'Step 2',..., in the suggested order.</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <table border="1" width="100%">
+          <tr>
+            <td>
+              <button type='button' id="button1" onclick="firstStep()">
+                <div lang="fr">Etape 1</div>
+                <!-- /fr -->
+                <div lang="en">Step 1</div>
+                <!-- /en -->
+              </button>
+            </td>
+            <td>
+              <button type='button' id="button2" onclick="secondStep()">
+                <div lang="fr">Etape 2</div>
+                <!-- /fr -->
+                <div lang="en">Step 2</div>
+                <!-- /en -->
+              </button>
+            </td>
+            <td>
+              <button type='button' id="button3" onclick="thirdStep()">
+                <div lang="fr">Etape 3</div>
+                <!-- /fr -->
+                <div lang="en">Step 3</div>
+                <!-- /en -->
+              </button>
+            </td>
+            <td>
+              <button type='button' id="button4" onclick="fourthStep()">
+                <div lang="fr"> Etape 4</div>
+                <!-- /fr -->
+                <div lang="en">Step 4</div>
+                <!-- /en -->
+              </button>
+            </td>
+            <td>
+              <button type='button' id="button5" onclick="fifthStep()">
+                <div lang="fr">Etape 5</div>
+                <!-- /fr -->
+                <div lang="en">Step 5</div>
+                <!-- /en -->
+              </button>
+            </td>
+          </tr>
+        </table>
+        <script src="js/amener_regle.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Cas de l'espace à 3 dimensions</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of 3D space</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/hymed2.png" width="304" height="249" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/euclihymed/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/euclihymed/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

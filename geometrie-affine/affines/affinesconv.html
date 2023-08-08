@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Convexité</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/affinesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/affinesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Dans toute cette page on suppose que le corps de base est &reals;. A désigne un espace affine réel. <br /> Nous avons déjà rencontré la notion de convexité ( <input type="button" value="voir par exemple" onclick="go('../../analyse-reelle/continuite/contconvexes.html#def1')" data-inline="true" />). </p>
+          <h2>Segment</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Throughout this page it is assumed that the base field is &reals;. A denotes a real affine space. <br /> We have already encountered the notion of convexity ( <input type="button" value="see for example" onclick="go('../../analyse-reelle/continuite/contconvexes.html#def1')" data-inline="true" />). </p>
+          <h2>Segment</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un <strong>
+              <em>'segment'</em>
+            </strong> de A est caractérisé par la donnée de deux points P et Q. <br> C'est l'ensemble des barycentres des systèmes ((P,&alpha;),(Q,&beta;)) où &alpha; et &beta; sont de même signe. <br> Un tel segment se note [PQ].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A <strong>
+              <em>'segment'</em>
+            </strong> of A is characterized by the data of two points P and Q. <br> This is the set of barycenters of the systems ((P,&alpha ;),(Q,&beta;)) where &alpha; and &beta; are of the same sign. <br> Such a segment is denoted [PQ].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Les deux remarques qui suivent résultent du principe d'homogénéité des barycentres : <br>
+          <ul>
+            <li>On peut, dans la définition remplacer &alpha; et &beta; de même signe par &alpha; et &beta; tous deux positifs.</li>
+            <li>On peut, dans la définition remplacer &alpha; et &beta; de même signe par &alpha; et &beta; tous deux positifs et &alpha;+&beta;=1.</li>
+          </ul> Un segment
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The following two remarks result from the principle of homogeneity of barycenters: <br>
+          <ul>
+            <li>You can, in the definition, replace &alpha; and &beta; of the same sign by &alpha; and &beta; both positive.</li>
+            <li>You can, in the definition, replace &alpha; and &beta; of the same sign by &alpha; and &beta; both positive and &alpha;+&beta;=1.</li>
+          </ul> A segment
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/segment.png" width="197" height="168" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Parties convexes</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Convex subsets</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit qu'une partie B de A est <strong>
+              <em>'convexe'</em>
+            </strong> si chaque fois qu'elle contient deux points, elle contient tout le segment joignant ces deux points.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A subset B of A is said to be <strong>
+              <em>'convex'</em>
+            </strong> if each time it contains two points, it contains the entire segment joining these two points.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2">
+          <tr>
+            <td align="center">
+              <div lang="fr">Une partie convexe</div>
+              <!-- /fr -->
+              <div lang="en">A convex subset</div>
+              <!-- /en -->
+            </td>
+            <td align="center">
+              <div lang="fr">Une partie non convexe</div>
+              <!-- /fr -->
+              <div lang="en">A non convex subset</div>
+              <!-- /en -->
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/150px-Convex_polygon_illustration1.png" width="150" height="142" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/150px-Convex_polygon_illustration2.png" width="150" height="142" border="0" alt="">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <em>
+                <font size="-1">image: http://fr.wikipedia.org/wiki/Ensemble_convexe</font>
+              </em>
+            </td>
+            <td>
+              <em>
+                <font size="-1">image: http://fr.wikipedia.org/wiki/Ensemble_convexe</font>
+              </em>
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h4>Exemples</h4>
+          <ul>
+            <li>L'espace entier est convexe.</li>
+            <li>Les points ( <input type="button" value="singletons" onclick="go('../../bases/ensembles/singletons.html#')" data-inline="true" />) sont convexes. </li>
+            <li>Toute <input type="button" value="variété linéaire" onclick="go('affinesvar.html#def1')" data-inline="true" /> est convexe. </li>
+            <li>Tout <input type="button" value="demi-espace" onclick="go('affinesvar.html#demi')" data-inline="true" /> déterminé par un hyperplan affine est convexe </li>
+          </ul> Tout cela est évident sauf peut-être le dernier point, mais si M<sub>1</sub> et M<sub>2</sub> sont situés dans le même demi-espace par rapport à un hyperplan H tout point G du segment [M<sub>1</sub>M<sub>2</sub>] vérifie : <br>
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{OG}=\frac{\alpha \overrightarrow{OM_{1} }+\beta \overrightarrow{OM_{2}}}{\alpha +\beta } \)</p>
+          <!-- /FORMULE UNIV INLINE--> où O est un point quelconque de H et &alpha;, &beta; sont deux scalaires positifs. <br> G appartient donc au même demi-espace que M<sub>1</sub> et M<sub>2</sub>. <br> Voici une appliquette mettant en évidence la convexité d'une ellipse. <br> Déplacez deux points A et B à l'intérieur de l'ellipse. <br> Le segment [AB] sera traçé qui doit se trouver entièrement à l'intérieur de l'ellipse.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Examples</h4>
+          <ul>
+            <li>The whole space is convex.</li>
+            <li>Dots ( <input type="button" value="singletons" onclick="go('../../bases/ensembles/singletons.html#')" data-inline="true" /> ) are convex. </li>
+            <li>Any <input type="button" value="linear variety" onclick="go('affinesvar.html#def1')" data-inline="true" /> is convex. </li>
+            <li>Any <input type="button" value="half-space" onclick="go('affinesvar.html#demi')" data-inline="true" /> determined by an affine hyperplane is convex </li>
+          </ul> All off this is obvious except maybe the last point, but if M<sub>1</sub> and M<sub>2</sub> are located in the same half-space with respect to a hyperplane H any point G of segment [M<sub>1</sub>M<sub>2</sub>] verifies: <br>
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{OG}=\frac{\alpha \overrightarrow{OM_{1} }+\beta \overrightarrow{OM_{2}}}{\alpha +\beta } \)</p>
+          <!-- /INLINE UNIV FORMULA--> where O is any point of H and &alpha;, &beta; are two positive scalars. <br> G therefore belongs to the same half-space as M<sub>1</sub> and M<sub>2</sub>. <br> Here is an applet highlighting the convexity of an ellipse. <br> Move two points A and B inside the ellipse. <br> The segment [AB] will be drawn which must lie entirely inside the ellipse.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:600px; height:400px;"></div>
+        <script src="js/convex1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Enveloppe convexe</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Convex hull</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Il résulte de la définition que l'intersection d'une famille quelconque (finie ou infinie) de parties convexes, est encore une partie convexe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> It follows from the definition that the intersection of any family (finite or infinite) of convex subsets, is still a convex subset.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour toute partie X de A il existe des parties convexes contenant X (par exemple A lui-même). <br> L'intersection de tous les convexes contenant X est donc un convexe contenant X et c'est évidemment le plus petit de ceux-ci. </div>
+        <!-- /fr -->
+        <div lang="en"> For any subset X of A there exist convex subsets containing X (e.g. A itself). <br> The intersection of all the convexes containing X is therefore a convex containing X and it is obviously the smallest of these. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On appelle ce convexe l'appelle <b>
+              <i>"l'enveloppe convexe"</i>
+            </b> de X.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> This convex is called the <b>
+              <i>"convex hull"</i>
+            </b> of X.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Cas des ensembles finis</h2> Supposons que X={P<sub>0</sub>,P<sub>1</sub>, ... ,P<sub>n</sub>} soit un ensemble fini de n+1 points. L'enveloppe convexe de X sera, en particulier contenue dans la <input type="button" value="variété linéaire engendrée" onclick="go('affinesinter.html#prop6')" data-inline="true" /> par ces n+1 points. <br /> Cependant, dans ce cas particulier, il est facile de caractériser l'enveloppe convexe :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of finite sets</h2> Let X={P<sub>0</sub>,P<sub>1</sub>, ... ,P<sub>n</sub>} be a finite set of n+1 points. The convex hull of X will, in particular, be contained in the <input type="button" value="generated linear variety" onclick="go('affinesinter.html#prop6')" data-inline="true" /> by these n+1 points. <br /> However, in this particular case, it is easy to characterize the convex hull:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> L'enveloppe convexe de X est exactement l'ensemble des barycentres des systèmes ((P<sub>1</sub>,&lambda;<sub>1</sub>), (P<sub>2</sub>,&lambda;<sub>2</sub>), ,(P<sub>1</sub>,&lambda;<sub>n</sub>)) où tous les &lambda;<sub>i</sub> sont &gt; 0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> The convex hull of X is exactly the set of barycenters of the systems ((P<sub>1</sub>,&lambda;<sub>1</sub>), (P<sub>2</sub>, &lambda;<sub>2</sub>), ,(P<sub>1</sub>,&lambda;<sub>n</sub>)) where all &lambda;<sub>i</sub> are &gt; 0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est simple. Par le <input type="button" value="théorème d'associativité" onclick="go('affinesbar.html#thm5')" data-inline="true" />, l'ensemble des tels barycentres est convexe. Or tout ensemble convexe contenant X doit contenir ces barycentres. </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is simple. By the <input type="button" value="associativity theorem" onclick="go('affinesbar.html#thm5')" data-inline="true" />, the set of such barycenters is convex. Now any convex set containing X must contain these barycenters. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <img src="images/220px-ConvexHull.png" width="220" height="176" border="0" alt="">
+        <br>
+        <font size="-1">
+          <em>Image: http://fr.wikipedia.org/wiki/Enveloppe_convexe</em>
+        </font>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un programme qui utilise <input type="button" value="l'algorithme de Graham" onclick="go('http://fr.wikipedia.org/wiki/Parcours_de_Graham#')" data-inline="true" /> pour déterminer l'enveloppe convexe d'un système fini de points.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> Here is a program that uses <input type="button" value="Graham's algorithm" onclick="go('https://en.wikipedia.org/wiki/Graham_scan')" data-inline="true " /> to determine the convex hull of a finite system of points.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/graham.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Et voici le résultat (fichier hull.png) : </div>
+        <!-- /fr -->
+        <div lang="en"> And here is the result (hull.png file): </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <img src="images/graham.png" width="278" height="278" border="0" alt="">
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Le coin de julia</h2> Voici un programme de calcul de l'enveloppe convexe de Graham. Il inclut le <input type="button" value="programme de définiton des structures utilisées" onclick="go('julia/BasesAffines.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> Here is a program for calculating the convex hull of Graham. It includes the <input type="button" value="program for defining the structures used" onclick="go('julia/BasesAffines.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/graham.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Et voici le résultat de l'exécution :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>And here is the result of the execution:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <img src="images/graham.jl.png" width="602" height="398" alt="" />
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/affinesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/affinesconv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

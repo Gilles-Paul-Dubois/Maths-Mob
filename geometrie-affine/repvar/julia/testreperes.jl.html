@@ -1,0 +1,63 @@
+<html>
+<head>
+<title>testreperes.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">include(</span><span class="s1">&quot;reperes.jl&quot;</span><span class="s0">)</span>
+
+<span class="s2">function </span><span class="s0">test_base()</span>
+    <span class="s0">println(</span><span class="s1">&quot;début test_base-------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">VS1 = aleavectsystemR(</span><span class="s3">3</span><span class="s0">, </span><span class="s3">2</span><span class="s0">)</span>
+    <span class="s0">println(base(VS1))</span>
+    <span class="s0">VS2 = aleavectsystemR(</span><span class="s3">3</span><span class="s0">, </span><span class="s3">3</span><span class="s0">)</span>
+    <span class="s0">println(base(VS2))</span>
+    <span class="s0">VS3 = VSQ([[</span><span class="s3">1 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">2 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">], [</span><span class="s3">2 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">4 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">]])</span>
+    <span class="s0">println(base(VS3))</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin test_base-------------------------------&quot;</span><span class="s0">)</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">test_repere()</span>
+    <span class="s0">println(</span><span class="s1">&quot;début test_repere-------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">ovs1 = OVS(aleaRP(</span><span class="s3">2</span><span class="s0">), aleavectsystemR(</span><span class="s3">3</span><span class="s0">, </span><span class="s3">3</span><span class="s0">))</span>
+    <span class="s0">println(repere(ovs1))</span>
+    <span class="s0">ovs2 = OVS(aleaRP(</span><span class="s3">3</span><span class="s0">), aleavectsystemR(</span><span class="s3">3</span><span class="s0">, </span><span class="s3">3</span><span class="s0">))</span>
+    <span class="s0">println(repere(ovs2))</span>
+    <span class="s0">ovs3 = OVS(aleaQP(</span><span class="s3">2</span><span class="s0">), VSQ([[</span><span class="s3">1 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">2 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">], [</span><span class="s3">2 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">4 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">]]))</span>
+    <span class="s0">println(repere(ovs3))</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin test_repere-------------------------------&quot;</span><span class="s0">)</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">test_coords()</span>
+    <span class="s0">println(</span><span class="s1">&quot;début test coords vect--------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">println(</span><span class="s1">&quot;cas des vecteurs&quot;</span><span class="s0">)</span>
+    <span class="s0">B = VSQ([[</span><span class="s3">1 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">2 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">], [</span><span class="s3">3 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">4 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">]])</span>
+    <span class="s0">V = [</span><span class="s3">3 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">3 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">]</span>
+    <span class="s0">println(coords(B, V))</span>
+    <span class="s0">println(</span><span class="s1">&quot;cas des points&quot;</span><span class="s0">)</span>
+    <span class="s0">rep=OVS(QP([</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">]),B)</span>
+    <span class="s0">P=QP([</span><span class="s3">3 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">, </span><span class="s3">3 </span><span class="s0">// </span><span class="s3">1</span><span class="s0">])</span>
+    <span class="s0">println(coords(rep,P))</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin test coords vect--------------------------&quot;</span><span class="s0">)</span>
+<span class="s2">end</span>
+
+
+<span class="s2">function </span><span class="s0">test()</span>
+    <span class="s0">test_base()</span>
+    <span class="s0">test_repere()</span>
+    <span class="s0">test_coords()</span>
+<span class="s2">end</span>
+
+
+<span class="s0">test()</span>
+
+</pre>
+</body>
+</html>

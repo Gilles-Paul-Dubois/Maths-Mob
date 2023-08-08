@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Triangles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/plantriangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/plantriangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Mesures des côtés</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Lengths of sides</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Si ABC est un triangle chaque côté est, en longueur, inférieur à la somme des deux autres, et chaque côté est supérieur à la valeur absolue de la différence des deux autres.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> If ABC is a triangle each side is, in length, less than the sum of the other two, and each side is greater than the absolute value of the difference of the other two.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> BC ≤ BA+AC <br /> BC ≥ |BA-AC| <br /> C'est simplement la traduction en termes de distances d'un résultat sur les normes. <h2>Somme des angles</h2> Nous rappelons ici un résultat simple vu dans <input type="button" value="cet exercice" onclick="go('exercices/planmesangles/ex01.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> BC ≤ BA+AC <br /> BC ≥ |BA-AC| <br /> It is simply the translation in terms of distances of a result on the standards. <h2>Sum of angles</h2> We recall here a simple result seen in <input type="button" value="this exercise" onclick="go('exercices/planmesangles/ex01.html#')" data-inline="true" />. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Dans un triangle ABC la somme des trois angles 'intérieurs' a pour mesure π.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> In a triangle ABC the sum of the three 'interior' angles has the measure π.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/mesanglesex01.png" width="340" height="224" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Familles de droites concourantes</h2>
+          <h3>Médianes</h3> Nous rappelons un résultat vu dans <input type="button" value="cette page" onclick="go('../affines/affinesbar.html#thm6')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Families of concurrent lines</h2>
+          <h3>Medians</h3> We recall a result seen in <input type="button" value="this page" onclick="go('../affines/affinesbar.html#thm6')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Dans tout triangle les 3 médianes (joignant chaque sommet au milieu du côté opposé) sont concourantes en un point appelé <b>
+              <i>'centre de gravité'</i>
+            </b> du triangle. Ce point se trouve au 2/3 de chaque médiane à partir du sommet.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> In any triangle, the 3 medians (joining each vertex to the middle of the opposite side) meet at a point called the <b>
+              <i>'center of gravity'</i>
+            </b> of the triangle. This point is at 2/3 of each median from the vertex.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Avec l'appliquette suivante vous pouvez déplacer les sommets du triangle. </div>
+        <!-- /fr -->
+        <div lang="en"> With the following applet you can move the vertices of the triangle. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Médiatrices</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Perpendicular bisectors</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Dans tout triangle les 3 médiatrices des côtés sont concourantes en un point qui est centre d'un cercle passant par les 3 sommets (cercle <b>
+              <i>'circonscrit'</i>
+            </b>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> In any triangle, the 3 perpendicular bisectors of the sides are concurrent at a point which is the center ( <strong>
+              <em>circumcenter</em>
+            </strong>) of a circle passing through the 3 vertices ( <b>
+              <i>'circumscribed'</i>
+            </b> circle).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La démonstration se trouve dans <input type="button" value="cet exercice" onclick="go('../euclidiens/exercices/euclihymed/ex03.html#')" data-inline="true" />. <br /> Avec l'appliquette suivante vous pouvez déplacer les sommets du triangle avec la souris. </div>
+        <!-- /fr -->
+        <div lang="en"> The demonstration is in <input type="button" value="this exercise" onclick="go('../euclidiens/exercices/euclihymed/ex03.html#')" data-inline="true" />. <br /> With the following applet you can move the vertices of the triangle. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Hauteurs</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Altitudes</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Dans tout triangle les trois hauteurs sont concourantes en un point appelé ' <strong>
+              <em>orthocentre</em>
+            </strong>'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> In any triangle the three altitudes are concurrent at a point called ' <strong>
+              <em>orthocenter</em>
+            </strong>'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La démonstration se trouve dans <input type="button" value="cet exercice" onclick="go('../euclidiens/exercices/eucliortho/ex03.html#')" data-inline="true" />. <br /> Avec l'appliquette suivante vous pouvez déplacer les sommets du triangle. </div>
+        <!-- /fr -->
+        <div lang="en"> The demonstration is in <input type="button" value="this exercise" onclick="go('../euclidiens/exercices/eucliortho/ex03.html#')" data-inline="true" />. <br /> With the following applet you can move the vertices of the triangle. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Alors que le centre de gravité se trouve toujours situé à l'intérieur du triangle, le centre du cercle circonscrit et l'orthocentre peuvent se trouver à l'extérieur. <br> Il existe une relation entre les 3 points. </div>
+        <!-- /fr -->
+        <div lang="en"> While the center of gravity is always located inside the triangle, the center of the circumcircle and the orthocenter can be outside. <br> There is a relationship between the 3 points. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles4.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Dans tout triangle, l'orthocentre H, le centre de gravité G et le centre du cercle circonscrit J sont alignés sur une droite appelée <b>
+              <i>'Droite d'Euler'</i>
+            </b> du triangle ABC. <br> En outre G se trouve entre H et J au 1/3 sur le segment [JH] en partant de J.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> In any triangle, the orthocenter H, the center of gravity G and the center of the circumscribed circle J are aligned on a line called <b>
+              <i>'Euler's line'</i>
+            </b> of the triangle ABC. <br> Moreover G is between H and J at 1/3 on the segment [JH] starting from J.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet, l'homothétie de centre G et de rapport -2 transforme B' en B et J en H. <h3>Bissectrices</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, the dilation with center G and ratio -2 transforms B' into B and J into H. <h3>Angle bisectors</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> Dans tout triangle les trois bissectrices intérieures convergent en un point qui est le ' <b>
+              <i>centre du cercle inscrit</i>
+            </b>' tangent intérieurement aux trois côtés. <br> Chaque bissectrice intérieure converge avec les deux autres bissectrices extérieures. Les points de concours sont les centres des <b>
+              <i>'cercles ex-inscrits'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> In any triangle the three interior angle bisectors converge to a point which is the ' <b>
+              <i>center of the incircle</i>
+            </b>' tangent internally to the three sides. <br> Each interior bisector converges with the other two exterior bisectors. The convergence points are the centers of the <b>
+              <i>'excircles'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour une démonstration, voir <input type="button" value="cet exercice" onclick="go('../euclidiens/exercices/euclihybiss/ex03.html#')" data-inline="true" />. <br> Avec l'appliquette suivante vous pouvez déplacer les sommets du triangle. </div>
+        <!-- /fr -->
+        <div lang="en"> For a demonstration, see <input type="button" value="this exercise" onclick="go('../euclidiens/exercices/euclihybiss/ex03.html#')" data-inline="true" />. <br> With the following applet you can move the vertices of the triangle. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box5" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles5.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h4>Une propriété des bissectrices</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>A property of angle bisectors</h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 8</div> Les bissectrices issues de A, partagent le côté [BC] dans le rapport AB/AC. <br> Si D est le pied de la bissectrice intérieure issue de A et si E est le pied de la bissectrice extérieure issue de A, alors <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\overline{DB}}{\overline{DC}} = - \frac{AB}{AC} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; et &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\overline{EB}}{\overline{EC}} = \frac{AB}{AC} \)
+            <!-- /FORMULE UNIV INLINE--> .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 8</div> The bisectors cfor angle &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{A} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; share the side [BC] in the ratio AB/AC. <br> If D is the foot of the interior bisector from A and if E is the foot of the exterior bisector of &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{A} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;, then <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \frac{\overline{DB}}{\overline{DC}} = - \frac{AB}{AC} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; and &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \frac{\overline{EB}}{\overline{EC}} = \frac{AB}{AC} \)
+            <!-- /INLINE UNIV FORMULA--> .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il en résulte donc que (B,C,D,E) est une <input type="button" value="division harmonique" onclick="go('../theoremes/theorapport.html#def5')" data-inline="true" />, et que les droites (AB),(AC),(AD),(AE) forment un faisceau harmonique. <br /> Pour une démonstration de ce résultat voir <input type="button" value="cet exercice" onclick="go('../euclidiens/exercices/euclihybiss/ex02.html#')" data-inline="true" />. <br /> Avec l'appliquette suivante vous pouvez déplacer les sommets du triangle. </div>
+        <!-- /fr -->
+        <div lang="en"> It therefore follows that (B,C,D,E) is an <input type="button" value="harmonic division" onclick="go('../theoremes/theorapport.html#def5')" data-inline="true" />, and that the straight lines (AB),(AC),(AD),(AE) form a harmonic beam. <br /> For a demonstration of this result see <input type="button" value="this exercise" onclick="go('../euclidiens/exercices/euclihybiss/ex02.html#')" data-inline="true" />. <br /> With the following applet you can move the vertices of the triangle. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box6" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles6.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Cas d'égalité</h2> Nous considérons ici les triangles comme des <input type="button" value="triplets ordonnés" onclick="go('../../bases/relations/cartesien.html#')" data-inline="true" /> de 3 points (A,B,C), et on s'intéresse à la figure formée par deux tels triplets soient (A,B,C) et (A',B',C'). <br /> Les sommets de même ordre sont dits 'correspondants' (exemple : A et A' , B et B'). <br /> Les côtés formés de sommets correspondants seront dits eux-mêmes 'correspondants' (exemple [AB] et [A'B']). <br />On s'intéresse aux angles 'géométriques' (non orientés) déterminés par les côtés, on peut donc supposer que leurs mesures sont toutes positives et entre 0 et π. <br />Tout comme les sommets et les côtés on a la notion d'angles 'correspondants' (exemple : &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{BAC} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; et &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{B'A'C'} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;)
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Cases of equality</h2> Here we consider triangles as <input type="button" value="ordered triples" onclick="go('../../bases/relations/cartesien.html#')" data-inline="true" /> of 3 points (A,B,C), and we are interested in the figure formed by two such triplets (A,B,C) and (A',B',C'). <br /> The vertices of the same order are said to be 'corresponding' (example: A and A' , B and B'). <br /> The sides formed by corresponding vertices will themselves be said to be 'corresponding' (example [AB] and [A 'B']). <br />We are interested in the 'geometric' (non-oriented) angles determined by the sides, so we can assume that their measures are all positive and between 0 and π. <br />Like vertices and sides, we have the notion of 'corresponding' angles (example: &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{BAC} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; and &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{B'A'C'} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;)
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Deux triangles (A,B,C) et (A',B',C') d'un même plan sont dits <b>
+              <i>'isométriques'</i>
+            </b> s'il existe une isométrie plane f telle que f(A)=A', f(B)=B', f(C)=C'. <br /> Par abus de langage, nous dirons que deux tels triangles sont <b>
+              <i>'égaux'</i>
+            </b>. <br /> Il va de soi <b>qu'il ne s'agit pas</b> ici d'une <input type="button" value="égalité au sens de la théorie des ensembles" onclick="go('../../bases/ensembles/egalite.html#')" data-inline="true" />. <br /> De la même façon, et toujours par abus de langage, nous parlerons de côtés <b>
+              <i>'égaux'</i>
+            </b> pour désigner des côtés de même longueur. <br /> Et toujours dans le même ordre d'idée, pour simplifier le discours, nous parlerons d'angles <b>
+              <i>'égaux'</i>
+            </b> pour désigner des angles de même mesure.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Two triangles (A,B,C) and (A',B',C') of the same plane are said to be <b>
+              <i>'isometric'</i>
+            </b> if there is a plane isometry f such that f(A)=A', f(B)=B', f(C)=C'. <br /> By misuse of language and for simplicity, we will say that two such triangles are <b>
+              <i>'equal'</i>
+            </b>. <br /> It goes without saying <b>that it is not</b> here an <input type="button" value="equality in the sense of set theory" onclick="go('../../bases/ensembles/egalite.html#')" data-inline="true" />. <br /> In the same way, and again by abuse of language, we will speak of <b>
+              <i>'equal'</i>
+            </b> sides to designate sides of the same length. <br /> And still in the same order of idea, to simplify the discourse, we will speak of <b>
+              <i>'equal'</i>
+            </b> angles to designate angles with the same measure.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il est évident que : </div>
+        <!-- /fr -->
+        <div lang="en"> It is obvious that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 9</div> Une condition nécessaire pour que ABC et A'B'C' soit égaux est que simultanément <ul>
+              <li>Leurs côtés correspondants soient égaux.</li>
+              <li>Leurs angles correspondants soient égaux.</li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 9</div> A necessary condition for ABC and A'B'C' to be equal is that simultaneously <ul>
+              <li>Their corresponding sides are equal.</li>
+              <li>Their corresponding angles are equal.</li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte immédiatement de : <ul>
+            <li>La définition de l'égalité des triangles</li>
+            <li>La définition des isométries</li>
+            <li>Les propriétés des isométries relatives aux <input type="button" value="angles géométriques" onclick="go('planangles.html#def5')" data-inline="true" />
+            </li>
+          </ul> Nous énonçons maintenant, en manière de réciproque, une liste de conditions suffisantes pour que deux triangles soient égaux. </div>
+        <!-- /fr -->
+        <div lang="en"> This follows immediately from: <ul>
+            <li>The definition of the equality of triangles</li>
+            <li>The definition of isometries</li>
+            <li>Properties of isometries related to <input type="button" value="geometric angles" onclick="go('planangles.html#def5')" data-inline="true" />
+            </li>
+          </ul> We now state, as a reciprocal, a list of sufficient conditions for two triangles to be equal. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop10"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 10</div> Deux triangles sont égaux si : <ul>
+              <li>Ils ont leurs trois côtés égaux.</li>
+              <li>Ils ont une pair de côtés correspondants égaux et si les angles formés par ces côtés sont égaux (exemple <br>A'B'=AB, A'C'=AC et &nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{BAC} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp; = &nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{B'A'C'} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp;).
+              </li>
+              <li>Ils ont deux angles correspondants égaux et les côtés communs à ces deux angles égaux (exemple <br> &nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{B'A'C'} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp;=&nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{BAC} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp; ,&nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{ C'B'A'} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp; = &nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{CBA} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp; et &nbsp; A'B'=AB ).
+              </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 10</div> Two triangles are equal if: <ul>
+              <li>They have all three equal sides.</li>
+              <li>They have a pair of equal corresponding sides and if the angles formed by these sides are equal (example <br>A'B'=AB, A'C'=AC and &nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{BAC} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp; = &nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{B'A'C'} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp;).
+              </li>
+              <li>They have two equal corresponding angles and the sides common to these two equal angles (example <br> &nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{B'A'C'} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp;=&nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{BAC} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp; ,&nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{ C'B'A'} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp; = &nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{CBA} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp; and &nbsp; A'B'=AB ).
+              </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve, un peu longue et fastidieuse ne présente pas de réelles difficultés. Elle utilise le résultat préliminaire suivant : </div>
+        <!-- /fr -->
+        <div lang="en"> The proof, which is a bit long and tedious, does not present any real difficulties. It uses the following preliminary result: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="lem1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 1</div> Etant donnés deux couples de points équidistants (A,B) et (A',B') avec AB=A'B'&ne; 0, il y a exactement deux isométries amenant A sur A' et B sur B'. <br> L'une seule et directe et l'autre est composée de la première par la réflexion d'axe (A'B') à gauche ou par la réflexion d'axe (AB) à droite.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 1</div> given two pairs of equidistant points (A,B) and (A',B') with AB=A'B'&ne; 0, there are exactly two isometries bringing A onto A' and B onto B'. <br> One is direct and the other is the composite of the first by reflection with mirror (A'B') at left or by the reflection with mirror(AB) on the right.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Application</h3> Construction de la bissectrice d'un angle :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Application</h3> Construction of the bisector of an angle:
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box9" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" id="button99" onclick="firstStep()">Animation</button>
+        <br>
+        <script src="js/bissectrice.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Triangles semblables</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Similar triangles</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> De la même façon que nous avons défini des triangles 'égaux' nous définissons des triangles <strong>
+              <em>'semblables'</em>
+            </strong> comme étant des triangles s'échangeant par une similitude.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> In the same way that we defined 'equal' triangles we define <strong>
+              <em>'similar'</em>
+            </strong> triangles as being triangles that are exchanged by a similarity.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> De la même façon que nous avons des cas d'égalité nous avons des 'cas de similitude' </div>
+        <!-- /fr -->
+        <div lang="en"> In the same way that we have cases of equality we have 'cases of similarity' </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop11"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 11</div> Pour que deux triangles soient semblables il suffit <ul>
+              <li>Qu'ils aient leurs trois côtés proportionnels ( &exist; k&ne; 0 tel que A'B'=kAB, A'C'=kAC, B'C'=kBC)</li>
+              <li>Qu'ils aient deux angles égaux (dans ce cas ils ont trois angles égaux)</li>
+              <li>Q'ils aient deux côtés proportionnels les angles déterminés par ces deux côtés étant égaux (exemple: <br> il existe k tel que A'B'=kAB, A'C'=kAC et &nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{BAC} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp; = &nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{B'A'C'} \)
+                <!-- /FORMULE UNIV INLINE--> ).
+              </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 11</div> For two triangles to be similar, it suffices <ul>
+              <li>That they have their three sides proportional ( &exist; k&ne; 0 such that A'B'=kAB, A'C'=kAC, B'C'=kBC)</li>
+              <li>That they have two equal angles (in this case they have three equal angles)</li>
+              <li>That they have two proportional sides the angles determined by these two sides being equal (example: <br>there exists k such that A'B'=kAB, A'C'=kAC and &nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{BAC} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp; = &nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{B'A'C'} \)
+                <!-- /INLINE UNIV FORMULA--> ).
+              </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Les cas de similitude se déduisent immédiatement des cas d'égalité par l'application d'une homothétie. <h2>Cercle de Feuerbach</h2> Karl Wilhelm Feuerbach (30 mai 1800 - 12 mars 1834) était un géomètre allemand, on lui attribue la découverte du résultat qui suit, mais ce résultat était déjà connu d'Euler. </div>
+        <!-- /fr -->
+        <div lang="en"> The cases of similarity are immediately deduced from the cases of equality by application of a dilation. <h2>Feuerbach Circle (aka nine-point circle)</h2> Karl Wilhelm Feuerbach (May 30, 1800 - March 12, 1834) was a German geometer, he is credited with discovering the following result, but this result was already known to Euler. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="0" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font color="#FFFFFF">Euler</font>
+            </td>
+            <td align="center">
+              <font color="#FFFFFF">Feuerbach</font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/200px-Leonhard_Euler.jpg" width="200" height="258" border="0" alt="">
+            </td>
+            <td>
+              <img src="images/220px-Karl_Wilhelm_Feuerbach.jpg" width="220" height="268" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Dans un triangle ABC le cercle circonscrit aux milieux des côtés passe également par les pieds des hauteurs et les milieux des segments joignant l'orthocentre à chaque sommet.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> In a triangle ABC the circumcircle of the midpoints of the sides also passes through the feet of the altitudes and the midpoints of the segments joining the orthocenter to each vertex.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'appliquette qui suit vous permet de déplacer les sommets du triangle ABC. <br> Vous pouvez voir le cercle des neufs points. </div>
+        <!-- /fr -->
+        <div lang="en"> The following applet allows you to move the vertices of triangle ABC. <br> You can see the circle of nine points. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box7" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles7.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Le cercle circonscrit aux milieux est l'image du cercle circonscrit au triangle ABC par une homothétie de centre G (centre de gravité de ABC) et de rapport -1/2. <br> Si O est le centre du cercle circonscrit à ABC, le centre F du cercle de Feuerbach est donc l'image de O par l'homothétie de centre G et de rapport -1/2. <br> On sait que &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{HG}=2\overrightarrow{GO} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; et que &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{FG}=\frac {1}{2}\overrightarrow{GO} \)
+            <!-- /FORMULE UNIV INLINE--> . <br> F est donc le milieu de [OH]. <br> Soit maintenant h l'homothétie de centre H et de rapport 1/2. Cette homothétie transforme le cercle circonscrit en le cercle de Feuerbach. Or chaque sommet est transformé par cette homothétie en le milieu du segment joignant l'orthocentre au sommet. <br> Il résulte de ce qui précède que si A" est le milieu de [AH], B" celui de [BH] et C" celui de [CH] alors le triangle A"B"C" est l'homothétique de A'B'C' dans une homothétie de centre F et de rapport -1 (symétrie centrale). <br> Il en résulte donc que [A'A"],[B'B"],[C'C"] sont des diamètres du cercle de Feuerbach. <br> Mais si A''' est le pied de la hauteur issue de A, l'angle &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{A'A'''A''} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; est droit, ce qui prouve que A''' est sur le cercle de Feuerbach. Le même raisonnement vaut pour les pieds des deux autres hauteurs.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> The circle circumscribed at the midpoints is the image of the circle circumscribed to triangle ABC by a dilation with center G (center of gravity of ABC) and ratio -1/2. <br> If O is the center of the circle circumscribed to ABC, the center F of the Feuerbach circle is therefore the image of O by the dilation of center G and ratio -1/2. <br> We know that &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{HG}=2\overrightarrow{GO} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; and that &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{FG}=\frac {1}{2}\overrightarrow{GO} \)
+            <!-- /INLINE UNIV FORMULA--> . <br> F is therefore the midpoint of [OH]. <br> Let h be the homothety with center H and ratio 1/2. This dilation transforms the circumscribed circle into the Feuerbach circle. However, each vertex is transformed by this homothety into the middle of the segment joining the orthocenter to the vertex. <br> It follows from the above that if A" is the midpoint of [AH], B" that of [BH] and C" that of [CH] then the triangle A"B"C" is the homothetic of A'B 'C' in a dilation with center F and ratio -1 (point reflection). <br> It therefore follows that [A'A"],[B'B"],[C'C"] are diameters of the Feuerbach circle. <br> But if A''' is the foot of the altitude from A, the angle &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{A'A'''A''} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; is right, which proves that A''' is on the Feuerbach circle. The same reasoning applies to the feet of the other two altitudes.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Droites de Steiner et de Simson</h2> Jakob Steiner né le 18 mars 1796 et mort le 1er avril 1863, est un mathématicien suisse. <br> Robert Simson (14 octobre 1687 – 1er octobre 1768) est un mathématicien écossais célèbre pour ses contributions en géométrie, notamment la droite de Simson. <br> William Wallace (23 septembre 1768 - 28 avril 1843) est un mathématicien écossais qui est certainement l'auteur des travaux attribués par erreur à Simson.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Steiner and Simson lines</h2> Jakob Steiner (March 18, 1796 – April 1, 1863) was a Swiss mathematician. <br> Robert Simson (October 14, 1687 – October 1, 1768) was a Scottish mathematician famous for his contributions to geometry, notably Simson's line. <br> William Wallace (September 23, 1768 – April 28, 1843) was a Scottish mathematician who is certainly the author of the work mistakenly attributed to Simson.
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="0" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font color="#FFFFFF">Steiner</font>
+            </td>
+            <td align="center">
+              <font color="#FFFFFF">Simson</font>
+            </td>
+            <td align="center">
+              <font color="#FFFFFF">Wallace</font>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/180px-JakobSteiner.jpg" width="180" height="253" border="0" alt="">
+            </td>
+            <td>
+              <img src="images/Simson.jpg" width="150" height="188" border="0" alt="">
+            </td>
+            <td>
+              <img src="images/Wallace.jpeg" width="268" height="326" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit P un point quelconque du cercle circonscrit au triangle ABC, alors si on désigne par K,L,M les projections orthogonales de P sur [BC],[AC],[AB] respectivement les points K,L et M sont alignés sur une droite appelée <strong>
+              <em>'droite de Simson'</em>
+            </strong>. <br> Il en résulte que si K',L',M' désignent les symétriques de P par rapport aux trois côtés, les points K',L',M' sont également alignés sur une droite appelée <strong>
+              <em>'droite de Steiner'</em>
+            </strong>. <br> Les droites de Simson et de Steiner se correspondent dans une homothétie de rapport 2, et sont donc parallèles. <br> La réciproque est vraie c'est à dire que si K L M sont alignés alors PABC est inscriptible.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Let P be any point of the circumcircle of the triangle ABC, then if we designate by K,L,M the orthogonal projections of P on [BC],[AC],[AB] respectively the points K,L and M are aligned on a line called <strong>
+              <em>'Simson's line'</em>
+            </strong>. <br> It follows that if K',L',M' designate the mirror images of P with respect to the three sides, the points K',L',M' are also aligned on a line called <strong>
+              <em>'line of Steiner'</em>
+            </strong>. <br> The Simson and Steiner lines correspond in a dilation of ratio 2, and are therefore parallel. <br> The converse is true, ie if K L M are aligned then PABC is inscriptible.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'applet Geogebra suivante vous permet de déplacer les sommets du triangle ABC. Vous pouvez également déplacer le point P sur le cercle circonscrit à ABC. <br> La droite de Simson apparait en rouge, celle de Steiner en bleu. </div>
+        <!-- /fr -->
+        <div lang="en"> The following Geogebra applet allows you to move the vertices of triangle ABC. You can also move point P on the circumcircle of ABC. <br> Simson's line appears in red, Steiner's line in blue. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box8" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/triangles8.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{PKM}=\widehat{PBM} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; car PMAN inscriptible. <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{PBM}=\pi -\widehat{PBA} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;car ce sont des angles adjacents sur la droite ABK. <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \pi -\widehat{PBA}=\widehat{PCA} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;car PBAC inscriptible <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{PCA}=\widehat{PCL} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; (simple renommage de l'angle). <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{PCL}=\pi -\widehat{PKL} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; car PCLK inscriptible. <br> d'où nous tirons : <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{PKM}=\pi -\widehat{PKL} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; <br> Et finalement : <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{PKM}+\widehat{PKL}=\pi \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; <br> qui prouve l'alignement. <br> La démonstration de la réciproque se résume à un réarrangement des arguments du théorème direct.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{PKM}=\widehat{PBM} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; because PMAN inscriptible. <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{PBM}=\pi -\widehat{PBA} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;because they are adjacent angles on line ABK. <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \pi -\widehat{PBA}=\widehat{PCA} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;because PBAC inscriptible <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{PCA}=\widehat{PCL} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; (simple angle renaming). <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{PCL}=\pi -\widehat{PKL} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; because PCLK inscriptible. <br> where we draw from : <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{PKM}=\pi -\widehat{PKL} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; <br> And finally: <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{PKM}+\widehat{PKL}=\pi \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; <br> which proves the alignment. <br> The proof of the converse comes down to a rearrangement of the arguments of the direct theorem.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/plantriangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/plantriangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

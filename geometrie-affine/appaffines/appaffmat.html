@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Représentation matricielle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/appaffmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/appaffmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Dans tout ce qui suit A<sub>1</sub> et A<sub>2</sub> sont deux espaces affines de dimensions finies respectivement n et m sur un même corps. <br> f est une application affine de A<sub>1</sub> dans A<sub>2</sub>. <br> E<sub>1</sub> et E<sub>2</sub> désignent les espaces vectoriels associés à A<sub>1</sub> et A<sub>2</sub> respectivement. <br> R<sub>1</sub>=(O<sub>1</sub>,B<sub>1</sub>) désigne un repère de A<sub>1</sub>, et R<sub>2</sub>=(O<sub>2</sub>,B<sub>2</sub>) un repère de A<sub>2</sub>. </p>
+          <h2>Représentation analytique d'une application affine</h2> Tout point M de A<sub>1</sub> a donc des coordonnées (x<sub>1</sub>,x<sub>2</sub>, ... ,x<sub>n</sub>) dans le repère R<sub>1</sub>. <br> Tout point M' de A<sub>2</sub> a des coordonnées (x'<sub>1</sub>,x'<sub>2</sub>, ..., x'<sub>m</sub>) dans le repère R<sub>2</sub>.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>In what follows A<sub>1</sub> and A<sub>2</sub> are two affine spaces of finite dimensions n and m respectively over the same field. <br> f is an affine mapping from A<sub>1</sub> to A<sub>2</sub>. <br> E<sub>1</sub> and E<sub>2</sub> denote the vector spaces associated with A<sub>1</sub> and A<sub>2</sub> respectively. <br> R<sub>1</sub>=(O<sub>1</sub>,B<sub>1</sub>) denotes a frame of A<sub>1</sub>, and R<sub> 2</sub>=(O<sub>2</sub>,B<sub>2</sub>) a frame of A<sub>2</sub>. </p>
+          <h2>Analytical representation of an affine map</h2> Any point M of A<sub>1</sub> therefore has coordinates (x<sub>1</sub>,x<sub>2</sub>, ... ,x<sub>n</sub>) in the R<sub>1</sub> frame. <br> Any point M' of A<sub>2</sub> has coordinates (x'<sub>1</sub>,x'<sub>2</sub>, ..., x'<sub>m </sub>) in the R<sub>2</sub> frame.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Nous appelons détermination analytique de f les m équations : <br> x'<sub>i</sub>=f<sub>i</sub>(x<sub>1</sub>,x<sub>2</sub> .., x<sub>n</sub>) pour 1 &le; i &le; m permettant le calcul des x'<sub>i</sub> 1 &le; i &le; m en fonction des x<sub>j</sub> 1 &le; j &le; n.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We call analytical determination of f the m equations: <br> x'<sub>i</sub>=f<sub>i</sub>(x<sub>1</sub>,x<sub>2</sub> .., x<sub>n</sub>) for 1 &le; i &le; m allowing the calculation of x'<sub>i</sub> 1 &le; i &le; m as a function of x<sub>j</sub> 1 &le; j &le; n.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous allons voir immédiatement que ces fonctions f<sub>i</sub> ont une forme relativement simple : </div>
+        <!-- /fr -->
+        <div lang="en"> We will immediately see that these functions f<sub>i</sub> have a relatively simple form: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Ce sont des polynômes du premier degré en les variables x<sub>j</sub> et cette propriété caractérise les applications affines.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> They are polynomials of the first degree in the variables x<sub>j</sub> and this property characterizes affine maps.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Forme matricielle</h2> Supposons que O<sub>2</sub>=f(O<sub>1</sub>)=O<sub>1</sub>'. <br> Alors si u désigne l'application linéaire associée à f de E<sub>1</sub> dans E<sub>2</sub>, on a
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{O_{2}M'}=u\left ( \overrightarrow{O_{1}M} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> par définition même de l'application linéaire associée à une application affine. <br> Il en résulte que avec les notations précédentes.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Matrix form</h2> Suppose that O<sub>2</sub>=f(O<sub>1</sub>)=O<sub>1</sub>'. <br> Then if u denotes the linear map associated with f from E<sub>1</sub> to E<sub>2</sub>, we have
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{O_{2}M'}=u\left ( \overrightarrow{O_{1}M} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> by very definition of the linear map associated with an affine map. <br> It follows that with the previous notations.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Si U désigne <input type="button" value="la matrice de u par rapport aux bases B
+																									<sub>1</sub> et B
+																									<sub>2</sub>" onclick="go('../../algebre-lineaire/matapplin/defmatapp.html#')" data-inline="true" />, et si <br />
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle X = \begin{pmatrix} x_{1} \\ x_{2} \\ \\ x_{n} \\ \end{pmatrix} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle X' = \begin{pmatrix} {x'}_{1} \\ {x'}_{2} \\ \\ {x'}_{m} \\ \end{pmatrix} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br /> On a X'=UX
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> If U designates <input type="button" value="the matrix of u with respect to bases B
+																										<sub>1</sub> and B
+																										<sub>2</sub>" onclick="go('../../algebre-lineaire/matapplin/defmatapp.html#')" data-inline="true" />, and if <br />
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle X = \begin{pmatrix} x_{1} \\ x_{2} \\ \\ x_{n} \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle X' = \begin{pmatrix} {x'}_{1} \\ {x'}_{2} \\ \\ {x'}_{m} \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br /> We have X'=UX
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Lorsqu'on explicite l'écriture ci-dessus il en résulte des formules du type : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {x'}_{i} = f_{i}\left( x_{1},x_{2},...,x_{n} \right) = {\sum\limits_{j = 1}^{n}a_{i,j}x_{j}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où les a<sub>i,j</sub> sont les coefficients de la matrice U.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> When we explicit the writing above, it results in formulas of the type: <br>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {x'}_{i} = f_{i}\left( x_{1},x_{2},...,x_{n} \right) = {\sum\limits_{j = 1} ^{n}a_{i,j}x_{j}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> where the a<sub>i,j</sub> are the coefficients of the matrix U.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce qui fait que quand O<sub>2</sub> n'est pas égal à O'<sub>1</sub> les formules sont les mêmes à une constante près puisque <input type="button" value="on change le repère" onclick="go('../repvar/repvarchgt.html#prop1')" data-inline="true" /> (O'<sub>1</sub>,B<sub>2</sub>) en le repère (O<sub>2</sub>,B<sub>2</sub>). </div>
+        <!-- /fr -->
+        <div lang="en"> This means that when O<sub>2</sub> is not equal to O'<sub>1</sub> the formulas are the same except for one constant since <input type="button" value=" we change the frame " onclick="go('../repvar/repvarchgt.html#prop1')" data-inline="true" /> (O'<sub>1</sub>,B<sub>2 </sub>) to the frame (O<sub>2</sub>,B<sub>2</sub>). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Les formules deviennent donc dans le cas général :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {x'}_{i} = f_{i}\left( x_{1},x_{2},...,x_{n} \right) = {\sum\limits_{j = 1}^{n}a_{i,j}x_{j} + b_{i}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> The formulas therefore become in the general case:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {x'}_{i} = f_{i}\left( x_{1},x_{2},...,x_{n} \right) = {\sum\limits_{j = 1} ^{n}a_{i,j}x_{j} + b_{i}} \)</p>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce qui est exactement le résultat annoncé plus haut, et la réciproque est non moins évidente. <br> Les fonctions affines sont donc bien la généralisation des fonctions 'affines' du type f(x)=ax+b, de &reals; dans &reals; de nos jeunes années. </div>
+        <!-- /fr -->
+        <div lang="en"> Which is exactly the result announced above, and the converse is no less obvious. <br> The affine functions are therefore the generalization of the 'affine' functions of the type f(x)=ax+b, of &reals; in &reals; of our younger years. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h3>Exemples</h3>
+          <h4>Translations</h4> Les formules associées à une translation sont, bien sûr : <br> x'<sub>i</sub>=x<sub>i</sub>+b<sub>i</sub>
+          <h4>Homothéties</h4> Prenons le cas d'une homothétie centrale de rapport k et de centre O en dimension n. <br> Si (o<sub>1</sub>,o<sub>2</sub>, ... o<sub>n</sub>) sont les coordonnées de O les formules seront, quelle que soit la base du repère : <br> x'<sub>i</sub>-o<sub>i</sub>=k(x<sub>i</sub>-o<sub>i</sub>) <br> Soit encore : <br> x'<sub>i</sub>=kx<sub>i</sub>+(1-k)o<sub>i</sub>
+          <h4>Projections</h4> Considérons par exemple dans l'espace &reals;<sup>3</sup> une projection sur un plan P de vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> ,
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> parallèlement à une droite D de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> . <br> Si nous prenons un repère R ayant pour origine le point O d'intersection de P et D et pour base
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle B=\left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> , la détermination analytique de la projection sur P parallèlement à D sera : <br> x'=x <br> y'=y <br> z'=0 <br>
+          <h4>Affinités</h4> Considérons par exemple dans l'espace &reals;<sup>3</sup> une affinité ayant pour axe un plan P de vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> ,
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> parallèlement à une droite D de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> et pour rapport k. <br> Si nous prenons un repère R ayant pour origine le point O d'intersection de P et D et pour base
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle B=\left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> , la détermination analytique de cette affinité sera : <br> x'=x <br> y'=y <br> z'=kz <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Examples</h3>
+          <h4>Translations</h4> The formulas associated with a translation are, of course: <br> x'<sub>i</sub>=x<sub>i</sub>+b<sub>i</sub>
+          <h4>Dilations</h4> Let us take the case of a dilation of ratio k and center O in dimension n. <br> If (o<sub>1</sub>,o<sub>2</sub>, ... o<sub>n</sub>) are the coordinates of O the formulas will be, whatever the base of the framek: <br> x'<sub>i</sub>-o<sub>i</sub>=k(x<sub>i</sub>-o<sub>i</sub>) <br> Or again: <br> x'<sub>i</sub>=kx<sub>i</sub>+(1-k)o<sub>i</sub>
+          <h4>Projections</h4> Consider for example in the space &reals;<sup>3</sup> a projection on a plane P with direction vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> ,
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> parallel to a straight line D with direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> . <br> If we take a frame R having for origin the point O of intersection of P and D and for base
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle B=\left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> , the analytical determination of the projection on P parallel to D will be: <br> x'=x <br> y'=y <br> z'=0 <br>
+          <h4>Stretchings</h4> Let us consider for example in the space &reals;<sup>3</sup> a stretching having for axis a plane P of direction vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> ,
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> parallel to a straight line D with direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> and for ratio k. <br> If we take a frame R having for origin the point O of intersection of P and D and for basis
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle B=\left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> , the analytical determination of this stretching will be: <br> x'=x <br> y'=y <br> z'=kz <br>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de python</h2> Voici un programme qui définit un objet python représentant une application affine de K<sup>n </sup>dans K<sup>m</sup> donnée par un système d'équations. <br /> Ce module utilise lui-même le module <input type="button" value="reperes.py" onclick="go('../repvar/python/reperes.html#')" data-inline="true" /> :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's corner</h2> Here is a program that defines a python object representing an affine mapping from K<sup>n</sup>into K<sup>m</sup> given by a system of equations. <br /> This module itself uses the module <input type="button" value="reperes.py" onclick="go('../repvar/python/reperes.html#')" data-inline="true" />:
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/appaff1.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de julia</h2> Voici un programme de calcul de l'image d'un point par une application affine donnée par sa matrice. Il inclut le <input type="button" value="programme de définition des repères affines" onclick="go('../repvar/julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> Here is a program to calculate the image of a point by an affine map given by its matrix. It includes the <input type="button" value="program for defining affine frames" onclick="go('../repvar/julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/appaff.jl.html" type="text/html" border="3" height="350" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/appaffmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/appaffmat/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

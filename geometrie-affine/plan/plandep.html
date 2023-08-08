@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Déplacements du plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/plandep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/plandep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous avons vu <input type="button" value="ici" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" /> que les déplacements du plan sont les isométries ayant pour application linéaire associée une rotation vectorielle. <br> Il en résulte que par rapport à toute base orthonormale la détermination analytique d'un tel déplacement est :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x' = x_{0} + {ax} - {by}} \\ {y' = y_{0} + {bx} + {ay}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> et que les nombres a et b, vérifiant a<sup>2</sup>+b<sup>2</sup>=1 sont indépendants du repère orthonormé particulier choisi pour la représentation analytique. <br> Les points fixes sont donc solutions du système :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = x_{0} + {ax} - {by}} \\ {y = y_{0} + {bx} + {ay}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> qui peut encore s'écrire :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\left( {1 - a} \right)x + {by} = x_{0}} \\ {- {bx} + \left( {1 - a} \right)y = y_{0}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> et dont le déterminant est :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left| \begin{matrix} {1 - a} & b \\ {- b} & {1 - a} \\ \end{matrix} \right| = \left( {1 - a} \right)^{2} + b^{2} = 2\left( {1 - a} \right) \)</p>
+          <!-- /FORMULE UNIV INLINE--> Deux cas peuvent alors se présenter. <br>
+          <strong>Cas a=1</strong> : <br> alors forcément b=0 et le déterminant est nul dans ce cas la détermination analytique est :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x' = x + x_{0}} \\ {y' = y + y_{0}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> et on reconnait une translation de vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}\begin{pmatrix} x_{0} \\ y_{0} \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br>
+          <b>Cas a &ne; 1</b> : <br> Dans ce cas il y a un point fixe unique dont les coordonnées sont solutions du système de Cramer :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\left( {1 - a} \right)x + {by} = x_{0}} \\ {- {bx} + \left( {1 - a} \right)y = y_{0}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have seen <input type="button" value="here" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" /> that the proper isometries of the plane are the isometries having for associated linear map a vector rotation. <br> It follows that with respect to any orthonormal basis the analytical determination of such a displacement is:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x' = x_{0} + {ax} - {by}} \\ {y' = y_{0} + {bx} + {ay}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> and that the numbers a and b satisfying a<sup>2</sup>+b<sup>2</sup>=1 are independent of the particular orthonormal frame chosen for the analytic representation. <br> The fixed points are therefore solutions of the system:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = x_{0} + {ax} - {by}} \\ {y = y_{0} + {bx} + {ay}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> which can also be written:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\left( {1 - a} \right)x + {by} = x_{0}} \\ {- {bx} + \left( {1 - a} \right)y = y_{0}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> and whose determinant is:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left| \begin{matrix} {1 - a} & b \\ {-b} & {1 -a} \\ \end{matrix} \right| = \left( {1 - a} \right)^{2} + b^{2} = 2\left( {1 - a} \right) \)</p>
+          <!-- /INLINE UNIV FORMULA--> Two cases can then arise. <br>
+          <strong>Case a=1</strong>: <br> then necessarily b=0 and the determinant is zero in this case the analytical determination is:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x' = x + x_{0}} \\ {y' = y + y_{0}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> and we recognize a translation with vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u}\begin{pmatrix} x_{0} \\ y_{0} \\ \end{pmatrix} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br>
+          <b>Case a &ne; 1</b>: <br> In this case there is a single fixed point whose coordinates are solutions of the Cramer system:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\left( {1 - a} \right)x + {by} = x_{0}} \\ {- {bx} + \left( {1 - a} \right)y = y_{0}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Dans ce cas on dit qu'on a affaire à une <b>
+              <i>'rotation affine'</i>
+            </b> dont le <b>
+              <i>'centre'</i>
+            </b> est justement ce point fixe unique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> In this case we say that we are dealing with an <b>
+              <i>'affine rotation'</i>
+            </b> whose <b>
+              <i>'centre'</i>
+            </b> is precisely this unique fixed point.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/rotaaffplan.png" width="330" height="308" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> L'application linéaire associée est une <input type="button" value="rotation vectorielle" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> The associated linear map is a <input type="button" value="vectorial rotation" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline=" true" />. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Par définition, <b>
+              <i>"l'angle"</i>
+            </b> de la rotation affine est l'angle de la rotation vectorielle associée.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> By definition, the <b>
+              <i>"angle"</i>
+            </b> of the affine rotation is the angle of the associated vector rotation.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En résumé : </div>
+        <!-- /fr -->
+        <div lang="en"> In summary : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Les seuls déplacements du plan sont les translations et les rotations affines. <br> Les rotations ont un point fixe unique (le centre). <br> Les translations n'ont aucun point fixe si le vecteur de translation n'est pas nul, dans le cas contraire tous les points sont fixes.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> The only proper isometries of the plane are affine translations and rotations. <br> Rotations have a single fixed point (the center). <br> Translations have no fixed point if the translation vector is not zero, otherwise all points are fixed.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/plandep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/plandep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

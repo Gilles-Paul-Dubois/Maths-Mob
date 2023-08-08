@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Surfaces réglées</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/phoria/gl-matrix.js"></script>
+    <script src="../../js/phoria/phoria-util.js"></script>
+    <script src="../../js/phoria/phoria-entity.js"></script>
+    <script src="../../js/phoria/phoria-scene.js"></script>
+    <script src="../../js/phoria/phoria-renderer.js"></script>
+    <script src="../../js/phoria/phoria-view.js"></script>
+    <script src='../../js/phoria/dat.gui.min.js'></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacereglees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacereglees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Cette page se résume à quelques définitions. <br /> Nous ne proposons aucun résultat, il s'agit simplement d'accroître la 'bibliothèque' du lecteur en matière de figures de l'espace qui se résume pour l'instant : <ul>
+            <li>Aux <input type="button" value="variétés linéaires" onclick="go('../affines/affinesvar.html#')" data-inline="true" /> (points, droites, plans) </li>
+            <li>Aux sous-ensembles de telles variétés ( <input type="button" value="segments" onclick="go('../affines/affinesconv.html#')" data-inline="true" />, <input type="button" value="demi-droites" onclick="go('../plan/planangles.html#')" data-inline="true" />, <input type="button" value="demi-plans" onclick="go('../affines/affinesvar.html#demi')" data-inline="true" />, etc...) </li>
+            <li>Aux <input type="button" value="sphères" onclick="go('../esp3d/espacespheres.html#')" data-inline="true" />
+            </li>
+            <li>A quelques polyèdres ( <input type="button" value="tétraèdres" onclick="go('../esp3d/espacetetra.html#')" data-inline="true" />, parallélépipèdes) </li>
+          </ul> Les figures que nous allons définir dans cette page et la suivante permettent d'enrichir notablement cette collection. <br /> En outre, nous utiliserons abondamment ces figures dans le prochain chapitre consacré aux coniques. <br />
+          <h2>Courbes planes</h2> Nous supposons pour le moment acquis le concept de <strong>
+            <em>'courbe plane'</em>
+          </strong>. <br /> Une telle courbe pouvant être définie comme : <ol>
+            <li>L'ensemble des points M(t)(x(t),y(t)) où le plus souvent x(t) et y(t) sont deux fonctions <input type="button" value="continues" onclick="go('../../analyse-reelle/continuite/index.html#')" data-inline="true" /> de la variable t laquelle parcourt un intervalle I (courbe paramétrée) </li>
+            <li>Une équation du type y=f(x), la courbe se confondant alors avec le <input type="button" value="graphe" onclick="go('../../bases/relations/graphe.html#')" data-inline="true" /> de la fonction f </li>
+            <li>Une équation cartésienne (par exemple x²+y²=r²) pour un cercle</li>
+          </ol> La courbe paramétrée représente le cas le plus général, en effet le cas 2) correspond simplement aux courbes où le paramètre est l'abscisse. <br /> Quand au cas 3) il peut se ramener, dans la plupart des cas simples, au cas 2) donc au cas 1) par le <input type="button" value="théorème des fonctions implicites" onclick="go('../../analyse-reelle/continuite/contimplicite.html#')" data-inline="true" />. <br />
+          <h2>Cylindres</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This page boils down to a few definitions. <br /> We do not offer any results, it is simply a question of increasing the reader's 'library' in terms of figures of space which can be summed up for the moment: <ul>
+            <li>To the <input type="button" value="linear varieties" onclick="go('../affines/affinesvar.html#')" data-inline="true" /> (points, lines, planes ) </li>
+            <li>To subsets of such varieties ( <input type="button" value="segments" onclick="go('../affines/affinesconv.html#')" data-inline="true" /> , <input type="button" value="half-lines" onclick="go('../plan/planangles.html#')" data-inline="true" />, <input type="button" value="half-planes" onclick="go('../affines/affinesvar.html#demi')" data-inline="true" />, etc...) </li>
+            <li>To <input type="button" value="spheres" onclick="go('../esp3d/espacespheres.html#')" data-inline="true" />
+            </li>
+            <li>A few polyhedra ( <input type="button" value="tetrahedra" onclick="go('../esp3d/espacetetra.html#')" data-inline="true" />, parallelepipeds) </li>
+          </ul> The figures that we are going to define in this page and the following one allow to notably enrich this collection. <br /> Moreover, we will use these figures extensively in the next chapter devoted to conic sections. <br />
+          <h2>Planar curves</h2> We assume for the moment that the concept of <strong>
+            <em>'flat curve'</em>
+          </strong> has been acquired. <br /> Such a curve can be defined as: <ol>
+            <li>The set of points M(t)(x(t),y(t)) where most often x(t) and y(t) are two <input type="button" value="continuous " onclick="go('../../analyse-reelle/continuite/index.html#')" data-inline="true" /> functions of the variable t which covers an interval I (parametric curve) </li>
+            <li>An equation of the type y=f(x), the curve then merging with the <input type="button" value="graph" onclick="go('../../bases/relations/graphe.html#')" data-inline="true" /> of function f </li>
+            <li>A Cartesian equation (e.g. x²+y²=r²) for a circle</li>
+          </ol> The parametrized curve represents the most general case, indeed case 2) simply corresponds to the curves where the parameter is the abscissa. <br /> When in case 3) it can be reduced, in most simple cases, to case 2) therefore to case 1) by the <input type="button" value="theorem of implicit functions" onclick="go('../../analyse-reelle/continuite/contimplicite.html#')" data-inline="true" />. <br />
+          <h2>Cylinders</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On considère une courbe plane paramétrée B, c'est à dire une application t &rarr; M(t) d'un intervalle I de &reals; à valeurs dans un plan P de l'espace E. <br> On suppose également qu'on s'est donné une 'direction' matérialisée par un axe, c'est à dire une droite &Delta; et un vecteur directeur &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; de cette droite. <br> Pour chaque valeur de t, on considère la droite D(t) passant par M(t) et de vecteur directeur &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;. On appelle <b>
+              <i>'cylindre'</i>
+            </b> de base B et de direction &Delta; l'ensemble engendré par les droites D(t), c'est à dire leur réunion.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We consider a parametrized plane curve B, ie an application t &rarr; M(t) of an interval I of &reals; with values in a plane P of the space E. <br> We also assume that we are given a 'direction' materialized by an axis, i.e. a straight line &Delta; and a direction vector &nbsp;
+            <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; of this line. <br> For each value of t, we consider the line D(t) passing through M(t) and with direction vector &nbsp;
+            <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;. We call <b>
+              <i>'cylinder'</i>
+            </b> with base B and direction &Delta; the set generated by the lines D(t), i.e. their union.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> C'est une définition très générale et qui recouvre de nombreux cas particuliers. </div>
+        <!-- /fr -->
+        <div lang="en"> This is a very general definition and which covers many specific cases. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Un cylindre est dit <b>
+              <i>'droit'</i>
+            </b> si la direction &Delta; est orthogonale au plan de la base. <br> Dans le cas contraire il est dit <b>
+              <i>'oblique'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A cylinder is <b>
+              <i>'straight'</i>
+            </b> if the direction &Delta; is orthogonal to the plane of the base. <br> Otherwise it is said to be <b>
+              <i>'oblique'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On désigne par P(t,s) le point de la droite D(t) de paramètre s dans la <input type="button" value="représentation paramètrique" onclick="go('../repvar/repvarparam.html#')" data-inline="true" /> de D(t) liée au choix du point M(t) et du vecteur directeur &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We designate by P(t,s) the point of the line D(t) with parameter s in the <input type="button" value="parametric representation" onclick="go('../repvar/repvarparam.html#')" data-inline="true" /> of D(t) linked to the choice of the point M(t) and the directing vector &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de la définition qui précède qu'un cylindre est une surface paramétrée (à deux paramètres donc). <br> L'application (t,s) &rarr; M(t,s) définit donc une application surjective de I&times;&reals; sur le cylindre. <br> Nous verrons plus tard qu'une grand nombre de propriétés de la surface peuvent être déduites de l'étude analytique de cette fonction mais ceci suppose connues des notions d'analyse sur les fonctions de plusieurs variables (continuité, différentiabilité, etc.). <h3>Cylindre à base circulaire</h3> Quand la base est un cercle, on retrouve la notion usuelle de 'cylindre'. <br> Voici une animation qui vous permet de voir la génération d'un cylindre droit à base circulaire. </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from the preceding definition that a cylinder is a parametrized surface (with two parameters therefore). <br> The application (t,s) &rarr; M(t,s) therefore defines a surjective map of I&times;&reals; onto the cylinder. <br> We will see later that a large number of properties of the surface can be deduced from the analytical study of this function but this supposes known notions of analysis on the functions of several variables (continuity, differentiability, etc.). <h3>Cylinder with circular base</h3> When the base is a circle, we find the usual common notion of 'cylinder'. <br> Here is an animation that allows you to see the generation of a straight cylinder with a circular base. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas1" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/gencylindre.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Prismes</h3> On peut également prendre pour base un polygone convexe, comme un triangle ou un quadrilatère.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Prisms</h3> It is also possible to take as a base a convex polygon, such as a triangle or a quadrilateral.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Dans ce cas le cylindre obtenu porte plus familièrement le nom de <b>
+              <i>'prisme'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> In this case, the corresponding cylinder is more familiarly called <b>
+              <i>'prism'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'animation suivante vous permet de voir la génération d'un prisme oblique à base carrée. </div>
+        <!-- /fr -->
+        <div lang="en"> The following animation lets you see the generation of a square-based oblique prism. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas2" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/genprisme.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Cylindres tronqués</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Truncated cylinders</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> En coupant un cylindre par deux plans parallèles au plan de la base, on obtient un 'cylindre tronqué'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> By cutting a cylinder by two planes parallel to the plane of the base, we obtain a 'truncated cylinder'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'image GeoGebra suivante vous permet de voir un tronc de prisme droit à base triangulaire. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The following GeoGebra image allows you to see a truncated triangular-based straight prism . <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/troncprisme.png" width="365" height="391" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Cônes</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Cones</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 6</div> On considère une courbe plane paramétrée B, c'est à dire une application t &rarr; M(t) d'un intervalle I de &reals; à valeurs dans un plan P de l'espace E. <br> On suppose également qu'on s'est donné un point A n'appartenant pas au plan P et appelé <b>
+              <i>'sommet'</i>
+            </b>. <br> Pour chaque valeur de t, on considère la droite D(t) passant par M(t) et A. On appelle <b>
+              <i>'cône'</i>
+            </b> de base B et de sommet A l'ensemble engendré par les droites D(t), c'est à dire leur réunion.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 6</div> We consider a parametrized plane curve B, ie an application t &rarr; M(t) of an interval I of &reals; with values in a plane P of the space E. <br> We also suppose that we have given ourselves a point A not belonging to the plane P and called <b>
+              <i>'vertex'</i>
+            </b>. <br> For each value of t, we consider the line D(t) passing through M(t) and A. We call <b>
+              <i>'cone'</i>
+            </b> with base B and vertex A the set generated by the lines D(t), i.e. their union.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 7</div> On désigne par P(t,s) le point de la droite D(t) de paramètre s dans la <input type="button" value="représentation paramètrique" onclick="go('../repvar/repvarparam.html#')" data-inline="true" /> de D(t) liée au choix du point M(t) et du vecteur directeur &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; unitaire et de même sens que &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{AM(t)} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 7</div> We designate by P(t,s) the point of the line D(t) with parameter s in the <input type="button" value="parametric representation" onclick="go('../repvar/repvarparam.html #')" data-inline="true" /> of D(t) linked to the choice of the point M(t) and the directing vector &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; unitary and in the same direction as &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{AM(t)} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de la définition qui précède qu'un cône, comme un cylindre, est une surface paramétrée (à deux paramètres donc). <br> L'application (t,s) &rarr; M(t,s) définit donc une application surjective de I&times;&reals; sur le cône. <br> La même remarque ci-dessus faite pour les cylindres s'applique également aux cônes. <br>
+          <h3>Cônes circulaire</h3> Ce sont les cônes dont la base est un cercle. <br> Voici une animation permettant de voir la génération d'un cône circulaire. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from the preceding definition that a cone, like a cylinder, is a parametrized surface (with two parameters therefore). <br> The application (t,s) &rarr; M(t,s) therefore defines a surjective map of I&times;&reals; onyo the cone. <br> The same point above made for cylinders also applies to cones as well. <br>
+          <h3>Circular cones</h3> These are the cones whose base is a circle. <br> Here is an animation showing the generation of a circular cone. <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas3" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/gencone1.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Cônes à base polygonale</h3> Voici une animation permettant de voir la génération d'un cône à base carrée.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Polygonal based cones</h3> Here is an animation showing the generation of a square-based cone.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas4" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/gencone2.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Troncs de cônes</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Truncated cones</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 8</div> Un <b>
+              <i>'tronc de cône'</i>
+            </b> est délimité par deux plans parallèles au plan de la base, l'un de ces plans peut passer par le sommet.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 8</div> A <b>
+              <i>'truncated cone'</i>
+            </b> is delimited by two planes parallel to the plane of the base, one of these planes can contain the vertex.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'image GeoGebra qui suit vous permet de voir un tronc de cône à base circulaire. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The following GeoGebra image allows you to see a truncated cone with a circular base. <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/tronccone.png" width="495" height="385" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Equations cartésiennes</h2> Les points d'une surface réglée sont donc caractérisés par 3 équations à 2 inconnues :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = x(t,s)} \\ {y = y(t,s)} \\ {z = z(t,s)} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> constituant une représentation paramétrique de la surface. <br> Il est parfois possible d'extraire de cette représentation une équation unique du type f(x,y,z)=0 caractérisant les points de la surface, une telle équation (comme dans le cas d'un hyperplan) est dite équation 'cartésienne' de la surface réglée. <br> Traitons un exemple ; prenons un cône à base circulaire. <br> Le point M(t) décrit la base circulaire d'équation x²+y²=1 dans le plan z=0 paramétrée par : t &rarr; M(t)(cos(t),sin(t),0). <br> Le sommet S est S(0,0,1), de sorte qu'un vecteur directeur de la droite (MS) est :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle w(t) = \begin{pmatrix} {\cos(t)} \\ {\sin(t)} \\ {- 1} \\ \end{pmatrix} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Une représentation paramétrique du cône est donc :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x\left( {t,s} \right) = s . \cos(t)} \\ {y\left( {s,t} \right) = s . \sin(t)} \\ {z\left( {s,t} \right) = 1 - s} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> De là nous tirons x<sup>2</sup>+y<sup>2</sup>=s<sup>2</sup> et s=1-z, d'où finalement l'équation cartésienne de ce cône :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle x^{2} + y^{2} = \left( {1 - z} \right)^{2} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <h2>Surfaces réglées plus générales</h2> On peut s'affranchir de la condition suivant laquelle les droites D<sub>t</sub> doivent soit être toutes parallèles à une direction de droite donnée (cas des cylindres), soit toutes passer par un même point (cas des cônes). <br> De façon plus générale :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Cartesian equations</h2> The points of a ruled surface are therefore characterized by 3 equations with 2 unknowns:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = x(t,s)} \\ {y = y(t,s)} \\ {z = z(t,s)} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> constituting a parametric representation of the surface. <br> It is sometimes possible to extract from this representation a single equation of the type f(x,y,z)=0 characterizing the points of the surface, such an equation (as in the case of a hyperplane) is called a Cartesian equation ' of the ruled surface. <br> Let's deal with an example; let's take a cone with a circular base. <br> The point M(t) describes the circular base with equation x²+y²=1 in the plane z=0 parameterized by: t &rarr; M(t)(cos(t),sin(t),0). <br> Vertex S is S(0,0,1), so a direction vector of the line (MS) is:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle w(t) = \begin{pmatrix} {\cos(t)} \\ {\sin(t)} \\ {- 1} \\ \end{pmatrix} \)</p>
+          <!-- /INLINE UNIV FORMULA--> A parametric representation of the cone is therefore:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x\left( {t,s} \right) = s . \cos(t)} \\ {y\left( {s,t} \right) = s . \sin(t)} \\ {z\left( {s,t} \right) = 1 - s} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> From this we derive x<sup>2</sup>+y<sup>2</sup>=s<sup>2</sup> and s=1-z, hence finally the Cartesian equation of this cone:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle x^{2} + y^{2} = \left( {1 - z} \right)^{2} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+          <h2>More general ruled surfaces</h2> We can avoid the condition according to which the lines D<sub>t</sub> must either all be parallel to a given direction of the line (case of cylinders), or all pass through the same point (case of cones) . <br> More generally:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 9</div> On appelle <b>
+              <i>'surface réglée'</i>
+            </b> S de <b>
+              <i>'directrice'</i>
+            </b> ou de <b>
+              <i>'base'</i>
+            </b> B où B est une courbe paramétrée t &rarr; M(t) , la surface engendrée par une famille de droites D<sub>t</sub>, chaque droite D<sub>t</sub> passant par le point M de paramètre t de la courbe B. <br> Les droites D<sub>t</sub> s'appellent alors les <b>
+              <i>'génératrices'</i>
+            </b> de la surface réglée S.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 9</div> We call <b>
+              <i>'ruled surface'</i>
+            </b> S of <b>
+              <i>'directrix'</i>
+            </b> or of <b>
+              <i>'base' </i>
+            </b> B where B is a parametric curve t &rarr; M(t) , the surface generated by a family of lines D<sub>t</sub>, each line D<sub>t</sub> passing through the point M of parameter t of the curve B. <br> The straight lines D<sub>t</sub> are then called the <b>
+              <i>'generators'</i>
+            </b> of the ruled surface S.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Notons que la définition ci-dessus ne suppose plus explicitement que la directrice est une courbe plane. <br> Une surface réglée apparait donc naturellement comme un sous-ensemble doublement paramétré de l'espace. <br> Le point M(t,s) est le point de la droite D<sub>t</sub> de paramètre s dans une représentation paramétrique de D<sub>t</sub>, liée le plus généralement au point M(t) de la base et un vecteur unitaire &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u(t)} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br> Le point M(t,s) est donc caractérisé par &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle M(t,s)=M(t)+s.\overrightarrow{u(t)} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br>
+          <h3>Quelques exemples </h4>
+            <h4>Bande (ou ruban) de Möbius </h5> Voici une animation vous permettant de voir la génération de cette surface.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Note that the above definition no longer explicitly assumes that the directrix is a plane curve. <br> A ruled surface therefore appears naturally as a doubly parameterized subset of the space. <br> The point M(t,s) is the point on the line D<sub>t</sub> with parameter s in a parametric representation of D<sub>t</sub>, most generally related to the point M(t ) of the base and a unit vector &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u(t)} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;. <br> The point M(t,s) is therefore characterized by &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle M(t,s)=M(t)+s.\overrightarrow{u(t)} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;. <br>
+          <h3>Some examples </h4>
+            <h4>Möbius strip (or band) </h5> Here is an animation allowing you to see the generation of this surface.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas5" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/mobius2.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Le point M(t) parcourt un cercle. Au départ la droite D<sub>t</sub> est verticale orientée dans le sens de Oz. <br> En même temps que M se déplace la droite tourne dans le plan déterminé par l'axe Oz et le point M. <br> Quand le point M a fait un tour complet la droite à fait un demi tour. <br> Elle revient au point initial après avoir inversé son orientation. <br> Pour le traitement d'un cas simple voir <input type="button" value="cet exercice" onclick="go('exercices/espacereglees/ex01.html#')" data-inline="true" />. <h4>Conoïde</h4> Voici une animation vous permettant de voir la génération de cette surface. </div>
+        <!-- /fr -->
+        <div lang="en"> The point M(t) travels a circle. Initially the line D<sub>t</sub> is vertical oriented in the direction of Oz. <br> As M moves, the line rotates in the plane determined by the Oz axis and the point M. <br> When point M has made a complete turn, the line has made a half turn. <br> It returns to the initial point after reversing its orientation. <br> For the treatment of a simple case see <input type="button" value="this exercise" onclick="go('exercices/espacereglees/ex01.html#')" data-inline="true" />. <h4>Conoid</h4> Here is an animation allowing you to see the generation of this surface. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas6" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/conoide2.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Le point M(t) parcourt un cercle. <br /> La droite D(t) passe par le point M(t) elle s'appuie sur une droite D' parallèle au plan du cercle et en étant orthogonale à D'. <br /> Pour le traitement d'un cas simple voir <input type="button" value="cet exercice" onclick="go('exercices/espacereglees/ex02.html#')" data-inline="true" />. <h4>Hélicoïde</h4> Voici une animation vous permettant de voir la génération de cette surface. </div>
+        <!-- /fr -->
+        <div lang="en"> The point M(t) travels a circle. <br /> The straight line D(t) passes through the point M(t) it rests on a straight line D' parallel to the plane of the circle and being orthogonal to D'. <br /> For the treatment of a simple case see <input type="button" value="this exercise" onclick="go('exercices/espacereglees/ex02.html#')" data-inline="true" /> . <h4>Helicoid</h4> Here is an animation allowing you to see the generation of this surface. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas7" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/helicoide2.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> La projection du point M sur le plan z=0, décrit un cercle de centre O. <br /> En même temps qu'il tourne le point M s'élève proportionellement à l'angle de la rotation. <br /> La droite D<sub>t</sub> est orthogonale à l'axe Oz, et elle coupe cet axe. <br /> Pour le traitement d'un cas simple voir <input type="button" value="cet exercice" onclick="go('exercices/espacereglees/ex03.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> The projection of the point M on the plane z=0, describes a circle with center O. <br /> As it rotates the point M rises proportionally to the angle of rotation. <br /> The line D<sub>t</sub> is orthogonal to the Oz axis, and it intersects this axis. <br /> For the treatment of a simple case see <input type="button" value="this exercise" onclick="go('exercices/espacereglees/ex03.html#')" data-inline="true" />. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacereglees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacereglees/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

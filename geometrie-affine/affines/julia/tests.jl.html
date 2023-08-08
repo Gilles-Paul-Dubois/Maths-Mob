@@ -1,0 +1,205 @@
+<html>
+<head>
+<title>tests.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #0033b3;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">include(</span><span class="s1">&quot;BasesAffines.jl&quot;</span><span class="s0">)</span>
+<span class="s2">#fonctions de test - test functions</span>
+<span class="s3">function </span><span class="s0">test_point()</span>
+    <span class="s0">println(</span><span class="s1">&quot;test_point-------------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">println(</span><span class="s1">&quot;réels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=RP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">])</span>
+    <span class="s0">println(P1)</span>
+    <span class="s0">println(gettype(P1))</span>
+    <span class="s0">P4=RP([</span><span class="s4">1.0</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">6</span><span class="s0">])</span>
+    <span class="s0">println(</span><span class="s1">&quot;différence de deux points&quot;</span><span class="s0">)</span>
+    <span class="s0">println(P1-P4)</span>
+    <span class="s0">println(typeof(P1-P4))</span>
+    <span class="s0">println(</span><span class="s1">&quot;translaté d'un point&quot;</span><span class="s0">)</span>
+    <span class="s0">println(P1+[</span><span class="s4">1</span><span class="s0">,</span><span class="s4">1</span><span class="s0">,</span><span class="s4">1</span><span class="s0">])</span>
+    <span class="s0">println(</span><span class="s1">&quot;rationnels&quot;</span><span class="s0">)</span>
+    <span class="s0">P2=QP([</span><span class="s4">1</span><span class="s0">//</span><span class="s4">2</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">])</span>
+    <span class="s0">println(P2)</span>
+    <span class="s0">println(gettype(P2))</span>
+    <span class="s0">P5=QP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">6</span><span class="s0">])</span>
+    <span class="s0">println(</span><span class="s1">&quot;différence de deux points&quot;</span><span class="s0">)</span>
+    <span class="s0">println(P2-P5)</span>
+    <span class="s0">println(typeof(P2-P5))</span>
+    <span class="s0">println(</span><span class="s1">&quot;translaté d'un point&quot;</span><span class="s0">)</span>
+    <span class="s0">println(P2+[</span><span class="s4">1</span><span class="s0">//</span><span class="s4">2</span><span class="s0">,</span><span class="s4">1</span><span class="s0">,</span><span class="s4">1</span><span class="s0">])</span>
+    <span class="s0">println(</span><span class="s1">&quot;Z/pZ&quot;</span><span class="s0">)</span>
+    <span class="s0">P3=FP([F(</span><span class="s4">2</span><span class="s0">),F(</span><span class="s4">4</span><span class="s0">),F(</span><span class="s4">6</span><span class="s0">)])</span>
+    <span class="s0">println(P3)</span>
+    <span class="s0">println(gettype(P3))</span>
+    <span class="s0">P6=FP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">5</span><span class="s0">])</span>
+    <span class="s0">println(</span><span class="s1">&quot;différence de deux points&quot;</span><span class="s0">)</span>
+    <span class="s0">println(P3-P6)</span>
+    <span class="s0">println(typeof(P3-P6))</span>
+    <span class="s0">println(</span><span class="s1">&quot;translaté d'un point&quot;</span><span class="s0">)</span>
+    <span class="s0">println(P3+[F(</span><span class="s4">2</span><span class="s0">),F(</span><span class="s4">4</span><span class="s0">),F(</span><span class="s4">6</span><span class="s0">)])</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin de test_point-------------------------------&quot;</span><span class="s0">)</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">test_pointssystem()</span>
+    <span class="s0">println(</span><span class="s1">&quot;test_pointssystem-------------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">println(</span><span class="s1">&quot;réels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=RP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">])</span>
+    <span class="s0">P2=RP([</span><span class="s4">1.0</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">6</span><span class="s0">])</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">println(typeof(S))</span>
+    <span class="s0">S1=PSR(S)</span>
+    <span class="s0">println(typeof(S1))</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(</span><span class="s1">&quot;rationnels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=QP([</span><span class="s4">1</span><span class="s0">//</span><span class="s4">2</span><span class="s0">,</span><span class="s4">2</span><span class="s0">//</span><span class="s4">3</span><span class="s0">,</span><span class="s4">3</span><span class="s0">//</span><span class="s4">2</span><span class="s0">])</span>
+    <span class="s0">P2=QP([</span><span class="s4">3</span><span class="s0">,</span><span class="s4">1</span><span class="s0">//</span><span class="s4">5</span><span class="s0">,</span><span class="s4">2</span><span class="s0">])</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">println(typeof(S))</span>
+    <span class="s0">S1=PSQ(S)</span>
+    <span class="s0">println(typeof(S1))</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Z/pZ&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=FP([F(</span><span class="s4">1</span><span class="s0">),F(</span><span class="s4">2</span><span class="s0">),F(</span><span class="s4">3</span><span class="s0">)])</span>
+    <span class="s0">P2=FP([</span><span class="s4">3</span><span class="s0">,</span><span class="s4">5</span><span class="s0">,</span><span class="s4">0</span><span class="s0">])</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">println(typeof(S))</span>
+    <span class="s0">S1=PSF(S)</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(typeof(S1))</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin de test_pointssystem-------------------------------&quot;</span><span class="s0">)</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">test_masspoint()</span>
+    <span class="s0">println(</span><span class="s1">&quot;test_point pondéré-------------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Réels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=RMP(RP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">]),</span><span class="s4">3</span><span class="s0">)</span>
+    <span class="s0">println(P1)</span>
+    <span class="s0">P2=RMP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">4</span><span class="s0">],</span><span class="s4">2</span><span class="s0">)</span>
+    <span class="s0">println(P2)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Rationnels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=QMP(QP([</span><span class="s4">1</span><span class="s0">//</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">1</span><span class="s0">//</span><span class="s4">3</span><span class="s0">]),</span><span class="s4">2</span><span class="s0">//</span><span class="s4">1</span><span class="s0">)</span>
+    <span class="s0">println(P1)</span>
+    <span class="s0">P2=QMP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">4</span><span class="s0">],</span><span class="s4">2</span><span class="s0">)</span>
+    <span class="s0">println(P2)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Z/pZ&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=FMP(FP([F(</span><span class="s4">4</span><span class="s0">),F(</span><span class="s4">5</span><span class="s0">),F(</span><span class="s4">6</span><span class="s0">)]),F(</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(P1)</span>
+    <span class="s0">P2=FMP([F(</span><span class="s4">4</span><span class="s0">),F(</span><span class="s4">5</span><span class="s0">),F(</span><span class="s4">6</span><span class="s0">)],F(</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(P2)</span>
+    <span class="s0">P3=FMP(FP([</span><span class="s4">4</span><span class="s0">,</span><span class="s4">5</span><span class="s0">,</span><span class="s4">6</span><span class="s0">]),</span><span class="s4">6</span><span class="s0">)</span>
+    <span class="s0">println(P3)</span>
+    <span class="s0">P4=FMP([</span><span class="s4">4</span><span class="s0">,</span><span class="s4">5</span><span class="s0">,</span><span class="s4">6</span><span class="s0">],</span><span class="s4">6</span><span class="s0">)</span>
+    <span class="s0">println(P4)</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin de test_point pondéré-------------------------------------&quot;</span><span class="s0">)</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">test_masspointssystem()</span>
+    <span class="s0">println(</span><span class="s1">&quot;test_systeme points pondérés-------------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Réels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=RMP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">],</span><span class="s4">2</span><span class="s0">)</span>
+    <span class="s0">P2=RMP([</span><span class="s4">4</span><span class="s0">,</span><span class="s4">5</span><span class="s0">,</span><span class="s4">0.5</span><span class="s0">],</span><span class="s4">3</span><span class="s0">)</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">S1=PMSR(S)</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Rationnels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=QMP([</span><span class="s4">1</span><span class="s0">//</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">1</span><span class="s0">//</span><span class="s4">3</span><span class="s0">],</span><span class="s4">2</span><span class="s0">//</span><span class="s4">1</span><span class="s0">)</span>
+    <span class="s0">P2=QMP([</span><span class="s4">1</span><span class="s0">//</span><span class="s4">3</span><span class="s0">,</span><span class="s4">3</span><span class="s0">,</span><span class="s4">5</span><span class="s0">//</span><span class="s4">2</span><span class="s0">],</span><span class="s4">3</span><span class="s0">//</span><span class="s4">1</span><span class="s0">)</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">S1=PMSQ(S)</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(</span><span class="s1">&quot;cas Z/pZ&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=FMP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">],</span><span class="s4">2</span><span class="s0">)</span>
+    <span class="s0">P2=FMP([</span><span class="s4">4</span><span class="s0">,</span><span class="s4">5</span><span class="s0">,</span><span class="s4">6</span><span class="s0">],</span><span class="s4">2</span><span class="s0">)</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">S1=PMSF(S)</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(</span><span class="s1">&quot;test_systeme points pondérés-------------------------------------&quot;</span><span class="s0">)</span>
+<span class="s3">end</span>
+<span class="s2">#fin de la section - end of section</span>
+
+<span class="s3">function </span><span class="s0">test_vectorssystem()</span>
+    <span class="s0">println(</span><span class="s1">&quot;test_systeme vecteurs pondérés-------------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Réels&quot;</span><span class="s0">)</span>
+    <span class="s0">V1=[</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">]</span>
+    <span class="s0">V2=[</span><span class="s4">4</span><span class="s0">,</span><span class="s4">5</span><span class="s0">,</span><span class="s4">6</span><span class="s0">]</span>
+    <span class="s0">S=[V1,V2]</span>
+    <span class="s0">VS=VSR(S)</span>
+    <span class="s0">println(VS)</span>
+    <span class="s0">println(gettype(VS))</span>
+    <span class="s0">println(size(VS,</span><span class="s4">1</span><span class="s0">))</span>
+    <span class="s0">println(size(VS,</span><span class="s4">2</span><span class="s0">))</span>
+    <span class="s0">println(matrice(VS))</span>
+    <span class="s0">println(typeof(matrice(VS)))</span>
+    <span class="s0">println(rang(VS))</span>
+    <span class="s0">println(</span><span class="s1">&quot;Rationnels&quot;</span><span class="s0">)</span>
+    <span class="s0">V1=[</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">]</span>
+    <span class="s0">V2=[</span><span class="s4">4</span><span class="s0">,</span><span class="s4">5</span><span class="s0">,</span><span class="s4">6</span><span class="s0">]</span>
+    <span class="s0">S=[V1,V2]</span>
+    <span class="s0">VS=VSQ(S)</span>
+    <span class="s0">println(VS)</span>
+    <span class="s0">println(gettype(VS))</span>
+    <span class="s0">println(size(VS,</span><span class="s4">1</span><span class="s0">))</span>
+    <span class="s0">println(size(VS,</span><span class="s4">2</span><span class="s0">))</span>
+    <span class="s0">println(matrice(VS))</span>
+    <span class="s0">println(rang(VS))</span>
+    <span class="s0">println(</span><span class="s1">&quot;Corps Z/pZs&quot;</span><span class="s0">)</span>
+    <span class="s0">V1=[F(</span><span class="s4">1</span><span class="s0">),F(</span><span class="s4">2</span><span class="s0">),F(</span><span class="s4">3</span><span class="s0">)]</span>
+    <span class="s0">V2=[F(</span><span class="s4">4</span><span class="s0">),F(</span><span class="s4">5</span><span class="s0">),F(</span><span class="s4">6</span><span class="s0">)]</span>
+    <span class="s0">S=[V1,V2]</span>
+    <span class="s0">VS=VSF(S)</span>
+    <span class="s0">println(VS)</span>
+    <span class="s0">println(gettype(VS))</span>
+    <span class="s0">println(size(VS,</span><span class="s4">1</span><span class="s0">))</span>
+    <span class="s0">println(size(VS,</span><span class="s4">2</span><span class="s0">))</span>
+    <span class="s0">println(matrice(VS))</span>
+    <span class="s0">println(rang(VS))</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin_test_systeme vecteurs pondérés-------------------------------------&quot;</span><span class="s0">)</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">testaleas()</span>
+    <span class="s0">println(</span><span class="s1">&quot;test_objets aléatoires-------------------------------------&quot;</span><span class="s0">)</span>
+    <span class="s0">println(</span><span class="s1">&quot;Points&quot;</span><span class="s0">)</span>
+    <span class="s0">println(aleaRP(</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(aleaQP(</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(aleaFP(</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(</span><span class="s1">&quot;systèmes de points&quot;</span><span class="s0">)</span>
+    <span class="s0">println(aleaptsystemR(</span><span class="s4">2</span><span class="s0">,</span><span class="s4">4</span><span class="s0">))</span>
+    <span class="s0">println(aleaptsystemQ(</span><span class="s4">3</span><span class="s0">,</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(aleaptsystemF(</span><span class="s4">2</span><span class="s0">,</span><span class="s4">2</span><span class="s0">))</span>
+    <span class="s0">println(</span><span class="s1">&quot;Points pondérés&quot;</span><span class="s0">)</span>
+    <span class="s0">println(aleamassptR(</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(aleamassptQ(</span><span class="s4">4</span><span class="s0">))</span>
+    <span class="s0">println(aleamassptF(</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(</span><span class="s1">&quot;Systèmes de points pondérés&quot;</span><span class="s0">)</span>
+    <span class="s0">println(aleasysmassptR(</span><span class="s4">3</span><span class="s0">,</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(aleasysmassptQ(</span><span class="s4">3</span><span class="s0">,</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(aleasysmassptF(</span><span class="s4">3</span><span class="s0">,</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(</span><span class="s1">&quot;Systèmes de vecteurs&quot;</span><span class="s0">)</span>
+    <span class="s0">println(aleavectsystemR(</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(aleavectsystemQ(</span><span class="s4">3</span><span class="s0">,</span><span class="s4">2</span><span class="s0">))</span>
+    <span class="s0">println(aleavectsystemF(</span><span class="s4">3</span><span class="s0">,</span><span class="s4">3</span><span class="s0">))</span>
+    <span class="s0">println(</span><span class="s1">&quot;fin test_objets aléatoires-------------------------------------&quot;</span><span class="s0">)</span>
+
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">main()</span>
+     <span class="s0">test_point()</span>
+     <span class="s0">test_pointssystem()</span>
+     <span class="s0">test_masspoint()</span>
+     <span class="s0">test_masspointssystem()</span>
+     <span class="s0">test_vectorssystem()</span>
+     <span class="s0">testaleas()</span>
+<span class="s3">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

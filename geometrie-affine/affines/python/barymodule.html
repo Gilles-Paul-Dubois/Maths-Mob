@@ -1,0 +1,60 @@
+<html>
+<head>
+<title>barymodule.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">from </span><span class="s1">affines </span><span class="s2">import </span><span class="s1">PointKn, MyError 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">PointPondere: 
+    </span><span class="s2">def </span><span class="s1">__init__(self, P, m): 
+        self.P = P 
+        self.m = m 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">&quot;&quot;&quot;représentation externe pour print etc...&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">str(self.P) + </span><span class="s3">&quot;:&quot; </span><span class="s1">+ str(self.m) 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">SystemePoints: 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        self.Points = L 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.Points] 
+        </span><span class="s2">return </span><span class="s3">'(' </span><span class="s1">+ </span><span class="s3">&quot;,&quot;</span><span class="s1">.join(L) + </span><span class="s3">')'</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">MasseTotale(self): 
+        </span><span class="s2">return </span><span class="s1">reduce((</span><span class="s2">lambda </span><span class="s1">x, y: x + y), [P.m </span><span class="s2">for </span><span class="s1">P </span><span class="s2">in </span><span class="s1">self.Points]) 
+ 
+    </span><span class="s2">def </span><span class="s1">Barycentre(self): 
+        </span><span class="s2">if </span><span class="s1">self.MasseTotale() == </span><span class="s4">0</span><span class="s1">: 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s3">&quot;Masse totale nulle&quot;</span><span class="s1">) 
+        k = self.Points[</span><span class="s4">0</span><span class="s1">].P.n 
+        </span><span class="s2">if </span><span class="s1">any([m != k </span><span class="s2">for </span><span class="s1">m </span><span class="s2">in </span><span class="s1">(PP.P.n </span><span class="s2">for </span><span class="s1">PP </span><span class="s2">in </span><span class="s1">self.Points)]): 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s3">&quot;Les points doivent etre dans un meme espace&quot;</span><span class="s1">) 
+        M = self.MasseTotale() 
+        L = [PP.P </span><span class="s2">for </span><span class="s1">PP </span><span class="s2">in </span><span class="s1">self.Points] 
+        K = [PP.m </span><span class="s2">for </span><span class="s1">PP </span><span class="s2">in </span><span class="s1">self.Points] 
+        CB = [</span><span class="s4">0</span><span class="s1">] * k 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, k): 
+            CB[j] = reduce((</span><span class="s2">lambda </span><span class="s1">x, y: x + y), [K[i] * L[i].C[j] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, k)]) 
+        CB = [x / M </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">CB] 
+        </span><span class="s2">return </span><span class="s1">PointKn(CB) 
+</span></pre>
+</body>
+</html>

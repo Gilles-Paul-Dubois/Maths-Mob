@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>barycentres.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">include(</span><span class="s1">&quot;BasesAffines.jl&quot;</span><span class="s0">)</span>
+
+<span class="s2">function </span><span class="s0">nullmass(S::MassPointsSystem{P}) </span><span class="s2">where </span><span class="s0">P</span>
+    <span class="s0">L1=[p.M </span><span class="s2">for </span><span class="s0">p </span><span class="s2">in </span><span class="s0">S.MassPts]</span>
+    <span class="s0">m=reduce(+,L1)</span>
+    <span class="s2">if </span><span class="s0">P!=</span><span class="s1">&quot;NN&quot;</span>
+        <span class="s2">return </span><span class="s0">iszero(m)</span>
+    <span class="s2">else</span>
+        <span class="s2">return </span><span class="s0">s==F(</span><span class="s3">0</span><span class="s0">)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">barycentre(S::MassPointsSystem{P}) </span><span class="s2">where </span><span class="s0">P</span>
+    <span class="s2">if </span><span class="s0">nullmass(S)</span>
+        <span class="s2">return </span><span class="s0">nothing</span>
+    <span class="s2">end</span>
+    <span class="s0">n=length(S.MassPts[</span><span class="s3">1</span><span class="s0">].C)</span>
+    <span class="s0">L1=[p.M </span><span class="s2">for </span><span class="s0">p </span><span class="s2">in </span><span class="s0">S.MassPts]</span>
+    <span class="s0">L2(i)=reduce(+,[p.C[i] </span><span class="s2">for </span><span class="s0">p </span><span class="s2">in </span><span class="s0">S.MassPts])</span>
+    <span class="s0">m=reduce(+,L1)</span>
+    <span class="s0">L3(i)=L2(i)*inv(m)</span>
+    <span class="s0">s=[L3(i) </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:n]</span>
+    <span class="s2">if </span><span class="s0">P==</span><span class="s1">&quot;NN&quot; </span><span class="s0">&amp;&amp; m==F(</span><span class="s3">0</span><span class="s0">)</span>
+        <span class="s2">return </span><span class="s0">nothing</span>
+    <span class="s2">else</span>
+        <span class="s2">return </span><span class="s0">P(s,m)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">test_bary()</span>
+    <span class="s0">println(</span><span class="s1">&quot;Réels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=RMP([</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">,</span><span class="s3">3</span><span class="s0">],</span><span class="s3">2</span><span class="s0">)</span>
+    <span class="s0">P2=RMP([</span><span class="s3">4</span><span class="s0">,</span><span class="s3">5</span><span class="s0">,</span><span class="s3">0.5</span><span class="s0">],</span><span class="s3">3</span><span class="s0">)</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">S1=PMSR(S)</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(barycentre(S1))</span>
+    <span class="s0">S2=aleasysmassptR(</span><span class="s3">3</span><span class="s0">,</span><span class="s3">3</span><span class="s0">)</span>
+    <span class="s0">println(S2)</span>
+    <span class="s0">println(barycentre(S2))</span>
+    <span class="s0">println(</span><span class="s1">&quot;Rationnels&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=QMP([</span><span class="s3">1</span><span class="s0">//</span><span class="s3">2</span><span class="s0">,</span><span class="s3">3</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">3</span><span class="s0">],</span><span class="s3">2</span><span class="s0">//</span><span class="s3">1</span><span class="s0">)</span>
+    <span class="s0">P2=QMP([</span><span class="s3">1</span><span class="s0">//</span><span class="s3">3</span><span class="s0">,</span><span class="s3">3</span><span class="s0">,</span><span class="s3">5</span><span class="s0">//</span><span class="s3">2</span><span class="s0">],</span><span class="s3">3</span><span class="s0">//</span><span class="s3">1</span><span class="s0">)</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">S1=PMSQ(S)</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(barycentre(S1))</span>
+    <span class="s0">S2=aleasysmassptQ(</span><span class="s3">3</span><span class="s0">,</span><span class="s3">3</span><span class="s0">)</span>
+    <span class="s0">println(S2)</span>
+    <span class="s0">println(barycentre(S2))</span>
+    <span class="s0">println(</span><span class="s1">&quot;cas Z/pZ&quot;</span><span class="s0">)</span>
+    <span class="s0">P1=FMP([</span><span class="s3">1</span><span class="s0">,</span><span class="s3">2</span><span class="s0">,</span><span class="s3">3</span><span class="s0">],</span><span class="s3">2</span><span class="s0">)</span>
+    <span class="s0">P2=FMP([</span><span class="s3">4</span><span class="s0">,</span><span class="s3">5</span><span class="s0">,</span><span class="s3">6</span><span class="s0">],</span><span class="s3">2</span><span class="s0">)</span>
+    <span class="s0">S=[P1,P2]</span>
+    <span class="s0">S1=PMSF(S)</span>
+    <span class="s0">println(S1)</span>
+    <span class="s0">println(barycentre(S1))</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s3">1</span><span class="s0">:</span><span class="s3">10</span>
+        <span class="s0">S2=aleasysmassptF(</span><span class="s3">3</span><span class="s0">,</span><span class="s3">3</span><span class="s0">)</span>
+        <span class="s0">println(S2)</span>
+        <span class="s0">println(barycentre(S2))</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s0">test_bary()</span></pre>
+</body>
+</html>

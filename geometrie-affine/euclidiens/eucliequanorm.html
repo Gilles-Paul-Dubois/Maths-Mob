@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+	<title>Equations normales</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../css/themes/myown.css" />
+	<link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+	<link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+   <link href="../../css/myown.css" rel="stylesheet">
+	<script src="../../js/jquery-1.11.3.js"></script>
+	<script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+	<script src="../../js/custom.js"></script>
+ <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+ </head>	
+<body style="overflow: auto; "class="fr">
+<script> window.onload=get();</script>
+<a name="beg"></a>
+<div data-role="page" data-theme="e">
+
+	<div data-role="header">
+<table>
+<tr>
+<td>Choisissez votre langue !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+<td>Choose your language !</td>
+<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+</tr>
+</table>	
+	</div><!-- /header -->
+
+<div style="overflow: auto; "  data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/eucliequanorm/menu.html')" /></li>  
+ 	 <li><input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                    
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/eucliequanorm/menu.html')" /></li>
+	 <li><input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Affine geometry" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                 
+  </ul>
+</div><!-- /navbar --></div><!-- /en --> 
+<div lang="fr">
+<h2>Rappels</h2>
+Nous nous plaçons dans le cas d'un espace euclidien A de dimension finie ayant E pour espace vectoriel directeur.<br/>
+Nous rappelons que relativement à un repère R=(O,B) quelconque, tout <input type="button" value="hyperplan affine" onclick="go('../affines/affinesvar.html#def5')" data-inline="true" /> F possède une <input type="button" value="équation cartésienne" onclick="go('../repvar/repvarcart.html#def1')" data-inline="true" /> (définie à une constante multiplicative non nulle près), du type :
+a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... +a<sub>n</sub>x<sub>n</sub>=b<br/>
+où les a<sub>i</sub> ne sont pas tous nuls.<br/>
+Nous rappelons également que tout vecteur &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{u}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; de l'hyperplan vectoriel H directeur de F et ayant des coordonnées (u<sub>1</sub>,u<sub>2</sub>, ... ,u<sub>n</sub>) dans la base B du repère R est caractérisé par :<br/>
+a<sub>1</sub>u<sub>1</sub>+a<sub>2</sub>u<sub>2</sub>+ ... +a<sub>n</sub>u<sub>n</sub>=0<br/>
+de sorte que (a<sub>1</sub>, ... ,a<sub>n</sub>) sont les coordonnées dans la base B* duale de B de la <input type="button" value="forme linéaire" onclick="go('../../algebre-lineaire/applicalin/formeslin.html#')"  data-inline="true"/> non nulle f dont H est le noyau.<br/>
+Si maintenant on suppose B orthonormée les a<sub>i</sub> s'identifient aux coordonnées d'un vecteur &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; de E et l'expression
+a<sub>1</sub>u<sub>1</sub>+a<sub>2</sub>u<sub>2</sub>+ ... +a<sub>n</sub>u<sub>n</sub> s'écrit tout simplement 
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}.\overrightarrow{u}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;
+.<br/>
+On voit donc que dans ce cas H est l'orthogonal de la droite vectorielle de vecteur directeur &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;.
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>Reminders</h2>
+We place ourselves in the case of a Euclidean space A of finite dimension having E as its director vector space.<br/>
+We recall that relative to any R=(O,B) frame, any <input type="button" value="hyperplane affine" onclick="go('../affines/affinesvar.html#def5')" data-inline="true" /> F has an <input type="button" value="Cartesian equation" onclick="go('../repvar/repvarcart.html#def1')" data-inline="true" /> (defined up to a non-zero multiplicative constant), of the type:
+a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... +a<sub>n</sub >x<sub>n</sub>=b<br/>
+where the a<sub>i</sub> are not all zero.<br/>
+We also recall that any vector &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{u}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; of the directing vector hyperplane H of F and having coordinates (u<sub>1</sub>,u<sub>2</sub>, ... ,u<sub>n</sub>) in the base B of frame R is characterized by:<br/>
+a<sub>1</sub>u<sub>1</sub>+a<sub>2</sub>u<sub>2</sub>+ ... +a<sub>n</sub >u<sub>n</sub>=0<br/>
+so that (a<sub>1</sub>, ... ,a<sub>n</sub>) are the coordinates in the dual basis B* of B of the nonzero <input type="button" value="linear form" onclick="go('../../algebre-lineaire/applicalin/formeslin.html#')"  data-inline="true"/> f of which H is the kernel.<br/>
+If we now assume B to be orthonormal, the a<sub>i</sub> are identified with the coordinates of a vector &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; of E and the expression
+a<sub>1</sub>u<sub>1</sub>+a<sub>2</sub>u<sub>2</sub>+ ... +a<sub>n</sub >u<sub>n</sub> is simply written
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{a}.\overrightarrow{u}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;
+.<br/>
+We can therefore see that in this case H is the orthogonal of the vector line with directing vector &nbsp;<!-- FORMULA UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;.
+</div><!-- /en --> 
+<!-- STOP -->
+<a name="prop1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">propriété 1</div>
+En résumé dans le cas d'un repère orthonormé, si on connait un vecteur orthogonal à F soit &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;, les coefficients a<sub>i</sub> d'une équation cartésienne de F sont tout simplement les coordonnées du vecteur &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /FORMULE UNIV INLINE-->
+.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">property 1</div>
+In summary in the case of an orthonormal reference, if we know a vector orthogonal to F is &nbsp;<!-- FORMULA UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;, the coefficients a<sub>i</sub> of a Cartesian equation of F are simply the coordinates of the vector &nbsp;<!-- INLINE UNIV FORMULA -->
+\(
+\displaystyle \overrightarrow{a}
+\)
+<!-- /INLINE UNIV FORMULA-->
+.
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<!-- STOP -->
+<a name="def1"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 1</div>
+Nous convenons maintenant d'appeler vecteur <strong><em>'normal'</em></strong> à F tout vecteur <input type="button" value="orthogonal" onclick="go('../../algebre-lineaire/orthogonalite/vectorth.html#')"  data-inline="true"/> à F et de <input type="button" value="norme" onclick="go('euclidef.html#def3')"  data-inline="true"/> 1.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 1</div>
+We now agree to call vector <strong><em>'normal'</em></strong> to F any vector<input type="button" value="orthogonal" onclick="go('../../algebre-lineaire/orthogonalite/vectorth.html#')"  data-inline="true"/>  to F and with <input type="button" value="norme" onclick="go('euclidef.html#def3')"  data-inline="true"/> 1.
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+<h2>Exemple de calcul</h2>
+Déterminer l'équation cartésienne du plan P passant par les trois points :<br/>
+A(1,0,0), B(0,1,0), C(1,1,1).<br/>
+On obtient tout de suite les coordonnées des vecteurs &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{AB}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; et &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{AC}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; directeurs du plan :<br/>
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{AB}\begin{pmatrix}
+{- 1} \\
+1 \\
+0 \\
+\end{pmatrix}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; et
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{AC}\begin{pmatrix}
+0 \\
+1 \\
+1 \\
+\end{pmatrix}
+\)
+<!-- /FORMULE UNIV INLINE-->
+<br/>
+Le <input type="button" value="produit vectoriel" onclick="go('../../algebre-lineaire/orthogonalite/prodvect.html#')" data-inline="true" />
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a} = \overrightarrow{AB} \land \overrightarrow{AC}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;
+est alors orthogonal au plan P.<br/>
+Un rapide calcul donne
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{a}\begin{pmatrix}
+1 \\
+1 \\
+{- 1} \\
+\end{pmatrix}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;<br/>
+On en déduit que l'équation de P est de la forme x+y-z=b.<br/>
+En écrivant que A ∈ P on obtient b=1.<br/>
+d'où l'équation finale de P: x+y-z=1.<br/>
+<h2>Equation normale d'un hyperplan</h2>
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>Example of calculation</h2>
+Determine the Cartesian equation of the plane P passing through the three points:<br/>
+A(1,0,0), B(0,1,0), C(1,1,1).<br/>
+We immediately obtain the coordinates of the vectors &nbsp;<!-- FORMULA UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{AB}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; and &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{AC}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; directors of plane P:<br/>
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{AB}\begin{pmatrix}
+{- 1} \\
+1 \\
+0 \\
+\end{pmatrix}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; and
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{AC}\begin{pmatrix}
+0 \\
+1 \\
+1 \\
+\end{pmatrix}
+\)
+<!-- /INLINE UNIV FORMULA-->
+<br/>
+The <input type="button" value="cross product" onclick="go('../../algebre-lineaire/orthogonalite/prodvect.html#')" data-inline="true" />
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{a} = \overrightarrow{AB} \land \overrightarrow{AC}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;
+is then orthogonal to the plane P.<br/>
+A quick calculation gives
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{a}\begin{pmatrix}
+1 \\
+1 \\
+{- 1} \\
+\end{pmatrix}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;<br/>
+We deduce that the equation of P is of the form x+y-z=b.<br/>
+By writing that A ∈ P we obtain b=1.<br/>
+hence the final equation of P: x+y-z=1.<br/>
+<h2>Normal equation of a hyperplane</h2>
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="def2"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 2</div>
+Une équation <strong><em>'normale'</em></strong> ou <strong><em>'eulérienne'</em></strong> d'un hyperplan, c'est une équation obtenue à partir d'un vecteur normal au plan (donc unitaire au sens précédent).
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 2</div>
+A <strong><em>'normal'</em></strong> or <strong><em>'Eulerian'</em></strong> equation of a hyperplane is an equation obtained from of a vector normal to the plane (thus unitary in the preceding sense).
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<!-- STOP -->
+<a name="prop2"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">propriété 2</div>
+Il résulte immédiatement de la définition que tout hyperplan possède deux équations normales identiques au signe près.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">property 2</div>
+It follows immediately from the definition that any hyperplane has two normal equations identical up to the sign.
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+<h2>Signification de la constante b dans l'équation normale</h2>
+Soit a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... +a<sub>n</sub>x<sub>n</sub>=b une équation normale d'un hyperplan F.<br/>
+Soit O' la <input type="button" value="projection orthogonale" onclick="go('eucliprojorth.html#def1')" data-inline="true" /> de O sur F et soient y<sub>1</sub>, ... ,y<sub>n</sub> les coordonnées de O'.<br/>
+Le vecteur
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{OO'}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; a pour cooordonnées y<sub>1</sub>, ... ,y<sub>n</sub> et il est colinéaire au vecteur normal <math><mover><mi>n</mi><mo>→</mo></mover></math> à F de composantes (a<sub>1</sub>,a<sub>2</sub>, ... ,a<sub>n</sub>) dans la base orthonormale B.<br/>
+Il en résulte que le produit scalaire
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{OO'}.\overrightarrow{n}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;
+ a pour valeur la disatnce OO' soit la distance de O à F au signe près selon que &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{OO'}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; et &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{n}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; sont de même sens ou non.<br/>
+Et comme O' ∈ F il en résulte que la constante b est égale à <input type="button" value="la distance de l'origine à F" onclick="go('euclidef.html#def5')" data-inline="true" /> au signe près selon l'orientation de &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{n}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;.
+<h2>Exemple de calcul</h2>
+Si nous reprenons l'exemple donné plus haut
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle {\parallel \overrightarrow{a} \parallel} = \sqrt{3}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;
+une équation normale de P est donc
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \frac{1}{\sqrt{3}}x + \frac{1}{\sqrt{3}}y - \frac{1}{\sqrt{3}}z = \frac{1}{\sqrt{3}}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;
+<h2>Utilisation de l'équation normale d'un hyperplan</h2>
+Soit F un hyperplan d'un aspace affine euclidien de dimension finie et d'équation normale :<br/>
+a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... +a<sub>n</sub>x<sub>n</sub>-b=0
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>Meaning of the constant b in the normal equation</h2>
+Let a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... +a<sub>n</sub>x<sub>n</sub>=b a normal equation of a hyperplane F.<br/>
+Let O' be the <input type="button" value="orthogonal projection" onclick="go('eucliprojorth.html#def1')" data-inline="true" /> of O onto F and let y<sub> 1</sub>, ... ,y<sub>n</sub> the coordinates of O'.<br/>
+The vector
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{OO'}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; has coordinates y<sub>1</sub>, ... ,y<sub>n</sub> and is collinear with the normal vector <math><mover><mi>n</mi><mo> →</mo></mover></math> to F of components (a<sub>1</sub>,a<sub>2</sub>, ... ,a<sub>n</sub >) in orthonormal basis B.<br/>
+It follows that the scalar product
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{OO'}.\overrightarrow{n}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;
+  has the value of the disatnce OO', i.e. the distance from O to F up to the sign according to whether &nbsp;<!-- FORMULA UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{OO'}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; and &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{n}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; are of the same direction or not.<br/>
+And since O' ∈ F it follows that the constant b is equal to <input type="button" value="the distance from the origin to F" onclick="go('euclidef.html#def5')" data-inline="true" /> up to the sign according to the orientation of &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{n}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;.
+<h2>Example of calculation</h2>
+If we take the example given above
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle {\parallel \overrightarrow{a} \parallel} = \sqrt{3}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;
+a normal equation of P is therefore
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \frac{1}{\sqrt{3}}x + \frac{1}{\sqrt{3}}y - \frac{1}{\sqrt{3}}z = \frac{1}{ \sqrt{3}}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;
+<h2>Using the normal equation of a hyperplane</h2>
+Let F be a hyperplane of an affine Euclidean space of finite dimension and normal equation:<br/>
+a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... +a<sub>n</sub >x<sub>n</sub>-b=0
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="def3"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">définition 3</div>
+Pour tout point M de coordonnées (y<sub>1</sub>, .... ,y<sub>n</sub>), nous définissons la <strong><em>'puissance de M par rapport à F'</em></strong> comme étant le scalaire 
+a<sub>1</sub>y<sub>1</sub>+a<sub>2</sub>y<sub>2</sub>+ ... +a<sub>n</sub>y<sub>n</sub>-b<br>
+obtenu en remplaçant les inconnues x<sub>i</sub> par les coordonnées y<sub>i</sub> de M dans une équation normale de F.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">definition 3</div>
+For any point M with coordinates (y<sub>1</sub>, .... ,y<sub>n</sub>), we define the <strong><em>'power of M with respect to F '</em></strong> as the scalar
+a<sub>1</sub>y<sub>1</sub>+a<sub>2</sub>y<sub>2</sub>+ ... +a<sub>n</sub >y<sub>n</sub>-b<br>
+obtained by replacing the unknowns x<sub>i</sub> by the coordinates y<sub>i</sub> of M in a normal equation of F.
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+Nous avons alors le résultat suivant :
+</div><!-- /fr --> 
+
+<div lang="en">
+We then have the following result:
+</div><!-- /en --> 
+
+<!-- STOP -->
+<a name="prop3"></a>
+<div id="container">
+<div lang="fr">
+<div id="label">propriété 3</div>
+La puissance de M par rapport à F est au signe près la distance de M à F selon que M se trouve du même côté de F que l'origine ou non.
+</div><!--/fr-->
+<div lang="en">
+<div id="label">property 3</div>
+The power of M with respect to F is up to the sign the distance from M to F depending on whether M is on the same side of F as the origin or not.
+</div><!-- /en -->
+</div> <!-- /cont -->
+<!-- /STOP -->
+
+<div lang="fr">
+La preuve est simple il suffit d'introduire la projection orthogonale M' de M sur F et la projection orthogonale O' de O sur F. <br>On a alors 
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{OM} = \overrightarrow{{OO}'} + \overrightarrow{O'M'} + \overrightarrow{M'M}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;. 
+En outre 
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{MM'}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; et &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{OO'}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; sont colinéaires à &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{n}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; tandis que &nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{O'M'}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp; est un vecteur directeur de F.<br>
+On en déduit que 
+&nbsp;<!-- FORMULE UNIV INLINE -->
+\(
+\displaystyle \overrightarrow{n} . \overrightarrow{OM} - b = \overrightarrow{n} . \overrightarrow{M'M}
+\)
+<!-- /FORMULE UNIV INLINE-->
+&nbsp;
+qui est exactement notre proposition.
+<h2>Le coin de Python</h2>
+Voici un module python qui matérialise les hyperplans dans un espace affine euclidien de dimension quelconque. Des méthodes sont proposées pour calculer une équation normale et la distance d'un point à l'hyperplan.
+</div><!-- /fr --> 
+
+<div lang="en">
+The proof is simple, it suffices to introduce the orthogonal projection M' of M onto F and the orthogonal projection O' of O onto F. <br>We then have
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{OM} = \overrightarrow{{OO}'} + \overrightarrow{O'M'} + \overrightarrow{M'M}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;.
+Besides
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{MM'}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; and &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{OO'}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; are collinear with &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{n}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; while &nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{O'M'}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp; is a direction vector of F.<br>
+It is deduced that
+&nbsp;<!-- UNIV INLINE FORMULA -->
+\(
+\displaystyle \overrightarrow{n} . \overrightarrow{OM} - b = \overrightarrow{n} . \overrightarrow{M'M}
+\)
+<!-- /INLINE UNIV FORMULA-->
+&nbsp;
+which is exactly our proposal.
+<h2>Python's Corner</h2>
+Here is a python module that materializes hyperplanes in an affine Euclidean space of any dimension. Methods are proposed to calculate a normal equation and the distance from a point to the hyperplane.
+</div><!-- /en --> 
+<!-- STOP CODE -->
+<p><object data="python/equanorm.html" type="text/html" border="3" height="400" width="100%"></object></p>
+<!-- /STOP  CODE-->
+<div lang="fr">
+Ce module utilise le module <input type="button" value="euclidiens.py" onclick="go('python/euclidiens.html#')"  data-inline="true"/>
+' (déjà vu).
+</div><!-- /fr --> 
+
+<div lang="en">
+This module uses the module <input type="button" value="euclidiens.py" onclick="go('python/euclidiens.html#')"  data-inline="true"/>(already seen).
+</div><!-- /en --> 
+
+
+<div lang="fr">
+Ainsi que le module <input type="button" value="reperes.py" onclick="go('../repvar/python/reperes.html#')"  data-inline="true"/> (déjà vu également) lequel utilise lui-même le module <input type="button" value="affines.py" onclick="go('../affines/python/affines.html#')"  data-inline="true"/>.
+</div><!-- /fr --> 
+
+<div lang="en">
+As well as the  module <input type="button" value="reperes.py" onclick="go('../repvar/python/reperes.html#')"  data-inline="true"/>(also already seen) which uses itself the module <input type="button" value="affines.py" onclick="go('../affines/python/affines.html#')"  data-inline="true"/>.
+</div><!-- /en --> 
+
+
+<div lang="fr">
+<h2>Le coin de Julia</h2>
+Même chose avec Julia 1.6. Ce programme calcule l'équation normale d'un hyperplan et la distance d'un point à un hyperplan. Il utilise le fichier de définition <input type="button" value="euclidiens.jl" onclick="go('julia/euclidiens.jl.html#')" data-inline="true" />.
+</div><!-- /fr --> 
+
+<div lang="en">
+<h2>Julia's corner</h2>
+Same with Julia 1.6. This program calculates the normal equation of a hyperplane and the distance from a point to a hyperplane. It uses the definition file <input type="button" value="eucliens.jl" onclick="go('julia/euclidiens.jl.html#')" data-inline="true" />.
+</div><!-- /en --> 
+
+<!-- STOP CODE -->
+<p><object data="julia/repeuc.jl.html" type="text/html" border="3" height="400" width="100%"></object></p> 
+<!-- /STOP  CODE-->
+
+<div lang="fr"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercices" onclick="go('exercices/eucliequanorm/menu.html')" /></li>  
+    <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div><!-- /navbar --></div><!-- /fr --> 
+<div lang="en"><div>
+  <ul style=list-style-type:'';>
+    <li><input type="button" value="Exercises" onclick="go('exercices/eucliequanorm/menu.html')" /></li>  
+    <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li> 
+	 <li><input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" /></li>
+  	 <li><input type="button" value="Back to Affine geometry" onclick="go('../index.html')" /></li>
+  	 <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>                     
+  </ul>
+</div></div><!-- /en --> 
+
+	</div><!-- /content -->
+
+<div data-role="footer">
+	<table cellpadding="10">
+<tr>
+	<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
+	<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
+	<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
+	<td><a href="https://www.mathjax.org">
+    <img title="Powered by MathJax"
+    src="https://www.mathjax.org/badge/badge.gif"
+    border="0" alt="Powered by MathJax" />
+</a></td>	
+</tr>
+</table>	
+</div><!-- /footer -->
+<ul style=list-style-type:'';>
+ <li>
+ <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+  <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+   </li>
+<li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+	</ul>
+</div><!-- /page -->
+
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Hyperplan bissecteur</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/euclihybiss/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/euclihybiss/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> On considère dans toute cette page la figure formée par deux hyperplans affines F<sub>1</sub> et F<sub>2</sub> distincts. <br />
+          <h2>Définition</h2> On s'intéresse à l'ensemble des points équidistants des deux hyperplans. <br /> Soient : <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>=0 <input type="button" value="une équation d'Euler" onclick="go('eucliequanorm.html#def2')" data-inline="true" /> de F<sub>1</sub>. <br /> b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>=0 une équation d'Euler de F<sub>2</sub>. <br /> L'égalité d(M,F<sub>1</sub>)=d(M,F<sub>2</sub>) peut être écrite : <br /> |a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>|= |b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>| <br /> Cette égalité équivaut à la disjonction de deux égalités : <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>= b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>
+          <br /> et <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>= -(b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>) <br />
+          <h3>Cas où les hyperplans sont strictement parallèles</h3> On peut supposer alors que a<sub>i</sub>=b<sub>i</sub> pour 1 ≤ i ≤ n et c<sub>1</sub> ≠ c<sub>2</sub>
+          <br /> Une des deux égalités donne l'ensemble vide et l'autre est : <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>= -a<sub>1</sub>x<sub>1</sub>-a<sub>2</sub>x<sub>2</sub>+ ... - a<sub>n</sub>x<sub>n</sub>-c<sub>2</sub>
+          <br /> Cela nous donne donc un nouvel hyperplan d'équation : <br /> 2a<sub>1</sub>x<sub>1</sub>+2a<sub>2</sub>x<sub>2</sub>+ ... + 2a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>+c<sub>2</sub>=0 <br /> On trouve donc un hyperplan parallèle à F1 et à F2 et d'équation normale : <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+(c<sub>1</sub>+c<sub>2</sub>)/2=0 <h3>Cas où les hyperplans sont sécants</h3> Leur intersection est alors une variété H de dimension n-2. <br /> L'ensemble cherché est alors la réunion de l'hyperplan d'équation <br /> (a<sub>1</sub>-b<sub>1</sub>)x<sub>1</sub>+(a<sub>2</sub>-b<sub>2</sub>)x<sub>2</sub>+ ... +(a<sub>n</sub>-b<sub>n</sub>)x<sub>n</sub> +(c<sub>1</sub>-c<sub>2</sub>)=0 <br /> avec l'hyperplan d'équation <br /> (a<sub>1</sub>+b<sub>1</sub>)x<sub>1</sub>+(a<sub>2</sub>+b<sub>2</sub>)x<sub>2</sub>+ ... +(a<sub>n</sub>+b<sub>n</sub>)x<sub>n</sub> +(c<sub>1</sub>+c<sub>2</sub>)=0 <br /> Ces deux hyperplans contiennent bien évidemment tous les deux H. <br /> En outre un vecteur normal au premier est : <br /> &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; de coordonnées ((a<sub>1</sub>-b<sub>1</sub>), ... ,(a<sub>n</sub>-b<sub>n</sub>)). <br /> Un vecteur normal au second est : <br /> &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; de coordonnées ((a<sub>1</sub>+b<sub>1</sub>), ... ,(a<sub>n</sub>+b<sub>n</sub>)). <br /> On a alors :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{u} . \overrightarrow{v} = {\sum\limits_{i = 1}^{n}\left( {a_{i} - b_{i}} \right)}\left( a_{i} + b_{i} \right) = {\sum\limits_{i = 1}^{n}\left. \left( a_{i} \right.^{2} - {b_{i}}^{2} \right)} = {\sum\limits_{i = 1}^{n}{a_{i}}^{2}} - {\sum\limits_{i = 1}^{n}{b_{i}}^{2}} = 1 - 1 = 0 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Les deux hyperplans qui se coupent en H ont donc des vecteurs normaux orthogonaux.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We consider throughout this page the figure formed by two distinct affine hyperplanes F<sub>1</sub> and F<sub>2</sub>. <br />
+          <h2>Definition</h2> We are interested in the set of points equidistant of the two hyperplanes. <br /> Let: <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>=0 <input type="button" value="an Euler equation" onclick="go('eucliequanorm.html#def2' )" data-inline="true" /> of F<sub>1</sub>. <br /> b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>=0 an Euler (normal) equation of F<sub>2</sub>. <br /> The equality d(M,F<sub>1</sub>)=d(M,F<sub>2</sub>) can be written: <br /> |a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>|= |b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>| <br /> This equality is equivalent to the disjunction of two equalities: <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>= b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>
+          <br /> and <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>= -(b<sub>1</sub>x<sub>1</sub>+b<sub>2</sub>x<sub>2</sub>+ ... + b<sub>n</sub>x<sub>n</sub>+c<sub>2</sub>) <br />
+          <h3>Case where the hyperplanes are strictly parallel</h3> We can then assume that a<sub>i</sub>=b<sub>i</sub> for 1 ≤ i ≤ n and c<sub>1</sub> ≠ c<sub>2</sub>
+          <br /> One of the two equalities gives the empty set and the other is: <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>= -a<sub>1</sub>x<sub>1</sub>-a<sub>2</sub>x<sub>2</sub>+ ... - a<sub>n</sub>x<sub>n</sub>-c<sub>2</sub>
+          <br /> This therefore gives us a new hyperplane with equation: <br /> 2a<sub>1</sub>x<sub>1</sub>+2a<sub>2</sub>x<sub>2</sub>+ ... + 2a<sub>n</sub>x<sub>n</sub>+c<sub>1</sub>+c<sub>2</sub>=0 <br /> We therefore find a hyperplane parallel to F1 and F2 and with normal equation: <br /> a<sub>1</sub>x<sub>1</sub>+a<sub>2</sub>x<sub>2</sub>+ ... + a<sub>n</sub>x<sub>n</sub>+(c<sub>1</sub>+c<sub>2</sub>)/2=0 <h3>Case where the hyperplanes are secant</h3> Their intersection is then a manifold H of dimension n-2. <br /> The sought set is then the union of the hyperplane of equation <br /> (a<sub>1</sub>-b<sub>1</sub>)x<sub>1</sub>+(a<sub>2</sub>-b<sub>2</sub>)x<sub>2</sub>+ ... +(a<sub>n</sub>-b<sub>n</sub>)x<sub>n</sub> +(c<sub>1</sub>-c<sub>2</sub>)=0 <br /> with the equation hyperplane <br /> (a<sub>1</sub>+b<sub>1</sub>)x<sub>1</sub>+(a<sub>2</sub>+b<sub>2</sub>)x<sub>2</sub>+ ... +(a<sub>n</sub>+b<sub>n</sub>)x<sub>n</sub> +(c<sub>1</sub>+c<sub>2</sub>)=0 <br /> These two hyperplanes obviously both contain H. <br /> Furthermore a vector normal to the prime is: <br /> &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; of coordinates ((a<sub>1</sub>-b<sub>1</sub>), ... ,(a<sub>n</sub>-b<sub>n</sub>) ). <br /> A vector normal to the second is: <br /> &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; of coordinates ((a<sub>1</sub>+b<sub>1</sub>), ... ,(a<sub>n</sub>+b<sub>n</sub>) ). <br /> We then have:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{u} . \overrightarrow{v} = {\sum\limits_{i = 1}^{n}\left( {a_{i} - b_{i}} \right)}\left( a_{i} + b_{i} \right)={\sum\limits_{i=1}^{n}\left. \left( a_{i} \right.^{2} - {b_{i}}^{2} \right)} = {\sum\limits_{i = 1}^{n}{a_{i}} ^{2}} - {\sum\limits_{i = 1}^{n}{b_{i}}^{2}} = 1 - 1 = 0 \)</p>
+          <!-- /INLINE UNIV FORMULA--> The two hyperplanes which intersect in H therefore have orthogonal normal vectors.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On appelle ces deux hyperplans les deux hyperplans <strong>
+              <em>'bissecteurs'</em>
+            </strong> de F<sub>1</sub> et F<sub>2</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> These two hyperplanes are called the two hyperplanes <strong>
+              <em>'angle bisectors'</em>
+            </strong> of F<sub>1</sub> and F<sub>2</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Illustrations</h2>
+          <h3>En dimension 2</h3> Les hyperplans sont des droites. <br /> Quand elles sont sécantes, les hyperplans bissecteurs sont donc deux droites perpendiculaires se coupant au même point que les deux droites initiales. <br /> Une paire de droites (a,b) sécantes en S, et leurs bissectrices (c,d) :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Illustrations</h2>
+          <h3>In dimension 2</h3> Hyperplanes are straight lines. <br /> When they are secant, the angle bisector hyperplanes are therefore two perpendicular lines intersecting at the same point as the two initial lines. <br /> A pair of lines (a,b) secant in S, and their angle bisectors (c,d):
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/hypbiss1.png" width="604" height="377" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h4>Construction d'une bissectrice</h4> Appuyer sur le bouton 'animation' pour voir la construction à la règle et au compas.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Construction of an angle bisector</h4> Press the 'animation' button to see the ruler and compass construction.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" id="button1" onclick="firstStep()">Animation</button>
+        <br>
+        <script src="js/bissectrice.js"></script>
+        <script type="text/JavaScript" src="js/utilities.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>En dimension 3</h3> Les hyperplans sont des plans. <br> Si les deux plans initiaux se coupent en une droite, les deux plans bissecteurs se coupent suivant la même droite. <br> Deux plans sécants suivants une droite (bleus) et leurs plans bissecteurs (rouges) :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>In 3D</h3> Hyperplanes are planes. <br> If the two initial planes intersect in a straight line, the two bisector planes intersect along the same straight line. <br> Two secant planes following a straight line (blue) and their bisector planes (red):
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/hypbiss2.png" width="586" height="607" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/euclihybiss/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/euclihybiss/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

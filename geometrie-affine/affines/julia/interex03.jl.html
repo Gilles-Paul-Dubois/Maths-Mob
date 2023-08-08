@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>exo3.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Nemo</span>
+<span class="s0">const </span><span class="s1">F = ResidueRing(ZZ, </span><span class="s2">3</span><span class="s1">) </span><span class="s3">#corps primaire ℤ/5ℤ - primary field Z/3Z</span>
+
+<span class="s1">K=[F(i) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">0</span><span class="s1">:</span><span class="s2">2</span><span class="s1">]</span>
+
+<span class="s0">const </span><span class="s1">NN = nmod</span><span class="s3">#systèmes de vecteurs - vector systems</span>
+<span class="s0">struct </span><span class="s1">Point{T}</span>
+    <span class="s1">C::Vector{T}</span>
+<span class="s0">end</span>
+<span class="s1">Base.show(io::IO, P::Point{T}) </span><span class="s0">where </span><span class="s1">{T} = print(io,P.C)</span>
+<span class="s1">Base.:+(A::Point{T},V) </span><span class="s0">where </span><span class="s1">{T}=Point{T}(A.C+V)</span>
+
+<span class="s0">const </span><span class="s1">FP=Point{NN}</span>
+<span class="s1">FP(V::Vector{Int64})=Point{NN}(map(x-&gt;F(x),V))</span>
+
+<span class="s1">Base.:*(k::NN,V::Vector{NN})=[k*v </span><span class="s0">for </span><span class="s1">v </span><span class="s0">in </span><span class="s1">V] </span><span class="s3">#produit d'un vecteur par un scalaire - product of a vector by a scalar</span>
+<span class="s0">function </span><span class="s1">isequal(A::Point{NN},B::Point{NN}) </span><span class="s3">#égalité de deux points de FP - equality of two points of FP</span>
+    <span class="s1">s=length(A.C)</span>
+    <span class="s0">return </span><span class="s1">all((A.C[i]==B.C[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:s))</span>
+<span class="s0">end</span>
+
+<span class="s1">P=FP([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">,</span><span class="s2">1</span><span class="s1">])</span>
+<span class="s1">Q=FP([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">0</span><span class="s1">,</span><span class="s2">1</span><span class="s1">])</span>
+<span class="s1">u=[F(</span><span class="s2">2</span><span class="s1">),F(</span><span class="s2">1</span><span class="s1">),F(</span><span class="s2">1</span><span class="s1">)]</span>
+<span class="s1">v=[F(</span><span class="s2">1</span><span class="s1">),F(</span><span class="s2">0</span><span class="s1">),F(</span><span class="s2">1</span><span class="s1">)]</span>
+<span class="s1">w=[F(</span><span class="s2">0</span><span class="s1">),F(</span><span class="s2">0</span><span class="s1">),F(</span><span class="s2">1</span><span class="s1">)]</span>
+<span class="s1">t=[F(</span><span class="s2">0</span><span class="s1">),F(</span><span class="s2">1</span><span class="s1">),F(</span><span class="s2">1</span><span class="s1">)]</span>
+<span class="s1">P1=[P+(x*u+y*v) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">K </span><span class="s0">for </span><span class="s1">y </span><span class="s0">in </span><span class="s1">K] </span><span class="s3">#plan affine - affine plane</span>
+<span class="s1">P2=[Q+(x*w+y*t) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">K </span><span class="s0">for </span><span class="s1">y </span><span class="s0">in </span><span class="s1">K] </span><span class="s3">#droite affine - affine line</span>
+<span class="s1">I=[M </span><span class="s0">for </span><span class="s1">M </span><span class="s0">in </span><span class="s1">P1 </span><span class="s0">if </span><span class="s1">any((isequal(M,N) </span><span class="s0">for </span><span class="s1">N </span><span class="s0">in </span><span class="s1">P2))] </span><span class="s3">#intersection</span>
+<span class="s1">println(I)</span></pre>
+</body>
+</html>

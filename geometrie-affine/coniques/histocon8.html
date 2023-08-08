@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intersection d'un cône et d'un plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/phoria/gl-matrix.js"></script>
+    <script src="../../js/phoria/phoria-util.js"></script>
+    <script src="../../js/phoria/phoria-entity.js"></script>
+    <script src="../../js/phoria/phoria-scene.js"></script>
+    <script src="../../js/phoria/phoria-renderer.js"></script>
+    <script src="../../js/phoria/phoria-view.js"></script>
+    <script src='../../js/phoria/dat.gui.min.js'></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas8" width="768" height="768" style="background-color: #eee"></canvas>
+        </div>
+        <table width="100%">
+          <tr>
+            <td width="250">
+              <div lang="fr">Variation de M sur l'hyperbole :</div>
+              <!-- /fr -->
+              <div lang="en"> Vary M on hyperbola :</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange81" step='1' min='0' max='360' value='135' onchange="nameSpace8.changeM(this.value)" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div lang="fr">Variation de &theta; :</div>
+              <!-- /fr -->
+              <div lang="en">Vary &theta; :</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange82" step='1' min='45' max='60' value='50' onchange="nameSpace8.changeThetaPhi(this.value)" />
+            </td>
+          </tr>
+        </table>
+        <script src='js/histocon8.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> La figure est analogue au cas précédent, sauf que les deux sphères sont de part et d'autre du sommet du cône. <br>
+          <ul>
+            <li>P est le plan (couleur rouge).</li>
+            <li>C est le cône (couleur verte).</li>
+            <li>
+              <strong>S</strong> est le sommet de C.
+            </li>
+            <li>S<sub>1</sub> est la première sphère de Dandelin (couleur rouge). </li>
+            <li>C<sub>1</sub> est le cercle intersection de C et de S<sub>1</sub>. </li>
+            <li>S<sub>2</sub> est la seconde sphère de Dandelin (couleur bleue). </li>
+            <li>C<sub>2</sub> est le cercle intersection de C et de S<sub>2</sub>. </li>
+            <li>H est l'intersection de C et de P.</li>
+            <li>
+              <strong>M</strong> est un point quelconque de H.
+            </li>
+            <li>La droite (SM), génératrice de C, coupe C<sub>1</sub> en <strong>A</strong> et C<sub>2</sub> en <strong>B</strong>. </li>
+            <li>
+              <strong>F<sub>1</sub>
+              </strong> est le point de contact de P et S<sub>1</sub>.
+            </li>
+            <li>
+              <strong>F<sub>2</sub>
+              </strong> est le point de contact de P et S<sub>2</sub>.
+            </li>
+          </ul> Si vous travaillez sur ordinateur, nous vous conseillons de faire tourner la figure avec la souris pour bien visualiser les positions respectives des différents objets. <br> La démonstration est rigoureusement identique à la précédente sauf que cette fois la propriété caractéristique des points de H est : <br> |MF<sub>1</sub>-MF<sub>2</sub>|=AB. par Thalès (MB) et (GS) sont parallèles et M est également un point du plan P.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The figure is analogous to the previous case, except that the two spheres are on either side of the apex of the cone. <br>
+          <ul>
+            <li>P is the plane (red color).</li>
+            <li>C is the cone (green color).</li>
+            <li>
+              <strong>S</strong> is the vertex of C.
+            </li>
+            <li>S<sub>1</sub> is the first Dandelin sphere (red color). </li>
+            <li>C<sub>1</sub> is the circle intersection of C and S<sub>1</sub>. </li>
+            <li>S<sub>2</sub> is the second Dandelin sphere (blue color). </li>
+            <li>C<sub>2</sub> is the circle intersection of C and S<sub>2</sub>. </li>
+            <li>H is the intersection of C and P.</li>
+            <li>
+              <strong>M</strong> is any point of H.
+            </li>
+            <li>The line (SM), generator of C, cuts C<sub>1</sub> at <strong>A</strong> and C<sub>2</sub> at <strong>B</strong>. </li>
+            <li>
+              <strong>F<sub>1</sub>
+              </strong> is the point of contact of P and S<sub>1</sub>.
+            </li>
+            <li>
+              <strong>F<sub>2</sub>
+              </strong> is the point of contact of P and S<sub>2</sub>.
+            </li>
+          </ul> If you are working on a computer, we advise you to rotate the figure with the mouse to clearly visualize the respective positions of the different objects. <br> The proof is strictly identical to the previous one except that this time the characteristic property of the points of H is: <br> |MF<sub>1</sub>-MF<sub>2</sub>|=AB. by Thales (MB) and (GS) are parallel and M is also a point of the plane P.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intersection d'un cône et d'un plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/phoria/gl-matrix.js"></script>
+    <script src="../../js/phoria/phoria-util.js"></script>
+    <script src="../../js/phoria/phoria-entity.js"></script>
+    <script src="../../js/phoria/phoria-scene.js"></script>
+    <script src="../../js/phoria/phoria-renderer.js"></script>
+    <script src="../../js/phoria/phoria-view.js"></script>
+    <script src='../../js/phoria/dat.gui.min.js'></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas6" width="768" height="768" style="background-color: #eee"></canvas>
+        </div>
+        <table width="100%">
+          <tr>
+            <td width="250">
+              <div lang="fr">Variation de M sur la parabole :</div>
+              <!-- /fr -->
+              <div lang="en">Vary M on parabola</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange61" step='1' min='80' max='290' value='135' onchange="nameSpace6.changeM(this.value)" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div lang="fr">Variation de &theta; et &phi; :</div>
+              <!-- /fr -->
+              <div lang="en">Vray &theta; and &phi; :</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange62" step='1' min='30' max='50' value='45' onchange="nameSpace6.changeThetaPhi(this.value)" />
+            </td>
+          </tr>
+        </table>
+        <script src='js/histocon6.js'></script>
+        <br>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Considérons la figure ci-dessus et précisons les objets marqués : <br>
+          <ul>
+            <li>Le cône <b>C</b> est représenté en vert. </li>
+            <li>
+              <b>S</b> est le commet du cône.
+            </li>
+            <li>Le plan <b>P</b> est représenté en rouge. </li>
+            <li>La sphère de Dandelin est représentée en rouge.</li>
+            <li>L'intersection du cone C et du plan P (parabole) est la courbe tracée en blanc.</li>
+            <li>
+              <b>M</b> est un point quelconque de l'intersection de P et C.
+            </li>
+            <li>
+              <b>&Gamma;</b> est le cercle formé des points de contact de la sphère et du cône.
+            </li>
+            <li>
+              <b>E</b> est le plan du cercle &Gamma; (coloration bleue).
+            </li>
+            <li>
+              <b>F</b> est le point de contact de la sphère de Dandelin et du plan P.
+            </li>
+            <li>
+              <b>G</b> est le point diamétralement opposé à F sur la sphère.
+            </li>
+            <li>
+              <b>D</b> est la droite intersection des plans P et E.
+            </li>
+            <li>
+              <b>B</b> est la projection orthogonale de M sur D.
+            </li>
+            <li>
+              <b>A</b> est l'intersection de la génératrice (SM) avec &Gamma;.
+            </li>
+            <li>
+              <b>I</b> est l'intersection du plan (SGF) avec la droite D
+            </li>
+          </ul> Si vous travaillez sur ordinateur, nous vous invitons à faire tourner la figure dans toutes les directions avec la souris pour voir les positions respectives des différents éléments. <br> Vous pouvez grâce à un curseur faire varier les valeurs de &theta; et &phi;. <br> Vous pouvez grâce à un curseur faire le point M sur l'intersection du cône avec le plan P (parabole). <br> La droite (FG) est donc orthogonale au plan P. <br> Remarquons que le point F et la droite D ne dépendent pas de M. <br> le plan (FSGI) représenté en jaune sur la figure est donc orthogonal à P. C'est un plan de symétrie pour la figure constituée par le plan, le cône et la sphère de Dandelin. <br> La droite (GS) étant orthogonale à (FG) est donc parallèle à (MB). <br> L'homothétie de centre A qui transforme M en S transforme donc la droite (MB) en la droite (GS). <br> Il en résulte que comme A,B et g sont coplanaires dans le plan E, l'image de B par cette homothétie est G. <br> Les points B,A,G sont donc alignés. <br> On a donc SG/SA=MB/MA par Thalès. <br> Or SAG est un triangle isocèle de sommet S puisque (SA) et (SG) sont deux tangentes à la sphère issues du même point S. <br> Il en résulte que MA=MB. <br> Mais MA=MF car (MA) et (MF) sont deux tangentes à la sphère issues d'un même point M. <br> Donc MB=MF. <br> Donc, dans ce cas précis, (et dans ce cas seulement) tout point de l'intersection de P et de C est donc équidistant d'une droite fixe D et d'un point fixe F. Supposons réciproquement que M soit un point du cône et vérifie MA=MB, alors par Thalès (MB) et (GS) sont parallèles et M est également un point du plan P. <br> La propriété trouvée est donc caractéristique des points de l'intersection.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> If you are working on a computer, we invite you to rotate the figure in all directions with the mouse to see the respective positions of the different elements. <br> You can use a slider to vary the values of &theta; and &phi;. <br> You can, thanks to a cursor, make the point M on the intersection of the cone with the plane P (parabola). <br> The line (FG) is therefore orthogonal to the plane P. <br> Note that the point F and the line D do not depend on M. <br> the plane (FSGI) represented in yellow in the figure is therefore orthogonal to P. It is a plane of symmetry for the figure made up of the plane, the cone and the Dandelin sphere. <br> The line (GS) being orthogonal to (FG) is therefore parallel to (MB). <br> The dilation with center A which transforms M into S therefore transforms the line (MB) into the line (GS). <br> It follows that as A,B and g are coplanar in the plane E, the image of B by this dilation is G. <br> Points B,A,G are therefore aligned. <br> So we have SG/SA=MB/MA by Thales. <br> Now SAG is an isosceles triangle with vertex S since (SA) and (SG) are two tangents to the sphere from the same point S. <br> It follows that MA=MB. <br> But MA=MF because (MA) and (MF) are two tangents to the sphere from the same point M. <br> So MB=MF. <br> So, in this specific case, (and in this case only) any point of the intersection of P and C is therefore equidistant from a fixed line D and from a fixed point F. Suppose conversely that M is a point of the cone and verifies MA=MB, then by Thales (MB) and (GS) are parallel and M is also a point of the plane P. <br> The property found is therefore characteristic of the points of the intersection. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

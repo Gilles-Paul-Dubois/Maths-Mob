@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Tétraèdres</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/phoria/gl-matrix.js"></script>
+    <script src="../../js/phoria/phoria-util.js"></script>
+    <script src="../../js/phoria/phoria-entity.js"></script>
+    <script src="../../js/phoria/phoria-scene.js"></script>
+    <script src="../../js/phoria/phoria-renderer.js"></script>
+    <script src="../../js/phoria/phoria-view.js"></script>
+    <script src='../../js/phoria/dat.gui.min.js'></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacetetra/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacetetra/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Dans l'espace euclidien à 3 dimensions on appelle <b>
+              <i>'tétraèdre'</i>
+            </b> la figure formée par 4 points A,B,C,D <input type="button" value="affinement indépendants" onclick="go('../affines/affinesinter.html#def2')" data-inline="true" />. <br /> Les points A,B,C,D s'appellent les <b>
+              <i>'sommets'</i>
+            </b> du tétraèdre. <br /> Les segments [AB],[AC],[AD],[BC],[BD], [CD] s'appellent les <b>
+              <i>'arêtes'</i>
+            </b>. <br /> Deux arêtes n'ayant aucun sommet commun dont dites <strong>
+              <em>'opposées'</em>
+            </strong>. <br /> Les triangles BCD, ACD, ABD, ABC s'appellent les <b>
+              <i>'faces'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> In 3-dimensional Euclidean space, the figure formed by 4 points A,B,C,D <input type="button" value="affinely independent" onclick="go('../affines/affinesinter.html#def2')" data-inline="true" /> is called <b>
+              <i>'tetrahedron'</i>
+            </b> . <br /> The points A,B,C,D are called the <b>
+              <i>'vertices'</i>
+            </b> of the tetrahedron. <br /> The segments [AB],[AC],[AD],[BC],[BD],[CD] are called <b>
+              <i>'edges'</i>
+            </b>. <br /> Two edges having no common vertex which are said to be <strong>
+              <em>'opposite'</em>
+            </strong>. <br /> The triangles BCD, ACD, ABD, ABC are called the <b>
+              <i>'faces'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Remarque: La plupart de ces définitions valent en fait pour tous les systèmes de n points (polyèdres). <br />
+          <h3>Tétraèdres particuliers</h3>
+          <table border="2" cellpadding="10" cellspacing="0">
+            <tr>
+              <td align="center">
+                <h4>Tétraèdres réguliers ( <input type="button" value="voir cet exercice" onclick="go('exercices/espacetetra/ex03.html#')" data-inline="true" />) </h4>
+              </td>
+              <td align="center">
+                <h4>Tétraèdres trirectangles</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>Ce sont ceux qui ont toutes leurs arêtes <br />et toutes leurs faces égales. <br /> Les 4 faces sont alors des triangles équilatéraux </td>
+              <td>Ce sont ceux qui ont trois faces <br />ayant un angle droit sur le même sommet </td>
+            </tr>
+            <tr>
+              <td>
+                <img alt="" border="0" height="266" src="images/tetraregulier.png" width="296" />
+              </td>
+              <td>
+                <img alt="" border="0" height="271" src="images/tetratrirectangle.png" width="365" />
+              </td>
+            </tr>
+          </table>
+          <h2>Centre de gravité</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Note: Most of these definitions actually hold for all n-point systems (polyhedra). <br />
+          <h3>Special tetrahedra</h3>
+          <table border="2" cellpadding="10" cellspacing="0">
+            <tr>
+              <td align="center">
+                <h4>Regular tetrahedra ( <input type="button" value="see this exercise" onclick="go('exercices/espacetetra/ex03.html#')" data-inline=" true" />) </h4>
+              </td>
+              <td align="center">
+                <h4>Trirectangle tetrahedra</h4>
+              </td>
+            </tr>
+            <tr>
+              <td>These are those that have all their edges <br />and all their faces equal. <br /> The 4 faces are then equilateral triangles </td>
+              <td>These are those that have three faces <br />having a right angle on the same vertex </td>
+            </tr>
+            <tr>
+              <td>
+                <img alt="" border="0" height="266" src="images/tetraregulier.png" width="296" />
+              </td>
+              <td>
+                <img alt="" border="0" height="271" src="images/tetratrirectangle.png" width="365" />
+              </td>
+            </tr>
+          </table>
+          <h2>Center of gravity</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On appelle 'médiane' d'un tétraèdre toute droite joignant un sommet au <input type="button" value="centre de gravité" onclick="go('../plan/plantriangles.html#prop3')" data-inline="true" /> de la face opposée.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We call 'median' of a straight tetrahedron joining a vertex to the <input type="button" value="center of gravity" onclick="go('../plan/plantriangles.html#prop3')" data-inline="true" /> of the opposite face.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Dans tout tétraèdre les 4 médianes sont concourantes en un point appelé 'centre de gravité' du tétraèdre. <br /> Ce point est <input type="button" value="l'isobarycentre" onclick="go('../affines/affinesbar.html#def6')" data-inline="true" /> des 4 sommets. <br /> Il est situé sur chaque médiane au 1/4 en partant du pied (ou au 3/4 en partant du sommet).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> In any tetrahedron the 4 medians are concurrent at a point called the 'center of gravity' of the tetrahedron. <br /> This point is <input type="button" value="the isobarycenter" onclick="go('../affines/affinesbar.html#def6')" data-inline="true" /> of the 4 vertices.
+            < br /> It is located on each median at 1/4 starting from the foot (or at 3/4 starting from the top).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette propriété résulte du <input type="button" value="théorème d'associativité" onclick="go('../affines/affinesbar.html#thm5')" data-inline="true" /> des barycentres. <br /> Voici maintenant une appliquette vous montrant un téraèdre ABCD. <br /> G<sub>1</sub> est le centre de gravité du triangle ABC. <br /> G<sub>2</sub> est le centre de gravité du triangle DAB. <br /> G<sub>3</sub> est le centre de gravité du triangle DAC. <br /> G<sub>4</sub> est le centre de gravité du triangle DCB. <br /> G est le centre de gravité du tétraèdre. <br /> Vous pouvez avec les boutons faire varier les coordonnées des 4 sommets. <br /> vous pouvez faire tourner la figure avec la souris ou le doigt. </div>
+        <!-- /fr -->
+        <div lang="en"> This property results from the <input type="button" value="associativity theorem" onclick="go('../affines/affinesbar.html#thm5')" data-inline="true" /> of barycenters. <br /> Here is now an applet showing you a terahedron ABCD. <br /> G<sub>1</sub> is the center of gravity of triangle ABC. <br /> G<sub>2</sub> is the center of gravity of triangle DAB. <br /> G<sub>3</sub> is the center of gravity of the triangle DAC. <br /> G<sub>4</sub> is the center of gravity of triangle DCB. <br /> G is the center of gravity of the tetrahedron. <br /> You can use the buttons to vary the coordinates of the 4 vertices. <br /> you can rotate the figure with mouse or finger. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <table width="100%">
+          <tr>
+            <td>
+              <button type="button" id="buttonAxp" onclick="Axplus()">Ax+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonAxm" onclick="Axminus()">Ax-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonBxp" onclick="Bxplus()">Bx+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonBxm" onclick="Bxminus()">Bx-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonCxp" onclick="Cxplus()">Cx+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonCxm" onclick="Cxminus()">Cx-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonDxp" onclick="Dxplus()">Dx+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonDxm" onclick="Dxminus()">Dx-</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button" id="buttonAyp" onclick="Ayplus()">Ay+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonAym" onclick="Ayminus()">Ay-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonByp" onclick="Byplus()">By+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonBym" onclick="Byminus()">By-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonCyp" onclick="Cyplus()">Cy+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonCym" onclick="Cyminus()">Cy-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonDyp" onclick="Dyplus()">Dy+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonDym" onclick="Dyminus()">Dy-</button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="button" id="buttonAzp" onclick="Azplus()">Az+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonAzm" onclick="Azminus()">Az-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonBzp" onclick="Bzplus()">Bz+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonBzm" onclick="Bzminus()">Bz-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonCzp" onclick="Czplus()">Cz+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonCzm" onclick="Czminus()">Cz-</button>
+            </td>
+            <td>
+              <button type="button" id="buttonDzp" onclick="Dzplus()">Dz+</button>
+            </td>
+            <td>
+              <button type="button" id="buttonDzm" onclick="Dzminus()">Dz-</button>
+            </td>
+          </tr>
+        </table>
+        <script src='js/tetra.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Sphère circonscrite</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Circumscribed sphere (circumsphere)</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Pour tout tétraèdre (non aplati), il existe une et une seule sphère passant par les 4 sommets. <br> On l'appelle la sphère <b>
+              <i>'circonscrite'</i>
+            </b> au tétraèdre.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> For any tetrahedron (not flattened), there is one and only one sphere passing through the 4 vertices. <br> It is called the sphere <b>
+              <i>'circumscribed'</i>
+            </b> (or for short ' <strong>
+              <em>circumsphere</em>
+            </strong>') to the tetrahedron.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit K le centre du cercle circonscrit au triangle ABC, et soit &Delta; la droite orthogonale en K au plan (ABC). <br> Alors, par le théorème de Pythagore, tout point de &Delta; est équidistant des 3 sommets A,B et C. <br> Soit maintenant P le plan médiateur de [AD] (ou de [BD] ou de [CD]). <br> L'hypothèse faite sur les 4 points A,B,C,D assure que P et &Delta; sont sécants en un point J.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let K be the center of the circle circumscribed to triangle ABC, and let &Delta; the line orthogonal in K to the plane (ABC). <br> Then, by the Pythagorean theorem, any point of &Delta; is equidistant from the 3 vertices A, B and C. <br> Now let P be the middle plane of [AD] (or of [BD] or of [CD]). <br> The assumption made on the 4 points A,B,C,D ensures that P and &Delta; intersect at a point J.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Le centre de cette sphère est évidemment équidistant des 4 sommets. </div>
+        <!-- /fr -->
+        <div lang="en"> The center of this sphere is obviously equidistant from the 4 vertices. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/spherecircon.png" width="460" height="420" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <em>
+            <font size="-1">Image générée avec GeoGebra3D</font>
+          </em>
+          <h2>Sphères tangentes</h2> Tout comme dans le cas du triangle, les plans bissecteurs des couples de faces, qui se coupent sur les arêtes, sont des ensembles de points équidistants de deux faces. <br> L'intersection de deux tels plans est donc une droite formée de points équidistants de 3 faces. <br> Si cette droite coupe tout plan bissecteur du couple formé par une quelconque de ces 3 faces avec la quatrième face en un point ce point est équidistant des 4 faces et est donc le centre d'une sphère tangente aux quatre faces. <br> Si e<sub>1</sub>=0, e<sub>2</sub>=0 e<sub>3</sub>=0 et e<sub>4</sub>=0 sont les <input type="button" value="équations normales" onclick="go('../euclidiens/eucliequanorm.html#def2')" data-inline="true" /> des faces, les centres de ces sphères sont solutions des 8 systèmes linéaires obtenus à partir de <br>
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {{\mid e_{1} \mid} = {\mid e_{2} \mid}} \\ {{\mid e_{2} \mid} = {\mid e_{3} \mid}} \\ {{\mid e_{3} \mid} = {\mid e_{4} \mid}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <em>
+            <font size="-1">Image generated with GeoGebra3D</font>
+          </em>
+          <h2>Tangent spheres</h2> Just as in the case of the triangle, the bisector planes of the pairs of faces, which intersect on the edges, are sets of points equidistant from two faces. <br> The intersection of two such planes is therefore a straight line formed by equidistant points of 3 faces. <br> If this line intersects any bisector plane of the pair formed by any one of these 3 faces with the fourth face at a point, this point is equidistant from the 4 faces and is therefore the center of a sphere tangent to the four faces. <br> If e<sub>1</sub>=0, e<sub>2</sub>=0 e<sub>3</sub>=0 and e<sub>4</sub>=0 are the <input type="button" value="normal equations" onclick="go('../euclidiens/eucliequanorm.html#def2')" data-inline="true" /> faces, the centers of these spheres are solutions of 8 linear systems obtained from <br>
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {{\mid e_{1} \mid} = {\mid e_{2} \mid}} \\ {{\mid e_{2} \mid} = {\mid e_{3} \mid}} \\ {{\mid e_{3} \mid} = {\mid e_{4} \mid}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Tout tétraèdre possède donc plusieurs sphères tangentes au 4 plans des faces. <br> Les sphères tangentes aux quatre plans entrent dans une classification : <ol>
+              <li>Sphère tangente aux 4 faces en un point de ces faces (considérées comme des triangles), c'est la sphère <b>'inscrite'</b>. </li>
+              <li>Sphères tangentes à une face en un point de cette face et aux autres faces en un point de leur prolongement, ce sont les sphères <b>'ex-inscrites'</b>. </li>
+              <li>Sphères tangentes aux trois faces en un point de leur prolongement (ne touchant pas le tétraèdre proprement dit) et appelées quelquefois <b>'sphères des combles'</b>. </li>
+            </ol>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> Any tetrahedron therefore has several spheres tangent to the 4 planes of the faces. <br> The spheres tangent to the four planes fall into a classification: <ol>
+              <li>Sphere tangent to the 4 faces at a point of these faces (considered as triangles), this is the <b>'inscribed' sphere</b>. </li>
+              <li>Spheres tangent to a face at a point of this face and to the other faces at a point of their extension, these are the <b>'ex-inscribed'</b> spheres. </li>
+              <li>Spheres tangent to the three faces at a point on their extension (not touching the proper tetrahedron itself) and sometimes called <b>'attic spheres'</b>. </li>
+            </ol>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On peut démontrer que les 5 sphères (autres que les sphères des combles) existent toujours, les trois autres pouvant être rejetées à l'infini. <br> Pour une démonstration complète voir par exemple: <br>
+          <font size="-1">
+            <em>Géométrie de Marcel Berger (Cedic Fernand Nathan) <br> Volume 2 (triangles, cercles et sphères) <br> 10.6.8 (page 168) ('les sphères des combles'). <br>
+            </em>
+          </font>
+          <font size="-1">
+            <em>NB:Nous remercions Mr Laurent Chaumard de Montpellier qui nous a fait rectifier l'énoncé initialement faux figurant en cette place.</em>
+          </font>
+          <h3>Sphère inscrite</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It can be demonstrated that the 5 spheres (other than the attic spheres) always exist, the other three can be rejected ad infinitum. <br> For a complete demonstration see for example: <br>
+          <font size="-1">
+            <em>Geometry by Marcel Berger (Cedic Fernand Nathan) <br> Volume 2 (triangles, circles and spheres) <br> 10.6.8 (page 168) ('attic spheres'). <br>
+            </em>
+          </font>
+          <font size="-1">
+            <em>NB: We would like to thank Mr Laurent Chaumard from Montpellier who made us correct the initially false statement appearing in this place.</em>
+          </font>
+          <h3>Inscribed sphere</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/sphereinscrite.png" width="343" height="280" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <em>
+            <font size="-1">Image générée avec GeoGebra3D</font>
+          </em>
+          <br>
+          <h3>Sphères ex-inscrites</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <em>
+            <font size="-1">Image generated with GeoGebra3D</font>
+          </em>
+          <br>
+          <h3>Ex-inscribed spheres</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/spheresTetraedre.png" width="480" height="480" border="0" alt="">
+          <br>
+          <font size="-1">
+            <em>Image : http://texgraph.tuxfamily.org/GalerieJvx.html</em>
+          </font>
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Hauteurs</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Altitudes</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Dans un tétraèdre on appelle <b>
+              <i>'hauteur'</i>
+            </b> toute droite passant par un sommet et orthogonale à la face opposée à ce sommet.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> In a tetrahedron, we call <b>
+              <i>'altitude'</i>
+            </b> any straight line passing through a vertex and orthogonal to the face opposite to this vertex.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/tetrahauteurs.png" width="445" height="350" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <em>
+            <font size="-1">Image générée avec GeoGebra2D</font>
+          </em>
+          <br>
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> A la différence du triangle, les 4 hauteurs ne sont en général pas concourantes, mais elles peuvent l'être (voir le cas du tétraèdre trirectangle ainsi que celui du tétraèdre régulier, entre autres).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <em>
+            <font size="-1">Image generated with GeoGebra2D</font>
+          </em>
+          <br>
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> Unlike the triangle, the 4 altitudes are generally not concurrent, but they can be (see the case of the trirectangle tetrahedron as well as that of the regular tetrahedron, among others).
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Si les hauteurs sont concourantes on dit que le tétraèdre est <b>
+              <i>'orthocentrique'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> If the heights are concurrent, the tetrahedron is said to be <b>
+              <i>'orthocentric'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour une caractérisation des tétraèdres orthocentriques voir <input type="button" value="cet exercice" onclick="go('exercices/espacetetra/ex01.html#')" data-inline="true" />. <br /> Pour un contre-exemple voir <input type="button" value="cet exercice" onclick="go('exercices/espacetetra/ex02.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> For a characterization of orthocentric tetrahedra see <input type="button" value="this exercise" onclick="go('exercices/espacetetra/ex01.html#')" data-inline="true" />. <br /> For a counter-example see <input type="button" value="this exercise" onclick="go('exercices/espacetetra/ex02.html#')" data-inline="true" />. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacetetra/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacetetra/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

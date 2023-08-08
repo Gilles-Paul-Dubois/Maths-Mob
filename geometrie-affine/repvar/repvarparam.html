@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Représentations paramétriques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+    <script type="text/javascript" src="../../js/my3Dlib.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> Une variété linéaire est, en particulier, avec sa structure induite un espace affine.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2> A linear manifold is, in particular, with its induced structure an affine space.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On appelle <strong>
+              <em>'représentation paramétrique'</em>
+            </strong> de la variété linéaire V la donnée d'un repère affine R' de V c'est à dire d'une origine P et d'une base B' de F sous espace directeur de V.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We call <strong>
+              <em>'parametric representation'</em>
+            </strong> of the linear variety V the data of an affine frame R' of V, that is to say of an origin P and of a base B' of F direction subspace of V.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Si V est de dimension p et si
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle B'=\left ( \overrightarrow{u_{1}},\overrightarrow{u_{2}},...,\overrightarrow{u_{p}} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> , à tout p-uple (k<sub>1</sub>, k<sub>2</sub>, ... ,k<sub>p</sub>) de scalaires on associe un unique point Q de V déterminé par
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}=\sum_{i=1}^{p}k_{i}\overrightarrow{u_{i}} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Q s'appelle le point de <strong>
+              <em>'paramètres'</em>
+            </strong> (k<sub>1</sub>, k<sub>2</sub>, ... ,k<sub>p</sub>) dans la représentation (P,B').
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> If V is of dimension p and if
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle B'=\left ( \overrightarrow{u_{1}},\overrightarrow{u_{2}},...,\overrightarrow{u_{p}} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> , to every p-uple (k<sub>1</sub>, k<sub>2</sub>, ... ,k<sub>p</sub>) of scalars we associate a unique point Q of V determined by
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}=\sum_{i=1}^{p}k_{i}\overrightarrow{u_{i}} \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br> Q is called the point of <strong>
+              <em>'parameters'</em>
+            </strong> (k<sub>1</sub>, k<sub>2</sub>, .. . ,k<sub>p</sub>) in the representation (P,B').
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Les représentations paramétriques, sont avec les systèmes d'équations cartésiennes, un autre mode de représentation des variétés linéaires. <h2>Cas de la droite</h2> Nous nous intéressons aux variétés linéaires de dimension 1 (droites affines). <br /> Ces variétés sont caractérisées par un point P et un vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> . <br /> le point Q de paramètre k est défini par
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}=k\overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> . <br /> L'appliquette suivante vous permet de visualiser la représentation paramétrique d'une droite associée à un point P et un vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE-->. <br /> Vous pouvez fixer le paramètre k avec le curseur. <br /> Cela fait vous voyez apparaître le point Q tel que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}=k\overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br /> Vous pouvez tirer-déplacer le point P avec la souris. <br /> Vous pouvez également modifier le vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> en l'attrapant par son extrêmité avec la souris.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The parametric representations, are with the systems of Cartesian equations, another mode of representation of the linear varieties. <h2>Case of the line</h2> We are interested in linear manifolds of dimension 1 (affine lines). <br /> These manifolds are characterized by a point P and a direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> . <br /> the point Q with parameter k is defined by
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}=k\overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> . <br /> The following applet allows you to view the parametric representation of a straight line associated with a point P and a direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULA UNIV INLINE-->. <br /> You can set the k parameter with the slider. <br /> This causes you to see point Q appear as
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}=k\overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA-->
+          <br /> You can drag-and-drop the P-point with the mouse. <br /> You can also change the vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> grabbing it by its end with the mouse.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/param1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Cas du plan</h2> Nous nous intéressons aux variéts de dimension 2 (plans affines). <br> Une telle variété est caractérisée par un point P et deux vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> , linéairement indépendants. <br> Le point Q de paramètre (k,h) est défini par
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}=h\overrightarrow{u}+k\overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> . <br> L'appliquette suivante vous permet de visualiser la représentation paramétrique d'un plan associé à un point P et deux vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> . <br> Vous pouvez fixer les paramètres k et h avec les curseurs. <br> Cela fait vous voyez apparaître le point Q tel que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}=h\overrightarrow{u}+k\overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> . <br> Arrêtez la rotation par un simple clic sur le graphique quand la vision est optimale. Redémarrez l'animation de la même manière. <br> Si les paramètres aléatoires ne sont pas les meilleurs possibles, appuyez sur 'Autre exemple'.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of the plane</h2> We are interested in manifolds of dimension 2 (affine planes). <br> Such a manifold is characterized by a point P and two direction vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> , linearly independent. <br> The point Q of parameter (k,h) is defined by
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}=h\overrightarrow{u}+k\overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> . <br> The following applet allows you to view the parametric representation of a plane associated with a point P and two direction vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /UNIV INLINE FORMULA--> . <br> You can set the k and h parameters with the sliders. <br> This causes you to see point Q appear such as
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}=h\overrightarrow{u}+k\overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> . <br> Stop the animation by a simple click on the graph when the vision is optimal. Restart the animation the same way. <br> If the random settings are not the best possible, press 'Other example'.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+          <br />
+          <button type="button" onclick="nameSpace2.onButton1();"> Autre exemple</button>
+          <input type='range' id="myRange1" step='0.1' min='-2' max='2' value='1' onchange="nameSpace2.changer1(this.value)" />
+          <input type='range' id="myRange2" step='0.1' min='-2' max='2' value='1' onchange="nameSpace2.changer2(this.value)" />
+          <br>
+          <script src="js/param2.js"></script>
+        </div>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Traduction avec des coordonnées</h2> On suppose que l'espace entier A est rapporté à un repère affine R=(O,B) où
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle B=\left ( \overrightarrow{v_{1}},\overrightarrow{v_{2}}, ,\overrightarrow{v_{n}} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> avec n ≥ p. <br /> Chacun des vecteurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /FORMULE UNIV INLINE--> se décompose alors suivant la base B avec des coordonnées α<sub>j,i</sub>
+         <sub>(1≤j≤p , 1≤i≤n)</sub> où α<sub>j,i</sub> est la coordonnée du vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /FORMULE UNIV INLINE--> suivant le vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v_{i}} \)
+          <!-- /FORMULE UNIV INLINE-->. <br /> Si (x<sub>1</sub>, x<sub>2</sub>, ... ,x<sub>n</sub>) sont les coordonnées de P dans R et si (y<sub>1</sub>, y<sub>2</sub>, ...,y<sub>n</sub>) sont les coordonnées de Q dans R, alors la relation vectorielle
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}=\sum_{j=1}^{p}k_{j}\overrightarrow{u_{j}} \)
+          <!-- /FORMULE UNIV INLINE--> se traduit par n relations : <br />
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle y_{i} = x_{i} + {\sum\limits_{j = 1}^{p}k_{j}\alpha_{j,i}} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br /> pour i allant de 1 à n. <br /> Ces relations permettent de calculer les coordonnées d'un point d'une variété dont on connait un jeu de paramètres. <br /> Inversement pour tester si un point de coordonnées données appartient à la variété il faut tester si le système (généralement <input type="button" value="surdéterminé" onclick="go('../../algebre-lineaire/systemes/surdet.html#def1')" data-inline="true" />) en les inconnues k<sub>j</sub>
+         <sub>(1≤j≤p)</sub> possède une solution. <h2>Le coin de Python</h2> Le programme suivant calcule les coordonnées d'un point d'un plan de l'espace de paramètres donnés. <br /> Il utilise le module <input type="button" value="'reperes'" onclick="go('python/reperes.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Translation with coordinates</h2> We assume that the entire space A is referred to an affine frame R=(O,B) where
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle B=\left ( \overrightarrow{v_{1}},\overrightarrow{v_{2}}, ,\overrightarrow{v_{n}} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> with n ≥ p. <br /> Each of the vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /INLINE UNIV FORMULA--> then decomposes along the base B with coordinates α<sub>j,i</sub>
+         <sub>(1≤j≤p , 1≤i≤n)</sub> where α<sub>j,i</sub> is the coordinate of the vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{j}} \)
+          <!-- /INLINE UNIV FORMULA--> following the vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v_{i}} \)
+          <!-- /FORMULA UNIV INLINE-->. <br /> If (x<sub>1</sub>, x<sub>2</sub>, ... ,x<sub>n</sub>) are the coordinates of P in R and if (y<sub> 1</sub>, y<sub>2</sub>, ...,y<sub>n</sub>) are the coordinates of Q in R, then the vector relation
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}=\sum_{j=1}^{p}k_{j}\overrightarrow{u_{j}} \)
+          <!-- /INLINE UNIV FORMULA--> translates into n relations: <br />
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle y_{i} = x_{i} + {\sum\limits_{j = 1}^{p}k_{j}\alpha_{j,i}} \)
+          <!-- /INLINE UNIV FORMULA-->
+          <br /> for i ranging from 1 to n. <br /> These relations make it possible to calculate the coordinates of a point of a manifold for which we know a set of parameters. <br /> Conversely, to test whether a point with given coordinates belongs to the manifold, it is necessary to test whether the system (generally <input type="button" value="overdetermined" onclick="go('../../algebre-lineaire/systemes/surdet.html#def1')" data-inline="true" />) in the unknowns k<sub>j</sub>
+         <sub>(1≤j≤p)</sub> has a solution. <h2>Python's Corner</h2> The following program calculates the coordinates of a point of a plane in the given parameter space. <br /> It uses the <input type="button" value="'reperes'" onclick="go('python/reperes.html#')" data-inline="true" /> module.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/reparam1.html" type="text/html" border="3" height="350" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de julia</h2> Voici un programme de calcul des coordonnées d'un point de paramètres donnés dans une représentation paramétrique donnée d'une variété linéaire. Il inclut le <input type="button" value="programme de définition des repères affines" onclick="go('julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> Here is a program to calculate the coordinates of a point of given parameters in a given parametric representation of a linear manifold. It includes the <input type="button" value="program for defining affine frames" onclick="go('julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/repparam.jl.html" type="text/html" border="3" height="350" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Changement de représentation</h2> Nous voyons qu'une variété linéaire peut être représentée (de façon non unique) de deux façons : <ul>
+            <li>Un système d'équations cartésiennes</li>
+            <li>Un représentation paramétrique</li>
+          </ul> Chaque façon a ses avantages et ses inconvénients. Par exemple la forme cartésienne est plus adaptée pour vérifier l'appartenance d'un point de coordonnées données à une variété. la forme paramétrique est plus adaptée pour générer les points d'une variété et effectuer certains calculs rendus par des fonctions dont les variables sont les paramètres en question. L'étude analytique de ces fonctions peut alors permettre de rechercher des extrema. <br /> Il n'existe donc pas de méthode de représentation meilleure en soi qu'une autre. Il faut chosiir une représentation adaptée au problème à résoudre. <br />
+          <h3>Passage des représentations cartésiennes aux représentations paramétriques</h3> On se place dans un espace affine de dimension finie n rapporté à un repère cartésien. <br /> Une variété linéaire V de dimension p ≤ n peut être représentée par un système de n-p équations cartésiennes indépendantes comme ceci :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\alpha_{1,1}x_{1} + ... + \alpha_{1,n - p}x_{n - p} + \alpha_{1,n - p + 1}x_{n - p + 1} + ... + \alpha_{1,n}x_{n} = \beta_{1}} \\ {\alpha_{2,1}x_{1} + ... + \alpha_{2,n - p}x_{n - p} + \alpha_{2,n - p + 1}x_{n - p + 1} + ... + \alpha_{2,n}x_{n} = \beta_{2}} \\ {.... = ...} \\ {{\alpha_{n - p}x}_{1} + ... + \alpha_{n - p,n - p}x_{n - p} + \alpha_{n - p,n - p + 1}x_{n - p + 1} + ... + \alpha_{n - p,n}x_{n} = \beta_{n}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Quitte à renuméroter les vecteurs de base du repère on peut supposer que la matrice carrée :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \begin{pmatrix} \alpha_{1,1} & \alpha_{1,2} & {...} & \alpha_{1,n - p} \\ \alpha_{2,1} & \alpha_{2,2} & {...} & \alpha_{2,n - p} \\ {...} & {...} & {...} & {...} \\ \alpha_{n - p,1} & \alpha_{n - p,2} & {...} & \alpha_{n - p,n - p} \\ \end{pmatrix} \)</p>
+          <!-- /FORMULE UNIV INLINE--> est inversible. <br /> Ceci prouve qu'à partir de la donnée des p nombres x<sub>n-p+1</sub>, x<sub>n-p+2</sub>, ...,x<sub>n</sub> le calcul des nombres <br /> x<sub>1</sub>, ..., x<sub>n-p</sub> est possible, avec un résultat unique par résolution d'un <input type="button" value="système de Cramer" onclick="go('../../algebre-lineaire/systemes/cramer.html#def1')" data-inline="true" />. <br /> D'où l'idée de prendre pour paramètres justement k<sub>1</sub>=x<sub>n-p+1</sub>, k<sub>2</sub>=x<sub>n-p+2</sub>, ... , k<sub>p</sub>=x<sub>n</sub> pour obtenir une représentation paramétrique de V. <br />
+          <h4>Exemple traité</h4> Soit dans l'espace &reals;<sup>3</sup> la droite affine D représentée par le système de deux équations : <br /> x+y-z=1 <br /> x-y+2z=0 <br /> Prenant t=z et resolvant le système en t, il vient : <br /> x=1/2 -t/2 <br /> y=1/2+3t/2 <br /> z=t <br /> qui est une représentation paramétrique de la droite D. <br /> Nous obtenons ainsi imédiatement un point P(1/2,1/2,0) et un vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}(-1/2.3/2.1) \)
+          <!-- /FORMULE UNIV INLINE--> de cette droite <h3>En sens inverse</h3> Partons d'une représentation paramétrique de V variété de dimension p :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x_{1} = a_{1} + k_{1}\alpha_{1,1} + ... + k_{p}\alpha_{1,p}} \\ {x_{2} = a_{2} + k_{1}\alpha_{2,1} + ... + k_{p}\alpha_{2,p}} \\ {... = ...} \\ {x_{n} = a_{n} + k_{1}\alpha_{n,1} + ... + k_{p}\alpha_{n,p}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> où (a<sub>1</sub>, ... , a<sub>n</sub>) sont les coordonnées d'un point de V et où pour chaque indice i (α<sub>1,i</sub> , α<sub>2,i</sub> , ... , α<sub>n,i</sub>) sont les composantes d'un vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{i}} \)
+          <!-- /FORMULE UNIV INLINE--> de V. <br /> Pour chaque i il est donc impossible que tous les α<sub>j,i</sub> soient nuls (1 ≤j≤n). <br /> On peut donc choisir au moins une equation pour 'extraire' (calculer) k<sub>1</sub> en fonction des autres paramètres k<sub>2</sub>, .... ,k<sub>p</sub> ainsi que des constantes a<sub>1</sub>, ..., a<sub>n</sub>, des constantes α<sub>i,j</sub> et d'au moins une variable parmi x<sub>1</sub>, ... , x<sub>n</sub>. <br /> Cela fait on reporte la valeur calculée de k<sub>1</sub> dans les autres équations. On se retrouve alors avec n-1 équatons ne comportant plus que les paramètres k<sub>2</sub>, ...,k<sub>p</sub>. <br /> On poursuit ainsi le processus par élimination successive de k<sub>2</sub>, k<sub>3</sub>, etc... <br /> On se retrouve à la fin avec un système de n-p équations ne comportant plus aucun paramètre et qui est donc un système d'équations cartésiennes de V. <h4>Exemple traité</h4> Soit la droite définie par un point P(1,2,3) et le vecteur directeur <math>
+            <mover>
+              <mi>u</mi>
+              <mo>→</mo>
+            </mover>
+          </math>(1,-1,2). <br /> Une représentation paramétrique possible est : <br /> x=1+t <br /> y=2-t <br /> z=3+2t <br /> On extrait t de la première équation t=x-1, et on le reporte dans les deux autres, pour obtenir : <br /> x+y=3 <br /> -2x+z=1 <br /> qui constitue un système d'équations cartésiennes pour la droite. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Change of representation</h2> We see that a linear manifold can be represented (non-uniquely) in two ways: <ul>
+            <li>A system of Cartesian equations</li>
+            <li>A parametric representation</li>
+          </ul> Each way has its advantages and disadvantages. For example, the Cartesian form is more suitable for verifying that a point with given coordinates belongs to a variety. the parametric form is more suitable for generating the points of a manifold and performing certain calculations rendered by functions whose variables are the parameters in question. The analytical study of these functions can then make it possible to search for extrema. <br /> There is therefore no better method of representation than another. It is necessary to choose a representation adapted to the problem to be solved. <br />
+          <h3>Switching from Cartesian representations to parametric representations</h3> We work in an affine space of finite dimension n together with a Cartesian coordinate system. <br /> A linear manifold V of dimension p ≤ n can be represented by a system of n-p independent Cartesian equations like this:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\alpha_{1,1}x_{1} + ... + \alpha_{1,n - p}x_{n - p} + \alpha_{1,n - p + 1}x_{n - p + 1} + ... + \alpha_{1,n}x_{n} = \beta_{1}} \\ {\alpha_{2,1}x_{1} + ... + \alpha_{2,n - p}x_{n - p} + \alpha_{2,n - p + 1}x_{n - p + 1} + ... + \alpha_{2,n}x_{n} = \beta_{2}} \\ {....=...} \\ {{\alpha_{n - p}x}_{1} + ... + \alpha_{n - p,n - p}x_{n - p} + \alpha_{n - p,n - p + 1 }x_{n - p + 1} + ... + \alpha_{n - p,n}x_{n} = \beta_{n}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> Even if it means renumbering the base vectors of the frame, we can assume that the square matrix:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \begin{pmatrix} \alpha_{1,1} & \alpha_{1,2} & {...} & \alpha_{1,n - p} \\ \alpha_{2,1} & \alpha_{2,2} & {...} & \alpha_{2,n - p} \\ {...} & {...} & {...} & {...} \\ \alpha_{n - p,1} & \alpha_{n - p,2} & {...} & \alpha_{n - p,n - p} \\ \end{pmatrix} \)</p>
+          <!-- /INLINE UNIV FORMULA--> is inversible. <br /> This proves that given the p numbers x<sub>n-p+1</sub>, x<sub>n-p+2</sub>, ...,x<sub>n</sub> calculating numbers <br /> x<sub>1</sub>, ..., x<sub>n-p</sub> is possible, with a single result by resolving an <input type="button" value="Cramer's system" onclick="go('../../algebre-lineaire/systemes/cramer.html#def1')" data-inline="true" />. <br /> Hence the idea of taking as parameters precisely k<sub>1</sub>=x<sub>n-p+1</sub>, k<sub>2</sub>=x<sub>n -p+2</sub>, ... , k<sub>p</sub>=x<sub>n</sub> to get a parametric representation of V. <br />
+          <h4>Processed example</h4> Let in the space &reals;<sup>3</sup> the affine line D represented by the system of two equations: <br /> x+y-z=1 <br /> x-y+2z=0 <br /> Taking t=z and solving the system for t, we get: <br /> x=1/2 -t/2 <br /> y=1/2+3t/2 <br /> z=t <br /> which is a parametric representation of the line D. <br /> We thus immediately obtain a point P(1/2,1/2,0) and a directing vector
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}(-1/2.3/2.1) \)
+          <!-- /FORMULE UNIV INLINE-->
+          <h3>Conversely</h3> Let us start from a parametric representation of V manifold of dimension p:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x_{1} = a_{1} + k_{1}\alpha_{1,1} + ... + k_{p}\alpha_{1,p}} \\ {x_{2} = a_{2} + k_{1}\alpha_{2,1} + ... + k_{p}\alpha_{2,p}} \\ {...=...} \\ {x_{n} = a_{n} + k_{1}\alpha_{n,1} + ... + k_{p}\alpha_{n,p}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> where (a<sub>1</sub>, ... , a<sub>n</sub>) are the coordinates of a point of V and where for each index i (α<sub>1,i</sub> , α<sub>2,i</sub> , ... , α<sub>n,i</sub>) are the components of a direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{i}} \)
+          <!-- /INLINE UNIV FORMULA--> by V. <br /> For each i it is therefore impossible for all the α<sub>j,i</sub> to be zero (1 ≤j≤n). <br /> We can therefore choose at least one equation to 'extract' (calculate) k<sub>1</sub> according to the other parameters k<sub>2</sub>, .... ,k<sub>p</sub> as well as constants a<sub>1</sub>, ..., a<sub>n</sub>, constants α<sub>i,j</sub> and at least one variable among x<sub>1</sub>, ... , x<sub>n</sub>. <br /> This done, we transfer the calculated value of k<sub>1</sub> to the other equations. We then end up with n-1 equations containing only the parameters k<sub>2</sub>, ...,k<sub>p</sub>. <br /> The process is thus continued by successive elimination of k<sub>2</sub>, k<sub>3</sub>, etc... <br /> We find ourselves at the end with a system of n-p equations no longer comprising any parameter and which is therefore a system of Cartesian equations of V. <h4>Processed example</h4> Let the line defined by a point P(1,2,3) and the direction vector <math>
+            <mover>
+              <mi>u</mi>
+              <mo>→</mo>
+            </mover>
+          </math>( 1,-1,2). <br /> A possible parametric representation is: <br /> x=1+t <br /> y=2-t <br /> z=3+2t <br /> We extract t from the first equation t=x-1, and transfer it to the other two, to obtain: <br /> x+y=3 <br /> -2x+z=1 <br /> which constitutes a system of Cartesian equations for the line. <br />
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

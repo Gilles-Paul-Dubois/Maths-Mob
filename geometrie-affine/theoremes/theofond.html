@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Théorème fondamental de la géométrie affine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/theofond/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/theofond/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Introduction</h2> Nous <input type="button" value="avons déjà vu" onclick="go('../appaffines/appaffbar.html#def1')" data-inline="true" /> qu'une application affine bijective de A dans A transforme une droite en une droite. <br /> Moyennant certaines restrictions que nous allons illustrer par quelques contre-exemples, la réciproque est vraie. <br /> Commençons donc par étudier quelques cas où la réciproque est fausse. <h3>Exemple 1</h3> Si la dimension de A est égale à 1. Toute application conserve l'alignement, or il est clair que toute <input type="button" value="bijection" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" /> de &reals; dans &reals; n'est pas affine (ex: x → x<sup>3</sup>). <h3>Exemple 2</h3> Le cas de la <input type="button" value="caractéristique" onclick="go('../../nombres/rationnels/caracteristique.html#')" data-inline="true" /> 2 est particulier. Toute droite est constituée d'exactement 2 points. Il en résulte que toute application bijective d'un espace affine sur K=&integers;/2&integers; conserve l'alignement. Prenons alors A=K<sup>3</sup>, A comporte donc 8 points, et le nombre des bijections de A dans A ( <input type="button" value="permutations de A" onclick="go('../../bases/applications/permutations.html#')" data-inline="true" />) est donc 8!= 40320. <br /> Les <input type="button" value="applications linéaires de A dans A" onclick="go('../../algebre-lineaire/applicalin/defapplin.html#')" data-inline="true" /> identifiées par leurs <input type="button" value="matrices" onclick="go('../../algebre-lineaire/matapplin/defmatapp.html#')" data-inline="true" /> dans la <input type="button" value="base canonique" onclick="go('../../algebre-lineaire/espaces/bases.html#canonique')" data-inline="true" /> sont au nombre de 2<sup>9</sup>=512. Le nombre des <input type="button" value="translations" onclick="go('../appaffines/appaffbar.html#def3')" data-inline="true" /> est égal à 8. Donc le nombre maximum d'applications affines de A dans A est 8×512=4096. Toutes les bijections de A dans A ne peuvent donc être affines. <br />
+          <h3>Exemple 3</h3> Prenons K=&complexes; et A=K<sup>2</sup>. <br /> Considérons l'application f de A dans A : (z<sub>1</sub>,z<sub>2</sub>) →
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left( \overline{z_{1}},\overline{z_{2}} \right) \)
+          <!-- /FORMULE UNIV INLINE--> , alors f transforme toute droite d'équation uz<sub>1</sub>+vz<sub>2</sub>+w=0 en la droite d'équation <span style="text-decoration: overline; ">u</span>z<sub>1</sub>+ <span style="text-decoration: overline; ">v</span>z<sub>2</sub>+ <span style="text-decoration: overline; ">w</span>=0. <br /> Montrons que f n'est pas affine. <br /> Dans le cas contraire il existerait des scalaires complexes α,β,γ,δ,a, b tels que ∀ (z<sub>1</sub>,z<sub>2</sub>) ∈ A, on aurait :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\overline{z_{1}} = \alpha z_{1} + \beta z_{2} + a} \\ {\overline{z_{2}} = \gamma z_{1} + \delta z_{2} + b} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Voir par exemple <input type="button" value="cette page" onclick="go('../appaffines/appaffmat.html#')" data-inline="true" /> pour un rappel. <br /> En prenant z<sub>1</sub>=z<sub>2</sub>=0, il vient immédiatement a=b=0. <br /> En prenant z<sub>1</sub>=1 et z<sub>2</sub>=0, il vient immédiatement α=1 et γ=0. <br /> En prenant z<sub>1</sub>=0 et z<sub>2</sub>=1, il vient immédiatement β=0 et δ=1. <br /> Donc pour finir, on aurait
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overline{z_{1}}=z_{1} \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overline{z_{2}}=z_{2} \)
+          <!-- /FORMULE UNIV INLINE--> ∀ (z<sub>1</sub>,z<sub>2</sub>) ∈ A, ce qui est absurde. <br> Avant de poursuivre nous aurons besoin d'un petit rappel d'algèbre. <h2>Applications semi-linéaires</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Intro</h2> We <input type="button" value="have already seen" onclick="go('../appaffines/appaffbar.html#def1')" data-inline="true" /> that a one-to-one affine application of A in A transforms a line into a line. <br /> Subject to certain restrictions that we will illustrate with a few counter-examples, the converse is true. <br /> So let's start by studying some cases where the converse is false. <h3>Example 1</h3> If the dimension of A is equal to 1. Any application preserves the alignment, but it is clear that any <input type="button" value="bijection" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" /> from &reals; in &reals; is not affine (ex: x → x<sup>3</sup>). <h3>Example 2</h3> The case of the <input type="button" value="characteristic" onclick="go('../../nombres/rationnels/caracteristique.html#')" data-inline="true" /> 2 is particular. Every line consists of exactly 2 points. It follows that any one-to-one map of an affine space on K=&integers;/2&integers; maintain alignment. Let us then take A=K<sup>3</sup>, A therefore has 8 points, and the number of bijections from A to A ( <input type="button" value="permutations of A" onclick="go(' ../../bases/applications/permutations.html#')" data-inline="true" />) is therefore 8!= 40320. <br /> The <input type="button" value="linear maps from A to A" onclick="go('../../algebre-lineaire/applicalin/defapplin.html#')" data-inline="true" /> identified by their <input type="button" value="matrices" onclick="go('../../algebre-lineaire/matapplin/defmatapp.html#')" data-inline="true" /> in the <input type="button" value="standard basis" onclick="go('../../algebre-lineaire/espaces/bases.html#canoniquee')" data-inline="true" /> are 2<sup>9</sup>=512 in number. The number of <input type="button" value="translations" onclick="go('../appaffines/appaffbar.html#def3')" data-inline="true" /> is equal to 8. So the maximum number of affine maps from A to A is 8×512=4096. All the bijections from A to A cannot therefore be affine. <br />
+          <h3>Example 3</h3> Take K=&complexes; and A=K<sup>2</sup>. <br /> Consider the map f from A to A :(z<sub>1</sub>,z<sub>2</sub>) →
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left(\overline{z_{1}},\overline{z_{2}}\right) \)
+          <!-- /INLINE UNIV FORMULA--> , then f transforms any line with equation uz<sub>1</sub>+vz<sub>2</sub>+w=0 into the line with equation <span style="text-decoration: overline; ">u</span>z<sub>1</sub>+ <span style="text-decoration: overline; ">v</span>z<sub> 2</sub>+ <span style="text-decoration: overline; ">w</span>=0. <br /> Let us show that f is not affine. <br /> Otherwise there would exist complex scalars α,β,γ,δ,a, b such that ∀ (z<sub>1</sub>,z<sub>2</sub>) ∈ A, we would have:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {\overline{z_{1}} = \alpha z_{1} + \beta z_{2} + a} \\ {\overline{z_{2}} = \gamma z_{1} + \delta z_{2} + b} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> See for example <input type="button" value="this page" onclick="go('../appaffines/appaffmat.html#')" data-inline="true" /> for a reminder. <br /> Taking z<sub>1</sub>=z<sub>2</sub>=0, it immediately comes to a=b=0. <br /> Taking z<sub>1</sub>=1 and z<sub>2</sub>=0, we immediately get α=1 and γ=0. <br /> Taking z<sub>1</sub>=0 and z<sub>2</sub>=1, we immediately get β=0 and δ=1. <br /> So finally, we would have
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overline{z_{1}}=z_{1} \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overline{z_{2}}=z_{2} \)
+          <!-- /INLINE UNIV FORMULA--> ∀ (z<sub>1</sub>,z<sub>2</sub>) ∈ A, which is nonsense. <br> Before continuing we will need a little reminder of algebra. <h2>Semi-linear maps</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un automorphisme d'un corps K est une application σ: K → K qui : <ul>
+              <li>est un <input type="button" value="homomorphisme" onclick="go('../../bases/operations/homomorphismes.html#')" data-inline="true" /> de <input type="button" value="groupes" onclick="go('../../bases/operations/groupe.html#')" data-inline="true" /> de (K,+) dans (K,+) </li>
+              <li>est <input type="button" value="bijectif" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" />, donc est un <input type="button" value="isomorphisme" onclick="go('../../bases/operations/isomorphismes.html#')" data-inline="true" />
+              </li>
+              <li>verifie σ(xy)=σ(x)σ(y) donc également homomorphisme <input type="button" value="multiplicatif" onclick="go('../../bases/operations/puissances.html#')" data-inline="true" /> de (K,×) dans (K,×) </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> An automorphism of a field K is a map σ: K → K which: <ul>
+              <li>is an <input type="button" value="homomorphism" onclick="go('../../bases/operations/homomorphismes.html#')" data-inline="true" /> of <input type="button" value="groups" onclick="go('../../bases/operations/groupe.html#')" data-inline="true" /> of (K,+) in (K,+) </li>
+              <li>is <input type="button" value="bijective" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" />, so is a <input type="button" value="isomorphism" onclick="go('../../bases/operations/isomorphismes.html#')" data-inline="true" />
+              </li>
+              <li>checks σ(xy)=σ(x)σ(y) so also homomorphism <input type="button" value="multiplicative" onclick="go('../../bases/operations/puissances.html#')" data-inline="true" /> from (K,×) in (K,×) </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples</h3>
+          <ul>
+            <li>L'application identique Id: K &rarr; K est toujours un automorphisme de K.</li>
+            <li>L'application z &rarr; <span style="text-decoration: overline; ">z</span> est un automorphisme de &complexes; qui n'est pas l'identité. </li>
+          </ul> Il existe un résultat important dans le cas du corps des réels.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Examples</h3>
+          <ul>
+            <li>The identity map Id: K &rarr; K is always an automorphism of K.</li>
+            <li>The map z &rarr; <span style="text-decoration: overline; ">z</span> is an automorphism of &complexes; which is not the identity. </li>
+          </ul> There is an important result in the case of the field of real numbers.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Le seul automorphisme de ℝ est l'identité.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> The only automorphism of ℝ is the identity map.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet si &sigma; est un tel automorphisme il résulte de la définition de &sigma;(0)=0 et &sigma;(1)=1. <br> Nous en concluons que pour tout entier positif &sigma;(p)=&sigma;(1+ ... +1)=&sigma;(1)+ ... +&sigma;(1)= 1 + ... + 1 =p <br> par ailleurs &sigma;(1/q + .... +1/q)= q&sigma;(1/q)=&sigma;(1)=1, d'où &sigma;(1/q)=1/q pour q positif. <br> L'égalité &sigma;(p/q)=p/q s'étend en fait à tous les rationnels positifs ou négatif à cause de l'additivité de &sigma; <br> La restriction de &sigma; à &rationals; est donc l'identité. <br> &sigma; est en outre positive. En effet si x &gt; 0 alors x=y<sup>2</sup> donc &sigma;(x)=&sigma;(y)<sup>2</sup> &gt; 0. <br> Il en résulte de &sigma; est croissante car si x &gt; y x-y &gt; 0 donc &sigma;(x-y) &gt; 0 d'où &sigma;(x) &gt; &sigma;(y). <br> De sorte que si x est un réel non rationnel. Il suffit de construire une suite de rationnels g<sub>n</sub> croissante tendant vers x et une suite de rationnels h<sub>n</sub> décroissante tendant vers x. Alors &sigma; est l'identité sur chacune des deux suites donc on a forcément &sigma;(x)=x à cause de la variation de &sigma;.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed if &sigma; is such an automorphism it results from the definition of &sigma;(0)=0 and &sigma;(1)=1. <br> We conclude that for any positive integer &sigma;(p)=&sigma;(1+ ... +1)=&sigma;(1)+ ... +&sigma;(1)= 1 + ... + 1 = p <br> furthermore &sigma;(1/q + .... +1/q)= q&sigma;(1/q)=&sigma;(1)=1, whence &sigma;(1/q)=1/q for q positive. <br> The equality &sigma;(p/q)=p/q in fact extends to all positive or negative rationals because of the additivity of &sigma; <br> The &sigma; at &rationals; so is the identity. <br> &sigma; is also positive. Indeed if x &gt; 0 then x=y<sup>2</sup> so &sigma;(x)=&sigma;(y)<sup>2</sup> &gt; 0. <br> This results in &sigma; is increasing because if x &gt; y x-y &gt; 0 so &sigma;(x-y) &gt; 0 hence &sigma;(x) &gt; &sigma;(y). <br> So that if x is a non-rational real. It suffices to construct an increasing sequence of rationals g<sub>n</sub> tending to x and a decreasing sequence of rationals h<sub>n</sub> tending to x. Then &sigma; is the identity on each of the two sequences so we necessarily have &sigma;(x)=x because of the variation of &sigma;.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Une application f d'un K-espace vectoriel E dans lui-même est dite <strong>
+              <em>'semi-linéaire'</em>
+            </strong> relativement à un automorphisme &sigma; de K si elle vérifie : <br> f(x+y)=f(x)+f(y) &forall; (x,y) &isin; K<sup>2</sup>
+            <br> f(&lambda;x)=&sigma;(&lambda;)f(x) &forall; x &isin; E et &forall; &lambda; &isin; K.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A mapping f from a K-vector space E to itself is said <strong>
+              <em>'semi-linear'</em>
+            </strong> with respect to an automorphism &sigma; of K if it verifies: <br> f(x+y)=f(x)+f(y) &forall; (x,y) &isin; K<sup>2</sup>
+            <br> f(&lambda;x)=&sigma;(&lambda;)f(x) &forall; x &isin; E and &forall; &lambda; &isin; K.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> f: A &rarr; A est dite <b>
+              <i>'semi-affine'</i>
+            </b> s'il existe une application semi-linéaire u : E &rarr; E (E espace vectoriel associé à A) telle que : f(M+x)=f(M)+u(x) pour tout point M et tout vecteur x.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> f: A &rarr; A is said <b>
+              <i>'semi-affine'</i>
+            </b> if there exists a semi-linear map u : E &rarr; E (E vector space associated with A) such that: f(M+x)=f(M)+u(x) for any point M and any vector x.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous sommes maintenant en mesure d'énoncer une des formes du théorème fondamental de la géométrie affine. <h2>Le théorème</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We are now in a position to state one of the forms of the fundamental theorem of affine geometry. <h2>The theorem</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit A un espace affine sur un corps K supposé de caractéristique différente de 2. <br> On suppose que la dimension (finie) de A est au moins égale à 2. <br> Dans ces conditions une bijection de A dans A conserve les alignements des systèmes de 3 points si et seulement si elle est semi-affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Let A be an affine space over a field K with characteristic different from 2. <br> We assume that the (finite) dimension of A is at least equal to 2. <br> Under these conditions a bijection from A into A preserves the alignments of the 3-point systems if and only if it is semi-affine.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous aurons besoin pour cela de quelques résultats préliminaires (lemmes). </div>
+        <!-- /fr -->
+        <div lang="en"> For this, we will need some preliminary results (lemmas). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Une partie B de A est une variété linéaire si et seulement si à chaque fois qu'elle contient deux points elle contient la droite joignant ces deux points.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> A subset B of A is a linear variety if and only if each time it contains two points it contains the line joining these two points.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit en effet d'appliquer le résultat de <input type="button" value="cet exercice" onclick="go('../affines/exercices/affinesvar/ex04.html#')" data-inline="true" />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> All you have to do is apply the result of <input type="button" value="this exercise" onclick="go('../affines/exercices/affinesvar/ex04.html#')" data-inline=" true" />
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Il résulte de ce qui précède que si X est une partie finie de A et si f est une bijection qui conserve les alignements alors si V(X) est la variété engendrée par X et V(f(X)) la variété engendrée par son image on a f(V(X))=V(f(X)).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> It follows from the above that if X is a finite subset of A and if f is a bijection which preserves the alignments then if V(X) is the variety generated by X and V(f(X)) the variety generated by its image we have f(V(X))=V(f(X)).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet, par le <input type="button" value="théorème d'associativité des barycentres" onclick="go('../affines/affinesbar.html#thm5')" data-inline="true" />, tout point de V(X) peut être construit par alignements à partir des points de X. <br /> Ceci est vrai en particulier si X est un système de points affinement indépendants de A supposé de dimension n, disons X={M<sub>0</sub>,M<sub>1</sub>, ...,M<sub>n</sub>}. f(X)={f(M<sub>0</sub>), f(M<sub>1</sub>), ... ,f(M<sub>n</sub>)} doit également être un système de n+1 points affinements indépendants de A, sinon f ne pourrait être bijective.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed, by the <input type="button" value="barycenters associativity theorem" onclick="go('../affines/affinesbar.html#thm5')" data-inline="true" /> , any point of V(X) can be constructed by alignments from the points of X. <br /> This is especially true if X is a system of affinely independent points of A assumed to be of dimension n, say X={M<sub>0</sub>,M<sub>1</sub>, ...,M<sub>n</sub>}. f(X)={f(M<sub>0</sub>), f(M<sub>1</sub>), ... ,f(M<sub>n</sub>)} must also be a system of n+1 independent refinements of A, otherwise f could not be one-to-one.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Le lemme suivant en découle rapidement : </div>
+        <!-- /fr -->
+        <div lang="en"> The following lemma quickly follows: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Si B est une variété linéaire de dimension p de A et si f conserve les alignements alors f(B) est une variété de dimension p.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> If B is a p-dimensional linear variety of A and if f preserves alignments then f(B) is a p-dimensional variety.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit en effet F le sous espace directeur de B. Choisissons une base de F
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{x_{1}},\overrightarrow{x_{2}},...,\overrightarrow{x_{p}} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> , que nous complétons en une base de E, soit
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{x_{1}},\overrightarrow{x_{2}},...,\overrightarrow{x_{p}},\overrightarrow{x_{p+1}} ,...,\overrightarrow{x_{n}}\right ) \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Alors si on M<sub>0</sub> est un point quelconque de B et si on pose
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle M_{i}=M_{0}+\overrightarrow{x_{i}} \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> M<sub>0</sub>,M<sub>1</sub>, ... ,M<sub>n</sub> sont n+1 points affinements indépendants de A et il en est de même de leurs images f(M<sub>0</sub>), f(M<sub>1</sub>), ... , f(M<sub>n</sub>) en vertu de ce qui précède. On peut donc dire la même chose de f(M<sub>0</sub>), f(M<sub>1</sub>), ... , f(M<sub>p</sub>), d'où la démonstration de notre nouveau lemme.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let F be the directing subspace of B. Let us choose a basis of F
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{x_{1}},\overrightarrow{x_{2}},...,\overrightarrow{x_{p}} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> , which we complete in a basis of E, that is
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{x_{1}},\overrightarrow{x_{2}},...,\overrightarrow{x_{p}},\overrightarrow{x_{p+1}} ,... ,\overrightarrow{x_{n}}\right ) \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br> Then if we M<sub>0</sub> is any point of B and if we set
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle M_{i}=M_{0}+\overrightarrow{x_{i}} \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br> M<sub>0</sub>,M<sub>1</sub>, ... ,M<sub>n</sub> are n+1 independent refinement points of A and so are their images f(M<sub>0</sub>), f(M<sub>1</sub>), ... , f(M<sub>n</sub>) under the above. The same can therefore be said of f(M<sub>0</sub>), f(M<sub>1</sub>), ... , f(M<sub>p</sub>) , hence the proof of our new lemma.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici maintenant un nouveau lemme : </div>
+        <!-- /fr -->
+        <div lang="en"> Now here is a new lemma: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Dans les hypothèses du théorème, toute application bijective qui conserve l'alignement transforme deux droites parallèles en deux droites parallèles.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> Under the assumptions of the theorem, any one-to-one mapping that preserves the alignment transforms two parallel lines into two parallel lines.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soient en effet D<sub>1</sub> et D<sub>2</sub> deux droites parallèles. Leurs images sont deux droites D'<sub>1</sub> et D'<sub>2</sub>. La variété engendrée par D<sub>1</sub> et D<sub>2</sub> est un plan, donc également la variété engendrée par D'<sub>1</sub> et D'<sub>2</sub>. En outre D<sub>1</sub> et D<sub>2</sub> étant sans point commun il en est forcément de même pour D'<sub>1</sub> et D'<sub>2</sub>.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let D<sub>1</sub> and D<sub>2</sub> be two parallel lines. Their images are two lines D'<sub>1</sub> and D'<sub>2</sub>. The variety generated by D<sub>1</sub> and D<sub>2</sub> is a plane, so also the variety generated by D'<sub>1</sub> and D'<sub>2 </sub>. Moreover D<sub>1</sub> and D<sub>2</sub> being without common point it is necessarily the same for D'<sub>1</sub> and D'<sub>2</sub>.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> De là et de la <input type="button" value="caractérisation des parallélogrammes" onclick="go('theoparallelo.html#prop3')" data-inline="true" />, nous tirons : </div>
+        <!-- /fr -->
+        <div lang="en"> From there and from the <input type="button" value="characterization of parallelograms" onclick="go('theoparallelo.html#prop3')" data-inline="true" />, we get: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 7</div> Dans les hypothèses du théorème, l'image par f d'un parallélogramme est un parallélogramme.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 7</div> Under the assumptions of the theorem, the image by f of a parallelogram is a parallelogram.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit maintenant O une origine quelconque dans A, tout revient à prouver que l'application
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle u : \overrightarrow{OM} \to \overrightarrow{O'M'} \)
+          <!-- /FORMULE UNIV INLINE--> est semi-linéaire relativement à un certain automorphisme &sigma; de K. <br>Comme d'habitude on a ici noté O'=f(O) et M'=f(M). <br> Montrons déjà l'additivité de u.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Now let O be any origin in A, everything amounts to proving that the map
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle u: \overrightarrow{OM} \to \overrightarrow{O'M'} \)
+          <!-- /INLINE UNIV FORMULA--> is semilinear with respect to some automorphism &sigma; of K. <br>As usual we noted here O'=f(O) and M'=f(M). <br> We already show the additivity of u.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soit
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y } \)
+            <!-- /FORMULE UNIV INLINE--> deux vecteurs. On suppose d'abord qu'ils sont non colinéaires. Dans ce cas si
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle A=O+\overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE-->,
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle B=O+\overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE-->,
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle C=O+\overrightarrow{x+y} \)
+            <!-- /FORMULE UNIV INLINE--> OACB est un parallélogramme, donc O'A'C'B' est aussi un parallélogramme. Nous en tirons que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{x}+\overrightarrow{y} \right )=u\left ( \overrightarrow{x} \right )+u\left ( \overrightarrow{y} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> . <br> Si maintenant
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE--> sont colinéaires, faisons intervenir un vecteur
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE--> non colinéaire à
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> et à
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE--> . Soit alors
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{t} \)
+            <!-- /FORMULE UNIV INLINE--> le vecteur
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{ x+y} \)
+            <!-- /FORMULE UNIV INLINE--> .
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{t} \)
+            <!-- /FORMULE UNIV INLINE--> est encore colinéaire avec
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE--> . On peut écrire
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{t}=\left ( \overrightarrow{x}+\overrightarrow{z} \right )+\left ( \overrightarrow{y}-\overrightarrow{z} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> . Les deux vecteurs
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x}+\overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y}-\overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE--> ne peuvent d'après nos hypothèses être colinéaires. Nous en tirons donc que : <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{y} \right )=u\left ( \overrightarrow{x}+\overrightarrow{z} \right )+u\left ( \overrightarrow{y}-\overrightarrow{z} \right )=u\left ( \overrightarrow{x} \right )+u\left ( \overrightarrow{z} \right )+u\left ( \overrightarrow{y} \right )+u\left ( \overrightarrow{-z} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> . De sorte qu'il suffit maintenant de voir qu'on a
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( -\overrightarrow{z} \right )=-u\left ( \overrightarrow{z} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> . <br> Mais on fait la figure formée par les 4 points
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle O+\overrightarrow{x}+\overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE--> ,
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle O+\overrightarrow{x}-\overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE-->,
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle O-\overrightarrow{x}+\overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE-->,
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle O-\overrightarrow{x}-\overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE--> est un parallélogramme de centre O. Son image est également un parallélogramme et le centre de ce parallélogarmme est O' car comme f conserve les alignements O' doit être à l'intersection des images des diagonales. Il en résulte bien que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \)
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( -\overrightarrow{z} \right )=-u\left ( \overrightarrow{z} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> et que u est additive. <br>
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Either
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /INLINE UNIV FORMULA--> two vectors. We first assume that they are not collinear. In this case if
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle A=O+\overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA-->,
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle B=O+\overrightarrow{y} \)
+            <!-- /INLINE UNIV FORMULA-->,
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle C=O+\overrightarrow{x+y} \)
+            <!-- /INLINE UNIV FORMULA--> OACB is a parallelogram, so O'A'C'B' is also a parallelogram. We derive that
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( \overrightarrow{x}+\overrightarrow{y} \right )=u\left ( \overrightarrow{x} \right )+u\left ( \overrightarrow{y} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> . <br> If now
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /INLINE UNIV FORMULA--> are collinear, let us introduce a vector
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{z} \)
+            <!-- /INLINE UNIV FORMULA--> not collinear with
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA--> and to
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /INLINE UNIV FORMULA--> . Either then
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{t} \)
+            <!-- /INLINE UNIV FORMULA--> the vector
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{ x+y} \)
+            <!-- /INLINE UNIV FORMULA--> .
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{t} \)
+            <!-- /INLINE UNIV FORMULA--> is still collinear with
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /INLINE UNIV FORMULA--> . We can write
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{t}=\left ( \overrightarrow{x}+\overrightarrow{z} \right )+\left ( \overrightarrow{y}-\overrightarrow{z} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> . The two vectors
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x}+\overrightarrow{z} \)
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{y}-\overrightarrow{z} \)
+            <!-- /INLINE UNIV FORMULA--> cannot, according to our assumptions, be collinear. We therefore conclude that: <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{y} \right )=u\left ( \overrightarrow{x}+\overrightarrow{z} \right )+u\left ( \overrightarrow{y}-\overrightarrow{z} \right )=u\left ( \overrightarrow{x} \right )+u\left ( \overrightarrow{z} \right )+u\left ( \overrightarrow{y} \right )+u\left ( \overrightarrow{-z} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> . So that it suffices now to see that we have
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( -\overrightarrow{z} \right )=-u\left ( \overrightarrow{z} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> . <br> But we make the figure formed by the 4 points
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle O+\overrightarrow{x}+\overrightarrow{z} \)
+            <!-- /INLINE UNIV FORMULA--> ,
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle O+\overrightarrow{x}-\overrightarrow{z} \)
+            <!-- /INLINE UNIV FORMULA-->,
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle O-\overrightarrow{x}+\overrightarrow{z} \)
+            <!-- /INLINE UNIV FORMULA-->,
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle O-\overrightarrow{x}-\overrightarrow{z} \)
+            <!-- /INLINE UNIV FORMULA--> is a parallelogram with center O. Its image is also a parallelogram and the center of this parallelogram is O' because as f preserves the alignments O' must be at the intersection of the images of the diagonals. It follows that although
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \)
+            <!-- /INLINE UNIV FORMULA-->
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( -\overrightarrow{z} \right )=-u\left ( \overrightarrow{z} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> and that u is additive. <br>
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous déterminons maintenant l'automorphisme &sigma; par rapport auquel u sera semi-linéaire. <br> Pour tout vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+          <!-- /FORMULE UNIV INLINE--> non nul et tout scalaire &lambda; nous posons
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \sigma _{\overrightarrow{x}}\left ( \lambda \right )=\frac{u\left ( \lambda \overrightarrow{x} \right )}{u\left ( \overrightarrow{x} \right )} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> Nous avons utilisé le fait que les vecteurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \lambda \overrightarrow{x} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> sont toujours colinéaires car si
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle P=O+\overrightarrow{x} \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle Q=O+\lambda \overrightarrow{x} \)
+          <!-- /FORMULE UNIV INLINE--> O,P,Q, alignés &rArr; O',P',Q' alignés. <br> Nous définissons ainsi une application
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \sigma _{\overrightarrow{x}} : K \rightarrow K \)
+          <!-- /FORMULE UNIV INLINE--> dont nous allons montrer dans un premier temps qu'elle ne dépend pas de x.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We now determine the automorphism &sigma; with respect to which u will be semilinear. <br> For any vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+          <!-- /UNIV INLINE FORMULA--> not null and any scalar &lambda; We set
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \sigma _{\overrightarrow{x}}\left ( \lambda \right )=\frac{u\left ( \lambda \overrightarrow{x} \right )}{u\left ( \overrightarrow{x} \right )} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <br> We used the fact that the vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( \lambda \overrightarrow{x} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> are always collinear because if
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle P=O+\overrightarrow{x} \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle Q=O+\lambda \overrightarrow{x} \)
+          <!-- /INLINE UNIV FORMULA--> O,P,Q, aligned &rArr; O',P',Q' aligned. <br> We thus define an application
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \sigma _{\overrightarrow{x}}: K \rightarrow K \)
+          <!-- /INLINE UNIV FORMULA--> which we will show first that it does not depend on x.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Soient donc
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE--> deux vecteurs non nuls distincts supposées non colinéaires, de sorte que les droites d'origine O et de vecteurs directeurs
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE--> sont distinctes tout comme leurs images qui se coupent en O', comme on l'a vu plus haut. <br> Nous avons par additivité de u : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle u\left ( \lambda \left ( \overrightarrow{x}+\overrightarrow{y} \right ) \right ) =\sigma _{\overrightarrow{x}+\overrightarrow{y}}(\lambda) u\left ( \overrightarrow{x}+\overrightarrow{y} \right ) =\sigma _{\overrightarrow{x}+\overrightarrow{y}}(\lambda)u\left ( \overrightarrow{x} \right )+\sigma _{\overrightarrow{x}+\overrightarrow{y}}(\lambda)u\left ( \overrightarrow{y} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> mais aussi :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle u\left ( \lambda \left ( \overrightarrow{x}+\overrightarrow{y} \right ) \right ) =u\left ( \lambda \overrightarrow{x}+\lambda \overrightarrow{y} \right ) =u\left ( \lambda \overrightarrow{x} \right )+u\left ( \lambda \overrightarrow{y} \right ) =\sigma _{\overrightarrow{x}}(\lambda)u\left ( \overrightarrow{x} \right )+\sigma _{\overrightarrow{y}}(\lambda)u\left ( \overrightarrow{y} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Mais comme les vecteurs
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{y} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> sont indépendants, nous pouvons en conclure :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sigma _{\overrightarrow{x}+\overrightarrow{y}}=\sigma _{\overrightarrow{x}}=\sigma _{\overrightarrow{y}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Si les vecteurs
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;sont maintenant supposés colinéaires, choisissons un vecteur
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{z} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;non colinéaire à x et à y. Le même raisonnement que précédemment donne
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \sigma _{\overrightarrow{x}}=\sigma _{\overrightarrow{z}} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;et
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \sigma _{\overrightarrow{y}}=\sigma _{\overrightarrow{z}} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;donc
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \sigma _{\overrightarrow{x}}=\sigma _{\overrightarrow{y}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> So let
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /UNIV INLINE FORMULA--> and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /INLINE UNIV FORMULA--> two distinct nonzero vectors assumed to be noncollinear, so that the lines with origin O and direction vectors
+            <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /FORMULE UNIV INLINE--> are distinct just like their images which intersect in O', as we saw above. <br> We have by additivity of u: <br>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle u\left ( \lambda \left ( \overrightarrow{x}+\overrightarrow{y} \right ) \right ) =\sigma _{\overrightarrow{x}+\overrightarrow{y}}(\lambda) u\left ( \overrightarrow{x}+\overrightarrow{y} \right ) =\sigma _{\overrightarrow{x}+\overrightarrow{y}}(\lambda)u\left ( \overrightarrow{x} \right )+\sigma _{\overrightarrow{x}+\overrightarrow{y}} (\lambda)u\left ( \overrightarrow{y} \right ) \)</p>
+            <!-- /INLINE UNIV FORMULA--> but also :
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle u\left ( \lambda \left ( \overrightarrow{x}+\overrightarrow{y} \right ) \right ) =u\left ( \lambda \overrightarrow{x}+\lambda \overrightarrow{y} \right ) =u\left ( \lambda \overrightarrow{x} \right )+u\left ( \lambda \overrightarrow{y} \right ) =\sigma _{\overrightarrow{x}}(\lambda)u\left ( \overrightarrow{x} \right )+\sigma _{\overrightarrow{y}}(\lambda)u\left ( \overrightarrow{y } \right ) \)</p>
+            <!-- /INLINE UNIV FORMULA--> But since the vectors
+            <!-- FORMULA UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( \overrightarrow{y} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> are independent, we can conclude:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \sigma _{\overrightarrow{x}+\overrightarrow{y}}=\sigma _{\overrightarrow{x}}=\sigma _{\overrightarrow{y}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> If the vectors
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{y} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;are now assumed collinear, choose a vector
+            <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{z} \)
+            <!-- /UNIV INLINE FORMULA--> &nbsp;not collinear with x and y. The same reasoning as before gives
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \sigma _{\overrightarrow{x}}=\sigma _{\overrightarrow{z}} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;and
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \sigma _{\overrightarrow{y}}=\sigma _{\overrightarrow{z}} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;so
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \sigma _{\overrightarrow{x}}=\sigma _{\overrightarrow{y}} \)
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous voyons maintenant que &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \sigma _{\overrightarrow{x}} \)&nbsp;
+          <!-- /FORMULE UNIV INLINE--> ne dépend pas de x. Nous la noterons simplement &sigma;. <br> Il s'agit maintenant de montrer que &sigma; est un automorphisme de K.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We now see that &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \sigma_{\overrightarrow{x}} \)&nbsp;
+          <!-- /INLINE UNIV FORMULA--> does not depend on x. We will simply denote it &sigma;. <br> We now have to show that &sigma; is an automorphism of K.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Montrons que &sigma; est additive, en utilisant l'additivité de u : <br> Soit &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; un vecteur non nul, de sorte que &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; est non nul également. <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle u\left ( (\lambda +\mu )\overrightarrow{x} \right )=\sigma (\lambda +\mu )u\left ( \overrightarrow{x} \right )=u\left ( \lambda \overrightarrow{x} \right )+u\left ( \mu \overrightarrow{x} \right )=\left ( \sigma (\lambda ) +\sigma (\mu )\right )\overrightarrow{x} \)</p>
+            <!-- /FORMULE UNIV INLINE--> d'où &sigma;(&lambda;+&mu;)=&sigma;(&lambda;)+&sigma;(&mu;) puisque &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; n'est pas nul. <br> D'autre part :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle u\left ( (\lambda \mu ) \overrightarrow{x}\right )=\sigma (\lambda \mu)u\left ( \overrightarrow{x} \right )=\sigma (\lambda )u\left ( \mu \overrightarrow{x} \right )=\sigma (\lambda )\sigma (\mu )u\left ( \overrightarrow{x} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> par application de la définition de &sigma; et des axiomes de définition des espaces vectoriels. <br> Ce qui achève la démonstration du théorème.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Let us show that &sigma; is additive, using the additivity of u: <br> Let &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; a nonzero vector, so that &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; is also non-zero. <br>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle u\left ( (\lambda +\mu )\overrightarrow{x} \right )=\sigma (\lambda +\mu )u\left ( \overrightarrow{x} \right )=u\left ( \lambda \overrightarrow{x} \right )+u\left ( \mu \overrightarrow{x} \right )=\left ( \sigma (\lambda ) +\sigma (\mu )\right )\overrightarrow{x} \)</p>
+            <!-- /INLINE UNIV FORMULA--> from where &sigma;(&lambda;+&mu;)=&sigma;(&lambda;)+&sigma;(&mu;) since &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left ( \overrightarrow{x} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; is not zero. <br> On the other hand :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle u\left ( (\lambda \mu ) \overrightarrow{x}\right )=\sigma (\lambda \mu)u\left ( \overrightarrow{x} \right )=\sigma (\lambda )u\left ( \mu \overrightarrow{x} \right )=\sigma (\lambda )\sigma (\mu )u\left ( \overrightarrow{x} \right ) \)</p>
+            <!-- /FORMULE UNIV INLINE--> by applying the definition of &sigma; and axioms for the definition of vector spaces. <br> This completes the proof of the theorem.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat admet en particulier le corollaire suivant : </div>
+        <!-- /fr -->
+        <div lang="en"> This result admits in particular the following corollary: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 8</div> Si K=&reals; et si dim(A) > 1 alors toute bijection qui conserve l'alignement est affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 8</div> If K=&reals; and if dim(A) > 1 then any bijection which preserves the alignment is affine.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il suffit d'appliquer le résultat précédent conjointement avec le fait que le seul automorphisme de &reals; est l'identité. </div>
+        <!-- /fr -->
+        <div lang="en"> It suffices to apply the previous result in conjunction with the fact that the only automorphism of &reals; is the identity. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/theofond/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/theofond/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

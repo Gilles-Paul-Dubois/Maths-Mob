@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Equations cartésiennes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarcart/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarcart/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Cette page concerne uniquement les espaces affines de dimension finie. <br /> Nous supposons connue le terminologie relative aux équations linéaires et aux systèmes de telles équations. Pour un rappel voir par exemple <input type="button" value="cette page" onclick="go('../../algebre-lineaire/systemes/defsys.html#')" data-inline="true" />. <h2>Cas des hyperplans affines</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This page is only about finite dimensional affine spaces. <br /> We assume familiarity with the terminology relating to linear equations and systems of such equations. For a reminder see for example <input type="button" value="this page" onclick="go('../../algebre-lineaire/systemes/defsys.html#')" data-inline="true " />. <h2>Case of affine hyperplanes</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Nous affirmons tout d'abord que si R=(O,B) est un <input type="button" value="repère affine" onclick="go('repvarrepaff.html#def1')" data-inline="true" /> de A, pour toute équation linéaire 'propre' (dont les coefficients ne sont pas tous nuls) l'ensemble des solutions représente les coordonnées des points d'un hyperplan affine et réciproquement.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> We first assert that if R=(O,B) is an <input type="button" value="affine frame" onclick="go('repvarrepaff.html#def1')" data-inline="true " /> of A, for any 'proper' linear equation (whose coefficients are not all zero) the set of solutions represents the coordinates of the points of an affine hyperplane and vice versa.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit en effet H un hyperplan affine de sous espace directeur l'hyperplan vectoriel F. <br /> On sait que F est le <input type="button" value="noyau" onclick="go('../../algebre-lineaire/applicalin/noyau.html#')" data-inline="true" /> d'une <input type="button" value="forme linéaire" onclick="go('../../algebre-lineaire/applicalin/formeslin.html#')" data-inline="true" /> non nulle. <br /> F est donc constitué des vecteurs dont les coordonnées u<sub>i</sub> dans la base B satisfont une équation du type :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle {\sum\limits_{i = 1}^{n}\alpha_{i}}u_{i} = 0 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Soit maintenant P un point particulier de H de coordonnées (x<sub>1</sub>,x<sub>2</sub>, ..., x<sub>n</sub>) dans le repère R, et posons :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \beta = {\sum\limits_{i = 1}^{n}\alpha_{i}}x_{i} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Maintenant pour un point Q de coordonnées (y<sub>1</sub>,y<sub>2</sub>, ... ,y<sub>n</sub>), il y a équivalence entre : Q ∈ H et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}\in F \)
+          <!-- /FORMULE UNIV INLINE--> . <br> Les coordonnées de
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ} \)
+          <!-- /FORMULE UNIV INLINE--> sont les nombres u<sub>i</sub>=y<sub>i</sub>-x<sub>i</sub>. <br /> De sorte qu'en tenant compte de la caractérisation de F donnée plus haut :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle Q\in H\Leftrightarrow \sum\limits_{i = 1}^{n}\alpha_{i}y_{i} = {\sum\limits_{i = 1}^{n}\alpha_{i}x_{i} = \beta} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let H be an affine hyperplane with the vector hyperplane F as direction. <br /> We know that F is the <input type="button" value="kernel" onclick="go('../../algebre-lineaire/applicalin/noyau.html#')" data-inline="true" /> of a <input type="button" value="linear form" onclick="go('../../algebre-lineaire/applicalin/formeslin.html#')" data-inline="true" /> not null. <br /> F is therefore made up of the vectors whose coordinates u<sub>i</sub> in the base B satisfy an equation of the type:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle {\sum\limits_{i=1}^{n}\alpha_{i}}u_{i}=0 \)</p>
+          <!-- /INLINE UNIV FORMULA--> Now let P be a particular point of H with coordinates (x<sub>1</sub>,x<sub>2</sub>, ..., x<sub>n</sub>) in the frame R, and let's set:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \beta={\sum\limits_{i=1}^{n}\alpha_{i}}x_{i} \)</p>
+          <!-- /INLINE UNIV FORMULA--> Now for a point Q with coordinates (y<sub>1</sub>,y<sub>2</sub>, ... ,y<sub>n</sub>), there is equivalence between: Q ∈ H and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}\in F \)
+          <!-- /INLINE UNIV FORMULA--> . <br> The coordinates of
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ} \)
+          <!-- /INLINE UNIV FORMULA--> are the numbers u<sub>i</sub>=y<sub>i</sub>-x<sub>i</sub>. <br /> So that taking into account the characterization of F given above:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle Q\in H\Leftrightarrow \sum\limits_{i = 1}^{n}\alpha_{i}y_{i} = {\sum\limits_{i = 1}^{n}\alpha_{i} x_{i} = \beta} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> L'équation
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \sum\limits_{i = 1}^{n}\alpha_{i}x_{i} = \beta \)
+            <!-- /FORMULE UNIV INLINE--> caractérise donc les points de H.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> The equation
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \sum\limits_{i=1}^{n}\alpha_{i}x_{i}=\beta \)
+            <!-- /INLINE UNIV FORMULA--> therefore characterizes the points of H.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que cette équation est une <strong>
+              <em>'équation cartésienne'</em>
+            </strong> de l'hyperplan H.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> This equation is said to be a <strong>
+              <em>'Cartesian equation'</em>
+            </strong> of the hyperplane H.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La réciproque se vérifie de la même manière. <br />
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> Un hyperplan affine ne possède pas une seule équation cartésienne. En multipliant une équation cartésienne de H par un scalaire non nul on en obtient une autre. <h2>Variétés quelconques</h2> Tout sous-espace vectoriel peut s'écrire comme intersection d'hyperplans vectoriels. <br /> En effet si F est un sous-espace de base
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{v_{1}}, \overrightarrow{v_{2}};...,\overrightarrow{v_{p}} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> , nous pouvons compléter cette base en une base
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{v_{1}}, \overrightarrow{v_{2}};...,\overrightarrow{v_{p}}, \overrightarrow{v_{p+1}},...,\overrightarrow{v_{n}} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> de l'espace E entier. <br /> En retirant successivement à cette base, un par un, chacun des vecteurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v_{p+1}},\overrightarrow{v_{p+2}},,\overrightarrow{v_{n}} \)
+          <!-- /FORMULE UNIV INLINE--> on obtient des bases d'hyperplans vectoriels dont l'intersection est F.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The converse holds in the same way. <br />
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> An affine hyperplane does not have a single Cartesian equation. By multiplying a Cartesian equation of H by a nonzero scalar, we obtain another one. <h2>Any variety</h2> Any vector subspace can be written as an intersection of vector hyperplanes. <br /> Indeed if F is a basic subspace
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{v_{1}}, \overrightarrow{v_{2}};...,\overrightarrow{v_{p}} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> , we can complete this basis into a basis
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{v_{1}}, \overrightarrow{v_{2}};...,\overrightarrow{v_{p}}, \overrightarrow{v_{p+1}},... ,\overrightarrow{v_{n}} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> of the entire space E. <br /> By successively removing from this basis, one by one, each of the vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v_{p+1}},\overrightarrow{v_{p+2}},,\overrightarrow{v_{n}} \)
+          <!-- /INLINE UNIV FORMULA--> we obtain bases of vector hyperplanes whose intersection is F.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Il en résulte que dans un espace de dimension n toute variété V de dimension p peut être écrite comme intersection de n-p hyperplans affines, que si un repère R=(O,B) est donné dans A, les points de V sont ceux dont les coordonnées relativement à R sont solutions d'un système de n-p équations linéaires.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> It follows that in an n-dimensional space any manifold V of dimension p can be written as an intersection of n-p affine hyperplanes, that if a frame R=(O,B) is given in A, the points of V are those whose coordinates relatively to R are solutions of a system of n-p linear equations.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ainsi dans l'espace à 3 dimensions toute droite peut être représentée par un système de deux équations linéaires (non proportionnelles). Cela revient à présenter une droite comme l'intersection de deux plans non parallèles. Naturellement cela peut se faire d'une infinité de façons. <br />
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />S'il est en général assez simple de voir que deux équations représentent le même hyperplan (la condition de proportionnalité étant nécessaire et suffisante), il est par contre plus difficile de voir si deux systèmes d'équations représentent la même variété. Même dans le cas de la droite dans le plan, il n'est pas immédiat de décider si deux systèmes de deux équations représentent la même droite. <br /> Une façon de le prouver consiste à montrer que les systèmes sont équivalents, c'est à dire à amener le premier système sous la forme du second par des opérations élémentaires sur les lignes (ajout à une ligne d'une combinaison linéaire des autres lignes, multiplication d'une ligne par un scalaire non nul). <br />
+          <h2>Le coin de Python</h2> Voici une modélisation des hyperplans et des variétés représentés par une ou plusieurs équations cartésiennes. <br /> Ce module utilise le module ' <input type="button" value="reperes.py" onclick="go('python/reperes.html#')" data-inline="true" />'
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Thus in 3-dimensional space any straight line can be represented by a system of two linear (non-proportional) equations. This amounts to presenting a straight line as the intersection of two non-parallel planes. Naturally this can be done in an infinite number of ways. <br />
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />While it is generally quite easy to see only two equations represent the same hyperplane (the proportionality condition being necessary and sufficient), it is on the other hand more difficult to see if two systems of equations represent the same manifold. Even in the case of the line in the plane, it is not immediate to decide whether two systems of two equations represent the same line. <br /> One way to prove it is to show that the systems are equivalent, i.e. to bring the first system into the form of the second by elementary operations on the rows (addition to a row of a linear combination of the other rows, multiplication of a row by a nonzero scalar). <br />
+          <h2>Python's Corner</h2> Here is a modeling of hyperplanes and manifolds represented by one or more Cartesian equations. <br /> This module uses the ' <input type="button" value="reperes.py" onclick="go('python/reperes.html#')" data-inline="true" />' module
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/varietes.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de julia</h2> Voici un programme de calcul d'une équation d'un hyperplan. Il inclut le <input type="button" value="programme de définition des repères affines" onclick="go('julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> Here is a program for calculating an equation of a hyperplane. It includes the <input type="button" value="program for defining affine landmarks" onclick="go('julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/equcart.jl.html" type="text/html" width="100%" height="400" border="3"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarcart/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarcart/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

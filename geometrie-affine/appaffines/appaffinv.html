@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Invariants</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/appaffinv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/appaffinv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Point fixe</h2> Dans toute la suite A désigne un espace affine et f une application affine de A dans lui-même. <h3>Définition</h3> La notion de point fixe (ou invariant) par une application d'un ensemble dans lui-même, a été déjà abordée <input type="button" value="ici" onclick="go('../../bases/applications/fixes.html#')" data-inline="true" />. <br /> Nous reprenons donc cette définition appliquée au cas particulier qui nous intéresse ici (endomorphisme affine).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Fixpoint</h2> Throughout the sequence A denotes an affine space and f an affine map of A into itself. <h3>Definition</h3> The notion of a fixed (or invariant) point by an application of a set to itself has already been discussed <input type="button" value="here" onclick="go('../../bases/applications/fixes.html#')" data-inline="true" />. <br /> We therefore use this definition applied to the particular case that interests us here (affine endomorphism).
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un point M de A est dit <b>
+              <i>'fixe'</i>
+            </b> (ou invariant) pour f s'il est égal à sa propre image par f, c'est à dire M=M'=f(M).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A point M of A is said to be <b>
+              <i>'fixed'</i>
+            </b> (or invariant) for f if it is equal to its own image by f, i.e. M=M '=f(M).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples</h3>
+          <ul>
+            <li>Une translation ne possède aucun point fixe, sauf si c'est la translation de vecteur nul (l'application idententique).</li>
+            <li>Une homothétie de centre O admet O comme point fixe est c'est le seul point fixe si le rapport est différent de 1.</li>
+            <li>Dans une projection sur B<sub>1</sub> parallèlement à B<sub>2</sub> tous les points de B<sub>1</sub> sont fixes et ce sont les seuls. Il en va de même pour une affinité d'axe B<sub>1</sub> parallèlement à B<sub>2</sub> si le rapport est distinct de 1. </li>
+          </ul>
+          <h2>Figure globalement invariante</h2> On suppose connue ici la notion <input type="button" value="d'image directe" onclick="go('../../bases/relations/imdir.html#')" data-inline="true" /> d'une partie de la source par une application. <h3>Définition</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Examples</h3>
+          <ul>
+            <li>A translation has no fixed point, except if it is the zero-vector translation (the identity map).</li>
+            <li>A dilation with center O admits O as a fixed point and it is the only fixed point if the ratio is different from 1.</li>
+            <li>In a projection on B<sub>1</sub> parallel to B<sub>2</sub> all points of B<sub>1</sub> are fixed and these are the only ones. The same is true for a stretching with an axis B<sub>1</sub> parallel to B<sub>2</sub> if the ratio is distinct from 1. </li>
+          </ul>
+          <h2>Globally invariant figure</h2> We assume that the notion of <input type="button" value="direct image" is known here onclick="go('../../bases/relations/imdir.html#')" data-inline="true " /> of a subset of the departure set by a mapping. <h3>Definition</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Soit X une partie de A. On dit que X est <b>
+              <i>'globalement invariante'</i>
+            </b> par f si f(X)=X.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> Let X be a subset of A. We say that X is <b>
+              <i>'globally invariant'</i>
+            </b> under f if f(X)=X.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemples</h3>
+          <ul>
+            <li>Dans une translation de vecteur
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u } \)
+              <!-- /FORMULE UNIV INLINE-->, toute droite admettant
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+              <!-- /FORMULE UNIV INLINE--> pour vecteur directeur est globalement invariante.
+            </li>
+            <li>Dans une homothétie de centre O, toute droite passant par O est globalement invariante.</li>
+            <li>La réunion de deux parties globalement invariante est elle-aussi globalement invariante, mais il n'en est pas de même de l'intersection.</li>
+            <li>Dans une affinité d'axe B<sub>1</sub> parallèlement à B<sub>2</sub> toute variété parallèle à B<sub>2</sub> est globalement invariante. </li>
+          </ul>
+          <h3>Cas du plan affine réel</h3> Si on introduit l'application f: z &rarr; z' associée de &complexes; dans &complexes;, la recherche des points fixes revient à chercher les points M d'affixe z solutions de l'équation f(z)=z. <br> Nous verrons un peu plus tard comment exploiter cette remarque en pratique.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Examples</h3>
+          <ul>
+            <li>In a translation by vector
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u } \)
+              <!-- /FORMULE UNIV INLINE--> any straight line having
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+              <!-- /FORMULE UNIV INLINE--> for direction vector is globally invariant.
+            </li>
+            <li>In a dilation with center O, any line going through O is globally invariant.</li>
+            <li>The union of two globally invariant parts is also globally invariant, but the same is not true for the intersection.</li>
+            <li>In a stretching with axis B<sub>1</sub> parallel to B<sub>2</sub> any manifold parallel to B<sub>2</sub> is globally invariant. </li>
+          </ul>
+          <h3>Case of the real affine plane</h3> If we introduce the map f: z &rarr; z' associated with &complexes; in &complexes;, the search for fixed points amounts to searching for the points M with affix z solutions of the equation f(z)=z. <br> We will see a little later how to exploit this remark in practice.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/appaffinv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/appaffinv/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

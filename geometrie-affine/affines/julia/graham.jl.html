@@ -1,0 +1,58 @@
+<html>
+<head>
+<title>graham.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #1750eb;}
+.s4 { color: #8c8c8c; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Plots</span>
+<span class="s1">include(</span><span class="s2">&quot;BasesAffines.jl&quot;</span><span class="s1">)</span>
+
+<span class="s1">getpoints(n)=aleaptsystemR(</span><span class="s3">2</span><span class="s1">,n)</span>
+<span class="s1">angle_between(P1::RP,P2::RP)=atan(P2.C[</span><span class="s3">2</span><span class="s1">]-P1.C[</span><span class="s3">2</span><span class="s1">],P2.C[</span><span class="s3">1</span><span class="s1">]-P1.C[</span><span class="s3">1</span><span class="s1">])</span>
+<span class="s1">is_left_turn(P1::RP,P2::RP,P3::RP)=(P2.C[</span><span class="s3">1</span><span class="s1">]-P1.C[</span><span class="s3">1</span><span class="s1">])*(P3.C[</span><span class="s3">2</span><span class="s1">]-P1.C[</span><span class="s3">2</span><span class="s1">])-(P2.C[</span><span class="s3">2</span><span class="s1">]-P1.C[</span><span class="s3">2</span><span class="s1">])*(P3.C[</span><span class="s3">1</span><span class="s1">]-P1.C[</span><span class="s3">1</span><span class="s1">]) &gt;=</span><span class="s3">0</span>
+<span class="s1">Base.isless(p1::RP,p2::RP)= p1.C[</span><span class="s3">2</span><span class="s1">]&lt;p2.C[</span><span class="s3">2</span><span class="s1">] || p1.C[</span><span class="s3">2</span><span class="s1">]==p2.C[</span><span class="s3">2</span><span class="s1">] &amp;&amp; p1.C[</span><span class="s3">1</span><span class="s1">]&lt;p2.C[</span><span class="s3">1</span><span class="s1">]</span>
+<span class="s1">pivot(S::PSR)=min(S.Pts...)</span>
+
+<span class="s0">function </span><span class="s1">convex_hull(S::PSR)</span>
+    <span class="s1">points=S.Pts</span>
+    <span class="s1">LDC=pivot(S) </span><span class="s4">#left down corner of cloud</span>
+    <span class="s1">isless(p1::RP,p2::RP) = angle_between(p1,LDC)&lt;=angle_between(p2,LDC)</span>
+    <span class="s1">sort!(points,lt=isless)</span>
+    <span class="s1">hull=points[</span><span class="s3">1</span><span class="s1">:</span><span class="s3">2</span><span class="s1">]</span>
+    <span class="s1">i=</span><span class="s3">3</span>
+    <span class="s0">while </span><span class="s1">i&lt;=length(points)</span>
+        <span class="s1">point=points[i]</span>
+        <span class="s0">while </span><span class="s1">length(hull)&gt;</span><span class="s3">1 </span><span class="s1">&amp;&amp; ! is_left_turn(hull[</span><span class="s0">end</span><span class="s1">-</span><span class="s3">1</span><span class="s1">],hull[</span><span class="s0">end</span><span class="s1">],point)</span>
+            <span class="s1">pop!(hull)</span>
+        <span class="s0">end</span>
+        <span class="s1">push!(hull,point)</span>
+        <span class="s1">i+=</span><span class="s3">1</span>
+    <span class="s0">end</span>
+    <span class="s1">push!(hull,points[</span><span class="s3">1</span><span class="s1">])</span>
+    <span class="s0">return </span><span class="s1">hull</span>
+<span class="s0">end</span>
+
+<span class="s1">S = getpoints(</span><span class="s3">30</span><span class="s1">)</span>
+<span class="s1">H=convex_hull(S)</span>
+<span class="s1">println(H)</span>
+<span class="s1">Points = S.Pts</span>
+<span class="s1">x = [p.C[</span><span class="s3">1</span><span class="s1">] </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">Points]</span>
+<span class="s1">y = [p.C[</span><span class="s3">2</span><span class="s1">] </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">Points]</span>
+<span class="s1">p1=plot(x, y, seriestype = :scatter, legend = </span><span class="s0">false</span><span class="s1">)</span>
+
+<span class="s1">x = [p.C[</span><span class="s3">1</span><span class="s1">] </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">H]</span>
+<span class="s1">y = [p.C[</span><span class="s3">2</span><span class="s1">] </span><span class="s0">for </span><span class="s1">p </span><span class="s0">in </span><span class="s1">H]</span>
+<span class="s1">p2=plot!(x, y,  legend = </span><span class="s0">false</span><span class="s1">)</span>
+<span class="s1">display(p1)</span>
+<span class="s1">display(p2)</span>
+</pre>
+</body>
+</html>

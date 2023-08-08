@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>equanorm.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">reperes </span><span class="s2">import </span><span class="s1">* 
+</span><span class="s2">from </span><span class="s1">euclidiens </span><span class="s2">import </span><span class="s1">* 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Hyperplan(): 
+    </span><span class="s0">&quot;&quot;&quot;Hyperplan défini par une équation cartésienne dans un espace euclidien&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Hyperplane defined by a Cartesian equation in an Euclidean space&quot;&quot;&quot;</span><span class="s1">     
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, R, E): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur prenant en argument un repère et une équation sous forme de liste de coefficients&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s0">&quot;&quot;&quot;constructor taking as argument a frame and an equation as a list of coefficients &quot;&quot;&quot;</span><span class="s1">         
+        self.Rep = R 
+        self.Equ = E 
+        self.n = len(R.Base)  </span><span class="s0"># dimension de l'espace - dimension of space</span><span class="s1"> 
+        </span><span class="s0"># test de compatibilité - compatibility test</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">len(E) != self.n + </span><span class="s3">1</span><span class="s1">: 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s4">&quot;Tailles non concordantes&quot;</span><span class="s1">) 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s2">return </span><span class="s4">&quot;+&quot;</span><span class="s1">.join([</span><span class="s4">'(' </span><span class="s1">+ str(self.Equ[i]) + </span><span class="s4">')' </span><span class="s1">+ </span><span class="s4">&quot;x&quot; </span><span class="s1">+ str(i + </span><span class="s3">1</span><span class="s1">) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)]) + </span><span class="s4">'=' </span><span class="s1">+ str( 
+            self.Equ[-</span><span class="s3">1</span><span class="s1">]) 
+ 
+    </span><span class="s2">def </span><span class="s1">Contains(self, P): 
+        </span><span class="s0">&quot;&quot;&quot;test de l'appartenance du point P à l'hyperplan&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s0">&quot;&quot;&quot;checks if point P belongs to hyperplane P &quot;&quot;&quot;</span><span class="s1">         
+        X = self.Rep.Coord(P) 
+        </span><span class="s2">return </span><span class="s1">sum([self.Equ[i] * X[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)]) == self.Equ[-</span><span class="s3">1</span><span class="s1">] 
+ 
+    </span><span class="s2">def </span><span class="s1">Equanorm(self): 
+        </span><span class="s0">&quot;&quot;&quot;Equation normale - normal equation&quot;&quot;&quot;</span><span class="s1"> 
+        u = VecteurKn(self.Equ[</span><span class="s3">0</span><span class="s1">:-</span><span class="s3">1</span><span class="s1">]) 
+        n = u.norm() 
+        L = [x / n </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">u.V] 
+ 
+    </span><span class="s2">def </span><span class="s1">Distance(self, P): 
+        </span><span class="s0">&quot;&quot;&quot;Distance d'un point à l'hyperplan - distance of a point to the hyperplane&quot;&quot;&quot;</span><span class="s1"> 
+        X = self.Rep.Coord(P) 
+        d = abs(sum([self.Equ[i] * X[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)]) - self.Equ[-</span><span class="s3">1</span><span class="s1">]) 
+        u = VecteurKn(self.Equ[</span><span class="s3">0</span><span class="s1">:-</span><span class="s3">1</span><span class="s1">]) 
+        n = u.norm() 
+        </span><span class="s2">return </span><span class="s1">d / n 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Variete(): 
+    </span><span class="s0">&quot;&quot;&quot;Variete définie comme intersection d'hyperplans&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Variety defined as an intersection of hyperplanes &quot;&quot;&quot;</span><span class="s1">     
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">&quot;&quot;&quot;Initialisation à partir d'une liste d'hyperplans - initialization from a list of hyperplanes&quot;&quot;&quot;</span><span class="s1"> 
+        self.LH = L 
+ 
+    </span><span class="s2">def </span><span class="s1">Contains(self, P): 
+        </span><span class="s0">&quot;&quot;&quot;test de l'appartenance du point P à la variété - checks if point P belongs to the variety&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">all([H.Contains(P) </span><span class="s2">for </span><span class="s1">H </span><span class="s2">in </span><span class="s1">self.LH]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    P = PointKn([</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">])  </span><span class="s0"># origine standard - standard origin</span><span class="s1"> 
+    u = VecteurKn([</span><span class="s3">1.0</span><span class="s1">, </span><span class="s3">0.0</span><span class="s1">, </span><span class="s3">0.0</span><span class="s1">]) 
+    v = VecteurKn([</span><span class="s3">0.0</span><span class="s1">, </span><span class="s3">1.0</span><span class="s1">, </span><span class="s3">0.0</span><span class="s1">]) 
+    w = VecteurKn([</span><span class="s3">0.0</span><span class="s1">, </span><span class="s3">0.0</span><span class="s1">, </span><span class="s3">1.0</span><span class="s1">]) 
+    B = ([u, v, w])  </span><span class="s0"># base canonique - standard basis</span><span class="s1"> 
+    R = Repere(P, B) 
+    Equation = [</span><span class="s3">1.0</span><span class="s1">, -</span><span class="s3">2.0</span><span class="s1">, -</span><span class="s3">1.0</span><span class="s1">, </span><span class="s3">3.0</span><span class="s1">]  </span><span class="s0"># plan x-2y-z=3</span><span class="s1"> 
+    H = Hyperplan(R, Equation) 
+    print(H) 
+    M = PointKn([</span><span class="s3">1.0</span><span class="s1">, -</span><span class="s3">2.1</span><span class="s1">, </span><span class="s3">0.0</span><span class="s1">]) 
+    N = PointKn([</span><span class="s3">1.0</span><span class="s1">, -</span><span class="s3">1.0</span><span class="s1">, </span><span class="s3">0.0</span><span class="s1">]) 
+    print(H.Distance(M)) 
+    print(H.Distance(N)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

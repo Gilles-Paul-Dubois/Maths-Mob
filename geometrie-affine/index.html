@@ -3,67 +3,192 @@
 <head>
     <meta charset="utf-8" />
 	<title>Géométrie affine</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../css/themes/myown.css" />
-	<link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
-	<link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.5.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../css/themes/myown.css" />
+    <link rel="stylesheet" href="../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../css/jquery.mobile.structure-1.4.5.min.css" />
     <link href="../css/myown.css" rel="stylesheet">
-	<link href="../css/jquery.mobile-1.4.5.css" rel="stylesheet">
-	<script src="../js/jquery-1.11.3.js"></script>
-	<script src="../js/jquery.mobile-1.4.5.min.js"></script>
-	<script src="../js/custom.js"></script>
-
-</head>
-<body style="overflow: auto; "class="fr">
-<script> window.onload=get();</script>
-
-<div data-role="page" data-theme="e">
-
-	<div data-role="header">
-<table>
-<tr>
-<td>Choisissez votre langue !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../images/fr.png" width="64" height="32" alt="Français"></button></td>
-<td>Choose your language !</td>
-<td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../images/uk.png" width="64" height="32" alt="English"></button></td>
-</tr>
-</table>	
-	</div><!-- /header -->
-
-<div data-role="content" data-theme="e">
+    <link href="../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../js/jquery-1.11.3.js"></script>
+    <script src="../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../js/custom.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
         <div lang="fr">
-          <p>Ce module est en construction.</p>
-          <p>L'chévement est prévu pour Août 2023.</p>
-          <p>En attendant vous pouvez consulter <br>
-            <a href="http://gilles.dubois10.free.fr/geometrie_affine/geometrie_affine.html" data-role="button" target="_blank">l'ancienne version</a> Cette version, conçue spécialement pour les ordinateurs individuels est <strong>difficile à consulter avec un appareil mobile</strong> (tablette - téléphone).
+          <div>
+            <ul style=list-style-type:'';>
+<li><input type="button" value="Espaces affines" onclick="go('affines/index.html')" /></li>
+<li><input type="button" value="Représentation des variétés" onclick="go('repvar/index.html')" /></li>
+<li><input type="button" value="Applications affines" onclick="go('appaffines/index.html')" /></li>
+<li><input type="button" value="Principaux théorèmes" onclick="go('theoremes/index.html')" /></li>
+<li><input type="button" value="Espaces euclidiens" onclick="go('euclidiens/index.html')" /></li>
+<li><input type="button" value="Le plan euclidien" onclick="go('plan/index.html')" /></li>
+<li><input type="button" value="L'espace tridimensionnel" onclick="go('esp3d/index.html')" /></li>
+ <li><input type="button" value="Coniques" onclick="go('coniques/index.html')" /></li>            
+ <li><input type="button" value="Retour à l'accueil" onclick="go('../index.html')" /></li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+
+<h2><img alt="" border="0" height="40" src="../images/attention.gif" width="40"/>Pré-requis culturel</h2>
+Pour être capable de lire et de comprendre le présent module, vous
+devez impérativement connaître le contenu du module <input type="button" value="Algèbre linéaire" onclick="go('../algebre-lineaire/index.html#')" data-inline="true" /> du même cours (ou équivalent).
+
+       <h2>Pré-requis technique</h2>
+        Depuis Mars 2015 ce module (géométrie affine) est exempt de toute appliquette java, il est entièrement java-free et peut être consulté par tout navigateur sans plugin.
+        Pour une visualisation correcte des différentes pages, vous devez:
+        <ul><li>Disposer
+                <span style="font-weight: bold;">d'un navigateur récent(FireFox, Chrome, Explorer, Opera)</span>
+</li>
+<li><b>Autoriser l'exécution de scripts</b> (JavaScript).</li>
+</ul>
+        La mise au point a été faite dans l'environnement Firefox 34.0 sous Linux-Mint (Qiana).<br/>
+        Tous les programmes Python donnés en exemple sont copiables et exécutables sur
+        votre
+        machine si vous possédez un interprète Python (téléchargeable
+        gratuitement).<br/>
+        Les sources ont été écrites pour la version    <a href="https://www.python.org/downloads/"  data-role="button" target="_blank" data-inline="true">Python 3.4 </a><br/>
+        Je remercie
+         <a href="http://jsxgraph.uni-bayreuth.de/wp/"  data-role="button" data-inline="true" target="_blank">L'université de Bayreuth </a> 
+   et l'équipe de développement de la bibliothèque JSXGraph, largement utilisé dans ces pages pour la réalisation d'applets javascript.<br/>
+        Je suis reconnaissant à l'équipe de développement du logiciel éducatif  <a href="https://www.geogebra.org/"  data-inline="true" data-role="button" target="_blank">GeoGebra </a>. Ce logiciel est largement utilisé pour la production d'images statiques dans ce module et dans les autres.<br>
+        J'adresse aussi tous mes remerciements à l'équipe de développement de 
+         <a href="http://www.mathjax.org/"  data-role="button" data-inline="true" target="_blank">MathJax </a>
+et dans tous les autres ; cette bibliothèque est largement utilisée dans tout le module.<br/>
+        Mes remerciements vont également à Kevin Roast, auteur de <input type="button" value="la bibliothèque Phoria" onclick="go('http://www.kevs3d.co.uk/dev/phoria/#')" data-inline="true" />, que j'utilise de nombreuses fois pour la géométrie interactive 3D, en concurrence avec mes propres outils.
+          <h2>Additif Juillet 2021</h2>
+          <p>Nous pensons que  <a href="https://julialang.org/"  data-role="button" data-inline="true" target="_blank">Le langage Julia </a> est promis à un grand avenir. C'est pourquoi, pour ce module, tous les exemples donnés en Python ont été doublés en Julia avec la version actuelle 1.6 aussi bien pour le cours que pour les exercices de programmation.</p>
+          <p>A cette occasion nous avons vérifié la totale compatibilité ascendate de la version 3.4 de Python avec la version actuelle 3.8.</p>
+          <p>Il est possible de tester les exemples et de les modifier en ligne, par simple copier/coller sur <a href="https://jupyter.org/try" data-role="button" target="_blank" data-inline="true"> Le site de Jupyter </a>. Il n'est donc pas nécessaire d'installer un EDI quelconque en mode local bien que cela puisse se faire justement à partir de leur site. </p>
+          <p>A ce jour il existe plusieurs éditeurs multi-langages (python/Julia) et multi plateformes (Windows, Linux, Mac) gratuits intéressants parmi lesquels <a href="https://www.jetbrains.com/fr-fr/pycharm/" data-inline="true" data-role="button" target="_blank">Pycharm de Jetbrains </a> et <a href="https://atom.io/" data-role="button" target="_blank" target="_blank" data-inline="true">atom </a>. Il suffit juste d'installer les plugins correspondants (juno pour atom, julia plugin pour jetbrains). </p>
+          <p>Sous Linux, le programme <a href="https://notepadqq.com/s/" data-role="button" target="_blank" data-inline="true">notepadqq </a> (version Linux de notepa++) sait éditer les programmes Julia. De plus avec un paramétrage convenable on peut exécuter ces programmes sans quitter l'éditeur. notepadqq peut aussi être utilisé conjointement avec PyCharm éditant un à un les fichiers d'un projet Julia de Pycharm. </p>
+          <p>
+            <a href="https://www.anaconda.com/" data-role="button" data-inline="true" target="_blank">Anaconda </a> fournit également un environnement Python récent et complet et donne accès à Jupyter si le package IJulia est installé, ainsi qu'à Pycharm.
           </p>
+          <p>Le lecteur vérifiera que le seul package 'MTH229' de Julia remplace avantageusement les librairies numpy, scipy, random, functools de Python (et peut-être d'autres encore). De nombreuses primitives de ces bibliothèques sont d'ores et déjà dépréciées (deprecated) avant leur suppression annoncée, ce qui va poser des problèmes de mise à jour. </p>
+          <p>N'hésitez pas à nous communiquer tout fonctionnement erratique des programmes donnés en exemple. D'avance merci !</p>
         </div>
         <!-- /fr -->
         <div lang="en">
-          <p>This part is still under construction.</p>
-          <p>Completion is estimated to August 2023.</p>
-          <p>In the meantime you can consult : <br>
-            <a href="http://gilles.dubois10.free.fr/geometrie_affine/geometrie_affine.html" data-role="button" target="_blank">the old version</a> But this version is desktop only. <strong>Consultation with mobiles devices is possible but not comfortable</strong>. <br> Furthermore it <strong>is in French language only.</strong> Of course you can ask the help of online translators such as those provided by Google or Yandex, but the result is not guaranteed.
-          </p>
+          <div>
+            <ul style=list-style-type:'';>
+ <li><input type="button" value="Affine spaces" onclick="go('affines/index.html')" /></li>
+<li><input type="button" value="Representation of varieties" onclick="go('repvar/index.html')" /></li>
+<li><input type="button" value="Afine maps" onclick="go('appaffines/index.html')" /></li>
+<li><input type="button" value="Main theorems" onclick="go('theoremes/index.html')" /></li>
+<li><input type="button" value="Euclidean spaces" onclick="go('euclidiens/index.html')" /></li>
+<li><input type="button" value="The Euclidean plane" onclick="go('plan/index.html')" /></li>
+<li><input type="button" value="The Euclidean 3D space" onclick="go('esp3d/index.html')" /></li>
+ <li><input type="button" value="Conic sections" onclick="go('coniques/index.html')" /></li>            
+ <li><input type="button" value="Retour à l'accueil" onclick="go('../index.html')" /></li>
+            </ul>
+ 
+          </div>
+          <!-- /navbar -->
+ <h2><img alt="" border="0" height="40" src="../images/attention.gif" width="40"/>Cultural requirement</h2>
+To be able to read and understand this module, you
+you must know the content of the <input type="button" value="Linear Algebra" onclick="go('../algebre-lineaire/index.html#')" data-inline="true" /> module of the same course (or equivalent).
+
+        <h2>Technical prerequisites</h2>
+         Since March 2015 this module (affine geometry) is free of any java applet, it is entirely java-free and can be consulted by any browser without a plugin.
+         For a correct visualization of the different pages, you must:
+         <ul><li>Arrange
+                 <span style="font-weight: bold;">a recent browser (FireFox, Chrome, Explorer, Opera)</span>
+</li>
+<li><b>Allow script execution</b> (JavaScript).</li>
+</ul>
+         The development was made in the Firefox 34.0 environment under Linux-Mint (Qiana).<br/>
+         All Python programs given as examples can be copied and run on
+         your
+         machine if you have a Python interpreter (downloadable
+         for free).<br/>
+         The sources were written for version <a href="https://www.python.org/downloads/" data-role="button" target="_blank" data-inline="true">Python 3.4 </a><br/>
+         I thank
+          <a href="http://jsxgraph.uni-bayreuth.de/wp/" data-role="button" data-inline="true" target="_blank">University of Bayreuth </a>
+    and the development team of the JSXGraph library, widely used in these pages for the realization of javascript applets.<br/>
+         I am grateful to the Educational Software Development Team <a href="https://www.geogebra.org/?lang=en" data-inline="true" data-role="button" target="_blank">GeoGebra </a>. This software is widely used for producing static images in this and other modules.<br>
+         I also extend my thanks to the development team of
+          <a href="http://www.mathjax.org/" data-role="button" data-inline="true" target="_blank">MathJax</a>
+and in all the others; this library is widely used throughout the module.<br/>
+         My thanks also go to Kevin Roast, author of <input type="button" value="the Phoria library" onclick="go('http://www.kevs3d.co.uk/dev/phoria/#')" data-inline="true" />, which I use many times for 3D interactive geometry, competing with my own tools.
+           <h2>Addendum July 2021</h2>
+           <p>We believe that <a href="https://julialang.org/" data-role="button" data-inline="true" target="_blank">The Julia Language</a> is promised to a great future. This is why, for this module, all the examples given in Python have been duplicated in Julia with the current version 1.6 both for the course and for the programming exercises.</p>
+           <p>On this occasion we checked the full backward compatibility of Python version 3.4 with the current version 3.8.</p>
+           <p>It is possible to test the examples and modify them online, by simply copying and pasting on <a href="https://jupyter.org/try" data-role="button" target="_blank" data-inline="true">Jupyter's site</a>. It is therefore not necessary to install any IDE in local mode, although this can be done from their site. </p>
+           <p> To date, there are several interesting free multi-language (python/Julia) and multi-platform (Windows, Linux, Mac) editors, including <a href="https://www.jetbrains.com/pycharm/" data-inline="true" data-role="button" target="_blank">Pycharm from Jetbrains</a> and <a href="https://atom.io/" data-role= "button" target="_blank" target="_blank" data-inline="true">atom</a>. Just install the corresponding plugins (juno for atom, julia plugin for jetbrains). </p>
+           <p>Under Linux, the program <a href="https://notepadqq.com/s/" data-role="button" target="_blank" data-inline="true">notepadqq </a> ( Linux version of notepa++) can edit Julia programs. Moreover, with suitable settings, these programs can be run without leaving the editor. notepadqq can also be used in conjunction with PyCharm editing one by one the files of a Pycharm Julia project. </p>
+           <p>
+             <a href="https://www.anaconda.com/" data-role="button" data-inline="true" target="_blank">Anaconda</a> also provides a recent and complete Python environment and gives access to Jupyter if the IJulia package is installed, as well as to Pycharm.
+           </p>
+           <p>The reader will verify that the single 'MTH229' package from Julia advantageously replaces the numpy, scipy, random, functools libraries of Python (and perhaps others). Many primitives of these libraries are already deprecated before their announced removal, which will cause problems.
         </div>
         <!-- /en -->
-	</div><!-- /content -->
-
-	<div data-role="footer">
-<table cellpadding="10">
-<tr>
-<td><div lang="fr">Création Gilles Dubois</div> <div lang="en">Created by Gilles Dubois</div></td>
-<td><div lang="fr">Janvier 2022</div><div lang="en">January 2022</div> </td>
-<td><div lang="fr">Version mobile Jquery</div><div lang="en">Mobile Jquery version</div></td>
-<td><a href="mailto:gilles.paul.dubois@free.fr"  data-role="button" data-inline="true" 
-   data-theme="a" rel="external" data-mini="true">Mail</a></td>
-   
-  <td><div lang="fr"><input type="button" value="Auteur" onclick="goext('../presentation.html')" /></div>
-   <div lang="en"><input type="button" value="Author" onclick="goext('../presentation.html')" /></div></td>
-</tr>
-</table>	
-	</div><!-- /footer -->
-</div><!-- /page -->
-
-</body>
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" data-inline="true" data-theme="a" rel="external" data-mini="true">Mail</a>
+            </td>
+            <td>
+              <div lang="fr">
+                <input type="button" value="Auteur" onclick="goext('../presentation.html')" />
+              </div>
+              <div lang="en">
+                <input type="button" value="Author" onclick="goext('../presentation.html')" />
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+    </div>
+    <!-- /page -->
+  </body>
 </html>

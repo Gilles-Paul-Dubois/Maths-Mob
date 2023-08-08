@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Définition par foyer et directrice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquesfoydir/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquesfoydir/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous avons vu <input type="button" value="activer l'appliquette ici" onclick="go('coniqueshist.html#def7')" data-inline="true" /> que dans les points de la parabole peuvent être caractérisés par une propriété métrique mettant en jeu un point et une droite. <br /> En clair la parabole peut être considérée comme l'ensemble des points équidistants d'une droite et d'un point. <br /> Nous cherchons maintenant une propriété analogue pour les autres sections coniques. <br />
+          <h2>Une autre propriété des sections coniques (non circulaires).</h2> Considérons le cas où la section conique (conique 'historique' donc) est soit une ellipse non circulaire, soit une hyperbole. Le premier curseur vous permet de déplacer M sur la conique. <br /> Avec la souris vous pouvez faire varier l'angle de vue de la figure. <br /> Le second curseur vous permet de faire varier l'angle θ du cône . <br /> Nous faisons une figure correspondant au cas de l'ellipse, la démonstration est tout à fait analogue pour l'hyperbole. <br /> Cliquez l'image ci-après pour ouvrir une appliquette dans une nouvelle fenêtre.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have seen <input type="button" value="activate the applet here" onclick="go('coniqueshist.html#def7')" data-inline="true" /> that in the points of the parabola can be characterized by a metric property involving a point and a line. <br /> Clearly the parabola can be considered as the set of points equidistant from a straight line and a point. <br /> We are now looking for an analogous property for the other conic sections. <br />
+          <h2>Another property of conic (non-circular) sections.</h2> Consider the case where the conic section (thus 'historical' conic) is either a non-circular ellipse or a hyperbola. The first slider allows you to move M on the conic. <br /> With the mouse on a computer you can vary the viewing angle of the figure. <br /> The second slider allows you to vary the angle θ of the cone. <br /> We draw a figure corresponding to the case of the ellipse, the demonstration is completely analogous for the hyperbola. <br /> Click the image below to open an applet in a new window.
+        </div>
+        <!-- /en -->
+        <input type="image" name="iconapplet7" src="images/applet.png" onclick="go('histocon7.html#')" data-inline="false">
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Les coniques historiques apparaissent donc comme des ensembles de points caractérisés par le fait que le rapport de leur distance à un point (foyer) à leur distance à une droite (directrice) est constant. <br> Cela s'applique en particulier aux paraboles pour lesquelles ce rapport vaut exactement 1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Historical conics therefore appear as sets of points characterized by the fact that the ratio of their distance to a point (focus) to their distance to a straight line (directrix) is constant. <br> This applies in particular to parabolas for which this ratio is exactly 1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Lien avec les coniques 'algébriques' (courbes du second degré).</h2> Le résultat principal est le suivant :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Link with 'algebraic' conics (quadratic curves).</h2> The main result is the following:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Le lieu des points du plan dont le rapport des distances à un point F et à une droite Δ distante de d &gt;0 de F, vaut un constante e ∈ &reals;<sup>+</sup> est une conique algébrique. <br />
+            <ul>
+              <li>C'est une ellipse si e &lt; 1.</li>
+              <li>C'est une parabole si e=1.</li>
+              <li>C'est une hyperbole si e &gt; 1.</li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> The locus of the points of the plane whose distance ratio to a point F and to a straight line Δ distant from d &gt;0 from F, is equal to a constant e ∈ &reals;<sup>+</sup> is an algebraic conic. <br />
+            <ul>
+              <li>It's an ellipse if e &lt; 1.</li>
+              <li>It's a parabola if e=1.</li>
+              <li>It's a hyperbola if e &gt; 1.</li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Dans un repère orthonormé où les coordonnées de F sont (d,0), et l'équation de &Delta; est x=0, le point M de coordonnées (x,y) appartient au lieu si et seulement si :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left( {x - d} \right)^{2} + y^{2} = e^{2}x^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> C'est à dire :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left( {1 - e^{2}} \right)x^{2} + y^{2} - 2{dx} = - d^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> ou encore
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle x^{2}\left( {1 - e^{2}} \right) - \frac{2p}{e}x + y^{2} = - \frac{p^{2}}{e^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> que nous pouvons écrire
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left( {1 - e^{2}} \right)\left( x^{2} - \frac{2p}{e\left( {1 - e^{2}} \right)}x + \frac{y^{2}}{1 - e^{2}} \right) = - \frac{p^{2}}{e^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> ou encore
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left( {x - \frac{p}{e\left( {1 - e^{2}} \right)}} \right)^{2} + \frac{y^{2}}{1 - e^{2}} = \frac{p^{2}e^{2}}{e^{2}\left( {1 - e^{2}} \right)^{2}} = \frac{p^{2}}{\left( {1 - e^{2}} \right)^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <h3>Cas 0 &lt; e &lt; 1</h3> Dans ce cas il vient :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\left( {x - \frac{p/e}{1 - e^{2}}} \right)^{2}}{\left( \frac{p}{1 - e^{2}} \right)^{2}} + \frac{y^{2}}{\left( \frac{p}{\sqrt{1 - e^{2}}} \right)^{2}} = 1 \)</p>
+            <!-- /FORMULE UNIV INLINE--> C'est donc l'ellipse de centre &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left( \frac{p/e}{1 - e^{2}},0 \right) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; d'axes principaux parallèles aux axes du repère et de demi-axes
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {a = \frac{p}{1 - e^{2}}} \\ {b = \frac{p}{\sqrt{1 - e^{2}}} < a} \\ \end{matrix} \right. \) </p>
+                <!-- /FORMULE UNIV INLINE--> Le second foyer est F'(q,0), avec :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle q = \frac{2p/e}{1 - e^{2}} - p/e = \left( \frac{1 + e^{2}}{1 - e^{2}} \right)p/e \)</p>
+                <!-- /FORMULE UNIV INLINE--> Il est donc "à droite" de F. <br> On a
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle c = \sqrt{a^{2} - b^{2}} = \frac{ep}{1 - e^{2}} \)</p>
+                <!-- /FORMULE UNIV INLINE--> donc
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle e = \frac{c}{a} \)</p>
+                <!-- /FORMULE UNIV INLINE-->
+                <h3>Cas e = 1</h3> Il vient :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle y^{2} = 2p\left( {x - \frac{p}{2}} \right) \)</p>
+                <!-- /FORMULE UNIV INLINE--> C'est donc la parabole d'axe D=F+&Delta;<sup>&perp;</sup>, de sommet O(p/2,0) et de paramètre p. <h3>Cas e &gt; 1</h3> Il vient :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle \frac{\left( {x - \frac{p/e}{1 - e^{2}}} \right)^{2}}{\left( \frac{p}{1 - e^{2}} \right)^{2}} - \frac{y^{2}}{\left( \frac{p}{\sqrt{1 - e^{2}}} \right)^{2}} = 1 \)</p>
+                <!-- /FORMULE UNIV INLINE--> C'est donc l'hyperbole de centre &nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \left( \frac{p/e}{1 - e^{2}},0 \right) \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp; (toujours à gauche de la directrice) d'axes principaux parallèles aux axes, et de demi-axes :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle \left\{ \begin{matrix} {a = \frac{p}{e^{2} - 1}} \\ {b = \frac{p}{\sqrt{e^{2} - 1}}} \\ \end{matrix} \right. \)</p>
+                <!-- /FORMULE UNIV INLINE--> Dans ce cas
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle c = \sqrt{a^{2} + c^{2}} = \frac{p}{e^{2} - 1}\sqrt{1 + e^{2} - 1} = \frac{ep}{e^{2} - 1} \)</p>
+                <!-- /FORMULE UNIV INLINE--> Donc e=c/a. <br> Le second foyer est (q,0) avec
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle q = \frac{2p/e}{1 - e^{2}} - p/e = \left( \frac{1 + e^{2}}{1 - e^{2}} \right)p/e \)</p>
+                <!-- /FORMULE UNIV INLINE--> Il est donc "à gauche" de la directrice et du centre.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> In an orthonormal frame where the coordinates of F are (d,0), and the equation of &Delta; is x=0, the point M with coordinates (x,y) belongs to the place if and only if:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left( {x - d} \right)^{2} + y^{2} = e^{2}x^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> That's to say :
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left( {1 - e^{2}} \right)x^{2} + y^{2} - 2{dx} = - d^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> or
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle x^{2}\left( {1 - e^{2}} \right) - \frac{2p}{e}x + y^{2} = - \frac{p^{2}}{e^{2}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> that we can write
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left( {1 - e^{2}} \right)\left( x^{2} - \frac{2p}{e\left( {1 - e^{2}} \right)}x + \frac{y^{2}}{1 - e^{2}} \right) = - \frac{p^{2}}{e^{2}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> or
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left( {x - \frac{p}{e\left( {1 - e^{2}} \right)}} \right)^{2} + \frac{y^{2}}{1 - e^{2}} = \frac{p^{2}e^{2}}{e^{2}\left( {1 - e^{2}} \right)^{2}} = \frac{p^{2}}{\left( { 1 - e^{2}} \right)^{2}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+            <h3>Case 0 &lt; e &lt; 1</h3> In this case it comes:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\left( {x - \frac{p/e}{1 - e^{2}}} \right)^{2}}{\left( \frac{p}{1 - e^{2}} \right)^{2}} + \frac{y^{2}}{\left( \frac{p}{\sqrt{1 - e^{2}}} \right)^{2}} = 1 \)</p>
+            <!-- /INLINE UNIV FORMULA--> It is therefore the ellipse with center &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left( \frac{p/e}{1 - e^{2}},0 \right) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; with principal axes parallel to the axes of the reference frame and with semi-axes
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {a = \frac{p}{1 - e^{2}}} \\ {b = \frac{p}{\sqrt{1 - e^{2}}} < a} \\ \end{matrix} \right. \) </p>
+                <!-- /INLINE UNIV FORMULA--> The second focus is F'(q,0), with:
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle q = \frac{2p/e}{1 - e^{2}} - p/e = \left( \frac{1 + e^{2}}{1 - e^{2}} \right)p/e \)</p>
+                <!-- /INLINE UNIV FORMULA--> It is therefore "to the right" of F. <br> We have
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle c = \sqrt{a^{2} - b^{2}} = \frac{ep}{1 - e^{2}} \)</p>
+                <!-- /INLINE UNIV FORMULA--> SO
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle e = \frac{c}{a} \)</p>
+                <!-- /INLINE UNIV FORMULA-->
+                <h3>Case e = 1</h3> He comes :
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle y^{2} = 2p\left( {x - \frac{p}{2}} \right) \)</p>
+                <!-- /INLINE UNIV FORMULA--> It is therefore the parabola with axis D=F+&Delta;<sup>&perp;</sup>, vertex O(p/2,0) and parameter p. <h3>Case e &gt; 1</h3> He comes :
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle \frac{\left( {x - \frac{p/e}{1 - e^{2}}} \right)^{2}}{\left( \frac{p}{1 - e^{2}} \right)^{2}} - \frac{y^{2}}{\left( \frac{p}{\sqrt{1 - e^{2}}} \right)^{2}} = 1 \)</p>
+                <!-- /INLINE UNIV FORMULA--> It is therefore the hyperbola with center &nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \left( \frac{p/e}{1 - e^{2}},0 \right) \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp; (always to the left of the directrix) with principal axes parallel to the axes, and with semi-axes:
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle \left\{ \begin{matrix} {a = \frac{p}{e^{2} - 1}} \\ {b = \frac{p}{\sqrt{e^{2} - 1}}} \\ \end{matrix} \right. \)</p>
+                <!-- /INLINE UNIV FORMULA--> In this case
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle c = \sqrt{a^{2} + c^{2}} = \frac{p}{e^{2} - 1}\sqrt{1 + e^{2} - 1} = \frac{ep}{e^{2} - 1} \)</p>
+                <!-- /INLINE UNIV FORMULA--> So e=c/a. <br> The second focus is (q,0) with
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle q = \frac{2p/e}{1 - e^{2}} - p/e = \left( \frac{1 + e^{2}}{1 - e^{2}} \right)p/e \)</p>
+                <!-- /INLINE UNIV FORMULA--> It is therefore "to the left" of the directrix and of the centre.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On appelle Δ la <b>
+              <i>'directrice'</i>
+            </b>, F le <b>
+              <i>'foyer'</i>
+            </b>, et e <b>
+              <i>"l'excentricité"</i>
+            </b> de la conique. <br /> Si e ≠ 1, F est l'un des foyers au sens de <input type="button" value="la page précédente" onclick="go('coniquesfoyers.html#')" data-inline="true" />. <br /> Le nombre p=e.d s'appelle le <b>
+              <i>'paramètre'</i>
+            </b> de la conique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We call Δ the <b>
+              <i>'directrix'</i>
+            </b>, F the <b>
+              <i>'focus'</i>
+            </b>, and e <b>
+              <i>the "eccentricity"</i>
+            </b> of the conic. <br /> If e ≠ 1, F is one of the foci in the sense of <input type="button" value="the previous page" onclick="go('coniquesfoyers.html#')" data-inline="true" />. <br /> The number p=e.d is called the <b>
+              <i>'parameter'</i>
+            </b> of the conic.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Les calculs faits précédemment permettent d'affirmer que : </div>
+        <!-- /fr -->
+        <div lang="en"> The calculations made above show that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> La définition par foyer et directrice donne bien toutes les ellipses (sauf le cercle), toutes les paraboles, et toutes les hyperboles.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> The definition by focus and directrix does give all ellipses (except the circle), all parabolas, and all hyperbolas.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Pour les paraboles c'est évident. <br> Dans les autres cas, il suffit en effet de reconstituer e et p à partir de a et b. <br> e s'obtient toujours par la formule e=c/a. <br> On a toujours de plus <br> p=a(1-e²)
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> For the parabolas it is obvious. <br> In the other cases, it suffices to retrieve e and p from a and b. <br> e is always obtained by the formula e=c/a. <br> We always have furthermore <br> p=a(1-e²)
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette définition laisse donc échapper les cercles, tout comme la définition 'bifocale' laissait échapper les paraboles. </div>
+        <!-- /fr -->
+        <div lang="en"> This definition therefore misses circles, just as the 'bifocal' definition misses parabolas. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Nous conviendrons cependant d'attribuer aux cercles l'excentricité nulle.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We will however agree to attribute to the circles a null eccentricity.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Les cercles auront donc un foyer (le centre) une excentricité, mais pas de directrice. <br> Avec cette convention : </div>
+        <!-- /fr -->
+        <div lang="en"> The circles will therefore have a focus (the center) an eccentricity, but no directrix. <br> With this agreement: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div>
+            <ul>
+              <li>Deux coniques sont égales (isométriques)) si elles ont même excentricité et même paramètre (ou même rayon pour les cercles).</li>
+              <li>Deux coniques sont semblables si elles ont même excentricité (incluant le cas des cercles qui sont donc tous semblables).</li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div>
+            <ul>
+              <li>Two conics are equal (isometric) if they have the same eccentricity and the same parameter (or the same radius for circles).</li>
+              <li>Two conics are similar if they have the same eccentricity (including the case of circles which are therefore all similar).</li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ceci est évident sur la définition par foyer et directrice et par la définition des <input type="button" value="similitudes" onclick="go('../euclidiens/euclisim.html#')" data-inline="true" />. <h2>Coniques 'historiques' (sections de cônes) v/s coniques 'algébriques' (courbes du second degré).</h2> Le temps est maintenant venu d'unifier toutes nos définitions et de montrer que les coniques définies historiquement à la mode d'Appollonius de Perge sont exactement les coniques (apparemment plus générales) définies par des équations du second degré. <br> Il suffit d'après ce qui précède de montrer que : </div>
+        <!-- /fr -->
+        <div lang="en"> This is evident on the definition by focus and directrix and by the definition of <input type="button" value="similarities" onclick="go('../euclidiens/euclisim.html#')" data-inline="true" />. <h2>'Historical' conics (sections of cones) v/s 'algebraic' conics (curves of the second degree).</h2> The time has now come to unify all our definitions and show that the conics defined historically in the fashion of Apollonius of Perge are exactly the (seemingly more general) conics defined by quadratic equations. <br> It suffices from the above to show that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Une conique d'excentricité quelconque peut être obtenue comme intersection d'un cône droit et d'un plan.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> A conic of any eccentricity can be obtained as the intersection of a straight cone and a plane.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> On peut d'entrée éliminer le cas des cercles qui sont les sections par des plans orthogonaux à l'axe du cône. <br /> Les cônes droits étant des <input type="button" value="cônes de révolution" onclick="go('../esp3d/espacerevolution.html#')" data-inline="true" /> on peut supposer qu'un tel cône C dans un repère bien choisi a une équation du type :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \alpha^{2}z^{2} = x^{2} + y^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Sans aucune perte de généralité on peut supposer que les plans sécants P sont parallèles à Ox et donc d'équation :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\beta z} = y + \gamma \)</p>
+            <!-- /FORMULE UNIV INLINE--> Posant alors &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} = \begin{pmatrix} 1 \\ 0 \\ 0 \\ \end{pmatrix} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} = \begin{pmatrix} 0 \\ \frac{\beta}{\delta} \\ \frac{1}{\delta} \\ \end{pmatrix} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} = \begin{pmatrix} 0 \\ {- \frac{1}{\delta}} \\ \frac{\beta}{\delta} \\ \end{pmatrix} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; où &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \delta = \sqrt{1 + \beta^{2}} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; <br> On vérifie que &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; est une base orthonormée et que &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; est une base du plan vectoriel &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{P} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; directeur de P. <br> Les formules de changement de repère de &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; repère nitial à &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; sont donc
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {x = X} \\ {y = \frac{{\beta Y} - Z}{\delta}} \\ {z = \frac{Y + {\beta Z}}{\delta}} \\ \end{matrix} \right. \)</p>
+            <!-- /FORMULE UNIV INLINE--> où (x,y,z) sont les coordonnées dans &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; et X,Y,Z les coordonnées dans &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; <br> Les équations de P et de C dans le repère &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left (O, \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; s'écrivent donc en posant &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \varepsilon = \frac{\gamma}{\delta} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;: <br> Z= &epsilon; <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \delta^{2}X^{2} + \left( \beta^{2} - \alpha^{2} \right)Y^{2} - 2\beta\left( {1 + \alpha^{2}} \right){YZ} + \left( {1 - \alpha^{2}\beta^{2}} \right)Z^{2} = 0 \)</p>
+            <!-- /FORMULE UNIV INLINE--> Et la courbe intersection de P et C a donc pour équation dans P :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \delta^{2}X^{2} + \left( \beta^{2} - \alpha^{2} \right)Y^{2} - 2{\beta\epsilon}\left( {1 + \alpha^{2}} \right)Y + \left( {1 - \alpha^{2}\beta^{2}} \right)\epsilon^{2} = 0 \)</p>
+            <!-- /FORMULE UNIV INLINE--> L'excentricité de la conique vaut
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle e = \sqrt{\left( \frac{1 + \alpha^{2}}{1 + \beta^{2}} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> En faisant varier &beta; on obtient donc toutes les coniques d'excentricité e avec 0 &le; e &le; &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \sqrt{1 + \alpha^{2}} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;. <br> En faisant varier &alpha; on les obtient toutes.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> We can immediately eliminate the case of circles which are the sections by planes orthogonal to the axis of the cone. <br /> The right cones being <input type="button" value="cones of revolution" onclick="go('../esp3d/espacerevolution.html#')" data-inline="true" /> we can assume that such a cone C in a well-chosen reference frame has an equation of the type:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \alpha^{2}z^{2} = x^{2} + y^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> Without any loss of generality, we can assume that the secant planes P are parallel to Ox and therefore have the equation:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {\beta z} = y + \gamma \)</p>
+            <!-- /INLINE UNIV FORMULA--> Posing then &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} = \begin{pmatrix} 1 \\ 0 \\ 0 \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} = \begin{pmatrix} 0 \\ \frac{\beta}{\delta} \\ \frac{1}{\delta} \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} = \begin{pmatrix} 0 \\ {- \frac{1}{\delta}} \\ \frac{\beta}{\delta} \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; Or &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \delta = \sqrt{1 + \beta^{2}} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; <br> We check that &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; is an orthonormal basis and that &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; is a basis of the vector plane &nbsp;
+            <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{P} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; director of P. <br> The reference change formulas of &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; initial landmark at &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; thereby are
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {x=X} \\ {y = \frac{{\beta Y} - Z}{\delta}} \\ {z = \frac{Y + {\beta Z}}{\delta}} \\ \end{matrix} \right. \)</p>
+            <!-- /INLINE UNIV FORMULA--> where (x,y,z) are the coordinates in &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; and X,Y,Z coordinates in &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; <br> The equations of P and C in the frame &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left (O, \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; are therefore written by setting &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \varepsilon = \frac{\gamma}{\delta} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;: <br> Z= &epsilon; <br>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \delta^{2}X^{2} + \left( \beta^{2} - \alpha^{2} \right)Y^{2} - 2\beta\left( {1 + \alpha^{2}} \right){YZ} + \left( {1 - \alpha^{2}\beta^{2}} \right)Z^{2} = 0 \)</p>
+            <!-- /INLINE UNIV FORMULA--> And the intersection curve of P and C therefore has the equation in P:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \delta^{2}X^{2} + \left( \beta^{2} - \alpha^{2} \right)Y^{2} - 2{\beta\epsilon}\left( {1 + \alpha^{2}} \right)Y + \left( {1 - \alpha^{2}\beta^{2}} \right)\epsilon^{2} = 0 \)</p>
+            <!-- /INLINE UNIV FORMULA--> The eccentricity of the conic is worth
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle e = \sqrt{\left( \frac{1 + \alpha^{2}}{1 + \beta^{2}} \right)} \)</p>
+            <!-- /INLINE UNIV FORMULA--> By varying &beta; we therefore obtain all the conics of eccentricity e with 0 &le; e &le; &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \sqrt{1 + \alpha^{2}} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;. <br> By varying &alpha; we get them all.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> En conséquence, à partir de maintenant et pour toutes la suite de l'exposé, en cas de non dégénérescence, nous ne ferons plus aucune distinction entre coniques 'historiques' (sections de cônes de révolution par des plans) et coniques 'algébriques' (courbes du second degré). <br> En outre nous utiliserons parfois pour les coniques qui ne sont pas des paraboles des définitions 'bifocales' et pour toutes celles qui ne sont pas des cercles, des définitions par 'foyer et directrice'. <h2>Sommets</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Consequently, from now on and for all the rest of the presentation, in the case of non-degeneracy, we will no longer make any distinction between 'historical' conics (sections of cones of revolution by planes) and 'algebraic' conics (curves of the second degree). <br> Moreover we will sometimes use for conics which are not parabolas 'bifocal' definitions and for all those which are not circles, definitions by 'focus and directrix'. <h2>Vertices</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Pour les coniques à centre (excepté les cercles), <strong>
+              <em>"l'axe principal"</em>
+            </strong> ou <strong>
+              <em>'axe focal'</em>
+            </strong> désigne la droite (FF') où F et F' sont les deux foyers. Pour une parabole, c'est l'unique axe de symétrie.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> For centered conics (except circles), <strong>
+              <em>"major axis"</em>
+            </strong> or <strong>
+              <em>'focal axis'</em>
+            </strong> denotes the straight line (FF') where F and F' are the two foci. For a parabola, it is the only axis of symmetry.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> On appelle <strong>
+              <em>'sommets'</em>
+            </strong> d'une conique (qui n'est pas un cercle) tout point d'intersection de l'axe principal avec la conique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> We call <strong>
+              <em>'vertices'</em>
+            </strong> of a conic (which is not a circle) any point of intersection of the major axis with the conic.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour les ellipses et les hyperboles il y a donc deux sommets S(a,0) et S'(-a,0). <h2>Equations des coniques rapportées à un sommet</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> For ellipses and hyperbolas there are therefore two vertices S(a,0) and S'(-a,0). <h2>Equations of the conics referred to a vertex</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Dans un repère centré sur le sommet S(a,0) pour les coniques à centre et pour l'unique sommet pour les paraboles d'axe y'Oy, l'équation des coniques prend la forme générale
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle y^{2} = 2{px} - \left( {1 - e^{2}} \right)x^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où p est le paramètre et e l'excentricité de la conique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> In a frame centered on the vertex S(a,0) for the centered conics and for the single vertex for the parabolas of axis y'Oy, the equation of the conics takes the general form
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle y^{2} = 2{px} - \left( {1 - e^{2}} \right)x^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> where p is the parameter and e the eccentricity of the conic.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est purement calculatoire, il suffit de faire un changement de repère par translation d'un vecteur directeur de l'axe Ox, et d'utiliser les relations liant les quantités a et b d'une part et e d'autre part. <br> L'applet suivante vous permet de faire varier les paramètres p et e et de voir la tracé de la conique correspondante. <br> Observez bien la variation en fonction de e à p fixé. Partant de e=0, on voit un cercle qui se déforme progressivement en ellipse de plus en plus allongée, puis en parabole pour e=1, puis en hyperbole ensuite, la seconde branche venant se rappocher de la première quand e croît. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is purely computational, it suffices to make a change of frame by translation of a direction vector of the axis Ox, and to use the relations linking the quantities a and b on the one hand and e on the other hand. <br> The following applet allows you to vary the parameters p and e and to see the plot of the corresponding conic. <br> Observe carefully the variation as a function of e at fixed p. Starting from e=0, we see a circle which gradually deforms into an increasingly elongated ellipse, then into a parabola for e=1, then into a hyperbola, the second branch coming closer to the first when e increases. <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <table width="100%">
+          <tr>
+            <td width="200">
+              <div lang="fr">Excentricité :</div>
+              <!-- /fr -->
+              <div lang="en">Eccentricity :</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange21" step='0.1' min='0' max='3' value="0" onchange="nameSpace2.run( this.value,myRange22.value)" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div lang="fr">Paramètre p :</div>
+              <!-- /fr -->
+              <div lang="en">Parameter :</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange22" step='0.1' min='1' max='3' value="2" onchange="nameSpace2.run(myRange21.value,this.value)" />
+            </td>
+          </tr>
+        </table>
+        <script src="js/coniquesfoydir2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Interprétation graphique du paramètre d'une conique</h2> Un calcul rapide montre que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Graphical interpretation of the parameter of a conic</h2> A quick calculation shows that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 7</div> Dans le cas des coniques à centre on a toujours <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle p = \frac{b^{2}}{a} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 7</div> In the case of centered conics we always have <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle p = \frac{b^{2}}{a} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il en résulte que dans tous les cas de figure (parabole compris) : </div>
+        <!-- /fr -->
+        <div lang="en"> The result is that in all cases (parabola included): </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 8</div> 2p est la longueur d'une corde passant par un foyer et orthogonale à l'axe focal.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 8</div> 2p is the length of a chord passing through a focus and orthogonal to the focal axis.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Cas de la parabole</h4> L'applet suivante trace la parabole 2py=x² et montre la longueur AB=2p. <br> Vous voyez également le foyer et la directrice. <br> Vous pouvez faire varier le paramètre p avec le curseur.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The following applet draws the parabola 2py=x² and shows the length AB=2p. <br> You also see the foyer and the headmistress. <br> You can vary the p parameter with the slider. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/coniquesfoydir3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Cas de l'ellipse</h3> L'applet suivante trace l'ellipse x²/a²+y²/b²=1 montre la longueur AB=2p. <br> Vous pouvez faire varier a et b avec les curseurs.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of the ellipse</h3> The following applet plots the ellipse x²/a²+y²/b²=1 shows the length AB=2p. <br> You can vary a and b with the sliders.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/coniquesfoydir4.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Cas de l'hyperbole</h3> L'applet suivante trace l'hyperbole x²/a²-y²/b²=1 montre la longueur AB=2p. <br> Vous pouvez faire varier a et b avec les curseurs.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of hyperbola</h3> The following applet draws the hyperbola x²/a²-y²/b²=1 shows the length AB=2p. <br> You can vary a and b with the sliders.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box5" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/coniquesfoydir5.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Petit mémo</h2>
+          <font size="-1">
+            <em>Les images sont générées avec GeoGebra.</em>
+          </font>
+          <br> d est la distance de l'origine à la directrice.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Small memo</h2>
+          <font size="-1">
+            <em>Images are generated with GeoGebra.</em>
+          </font>
+          <br> d is the distance from the origin to the directrix.
+        </div>
+        <!-- /en -->
+        <table cellpadding="10" cellspacing="0" border="2">
+          <tr>
+            <td align="center">Ellipse</td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/resumellipse.png" width="430" height="276" border="0" alt="">
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left\{ \begin{matrix} {c = \sqrt{a^{2} - b^{2}}} \\ {e = \frac{c}{a}} \\ {p = \frac{b^{2}}{a}} \\ {d = \frac{a^{2}}{c}} \\ \end{matrix} \right. \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp;
+            </td>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <div lang="fr">Hyperbole</div>
+              <!-- /fr -->
+              <div lang="en">Hyperbola</div>
+              <!-- /en -->
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/resumehyper.png" width="552" height="305" border="0" alt="">
+            </td>
+          </tr>
+          <tr>
+            <td>&nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left\{ \begin{matrix} {c = \sqrt{a^{2} + b^{2}}} \\ {p = \frac{b^{2}}{a}} \\ {e = \frac{c}{a}} \\ {d = \frac{a^{2}}{c}} \\ {A_{1}:y = \frac{b}{a}x} \\ {A_{2}:y = - \frac{b}{a}x} \\ \end{matrix} \right. \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp;
+            </td>
+          </tr>
+        </table>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquesfoydir/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquesfoydir/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

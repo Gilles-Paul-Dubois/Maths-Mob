@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>euclidiens.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#point sans masse - point without mass</span>
+<span class="s2">struct </span><span class="s1">Point{T}</span>
+    <span class="s1">C::Vector{T}</span>
+<span class="s2">end</span>
+
+<span class="s1">gettype(P::Point{T}) </span><span class="s2">where </span><span class="s1">{T}= T</span>
+<span class="s1">Base.show(io::IO, P::Point{T}) </span><span class="s2">where </span><span class="s1">{T} = print(io,P.C)</span>
+<span class="s1">Base.:-(A::Point{T},B::Point{T}) </span><span class="s2">where </span><span class="s1">{T}= A.C-B.C</span>
+<span class="s1">Base.:+(A::Point{T},V) </span><span class="s2">where </span><span class="s1">{T}=Point{T}(A.C+V)</span>
+
+<span class="s2">const </span><span class="s1">RP=Point{Float64}</span>
+<span class="s1">RP(V::Vector{Int64})=Point{Float64}(Vector{Float64}(V))</span>
+<span class="s2">const </span><span class="s1">QP=Point{Rational{Int64}}</span>
+<span class="s1">QP(V::Vector{Int64})=Point{Rational{Int64}}(Vector{Rational{Int64}}(V))</span>
+<span class="s0">#fin de la section</span>
+
+<span class="s0">#systèmes de points - systems of points</span>
+<span class="s2">struct </span><span class="s1">PointsSystem{P}</span>
+    <span class="s1">Pts::Vector{P}</span>
+<span class="s2">end</span>
+
+<span class="s1">Base.show(io::IO, S::PointsSystem{P}) </span><span class="s2">where </span><span class="s1">{P} = print(io,S.Pts)</span>
+<span class="s2">const </span><span class="s1">PSR=PointsSystem{RP}</span>
+<span class="s2">const </span><span class="s1">PSQ=PointsSystem{QP}</span>
+<span class="s1">PSQ</span>
+<span class="s0">#fin de la section - end of section</span>
+
+<span class="s0">#systèmes de vecteurs - systems of vectors</span>
+<span class="s2">struct </span><span class="s1">VectorsSystem{T}</span>
+    <span class="s1">Vectors::Vector{Vector{T}}</span>
+<span class="s2">end</span>
+<span class="s1">Base.show(io::IO, S::VectorsSystem{T}) </span><span class="s2">where </span><span class="s1">{T} = print(io,S.Vectors)</span>
+<span class="s1">gettype(S::VectorsSystem{T}) </span><span class="s2">where </span><span class="s1">{T}=T</span>
+<span class="s2">function </span><span class="s1">Base.size(S::VectorsSystem{T},n) </span><span class="s2">where </span><span class="s1">{T}</span>
+    <span class="s2">if </span><span class="s1">n==</span><span class="s3">1</span>
+        <span class="s2">return </span><span class="s1">length(S.Vectors)</span>
+    <span class="s2">elseif </span><span class="s1">n==</span><span class="s3">2</span>
+        <span class="s2">return </span><span class="s1">length(S.Vectors[</span><span class="s3">1</span><span class="s1">])</span>
+    <span class="s2">else</span>
+        <span class="s2">return </span><span class="s3">0</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">const </span><span class="s1">VSR=VectorsSystem{Float64}</span>
+<span class="s2">const </span><span class="s1">VSQ=VectorsSystem{Rational{Int64}}</span>
+
+<span class="s2">function </span><span class="s1">matrice(S::VectorsSystem{T}) </span><span class="s2">where </span><span class="s1">{T} </span><span class="s0">#matrice associée à un système de vecteurs - matrix associated with a system of vectors</span>
+    <span class="s1">s1=size(S,</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s1">s2=size(S,</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">A = Array{T, </span><span class="s3">2</span><span class="s1">}(undef, s1, s2)</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:s1,j </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:s2</span>
+        <span class="s1">A[i,j]=S.Vectors[i][j]</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s1">A</span>
+<span class="s2">end</span>
+
+<span class="s1">rang(S::VectorsSystem{T}) </span><span class="s2">where </span><span class="s1">{T} = rank(matrice(S)) </span><span class="s0">#rang d'un système de vecteurs - rank of a system'</span>
+
+<span class="s0">#caractéristique pour les espaces euclidiens - For Euclidean spaces only</span>
+<span class="s1">Base.:*(U::Vector{T}, V::Vector{T}) </span><span class="s2">where </span><span class="s1">T = reduce(+,[U[i]*V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:length(U)])</span>
+<span class="s1">norme(U::Vector{T}) </span><span class="s2">where </span><span class="s1">T = sqrt(U*U)</span>
+<span class="s1">distance(P::Point{T},Q::Point{T}) </span><span class="s2">where </span><span class="s1">T = norme(P-Q)</span>
+
+<span class="s0"># section objets aléatoires pour générer faclement des exemples - Random objects to generate examples</span>
+<span class="s1">aleaRP(n)=RP([rand() </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:n])</span>
+
+<span class="s1">randrat()=rand(-</span><span class="s3">5</span><span class="s1">:</span><span class="s3">5</span><span class="s1">)//rand(</span><span class="s3">1</span><span class="s1">:</span><span class="s3">5</span><span class="s1">)</span>
+<span class="s1">aleaQP(n)=QP([randrat() </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:n])</span>
+
+<span class="s1">aleaptsystemR(n,p)=PSR([aleaRP(n) </span><span class="s2">for  </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:p])</span>
+<span class="s1">aleaptsystemQ(n,p)=PSQ([aleaQP(n) </span><span class="s2">for  </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:p])</span>
+
+<span class="s1">aleavectorR(n)=[rand() </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:n]</span>
+<span class="s1">aleavectorQ(n)=[randrat() </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:n]</span>
+
+<span class="s1">aleavectsystemR(n,p)=VSR([aleavectorR(n) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:p])</span>
+<span class="s1">aleavectsystemQ(n,p)=VSQ([aleavectorQ(n) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s3">1</span><span class="s1">:p])</span>
+<span class="s0">#fin section random</span>
+
+</pre>
+</body>
+</html>

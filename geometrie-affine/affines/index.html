@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Espaces affines</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Définition des espaces affines" onclick="go('affinesdef.html')" />
+              </li>
+              <li>
+                <input type="button" value="Barycentres" onclick="go('affinesbar.html')" />
+              </li>
+              <li>
+                <input type="button" value="Variétés linéaires" onclick="go('affinesvar.html')" />
+              </li>
+              <li>
+                <input type="button" value="Intersection des variétés" onclick="go('affinesinter.html')" />
+              </li>
+              <li>
+                <input type="button" value="Convexité" onclick="go('affinesconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="Liens externes" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Definitions" onclick="go('affinesdef.html')" />
+              </li>
+              <li>
+                <input type="button" value="Barycenters" onclick="go('affinesbar.html')" />
+              </li>
+              <li>
+                <input type="button" value="Linear varieties" onclick="go('affinesvar.html')" />
+              </li>
+              <li>
+                <input type="button" value="Intersection of varieties" onclick="go('affinesinter.html')" />
+              </li>
+              <li>
+                <input type="button" value="Convexity" onclick="go('affinesconv.html')" />
+              </li>
+              <li>
+                <input type="button" value="External links" onclick="go('liens.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <div lang="fr">
+          <h2>Introduction</h2> Ceci est le premier chapitre du module consacré à la branche des mathématiques que l'on désigne communément par 'géométrie affine'. La géométrie est une des plus anciennes, conjointement avec l'arithmétique, des spécialités mathématiques. Elle a été développée dès la plus haute antiquité par les égyptiens et les grecs, mais de façon fort différente. <br /> Comme son nom l'indique la géométrie (mesure de la terre) est une science qui trouve naturellement son origine dans les civilisations agricoles où le partage des terres est un problème récurrent. <br /> La géométrie classique vise à donner un modèle de l'espace physique dans lequel nous vivons, tel que nous le percevons. Cette perception peut s'éloigner beaucoup de la réalité, une première simplification consistant à considérer localement la surface de la terre comme une portion de plan. Il est clair que les anciens n'ont pas développé a priori une géométrie 'sphérique', on a donc négligé des 'courbures' spatiales et plus encore des courbures relativistes dues à la structure de l'espace-temps. Néanmoins les modèles qui ont été développés sont suffisants, de nos jours encore, pour résoudre un grand nombre de problèmes simples. On continue donc et on continuera certainement à enseigner la géométrie dite 'classique' ou 'euclidienne'. <br /> Tandis que l'arithmétique se consacre à l'étude des nombres, la géométrie traite, elle, d'objets tels que les points, les droites, les plans, et les 'figures' conçues comme des ensembles de points (segments, polygones, cercles, etc...). C'est évidemment la notion de 'mesure' qui relie les deux théories. <br /> La vision grecque de la géométrie et des mathématiques en général, diffère largement des approches concurrentes des grandes civilisations de l'antiquité. Alors que les égyptiens et les babyloniens cherchent à répondre à la question 'comment', les grecs se penchent plutôt sur le 'pourquoi' des choses. Bref, les mathématiques grecques sont déductives, c'est ce qui fait leur originalité et c'est ce qui fait que c'est le modèle de toute théorie scientifique, aujourd'hui encore. <br /> Les 'Éléments' d'Euclide, traité de géométrie de l'antiquité attribué à tort ou à raison au seul mathématicien Euclide dont nous savons fort peu de choses sinon qu'il vécu à Alexandrie, constitue aujourd'hui encore le modèle d'exposé mathématique 'moderne' avec une axiomatique (un ensemble de propositions considérées comme vraies a priori) et des 'théorèmes' qui se déduisent logiquement de ces prémisses par l'application de règles de déduction. On pourra, pour cette vision des choses revoir le module des bases de mathématiques consacré à la <input type="button" value="logique usuelle" onclick="go('../../bases/logique/index.html#')" data-inline="true" />. Cet ouvrage a une importance capitale, car non seulement il a constitué un 'modèle' (ayant encore une certaine valeur de nos jours) mais il a constitué le 'corpus' de la tradition de l'enseignement de la géométrie en Europe jusqu'à la seconde moitié du 20° siècle. <br /> La géométrie étant, avec l'arithmétique, un modèle des sciences déductives ont peut dire que les "Éléments" d'Euclide ont une importance capitale dans l'histoire des sciences en général. C'est un des ouvrages (avec la Bible) les plus imprimés au monde pendant les 20 siècles écoulés. <br /> Dans cette optique la 'figure' (dessin géométrique) constitue la base du raisonnement. <h2>L'apport de Descartes</h2> René Descartes, se penche sur la géométrie d'un point de vue classique mais il renforce le lien entre l'algèbre et la géométrie. Par l'utilisation d'un repère et de coordonnées, les points peuvent être remplacées par des ensembles de nombres, et les figures par des équations. <br /> Ce point de vue est moderne en ce qu'il 'réduit' la géométrie à l'algèbre en rendant possible un degré d'abstraction supplémentaire par l'élimination des 'figures'. <h2>L'époque moderne</h2> Deux personnalités scientifiques de tout premier plan font progresser la géométrie de manières différentes. Il s'agit de David Hilbert et de Felix Klein, tous deux originaires d'Allemagne. <br /> Hilbert publie "Grundlagen der Geometrie" (Les fondements de la géométrie) en 1899. Il remplace les cinq axiomes usuels de la géométrie euclidienne par 21 axiomes. Son système élimine les faiblesses de la géométrie d'Euclide, la seule enseignée à ce moment. <br /> Felix Christian Klein (25 avril 1849 à Düsseldorf, Allemagne - 22 juin 1925 à Göttingen) est un mathématicien allemand, connu pour ses travaux en théorie des groupes, en géométrie non euclidienne, et en analyse. Il a aussi énoncé le très influent programme d'Erlangen, qui ramène l'étude des différentes géométries à celle de leurs groupes de symétrie respectifs. Klein introduit donc le nouveau concept de 'groupe' en géométrie, et remplace l'étude d'une figure par l'étude du groupe des automorphismes la laissant invariante. C'est une vision moderne de la géométrie que propose Klein permettant d'étudier la géométrie 'euclidienne' parallèlement à des géométries concurrentes découvertes aux 19° siècle (Lobatchevski, Bolyai, Riemann)dans un cadre commun. Toutes ces géométrie ont une axiomatique de base différente de celle d'Euclide. <h2>Le point de vue présenté ici</h2> Historiquement, la <input type="button" value="notion de vecteur" onclick="go('../../algebre-lineaire/espaces/defev.html#')" data-inline="true" /> et <input type="button" value="l'algèbre linéaire" onclick="go('../../algebre-lineaire/index.html#')" data-inline="true" /> sont des notions mathématiques apparues bien après les notions de points de droites et de figures géométriques. Cependant il est possible de formaliser l'algèbre linéaire sans faire appel à des notions géométriques. Les espaces de dimension finies sont tous simplement des produits cartésiens finis d'un certain nombre d'exemplaire d'un même corps (par exemple &reals;) ainsi le 'plan vectoriel' est tout simplement &reals;<sup>2</sup>. <br /> Par ailleurs, ces espaces permettent de construire simplement des modèles satisfaisant à l'axiomatique de Hilbert, donc de développer une géométrie 'euclidienne' sur des bases solides. <br /> C'est le point de vue des 'espaces affines' qui ne sont qu'une autre manière de voir les espaces vectoriels (un autre formalisme). C'est un point de vue qui s'est imposé, y compris dans l'enseignement secondaire pendant la période 1960-1985. <br /> Par la suite, ce qu'il convient d'appeler la 'contre-réforme' visant à éradiquer les mathématiques modernes de l'enseignement secondaire (et d'une certaine façon de l'enseignement supérieur par conséquence) a voulu rompre avec cette 'nouvelle tradition' visant à présenter la géométrie comme fille de l'algèbre linéaire. <br /> Les arguments proposés avaient des solidités diverses (on pouvait reprocher le manque de représentation du au fait que beaucoup d'élèves formés à cette école n'avaient jamais vu une figure géométrique) ainsi que le refus de présenter des théories de façon axiomatique quelles qu'elles soient. <br /> On aurait pu penser que l'abolition de la 'mathématique moderne' signifiait le retour de la tradition. De fait il n'en fut rien, l'enseignement de la géométrie est aujourd'hui largement sacrifié au niveau des ambitions et au niveau des horaires (ce qui va de pair). Une illustration en est donnée par le contenu des nouveaux programmes de seconde. <br /> Quoiqu'il en soit le niveau actuel des lycéens en mathématiques, en France, est déplorable, mais cela se sent en particulier en géométrie. <br /> L'enseignement supérieur n'a pas décidé de combler cette lacune. La géométrie 'affine' qui rappelons-le n'est qu'une autre facette de l'algèbre linéaire, n'est pas enseignée au début des études de licence. <br /> Or de fait l'étude simultanée de l'algèbre linéaire et de la géométrie affine (je veux dire des deux langages d'une même théorie) permet d'éclairer l'une et l'autre. Les concepts de l'algèbre linéaire sont éclaircis par des figures. Les résultats élémentaires de géométrie apparaissent comme des conséquences de théorèmes simples d'algèbre linéaire. <br /> Une des conséquences est que les informaticiens travaillant sur des développements graphiques manquent des outils de base indispensables à la représentation d'objets sur des écrans. Ils ont des lacunes énormes pour tout ce qui concerne le dessin vectoriel, ne savent pas comment décider si un point appartient à une droite, calculer la distance d'un point à une droite, etc... Ils s'emmerveillent de redécouvrir que le produit de deux rotations de l'espace est une transformation du même type, etc. , etc. <br /> J'ai pu me rendre compte de ces lacunes en qualité de modérateur/rédacteur d'un forum d'algorithmique. Les participants titulaires le plus souvent d'un diplôme de niveau bac+2 s'émerveillent de redécouvrir des formules connues auparavant de la plupart des élèves de seconde. <br /> Voilà le résultat auquel nous sommes parvenus en un peu plus de deux décennies de laxisme impardonnable. J'espère que ce module, avec les nombreux programmes donnés en exemple leur permettra d'actualiser leurs connaissances. <h2>Galerie des portraits</h2>
+          <p>Le 'portrait' d'Euclide est évidemment une oeuvre d'imagination parmi d'autres (datant du 18° siècle) .</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Intro</h2> This is the first chapter of the module devoted to the branch of mathematics commonly referred to as 'affine geometry'. Geometry is one of the oldest, together with arithmetic, mathematical specialties. It was developed from the earliest antiquity by the Egyptians and the Greeks, but in very different ways. <br /> As its name suggests, geometry (measurement of the earth) is a science that naturally finds its origin in agricultural civilizations where the division of land is a recurring problem. <br /> Classical geometry aims to give a model of the physical space in which we live, as we perceive it. This perception can be far from reality, a first simplification consisting in considering locally the surface of the earth as a portion of a plane. It is clear that the ancients did not develop a priori a 'spherical' geometry, so we neglected spatial 'curvatures' and even more relativistic curvatures due to the structure of space-time. Nevertheless, the models that have been developed are sufficient, even today, to solve a large number of simple problems. We therefore continue and we will certainly continue to teach so-called 'classical' or 'Euclidean' geometry. <br /> While arithmetic is devoted to the study of numbers, geometry deals with objects such as points, lines, planes, and 'figures' conceived as sets of points (segments, polygons, circles, etc.). It is obviously the notion of 'measurement' that connects the two theories. <br /> The Greek vision of geometry and mathematics in general, differs widely from the competing approaches of the great civilizations of antiquity. While the Egyptians and the Babylonians seek to answer the question 'how', the Greeks lean more on the 'why' of things. In short, Greek mathematics is deductive, that's what makes it original and that's what makes it the model of all scientific theory, even today. <br /> Euclid's 'Elements', a treatise on geometry from antiquity attributed, rightly or wrongly, to the only mathematician Euclid, of whom we know very little except that he lived in Alexandria, still constitutes today the model of presentation 'modern' mathematics with an axiomatics (a set of propositions considered to be true a priori) and 'theorems' which are logically deduced from these premises by the application of rules of deduction. For this vision of things, we can review the basics of mathematics module devoted to <input type="button" value="usual logic" onclick="go('../../bases/logique/index.html')" data-inline="true" />. This work is of capital importance, because not only did it constitute a 'model' (which still has a certain value today) but it constituted the 'corpus' of the tradition of the teaching of geometry in Europe until the second half of the 20th century. <br /> Geometry being, with arithmetic, a model of deductive sciences, we can say that Euclid's "Elements" have a capital importance in the history of sciences in general. It is one of the most printed works (with the Bible) in the world during the past 20 centuries. <br /> In this perspective, the 'figure' (geometric drawing) constitutes the basis of the reasoning. <h2>The contribution of Descartes</h2> René Descartes, looks at geometry from a classical point of view but he reinforces the link between algebra and geometry. By using a frame and coordinates, points can be replaced by sets of numbers, and figures by equations. <br /> This point of view is modern in that it 'reduces' geometry to algebra by making possible an additional degree of abstraction by eliminating 'figures'. <h2>The Modern Age</h2> Two leading scientists are advancing geometry in different ways. They are David Hilbert and Felix Klein, both from Germany. <br /> Hilbert published "Grundlagen der Geometrie" (The Foundations of Geometry) in 1899. He replaced the usual five axioms of Euclidean geometry with 21 axioms. His system eliminates the weaknesses of Euclid's geometry, the only one taught at that time. <br /> Felix Christian Klein (April 25, 1849 in Düsseldorf, Germany - June 22, 1925 in Göttingen) was a German mathematician, known for his work in group theory, non-Euclidean geometry, and analysis. He also set out Erlangen's very influential program, which reduces the study of different geometries to that of their respective symmetry groups. Klein thus introduces the new concept of 'group' in geometry, and replaces the study of a figure by the study of the group of automorphisms leaving it invariant. It is a modern vision of geometry that Klein proposes, making it possible to study 'Euclidean' geometry alongside competing geometries discovered in the 19th century (Lobachevsky, Bolyai, Riemann) in a common framework. All these geometries have a basic axiomatic different from that of Euclid. <h2>The point of view presented here</h2> Historically, the <input type="button" value="notion of vector" onclick="go('../../algebre-lineaire/espaces/defev.html#')" data-inline="true" /> and <input type="button" value="linear algebra" onclick="go('../../algebre-lineaire/index.html#')" data-inline="true" /> are mathematical notions that appeared well after the notions of straight lines and geometric figures. However, it is possible to formalize linear algebra without using geometric notions. Finite dimensional spaces are simply finite Cartesian products of some number of instances of the same field (eg &reals;) so the 'vector plane' is simply &reals;<sup>2</sup> . <br /> Moreover, these spaces make it possible to simply construct models satisfying Hilbert's axiomatics, and therefore to develop a 'Euclidean' geometry on solid foundations. <br /> It is the point of view of 'affine spaces' which are only another way of seeing vector spaces (another formalism). It is a point of view which has become essential, including in secondary education during the period 1960-1985. <br /> Subsequently, what should be called the 'counter-reform' aimed at eradicating modern mathematics from secondary education (and in a certain way from higher education as a result) wanted to break with this ' new tradition' aiming to present geometry as the daughter of linear algebra. never seen a geometric figure) as well as the refusal to present theories axiomatically whatever they are. <br /> One might have thought that the abolition of 'modern mathematics' meant the return of tradition. In fact, nothing happened, the teaching of geometry is now largely sacrificed in terms of ambitions and schedules (which goes hand in hand). An illustration of this is given by the content of the new second-grade (French) programs. <br /> Be that as it may, the current level of high school students in mathematics in France is deplorable, but this is particularly apparent in geometry. <br /> Higher education has not decided to fill this gap. The 'affine' geometry which, let's remember, is only another facet of linear algebra, is not taught at the beginning of undergraduate studies. <br /> But in fact the simultaneous study of linear algebra and affine geometry (I mean the two languages of the same theory) makes it possible to shed light on both. The concepts of linear algebra are clarified by figures. The elementary results of geometry appear as consequences of simple theorems of linear algebra. <br /> One of the consequences is that computer scientists working on graphic developments lack the basic tools essential to the representation of objects on screens. They have huge gaps in everything related to vector drawing, do not know how to decide if a point belongs to a straight line, calculate the distance from a point to a straight line, etc... They marvel at rediscovering that the product of two rotations of space is a transformation of the same type, etc. , etc. <br /> I was able to realize these shortcomings as moderator/editor of an algorithmic forum. The participants most often holding a bac+2 level diploma are amazed to rediscover formulas previously known to most second-year students. <br /> This is the result we have achieved in just over two decades of unforgivable laxity. I hope that this module, with the many programs given as examples, will allow them to update their knowledge. <h2>Portrait gallery</h2>
+          <p>The 'portrait' of Euclid is obviously a work of imagination among others (dating from the 18th century).</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font color="#FFFFFF">Euclide (-325/-265?-Alexandrie)</font>
+            </td>
+            <td align="center">
+              <font color="#FFFFFF">René Descartes (1596/1650-FR)</font>
+            </td>
+            <td align="center">
+              <font color="#FFFFFF">Felix Klein(1859/1925-DE)</font>
+            </td>
+            <td align="center">
+              <font color="#FFFFFF">David Hilbert (1862/1943-DE)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/220px-Euklid-von-Alexandria_1.jpg" width="220" height="261" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/220px-Frans_Hals_-_Portret_van_Rene_Descartes.jpg" width="220" height="269" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/200px-Felix_Christian_Klein.jpg" width="200" height="275" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/Hilbert.jpg" width="200" height="270" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

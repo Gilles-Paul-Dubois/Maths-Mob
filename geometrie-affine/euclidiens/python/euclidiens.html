@@ -1,0 +1,146 @@
+<html>
+<head>
+<title>euclidiens.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">math 
+ 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction  </span><span class="s0"># version python &gt;= 3.0</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">MyError(Exception): 
+    </span><span class="s0">&quot;&quot;&quot;Erreur custom - custom exception&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, value): 
+        self.value = value 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s2">return </span><span class="s1">repr(self.value) 
+ 
+ 
+</span><span class="s0"># ###Espaces vectoriels sur R ou Q avec produit scalaire et norme associée##############</span><span class="s1"> 
+</span><span class="s0"># ###Vector spaces on R or Q with dot product and associated norm##############</span><span class="s1"> 
+</span><span class="s2">class </span><span class="s1">VecteurKn: 
+    </span><span class="s0">&quot;&quot;&quot;modélisation des vecteurs à n dimensions corps quelconque - model for n-dimensional vector space over any field&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur - constructor&quot;&quot;&quot;</span><span class="s1"> 
+        self.V = L 
+        self.n = len(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">&quot;&quot;&quot;représentation externe print, etc... - converts to string&quot;&quot;&quot;</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+        </span><span class="s2">return </span><span class="s3">'(' </span><span class="s1">+ </span><span class="s3">&quot;,&quot;</span><span class="s1">.join(L) + </span><span class="s3">')'</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__eq__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;test d'égalité - equality test&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.n == other.n </span><span class="s2">and </span><span class="s1">all(self.L[i] == other.L[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n)) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;addition des vecteurs - addition of vectors&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.n != other.n: 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s3">&quot;Tailles non concordantes&quot;</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            L = [self.V[i] + other.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n)] 
+            </span><span class="s2">return </span><span class="s1">VecteurKn(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">&quot;&quot;&quot;opposé d'un vecteur - opposite of a vector&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">VecteurKn([-x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;différence de deux vecteurs - difference of two vectors&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self + (-other) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+        </span><span class="s0">&quot;&quot;&quot; produit par un scalaire - external product&quot;&quot;&quot;</span><span class="s1"> 
+        L = [k * x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+        </span><span class="s2">return </span><span class="s1">VecteurKn(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__mul__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;produit scalaire - dot product&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.n != other.n: 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s3">&quot;Tailles non concordantes - sizes do not match&quot;</span><span class="s1">) 
+        </span><span class="s2">return </span><span class="s1">sum([self.V[i] * other.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n)]) 
+ 
+    </span><span class="s2">def </span><span class="s1">norm(self): 
+        </span><span class="s0">&quot;&quot;&quot;norme d'un vecteur - norm of a vector&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">math.sqrt(self * self) 
+ 
+ 
+</span><span class="s0">####fin de la définition des espaces vectoriels euclidiens - end of definition of Euclidean spaces###############</span><span class="s1"> 
+ 
+</span><span class="s0">###########Modélisation des espaces affines euclidiens - Model for affine Euclidean spaces###################</span><span class="s1"> 
+</span><span class="s2">class </span><span class="s1">PointKn: 
+    </span><span class="s0">&quot;&quot;&quot;modélisation des espaces affines K^n n et K quelconques - model for afine spaces K whatever K and n&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur - constructor&quot;&quot;&quot;</span><span class="s1"> 
+        self.C = L  </span><span class="s0">#coordonnées - coordinates</span><span class="s1"> 
+        self.n = len(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">&quot;&quot;&quot;représentation externe print, etc..- conversion to string.&quot;&quot;&quot;</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.C] 
+        </span><span class="s2">return </span><span class="s3">'(' </span><span class="s1">+ </span><span class="s3">&quot;,&quot;</span><span class="s1">.join(L) + </span><span class="s3">')'</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__eq__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;test d'égalité - equality test&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.n == other.n </span><span class="s2">and </span><span class="s1">all(self.C[i] == other.C[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n)) 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, vecteur): 
+        </span><span class="s0">&quot;&quot;&quot;opération du groupe additif des vecteurs - operation of group of vectors&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.n != vecteur.n: 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s3">&quot;Tailles non concordantes - sizes do not match&quot;</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            L = [self.C[i] + vecteur.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n)] 
+            </span><span class="s2">return </span><span class="s1">PointKn(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;vecteur différence de deux points - vector difference of two points&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.n != other.n: 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s3">&quot;Tailles non concordantes - size mismatch&quot;</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            L = [self.C[i] - other.C[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, self.n)] 
+            </span><span class="s2">return </span><span class="s1">VecteurKn(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">dist(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;distance de deux points - distance of two points&quot;&quot;&quot;</span><span class="s1"> 
+        V = other - self 
+        </span><span class="s2">return </span><span class="s1">V.norm() 
+ 
+ 
+</span><span class="s0">###fin de la modélisation des espaces affines - end of model for affine spaces######################</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;programme de tests - test program &quot;&quot;&quot;</span><span class="s1"> 
+    U = VecteurKn([</span><span class="s4">1</span><span class="s1">, </span><span class="s4">2</span><span class="s1">, </span><span class="s4">3</span><span class="s1">]) 
+    V = VecteurKn([</span><span class="s4">1</span><span class="s1">, </span><span class="s4">2</span><span class="s1">, -</span><span class="s4">1</span><span class="s1">]) 
+    print(U * V) 
+    print(U.norm()) 
+    A = PointKn([</span><span class="s4">1</span><span class="s1">, </span><span class="s4">2</span><span class="s1">, </span><span class="s4">3</span><span class="s1">]) 
+    B = PointKn([</span><span class="s4">4</span><span class="s1">, </span><span class="s4">5</span><span class="s1">, </span><span class="s4">6</span><span class="s1">]) 
+    print(A.dist(B)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

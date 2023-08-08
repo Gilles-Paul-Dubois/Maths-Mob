@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>exo3.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #8c8c8c; font-style: italic;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre>
+<span class="s1">#point sans masse - point without mass</span>
+<span class="s2">struct </span><span class="s0">Point{T}</span>
+    <span class="s0">C::Vector{T}</span>
+<span class="s2">end</span>
+
+<span class="s0">gettype(P::Point{T}) </span><span class="s2">where </span><span class="s0">{T}= T</span>
+<span class="s0">Base.show(io::IO, P::Point{T}) </span><span class="s2">where </span><span class="s0">{T} = print(io,P.C)</span>
+<span class="s2">const </span><span class="s0">QP=Point{Rational{Int64}}</span>
+<span class="s0">Base.:+(A::Point{T},V) </span><span class="s2">where </span><span class="s0">{T}=Point{T}(A.C+V)</span>
+<span class="s0">Base.:*(k::Rational{Int64},V::Vector{Rational{Int64}})=[k*v </span><span class="s2">for </span><span class="s0">v </span><span class="s2">in </span><span class="s0">V] </span><span class="s1">#produit d'un vecteur par un scalaire - external operator scalar&times;vector --> vector</span>
+<span class="s0">X=[</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">2</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">3</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">4</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">5</span><span class="s0">]</span>
+<span class="s0">P=QP([</span><span class="s3">1</span><span class="s0">//</span><span class="s3">3</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">3</span><span class="s0">])</span>
+<span class="s0">v=[</span><span class="s3">1</span><span class="s0">//</span><span class="s3">1</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">2</span><span class="s0">,</span><span class="s3">1</span><span class="s0">//</span><span class="s3">2</span><span class="s0">]</span>
+<span class="s0">D=[P+k*v </span><span class="s2">for </span><span class="s0">k </span><span class="s2">in </span><span class="s0">X]</span>
+<span class="s0">println(D)</span></pre>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Changement de repère</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarchgt/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarchgt/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>Le choix d'un repère transforme les figures en équations. <br /> Le choix d'un repère approprié peut rendre ces équations particulièrement simples. <br /> C'est le cas par exemples des coniques dites 'à centre' comme les ellipses et les hyperboles qui possèdent deux axes de symétrie et un centre de symétrie (l'intersection des deux axes). Un repère ayant pour origine le centre de symétrie, et des vecteurs de base dans la direction des axes de symétrie, permet d'obtenir des équations normalisées dites 'réduites' et une étude algébrique plus simple de ces courbes. <br /> Il arrive aussi qu'en mécanique le choix d'un repère lié à un mobile permette d'établir des équations différentielles ayant une forme particulièrement simple. Les trajectoires sont d'autant plus faciles à calculer. <br /> Nous supposerons connus les résultats d'algèbre linéaire concernant les <input type="button" value="matrices de passage" onclick="go('../../algebre-lineaire/matapplin/matpassage.html#')" data-inline="true" />. <br /> Tout ce qui suit ne concerne que les espaces affines de dimension finie. </p>
+          <h2>Changement d'origine</h2>
+          <p>On considére deux repères qui ne différent que par leur origine, disons R<sub>1</sub>=(O<sub>1</sub>,B) et R<sub>2</sub>=(O<sub>2</sub>,B). <br /> On considère un même point M et soient : <br /> (c<sub>1,i</sub>)<sub>i∈{1,2, ..., n}</sub> ses coordonnées par rapport à R<sub>1</sub>
+            <br /> (c<sub>2,i</sub>)<sub>i∈{1,2, ..., n}</sub> ses coordonnées par rapport à R<sub>2</sub>
+          </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Choosing a frame turns figures into equations. <br /> Choosing an appropriate frame can make these equations particularly simple. <br /> This is the case, for example, of so-called 'centered' conics such as ellipses and hyperbolas which have two axes of symmetry and a center of symmetry (the intersection of the two axes). A frame having the center of symmetry as its origin, and basis vectors in the direction of the axes of symmetry, makes it possible to obtain so-called 'reduced' normalized equations and a simpler algebraic study of these curves. <br /> It also happens that in mechanics the choice of a reference frame linked to a moving body makes it possible to establish differential equations having a particularly simple form. The trajectories are all the easier to calculate. <br /> We will assume known the linear algebra results concerning <input type="button" value="transition matrices" onclick="go('../../algebre-lineaire/matapplin/matpassage.html#')" data-inline="true" />. <br /> Everything that follows concerns only affine spaces of finite dimension. </p>
+          <h2>Change of origin</h2>
+          <p>We consider two frames that differ only in their origin, say R<sub>1</sub>=(O<sub>1</sub>,B) and R<sub>2</sub>= (O<sub>2</sub>,B). <br /> We consider the same point M and let: <br /> (c<sub>1,i</sub>)<sub>i∈{1,2, ..., n}</sub> its coordinates relative to R<sub>1</sub>
+            <br /> (c<sub>2,i</sub>)<sub>i∈{1,2, ..., n}</sub> its coordinates relative to R<sub>2</sub>
+          </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Il y a entre ces deux jeux de coordonnées les relations suivantes: <br> c<sub>2,i</sub>=c<sub>1,i</sub>-k<sub>i</sub> où &forall; i &isin; {1,2,.. ,n} k<sub>i</sub> est la coordonnée d'indice i du vecteur
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{O_{1}O_{2}} \)
+            <!-- /FORMULE UNIV INLINE--> dans la base B.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> There are between these two sets of coordinates the following relations: <br> c<sub>2,i</sub>=c<sub>1,i</sub>-k<sub>i</sub> where &forall; i &isin; {1,2,.. ,n} k<sub>i</sub> is the i-th coordinate of the vector
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{O_{1}O_{2}} \)
+            <!-- /INLINE UNIV FORMULA--> in basis B.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve résulte seulement de la relation vectorielle
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{O_{2}M}=\overrightarrow{O_{1}M}-\overrightarrow{O_{1}O_{2}} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <h2>Changement de base</h2> On considére deux repères de même origine, disons R<sub>1</sub>=(O,B<sub>1</sub>) et R<sub>2</sub>=(O,B<sub>2</sub>). <br /> On considère un même point M et soient : <br /> (c<sub>1,i</sub>)<sub>i∈{1,2, ..., n}</sub> ses coordonnées par rapport à R<sub>1</sub>
+          <br /> (c<sub>2,i</sub>)<sub>i∈{1,2, ..., n}</sub> ses coordonnées par rapport à R<sub>2</sub>
+          <br /> Introduisons la <input type="button" value="matrice de passage" onclick="go('../../algebre-lineaire/matapplin/matpassage.html#')" data-inline="true" /> P de B<sub>1</sub> à B<sub>2</sub> et son inverse P<sup>-1</sup>.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof results only from the vector relation
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{O_{2}M}=\overrightarrow{O_{1}M}-\overrightarrow{O_{1}O_{2}} \)
+          <!-- /INLINE UNIV FORMULA-->
+          <h2>Change of basis</h2> Consider two frames of the same origin, say R<sub>1</sub>=(O,B<sub>1</sub>) and R<sub>2</sub>=(O,B<sub> 2</sub>). <br /> We consider the same point M and let: <br /> (c<sub>1,i</sub>)<sub>i∈{1,2, ..., n}</sub> its coordinates relative to R<sub>1</sub>
+          <br /> (c<sub>2,i</sub>)<sub>i∈{1,2, ..., n}</sub> its coordinates relative to R<sub>2</sub>
+          <br /> Let's introduce the <input type="button" value="transition matrix" onclick="go('../../algebre-lineaire/matapplin/matpassage.html#')" data-inline="true" /> P from B<sub>1</sub> to B<sub>2</sub> and its inverse P<sub>-1 </sup>.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Dans ces conditions, si
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v_{1}} \)
+            <!-- /FORMULE UNIV INLINE--> est le vecteur de K<sup>n</sup> ayant les c<sub>1,i</sub> pour coordonnées, et si
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v_{2}} \)
+            <!-- /FORMULE UNIV INLINE--> est le vecteur de K<sup>n</sup> ayant les c<sub>2,i</sub> pour coordonnées, on a
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v_{2}}=P^{-1}\overrightarrow{v_{1}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Under these conditions, if
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v_{1}} \)
+            <!-- /INLINE UNIV FORMULA--> is the vector of K<sup>n</sup> having c<sub>1,i</sub> as coordinates, and if
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v_{2}} \)
+            <!-- /INLINE UNIV FORMULA--> is the vector of K<sup>n</sup> having c<sub>2,i</sub> as coordinates, we have
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v_{2}}=P^{-1}\overrightarrow{v_{1}} \)
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte évidemment de la définition même d'une matrice de passage et donne des formules explicites de changement de repère quand on modifie la base sans toucher l'origine. <h2>Cas général</h2> Pour le cas général, c'est à dire quand on passe d'un repère à un autre par changement de l'origine et de la base, il suffit de procéder en deux temps : <ol>
+            <li>Changement de l'origine simplement d'abord.</li>
+            <li>Changement de la base sans toucher à l'origine ensuite.</li>
+          </ol> On obtient donc des formules de changement de repère consistant en un décalage suivi de l'application d'une matrice de passage. <br> Voici maintenant une appliquette permettant de voir ce qu'il se passe dans &reals;<sup>2</sup>. <br> Nous avons 2 bases : la base
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> et la base
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> . <br>Nous avons deux origines : le point O et le point &Omega;. Ce qui nous donne 4 repères: <ul>
+            <li>Le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>Le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>Le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \Omega, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>Le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \Omega, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+          </ul> Chaque point M a donc 4 systèmes de coordonnées par rapport à chacun de ces 4 repères. <br>Voici les actions autorisées: <ul>
+            <li>Vous pouvez déplacer le point &Omega; en le tirant avec la souris.</li>
+            <li>Vous pouvez déplacer le point M en le tirant avec la souris.</li>
+            <li>Vous pouvez faire varier le vecteur
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+              <!-- /FORMULE UNIV INLINE--> en tirant son extrêmité avec la souris.
+            </li>
+            <li>Vous pouvez faire varier le vecteur
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+              <!-- /FORMULE UNIV INLINE--> en tirant son extrêmité avec la souris.
+            </li>
+          </ul> En fait les possibilités sont repérés par des points marqués de couleur rouge. <br>Ce faisant on fait varier les repères et/ou le point M dont les 4 systèmes de coordonnées. En temps réel vous voyez apparaître: <ul>
+            <li>en bleu les coordonnées de M dans le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>en rouge les coordonnées de M dans le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>en vert les coordonnées de M dans le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \Omega, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>en marron les coordonnées de M dans le repère
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \Omega, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This obviously results from the very definition of a transition matrix and gives explicit formulas for the change of reference frame when the basis is modified without touching the origin. <h2>General case</h2> For the general case, i.e. when you go from one reference to another by changing the origin and the basis, it suffices to proceed in two steps: <ol>
+            <li>Changing the origin simply first.</li>
+            <li>Changing the basis without touching the origin afterwards.</li>
+          </ol> We therefore obtain formulas for changing frames consisting of a shift followed by the application of a transition matrix. <br> Here is now an applet to see what is happening in &reals;<sup>2</sup>. <br> We have 2 basis: the basis
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> and the basis
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> . <br>We have two origins: the point O and the point &Omega; . Which gives us 4 frames: <ul>
+            <li>The frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /INLINE UNIV FORMULA-->
+            </li>
+            <li>The frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /INLINE UNIV FORMULA-->
+            </li>
+            <li>The frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \Omega, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /INLINE UNIV FORMULA-->
+            </li>
+            <li>The frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \Omega, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /INLINE UNIV FORMULA-->
+            </li>
+          </ul> Each point M therefore has 4 coordinate systems with respect to each of these 4 reference frames. <br>Here are the allowed actions: <ul>
+            <li>You can move the &Omega; by dragging it with the mouse.</li>
+            <li>You can move point M by dragging it with the mouse.</li>
+            <li>You can vary the vector
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+              <!-- /INLINE UNIV FORMULA--> dragging its end with the mouse.
+            </li>
+            <li>You can vary the vector
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+              <!-- /INLINE UNIV FORMULA--> by dragging its end with the mouse.
+            </li>
+          </ul> In fact the possibilities are identified by points marked in red. <br>In doing so, the frames and/or the point M including the 4 coordinate systems are varied. In real time you see appearing: <ul>
+            <li>in blue the coordinates of M in the frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /UNIV INLINE FORMULA-->
+            </li>
+            <li>in red the coordinates of M in the frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /UNIV INLINE FORMULA-->
+            </li>
+            <li>in green the coordinates of M in the frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \Omega, \overrightarrow{i},\overrightarrow{j} \right ) \)
+              <!-- /UNIV INLINE FORMULA-->
+            </li>
+            <li>in brown the coordinates of M in the frame
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \Omega, \overrightarrow{u},\overrightarrow{v} \right ) \)
+              <!-- /UNIV INLINE FORMULA-->
+            </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/chgtrep1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Le programme suivant utilise les modules <input type="button" value="affines.py" onclick="go('../affines/python/affines.html#')" data-inline="true" /> et <input type="button" value="reperes.py" onclick="go('python/reperes.html#')" data-inline="true" />. <br /> Il illustre les changements de coordonnées d'un même point quand on effectue des changements de repères simples.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> The following program uses the modules <input type="button" value="affines.py" onclick="go('../affines/python/affines.html#')" data-inline="true" /> and <input type="button" value="reperes.py" onclick="go('python/reperes.html#')" data-inline="true" />. <br /> It illustrates the changes of coordinates of the same point when one carries out simple changes of frames.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/chgtrep.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de julia</h2> Voici un programme de calcul. Il inclut le <input type="button" value="programme de définition des repères affines" onclick="go('julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> Here is a calculation program. It includes the <input type="button" value="program for defining frames" onclick="go('julia/reperes.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/chgtrep.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/repvarchgt/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/repvarchgt/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Variétés linéaires</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+    <script type="text/javascript" src="../../js/my3Dlib.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/affinesvar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/affinesvar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Vous avez maintenant sans doute l'habitude de certaines démarches. <br /> Une fois définie une catégorie d'objets ( <input type="button" value="les ensembles" onclick="go('../../bases/ensembles/definitions.html#')" data-inline="true" />, <input type="button" value="les groupes" onclick="go('../../bases/operations/groupe.html#')" data-inline="true" />, <input type="button" value="les anneaux" onclick="go('../../bases/operations/anneau.html#')" data-inline="true" />, <input type="button" value="les corps" onclick="go('../../bases/operations/corps.html#')" data-inline="true" />, <input type="button" value="les espaces vectoriels" onclick="go('../../algebre-lineaire/espaces/defev.html#')" data-inline="true" />),nous définissons immédiatement les sous-objets de la catégorie ( <input type="button" value="sous-ensembles" onclick="go('../../bases/ensembles/parties.html#')" data-inline="true" />, <input type="button" value="sous-groupes" onclick="go('../../nombres/relatifs/ideals.html#')" data-inline="true" />, sous-anneaux, sous-corps, <input type="button" value="sous-espaces vectoriels" onclick="go('../../algebre-lineaire/espaces/sousev.html#defax')" data-inline="true" />, etc...). <br /> Pour ceux qui estiment que la structure d'espace affine est redondante avec celle d'espace vectoriel, nous pourrions nous contenter de décrire les variétés affines (ou sous-espaces affines) comme les translatés des sous-espaces vectoriels, c'est à dire les ensembles de la forme
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}+F \)
+          <!-- /FORMULE UNIV INLINE--> où F est un sous-espace de E, E étant un espace vectoriel quelconque (au lecteur d'en tirer toutes les conclusions). <br /> Ce n'est pas l'approche que nous utiliserons ici où nous adopterons une démarche plus progressive, plus pédagogique, nous permettant de voir les choses sous deux aspects différents et complémentaires. <h2>Point de vue barycentrique</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> You are no doubt familiar with certain procedures by now. <br /> Once defined a category of objects ( <input type="button" value="the sets" onclick="go('../../bases/ensembles/definitions.html#')" data-inline="true" />, <input type="button" value="the groups" onclick="go('../../bases/operations/groupe.html#')" data-inline="true" />, <input type="button" value="the rings " onclick="go('../../bases/operations/anneau.html#')" data-inline="true" />, <input type="button" value="the fields" onclick="go('../../bases/operations/corps.html#')" data-inline="true" />, <input type="button" value="the vector spaces" onclick="go('../../algebre-lineaire/espaces/defev.html#')" data-inline="true" />), we define immediately the sub-objects of the category ( <input type="button" value="subsets" onclick="go('../../bases/ensembles/parties.html#')" data-inline="true" />, <input type="button" value="subgroups" onclick="go('../../nombres/relatifs/ideals.html#')" data-inline="true" />, subrings, subfields, <input type="button" value="vector subspaces" onclick="go('../../algebre-lineaire/espaces/sousev.html#defaxe')" data-inline="true" />, etc...). <br /> For those who believe that the structure of affine space is redundant with that of vector space, we could content ourselves with describing affine varieties (or affine subspaces) as the translates of vector subspaces, i.e. sets of the form
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}+F \)
+          <!-- /FORMULE UNIV INLINE--> where F is a subspace of E, E being a arbitrary vector space (up to the reader to draw all the conclusions). <br /> This is not the approach we will use here where we will adopt a more progressive, more educational approach, allowing us to see things from two different and complementary aspects. <h2>Barycentric point of view</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un sous-ensemble <u>non vide</u> B d'un espace affine A est appelé une <strong>
+              <em>'variété linéaire' </em>
+            </strong>(ou encore une <strong>
+              <em>'variété affine'</em>
+            </strong> ou même une 'variété linéaire affine'), si chaque fois qu'il contient n points P<sub>1</sub>, P<sub>2</sub>, ... ,P<sub>n</sub> il contient le barycentre de tout système pondéré ((P<sub>1</sub>,&lambda;<sub>1</sub>), (P<sub>2</sub>, &lambda;<sub>2</sub>), ... ,(P<sub>n</sub>,&lambda;<sub>n</sub>)), quel que soit le jeu de coefficients (&lambda;<sub>1</sub>, &lambda;<sub>2</sub>, ,&lambda;<sub>n</sub>) pourvu que la somme &lambda;<sub>1</sub>+ ... +&lambda;<sub>n</sub> soit non nulle.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A <u>non-empty</u> subset B of an affine space A is called a <strong>
+              <em>'linear variety ' </em>
+            </strong> (or alternatively an <strong>
+              <em>'affine subspace'</em>
+            </strong> or even a '<strong><em>linear manifold</em></strong>'), if each time it contains n points P<sub>1</sub>, P<sub>2</sub>, ... ,P<sub>n</sub> it contains the barycenter of any mass point system ((P<sub>1</sub>,&lambda;<sub>1</sub>), (P<sub>2</sub>, &lambda;<sub>2</sub>), ... ,(P<sub>n</sub>,&lambda;<sub>n</sub>)), whatever the set of coefficients (&lambda;<sub>1</sub>, &lambda;<sub>2</sub>, ,&lambda;<sub>n</sub>) provided that the sum &lambda;<sub>1 </sub>+ ... +&lambda;<sub>n</sub> is non-zero.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Conséquence : </div>
+        <!-- /fr -->
+        <div lang="en"> Consequence : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Si B est une variété linéaire d'un espace affine A associé à un espace vectoriel E, et si O est un point quelconque de B l'ensemble des vecteurs
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OM} \)
+            <!-- /FORMULE UNIV INLINE--> avec M &isin; B est un sous-espace de E.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> If B is a linear variety of an affine space A associated with a vector space E, and if O is any point of B the set of vectors
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OM} \)
+            <!-- /INLINE UNIV FORMULA--> with M &isin; B is a subspace of E.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet si M et O sont dans B alors si N est tel que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{ON}=\lambda \overrightarrow{OM} \)
+          <!-- /FORMULE UNIV INLINE--> N est alors le barycentre du système ((M,&lambda;),(O,1-&lambda;)) donc dans B. <br> En outre si M et N sont deux points de B, le vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OS}= \overrightarrow{OM}+\overrightarrow{ON} \)
+          <!-- /FORMULE UNIV INLINE--> est égal à deux fois le vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OG} \)
+          <!-- /FORMULE UNIV INLINE--> où G est le milieu de [MN] qui est donc dans B. Il résulte de ce qui précède que puisque G est un point de B, S est aussi un point de B. <br> La réciproque est vraie :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed if M and O are in B then if N is such that
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{ON}=\lambda \overrightarrow{OM} \)
+          <!-- /INLINE UNIV FORMULA--> N is then the barycenter of the system ((M,&lambda;),(O,1-&lambda;)) therefore in B. <br> Furthermore if M and N are two points of B, the vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OS}= \overrightarrow{OM}+\overrightarrow{ON} \)
+          <!-- /INLINE UNIV FORMULA--> is equal to twice the vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OG} \)
+          <!-- /INLINE UNIV FORMULA--> where G is the midpoint of [MN] which is therefore in B. It follows from the above that since G is a point of B, S is also a point of B. <br> The converse is true:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Si F est un sous-espace vectoriel de E et si P est un point quelconque de A, alors l'ensemble B des points de la forme
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle P+ \overrightarrow{u} \)
+            <!-- /FORMULE UNIV INLINE--> où
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u}\in F \)
+            <!-- /FORMULE UNIV INLINE--> est une variété linéaire.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> If F is a vector subspace of E and if P is any point of A, then the set B of points of the form
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle P+ \overrightarrow{u} \)
+            <!-- /INLINE UNIV FORMULA--> where
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u}\in F \)
+            <!-- /INLINE UNIV FORMULA--> is a linear variety.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soient en effet P<sub>1</sub>, ....,P<sub>n</sub> n points de B. et soit G le barycentre du système ((P<sub>1</sub>,&lambda;<sub>1</sub>) , ... , (P<sub>n</sub>,&lambda;<sub>n</sub>)). On a alors
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{PG} =\left ( \frac{1}{\sum_{i=1}^{n}} \lambda _{i}\right )\sum_{i=1}^{n}\lambda _{i}\overrightarrow{PP_{i}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> qui montre que G est un point de B par définition des sous-espaces vectoriels. <h2>Point de vue des sous-espaces directeurs</h2> Il résulte des remarques précédentes que :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let P<sub>1</sub>, ....,P<sub>n</sub> be n points of B. and let G be the barycenter of the system ((P<sub>1</sub> ,&lambda;<sub>1</sub>) , ... , (P<sub>n</sub>,&lambda;<sub>n</sub>)). We then have
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{PG} =\left ( \frac{1}{\sum_{i=1}^{n}} \lambda _{i}\right )\sum_{i=1}^{n}\ lambda _{i}\overrightarrow{PP_{i}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> which shows that G is a point of B by definition of vector subspaces. <h2>Point of view of the directing subspaces</h2> It follows from the above remarks that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Un sous-ensemble B d'un espace affine A associé à un espace vectoriel E, est une variété linéaire si et seulement si il existe un <input type="button" value="sous-espace vectoriel" onclick="go('../../algebre-lineaire/espaces/sousev.html#defax')" data-inline="true" /> F de E tel que
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle B=B+F= \left \{ P+\overrightarrow{u} ~~|~~\overrightarrow{u}\in F \right \} \)
+            <!-- /FORMULE UNIV INLINE--> où P est un point quelconque de B. En outre F ne dépend pas de P.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> A subset B of an affine space A associated with a vector space E, is a linear manifold if and only if there is <input type="button" value="vector subspace" onclick="go('../../algebre-lineaire/espaces/sousev.html#defaxe')" data-inline="true" /> F of E such that
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle B=B+F= \left \{ P+\overrightarrow{u} ~~|~~\overrightarrow{u}\in F \right \} \)
+            <!-- /INLINE UNIV FORMULA--> where P is any point of B. Moreover F does not depend on P.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Le seul point qui ne résulte pas directement du paragraphe précédent est la dernière affirmation. <br> Supposons donc que P+F=Q+F'. On en déduit aussitôt que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}\in F \)
+          <!-- /FORMULE UNIV INLINE--> et que
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PQ}\in F' \)
+          <!-- /FORMULE UNIV INLINE--> donc que F &sube; F' et F' &sube; F. On peut donc prendre alternativement cette propriété pour définition des variétés linéaires :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The only point that does not follow directly from the previous paragraph is the last statement. <br> Suppose therefore that P+F=Q+F'. We immediately deduce that
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}\in F \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PQ}\in F' \)
+          <!-- /INLINE UNIV FORMULA--> so that F &sube; F' and F' &sube; F. We can therefore alternatively take this property for the definition of linear varieties:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Le sous-espace F est appelé la <strong>
+              <em>'direction'</em>
+            </strong> ou le <strong>
+              <em>'sous-espace directeur'</em>
+            </strong> de B.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> The subspace F is called the <strong>
+              <em>'direction'</em>
+            </strong> or the <strong>
+              <em>'director subspace'</em>
+            </strong> of B.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On voit ainsi que comme dans tous les cas de sous-objets définis précédemment : </div>
+        <!-- /fr -->
+        <div lang="en"> We can thus see that, as in all the cases of sub-objects defined previously: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Si B est une variété linéaire de sous-espace directeur F, alors B devient elle-même un espace affine ayant pour espace associé l'espace F considéré comme espace vectoriel.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> If B is a linear variety with direction F, then B itself becomes an affine space having as its associated space the space F considered as a vector space.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Dimension d'une variété linéaire</h2> Nous nous plaçons ici dans le cadre d'espaces affines ayant pour espaces vectoriels associés des <input type="button" value="espaces de dimension finie" onclick="go('../../algebre-lineaire/espaces/dimension.html#defdim')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Dimension of a linear variety</h2> We place ourselves here within the framework of affine spaces having as associated vector spaces <input type="button" value="finite dimensional spaces" onclick="go('../../algebre-lineaire/espaces/dimension.html#defdime')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Si B est une variété linéaire de direction F, on appelle <strong>
+              <em>'dimension'</em>
+            </strong> de B, la dimension de F.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> If B is a linear variety of direction F, we call <strong>
+              <em>'dimension'</em>
+            </strong> of B, the dimension of F.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il en résulte que toutes les variétés linéaires d'un espace affine A associé à un espace vectoriel E de dimension finie n, sont de dimension &le; n. <br> Par analogie avec les sous-espaces vectoriels on adopte la terminologie suivante : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows that all the linear varieties of an affine space A associated with a vector space E of finite dimension n, are of dimension &le; n. <br> By analogy with vector subspaces, we adopt the following terminology: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div>
+            <ul>
+              <li>Les variétés linéaires de dimension 0 sont exactement les points.</li>
+              <li>Les variétés linéaires de dimension 1 sont appelées <strong>
+                  <em>'droites affines'</em>
+                </strong>. </li>
+              <li>Les variétés linéaires de dimension 2 sont appelées <strong>
+                  <em>'plans affines'</em>
+                </strong>. </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div>
+            <ul>
+              <li>Linear varieties of dimension 0 are exactly the points.</li>
+              <li>Linear varieties of dimension 1 are called <strong>
+                  <em>'affine lines'</em>
+                </strong>. </li>
+              <li>Linear varieties of dimension 2 are called <strong>
+                  <em>'affine planes'</em>
+                </strong>. </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette vous permettant de visualiser des droites affines. <br> Vous pouvez faire varier le point P en le tirant-déplaçant à la souris. <br> Vous pouvez également faire varier le vecteur directeur de la droite vectorielle (de couleur bleue) en tirant-déplaçant son extrêmité. <br> La droite affine apparait en vert, la droite vectorielle (sous-espace directeur) apparaît en noir. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet allowing you to visualize affine lines. <br> You can vary the point P by dragging it with the mouse. <br> You can also vary the direction vector of the vector line (in blue color) by dragging and dropping its extremity. <br> The affine line appears in green, the vector line (director subspace) appears in black. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/varlin1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Hyperplans affines</h2> Les hyperplans affines sont définis par analogie avec les hyperplans vectoriels :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Affine hyperplanes</h2> Affine hyperplanes are defined by analogy with vector hyperplanes:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> Un <strong>
+              <em>'hyperplan'</em>
+            </strong> affine est une variété linéaire dont le sous-espace directeur est un hyperplan vectoriel.< </div>
+              <!--/fr-->
+              <div lang="en">
+                <div id="label">definition 5</div> An affine <strong>
+                  <em>'hyperplane'</em>
+                </strong> is a linear variety whose direction is a vector hyperplane.< </div>
+                  <!-- /en -->
+              </div>
+              <!-- /cont -->
+              <!-- /STOP -->
+              <div lang="fr">
+                <ul>
+                  <li>Ainsi dans un espace affine de dimension 2, les hyperplans affines sont les droites affines.</li>
+                  <li> Dans un espace de dimension 3, les hyperplans affines sont les plans affines.</li>
+                </ul> Ces variétés jouent un rôle particulier du point de vue de la définition analytique des variétés linéaires (équations cartésiennes), c'est pourquoi nous introduisons leur définition dès à présent. <br> L'appliquette ci-dessous vous permet de visualiser des plans affines dans l'espace affine &reals;<sup>3</sup>. <br> En appuyant sur le bouton 'Autre exemple' vous générez un plan vectoriel (jaune) et un plan affine (orange) passant par le point fixe P et admettant ce plan vectoriel pour espace directeur. Cliquez sur la zone graphique pour interrompre et reprendre l'animation.
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <ul>
+                  <li>Thus in an affine space of dimension 2, the affine hyperplanes are the affine lines.</li>
+                  <li>In a 3-dimensional space, the affine hyperplanes are the affine planes.</li>
+                </ul> These varieties play a special role from the point of view of the analytical definition of linear varieties (Cartesian equations), which is why we introduce their definition now. <br> The applet below allows you to visualize affine planes in the affine space &reals;<sup>3</sup>. <br> By pressing the button 'Another example' you generate a vector plane (yellow) and an affine plane (orange) passing through the fixed point P and admitting this vector plane as director space. Click on the graphic zone to stop and restart animation.
+              </div>
+              <!-- /en -->
+              <!-- STOP  APPLET-->
+              <div>
+                <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+                <br />
+                <button type="button" onclick="nameSpace2.onButton1();">
+                  <div lang="fr">Autre exemple</div>
+                  <!-- /fr -->
+                  <div lang="en">Another example</div>
+                  <!-- /en -->
+                </button>
+                <script src="js/varlin2.js"></script>
+              </div>
+              <!-- /STOP  APPLET-->
+              <a name="demi"></a>
+              <div lang="fr">
+                <h2>Demi-espaces associés à un hyperplan affine</h2> Ce point ne concerne que les espaces affines réels. <br /> Tout hyperplan affine H dans l'espace affine A partage A en 3 régions de la manière suivante. <br /> Soit F le sous-espace directeur de H (donc un hyperplan vectoriel de E). <br /> Soit
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /FORMULE UNIV INLINE--> un vecteur quelconque n'appartenant pas à F de sorte que
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \mathbb{R}\overrightarrow{v} \)
+                <!-- /FORMULE UNIV INLINE--> est un <input type="button" value="supplémentaire" onclick="go('../../algebre-lineaire/espaces/opsev.html#supp')" data-inline="true" /> de F dans E. <br /> Si O est un point de H et si M est point quelconque de A alors on a un unique λ ∈ &reals; tel que
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OM}=\lambda \overrightarrow{v}+\overrightarrow{x} \)
+                <!-- /FORMULE UNIV INLINE--> où
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x} \)
+                <!-- /FORMULE UNIV INLINE--> est un vecteur de l'hyperplan vectoriel F. <br /> L'espace A est ainsi partagé en 3 régions : <ul>
+                  <li>Les points pour lesquels λ=0, c'est à dire l'hyperplan H lui-même</li>
+                  <li>La région des points pour lesquels λ &lt; 0</li>
+                  <li>La région des points pour lesquels λ &gt; 0 </li>
+                </ul> On peut se demander en quoi les deux dernières régions, appelées des <strong>
+                  <em>'demi-espaces'</em>
+                </strong> dépendent du vecteur
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /FORMULE UNIV INLINE--> . Supposons que
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+                <!-- /FORMULE UNIV INLINE--> soit un autre vecteur satisfaisant aux mêmes hypothèses que
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /FORMULE UNIV INLINE-->
+                <math>
+                  <mover>
+                    <mi>v</mi>
+                    <mo>→</mo>
+                  </mover>
+                </math> c'est à dire que
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w}\notin F \)
+                <!-- /FORMULE UNIV INLINE--> . <br /> Alors on peut écrire
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w}=\alpha \overrightarrow{v}+\overrightarrow{x} \)
+                <!-- /FORMULE UNIV INLINE--> avec
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{x}\in F \)
+                <!-- /FORMULE UNIV INLINE--> . <br /> On voit maintenant que si α &gt; 0 les deux demi-espaces déterminés par
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /FORMULE UNIV INLINE--> et
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+                <!-- /FORMULE UNIV INLINE--> coïncident, dans le cas contraire ces régions sont inversées. <br />
+                <h2>Le coin de Julia</h2> Voici un programme de calcul pour les vecteurs directeurs et la dimension de la <input type="button" value="variété engendrée" onclick="go('affinesinter.html#')" data-inline="true" />. Il inclut le <input type="button" value="programme de définiton des structures utilisées" onclick="go('julia/BasesAffines.jl.html#')" data-inline="true" />
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <h2>Half-spaces associated with an affine hyperplane</h2> This point concerns only real affine spaces. <br /> Any affine hyperplane H in the affine space A divides A into 3 regions as follows. <br /> Let F be the director subspace of H (therefore a vector hyperplane of E). <br /> Either
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /INLINE UNIV FORMULA--> any vector not belonging to F so that
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \mathbb{R}\overrightarrow{v} \)
+                <!-- /INLINE UNIV FORMULA--> is an <input type="button" value="supplementary" onclick="go('../../algebre-lineaire/espaces/opsev.html#suppe')" data-inline="true" /> of F in E. <br /> If O is a point of H and if M is any point of A then we have a unique λ ∈ &reals; such as
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OM}=\lambda \overrightarrow{v}+\overrightarrow{x} \)
+                <!-- /INLINE UNIV FORMULA--> where
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x} \)
+                <!-- /INLINE UNIV FORMULA--> is a vector of the vector hyperplane F. <br /> Space A is thus divided into 3 regions: <ul>
+                  <li>The points for which λ=0, i.e. the hyperplane H itself</li>
+                  <li>The region of points for which λ &lt; 0</li>
+                  <li>The region of points for which λ &gt; 0 </li>
+                </ul> One can wonder how the last two regions, called <strong>
+                  <em>'half-spaces'</em>
+                </strong> depend on the vector
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /INLINE UNIV FORMULA--> . suppose that
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+                <!-- /INLINE UNIV FORMULA--> be another vector satisfying the same hypotheses as
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /INLINE UNIV FORMULA--> which means
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w}\notin F \)
+                <!-- /INLINE UNIV FORMULA--> . <br /> So we can write
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w}=\alpha \overrightarrow{v}+\overrightarrow{x} \)
+                <!-- /INLINE UNIV FORMULA--> with
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{x}\in F \)
+                <!-- /INLINE UNIV FORMULA--> . <br /> We now see that if α &gt; 0 the two half-spaces determined by
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+                <!-- /INLINE UNIV FORMULA--> and
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+                <!-- /INLINE UNIV FORMULA--> coincide, otherwise these regions are reversed. <br />
+                <h2>Julia's corner</h2> Here is a calculation program for the direction vectors and the dimension of the <input type="button" value="generated variety" onclick="go('affinesinter.html#')" data-inline="true" />. It includes the <input type="button" value="program for defining the structures used" onclick="go('julia/BasesAffines.jl.html#')" data-inline="true" />
+              </div>
+              <!-- /en -->
+              <!-- STOP CODE -->
+              <p>
+                <object data="julia/directeurs.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+              </p>
+              <!-- /STOP  CODE-->
+              <div lang="fr">
+                <div>
+                  <ul style=list-style-type:'';>
+                    <li>
+                      <input type="button" value="Exercices" onclick="go('exercices/affinesvar/menu.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                    </li>
+                  </ul>
+                </div>
+                <!-- /navbar -->
+              </div>
+              <!-- /fr -->
+              <div lang="en">
+                <div>
+                  <ul style=list-style-type:'';>
+                    <li>
+                      <input type="button" value="Exercises" onclick="go('exercices/affinesvar/menu.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+                    </li>
+                    <li>
+                      <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- /en -->
+          </div>
+          <!-- /content -->
+          <div data-role="footer">
+            <table cellpadding="10">
+              <tr>
+                <td>
+                  <div lang="fr">Création Gilles Dubois</div>
+                  <div lang="en">Created by Gilles Dubois</div>
+                </td>
+                <td>
+                  <div lang="fr">Janvier 2022</div>
+                  <div lang="en">January 2022</div>
+                </td>
+                <td>
+                  <div lang="fr">Version mobile Jquery</div>
+                  <div lang="en">Mobile Jquery version</div>
+                </td>
+                <td>
+                  <a href="https://www.mathjax.org">
+                    <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <!-- /footer -->
+          <ul style=list-style-type:'';>
+            <li>
+              <div lang="fr">
+                <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+              </div>
+              <div lang="en">
+                <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+              </div>
+            </li>
+            <li>
+              <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /page -->
+  </body>
+</html>

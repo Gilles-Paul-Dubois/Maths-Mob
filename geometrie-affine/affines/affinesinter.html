@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intersection des variétés linéaires</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+    <script type="text/javascript" src="../../js/my3Dlib.js"></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/affinesinter/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/affinesinter/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Parallélisme</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Parallelism</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soient B et B' deux variétés linéaires d'un même espace affine A, de directions F et F' respectivement. On dit que B' est <strong>
+              <em>'paralléle'</em>
+            </strong> à B si F' ⊆ F. <br /> Nous dirons que B et B' sont <strong>
+              <em>'parallèles entre elles'</em>
+            </strong> si F=F'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let B and B' be two linear manifolds of the same affine space A, with directions F and F' respectively. B' is said to be <strong>
+              <em>'parallel'</em>
+            </strong> to B if F' ⊆ F. <br /> We will say that B and B' are <strong>
+              <em>'parallel to each other'</em>
+            </strong> if F=F'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette relation de parallélisme mutuel est évidemment une <input type="button" value="relation d'équivalence" onclick="go('../../bases/relations/equivalence.html#')" data-inline="true" />. <br> Le résultat suivant est une évidence : </div>
+        <!-- /fr -->
+        <div lang="en"> This mutual parallelism relation is obviously an <input type="button" value="equivalence relation" onclick="go('../../bases/relations/equivalence.html#')" data-inline="true" />. <br> The following result is again obvious: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Si B' est parallèle à B et que B et B' possèdent un seul point commun alors B' &sube; B.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> If B' is parallel to B and B and B' have a single common point then B' &sube; B.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il en résulte aussitôt que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows immediately that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Deux variétés parallèles entre elles sont soit <input type="button" value="disjointes" onclick="go('../../bases/ensembles/disjoints.html#')" data-inline="true" /> soit confondues.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Two varieties parallel to each other are either <input type="button" value="disjoint" onclick="go('../../bases/ensembles/disjoints.html#')" data-inline="true" /> or identical.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous avons en outre le résultat suivant : </div>
+        <!-- /fr -->
+        <div lang="en"> We also have the following result: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Soit B une variété linéaire et P un point quelconque. Par P il passe une et une seule variété B' telle que B et B' soient parallèles entre elles.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> Let B be a linear variety and P any point. Through P there passes one and only one variety B' such that B and B' are parallel to each other.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet si F est la direction de B la variété cherchée est manifestement P+F. <br>
+          <br> Voici une appliquette vous permettant de visualiser des droites affines parallèles entre elles. <br> Vous pouvez faire varier le point P en le tirant-déplaçant à la souris. <br> Vous pouvez faire varier le point Q en le tirant-déplaçant à la souris. <br> Vous pouvez également faire varier le vecteur directeur de la droite vectorielle directrice commune (de couleur bleue) en tirant-déplaçant son extrêmité. <br> Les droites affines parallèles apparaissent en vert, la droite vectorielle (sous-espace directeur) apparaît en noir.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed if F is the direction of B the desired variety is obviously P+F. <br>
+          <br> Here is an applet allowing you to visualize affine lines parallel to each other. <br> You can vary the point P by dragging it with the mouse. <br> You can vary the point Q by dragging it with the mouse. <br> You can also vary the direction vector of the common direction vector line (colored blue) by dragging and dragging its endpoint. <br> The parallel affine lines appear in green, the vector line (direction subspace) appears in black.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/parall1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <p>Voici maintenant une représentation de deux plans (strictement parallèles). <br> Cliquez n'importe où sur la zone graphique pour suspendre/reprendre l'animation. <br> Bouton 'Nouvel example' pour changer d'exemple. </p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Here is now a representation of two planes (strictly parallel). <br> Click anywhere on the graphic area to stop/restart the animation. <br> Click button 'Another example' to change example. </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000000;"></canvas>
+        <br />
+        <button type="button" onclick="nameSpace2.onButton1();">
+          <div lang="fr">Autre exemple</div>
+          <!-- /fr -->
+          <div lang="en">Other example</div>
+          <!-- /en -->
+        </button>
+        <script src="js/parall2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Intersection d'une famille de variétés linéaires</h2> On constate sur la définition que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Intersection of a family of linear varieties</h2> We can see from the definition that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div>
+            <input type="button" value="L'intersection" onclick="go('../../bases/ensembles/intersection.html#')" data-inline="true" /> de deux variétés linéaires est encore une variété linéaire si elle est non vide. <br /> Cette propriété s'étend aux familles finies et infinies de variétés.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div>
+            <input type="button" value="The intersection" onclick="go('../../bases/ensembles/intersection.html#')" data-inline="true" /> of two linear varieties is still a linear variety if it is non-empty. <br /> This property extends to finite and infinite families of manifolds.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat, d'une démonstration évidente, est bien sûr à mettre en parallèle avec le contenu de <input type="button" value="cette page" onclick="go('../../algebre-lineaire/espaces/opsev.html#')" data-inline="true" />. <br /> De plus, pour ce qui concerne l'intersection d'une famille de variétés (quand elle est non vide) : </div>
+        <!-- /fr -->
+        <div lang="en"> This result, of an obvious demonstration, is of course to be compared with the content of <input type="button" value="this page" onclick="go('../../algebre-lineaire/espaces/opsev.html#')" data-inline="true" />. <br /> Moreover, with regard to the intersection of a family of varieties (when it is non-empty): </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> e sous-espace directeur de l'intersection est l'intersection des sous-espaces directeurs des variétés de la famille.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> The direction of the intersection is the intersection of the directions of the varieties of the family.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Variétés engendrées</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Generated varieties</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Soit X une partie non vide d'un espace affine A. <br> Il existe des variétés linéaires contenant X (en particulier la variété 'totale' B=A). L'intersection de toutes ces variétés est encore une variété (elle est non vide car contenant X). <br> C'est évidemment, de par sa définition la plus petite des variétés de A contenant X, on l'appelle la variété <strong>
+              <em>'engendrée'</em>
+            </strong> par X. <br> Sa direction est l'intersection des directions des variétés contenant X.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> Let X be a nonempty subset of an affine space A. <br> There exist linear varieties containing X (in particular the 'total' variety B=A). The intersection of all these varieties is still a variety (it is non-empty because it contains X). <br> It is obviously, by its definition the smallest of the varieties of A containing X, it is called the variety < strong>
+              <em>'generated'</em>
+              </strong> by X. <br> Its direction is the intersection of the directions of the varieties containing X.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Cas d'une partie finie </h3> On suppose maintenant que X est constituée d'un nombre fini de points (disons n+1) X= {P<sub>0</sub>,P<sub>1</sub>, ...,P<sub>n</sub>}. <br> On cherche à caractériser la variété engendrée par X. <br> Nous avons le premier résultat suivant :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of a finite subset </h3> We now assume that X consists of a finite number of points (say n+1) X= {P<sub>0</sub>,P<sub>1</sub>, ...,P<sub>n</sub>}. <br> We want to characterize the variety generated by X. <br> We have the following first result:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> L'ensemble des barycentres des n+1 points P<sub>0</sub>, P<sub>1</sub>, ... ,P<sub>n</sub> (affectés de coefficients de masse totale non nulle) est exactement la variété engendrée par ces n+1 points.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> The set of barycenters of the n+1 points P<sub>0</sub>, P<sub>1</sub>, ... ,P<sub>n</sub> (affected by coefficients with nonzero total mass ) is exactly the variety generated by these n+1 points.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La démonstration est simple. Par le <input type="button" value="théorème d'associativité des barycentres" onclick="go('affinesbar.html#thm5')" data-inline="true" /> l'ensemble B en question est une variété linéaire. <br /> Or chaque point P<sub>i</sub> est le barycentre du système ((P<sub>0</sub>,0),(P<sub>1</sub>,0), ..., (P<sub>i</sub>,1), ...,(P<sub>n</sub>,0))donc B contient tous les P<sub>i</sub>. <br /> En outre toute variété contenant les P<sub>i</sub> doit contenir B par définition des variétés d'où le résultat. <br /> Pour ce qui concerne le sous-espace directeur de cette variété engendrée, nous avons le résultat suivant : </div>
+        <!-- /fr -->
+        <div lang="en"> The demonstration is simple. By the <input type="button" value="barycenter associativity theorem" onclick="go('affinesbar.html#thm5')" data-inline="true" /> the set B in question is a manifold linear. <br /> Now each point P<sub>i</sub> is the barycenter of the system ((P<sub>0</sub>,0),(P<sub>1</sub>,0 ), ..., (P<sub>i</sub>,1), ...,(P<sub>n</sub>,0)) so B contains all the P<sub>i </ sub>. <br /> Furthermore any variety containing the P<sub>i</sub> must contain B by definition of the varieties hence the result. <br /> Concerning the director subspace of this generated manifold, we have the following result: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 8</div> Le sous-espace directeur de la variété engendrée par les n+1 points P<sub>0</sub>, P<sub>1</sub>, ..., P<sub>n</sub> est le <input type="button" value="sous-espace engendré" onclick="go('../../algebre-lineaire/espaces/generateurs.html#')" data-inline="true" /> par les n vecteurs
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{P_{0}P_{1}},\overrightarrow{P_{0}P_{2}},.... ,\overrightarrow{P_{0}P_{2}} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 8</div> The direction of the variety generated by the n+1 points P<sub>0</sub>, P<sub>1</sub>, ..., P<sub>n</sub> is the <input type="button" value="generated subspace" onclick="go('../../algebre-lineaire/espaces/generateurs.html#')" data-inline="true" /> par the n vectors
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{P_{0}P_{1}},\overrightarrow{P_{0}P_{2}},.... ,\overrightarrow{P_{0}P_{2}} \)
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet si F est ce sous-espace il est clair que P<sub>0</sub>+F est une variété et que toute variété contenant P<sub>0</sub>, P<sub>1</sub>, .... ,P<sub>n</sub> doit contenir cette variété. <br>
+          <h3>Points affinements indépendants</h3> Il résulte du paragraphe qui précède que :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed if F is this subspace it is clear that P<sub>0</sub>+F is a variety and that any variety containing P<sub>0</sub>, P<sub>1</sub>, .... ,P<sub>n</sub> must contain this variety. <br>
+          <h3>Affinely independent points</h3> It follows from the preceding paragraph that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 9</div> La variété linéaire engendrée par un système de n+1 points est de dimension au plus égale à n.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 9</div> The linear variety generated by a system of n+1 points has dimension at most equal to n.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette remarque appelle la définition suivante : </div>
+        <!-- /fr -->
+        <div lang="en"> This remark calls for the following definition: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On dit que les n+1 points P<sub>0</sub>, P<sub>1</sub>, ... ,P<sub>n</sub> sont <strong>
+              <em>'affinement indépendants'</em>
+            </strong> si la dimension de la variété qu'ils engendrent est exactement n. <br> Cela revient à dire que les n vecteurs
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{P_{0}P_{1}},\overrightarrow{P_{0}P_{2}},.... ,\overrightarrow{P_{0}P_{n}} \)
+            <!-- /INLINE UNIV FORMULA--> sont linéairement indépendants.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We say that the n+1 points P<sub>0</sub>, P<sub>1</sub>, ... ,P<sub>n</sub> are <strong>
+              <em>'affinely independent'</em>
+            </strong> if the dimension of the manifold they generate is exactly n. <br> This amounts to saying that the n vectors
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{P_{0}P_{1}},\overrightarrow{P_{0}P_{2}},.... ,\overrightarrow{P_{0}P_{n}} \)
+            <!-- /INLINE UNIV FORMULA--> are linearly independent.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici quelques exemples : <ul>
+            <li>Deux points non confondus sont affinement indépendants.</li>
+            <li>Trois points non alignés sont affinement indépendants.</li>
+            <li>Quatre points non coplanaires sont affinement indépendants.</li>
+          </ul>
+          <h3>Coordonnées barycentriques</h3> Reprenons le cas de n+1 points affinement indépendants qui engendrent une variété de dimension n. Tout point P de cette variété est un barycentre d'un système ((P<sub>0</sub>,λ<sub>0</sub>), (P<sub>1</sub>,λ<sub>1</sub>), ... ,(P<sub>n</sub>,λ<sub>n</sub>)). Mais à cause du <input type="button" value="principe d'homogénéité" onclick="go('affinesbar.html#thm4')" data-inline="true" /> le jeu de coefficients (λ<sub>1</sub>, λ<sub>2</sub>, ... ,λ<sub>n</sub>) n'est en général pas unique. <br /> Cependant si nous prenons P<sub>0</sub> pour origine, dire que P est barycentre du système ((P<sub>0</sub>,λ<sub>0</sub>), (P<sub>1</sub>,λ<sub>1</sub>), ... ,(P<sub>n</sub>,λ<sub>n</sub>)) signifie que :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{P_{0}P}=\left ( \frac{1}{\sum_{i=0}^{n}\lambda _{i}} \right )\sum_{i=1}^{n}\lambda _{i}\overrightarrow{P_{0}P_{i}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Mais les vecteurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{P_{0}P_{1}},\overrightarrow{P_{0}P_{2}},.... ,\overrightarrow{P_{0}P_{n}} \)
+          <!-- /FORMULE UNIV INLINE--> étant linéairement indépendants les n+1 nombres :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \alpha _{i}=\frac{\lambda _{i}}{\sum_{k=0}^{n}\lambda _{k}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> de masse totale 1 sont eux, uniques.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Here are some examples : <ul>
+            <li>Two non-coincident points are refinement independent.</li>
+            <li>Three non-aligned points are refinement independent.</li>
+            <li>Four non-coplanar points are refinement independent.</li>
+          </ul>
+          <h3>Barycentric coordinates</h3> Let us take again the case of n+1 affinely independent points which generate a manifold of dimension n. Any point P of this manifold is a barycenter of a system ((P<sub>0</sub>,λ<sub>0</sub>), (P<sub>1</sub>,λ<sub>1</sub>), ... ,(P<sub>n</sub>,λ<sub>n</sub>)). But because of the <input type="button" value="principle of homogeneity" onclick="go('affinesbar.html#thm4')" data-inline="true" /> the set of coefficients (λ<sub> 1</sub>, λ<sub>2</sub>, ... ,λ<sub>n</sub>) is in general not unique. <br /> However if we take P<sub>0</sub> for origin, say that P is the barycenter of the system ((P<sub>0</sub>,λ<sub>0</sub>), (P<sub>1</sub>,λ<sub>1</sub>), ... ,(P<sub>n</sub>,λ<sub>n</sub>)) means that:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{P_{0}P}=\left ( \frac{1}{\sum_{i=0}^{n}\lambda _{i}} \right )\sum_{i=1}^ {n}\lambda _{i}\overrightarrow{P_{0}P_{i}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> But the vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{P_{0}P_{1}},\overrightarrow{P_{0}P_{2}},.... ,\overrightarrow{P_{0}P_{n}} \)
+          <!-- /INLINE UNIV FORMULA--> being linearly independent the n+1 numbers:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \alpha _{i}=\frac{\lambda _{i}}{\sum_{k=0}^{n}\lambda _{k}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> of total mass 1 are unique.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On les appelle les <b>
+              <i>'coordonnées barycentriques'</i>
+            </b> de P dans le système (P<sub>0</sub>, ...,P<sub>n</sub>) de n+1 points affinement indépendants. <br> Ce système de points est appelé également <b>
+              <i>'base affine'</i>
+            </b> pour la variété engendrée.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> They are called the <b>
+              <i>'barycentric coordinates'</i>
+            </b> of P in the system (P<sub>0</sub>, ...,P<sub>n</sub>) of n+1 independent affine points. <br> This point system is also called <b>
+              <i>'affine basis'</i>
+            </b> for the generated variety.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Dimension d'une intersection</h2> Nous nous intéressons au cas particulier des variétés non parallèles.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Dimension of an intersection</h2> We are interested in the special case of non-parallel varieties.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop10"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 10</div> Dans ce cas, si nous sommes dans un espace affine de dimension n. L'intersection d'une variété de dimension p avec une variété de dimension q est de dimension au moins égale à p+q-n.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 10</div> In this case, if we are in an n-dimensional affine space. The intersection of a variety of dimension p with a variety of dimension q has a dimension at least equal to p+q-n.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ceci résulte immédiatement de ce qui précède sur le sous-espace directeur d'une intersection ainsi que des résultats sur la dimension d'une intersection. Ainsi : <ul>
+            <li>Dans le plan deux droites non parallèles se coupent en un point exactement.</li>
+            <li>Dans l'espace deux plans non parallèles se coupent en une droite.</li>
+            <li>Dans l'espace un plan et une droite non parallèle à ce plan se coupent en un point exactement.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This follows immediately from what precedes on the direction of an intersection as well as from the results on the dimension of an intersection. So : <ul>
+            <li>In the plane two non-parallel lines intersect at exactly one point.</li>
+            <li>In space two non-parallel planes intersect in a straight line.</li>
+            <li>In space, a plane and a straight line not parallel to this plane intersect at exactly one point.</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/affinesinter/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/affinesinter/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

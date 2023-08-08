@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Antidéplacements du plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/plananti/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/plananti/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Nous avons vu <input type="button" value="ici" onclick="go('../euclidiens/euclianti.html#prop5')" data-inline="true" /> que les symétries orthogonales par rapport à une droite sont des antidéplacements du plan. <br> Ce ne sont certainement pas les seules. En particulier si on compose une telle symétrie avec un déplacement, on obtient un antidéplacement. <br> Commençons par étudier le cas de la composée d'une symétrie axiale avec une translation. <br>
+          <h4>Cas particulier</h4> On examinera en premier le cas où le vecteur de translation &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; est orthogonal à l'axe d de la symétrie. <br> Dans un repère où l'origine est un point de l'axe et où un vecteur de base est colinéaire à l'axe de la symétrie et l'autre est orthogonal à cet axe la détermination analytique de la symétrie est :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x' = x} \\ {y' = - y} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> dans ce même repère la translation a une expression annalytique :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x'' = x'} \\ {y'' = k + y'} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> La détermination analytique de la composée est donc :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x'' = x} \\ {y'' = k - y} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Que nous pouvons encore écrire :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x'' = x} \\ {y'' - k/2 = - \left( {y - k/2} \right)} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Et on reconnait là une symétrie axiale dont l'axe d' est translaté de l'axe de la symétrie initiale par une translation de vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v}=\frac{\overrightarrow{u}}{2} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br>
+          <img src="images/plananti1.png" width="505" height="430" border="0" alt="">
+          <br>
+          <h4>Cas général</h4> Le vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; de la translation peut se décomposer en la somme d'un vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{1}} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; // à l'axe de la symétrie et d'un vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{2}} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; &perp; à cet axe. <br> Comme &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle T_{\overrightarrow{u}} = T_{\overrightarrow{u_{1}}} \circ T_{\overrightarrow{u_{2}}} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br> On peut donc conclure de ce qui précède que la composée d'une symétrie axiale avec une translation peut toujours être écrite comme la composée d'une symétrie axiale avec une translation // à l'axe de la symétrie.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We have seen <input type="button" value="here" onclick="go('../euclidiens/euclianti.html#prop5')" data-inline="true" /> that orthogonal reflections with respect to a lmirror ine are improper isometries of the plane. <br> They are certainly not the only ones. In particular, if we compose such a reflection with a proper isometry, we obtain an improper isometry. <br> Let's start by studying the case of the composite of an axial symmetry with a translation. <br>
+          <h4>Special case</h4> We will first examine the case where the translation vector &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; is orthogonal to the mirror d of the reflection. <br> In a frame where the origin is a point on the mirror and where a basis vector is collinear with the mirror and the other is orthogonal to this mirror, the analytical determination of the symmetry is:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x' = x} \\ {y' = -y} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> in this same frame the translation has an analytical expression:
+          <!-- FORMULA UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x'' = x'} \\ {y'' = k + y'} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> The analytical determination of the composite is therefore:
+          <!-- FORMULA UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x'' = x} \\ {y'' = k - y} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> Which we can still write:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x'' = x} \\ {y'' - k/2 = - \left( {y - k/2} \right)} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> And we recognize there an axial symmetry whose axis of is translated from the axis of the initial symmetry by a translation of vector &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v}=\frac{\overrightarrow{u}}{2} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br>
+          <img src="images/plananti1.png" width="505" height="430" border="0" alt="">
+          <br>
+          <h4>General case</h4> The vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; of the translation can be broken down into the sum of a vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{1}} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; // to the mirror and a vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{2}} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; &perp; to this mirror. <br> As &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle T_{\overrightarrow{u}} = T_{\overrightarrow{u_{1}}} \circ T_{\overrightarrow{u_{2}}} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br> It can therefore be concluded from the above that the composite of a reflection with mirror line with a translation can always be written as the composite of a reflection with a translation // at the mirror.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un antidéplacement tel que celui décrit ci-dessus s'appelle parfois une ' <strong>
+              <em>symétrie glissée</em>
+            </strong>'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> An improper isometry such as the one just described is sometimes called a ' <strong>
+              <em>glide reflection</em>
+            </strong>'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/plananti2.png" width="366" height="356" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Nous allons voir maintenant que : </div>
+        <!-- /fr -->
+        <div lang="en"> We are going to see now, that : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Ces symétries glissées, comportant en particulier les symétries axiales dans le cas où le vecteur de glissement est nul sont les seuls antidéplacements du plan
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> These glide reflections, including as a particular case the usual reflections with a line mirror when translation vector is null, are the only improper isometries of the plane.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Tout d'abord un antidéplacement est par définition une isométrie telle que l'application linéaire orthogonale associée soit négative. On pourra revoir par exemple <input type="button" value="cette page" onclick="go('../../algebre-lineaire/orthogonalite/orientation.html#')" data-inline="true" />. <br> Il est facile de voir que relativement à une base orthonormée &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; la matrice d'une application linéaire orthogonale du plan dans lui même est du type :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \begin{pmatrix} a & b \\ b & {- a} \\ \end{pmatrix} \)</p>
+            <!-- /FORMULE UNIV INLINE--> avec a<sup>2</sup>+b<sup>2</sup>=1. <br> Ici a et b sont tout simplement les coordonnées de l'image de &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{i} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;. <br> Il est facile de voir qu'une telle application linéaire possède une droite de points fixes. <br> En effet, les points fixes sont solutions du système de rang 1 : <br>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {x = {ax} + {by}} \\ {y = {bx} - {ay}} \\ \end{matrix} \right. \)</p>
+            <!-- /FORMULE UNIV INLINE--> Si a=1 et b=0 la droite des points fixes est celle de vecteur directeur &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{i} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;, sinon le vecteur directeur est : &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} = \begin{pmatrix} b \\ {1 - a} \\ \end{pmatrix} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; <br> Soit f un antidéplacement du plan, et &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{f} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; son application linéaire associée, &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; un vecteur directeur de la droite invariante de &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{f} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;. <br> Prenons alors un repère de type &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; où &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; est un vecteur orthogonal à &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;. <br> La détermination analytique de f est donc, dans un tel repère :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {x' = x_{0} + x} \\ {y' = y_{0} - y} \\ \end{matrix} \right. \)</p>
+            <!-- /FORMULE UNIV INLINE--> Ce qui prouve que f est une symétrie-glissée.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> First of all, an improper isometry is by definition an isometry such that the associated orthogonal linear map is negative. We can review for example <input type="button" value="this page" onclick="go('../../algebre-lineaire/orthogonalite/orientation.html#')" data-inline="true" />. <br> It is easy to see that relatively to an orthonormal basis &nbsp;
+            <!-- FORMULA UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{i},\overrightarrow{j} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; the matrix of an orthogonal linear map from the plane to itself is of the type:
+            <!-- FORMULA UNIV INLINE -->
+            <p>\( \displaystyle \begin{pmatrix} a & b \\ b & {-a} \\ \end{pmatrix} \)</p>
+            <!-- /INLINE UNIV FORMULA--> with a<sup>2</sup>+b<sup>2</sup>=1. <br> Here a and b are simply the coordinates of the image of &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{i} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;. <br> It is easy to see that such a linear map has a line of fixed points. <br> Indeed, fixed points are solutions of the system of rank 1: <br>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {x = {ax} + {by}} \\ {y={bx}-{ay}}\\ \end{matrix} \right. \)</p>
+            <!-- /INLINE UNIV FORMULA--> If a=1 and b=0 the line of the fixed points is that of direction vector &nbsp;
+            <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{i} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;, otherwise the direction vector is: &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} = \begin{pmatrix} b \\ {1 - a} \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; <br> Let f be an improper isometry of the plane, and &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{f} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; its associated linear map, &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; a direction vector of the invariant line of &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{f} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;. <br> Let's then take a frame of the type &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; where &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; is a vector orthogonal to &nbsp;
+            <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{u} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;. <br> The analytical determination of f is therefore, in such a frame:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \left\{ \begin{matrix} {x' = x_{0} + x} \\ {y' = y_{0} - y} \\ \end{matrix} \right. \)</p>
+            <!-- /INLINE UNIV FORMULA--> This proves that f is a glide-symmetry.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/plananti/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/plananti/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

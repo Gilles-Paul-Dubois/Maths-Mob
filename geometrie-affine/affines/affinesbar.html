@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Barycentres</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/affinesbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/affinesbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <p>La présente page a pour but de présenter un concept particulièrement important en mécanique. Il s'agit de la généralisation du concept de centre de gravité d'un système. On considère en mécanique (et particulièrement en dynamique) des mobiles représentés comme des corps dont toute la masse est concentrée en un point. Leur trajectoire peut donc être assimilée à celle d'un point et se confond donc avec une courbe. <br /> Il va de soi que toutes les forces s'appliquant à un tel solide idéalement réduit peuvent être considérées comme ayant leur point d'application en ce point. <br /> Par la suite les systèmes de tels points deviennent des ensembles de ces points avec des interactions fortes telles que les positions relatives de ces points ne varient pas. <br /> Un solide continu peut être considéré comme le système obtenu par passage à la limite dans des systèmes de tels points. Dans les formules les intégrales remplaceront alors les sommes finies. La notion de centre de gravité pourra alors être étendue à de tels solides. </p>
+          <h2>Systèmes de points pondérés</h2> Soit A un <input type="button" value="espace affine" onclick="go('affinesdef.html#def1')" data-inline="true" /> associé à un espace vectoriel E.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>The purpose of this page is to introduce a particularly important concept in mechanics. This is the generalization of the concept of center of gravity of a system. We consider in mechanics (and particularly in dynamics) mobiles represented as bodies whose whole mass is concentrated at a point. Their trajectory can therefore be assimilated to that of a point and therefore merges with a curve. <br /> It goes without saying that all forces acting on such an ideally reduced solid can be considered to have their point of application at this point. <br /> Thereafter the systems of such points become sets of these points with strong interactions such that the relative positions of these points do not vary. <br /> A continuous solid can be considered as the system obtained by passing to the limit in systems of such points. In the formulas the integrals will then replace the finite sums. The notion of center of gravity can then be extended to such solids. </p>
+          <h2>Mass points systems</h2> Let A be an <input type="button" value="affine space" onclick="go('affinesdef.html#def1')" data-inline="true" /> associated with a vector space E.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un <strong>
+              <em>'point pondéré'</em>
+            </strong> consiste en la donnée d'un couple (P,λ) où P est un point de A et λ est un <input type="button" value="scalaire" onclick="go('../../algebre-lineaire/espaces/defev.html#')" data-inline="true" /> (un élément de K). <br /> Un tel point pondéré est donc un élément du <input type="button" value="produit cartésien" onclick="go('../../bases/relations/cartesien.html#')" data-inline="true" /> A×K.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A <strong>
+              <em>'mass point'</em>
+            </strong> consists of the data of a couple (P,λ) where P is a point of A and λ is a <input type="button" value="scalar" onclick="go('../../algebre-lineaire/espaces/defev.html#')" data-inline="true" /> (an element of K). <br /> Such a mass point is therefore an element of the <input type="button" value="Cartesian product" onclick="go('../../bases/relations/cartesien.html#')" data-inline=" true" /> A×K.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Un <strong>
+              <em>'système de points pondérés'</em>
+            </strong> consiste en la donnée d'une <input type="button" value="suite" onclick="go('../../nombres/naturels/suites.html#')" data-inline="true" /> finie ordonnée de points pondérés. <br /> Un tel système sera donc noté S=((P<sub>1</sub>,λ<sub>1</sub>),(P<sub>2</sub>,λ<sub>2</sub>) , ... ,(P<sub>n</sub>,λ<sub>n</sub>))
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> A <strong>
+              <em>'mass point system'</em>
+            </strong> consists of a finite ordered <input type="button" value="sequence" onclick="go('../../nombres/naturels/suites.html#')" data-inline="true" /> of mass points. <br /> Such a system will therefore be denoted S=((P<sub>1</sub>,λ<sub>1</sub>),(P<sub>2</sub>,λ<sub>2</sub>) , ... ,(P<sub>n</sub>,λ<sub>n</sub>))
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> La <strong>
+              <em>'masse totale'</em>
+            </strong> du système S=((P<sub>1</sub>,&lambda;<sub>1</sub>),(P<sub>2</sub>,&lambda;<sub>2</sub>) , ... ,(P<sub>n</sub>,&lambda;<sub>n</sub>)) est le scalaire &lambda;=&lambda;<sub>1</sub>+&lambda;<sub>2</sub>+ ... +&lambda;<sub>n</sub>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> The <strong>
+              <em>'total mass'</em>
+            </strong> of the system S=((P<sub>1</sub>,&lambda;<sub>1</sub>),(P<sub>2</sub>,&lambda;<sub>2</sub>) , ... ,(P<sub>n</sub>,&lambda;<sub>n</sub>)) is the scalar &lambda;=&lambda;<sub>1</sub>+&lambda;<sub>2</sub>+ ... +&lambda;<sub>n</sub>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Un <strong>
+              <em>'sous-système'</em>
+            </strong> S<sub>2</sub> d'un système pondéré S<sub>1</sub> est un système dont tous les points pondérés appartiennent au système S<sub>1</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> A <strong>
+              <em>'subsystem'</em>
+            </strong> S<sub>2</sub> of a mass point system S<sub>1</sub> is a system whose all mass points belong to the system S<sub>1</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Barycentres</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Barycenters</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit S=((P<sub>1</sub>,&lambda;<sub>1</sub>),(P<sub>2</sub>,&lambda;<sub>2</sub>) , ... ,(P<sub>n</sub>,&lambda;<sub>n</sub>)) un système de points pondérés d'un espace affine A, <u>de masse totale non nulle</u>. <br> Alors le point G défini par :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{OG}=\frac{1}{\sum_{i=1}^{n}\lambda _{i}}\sum_{i=1}^{n}\lambda _{i}\overrightarrow{OP_{i}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> ne dépend pas du point O choisi pour le définir.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let S=((P<sub>1</sub>,&lambda;<sub>1</sub>),(P<sub>2</sub>,&lambda;<sub>2</sub>) , ... ,(P<sub>n</sub>,&lambda;<sub>n</sub>)) a mass point system of an affine space A, <u> with nonzero total mass</u>. <br> Then the point G defined by:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \overrightarrow{OG}=\frac{1}{\sum_{i=1}^{n}\lambda _{i}}\sum_{i=1}^{n}\lambda _{i}\overrightarrow{OP_{i}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> does not depend on the point O chosen to define it.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit O' un autre point il suffit d'appliquer la <input type="button" value="relation de Chasles" onclick="go('affinesdef.html#prop1')" data-inline="true" /> aux triangles O,O',G et O,O',P<sub>i</sub>, c'est à dire
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{O'G}=\overrightarrow{O'O} + \overrightarrow{OG}~~et~~\overrightarrow{O'P_{i}}=\overrightarrow{O'O} + \overrightarrow{OP_{i}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> pour obtenir :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{O'G}=\frac{1}{\sum_{i=1}^{n}\lambda _{i}}\sum_{i=1}^{n}\lambda _{i}\overrightarrow{O'P_{i}} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let O' be another point just apply the <input type="button" value="Chasles relation" onclick="go('affinesdef.html#prop1')" data-inline="true" /> to triangles O,O',G and O,O',P<sub>i</sub>, that's to say
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{O'G}=\overrightarrow{O'O} + \overrightarrow{OG}~~et~~\overrightarrow{O'P_{i}}=\overrightarrow{O'O} + \overrightarrow{ OP_{i}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> to get :
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{O'G}=\frac{1}{\sum_{i=1}^{n}\lambda _{i}}\sum_{i=1}^{n}\lambda _{i }\overrightarrow{O'P_{i}} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> Avec les notations et les hypothèses de la proposition ci-dessus, G s'appelle le <strong>
+              <em>'barycentre'</em>
+            </strong> du système S.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> With the notations and assumptions of the above proposition, G is called the <strong>
+              <em>'barycenter'</em>
+            </strong> of the system S.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte immédiatement de la définition que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows immediately from the definition that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div>
+            <ul>
+              <li>Le barycentre d'un système pondéré ne dépend pas de l'ordre des points dans le système. (principe de commutativité)</li>
+              <li>Tous les points de masse nulle peuvent être éliminés du système, le barycentre du système restant inchangé.</li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div>
+            <ul>
+              <li>The barycenter of a mass point system does not depend on the order of the mass points in the system.</li>
+              <li>All points of zero mass can be eliminated from the system, the barycenter of the system remaining unchanged.(commutativity principle)</li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> Le barycentre du système S est également l'unique point G vérifiant :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=1}^{n}\lambda _{i}\overrightarrow{GP_{i}}=\overrightarrow{0} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> The barycenter of the system S is also the only point G verifying:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=1}^{n}\lambda _{i}\overrightarrow{GP_{i}}=\overrightarrow{0} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser le barycentre d'un système de deux points pondérés S=((A,a),(B,b)). <br> Vous pouvez déplacer les points A et B par un 'tirer-déplacer' à la souris. <br> Vous pouvez faire varier les coefficients a et b à l'aide des curseurs. <br> Le point G apparaît s'il n'est pas 'trop éloigné' des extrémités du segment. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize the barycenter of a system of two weighted points S=((A,a),(B,b)). <br> You can move points A and B by drag-and-drop with the mouse. <br> You can vary the a and b coefficients using the sliders. <br> Point G appears if it is not 'too far' from the ends of the segment. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/bary1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Remarquez ce qui se passe quand les deux coefficients sont de même signe, quand ils sont de signes opposés, quand un des coefficients est nul, quand les deux coefficients sont égaux. <h2>Principe d'homogénéité </h2> Le principe d'homogénéité affirme que : </div>
+        <!-- /fr -->
+        <div lang="en"> Notice what happens when the two coefficients have the same sign, when they have opposite signs, when one of the coefficients is zero, when the two coefficients are equal. <h2>Principle of homogeneity </h2> The principle of homogeneity states that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Le barycentre d'un système pondéré ne change pas quand on multiplie les masses de <strong>tous</strong> les points par un <strong>même</strong> scalaire <strong>non nul</strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> The barycenter of a mass point system does not change when the masses of <strong>all</strong> the points are multiplied by the <strong>same</strong>
+            <strong>non-zero</strong> scalar.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est immédiate sur la définition. <h2>Théorème d'associativité</h2> Ce résultat est moins trivial que le principe d'homogénéité. On peut l'énoncer ainsi : </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is immediate on the definition. <h2>Associativity theorem</h2> This result is less trivial than the principle of homogeneity. It can be stated as follows: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Supposons que le système S, de masse totale non nulle, soit réunion se p sous-systèmes S<sub>1</sub>, S<sub>2</sub>, ... , S<sub>p</sub> tous de masse totale non nulle. <br> Désignons par G<sub>1</sub> le barycentre du sous-système S<sub>1</sub>, G<sub>2</sub> le barycentre du sous-système S<sub>2</sub>, ... , G<sub>p</sub> le barycentre du sous-système S<sub>p</sub>. <br> Désignons par m<sub>1</sub> la masse totale du sous-système S<sub>1</sub>, m<sub>2</sub> la masse totale du sous-système S<sub>2</sub>, ... , m<sub>p</sub> la masse totale du sous-système S<sub>p</sub>. <br> Dans ces conditions si G est le barycentre du système total S, G est aussi le barycentre du système ((G<sub>1</sub>,m<sub>1</sub>),(G<sub>2</sub>,m<sub>2</sub>), ... ,(G<sub>p</sub>,m<sub>p</sub>))
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> Suppose that the system S, of nonzero total mass, is the union of se p subsystems S<sub>1</sub>, S<sub>2</sub>, ... , S<sub>p</sub> all of nonzero total mass. <br> Let G<sub>1</sub> be the barycenter of the subsystem S<sub>1</sub>, G<sub>2</sub> the barycenter of the subsystem S<sub>2</sub>, ... , G<sub>p</sub> the barycenter of the subsystem S<sub>p</sub>. <br> Let m<sub>1</sub> denote the total mass of subsystem S<sub>1</sub>, m<sub>2</sub> the total mass of subsystem S<sub>2</sub>, ... , m<sub>p</sub> the total mass of the subsystem S<sub>p</sub>. <br> Under these conditions if G is the barycenter of the total system S, G is also the barycenter of the system ((G<sub>1</sub>,m<sub>1</sub>),(G<sub>2</sub>,m<sub>2</sub>), ... ,(G<sub>p</sub>,m<sub>p</sub>))
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> Nous allons commencer par faire la preuve dans un cas particulier simple, le cas où S est la réunion de deux sous-systèmes S<sub>1</sub> et S<sub>2</sub> : <br> S<sub>1</sub>=((P<sub>1</sub>,&lambda;<sub>1</sub>), ... ,P<sub>m</sub>,&lambda;<sub>m</sub>) <br> S<sub>2</sub>=((P<sub>m+1</sub>,&lambda;<sub>m+1</sub>), ... ,P<sub>n</sub>,&lambda;<sub></sub>n </sub>) <br> On introduit alors G<sub>1</sub> barycentre de S<sub>1</sub> et G<sub>2</sub> barycentre de S<sub>2</sub>. <br> Il faut montrer que si G est barycentre de S alors G est aussi barycentre de ((G<sub>1</sub>,m<sub>1</sub>),(G<sub>2</sub>,m<sub>2</sub>)), où m<sub>1</sub>=&lambda;<sub>1</sub>+ ...+&lambda;<sub>m</sub> et m<sub>2</sub>=&lambda;<sub>m+1</sub>+ ...+&lambda;<sub>n</sub>. <br> Le barycentre G du système ((G<sub>1</sub>,m<sub>1</sub>),(G<sub>2</sub>,m<sub>2</sub>)) peut être caractérisé par :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m_{1}\overrightarrow{GG_{1}}+m_{2}\overrightarrow{GG_{2}}=\overrightarrow{0} \)</p>
+            <!-- /FORMULE UNIV INLINE--> utilisant alors
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{GG_{1}}=\frac{1}{m_{1}}\sum_{i=1}^{m}\lambda _{i}\overrightarrow{GP_{i}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{GG_{2}}=\frac{1}{m_{2}}\sum_{i=m+1}^{n}\lambda _{i}\overrightarrow{GP_{i}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> il vient
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=1}^{n}\lambda _{i}\overrightarrow{GP_{i}}=\overrightarrow{0} \)</p>
+            <!-- /FORMULE UNIV INLINE--> qui prouve notre assertion. <br> La démonstration en toute généralité se fait par récurrence sur le nombre de sous-systèmes et le principe de commutativité ci-dessus.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> We will start by doing the proof in a simple particular case, the case where S is the union of two subsystems S<sub>1</sub> and S<sub>2</sub>: <br> S<sub>1</sub>=((P<sub>1</sub>,&lambda;<sub>1</sub>), ... ,P<sub>m</sub>,&lambda;<sub>m</sub>) <br> S<sub>2</sub>=((P<sub>m+1</sub>,&lambda;<sub>m+1</sub>), ... ,P<sub>n</sub>,&lambda;<sub></sub>n </sub>) <br> We then introduce G<sub>1</sub> barycenter of S<sub>1</sub> and G<sub>2</sub> barycenter of S<sub>2</sub>. <br> We must show that if G is the barycenter of S then G is also the barycenter of ((G<sub>1</sub>,m<sub>1</sub>),(G<sub>2</sub>, m<sub>2</sub>)), where m<sub>1</sub>=&lambda;<sub>1</sub>+ ...+&lambda;<sub>m</sub> and m<sub>2</sub>=&lambda;<sub>m+1</sub>+ ...+&lambda;<sub>n</sub>. <br> The barycenter G of the system ((G<sub>1</sub>,m<sub>1</sub>),(G<sub>2</sub>,m<sub>2</sub>)) can be characterized by:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle m_{1}\overrightarrow{GG_{1}}+m_{2}\overrightarrow{GG_{2}}=\overrightarrow{0} \)</p>
+            <!-- /FORMULE UNIV INLINE--> using then
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{GG_{1}}=\frac{1}{m_{1}}\sum_{i=1}^{m}\lambda _{i}\overrightarrow{GP_{i}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> and
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{GG_{2}}=\frac{1}{m_{2}}\sum_{i=m+1}^{n}\lambda _{i}\overrightarrow{GP_{i}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> it follows
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum_{i=1}^{n}\lambda _{i}\overrightarrow{GP_{i}}=\overrightarrow{0} \)</p>
+            <!-- /FORMULE UNIV INLINE--> which proves our statement. <br> Proof in full generality can be obtained by induction on the number of susbsystems and the principle of commutativity (staed above)
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une appliquette qui vous permet de visualiser le barycentre G d'un système de trois points pondérés S=((A,a),(B,b),(C,c)). <br> Vous pouvez déplacer les points A, B et C par un 'tirer-déplacer' à la souris. <br> Vous pouvez faire varier les coefficients a, b et c à l'aide des curseurs. <br> G1 est le barycentre du système ((A,a),(B,b)), G2 celui du système ((A,a),(C,c)) et G3 celui de ((B,b),(C,c)). <br> Observez les alignements resultatnt du théorème d'associativité. Vous pouvez également visualiser le théorème d'associativité en action lorsque vous faites varier un seul coefficient, le point G se déplace sur une droite. <br> Cette droite passe par un sommet et un point du côté opposé à ce sommet. <br> Ce point correspond à la valeur nulle du coefficient que vous êtes en train de moduler. <br> Observez la position du point G en fonction des signes des 3 coefficients. <br> Observez ce qu'il se passe quand un coefficient est nul, quand deux coefficients sont nuls. <br> Observez encore ce qu'il se passe quand deux coeffcients sont égaux, quand les 3 sont égaux. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an applet that allows you to visualize the barycenter G of a system of three weighted points S=((A,a),(B,b),(C,c)). <br> You can move the points A, B and C by a 'drag-and-drop' with the mouse. <br> You can vary the coefficients a, b and c using the sliders. <br> G1 is the barycenter of the system ((A,a),(B,b)), G2 that of the system ((A,a),(C,c)) and G3 that of ((B,b),(C ,vs)). <br> Observe the resulting alignments of the associativity theorem. You can also view the associativity theorem in action when you vary a single coefficient, point G moves on a straight line. <br> This line passes through a vertex and a point on the side opposite this vertex. <br> This point corresponds to the zero value of the coefficient you are modulating. <br> Observe the position of the G-spot according to the signs of the 3 coefficients. <br> Observe what happens when one coefficient is zero, when two coefficients are zero. <br> Observe again what happens when two coefficients are equal, when the 3 are equal. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/bary2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Isobarycentres</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Isobarycenters</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 6</div> Lorsque les masses de tous les points d'un système sont égales on parle <strong>
+              <em>"d'isobarycentre"</em>
+            </strong> du système.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 6</div> When the masses of all points in a system are the same, we speak of the <strong>
+              <em>“isobarycenter”</em>
+            </strong> of the system.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On remarquera que par le principe d'homogénéité peu importe ce que sont ces masses du moment qu'elles soient égales. On peut donc, si on veut, supposer qu'elles sont toutes égales à 1. <br>
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> L'isobarycentre d'un système de p points dans un corps de <input type="button" value="caractéristique" onclick="go('../../nombres/rationnels/caracteristique.html#')" data-inline="true" /> p, n'est pas défini, car dans ce cas la masse totale est nulle. <br> La même remarque vaut lorsque ce nombre est un multiple de p. <h3>Cas de deux points</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It will be noted that by the principle of homogeneity it does not matter what these masses are as long as they are equal. We can therefore, if we want, assume that they are all equal to 1. <br>
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> The isobarycenter of a system of p points in a field of <input type="button" value="characteristic" onclick="go('../../nombres/rationnels/caracteristique.html#')" data-inline="true" /> p, is undefined, because in this case the total mass is zero. <br> The same remark applies when this number is a multiple of p. <h3>Case of two points</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 7</div> Dans ce cas particulier S=((a,1),(B,1)) l'isobarycentre porte le nom de <b>
+              <i>'milieu'</i>
+            </b>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 7</div> In this particular case S=((a,1),(B,1)) the isobarycenter is called <b>
+              <i>'midpoint'</i>
+            </b>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ceci suppose évidemment que le corps n'est pas de caractéristique 2. <h3>Cas de 3 points</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This obviously assumes that the field is not of characteristic 2. <h3>Case of 3 points</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 8</div> Dans ce cas particulier (pour un système S=((A,1),(B,1),(C,1)) l'isobarycentre porte le nom de <b>
+              <i>'centre de gravité du triangle'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 8</div> In this particular case (for a system S=((A,1),(B,1),(C,1)) the isobarycenter takes the name of <b>
+              <i>'center of gravity of the triangle'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela suppose qu'on n'est pas dans un corps de caractéristique 3. <br> Remarque: Le théorème d'associativité, dans ce cas particulier, nous donne immédiatement comme corollaire : </div>
+        <!-- /fr -->
+        <div lang="en"> This assumes that you are not in a characteristic 3 field. <br> Note: The associativity theorem, in this particular case, immediately gives us as a corollary: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Dans un triangle quelconque les 3 médianes sont concourantes et leur point de concours se trouve au 1/3 de chaque médiane en partant du pied.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> In any triangle the 3 medians are concurrent and their meeting point is at 1/3 of each median starting from the foot.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'appliquette qui suit visualise ce résultat important. <br> Avec la souris vous pouvez tirer-déplacer chacun des trois sommets A,B,C du triangle. </div>
+        <!-- /fr -->
+        <div lang="en"> The following applet visualizes this important result. <br> With the mouse you can drag'n drop each of the three vertices A,B,C of the triangle. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/bary3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Cas de 4 points</h3>
+          <h4>Dans le plan</h4> Dans ce cas particulier, pour un quadrilatère ABCD donc, nous obtenons grâce au théorème d'associativité, le résultat suivant.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of 4 points</h3>
+          <h4>In the plane</h4> In this particular case, for a quadrilateral ABCD therefore, we obtain thanks to the associativity theorem, the following result.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 7</div> Dans tout quadrilatère les médianes se coupent en leur milieu. <br> En outre, ce point de concours est le milieu du segment joignant les milieux des diagonales.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 7</div> In any quadrilateral the medians intersect at their midpoints. <br> Furthermore, this intersection point is the midpoint of the segment joining the midpoints of the diagonals.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'appliquette qui suit visualise ce résultat. <br> Avec la souris vous pouvez tirer-déplacer chacun des quatre sommets A,B,C,D du quadrilatère. </div>
+        <!-- /fr -->
+        <div lang="en"> The following applet visualizes this result. <br> With the mouse you can drag and drop each of the four vertices A,B,C,D of the quadrilateral. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/bary4.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h4>Dans l'espace</h4>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>In 3D space</h4>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 8</div> Dans tout tétraèdre les quatre segments joignant chaque sommet au centre de gravité du triangle opposé se coupent en un point. <br> Le point d'intersection est situé sur chaque segment aux 3/4 en partant du sommet.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 8</div> In any tetrahedron the four segments joining each vertex to the center of gravity of the opposite triangle intersect at a point. <br> The point of intersection is located on each segment 3/4 from the vertex.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un module extrait d'un programme précédent et que nous utiliserons à plusieurs reprises
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> Here is a module taken from a previous program that we will use several times
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/affines.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Voici maintenant un module Python qui modélise, les points pondérés et les systèmes de tels points avec les méthodes de calcul de la masse totale et du barycentre. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is now a Python module that models mass points and systems of such points with the methods to calculate the total mass and the barycenter. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/barycentres.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de julia</h2> Voici un programme de calcul. Il inclut le <input type="button" value="programme de définition des structures utilisées" onclick="go('julia/BasesAffines.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2> Here is a calculation program. It includes the <input type="button" value="program for defining the structures used" onclick="go('julia/BasesAffines.jl.html#')" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/barycentres.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/affinesbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/affinesbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

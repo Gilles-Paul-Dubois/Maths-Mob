@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Paramétrage des coniques</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquesparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquesparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un <b>
+              <i>'paramétrage'</i>
+            </b> d'une courbe consiste en la donnée d'une application t &rarr; M(t) d'un intervalle de &reals; sur l'ensemble des points de la courbe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A <b>
+              <i>'parameterization'</i>
+            </b> of a curve consists of the data of a mapping t &rarr; M(t) of an interval of &reals; onto the points of the curve.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> De fait, dans le cas d'une courbe plane, un repère étant choisi, tout point M(t) à des coordonnées (x(t),y(t)). Un tel paramétrage se confond donc avec la données de <strong>deux</strong> fonctions x et y de la variable t. <br /> Les cas les plus intéressants sont les cas où les fonctions x(t), y(t) sont au minimum <input type="button" value="continues" onclick="go('../../analyse-reelle/continuite/index.html#')" data-inline="true" />, ou mieux une ou plusieurs fois <input type="button" value="dérivables" onclick="go('../../analyse-reelle/derivees/index.html#')" data-inline="true" />. <br /> Une même courbe peut en général être paramétrée de plusieurs manières. <br /> Un cas particulier intéressant est celui où la courbe est le graphe d'une fonction f : x → f(x). Il existe alors un paramétrage 'naturel', lié au choix de l'abscisse comme paramètre : <br />
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x(t) = t} \\ {y(t) = f(t)} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <h2>Paramétrage de la parabole</h2> On choisira en général le paramétrage naturel par l'abscisse ou par l'ordonnée suivant l'orientation de l'axe de la parabole. Par exemple :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x(t) = t} \\ {y(t) = 2pt^{2}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> pour les paraboles à axe vertical. <h2>Paramétrages de l'ellipse</h2> On peut, bien entendu, partir de l'équation générale de l'ellipse qui permet d'écrire :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle y = \pm b\sqrt{1 - \frac{x^{2}}{a^{2}}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> et paramétrer la partie supérieure de l'ellipse par :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = t} \\ {y = b\sqrt{1 - \frac{t^{2}}{a^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> pour t &isin; [-a,a]. <br> Et la partie inférieure par :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = t} \\ {y = {-b}\sqrt{1 - \frac{t^{2}}{a^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> pour t &isin; [-a,a]. <br> Cependant ce n'est pas la façon la plus simple. <br> En remarquant que
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \sin^{2}(t) + \cos^{2}(t) = 1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> On voit que le point M(t)(a.cos(t),b.sin(t)) est un point de l'ellipse pour tout t &isin; [0,2&pi;[, et que l'application t &rarr; M(t) est une bijection de [0,2&pi;[ sur l'ensemble des points de l'ellipse. <br> Cette remarque suggère d'ailleurs une construction d'une l'ellipse de centre O à partir d'un cercle de centre O et de rayon a et d'un cercle de centre O et de rayon b. <br> Sur l'applet suivante, vous pouvez faire varier avec les curseurs : <br>
+          <ul>
+            <li>Le demi-axe a de l'ellipse</li>
+            <li>Le demi-axe b de l'ellipse</li>
+            <li>Le paramètre t et donc le point courant M de l'ellipse.</li>
+          </ul> Le point M a pour coordonnées (a <font size="-1">&times;</font>cos(t),b <font size="-1">&times;</font>sin(t)). <br> Il parcourt l'ellipse quand la valeur de t en radians se situe dans l'intervalle [0,2&pi;[.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> In fact, in the case of a plane curve, a reference being chosen, any point M(t) has coordinates (x(t),y(t)). Such a setting is therefore confused with the data of <strong>two</strong> functions x and y of the variable t. <br /> The most interesting cases are the cases where the functions x(t), y(t) are at least <input type="button" value="continuous" onclick="go('../../analyse-reelle/continuite/index.html#')" data-inline="true" />, or better one or more times <input type="button" value="differentiable" onclick="go('../../analyse-reelle/derivaees/index.html#')" data-inline="true" />. <br /> The same curve can generally be parameterized in several ways. <br /> An interesting special case is when the curve is the graph of a function f: x → f(x). There is then a 'natural' parameterization, linked to the choice of the abscissa as a parameter: <br />
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x(t) = t} \\ {y(t) = f(t)} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+          <h2>Parameterization of the parabola</h2> In general, the natural parameterization will be chosen by the abscissa or by the ordinate according to the orientation of the axis of the parabola. For example :
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x(t) = t} \\ {y(t) = 2pt^{2}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> for parabolas with a vertical axis. <h2>Parameterization of the ellipse</h2> We can, of course, start from the general equation of the ellipse which allows us to write:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle y = \pm b\sqrt{1 - \frac{x^{2}}{a^{2}}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> and parameterize the upper part of the ellipse by:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x=t} \\ {y = b\sqrt{1 - \frac{t^{2}}{a^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> for t &isin; [-a,a]. <br> And the lower part by:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x=t} \\ {y = {-b}\sqrt{1 - \frac{t^{2}}{a^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> for t &isin; [-a,a]. <br> However, this is not the easiest way. <br> By noticing that
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \sin^{2}(t) + \cos^{2}(t) = 1 \)</p>
+          <!-- /INLINE UNIV FORMULA--> We see that the point M(t)(a.cos(t),b.sin(t)) is a point of the ellipse for all t &isin; [0,2&pi;[, and the map t &rarr; M(t) is a bijection of [0,2&pi;[ on all the points of the ellipse. <br> This remark also suggests a construction of an ellipse with center O from a circle with center O and radius a and from a circle with center O and radius b. <br> On the following applet you can vary with the sliders: <br>
+          <ul>
+            <li>The semi-axe a of the ellipse</li>
+            <li>The semi-axe b of the ellipse</li>
+            <li>The parameter t and so the point M(t) of the ellipse.</li>
+          </ul> Point M has coordinates (a <font size="-1">&times;</font>cos(t),b <font size="-1">&times;</font>sin(t)). <br> It travels the ellipse when the value of t in radians is in the interval [0.2&pi;[.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/coniquesparam1.js"></script>
+        <br>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> La figure ci-dessus montre en outre clairement que : </div>
+        <!-- /fr -->
+        <div lang="en"> The figure above also clearly shows that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div>
+            <ul>
+              <li>L'ellipse est la transformée du cercle de centre O et de rayon a par <input type="button" value="l'affinité" onclick="go('../appaffines/appaffbar.html#def7')" data-inline="true" /> d'axe x'Ox et de rapport b/a. </li>
+              <li>L'ellipse est la transformée du cercle de centre O et de rayon b par l'affinité d'axe y'Oy et de rapport a/b.</li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div>
+            <ul>
+              <li>The ellipse is the transform of the circle with center O and radius a by <input type="button" value="stretchingy" onclick="go('../appaffines/appaffbar.html#def7')" data-inline="true" /> with axis x'Ox and ratio b/a. </li>
+              <li>The ellipse is the transform of the circle with center O and radius b by the stretching of axis y'Oy and ratio a/b.</li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Paramétrages de l'hyperbole</h2> On peut, bien entendu, partir de l'équation générale de l'hyperbole qui permet d'écrire :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle x = \pm a\sqrt{1 + \frac{y^{2}}{b^{2}}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> btenir le paramétrage d'une branche par
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {y = t} \\ {x = a\sqrt{1 + \frac{t^{2}}{b^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Pour t &isin; ]-&infin;,+&infin;[ <br> et la seconde branche par :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {y = t} \\ {x = {-a}\sqrt{1 + \frac{t^{2}}{b^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Pour t &isin; ]-&infin;,+&infin;[ <br> Cependant ce n'est généralement pas la solution retenue. <br> De la même façon que précédemment on part de la remarque
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \cosh^{2}(t) - \sinh^{2}(t) = 1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> (revoir éventuellement <input type="button" value="cette page" onclick="go('../../analyse-reelle/transcendantes/transchyper.html#')" data-inline="true" />). <br /> On obtient le paramétrage d'une branche par :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = a . \cosh(t)} \\ {y = b . \sinh(t)} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> pour t &isin; ]-&infin;,+&infin;[ <br> et de l'autre branche par :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = - a . \cosh(t)} \\ {y = b . \sinh(t)} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> pour t &isin; ]-&infin;,+&infin;[ <br> Sur l'applet suivante, vous pouvez faire varier avec les curseurs : <br>
+          <ul>
+            <li>Le demi-axe a de l'hyperbole</li>
+            <li>Le demi-axe b de l'hyperbole</li>
+            <li>Le paramètre t</li>
+          </ul> Le point M a pour coordonnées (a <font size="-1">&times;</font>cosh(t),b <font size="-1">&times;</font>sinh(t)). <br> Il parcourt une branche d'hyperbole quand la valeur de t en radians se situe dans l'intervalle [-&infin;,+&infin;[
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Parameterization of the hyperbola</h2> We can, of course, start from the general equation of the hyperbola which allows us to write:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle x = \pm a\sqrt{1 + \frac{y^{2}}{b^{2}}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> get the parameterization of a branch by
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {y=t} \\ {x = a\sqrt{1 + \frac{t^{2}}{b^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> For t &isin; ]-&infin;,+&infin;[ <br> and the second branch by:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {y=t} \\ {x = {-a}\sqrt{1 + \frac{t^{2}}{b^{2}}}} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> For t &isin; ]-&infin;,+&infin;[ <br> However, this is generally not the chosen solution. <br> In the same way as before, we start from the remark
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \cosh^{2}(t) - \sinh^{2}(t) = 1 \)</p>
+          <!-- /INLINE UNIV FORMULA--> (if needed review <input type="button" value="this page" onclick="go('../../analyse-reelle/transcendantes/transchyper.html#')" data-inline="true" />). <br /> The parameterization of a branch is obtained by:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = a. \cosh(t)} \\ {y=b. \sinh(t)} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> for t &isin; ]-&infin;,+&infin;[ <br> and of the other branch by:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = -a. \cosh(t)} \\ {y=b. \sinh(t)} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> for t &isin; ]-&infin;,+&infin;[ <br> On the following applet you can vary with the sliders: <br>
+          <ul>
+            <li>The semi-axe a has hyperbola</li>
+            <li>The semi-axe b of the hyperbola</li>
+            <li>The parameter t</li>
+          </ul> Point M has coordinates (a <font size="-1">&times;</font>cosh(t),b <font size="-1">&times;</font>sinh(t)). <br> It traverses a branch of hyperbola when the value of t in radians is in the interval [-&infin;,+&infin;[
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/coniquesparam2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquesparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquesparam/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

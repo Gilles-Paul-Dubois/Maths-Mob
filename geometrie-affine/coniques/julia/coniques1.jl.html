@@ -1,0 +1,193 @@
+<html>
+<head>
+<title>coniques1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">#coniques générales - general conic sections</span>
+<span class="s2">struct </span><span class="s1">ConiqueG</span>
+    <span class="s1">A::Float64</span>
+    <span class="s1">B::Float64</span>
+    <span class="s1">C::Float64</span>
+    <span class="s1">D::Float64</span>
+    <span class="s1">E::Float64</span>
+    <span class="s1">F::Float64</span>
+<span class="s2">end</span>
+
+<span class="s0">#affichage - display</span>
+<span class="s2">function </span><span class="s1">Base.show(io::IO, CG::ConiqueG)</span>
+    <span class="s1">pre_coeff(x::Float64)= x&gt;=</span><span class="s3">0 </span><span class="s1">? </span><span class="s4">&quot;+&quot; </span><span class="s1">: </span><span class="s4">&quot;&quot;</span>
+    <span class="s1">coeff(x::Float64)=string(pre_coeff(x),string(x))</span>
+    <span class="s1">S1=CG.A==</span><span class="s3">0 </span><span class="s1">? </span><span class="s4">&quot;&quot; </span><span class="s1">: string(string(CG.A),</span><span class="s4">&quot;x²&quot;</span><span class="s1">)</span>
+    <span class="s1">S2=CG.B==</span><span class="s3">0 </span><span class="s1">? </span><span class="s4">&quot;&quot; </span><span class="s1">: string(coeff(CG.B),</span><span class="s4">&quot;xy&quot;</span><span class="s1">)</span>
+    <span class="s1">S3=CG.C==</span><span class="s3">0 </span><span class="s1">? </span><span class="s4">&quot;&quot; </span><span class="s1">: string(coeff(CG.C),</span><span class="s4">&quot;y²&quot;</span><span class="s1">)</span>
+    <span class="s1">S4=CG.D==</span><span class="s3">0 </span><span class="s1">? </span><span class="s4">&quot;&quot; </span><span class="s1">: string(coeff(CG.D),</span><span class="s4">&quot;x&quot;</span><span class="s1">)</span>
+    <span class="s1">S5=CG.E==</span><span class="s3">0 </span><span class="s1">? </span><span class="s4">&quot;&quot; </span><span class="s1">: string(coeff(CG.E),</span><span class="s4">&quot;y&quot;</span><span class="s1">)</span>
+    <span class="s1">S6=CG.F==</span><span class="s3">0 </span><span class="s1">? </span><span class="s4">&quot;&quot; </span><span class="s1">: coeff(CG.F)</span>
+    <span class="s1">S=string(S1,S2,S3,S4,S5,S6,</span><span class="s4">&quot;=0&quot;</span><span class="s1">)</span>
+    <span class="s1">print(io,S)</span>
+<span class="s2">end</span>
+
+<span class="s0">#coniques semi-réduites (disparition du terme en xy) - half reduced conics without any term in xy</span>
+<span class="s2">struct </span><span class="s1">ConiqueSR</span>
+    <span class="s1">A::Float64</span>
+    <span class="s1">C::Float64</span>
+    <span class="s1">D::Float64</span>
+    <span class="s1">E::Float64</span>
+    <span class="s1">F::Float64</span>
+    <span class="s1">u::Tuple{Float64, Float64} </span><span class="s0">#premier vecteur de la base de réduction - first vector of reduction basis</span>
+    <span class="s1">v::Tuple{Float64, Float64} </span><span class="s0">#second vecteur - second vector</span>
+    <span class="s1">Omega::Tuple{Float64, Float64} </span><span class="s0">#origine du repère - origin of the frame</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s1">Base.show(io::IO, CSR::ConiqueSR)</span>
+    <span class="s1">CG=ConiqueG(CSR.A,</span><span class="s3">0</span><span class="s1">,CSR.C,CSR.D,CSR.E,CSR.F)</span>
+    <span class="s1">show(io,CG)</span>
+    <span class="s1">print(io,</span><span class="s4">&quot; dans la base &quot;</span><span class="s1">)</span>
+    <span class="s1">print(io,(CSR.u,CSR.v))</span>
+    <span class="s1">print(io,</span><span class="s4">&quot; avec l'origine &quot;</span><span class="s1">)</span>
+    <span class="s1">print(io, CSR.Omega)</span>
+<span class="s2">end</span>
+<span class="s0">#disparition du terme en xy par choix d'une base convenable - cancelation of xy using a proper basis</span>
+<span class="s2">function </span><span class="s1">reduire(CG::ConiqueG)</span>
+    <span class="s2">if </span><span class="s1">CG.B==</span><span class="s3">0</span>
+        <span class="s1">u=(</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">)</span>
+        <span class="s1">v=(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">1</span><span class="s1">)</span>
+        <span class="s1">o1,o2=</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span>
+        <span class="s2">if </span><span class="s1">CG.A != </span><span class="s3">0</span>
+            <span class="s1">o1=-CG.D/</span><span class="s3">2</span><span class="s1">CG.A</span>
+        <span class="s2">end</span>
+        <span class="s2">if </span><span class="s1">CG.C !=</span><span class="s3">0</span>
+            <span class="s1">o2=-CG.E/</span><span class="s3">2</span><span class="s1">CG.C</span>
+        <span class="s2">end</span>
+        <span class="s2">return </span><span class="s1">ConiqueSR(CG.A,CG.C,CG.D,CG.E,CG.F,u,v,(o1,</span><span class="s3">02</span><span class="s1">))</span>
+    <span class="s2">else</span>
+        <span class="s2">if </span><span class="s1">CG.A==CG.C</span>
+            <span class="s1">theta=pi/</span><span class="s3">4</span>
+        <span class="s2">else</span>
+            <span class="s1">theta=</span><span class="s3">0.5</span><span class="s1">*atan(CG.B/(CG.A-CG.C))</span>
+        <span class="s2">end</span>
+        <span class="s1">c=cos(theta)</span>
+        <span class="s1">s=sin(theta)</span>
+        <span class="s1">u=(c,s)</span>
+        <span class="s1">v=(-s,c)</span>
+        <span class="s1">A1 =CG.A * c * c + CG.B * c * s + CG.C * s * s</span>
+        <span class="s1">C1 = CG.A* s * s -CG.B * c * s + CG.C* c * c</span>
+        <span class="s1">D1 = CG.D * c + CG.E * s</span>
+        <span class="s1">E1 = CG.E* c - CG.D * s</span>
+        <span class="s1">F1 = CG.F</span>
+        <span class="s1">o1 , o2 = </span><span class="s3">0 </span><span class="s1">,</span><span class="s3">0</span>
+        <span class="s2">if </span><span class="s1">A1 !=</span><span class="s3">0</span>
+            <span class="s1">o1 = -D1 / (</span><span class="s3">2.0 </span><span class="s1">* A1)</span>
+        <span class="s2">end</span>
+        <span class="s2">if </span><span class="s1">C1 != </span><span class="s3">0</span>
+            <span class="s1">o2 = - E1 / (</span><span class="s3">2.0 </span><span class="s1">* C1)</span>
+        <span class="s2">end</span>
+        <span class="s1">O = (c * o1 - s * o2, s * o1 + c * o2)</span>
+        <span class="s2">return </span><span class="s1">ConiqueSR(A1,C1,D1,E1,F1,u,v,O)</span>
+     <span class="s2">end</span>
+ <span class="s2">end</span>
+
+<span class="s2">function </span><span class="s1">typeconique(CSR::ConiqueSR)</span>
+    <span class="s1">AC=CSR.A*CSR.C</span>
+    <span class="s2">if </span><span class="s1">AC != </span><span class="s3">0</span>
+        <span class="s1">N = CSR.D * CSR.D / (</span><span class="s3">4.0 </span><span class="s1">* CSR.A) - CSR.E * CSR.E / (</span><span class="s3">4.0 </span><span class="s1">* CSR.C) - CSR.F</span>
+    <span class="s2">else</span>
+        <span class="s1">N = nothing</span>
+    <span class="s2">end</span>
+    <span class="s2">if </span><span class="s1">AC != </span><span class="s3">0</span>
+        <span class="s2">if </span><span class="s1">N&gt;</span><span class="s3">0</span>
+            <span class="s2">if </span><span class="s1">CSR.A &gt; </span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.C &gt; </span><span class="s3">0</span>
+                <span class="s1">T=</span><span class="s4">&quot;Ellipse&quot;</span>
+            <span class="s2">end</span>
+            <span class="s2">if </span><span class="s1">CSR.A &lt; </span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.C &lt; </span><span class="s3">00</span>
+                <span class="s1">T=</span><span class="s4">&quot;Ensemble vide&quot;</span>
+            <span class="s2">end</span>
+            <span class="s2">if </span><span class="s1">AC &lt; </span><span class="s3">0</span>
+                <span class="s1">T=</span><span class="s4">&quot;Hyperbole&quot;</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+        <span class="s2">if </span><span class="s1">N==</span><span class="s3">0</span>
+            <span class="s2">if </span><span class="s1">AC &gt;</span><span class="s3">0</span>
+                <span class="s1">T=</span><span class="s4">&quot;Un point&quot;</span>
+            <span class="s2">else</span>
+                <span class="s1">T=</span><span class="s4">&quot;Couple de droites sécantes&quot;</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+        <span class="s2">if </span><span class="s1">N&lt;</span><span class="s3">0</span>
+           <span class="s2">if </span><span class="s1">CSR.A &gt; </span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.C &gt; </span><span class="s3">0</span>
+                <span class="s1">T=</span><span class="s4">&quot;Ensemble vide&quot;</span>
+            <span class="s2">end</span>
+            <span class="s2">if </span><span class="s1">CSR.A &lt; </span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.C &lt; </span><span class="s3">00</span>
+                <span class="s1">T=</span><span class="s4">&quot;Ellipse&quot;</span>
+            <span class="s2">end</span>
+            <span class="s2">if </span><span class="s1">AC &lt; </span><span class="s3">0</span>
+                <span class="s1">T=</span><span class="s4">&quot;Hyperbole&quot;</span>
+            <span class="s2">end</span>
+
+        <span class="s2">end</span>
+    <span class="s2">else</span>
+        <span class="s2">if </span><span class="s1">CSR.A==</span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.C !=</span><span class="s3">0</span>
+            <span class="s2">if </span><span class="s1">CSR.E != </span><span class="s3">0</span>
+                <span class="s1">T=</span><span class="s4">&quot;Parabole&quot;</span>
+            <span class="s2">else</span>
+                <span class="s2">if </span><span class="s1">CSR.E * CSR.E / </span><span class="s3">4.0 </span><span class="s1">- CSR.F * CSR.C == </span><span class="s3">0</span>
+                    <span class="s1">T=</span><span class="s4">&quot;Une droite&quot;</span>
+                <span class="s2">else</span>
+                    <span class="s1">T=</span><span class="s4">&quot;Deux droites parallèles&quot;</span>
+                <span class="s2">end</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+        <span class="s2">if </span><span class="s1">CSR.A != </span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.C == </span><span class="s3">0</span>
+            <span class="s2">if </span><span class="s1">CSR.E !=</span><span class="s3">0</span>
+                <span class="s1">T=</span><span class="s4">&quot;une parabole&quot;</span>
+            <span class="s2">else</span>
+                <span class="s2">if </span><span class="s1">CSR.D * CSR.D / </span><span class="s3">4.0 </span><span class="s1">- CSR.F * CSR.A == </span><span class="s3">0</span>
+                    <span class="s1">T=</span><span class="s4">&quot;Une droite&quot;</span>
+                <span class="s2">else</span>
+                    <span class="s1">T=</span><span class="s4">&quot;Deux droites parallèles&quot;</span>
+                <span class="s2">end</span>
+
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+        <span class="s2">if </span><span class="s1">CSR.A==</span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.C==</span><span class="s3">0</span>
+            <span class="s2">if </span><span class="s1">CSR.D==</span><span class="s3">0 </span><span class="s1">&amp;&amp; CSR.E==</span><span class="s3">0</span>
+                <span class="s2">if </span><span class="s1">CSR.F==</span><span class="s3">0</span>
+                    <span class="s1">T=</span><span class="s4">&quot;Plan entier&quot;</span>
+                <span class="s2">else</span>
+                    <span class="s1">T=</span><span class="s4">&quot;Ensemble vide&quot;</span>
+                <span class="s2">end</span>
+            <span class="s2">else</span>
+                <span class="s1">T=</span><span class="s4">&quot;Une droite&quot;</span>
+            <span class="s2">end</span>
+        <span class="s2">end</span>
+      <span class="s2">end</span>
+    <span class="s2">return </span><span class="s1">T</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s1">main()</span>
+    <span class="s1">C1=ConiqueG(</span><span class="s3">1</span><span class="s1">,-</span><span class="s3">1</span><span class="s1">,</span><span class="s3">1</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,</span><span class="s3">0</span><span class="s1">,-</span><span class="s3">1</span><span class="s1">)</span>
+    <span class="s1">println(C1)</span>
+    <span class="s1">CSR1=reduire(C1)</span>
+    <span class="s1">println(CSR1)</span>
+    <span class="s1">println(typeconique(CSR1))</span>
+    <span class="s1">println(</span><span class="s4">&quot;----------------------------&quot;</span><span class="s1">)</span>
+    <span class="s1">C2 = ConiqueG(</span><span class="s3">1</span><span class="s1">, sqrt(</span><span class="s3">3</span><span class="s1">), </span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, -</span><span class="s3">2</span><span class="s1">)</span>
+    <span class="s1">println(C2)</span>
+    <span class="s1">CSR2=reduire(C2)</span>
+    <span class="s1">println(CSR2)</span>
+    <span class="s1">println(typeconique(CSR2))</span>
+<span class="s2">end</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
+</html>

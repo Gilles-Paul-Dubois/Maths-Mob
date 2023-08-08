@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Théorème de Thalès</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/theothales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/theothales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Dans toute cette page on se place dans un plan affine. <h2>Hommage à Thalès de Milet</h2> Thalès de Milet appelé communément Thalès (en grec ancien Θαλής / Thalês), était un philosophe et savant grec né à Milet vers 625 av. J.-C. et mort vers l'an 547 av. J.-C. Il fut l'un des Sept sages de la Grèce et le fondateur présumé de l'école milésienne. <br /> Voici quelques unes de ses représentations : </div>
+        <!-- /fr -->
+        <div lang="en"> Throughout this page we place ourselves in an affine plane. <h2>Tribute to Thales of Miletus</h2> Thales of Miletus, commonly known as Thales (in ancient Greek Θαλής / Thalês), was a Greek philosopher and scholar born in Miletus around 625 BC. AD and died around the year 547 BC. He was one of the Seven Sages of Greece and the presumed founder of the Milesian school. <br /> Here are some of his performances: </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+          <tr>
+            <td align="center" valign="middle">
+              <img src="images/reptahles1.jpeg" width="120" height="192" border="0" alt="">
+            </td>
+            <td align="center" valign="middle">
+              <img src="images/rethales2.jpeg" width="104" height="133" border="0" alt="">
+            </td>
+            <td align="center" valign="middle">
+              <img src="images/repthales3.jpeg" width="128" height="147" border="0" alt="">
+            </td>
+            <td align="center" valign="middle">
+              <img src="images/repthales4.jpeg" width="130" height="160" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Le théorème de Thalès</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Thales' theorem - aka 'Intercept theorem'</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Soit D,D' et D" trois droites parallèles distinctes. <br> Soit &Delta; et &Delta;' deux droites non parallèles aux trois premières. <br> On désigne par M,N,P les points d'intersection de &Delta; avec D,D' et D" respectivement. <br> On désigne par M',N',P' les points d'intersection de &Delta;' avec D,D' et D" respectivement. <br> Dans ces conditions nous avons :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{MP}}=\frac{\overline{M'N'}}{\overline{M'P'}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Let D,D' and D" be three distinct parallel lines. <br> Let &Delta; and &Delta;' two straight lines not parallel to the first three. <br> We denote by M,N,P the points of intersection of &Delta; with D,D' and D" respectively. <br> We denote by M',N',P' the points of intersection of &Delta;' with D,D' and D" respectively. <br> Under these conditions we have:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{MP}}=\frac{\overline{M'N'}}{\overline{M'P'}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/thales1.png" width="406" height="397" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> La preuve est simple; la projection de Δ sur Δ' parallèlement à D conserve les rapports puisqu'elle est affine (voir <input type="button" value="page précédente" onclick="go('theorapport.html#prop5')" data-inline="true" />). </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is simple; the projection of Δ on Δ' parallel to D preserves the ratios since it is affine (see <input type="button" value="previous page" onclick="go('theorapport.html#prop5')" data-inline="true" />). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> De la même façon on montre que :
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{NP}}=\frac{\overline{M'N'}}{\overline{N'P'}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Similarly, we show that:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{NP}}=\frac{\overline{M'N'}}{\overline{N'P'}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> En outre un petit calcul algébrique donne :
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{M'N'}}=\frac{\overline{MP}}{\overline{M'P'}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> In addition, a small algebraic calculation gives:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{M'N'}}=\frac{\overline{MP}}{\overline{M'P'}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> De plus, des permutations circulaires des points M,N et P donnent des énoncés semblables. <br> Le théorème de Thalès possède une forme de réciproque. </div>
+        <!-- /fr -->
+        <div lang="en"> Moreover, circular permutations of the points M, N and P give similar statements. <br> Thales' theorem has a form of converse. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Avec les notations du théorème ci-dessus et si l'on suppose seulement que D et D" sont parallèles, et si de plus
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{NP}}=\frac{\overline{M'N'}}{\overline{N'P'}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> alors D' est parallèle à D et D".
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> With the notations of the theorem above and if we only assume that D and D" are parallel, and if moreover
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{NP}}=\frac{\overline{M'N'}}{\overline{N'P'}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> then D' is parallel to D and D".
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit N" le projeté de N sur Δ' parallèlement à D et D". Alors N" partage le segment [M'P'] dans le même rapport que N', donc N'=N" d'après les résultats de la <input type="button" value="page précédente" onclick="go('theorapport.html#prop4')" data-inline="true" />. <h2>Cas particulier</h2> On peut étudier le cas où Δ et Δ' se coupent sur D, c'est à dire quand M=M'. </div>
+        <!-- /fr -->
+        <div lang="en"> Let N" be the projection of N onto Δ' parallel to D and D". Then N" shares the segment [M'P'] in the same ratio as N', so N'=N" from the results of the <input type="button" value="previous page" onclick="go ('theorapport.html#prop4')" data-inline="true" />. <h2>Special case</h2> We can study the case where Δ and Δ' intersect on D, ie when M=M'. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/thales2.png" width="303" height="396" border="0" alt="">
+          <br>
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Le théorème de Thalès prend alors une forme spéciale : </div>
+        <!-- /fr -->
+        <div lang="en"> Thales' theorem then takes a special form: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Sous ces hypothèses
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{MP}}=\frac{\overline{MN'}}{\overline{MP'}}=\frac{\overline{NN'}}{\overline{PP'}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> Under these assumptions
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\overline{MN}}{\overline{MP}}=\frac{\overline{MN'}}{\overline{MP'}}=\frac{\overline{NN'}}{\overline{PP'}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La première égalité n'est rien d'autre que l'application de la forme générale du théorème de Thalès. <br> La seconde résulte de
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{NN'}=\overrightarrow{NM}+\overrightarrow{MN'} \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{PP'}=\overrightarrow{PM}+\overrightarrow{MP'} \)
+          <!-- /FORMULE UNIV INLINE-->
+          <h2>Conservation du birapport par projection centrale</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The first equality is nothing but the application of the general form of Thales' theorem. <br> The second results from
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{NN'}=\overrightarrow{NM}+\overrightarrow{MN'} \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{PP'}=\overrightarrow{PM}+\overrightarrow{MP'} \)
+          <!-- /INLINE UNIV FORMULA-->
+          <h2>Conservation of the cross-ratio by central projection</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Soit 4 droites concourantes en un point S et distinctes. On considère deux droites &Delta; et &Delta;' parallèles à aucune de ces quatres droites, ne passant pas par S et coupant donc les 4 droites précédentes en A,B,C,D pour &Delta; et A',B',C',D' pour &Delta;'. <br> Dans ces conditions le birapport des 4 points ABCD est égal au birapport des 4 points A'B'C'D'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> Consider 4 distinct straight lines concurrent at a point S. We consider two lines &Delta; and &Delta;' not parallel to any of these four lines, not passing through S and therefore intersecting the 4 previous lines in A,B,C,D for &Delta; and A',B',C',D' for &Delta;'. <br> Under these conditions, the cross-ratio of the 4 points ABCD is equal to the cross-ratio of the 4 points A'B'C'D'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/thales3.png" width="399" height="394" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> On trace la parallèle à (SA) passant par B, elle coupe (SC) en N et (SD) en M. <br> On trace la parallèle à (SA) passant par B’,elle coupe (SC) en N’ et (SD) en M’. <br> On applique le théorème de Thalès dans les triangles SAC et SAD :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{\overline{SA}}{\overline{NB}}=\frac{\overline{CA}}{\overline{CB}}=\frac{\overline{SA}}{\overline{MB}}=\frac{\overline{DA}}{\overline{DB}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Le birapport de ABCD vaut donc
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{\overline{SA}}{\overline{NB}}\div \frac{\overline{SA}}{\overline{B}}=\frac{\overline{MB}}{\overline{NB}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> On montre de même que le birapport de A'B'C'D' vaut
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\overline{M'B'}}{\overline{N'B'}} \)
+          <!-- /FORMULE UNIV INLINE-->. <br> En considérant l’homothétie de centre S qui transforme M en M', N en N’,B en B’ <br> On peut en conclure que
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{\overline{MB}}{\overline{NB}}=\frac{\overline{M'B'}}{\overline{N'B'}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> CQFD. <h2>Faisceau harmonique</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We draw the parallel to (SA) going through B, it intersects (SC) in N and (SD) in M. <br> We draw the parallel to (SA) going through B', it intersects (SC) in N' and (SD) in M'. <br> We apply the theorem of Thales in the SAC and SAD triangles:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \frac{\overline{SA}}{\overline{NB}}=\frac{\overline{CA}}{\overline{CB}}=\frac{\overline{SA}}{\overline{MB }}=\frac{\overline{DA}}{\overline{DB}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> The cross-ratio of ABCD is therefore equal to
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \frac{\overline{SA}}{\overline{NB}}\div \frac{\overline{SA}}{\overline{B}}=\frac{\overline{MB}}{\overline{ NB}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> We show in the same way that the cross-ratio of A'B'C'D' is equal to
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \frac{\overline{M'B'}}{\overline{N'B'}} \)
+          <!-- /UNIV INLINE FORMULA-->. <br> Considering the dilation with center S which transforms M into M', N into N', B into B' <br> It can be concluded that
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \frac{\overline{MB}}{\overline{NB}}=\frac{\overline{M'B'}}{\overline{N'B'}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> QED. <h2>Harmonic bundle</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On considère 4 droites concourantes comme ci dessus avec une sécante Δ qui coupe le faisceau en 4 points A,B,C,D. On dit que le faisceau est <strong>
+              <em>'harmonique'</em>
+            </strong> si les 4 points ABCD forment une <input type="button" value="division harmonique" onclick="go('theorapport.html#def5')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We consider 4 concurrent lines as above with a secant Δ which intersects the bundle in 4 points A,B,C,D. The bundle is said to be <strong>
+              <em>'harmonic'</em>
+            </strong> if the 4 points ABCD form an <input type="button" value="harmonic division" onclick="go('theorapport.html#def5')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On désignera également par <b>
+              <i>'faisceau harmonique'</i>
+            </b> un ensemble de 4 droites parallèles et distinctes telle qu'une sécante quelconque à ces quatre droites les coupe en 4 points A,B,C,D formant une division harmonique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We will also designate by <b>
+              <i>'harmonic bundle'</i>
+            </b> a set of 4 parallel and distinct lines such that any secant to these four lines intersects them at 4 points A,B,C ,D forming a harmonic division.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 7</div> Il résulte du théorème précédent que toute sécante à un faisceau harmonique de droites concourantes coupe ce faisceau suivant une division harmonique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 7</div> It follows from the previous theorem that any secant to a harmonic bundle of concurrent straight lines intersects this bundle according to a harmonic division.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Par ailleurs si &Delta; est une droite coupant un faisceau harmonique de droites parallèles suivant une division harmonique et si &Delta;' est une autre sécante, la projection sur &Delta;' parallèlement à la direction du faisceau étant une application affine elle transforme les 4 points de &Delta; A,B,C,D en division harmonique en quatre points A',B',C',D' de &Delta;' en division harmonique également. D'où nous concluons : </div>
+        <!-- /fr -->
+        <div lang="en"> Furthermore if &Delta; is a line intersecting a harmonic bundle of parallel lines following a harmonic division and if &Delta;' is another secant, the projection on &Delta;' parallel to the direction of the beam being an affine map it transforms the 4 points of &Delta; A,B,C,D in four-point harmonic division A',B',C',D' of &Delta;' also in harmonic division. From which we conclude: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 8</div> Le même résultat vaut pour les faisceaux harmoniques de droites parallèles.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 8</div> The same result holds for harmonic bundles of parallel lines.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/theothales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/theothales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>appaff1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s0"># Applications affines - affine maps</span><span class="s1"> 
+</span><span class="s2">from </span><span class="s1">reperes </span><span class="s2">import </span><span class="s1">* 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">AppAffine(): 
+    </span><span class="s0">&quot;&quot;&quot; Application affine de K^n dans K^m définie par des équations - Affine map defined by equations&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, R1, R2, E): 
+        </span><span class="s0">&quot;&quot;&quot;initialisation, R1 repère source, R2 repère but, E système d'équations _ initializing frame R1 departure, frame R2 arrival&quot;&quot;&quot;</span><span class="s1"> 
+        self.R1 = R1 
+        self.R2 = R2 
+        self.E = E 
+        self.n = len(R1.Base) 
+        self.m = len(R2.Base) 
+ 
+    </span><span class="s2">def </span><span class="s1">CalcImage(self, M): 
+        </span><span class="s0">&quot;&quot;&quot;Calcul de l'image M' d'un point M donné par ses coordonnées dans K^n - compouation of coordinates of point M' image of M&quot;&quot;&quot;</span><span class="s1"> 
+        COM = self.R1.Coord(M)  </span><span class="s0"># coordonnées de M dans R1 - coordinates of M in R1</span><span class="s1"> 
+        CI = [</span><span class="s3">0</span><span class="s1">] * self.m  </span><span class="s0"># contiendra les coordonnées de M' - will contain coordinates of M'</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.m): 
+            </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n): 
+                CI[i] = sum([self.E[i][j] * COM[j] </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n - </span><span class="s3">1</span><span class="s1">)]) + self.E[i][self.n - </span><span class="s3">1</span><span class="s1">] 
+        </span><span class="s2">return </span><span class="s1">self.R2.Point(CI) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    P = PointKn([Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    Q = PointKn([Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(-</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    u = VecteurKn([Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    v = VecteurKn([Fraction(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    w = VecteurKn([Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    B = ([u, v, w]) 
+    R1 = Repere(P, B)  </span><span class="s0"># premier repère - first frame</span><span class="s1"> 
+    R2 = Repere(Q, B)  </span><span class="s0"># second repère - second frame</span><span class="s1"> 
+    E = [[</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">3</span><span class="s1">], [</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">], [</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, -</span><span class="s3">2</span><span class="s1">, -</span><span class="s3">1</span><span class="s1">]] 
+    </span><span class="s4">&quot;&quot;&quot; application affine donnée par - affine map given by 
+    x'=x+2y+z+3 
+    y'=y+1 
+    z'=x+2y-2z-1 
+    &quot;&quot;&quot;</span><span class="s1"> 
+    f = AppAffine(R1, R2, E) 
+    M = PointKn([Fraction(-</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)])  </span><span class="s0"># un point quelconque - any point</span><span class="s1"> 
+    print(f.CalcImage(M))  </span><span class="s0"># affiche son image par f - displays its image by f</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

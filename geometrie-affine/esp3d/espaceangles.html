@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Angles</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../../css/themes/myown.css" />
+      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+      <link href="../../css/myown.css" rel="stylesheet">
+      <script src="../../js/jquery-1.11.3.js"></script>
+      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+      <script src="../../js/custom.js"></script>
+      <script src="../../js/phoria/gl-matrix.js"></script>
+      <script src="../../js/phoria/phoria-util.js"></script>
+      <script src="../../js/phoria/phoria-entity.js"></script>
+      <script src="../../js/phoria/phoria-scene.js"></script>
+      <script src="../../js/phoria/phoria-renderer.js"></script>
+      <script src="../../js/phoria/phoria-view.js"></script>
+      <script src='../../js/phoria/dat.gui.min.js'></script>  	
+      <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+   </head>
+   <body style="overflow: auto; "class="fr">
+      <script> window.onload=get();</script>
+      <a name="beg"></a>
+      <div data-role="page" data-theme="e">
+         <div data-role="header">
+            <table>
+               <tr>
+                  <td>Choisissez votre langue !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+                  <td>Choose your language !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+               </tr>
+            </table>
+         </div>
+         <!-- /header -->
+         <div style="overflow: auto; "  data-role="content" data-theme="e">
+            <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+               <div lang="fr">revenir au point de départ après retour à cette page</div>
+               <!-- /fr -->
+               <div lang="en">come back to starting point after return to this page</div>
+               <!-- /en -->
+            </button>
+            <script>
+               showscroll();
+            </script>
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/espaceangles/menu.html')" /></li>
+                     <li><input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/espaceangles/menu.html')" /></li>
+                     <li><input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to Affine geometry" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <h2>Angle de deux vecteurs de l'espace</h2>
+               Pour un couple de deux vecteurs de l'espace on peut seulement définir leur angle géométrique (non orienté), puisqu'il n'existe aucune orientation naturelle sur le plan vectoriel qu'ils engendrent.
+               <h2>Angle de deux plans</h2>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Angle of two vectors in space</h2>
+               For a couple of two vectors in space, we can only define their geometric angle (unoriented), since there is no natural orientation on the vector plane they generate.
+               <h2>Angle of two planes</h2>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def1"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 1</div>
+                  Soient P<sub>1</sub> et P<sub>2</sub> deux plans de l'espace.<br>
+                  S'ils sont parallèles on convient que leur angle est nul.<br>
+                  S'ils ne sont pas parallèles soit D leur intersection (qui est donc une droite, et soit H un plan orthogonal à D.<br>
+                  Soient enfin D<sub>1</sub> et D<sub>2</sub> les intersections de P<sub>1</sub> et P<sub>2</sub> avec H.<br>
+                  On appelle <b><i>'angle de P<sub>1</sub> et P<sub>2</sub>'</i></b> l'angle (non orienté) des droites D<sub>1</sub> et D<sub>2</sub>.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 1</div>
+                  Let P<sub>1</sub> and P<sub>2</sub> be two planes of space.<br>
+                  If they are parallel, we agree that their angle is zero.<br>
+                  If they are not parallel let D be their intersection (which is therefore a straight line), and let H be a plane orthogonal to D.<br>
+                  Finally, let D<sub>1</sub> and D<sub>2</sub> be the intersections of P<sub>1</sub> and P<sub>2</sub> with H.<br>
+                  We call <b><i>'angle of P<sub>1</sub> and P<sub>2</sub>'</i></b> the angle (not oriented) of the lines D<sub>1</sub> and D<sub>2</sub>.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP IMAGE -->
+            <p><img src="images/espaceangles1.png" width="476" height="491" border="0" alt=""></p>
+            <!-- /STOP IMAGE -->
+            <div lang="fr">
+               <em><font size="-1">Image générée avec GeoGebra3D</font></em>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <em><font size="-1">Image generated with GeoGebra3D</font></em>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="prop1"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">propriété 1</div>
+                  L'angle de deux plans est également l'angle (non orienté) d'un vecteur normal au premier avec un vecteur normal au second.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">property 1</div>
+                  The angle of two planes is also the (unoriented) angle of a vector normal to the first with a vector normal to the second.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h2>Angle d'une droite et d'un plan</h2>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Angle of a line and a plane</h2>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def2"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 2</div>
+                  Soient P un plan et D une droite dans l'espace.<br>
+                  S'ils sont orthogonaux, on convient que leur angle est &pi;/2.<br>
+                  Sinon on appelle <b><i>'angle de P et D'</i></b> l'angle (non orienté) de D avec sa projection orthogonale sur P.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 2</div>
+                  Let P be a plane and D a line in space.<br>
+                  If they are orthogonal, we agree that their angle is &pi;/2.<br>
+                  Otherwise we call <b><i>'angle of P and D'</i></b> the angle (not oriented) of D with its orthogonal projection on P.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP IMAGE -->
+            <p><img src="images/espaceangles2.png" width="383" height="418" border="0" alt=""></p>
+            <!-- /STOP IMAGE -->
+            <div lang="fr">
+               <em><font size="-1">Image générée avec GeoGebra3D</font></em>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <em><font size="-1">Image generated with GeoGebra3D</font></em>
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="prop2"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">propriété 2</div>
+                  L'angle d'une droite et d'un plan est complémentaire à l'angle non orienté de cette droite avec une normale au plan, c'est à dire que la somme de ces deux angles vaut &pi;/2 (à k&pi; près et au signe près).
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">property 2</div>
+                  The angle of a line and a plane is complementary to the non-oriented angle of this line with a normal to the plane, i.e. the sum of these two angles is &pi;/2 (up to the sign and modulo &pi;).
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <div lang="fr">
+               <h2>Angles d'Euler</h2>
+               Ce paragraphe est important pour de nombreux domaines, comme :
+               <ul>
+                  <li>La vision 3D</li>
+                  <li>La mécanique du solide</li>
+                  <li>La cinématique</li>
+                  <li>L'aéronautique</li>
+                  <li>La robotique</li>
+               </ul>
+               Cependant, chaque discipline a ses propres définitions, ses conventions, ses notations, son vocabulaire, de sorte qu'il n'y a aucune uniformisation. <br/>
+               Ces différences sont en partie justifiées par le but recherché. En particulier les mécaniciens font un usage important d'un repère local (lié au solide en mouvement) c'est le point de vue qui est parfois qualifié <b><i>"d'intrinsèque"</i></b>, alors que les informaticiens ont le plus souvent recours à un repère fixe, c'est le point de vue qualifié <b><i>"d'extrinsèque"</i></b>.<br/>
+               La base théorique est relativement simple.<br/>
+               Soit &nbsp;<!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \left ( O,\overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right )
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               &nbsp;un repère orthonormé de l'espace.<br/>
+               Suivant la coutume, on désigne par :<br/>
+               <ul>
+                  <li>
+                     Ox l'axe passant par O et orienté par le vecteur &nbsp;<!-- FORMULE UNIV INLINE -->
+                     \(
+                     \displaystyle \overrightarrow{i}
+                     \)
+                     <!-- /FORMULE UNIV INLINE-->
+                     &nbsp;
+                  </li>
+                  <li>
+                     Oy l'axe passant par O et orienté par le vecteur &nbsp;<!-- FORMULE UNIV INLINE -->
+                     \(
+                     \displaystyle \overrightarrow{j}
+                     \)
+                     <!-- /FORMULE UNIV INLINE-->
+                     &nbsp;
+                  </li>
+                  <li>
+                     Oz l'axe passant par O et orienté par le vecteur &nbsp;<!-- FORMULE UNIV INLINE -->
+                     \(
+                     \displaystyle \overrightarrow{k}
+                     \)
+                     <!-- /FORMULE UNIV INLINE-->
+                     &nbsp;
+                  </li>
+               </ul>
+               Le vectoriel et l'affine sont identifiés par le choix de l'origine du repère, O. <br/>
+               Nous nous concentrons sur les <input type="button" value="rotations affines" onclick="go('espacedep.html#')" data-inline="true" /> conservant le point O, lesquelles s'identifient aux <input type="button" value="rotations vectorielles" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" /> de &reals;<sup>3</sup>, lesquelles s'identifient à leur tour aux <input type="button" value="matrices orthogonales" onclick="go('../../algebre-lineaire/orthogonalite/grouporth.html#def2')" data-inline="true" /> directes.
+               Nous qualifions de rotation <b><i>'élémentaire'</i></b> toute rotation autour d'un des trois axes du repère.<br/>
+               Ainsi par exemple :<br/>
+               La rotation d'angle ψ autour de l'axe Ox qui a pour matrice
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle R_{x}(\psi) = \begin{pmatrix}
+                  1 & 0 & 0 \\
+                  0 & {\cos(\psi)} & {- \sin(\psi)} \\
+                  0 & {\sin(\psi)} & {\cos(\psi)} \\
+                  \end{pmatrix}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               La rotation d'angle &theta; autour de l'axe Oy qui a pour matrice 
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle R_{y}(\theta) = \begin{pmatrix}
+                  {\cos(\theta)} & 0 & {- \sin(\theta)} \\
+                  0 & 1 & 0 \\
+                  {\sin(\theta)} & 0 & {\cos(\theta)} \\
+                  \end{pmatrix}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               La rotation d'angle &phi; autour de l'axe Oz qui a pour matrice
+               <!-- FORMULE UNIV INLINE -->
+               <p>\(
+                  \displaystyle R_{z}(\varphi) = \begin{pmatrix}
+                  {\cos(\varphi)} & {- \sin(\varphi)} & 0 \\
+                  {\sin(\varphi)} & {\cos(\varphi)} & 0 \\
+                  0 & 0 & 1 \\
+                  \end{pmatrix}
+                  \)
+               </p>
+               <!-- /FORMULE UNIV INLINE-->
+               Ces rotations élémentaires portent des noms liés à la navigation maritime ou aérienne:
+               Imaginez vous un avion ou un bateau.
+               L'axe Oy passe par la queue et l'avant de l'appareil (la proue et la poupe du bateau), c'est un axe longitudinal.
+               L'axe Ox part de l'aile gauche à l'aile droite (de babord à tribord), c'est un axe transverse.
+               L'axe Oz pointe vers le haut de l'appareil, c'est l'axe vertical.<br>
+               Ainsi le <b><i>'tangage'</i></b> (anglais: pitch) devient la rotation autour de l'axe Ox, le <b><i>'lacet'</i></b> (anglais yaw) devient la rotation autour de l'axe Oz, et le <b><i>'roulis'</i></b> (anglais: roll) la rotation autour de l'axe Oy.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Euler angles</h2>
+               This paragraph is important for many areas, such as:
+               <ul>
+                  <li>3D vision</li>
+                  <li>The mechanics of the solid</li>
+                  <li>The kinematics</li>
+                  <li>Aeronautics</li>
+                  <li>Robotics</li>
+               </ul>
+               However, each discipline has its own definitions, conventions, notations, vocabulary, so there is no uniformity. <br/>
+               These differences are partly justified by the intended purpose. In particular, mechanics make extensive use of a local reference frame (linked to the solid in motion) it is the point of view which is sometimes qualified <b><i>"intrinsic"</i></b> , while computer scientists most often use a fixed benchmark, it is the so-called <b><i>"extrinsic"</i></b> view.<br/>
+               The theoretical basis is relatively simple.<br/>
+               Either &nbsp;<!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \left ( O,\overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right )
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               &nbsp;an orthonormal coordinate system of space.<br/>
+               According to custom, we designate by:<br/>
+               <ul>
+                  <li>
+                     Ox the axis passing through O and oriented by the vector &nbsp;<!-- UNIV INLINE FORMULA -->
+                     \(
+                     \displaystyle \overrightarrow{i}
+                     \)
+                     <!-- /INLINE UNIV FORMULA-->
+                     &nbsp;
+                  </li>
+                  <li>
+                     Oy the axis passing through O and oriented by the vector &nbsp;<!-- UNIV INLINE FORMULA -->
+                     \(
+                     \displaystyle \overrightarrow{j}
+                     \)
+                     <!-- /INLINE UNIV FORMULA-->
+                     &nbsp;
+                  </li>
+                  <li>
+                     Oz the axis passing through O and oriented by the vector &nbsp;<!-- UNIV INLINE FORMULA -->
+                     \(
+                     \displaystyle \overrightarrow{k}
+                     \)
+                     <!-- /INLINE UNIV FORMULA-->
+                     &nbsp;
+                  </li>
+               </ul>
+               The vector and the affine are identified by the choice of the origin of the frame, O. <br/>
+               We focus on <input type="button" value="affine rotations" onclick="go('espacedep.html#')" data-inline="true" /> retaining point O, which identify with <input type="button" value="vector rotations" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" /> from &reals; <sup>3</sup>, which in turn identify with <input type="button" value="orthogonal matrices" onclick="go('../../algebre-lineaire/orthogonalite/grouporth.html#def2e')" data-inline="true" /> direct.
+               We call rotation <b><i>'elementary'</i></b> any rotation around one of the three axes of the frame.<br/>
+               So for example:<br/>
+               The rotation of angle ψ around the axis Ox which has for matrix
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle R_{x}(\psi) = \begin{pmatrix}
+                  1 & 0 & 0 \\
+                  0 & {\cos(\psi)} & {- \sin(\psi)} \\
+                  0 & {\sin(\psi)} & {\cos(\psi)} \\
+                  \end{pmatrix}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               The angle rotation &theta; around the axis Oy which has for matrix
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle R_{y}(\theta) = \begin{pmatrix}
+                  {\cos(\theta)} & 0 & {- \sin(\theta)} \\
+                  0 & 1 & 0 \\
+                  {\sin(\theta)} & 0 & {\cos(\theta)} \\
+                  \end{pmatrix}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               The angle rotation &phi; around the Oz axis which has for matrix
+               <!-- UNIV INLINE FORMULA -->
+               <p>\(
+                  \displaystyle R_{z}(\varphi) = \begin{pmatrix}
+                  {\cos(\varphi)} & {- \sin(\varphi)} & 0 \\
+                  {\sin(\varphi)} & {\cos(\varphi)} & 0 \\
+                  0 & 0 & 1 \\
+                  \end{pmatrix}
+                  \)
+               </p>
+               <!-- /INLINE UNIV FORMULA-->
+               These elementary rotations have names related to sea or air navigation:
+               Imagine an airplane or a boat.
+               The Oy axis passes through the tail and the front of the device (the bow and the stern of the boat), it is a longitudinal axis.
+               The Ox axis starts from the left wing to the right wing (from port to starboard), it is a transverse axis.
+               The Oz axis points to the top of the device, it is the vertical axis.<br>
+               Thus the <b><i>'pitch'</i></b> (French: tangage) becomes the rotation around the Ox axis, the <b><i>'yaw'</i></b> (French: lacet) becomes the rotation around the Oz axis, and <b><i>'roll'</i></b> (French: roulis) the rotation around the Oy axis.
+            </div>
+            <!-- /en --> 
+            <!-- STOP IMAGE -->
+            <p><img src="images/Axes_A%C3%A9ronef.svg.png" alt=""></p>
+            <!-- /STOP IMAGE -->
+            <div lang="fr"><span style="font-size: smaller;"><em>Image wikipedia lacet, roulis tangage dans un avion</em></span></div>
+            <!-- /fr --> 
+            <div lang="en"><em><span style="font-size: smaller;"></span>roll pitch and yaw in a  wikipedia image of a plane.</em></div>
+            <!-- /en --> 
+            <div lang="fr">
+               <br>
+               Dans la pratique ces 3 mouvements sont combinés. On peut donc imaginer toutes sortes de compositions comme :<br>
+               R<sub>x</sub><font size="-1">o</font>R<sub>y</sub><font size="-1">o</font>R<sub>z</sub><br>
+               R<sub>z</sub><font size="-1">o</font>R<sub>y</sub><font size="-1">o</font>R<sub>x</sub><br>
+               etc ... soit 6 au total.<br>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>Toutes ces composées sont distinctes !!!<br>
+               Nous choisirons pour notre étude la seconde convention et nous considérerons, les produits du type 
+               R<sub>z</sub>(&phi;)<font size="-1">o</font>R<sub>y</sub>(&theta;)<font size="-1">o</font>R<sub>x</sub>(&psi;)<br>.<br>
+               Avec ces notations nous pouvons affirmer :
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <br>
+               In practice these 3 movements are combined. So we can imagine all kinds of compositions like:<br>
+               R<sub>x</sub><font size="-1">o</font>R<sub>y</sub><font size="-1">o</font>R<sub> z</sub><br>
+               R<sub>z</sub><font size="-1">o</font>R<sub>y</sub><font size="-1">o</font>R<sub> x</sub><br>
+               etc... so 6 in total.<br>
+               <img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>All these composites are distinct!!!<br>
+               We will choose for our study the second convention and we will consider, the products of the type
+               R<sub>z</sub>(&phi;)<font size="-1">o</font>R<sub>y</sub>(&theta;)<font size="-1">o </font>R<sub>x</sub>(&psi;)<br>.<br>
+               With these notations we can say:
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="prop3"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">propriété 3</div>
+                  Toute rotation R peut s'écrire (de manière non unique) comme composée d'au plus trois rotations élémentaires.<br>
+                  Autrement dit si R est une rotation quelconque de l'espace conservant l'origine, on peut toujours trouver au moins un triplet (&phi; &theta;,&psi;) tel que R=R<sub>z</sub>(&phi;)<font size="-1">o</font>R<sub>y</sub>(&theta;)<font size="-1">o</font>R<sub>x</sub>(&psi;) avec la convention que les angles peuvent éventuellement être nuls.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">property 3</div>
+                  Any rotation R can be written (in a non-unique way) as composed of at most three elementary rotations.<br>
+                  In other words, if R is any rotation of space preserving the origin, we can always find at least one triple (&phi; &theta;,&psi;) such that R=R<sub>z</sub>(&phi; )<font size="-1">o</font>R<sub>y</sub>(&theta;)<font size="-1">o</font>R<sub>x</sub >(&psi;) with the convention that the angles can possibly be zero.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP -->
+            <div lang="fr">
+               <div data-role="collapsible">
+                  <h4>démonstration</h4>
+                  Effectuons d'abord le produit des 3 matrices :<br>
+                  R<sub>z</sub>(&phi;)<font size="-1">o</font>R<sub>y</sub>(&theta;)<font size="-1">o</font>R<sub>x</sub>(&psi;), on trouve 
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \begin{pmatrix}
+                     {\cos(\theta)\cos(\varphi)} & {\sin(\psi)\sin(\theta)\cos(\varphi) - \cos(\psi)\sin(\varphi)} & {\cos(\psi)\sin(\theta)\cos(\varphi) + \sin(\psi)\sin(\varphi)} \\
+                     {\cos(\theta)\sin(\varphi)} & {\sin(\psi)\sin(\theta)\sin(\varphi) + \cos(\psi)\cos(\varphi)} & {\cos(\psi)\sin(\theta)\sin(\varphi) - \sin(\psi)\cos(\varphi)} \\
+                     {- \sin(\theta)} & {\sin(\psi)\cos(\theta)} & {\cos(\psi)\cos(\theta)} \\
+                     \end{pmatrix}
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  La matrice d'une rotation générale est une matrice orthogonale positive :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle R = \begin{pmatrix}
+                     R_{11} & R_{12} & R_{13} \\
+                     R_{21} & R_{22} & R_{23} \\
+                     R_{31} & R_{32} & R_{33} \\
+                     \end{pmatrix}
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  De sorte que notre problème revient à la résolution d'un système de 9 équations en les 3 inconnues &psi;, &theta; et &phi;.<br>
+                  <h3>Résolution en &theta;.</h3>
+                  Il vient immédiatement R<sub>31</sub>=-sin(&theta;).<br>
+                  Si nous laissons pour le moment de côté les cas R<sub>31</sub>=+1 et R<sub>31</sub>=-1, nous tirons deux valeurs possibles pour &theta; :<br>
+                  &theta;<sub>1</sub>=-arcsin(R<sub>31</sub>)
+                  &theta;<sub>2</sub>=&pi;-&theta;<sub>1</sub>=&pi;+arcsin(R<sub>31</sub>) <br>
+                  Nous traiterons plus tard les cas particuliers évoqués.
+                  <h3>Résolution en &psi;</h3>
+                  En trigonométrie, la fonction atan2 à deux arguments est une variation de la fonction arctangente.<br> Pour tous arguments réels x et y non nuls, atan2(y,x) est l'angle en radians entre la partie positive de l'axe des x d'un plan, et le point de ce plan aux coordonnées (x,y).<br> Cet angle est positif pour les angles dans le sens anti-horaire dit sens trigonométrique (moitié haute du plan, y > 0) et négatif dans l'autre (moitié basse du plan, y < 0).<br>
+                  Nous laissons toujours de côté le cas cos(&theta;)=0.<br>
+                  Nous avons donc les deux possibilités.
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \left\{ \begin{matrix}
+                     {\psi_{1} = a\tan 2\left( \frac{R_{32}}{\cos\left( \theta_{1} \right)},\frac{R_{33}}{\cos\left( \theta_{1} \right)} \right)} \\
+                     {\psi_{2} = a\tan 2\left( \frac{R_{32}}{\cos\left( \theta_{2} \right)},\frac{R_{33}}{\cos\left( \theta_{2} \right)} \right)} \\
+                     \end{matrix} \right.
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  <h3>Résolution en &phi;</h3>
+                  Le même raisonnement que précédemment nous conduit à :
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \left\{ \begin{matrix}
+                     {\varphi_{1} = a\tan 2\left( \frac{R_{21}}{\cos\left( \theta_{1} \right)},\frac{R_{11}}{\cos\left( \theta_{1} \right)} \right)} \\
+                     {\varphi_{2} = a\tan 2\left( \frac{R_{21}}{\cos\left( \theta_{2} \right)},\frac{R_{11}}{\cos\left( \theta_{2} \right)} \right)} \\
+                     \end{matrix} \right.
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  Toujours dans le cas où cos(&theta;)&ne;0
+                  Nous traitons maintenant le :
+                  <h3>Cas spécial où cos(&theta;)=0</h3>
+                  Ce cas se partage lui-même en deux sous-cas :
+                  <h4>Cas spécial &theta;=&pi;/2</h4>
+                  On a alors :<br>
+                  R<sub>12</sub>=sin(&psi;-&phi;)<br>
+                  R<sub>13</sub>=cos(&psi;-&phi;)<br>
+                  Qui nous donne :<br>
+                  &psi;=&phi;+atan2(R<sub>12</sub>,R<sub>13</sub>)
+                  <h4>Cas spécial &theta;=-&pi;/2</h4>
+                  De la même façon il vient :<br>
+                  &psi;=-&phi;+atan2(-R<sub>12</sub>,-R<sub>13</sub>)
+                  <h3>Résumé</h3>
+                  Dans les cas &theta;=&pi;/2 et &theta;=-&pi;/2 (cas connu sous le nom de <b><i>'gimbal lock'</i></b>), nous voyons qu'il y a une infinité de solutions, &psi; et &phi; étant liés par une relation et &phi; étant quelconque.<br>
+                  Pour une solution particulière nous pouvons toujours prendre &phi;=0.<br>
+                  On obtient donc :<br>
+                  &theta;=&pi;/2<br>
+                  &phi;=0<br>
+                  &psi;=atan2(R<sub>12</sub>,R<sub>13</sub>)<br>
+                  Mais aussi :<br>
+                  &theta;=-&pi;/2<br>
+                  &phi;=0<br>
+                  &psi;=atan2(-R<sub>12</sub>,-R<sub>13</sub>)<br>
+                  Dans tous les autres cas , on a deux solutions :<br>
+                  (&theta;<sub>1</sub>,&psi;<sub>1</sub>,&phi;<sub>1</sub>)<br>
+                  (&theta;<sub>2</sub>,&psi;<sub>2</sub>,&phi;<sub>2</sub>)<br>
+               </div>
+               <!--demo -->
+            </div>
+            <!-- /fr -->
+            <div lang="en">
+               <div data-role="collapsible">
+                  <h4>proof</h4>
+                  Let's first perform the product of the 3 matrices:<br>
+                  R<sub>z</sub>(&phi;)<font size="-1">o</font>R<sub>y</sub>(&theta;)<font size="-1">o </font>R<sub>x</sub>(&psi;), we find
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle \begin{pmatrix}
+                     {\cos(\theta)\cos(\varphi)} & {\sin(\psi)\sin(\theta)\cos(\varphi) - \cos(\psi)\sin(\varphi)} & { \cos(\psi)\sin(\theta)\cos(\varphi) + \sin(\psi)\sin(\varphi)} \\
+                     {\cos(\theta)\sin(\varphi)} & {\sin(\psi)\sin(\theta)\sin(\varphi) + \cos(\psi)\cos(\varphi)} & { \cos(\psi)\sin(\theta)\sin(\varphi) - \sin(\psi)\cos(\varphi)} \\
+                     {- \sin(\theta)} & {\sin(\psi)\cos(\theta)} & {\cos(\psi)\cos(\theta)} \\
+                     \end{pmatrix}
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  The matrix of a general rotation is a positive orthogonal matrix:
+                  <!-- UNIV INLINE FORMULA -->
+                  <p>\(
+                     \displaystyle R = \begin{pmatrix}
+                     R_{11} & R_{12} & R_{13} \\
+                     R_{21} & R_{22} & R_{23} \\
+                     R_{31} & R_{32} & R_{33} \\
+                     \end{pmatrix}
+                     \)
+                  </p>
+                  <!-- /INLINE UNIV FORMULA-->
+                  So that our problem comes down to solving a system of 9 equations in the 3 unknowns &psi;, &theta; and &phi;.<br>
+                  <h3>&theta; resolution.</h3>
+                  It immediately comes R<sub>31</sub>=-sin(&theta;).<br>
+                  Leaving aside for the moment the cases R<sub>31</sub>=+1 and R<sub>31</sub>=-1, we derive two possible values for &theta; :<br>
+                  &theta;<sub>1</sub>=-arcsin(R<sub>31</sub>)
+                  &theta;<sub>2</sub>=&pi;-&theta;<sub>1</sub>=&pi;+arcsin(R<sub>31</sub>) <br>
+                  We will deal with the particular cases mentioned later.
+                  <h3>Resolution in &psi;</h3>
+                  In trigonometry, the two-argument function atan2 is a variation of the arctangent function.<br> For all nonzero real arguments x and y, atan2(y,x) is the angle in radians between the positive part of the axis of the x of a plane, and the point of this plane at the coordinates (x,y).<br> This angle is positive for the angles in the anti-clockwise direction called trigonometric direction (upper half of the plane, y > 0) and negative in the other (lower half of the plane, y < 0).<br>
+                  We always leave out the case cos(&theta;)=0.<br>
+                  So we have both possibilities.
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \left\{ \begin{matrix}
+                     {\psi_{1} = a\tan 2\left( \frac{R_{32}}{\cos\left( \theta_{1} \right)},\frac{R_{33}}{\cos\left( \theta_{1} \right)} \right)} \\
+                     {\psi_{2} = a\tan 2\left( \frac{R_{32}}{\cos\left( \theta_{2} \right)},\frac{R_{33}}{\cos\left( \theta_{2} \right)} \right)} \\
+                     \end{matrix} \right.
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  <h3>Resolution in &phi;</h3>
+                  The same reasoning as before leads us to:
+                  <!-- FORMULE UNIV INLINE -->
+                  <p>\(
+                     \displaystyle \left\{ \begin{matrix}
+                     {\varphi_{1} = a\tan 2\left( \frac{R_{21}}{\cos\left( \theta_{1} \right)},\frac{R_{11}}{\cos\left( \theta_{1} \right)} \right)} \\
+                     {\varphi_{2} = a\tan 2\left( \frac{R_{21}}{\cos\left( \theta_{2} \right)},\frac{R_{11}}{\cos\left( \theta_{2} \right)} \right)} \\
+                     \end{matrix} \right.
+                     \)
+                  </p>
+                  <!-- /FORMULE UNIV INLINE-->
+                  Always in case cos(&theta;)&ne;0
+                  We are now dealing with:
+                  <h3>Special case where cos(&theta;)=0</h3>
+                  This case divides itself into two sub-cases:
+                  <h4>Special case &theta;=&pi;/2</h4>
+                  We then have:<br>
+                  R<sub>12</sub>=sin(&psi;-&phi;)<br>
+                  R<sub>13</sub>=cos(&psi;-&phi;)<br>
+                  Who gives us:<br>
+                  &psi;=&phi;+atan2(R<sub>12</sub>,R<sub>13</sub>)
+                  <h4>Special case &theta;=-&pi;/2</h4>
+                  The same way it comes:<br>
+                  &psi;=-&phi;+atan2(-R<sub>12</sub>,-R<sub>13</sub>)
+                  <h3>Summary</h3>
+                  In the cases &theta;=&pi;/2 and &theta;=-&pi;/2 (case known as <b><i>'gimbal lock'</i></b>), we see that there is an infinity of solutions, &psi; and &phi; being linked by a relation and &phi; being unspecified.<br>
+                  For a particular solution we can always take &phi;=0.<br>
+                  So we get:<br>
+                  &theta;=&pi;/2<br>
+                  &phi;=0<br>
+                  &psi;=atan2(R<sub>12</sub>,R<sub>13</sub>)<br>
+                  But also:<br>
+                  &theta;=-&pi;/2<br>
+                  &phi;=0<br>
+                  &psi;=atan2(-R<sub>12</sub>,-R<sub>13</sub>)<br>
+                  In all other cases, there are two solutions:<br>
+                  (&theta;<sub>1</sub>,&psi;<sub>1</sub>,&phi;<sub>1</sub>)<br>
+                  (&theta;<sub>2</sub>,&psi;<sub>2</sub>,&phi;<sub>2</sub>)<br>
+               </div>
+               <!--demo -->
+            </div>
+            <!-- /en -->
+            <!-- /STOP -->
+            <div lang="fr">
+               La démonstration ci-dessus constitue un algorithme de détermination des angles d'Euler.<br/>
+               <input type="button" value="Cet exercice" onclick="go('exercices/espaceangles/ex03.html#')" data-inline="true" /> vous propose une implémentation en langage Python de cet algorithme.<br/>
+               Voici une appliquette javascript qui vous permet de voir les rotations élémentaires d'un solide par rapport à trois axes fixes :<br/>
+               Avec l'un des 3 boutons choisissez un axe de rotation.<br/>
+               Avec le curseur déterminer un angle de rotation en degrés autour de l'axe choisi précédemment.<br/>
+               Le solide (cube) tourne alors de la valeur de l'angle choisi autour de l'axe choisi par rapport à sa position actuelle.<br/>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               The demonstration above is an algorithm for determining Euler angles.<br/>
+               <input type="button" value="This exercise" onclick="go('exercices/espaceangles/ex03.html#')" data-inline="true" /> offers you a Python language implementation of this algorithm. <br/>
+               Here is a javascript applet that allows you to see the elementary rotations of a solid with respect to three fixed axes:<br/>
+               With one of the 3 buttons choose an axis of rotation.<br/>
+               With the slider determine a rotation angle in degrees around the previously chosen axis.<br/>
+               The solid (cube) then rotates by the value of the chosen angle around the chosen axis relative to its current position.<br/>
+            </div>
+            <!-- /en --> 
+            <!-- STOP  APPLET-->
+            <div>
+               <canvas id="canvas" width="512" height="512" style="background-color: #eee"></canvas>
+            </div>
+            <table width="100%">
+               <tr>
+                  <td><button type="button" id="button1" style="color:red" onclick="axisX()" >Ox</button></td>
+                  <td><button type="button" id="button2" style="color:green" onclick="axisY()" >Oy</button></td>
+                  <td><button type="button" id="button3" style="color:blue" onclick="axisZ()" >Oz</button></td>
+                  <td> <input type="text" id="mytext3"></td>
+               </tr>
+            </table>
+            <div lang="fr">Mesure de l'angle en degrés entre -180 et +180 :</div>
+            <!-- /fr --> 
+            <div lang="en">Measure of the angle in degrees between -180 and +180</div>
+            <!-- /en -->  <input type='range' id="myRange2" step='10' min='-180' max='180' value='0'  onchange="changeangle(this.value)"/>
+            <br>
+            <script src='js/rotsol.js'></script>
+            <!-- /STOP  APPLET-->
+            <div lang="fr">
+               <h3>Une autre convention</h3>
+               La convention suivante est largement utilisée en mécanique du solide :<br>
+               On passe du référentiel fixe Oxyz au référentiel lié au solide Ox'y'z' par trois rotations successives.
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h3>Another convention</h3>
+               The following convention is widely used in solid mechanics:<br>
+               One passes from the fixed frame of reference Oxyz to the frame of reference linked to the solid Ox'y'z' by three successive rotations.
+            </div>
+            <!-- /en --> 
+            <!-- STOP -->
+            <a name="def3"></a>
+            <div id="container">
+               <div lang="fr">
+                  <div id="label">définition 3</div>
+                  <ol>
+                     <li>La <b><i>'précession'</i></b> &psi;, autour de l'axe Oz, fait passer de Oxyz au référentiel Ouvz</li>
+                     <li>La <b><i>'nutation'</i></b> &theta;, autour de l'axe Ou, fait passer de Ouvz à Ouwz'</li>
+                     <li>La <b><i>'rotation propre'</i></b> &phi;, autour de l'axe Oz', fait passer de Ouwz’ au référentiel lié au solide Ox'y'z’</li>
+                  </ol>
+                  NB. L'axe Ou est porté par l'intersection des plans Oxy et Ox'y' dite 'droite des noeuds'.
+               </div>
+               <!--/fr-->
+               <div lang="en">
+                  <div id="label">definition 3</div>
+                  <ol>
+                     <li>The <b><i>'precession'</i></b> &psi;, around the Oz axis, makes the transition from Oxyz to the reference frame Ouvz</li>
+                     <li>The <b><i>'nutation'</i></b> &theta;, around the Ou axis, changes from Ouvz to Ouwz'</li>
+                     <li>The <b><i>'proper rotation'</i></b> &phi;, around the Oz' axis, changes from Ouwz' to the reference frame linked to the solid Ox'y'z'</li>
+                  </ol>
+                  NB. The Or axis is carried by the intersection of the Oxy and Ox'y' planes, known as the 'line of nodes'.
+               </div>
+               <!-- /en -->
+            </div>
+            <!-- /cont -->
+            <!-- /STOP -->
+            <!-- STOP IMAGE -->
+            <p><img src="images/250px-AngleEuler.png" width="250" height="321" border="0" alt=""><br>
+               <em><font size="-1">Image : http://fr.wikipedia.org/wiki/Angles_d%27Euler<br></font></em>
+            </p>
+            <!-- /STOP IMAGE -->
+            <div lang="fr">
+               Ci-dessous une rès belle animation de Madame Geneviève Tulloue<br>
+               <a href="https://phyanim.sciences.univ-nantes.fr/Meca/Cinematique/Euler_FJ.php"  data-role="button" target="_blank">Angles d'Euler </a>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               Below is a beautiful animation by Mrs Geneviève Tulloue<br>
+               <a href="https://phyanim.sciences.univ-nantes.fr/Meca/Cinematique/Euler_FJ.php"  data-role="button" target="_blank">Euler angles </a>
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/espaceangles/menu.html')" /></li>
+                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/espaceangles/menu.html')" /></li>
+                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to Affine geometry" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /en --> 
+         </div>
+         <!-- /content -->
+         <div data-role="footer">
+            <table cellpadding="10">
+               <tr>
+                  <td>
+                     <div lang="fr">Création Gilles Dubois</div>
+                     <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Janvier 2022</div>
+                     <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Version mobile Jquery</div>
+                     <div lang="en">Mobile Jquery version</div>
+                  </td>
+                  <td><a href="https://www.mathjax.org">
+                     <img title="Powered by MathJax"
+                        src="https://www.mathjax.org/badge/badge.gif"
+                        border="0" alt="Powered by MathJax" />
+                     </a>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <!-- /footer -->
+         <ul style=list-style-type:'';>
+            <li>
+               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+            </li>
+            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+         </ul>
+      </div>
+      <!-- /page -->
+   </body>
+</html>

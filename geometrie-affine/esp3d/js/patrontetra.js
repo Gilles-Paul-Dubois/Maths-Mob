@@ -1,0 +1,25 @@
+var nameSpace1 = {};
+nameSpace1.xmin = -10;
+nameSpace1.xmax = 10;
+nameSpace1.ymin = -10;
+nameSpace1.ymax = 10;
+nameSpace1.board = JXG.JSXGraph.initBoard('box1', {boundingbox: [nameSpace1.xmin, nameSpace1.ymax, nameSpace1.xmax, nameSpace1.ymin], axis: false});
+nameSpace1.A = nameSpace1.board.create('point', [1,1],{size:1});
+nameSpace1.B = nameSpace1.board.create('point', [-3,-3],{size:1});
+nameSpace1.AB=nameSpace1.board.create('line',[nameSpace1.A,nameSpace1.B]);
+nameSpace1.I=nameSpace1.board.create('midpoint',[nameSpace1.A,nameSpace1.B], {size:1, name:'I', color:'blue'});
+nameSpace1.K1=nameSpace1.board.create('circle', [nameSpace1.I, nameSpace1.A]);
+nameSpace1.C=nameSpace1.board.create('glider',[-1,2,nameSpace1.K1], {size:1});
+nameSpace1.AC=nameSpace1.board.create('line',[nameSpace1.A,nameSpace1.C]);
+nameSpace1.D1=nameSpace1.board.create('glider',[-5.5,0,nameSpace1.AC], {size:1, name:"D'"});
+nameSpace1.K2=nameSpace1.board.create('circle', [nameSpace1.C, nameSpace1.D1]);
+nameSpace1.P1=nameSpace1.board.create('perpendicular', [nameSpace1.A, nameSpace1.AC]);
+nameSpace1.D2=nameSpace1.board.create('intersection',[nameSpace1.P1, nameSpace1.K2,0],{size:1, name:"D''", color:'blue'});
+nameSpace1.K3=nameSpace1.board.create('circle', [nameSpace1.B, nameSpace1.D1]);
+nameSpace1.P2=nameSpace1.board.create('perpendicular', [nameSpace1.A, nameSpace1.AB]);
+nameSpace1.D3=nameSpace1.board.create('intersection',[nameSpace1.P2, nameSpace1.K3,1],{size:1, name:"D'''", color:'blue'});
+
+nameSpace1.T1=nameSpace1.board.create('polygon',[nameSpace1.A,nameSpace1.B, nameSpace1.C]);
+nameSpace1.T2=nameSpace1.board.create('polygon',[nameSpace1.B,nameSpace1.C, nameSpace1.D1],{color:'red', opacity:0.3});
+nameSpace1.T3=nameSpace1.board.create('polygon',[nameSpace1.A,nameSpace1.C, nameSpace1.D2],{color:'blue', opacity:0.3});
+nameSpace1.T4=nameSpace1.board.create('polygon',[nameSpace1.A,nameSpace1.B, nameSpace1.D3],{color:'yellow', opacity:0.3});

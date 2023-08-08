@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Equations polaires</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquesequpol/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquesequpol/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Coordonnées polaires</h2> Nous avons déjà rencontré les <input type="button" value="coordonnées polaires" onclick="go('../../nombres/complexes/polaire.html#')" data-inline="true" />. <br /> Tout point M(x,y) du plan euclidien non égal à l'origine, peut être caractérisé par : <ul>
+            <li>Sa distance à l'origine O, soit ρ=√(x²+y²)</li>
+            <li>L'angle θ que fait le vecteur &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OM} \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp; avec le premier vecteur &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{i} \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp; du repère.
+            </li>
+          </ul> De sorte que si
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{u} = \frac{\overrightarrow{OM}}{\parallel \overrightarrow{OM} \parallel} \)</p>
+          <!-- /FORMULE UNIV INLINE--> on a
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{u} = \cos(\theta)\overrightarrow{i} + \sin(\theta)\overrightarrow{j} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Les formules de changement de repère sont donc dans un sens : <ul>
+            <li>x=&rho;cos(&theta;)</li>
+            <li>y=&rho;sin(&theta;)</li>
+          </ul> et dans l'autre sens : <ul>
+            <li>&rho;=x²+y²</li>
+            <li>&theta;=arctan2(y/x) si x&ne;0</li>
+            <li>&theta;=&pi;/2 si x=0 et y&gt;0</li>
+            <li>&theta;=-&pi;/2 si x=0 et y&lt;0</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Polar coordinates</h2> We have already encountered the <input type="button" value="polar coordinates" onclick="go('../../nombres/complexes/polaire.html#')" data-inline="true" /> . <br /> Any point M(x,y) of the Euclidean plane not equal to the origin, can be characterized by: <ul>
+            <li>Its distance from the origin O, i.e. ρ=√(x²+y²)</li>
+            <li>The angle θ made by the vector &nbsp;
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OM} \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp; with the first vector &nbsp;
+              <!-- INLINE UNIV FORMULA --> \( \displaystyle \overrightarrow{i} \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp; of the frame.
+            </li>
+          </ul> so that if
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{u} = \frac{\overrightarrow{OM}}{\parallel \overrightarrow{OM} \parallel} \)</p>
+          <!-- /INLINE UNIV FORMULA--> we have
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{u} = \cos(\theta)\overrightarrow{i} + \sin(\theta)\overrightarrow{j} \)</p>
+          <!-- /INLINE UNIV FORMULA--> The frame change formulas are therefore in a sense: <ul>
+            <li>x=&rho;cos(&theta;)</li>
+            <li>y=&rho;sin(&theta;)</li>
+          </ul> and conversely: <ul>
+            <li>&rho;=x²+y²</li>
+            <li>&theta;=arctan2(y/x) if x&ne;0</li>
+            <li>&theta;=&pi;/2 if x=0 and y&gt;0</li>
+            <li>&theta;=-&pi;/2 if x=0 and y&lt;0</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/coordpol.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h2>Equation polaire d'une courbe</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Polar equation of a curve</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On appelle 'équation polaire' d'une courbe un <input type="button" value="paramétrage" onclick="go('coniquesparam.html#')" data-inline="true" /> de la courbe par l'angle θ où la quantité positive ρ est donnée par une fonction φ de θ. <br /> ρ=φ(θ)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We call 'polar equation' of a curve a <input type="button" value="parameterization" onclick="go('coniquesparam.html#')" data-inline="true" /> of the curve by the angle θ where the positive quantity ρ is given by a function φ of θ. <br /> ρ=φ(θ)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple </h3> Le cercle de centre O et rayon R a comme équation polaire ρ=R. <br> Nous allons maintenant montrer que les coniques ont des équations polaires particulièrement simples quand on prend comme origine un foyer. <br />
+          <h2>Equations polaires des coniques</h2> Revenons sur la définition des coniques par <input type="button" value="foyer et directrice" onclick="go('coniquesfoydir.html#')" data-inline="true" />. <br /> On a donc en prenant pour origine un foyer, pour tout point M(x,y) de la conique de paramètre p et d'excentricité e
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle x^{2} + y^{2} = e^{2}\left( {d - x} \right)^{2} \)</p>
+          <!-- /FORMULE UNIV INLINE--> où d est la distance entre un foyer et sa directrice. <br> Comme d=p/e
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \rho = e\left( \frac{p}{e} - \rho{co}(\theta) \right) \)</p>
+          <!-- /FORMULE UNIV INLINE--> soit encore :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Example </h3> The circle with center O and radius R has the polar equation ρ=R. <br> We are now going to show that conics have particularly simple polar equations when we take a focus as origin of the frame. <br />
+          <h2>Polar equations of conics</h2> Let's go back to the definition of conics by <input type="button" value="focus and directrix" onclick="go('coniquesfoydir.html#')" data-inline="true" />. <br /> We therefore have, taking a focus as origin, for any point M(x,y) of the conic section with parameter p and eccentricity e
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle x^{2} + y^{2} = e^{2}\left( {d - x} \right)^{2} \)</p>
+          <!-- /INLINE UNIV FORMULA--> where d is the distance between a focus and its directrix. <br> As d=p/e
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \rho = e\left( \frac{p}{e} - \rho{co}(\theta) \right) \)</p>
+          <!-- /INLINE UNIV FORMULA--> or again:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> L'équation polaire dans un tel repère est :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \rho = \varphi(\theta) = \frac{p}{1 + e . \cos(\theta)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> The polar equation in such a frame is:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \rho = \varphi(\theta) = \frac{p}{1 + e . \cos(\theta)} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Visualisation</h2> L'applet suivante vous permet de faire varier p et e avec les curseurs. <br /> Vous pouvez également faire varier le point M sur la conique.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Visualization</h2> The following applet allows you to vary p and e with the sliders. <br /> You can also vary the M point on the conic.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <table width="100%">
+          <tr>
+            <td width="200">
+              <div lang="fr">Excentricité :</div>
+              <!-- /fr -->
+              <div lang="en">Eccentricity:</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange21" step='0.1' min='0' max='3' value='1.5' onchange="nameSpace2.run(myRange22.value, this.value)" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div lang="fr">Paramètre p :</div>
+              <!-- /fr -->
+              <div lang="en">Parameter p:</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange22" step='0.1' min='1' max='3' value='2' onchange="nameSpace2.run(this.value,myRange21.value)" />
+            </td>
+          </tr>
+        </table>
+        <script src="js/equapol.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquesequpol/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquesequpol/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8" />
+      <title>Problèmes d'intersection</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="../../css/themes/myown.css" />
+      <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+      <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+      <link href="../../css/myown.css" rel="stylesheet">
+      <script src="../../js/jquery-1.11.3.js"></script>
+      <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+      <script src="../../js/custom.js"></script>
+      <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+   </head>
+   <body style="overflow: auto; "class="fr">
+      <script> window.onload=get();</script>
+      <a name="beg"></a>
+      <div data-role="page" data-theme="e">
+         <div data-role="header">
+            <table>
+               <tr>
+                  <td>Choisissez votre langue !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('fr')"><img src="../../images/fr.png" width="64" height="32" alt="Français"></button></td>
+                  <td>Choose your language !</td>
+                  <td><button class="ui-btn ui-btn-inline" onclick="changelang('en')"><img src="../../images/uk.png" width="64" height="32" alt="English"></button></td>
+               </tr>
+            </table>
+         </div>
+         <!-- /header -->
+         <div style="overflow: auto; "  data-role="content" data-theme="e">
+            <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+               <div lang="fr">revenir au point de départ après retour à cette page</div>
+               <!-- /fr -->
+               <div lang="en">come back to starting point after return to this page</div>
+               <!-- /en -->
+            </button>
+            <script>
+               showscroll();
+            </script>
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/repvarinter/menu.html')" /></li>
+                     <li><input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/repvarinter/menu.html')" /></li>
+                     <li><input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to Affine geometry" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <p>Nous sommes toujours dans le cas d'un espace affine de dimension finie rapporté à un repère.<br>
+                  Nous considérons dans cet espace deux variétés linéaires V et V'.
+               </p>
+               <table cellpadding="10" cellspacing="10" border="2">
+                  <tr>
+                     <td>
+                        V, de dimension p, peut être représentée par un système de n-p équations cartésiennes :<br>
+                        C<sub>1</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c<sub>1</sub><br>
+                        C<sub>2</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c<sub>2</sub><br>
+                        ......<br>
+                        C<sub>n-p</sub>(x<sub>1</sub>, ..., x<sub>n</sub>)=c<sub>n-p</sub><br>
+                        où chaque expression C<sub>i</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>) est une combinaison linéaire des x<sub>i</sub> du type a<sub>i,1</sub>x<sub>1</sub>+ ... +a<sub>i,n</sub>x<sub>n</sub>.<br>
+                        ou bien par une représentation paramétrique avec p paramètres k<sub>1</sub>, ... ,k<sub>p</sub> :<br>
+                        x<sub>1</sub>=P<sub>1</sub>(k<sub>1</sub>, ..,k<sub>p</sub>)<br>
+                        x<sub>2</sub>=P<sub>2</sub>(k<sub>1</sub>, ..,k<sub>p</sub>)<br>
+                        ......<br>
+                        x<sub>n</sub>=P<sub>n</sub>(k<sub>1</sub>, ..,k<sub>p</sub>)<br>
+                        où chaque expression P<sub>i</sub> est de la forme m<sub>i</sub>+k<sub>1</sub>u<sub>i,1</sub>+ ... + k<sub>p</sub>u<sub>i,p</sub><br>
+                        où les nombres (m<sub>1</sub>, ... , m<sub>n</sub>) sont les coordonnées d'un point M de V, et u<sub>i,j</sub> la j-ième coordonnée d'un vecteur 
+                        <!-- FORMULE UNIV INLINE -->
+                        \(
+                        \displaystyle \overrightarrow{u_{i}}
+                        \)
+                        <!-- /FORMULE UNIV INLINE-->
+                        ces vecteurs étant choisis de sorte que 
+                        <!-- FORMULE UNIV INLINE -->
+                        \(
+                        \displaystyle \left ( \overrightarrow{u}_{1},...\overrightarrow{u}_{p} \right )
+                        \)
+                        <!-- /FORMULE UNIV INLINE-->
+                        soit une base du sous-espace directeur de V.<br>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        V', de dimension q, peut être représentée par un système de n-q équations cartésiennes :<br>
+                        C'<sub>1</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c'<sub>1</sub><br>
+                        C'<sub>2</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c'<sub>2</sub><br>
+                        ......<br>
+                        C'<sub>n-q</sub>(x<sub>1</sub>, ..., x<sub>n</sub>)=c'<sub>n-q</sub><br>
+                        où chaque expression C'<sub>i</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>) est une combinaison linéaire des x<sub>i</sub> du type a'<sub>i,1</sub>x<sub>1</sub>+ ... +a'<sub>i,n</sub>x<sub>n</sub>.<br>
+                        ou bien par une représentation paramétrique avec q paramètres h<sub>1</sub>, ... ,h<sub>q</sub> :<br>
+                        x<sub>1</sub>=P'<sub>1</sub>(h<sub>1</sub>, ..,h<sub>q</sub>)<br>
+                        x<sub>2</sub>=P'<sub>2</sub>(h<sub>1</sub>, ..,h<sub>q</sub>)<br>
+                        ......<br>
+                        x<sub>n</sub>=P'<sub>n</sub>(h<sub>1</sub>, ..,h<sub>q</sub>)<br>
+                        où chaque expression P<sub>i</sub> est de la forme m'<sub>i</sub>+h<sub>1</sub>u'<sub>i,1</sub>+ ... + h<sub>q</sub>u'<sub>i,q</sub><br>
+                        où les nombres (m'<sub>1</sub>, ... , m'<sub>n</sub>) sont les coordonnées d'un point M' de V', et u'<sub>i,j</sub> la j-ième coordonnée d'un vecteur 
+                        <!-- FORMULE UNIV INLINE -->
+                        \(
+                        \displaystyle \overrightarrow{u'_{i}}
+                        \)
+                        <!-- /FORMULE UNIV INLINE-->
+                        ces vecteurs étant choisis de sorte que 
+                        <!-- FORMULE UNIV INLINE -->
+                        \(
+                        \displaystyle \left ( \overrightarrow{u'}_{1},...,\overrightarrow{u'}_{q} \right )
+                        \)
+                        <!-- /FORMULE UNIV INLINE-->
+                        soit une base du sous-espace directeur de V'.
+                     </td>
+                  </tr>
+               </table>
+               Le problème est de déduire de ces données une représentation analytique de l'intersection de V et de V' qui est, <input type="button" value="rappelons le" onclick="go('../affines/affinesinter.html#prop2')" data-inline="true" /> soit l'ensemble vide soit une variété linéaire. Le cas de l'ensemble vide correspond au parallélisme strict (une variété est parallèle à l'autre et non incluse dans cette autre), donc dans le cas contraire il nous faut donner soit un système d'équations cartésiennes soit une représentation paramétrique de la variété intersection.<br>
+               <table cellpadding="10" cellspacing="10" border="2">
+                  <tr>
+                     <td>Tout d'abord quand V et V' sont données toutes deux par des systèmes d'équations cartésiennes, le système obtenu en réunissant les n-p équations définissant v avec les n-q équations définissant V' est un système d'équations linéaires définissant V &cap; V'.<br>
+                        Cependant, ce système n'est peut-être pas optimal en ce sens qu'il y a peut être des redondances. Le travail qui reste à faire consiste donc à calculer son rang r puis à extraire des 2n-p-q lignes r lignes indépendantes et à vérifier les conditions de compatibilité pour les 2n-p-q-r lignes restantes. Si ces conditions de compatibilité ne sont pas vérifiées l'intersection est vide, dans le cas contraire la variété intersection est représentée par ces r équations choisies.
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Quand V et V' sont représentées toutes les deux par des représentations paramétriques, on pose le système obtenu en égalant les expressions des x<sub>i</sub> en fonctions de k<sub>1</sub>, ..., k<sub>p</sub> d'une part et de h<sub>1</sub>, ... ,h<sub>q</sub> d'autre part.<br>
+                        On obtient ainsi un système de n équations à p+q inconnues :<br>
+                        P<sub>1</sub>(k<sub>1</sub>, ... ,k<sub>p</sub>)=P'<sub>1</sub>(h<sub>1</sub>, ..., h<sub>q</sub>)<br>
+                        P<sub>2</sub>(k<sub>1</sub>, ... ,k<sub>p</sub>)=P'<sub>2</sub>(h<sub>1</sub>, ..., h<sub>q</sub>)<br>
+                        ..................<br>
+                        P<sub>n</sub>(k<sub>1</sub>, ... ,k<sub>p</sub>)=P'<sub>n</sub>(h<sub>1</sub>, ..., h<sub>q</sub>)<br>
+                        Ce système peut-être sous-déterminé cas p+q > n.<br>
+                        Il peut être sur-déterminé si p+q < n.<br>
+                        Il peut enfin être de Cramer (mais pas nécessairement) si p+q=n.
+                        <br>
+                        On trouvera donc suivant les cas l'ensemble vide, ou bien un point (cas du système de Cramer) ou bien une variété linéaire avec un nombre variable de paramètres mais inférieur à max(p,q).
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Vient enfin le cas où l'une des variétés, disons par exemple V, est donnée par un système d'équations cartésiennes et l'autre, disons V', par une représentation paramétrique.<br>
+                        Dans ce cas, en remplaçant les x<sub>i</sub> par leurs expressions en fonction des h<sub>j</sub> 1 &le; j &le; q dans les équations cartésiennes déterminant V on obtiendra un système de n-p équations à q inconnues qui pourra encore être éventuellement de Cramer si n-p=q ou bien surdéterminé ou encore sous-déterminé. <br>
+                        La résolution de ce système par les méthodes données en algèbre linéaire nous donnera l'ensemble solution.
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <p>We are still in the case of an affine space of finite dimension referred to a frame.<br>
+                  We consider in this space two linear manifolds V and V'.
+               </p>
+               <table cellpadding="10" cellspacing="10" border="2">
+                  <tr>
+                     <td>
+                        V, of dimension p, can be represented by a system of n-p Cartesian equations:<br>
+                        C<sub>1</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c<sub>1</sub><br>
+                        C<sub>2</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c<sub>2</sub><br>
+                        ......<br>
+                        C<sub>n-p</sub>(x<sub>1</sub>, ..., x<sub>n</sub>)=c<sub>n-p</sub><br>
+                        where each C<sub>i</sub> expression (x<sub>1</sub>, ... ,x<sub>n</sub>) is a linear combination of the x<sub>i</sub > of type a<sub>i,1</sub>x<sub>1</sub>+ ... +a<sub>i,n</sub>x<sub>n</sub>.<br>
+                        or by a parametric representation with p parameters k<sub>1</sub>, ... ,k<sub>p</sub>:<br>
+                        x<sub>1</sub>=P<sub>1</sub>(k<sub>1</sub>, ..,k<sub>p</sub>)<br>
+                        x<sub>2</sub>=P<sub>2</sub>(k<sub>1</sub>, ..,k<sub>p</sub>)<br>
+                        ......<br>
+                        x<sub>n</sub>=P<sub>n</sub>(k<sub>1</sub>, ..,k<sub>p</sub>)<br>
+                        where each expression P<sub>i</sub> is of the form m<sub>i</sub>+k<sub>1</sub>u<sub>i,1</sub>+ ... + k<sub>p</sub>u<sub>i,p</sub><br>
+                        where the numbers (m<sub>1</sub>, ... , m<sub>n</sub>) are the coordinates of a point M of V, and u<sub>i,j</sub > the j-th coordinate of a vector
+                        <!-- UNIV INLINE FORMULA -->
+                        \(
+                        \displaystyle \overrightarrow{u_{i}}
+                        \)
+                        <!-- /INLINE UNIV FORMULA-->
+                        these vectors being chosen so that
+                        <!-- UNIV INLINE FORMULA -->
+                        \(
+                        \displaystyle \left ( \overrightarrow{u}_{1},...\overrightarrow{u}_{p} \right )
+                        \)
+                        <!-- /INLINE UNIV FORMULA-->
+                        be a basis of the director subspace of V.<br>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        V', of dimension q, can be represented by a system of n-q Cartesian equations:<br>
+                        C'<sub>1</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c'<sub>1</sub><br>
+                        C'<sub>2</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>)=c'<sub>2</sub><br>
+                        ......<br>
+                        C'<sub>n-q</sub>(x<sub>1</sub>, ..., x<sub>n</sub>)=c'<sub>n-q</sub><br>
+                        where each expression C'<sub>i</sub>(x<sub>1</sub>, ... ,x<sub>n</sub>) is a linear combination of the x<sub>i</sub> of type a'<sub>i,1</sub>x<sub>1</sub>+ ... +a'<sub>i,n</sub>x<sub>n</sub >.<br>
+                        or by a parametric representation with q parameters h<sub>1</sub>, ... ,h<sub>q</sub>:<br>
+                        x<sub>1</sub>=P'<sub>1</sub>(h<sub>1</sub>, ..,h<sub>q</sub>)<br>
+                        x<sub>2</sub>=P'<sub>2</sub>(h<sub>1</sub>, ..,h<sub>q</sub>)<br>
+                        ......<br>
+                        x<sub>n</sub>=P'<sub>n</sub>(h<sub>1</sub>, ..,h<sub>q</sub>)<br>
+                        where each expression P<sub>i</sub> is of the form m'<sub>i</sub>+h<sub>1</sub>u'<sub>i,1</sub>+ . .. + h<sub>q</sub>u'<sub>i,q</sub><br>
+                        where the numbers (m'<sub>1</sub>, ... , m'<sub>n</sub>) are the coordinates of a point M' of V', and u'<sub>i ,j</sub> the j-th coordinate of a vector
+                        <!-- UNIV INLINE FORMULA -->
+                        \(
+                        \displaystyle \overrightarrow{u'_{i}}
+                        \)
+                        <!-- /INLINE UNIV FORMULA-->
+                        these vectors being chosen so that
+                        <!-- UNIV INLINE FORMULA -->
+                        \(
+                        \displaystyle \left ( \overrightarrow{u'}_{1},...\overrightarrow{u'}_{q} \right )
+                        \)
+                        <!-- /INLINE UNIV FORMULA-->
+                        be a basis of the director subspace of V'.
+                     </td>
+                  </tr>
+               </table>
+               The problem is to deduce from these data an analytical representation of the intersection of V and V' which is, <input type="button" value="see this page" onclick="go('../affines/affinesinter.html#prop2')" data-inline="true" /> either the empty set or a linear variety. The case of the empty set corresponds to strict parallelism (one manifold is parallel to the other and not included in this other), so otherwise we have to give either a system of Cartesian equations or a parametric representation of the variety intersection.<br>
+               <table cellpadding="10" cellspacing="10" border="2">
+                  <tr>
+                     <td>First of all when V and V' are both given by systems of Cartesian equations, the system obtained by joining together the n-p equations defining v with the n-q equations defining V' is a system of linear equations defining V &cap; V'.<br>
+                        However, this system may not be optimal in the sense that there may be redundancies. The work that remains to be done therefore consists of calculating its rank r then extracting 2n-p-q rows r independent rows and checking the compatibility conditions for the remaining 2n-p-q-r rows. If these compatibility conditions are not verified the intersection is empty, otherwise the intersection variety is represented by these r chosen equations.
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>When V and V' are both represented by parametric representations, we pose the system obtained by equating the expressions of x<sub>i</sub> as functions of k<sub>1</sub>, ..., k<sub>p</sub> on the one hand and h<sub>1</sub>, ... ,h<sub>q</sub> on the other hand.<br>
+                        We thus obtain a system of n equations with p+q unknowns:<br>
+                        P<sub>1</sub>(k<sub>1</sub>, ... ,k<sub>p</sub>)=P'<sub>1</sub>(h<sub> 1</sub>, ..., h<sub>q</sub>)<br>
+                        P<sub>2</sub>(k<sub>1</sub>, ... ,k<sub>p</sub>)=P'<sub>2</sub>(h<sub> 1</sub>, ..., h<sub>q</sub>)<br>
+                        ..................<br>
+                        P<sub>n</sub>(k<sub>1</sub>, ... ,k<sub>p</sub>)=P'<sub>n</sub>(h<sub> 1</sub>, ..., h<sub>q</sub>)<br>
+                        This system may be underdetermined if p+q > n.<br>
+                        It can be over-determined if p+q < n.<br>
+                        Finally, it can be Cramer (but not necessarily) if p+q=n.
+                        <br>
+                        We will therefore find, depending on the case, the empty set, either a point (case of the Cramer system) or a linear manifold with a variable number of parameters but less than max(p,q).
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>Finally comes the case where one of the varieties, say for example V, is given by a system of Cartesian equations and the other, say V', by a parametric representation.<br>
+                        In this case, by replacing the x<sub>i</sub> by their expressions according to the h<sub>j</sub> 1 &le; j &le; q in the Cartesian equations determining V we will obtain a system of n-p equations with q unknowns which could still possibly be Cramer if n-p=q either overdetermined or even underdetermined. <br>
+                        Solving this system by the methods given in linear algebra will give us the solution set.
+                     </td>
+                  </tr>
+               </table>
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <h2>Exemples traités</h2>
+               L'espace est &reals;<sup>3</sup> rapporté à la base canonique.
+               <h3>Exemple 1</h3>
+               Trouver l'intersection de la droite définie par le système :<br>
+               -3x+2y-2z=4<br>
+               3x+3y=-2<br>
+               Avec le plan d'équation :<br>
+               x+2y-z=4<br>
+               Il suffit de résoudre le système formé par les 3 équations qui est un système de Cramer on trouve donc l'unique point :<br>
+               M(16/9,-22/9,-64/9)
+               <h3>Exemple 2</h3>
+               Trouver l'intersection de la droite définie par le système :<br>
+               2x+4y-2z=3<br>
+               3x+3y=-2<br>
+               Avec le plan d'équation :<br>
+               x+2y-z=4<br>
+               Il suffit de résoudre le système formé par les 3 équations qui est de rang 2 sans solution<br>
+               <h3>Exemple 3</h3>
+               Trouver l'intersection de la droite définie par le système :<br>
+               -3x+2y-2z=4<br>
+               3x+3y=-2<br>
+               Avec le plan d'équation :<br>
+               6x+6y=-4<br>
+               On vérifie que les équations 3x+3y=-2 et 6x+6y=-4 sont deux équations d'un même plan. La droite est donc contenue dans le plan et l'intersection est la droite entière.
+               <h3>Exemple 4 </h3>
+               On considère le plan P déterminé par le point A(4,0,1) et les vecteurs directeurs 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{u}=(3,-4,-1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               et 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{v}=(3,1,0)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               , d'une part, ainsi que la droite D déterminée par le point B(2,1,1) et le vecteur 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               d'autre part.<br>
+               Déterminer l'intersection de P et D.<br>
+               On écrit les représentations paramétriques associées aux définitions des deux variétés :<br>
+               x=4+3k+3h<br>
+               y=-4k +h<br>
+               z=1-k<br>
+               pour le plan P<br>
+               x=2+t<br>
+               y=1-t<br>
+               z=1+t<br>
+               pour la droite D.<br>
+               Puis les équations qui en résultent :<br>
+               2+t=4+3k+3h<br>
+               1-t=-4k+h<br>
+               1+t=1-k<br>
+               Soit sous forme standardisée :<br>
+               3k+3h-t=-2<br>
+               -4k+h+t=1<br>
+               k+0h+t=0<br>
+               Qui donne comme solution :<br>
+               k=-5/19 , h=-6/19 , t=5/19<br>
+               On trouve donc un unique point d'intersection :<br>
+               M(43/19,14/19,24/19)
+               <h3>Exemple 5</h3>
+               Soit la droite D<sub>1</sub> déterminée par le point A(2,1,1) et le vecteur 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               .<br>
+               Soit la droite D<sub>2</sub> déterminée par le point B(3,1,2) et le vecteur 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(0,1,0)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               .<br>
+               Déterminer l'intersection de D<sub>1</sub> avec D<sub>2</sub>.<br>
+               On écrit les représentations paramétriques des deux droites :<br>
+               x=2+t<br>
+               y=1-t<br>
+               z=1+t<br>
+               pour la première<br>
+               x=3<br>
+               y=1+s<br>
+               z=2<br>
+               pour la seconde<br>
+               On forme le système correspondant :<br>
+               2+t=3<br>
+               1-t=1+s<br>
+               1+t=2<br>
+               qui est un système surdéterminé admettant la solution unique (t,s)=(1,-1)<br>
+               Il existe donc un unique point d'intersection entre les deux droites de l'espace soit le point M(3,0,2)<br>
+               <h3>Exemple 6</h3>
+               Soit la droite D<sub>1</sub> déterminée par le point A(2,1,1) 
+               et le vecteur
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE--><br>
+               Soit la droite D<sub>2</sub> determinée par le point  B(3,1,2) et le vecteur 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w'}=(0,1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               <br>
+               Déterminer l'intersection de D<sub>1</sub> avec D<sub>2</sub>.<br>
+               On écrit les représentations paramétriques des deux droites :<br>
+               x=2+t<br>
+               y=1-t<br>
+               z=1+t<br>
+               pour la première<br>
+               x=3<br>
+               y=1+s<br>
+               z=2+s<br>
+               pour la seconde<br>
+               On forme le système correspondant :<br>
+               2+t=3<br>
+               1-t=1+s<br>
+               1+t=2+s<br>
+               Qui est un système surdéterminé n'admettant aucune solution.
+               <h3>Exemple 7</h3>
+               Soit la droite D déterminée par le point A(2,1,1) et le vecteur
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE--> 
+               .<br>
+               Soit P le plan d'équation x-y=2.<br>
+               Déterminer D &cap; P.<br>
+               Partons d'une représentation paramétrique de D :<br>
+               x=2+t
+               y=1-t
+               z=1+t
+               Remplaçons x, y et z par leurs valeurs en fonction de t dans l'équation du plan, il vient :<br>
+               (2+t)-(1-t)=2<br>
+               On en tire t=1/2 et un seul point d'intersection M(5/2,1/2,3/2)<br>
+               <h3>Exemple 8</h3>
+               Soit la droite D déterminée par le point A(2,1,1) et le vecteur 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               .<br>
+               Soit P le plan d'équation x+y=2.<br>
+               On voit tout de suite que le vecteur 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               est un vecteur directeur de P.<br> La droite est donc parallèle au plan.<br> Mais le point A n'est pas dans P donc P &cap; D= &empty;.<br>
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <h2>Examples processed</h2>
+               The space is &reals;<sup>3</sup> referred to the canonical base.
+               <h3>Example 1</h3>
+               Find the intersection of the line defined by the system:<br>
+               -3x+2y-2z=4<br>
+               3x+3y=-2<br>
+               With the equation plan:<br>
+               x+2y-z=4<br>
+               It suffices to solve the system formed by the 3 equations which is a Cramer system so we find the unique point:<br>
+               M(16/9,-22/9,-64/9)
+               <h3>Example 2</h3>
+               Find the intersection of the line defined by the system:<br>
+               2x+4y-2z=3<br>
+               3x+3y=-2<br>
+               With the equation plan:<br>
+               x+2y-z=4<br>
+               It is enough to solve the system formed by the 3 equations which is of rank 2 without solution<br>
+               <h3>Example 3</h3>
+               Find the intersection of the line defined by the system:<br>
+               -3x+2y-2z=4<br>
+               3x+3y=-2<br>
+               With the equation plan:<br>
+               6x+6y=-4<br>
+               We verify that the equations 3x+3y=-2 and 6x+6y=-4 are two equations of the same plane. The line is therefore contained in the plane and the intersection is the entire line.
+               <h3>Example 4 </h3>
+               We consider the plane P determined by the point A(4,0,1) and the direction vectors
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{u}=(3,-4,-1)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               And
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{v}=(3,1,0)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               , on the one hand, as well as the line D determined by the point B(2,1,1) and the vector
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               on the other hand.<br>
+               Determine the intersection of P and D.<br>
+               We write the parametric representations associated with the definitions of the two varieties:<br>
+               x=4+3k+3h<br>
+               y=-4k+h<br>
+               z=1-k<br>
+               for plane P<br>
+               x=2+t<br>
+               y=1-t<br>
+               z=1+t<br>
+               for right D.<br>
+               Then the resulting equations:<br>
+               2+t=4+3k+3h<br>
+               1-t=-4k+h<br>
+               1+t=1-k<br>
+               Either in standardized form:<br>
+               3k+3h-t=-2<br>
+               -4k+h+t=1<br>
+               k+0h+t=0<br>
+               Which gives as solution:<br>
+               k=-5/19 , h=-6/19 , t=5/19<br>
+               We therefore find a unique point of intersection:<br>
+               M(43/19,14/19,24/19)
+               <h3>Example 5</h3>
+               Let D<sub>1</sub> be the line determined by the point A(2,1,1) and the vector
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               .<br>
+               Consider the line D<sub>2</sub> determined by the point B(3,1,2) and the vector
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{w}=(0,1,0)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               .<br>
+               Determine the intersection of D<sub>1</sub> with D<sub>2</sub>.<br>
+               We write the parametric representations of the two straight lines:<br>
+               x=2+t<br>
+               y=1-t<br>
+               z=1+t<br>
+               for the first<br>
+               x=3<br>
+               y=1+s<br>
+               z=2<br>
+               for the second<br>
+               We form the corresponding system:<br>
+               2+t=3<br>
+               1-t=1+s<br>
+               1+t=2<br>
+               which is an overdetermined system admitting the unique solution (t,s)=(1,-1)<br>
+               There is therefore a unique point of intersection between the two straight lines of space, that is the point M(3,0,2)<br>
+               <h3>Example 6</h3>
+               Consider the line D<sub>1</sub> determined by the point A(2,1,1) and the vector 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               ).<br>
+               Consider the line D<sub>2</sub> determined by the point B(3,1,2) and the vector 
+               <!-- FORMULE UNIV INLINE -->
+               \(
+               \displaystyle \overrightarrow{w'}=(0,1,1)
+               \)
+               <!-- /FORMULE UNIV INLINE-->
+               .<br>
+               Determine the intersection of D<sub>1</sub> with D<sub>2</sub>.<br>
+               We write the parametric representations of the two straight lines:<br>
+               x=2+t<br>
+               y=1-t<br>
+               z=1+t<br>
+               for the first<br>
+               x=3<br>
+               y=1+s<br>
+               z=2+s<br>
+               for the second<br>
+               We form the corresponding system:<br>
+               2+t=3<br>
+               1-t=1+s<br>
+               1+t=2+s<br>
+               Which is an overdetermined system admitting no solution.
+               <h3>Example 7</h3>
+               Consider the line D determined by the point A(2,1,1) and the vector
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               .<br>
+               Let P be the plane of equation x-y=2.<br>
+               Determine D &cap; P.<br>
+               Let's start with a parametric representation of D:<br>
+               x=2+t
+               y=1-t
+               z=1+t
+               Let's replace x, y and z by their values according to t in the plan equation, it comes:<br>
+               (2+t)-(1-t)=2<br>
+               We get t=1/2 and a single point of intersection M(5/2,1/2,3/2)<br>
+               <h3>Example 8</h3>
+               Consider the line D determined by the point A(2,1,1) and the vector
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               .<br>
+               Let P be the plane of equation x+y=2.<br>
+               We see immediately that the vector
+               <!-- UNIV INLINE FORMULA -->
+               \(
+               \displaystyle \overrightarrow{w}=(1,-1,1)
+               \)
+               <!-- /INLINE UNIV FORMULA-->
+               is a direction vector of P.<br> The line is therefore parallel to the plane.<br> But the point A is not in P therefore P &cap; D= &empty;.<br>
+            </div>
+            <!-- /en --> 
+            <div lang="fr">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercices" onclick="go('exercices/repvarinter/menu.html')" /></li>
+                     <li><input type="button" value="Retour au début de cette page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+               <!-- /navbar -->
+            </div>
+            <!-- /fr --> 
+            <div lang="en">
+               <div>
+                  <ul style=list-style-type:'';>
+                     <li><input type="button" value="Exercises" onclick="go('exercices/repvarinter/menu.html')" /></li>
+                     <li><input type="button" value="Back to the beginning of this page" onclick="go('#beg')" /></li>
+                     <li><input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" /></li>
+                     <li><input type="button" value="Back to Affine geometry" onclick="go('../index.html')" /></li>
+                     <li><input type="button" value="Back to home page" onclick="go('../../index.html')" /></li>
+                  </ul>
+               </div>
+            </div>
+            <!-- /en --> 
+         </div>
+         <!-- /content -->
+         <div data-role="footer">
+            <table cellpadding="10">
+               <tr>
+                  <td>
+                     <div lang="fr">Création Gilles Dubois</div>
+                     <div lang="en">Created by Gilles Dubois</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Janvier 2022</div>
+                     <div lang="en">January 2022</div>
+                  </td>
+                  <td>
+                     <div lang="fr">Version mobile Jquery</div>
+                     <div lang="en">Mobile Jquery version</div>
+                  </td>
+                  <td><a href="https://www.mathjax.org">
+                     <img title="Powered by MathJax"
+                        src="https://www.mathjax.org/badge/badge.gif"
+                        border="0" alt="Powered by MathJax" />
+                     </a>
+                  </td>
+               </tr>
+            </table>
+         </div>
+         <!-- /footer -->
+         <ul style=list-style-type:'';>
+            <li>
+               <div  lang="fr"><input type="button" value="Auteur" onclick="goext('../../presentation.html')"  data-inline="false"/></div>
+               <div lang="en"><input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" /></div>
+            </li>
+            <li>	<a href="mailto:gilles.paul.dubois@free.fr"  data-role="button"  rel="external" >Mail</a> </li>
+         </ul>
+      </div>
+      <!-- /page -->
+   </body>
+</html>

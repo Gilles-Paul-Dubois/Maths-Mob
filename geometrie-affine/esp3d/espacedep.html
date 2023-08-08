@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Déplacements de l'espacex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/phoria/gl-matrix.js"></script>
+    <script src="../../js/phoria/phoria-util.js"></script>
+    <script src="../../js/phoria/phoria-entity.js"></script>
+    <script src="../../js/phoria/phoria-scene.js"></script>
+    <script src="../../js/phoria/phoria-renderer.js"></script>
+    <script src="../../js/phoria/phoria-view.js"></script>
+    <script src='../../js/phoria/dat.gui.min.js'></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacedep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacedep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Cette page suppose connus tous les résultats de <input type="button" value="la page consacrée aux
+rotations vectorielles" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" />, et en particulier le cas de l'espace à 3 dimensions. <h2>Définitions</h2> Conformément aux usages respectés jusqu'ici : </div>
+        <!-- /fr -->
+        <div lang="en"> This page assumes that all the results of <input type="button" value="the page dedicated to
+vector rotations" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" />, and in particular the case of 3 dimensional space. <h2>Definitions</h2> In accordance with the practices respected so far: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Un déplacement de l'espace est une <input type="button" value="isométrie
+  positive" onclick="go('../euclidiens/euclidep.html#')" data-inline="true" />, donc une <input type="button" value="isométrie" onclick="go('../euclidiens/eucliiso.html#')" data-inline="true" /> dont <input type="button" value="l'application linéaire associée" onclick="go('../appaffines/appafflin.html#thm2')" data-inline="true" /> est une <input type="button" value="rotation vectorielle" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A proper isometry of space is a <input type="button" value="positive isometry" onclick="go('../euclidiens/euclidep.html#')" data-inline="true" />, that is an <input type="button" value="isométry" onclick="go('../euclidiens/eucliiso.html#')" data-inline="true" /> whose <input type="button" value="associated linear map" onclick="go('../appaffines/appafflin.html#thm2')" data-inline="true" /> is a <input type="button" value="vector rotation" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Tout d'abord, comme dans le plan et en dimension quelconque, les <input type="button" value="translations" onclick="go('../appaffines/appaffbar.html#def3')" data-inline="true" /> (qui ont pour application linéaire associée l'application identique) sont des déplacements.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> First of all, as in the plane and in any dimension, the <input type="button" value="translations" onclick="go('../appaffines/appaffbar.html#def3')" data-inline="true" /> (which have for associated linear application the identity map) are proper isometries trips.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On s'intéresse maintenant aux déplacements de l'espace qui ne sont pas des translations. Distinguons deux cas : <h3>Le déplacement possède au moins un point fixe.</h3> Dans ce cas la matrice de l'application linéaire orthogonale u associée possède une ou trois valeurs propres réelles à l'ordre de multiplicité près, qui sont toutes égales à +1 ou à -1. <br /> Les possibilités sont donc: <ol>
+            <li>1,1,1 : 1 <input type="button" value="valeur propre" onclick="go('../../algebre-lineaire/reducmat/valvecprop.html#def1')" data-inline="true" /> de multiplicité 3 </li>
+            <li>-1,-1,-1 : -1 valeur propre de multiplicité 3</li>
+            <li>1,-1,-1 : 1 valeur propre simple et -1 valeur propre double</li>
+            <li>-1,1,1 : -1 valeur propre simple et 1 valeur propre double</li>
+            <li>1 : 1 valeur propre unique et simple</li>
+            <li>-1 : -1 valeur propre unique et simple</li>
+          </ol> Nous éliminons le cas 1) qui correspond aux translations. <br /> Nous éliminons les cas 2) et 4) qui correspondent à des isométries négatives. <br /> Le cas 6) correspond également à une isométrie négative u, car si D est la droite associée à la valeur propre -1 et H son orthogonal, u induit sur H une isométrie vectorielle sans point fixe autre que l'origine, donc une rotation vectorielle et le déterminant de u est alors égal à -1. <br /> Il ne reste donc que les deux cas : <ul>
+            <li>1,-1,-1 : 1 valeur propre simple et -1 valeur propre double</li>
+            <li>1 : 1 valeur propre unique et simple</li>
+          </ul> Dans les deux cas ont voit donc qu'on a une droite de points fixes, et que la restriction de l'isométrie à tout plan orthogonal à cette droite est une rotation affine plane (toutes ces rotations affines ayant la même rotation vectorielle plane associée), d'où notre nouvelle définition : </div>
+        <!-- /fr -->
+        <div lang="en"> We are now interested in the displacements of space which are not not translations. Let us distinguish two cases: <h3>The displacement has at least one fixed point.</h3> In this case the matrix of the associated orthogonal linear map u has one or three real eigenvalues up to the order of multiplicity, which are all equal to +1 or -1. <br /> The possibilities are therefore: <ol>
+            <li>1,1,1 : 1 <input type="button" value="eigenvalue" onclick="go('../../algebre-lineaire/reducmat/valvecprop.html#def1')" data-inline="true" /> of multiplicity 3 </li>
+            <li>-1,-1,-1: -1 eigenvalue of multiplicity 3</li>
+            <li>1,-1,-1: 1 simple eigenvalue and -1 double eigenvalue</li>
+            <li>-1,1,1: -1 simple eigenvalue and 1 double eigenvalue</li>
+            <li>1: 1 unique and simple eigenvalue</li>
+            <li>-1: -1 unique and simple eigenvalue</li>
+          </ol> We eliminate case 1) which corresponds to translations. <br /> We eliminate cases 2) and 4) which correspond to improper isometries. <br /> Case 6) also corresponds to a negative isometry u, because if D is the line associated with the eigenvalue -1 and H its orthogonal, u induces on H a vector isometry without fixed point other than the origin, therefore a vector rotation and the determinant of u is then equal to -1. <br /> So there are only two possible cases left: <ul>
+            <li>1,-1,-1: 1 simple eigenvalue and -1 double eigenvalue</li>
+            <li>1: 1 unique and simple eigenvalue</li>
+          </ul> In both cases we see that we have a line of fixed points, and that the restriction of the isometry to any plane orthogonal to this line is a plane affine rotation (all these affine rotations having the same associated plane vector rotation), hence our new definition: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On appelle <b>
+              <i>'rotation affine de l'espace'</i>
+            </b> d'axe Δ tout déplacement de l'espace admettant Δ comme droite de points fixes.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We call <b>
+              <i>'affine rotation of space'</i>
+            </b> with axis Δ any proper isometry of space admitting Δ as a straight line of fixed points.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit maintenant r une telle application et Δ sa droite de points fixes. Fixons un vecteur unitaire &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; sur Δ de sorte que &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \Delta, \overrightarrow{u} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; devient un axe. Dans ce cas si &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; est une base orthonormale du plan vectoriel H orthogonal à &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; et si on impose à &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; d'être directe, l'orientation de H définie par &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; ne dépend que de l'orientation de &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br /> Si r' est la rotation plane induite par r sur tout plan affine orthogonal à Δ r' est donc caractérisée par un angle α lié lui-même à l'orientation associée à &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left (\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> .
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Now let r be such a map and Δ its line of points fixed. Fix a unit vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; on Δ so that &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \Delta, \overrightarrow{u} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; becomes an axis. In this case if &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; is an orthonormal basis of the vector plane H orthogonal to &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; and if we impose on &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; to be direct, the orientation of H defined by &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; depends only on the orientation of &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;. <br /> If r' is the plane rotation induced by r on any affine plane orthogonal to Δ r' is therefore characterized by an angle α linked itself to the orientation associated with &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left (\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> .
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> On appelle <b>
+              <i>'rotation affine de l'espace'</i>
+            </b> d'axe Δ tout déplacement de l'espace admettant Δ comme droite de points fixes.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We call <b>
+              <i>'affine rotation of space'</i>
+            </b> with axis Δ any proper isometry of space admitting Δ as a straight line of fixed points.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Avec ces conventions </div>
+        <!-- /fr -->
+        <div lang="en"> With these agreements </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> La rotation d'axe&nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \Delta, \overrightarrow{u} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; et d'angle α, coïncide avec la rotation d'axe&nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( \Delta, -\overrightarrow{u} \right ) \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; et d'angle -α.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> The rotation with axis&nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \Delta, \overrightarrow{u} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; and with angle α, coincides with the rotation with axis&nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( \Delta, -\overrightarrow{u} \right ) \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; and angle -α.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Illustration</h4> Image de la rotation d'un angle de π/4 autour de l'axe Δ de vecteur unitaire &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br /> H est la projection orthogonale de M sur Δ. <br /> &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; est le vecteur unitaire // à &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{HM} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br /> &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; est un vecteur unitaire tel que la base &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle (\overrightarrow{u}, \overrightarrow{v}, \overrightarrow{w}) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; soit orthonormée directe. <br /> Le point M' est le transformé de M par la rotation plane d'angle π/4 et de centre H dans le plan orthogonal à Δ passant par M et orienté par &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle ( \overrightarrow{v}, \overrightarrow{w}) \)
+          <!-- /FORMULE UNIV INLINE--> .
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Illustration</h4> Image of the rotation of an angle of π/4 around the axis Δ of vector unitary &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;. <br /> H is the orthogonal projection of M onto Δ. <br /> &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; is the unit vector // at &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{HM} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;. <br /> &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; is a unit vector such that the basis &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle (\overrightarrow{u}, \overrightarrow{v}, \overrightarrow{w}) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; is orthonormal direct. <br /> The point M' is the image of M by the plane rotation of angle π/4 and center H in the plane orthogonal to Δ passing through M and oriented by &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle ( \overrightarrow{v}, \overrightarrow{w}) \)
+          <!-- /INLINE UNIV FORMULA--> .
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img width="712" height="544" border="0" alt="" src="images/rotation3D_1.png" />
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <em>
+            <font size="-1">Image générée avec GeoGebra3D</font>
+          </em>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <em>
+            <font size="-1">Image generated with GeoGebra3D</font>
+          </em>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h4>Le déplacement ne possède aucun point fixe.</h4> Éliminons encore le cas des translations. <br /> Soit f un déplacement affine de l'espace sans aucun point fixe. <br /> Soit M un point quelconque de l'espace et M' son image. <br /> On désigne par &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{t} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; le vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{MM'} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;, et soit T la translation de vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{t} \)
+          <!-- /FORMULE UNIV INLINE--> . <br /> Alors T<sup>-1</sup>
+         <font size="-1">o</font>f est une rotation vectorielle r admettant M comme point fixe. <br /> En outre si f n'est pas une translation, T<sup>-1</sup>
+         <font size="-1">o</font>f non plus. <br /> T<sup>-1</sup>
+         <font size="-1">o</font>f est donc une rotation affine de l'espace, soit r d'axe Δ. <br /> Soit &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{\Delta} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; la droite vectorielle directrice de Δ et &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{H} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; le plan vectoriel orthogonal de cette droite. <br /> Le vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{t} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; peut se décomposer de manière unique sous la forme &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{t}=\overrightarrow{k}+\overrightarrow{h} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; où &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{k} \in \overrightarrow{\Delta} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; et &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{h} \in \overrightarrow{H} \)
+          <!-- /FORMULE UNIV INLINE--> . <br /> Si T<sub>1</sub> est la translation de vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{h} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; et T<sub>2</sub> la translation de vecteur &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{k} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;, on a : <br /> T=T<sub>1</sub>
+         <font size="-1">o</font>T<sub>2</sub>=T<sub>2</sub>
+         <font size="-1">o</font>T<sub>1</sub>
+          <br /> Donc f=T<font size="-1">o</font>r=T<sub>1</sub>
+         <font size="-1">o</font>(T<sub>2</sub>
+         <font size="-1">o</font>r) <br /> Nous affirmons que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>The isometry has no fixed point.</h4> Let's eliminate the case of translations again. <br /> Let f be an affine proper isometry of space without any fixed point. <br /> Let M be any point in space and M' its image. <br /> We denote by &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{t} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; the vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{MM'} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;, and let T be the translation of vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{t} \)
+          <!-- /INLINE UNIV FORMULA--> . <br /> Then T<sup>-1</sup>
+         <font size="-1">o</font>f is a rotation vector r admitting M as a fixed point. <br /> Also if f is not a translation, T<sup>-1</sup>
+         <font size="-1">o</font>f neither. <br /> T<sup>-1</sup>
+         <font size="-1">o</font>f is therefore an affine rotation of space, or r with axis Δ. <br /> Let &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{\Delta} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; the direction vector line of Δ and &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{H} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; the orthogonal vector plane of this line. <br /> The vector &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{t} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; can be decomposed uniquely in the form &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{t}=\overrightarrow{k}+\overrightarrow{h} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; where &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{k} \in \overrightarrow{\Delta} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; and &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{h} \in \overrightarrow{H} \)
+          <!-- /INLINE UNIV FORMULA--> . <br /> If T<sub>1</sub> is the translation of vector &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{ h} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; and T<sub>2</sub> the translation of vector &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{k} \)
+          <!-- /FORMULE UNIV INLINE--> , we have: <br /> T=T<sub>1</sub>
+         <font size="-1">o</font>T<sub>2</sub>=T<sub>2</sub>
+         <font size="-1">o</font>T<sub>1</sub>
+          <br /> So f=T<font size="-1">o</font>r=T<sub>1</sub>
+         <font size="-1">o</font>(T<sub>2</sub>
+         <font size="-1">o</font>r) <br /> We affirm that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> T<sub>2</sub>
+           <font size="-1">o</font>r est une rotation affine de l'espace d'axe parallèle à Δ.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> T<sub>2</sub>
+           <font size="-1">o</font>r is an affine rotation of space with axis parallel to Δ.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet soit H un plan affine orthogonal à Δ et soit r' la rotation plane induite par r sur H. <br /> D'après les résultats vus sur les rotations planes, on sait que T<sub>2</sub>
+         <font size="-1">o</font>r' est une rotation plane du plan H, et son centre est invariant par T<sub>2</sub>
+         <font size="-1">o</font>r. <br /> Il s'ensuit que T<sub>2</sub>
+         <font size="-1">o</font>r est une rotation affine ρ de l'espace et que f peut s'écrire T<sub>1</sub>
+         <font size="-1">o</font>ρ.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed let H be an affine plane orthogonal to Δ and let r' be the rotation plane induced by r on H. <br /> From the results seen on plane rotations, we know that T<sub>2</sub>
+         <font size="-1">o</font>r' is a planar rotation of the H-plane, and its center is invariant by T<sub>2</sub>
+         <font size="-1">o</font>r. <br /> It follows that T<sub>2</sub>
+         <font size="-1">o</font>r is a affine rotation ρ of the space and that f can be written T<sub>1</sub>
+         <font size="-1">o</font>ρ.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Δ étant une droite de l'espace, nous appelons <b>
+              <i>'vissage'</i>
+            </b> ou encore <b>
+              <i>'déplacement hélicoïdal'</i>
+            </b> d'axe Δ tout produit d'une rotation d'axe Δ par une translation de vecteur // à Δ.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> Δ being a straight line in space, we call <b>
+              <i>'screwing'</i>
+            </b> (screw displacement) or again <b>
+              <i>'helical displacement'</i>
+            </b> with axis Δ all product of a rotation of axis Δ by a translation of vector // to Δ.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Illustration</h4> M" est l'image de M par un vissage (vecteur de translation &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;) avec &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left \| \overrightarrow{w} \right \|=2\left \| \overrightarrow{u} \right \| \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Illustration</h4> M" is the image of M by a screwing (translation vector &nbsp;
+          <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;) with &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left\| \overrightarrow{w} \right \|=2\left \| \overrightarrow{u} \right \| \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/vissage_1.png" width="660" height="466" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <em>
+            <font size="-1">Image générée avec GeoGebra3D</font>
+          </em>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <em>
+            <font size="-1">Image generated with GeoGebra3D</font>
+          </em>
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Il résulte de ce qui précède que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from the above that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Tout déplacement de l'espace qui n'admet aucun point fixe et qui n'est pas une translation est un vissage.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> Any proper isometry of space which does not admit any fixed point and which is not a translation is a screw displacement.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Classification suivant les invariants.</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Classification according to the invariants.</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Il résulte du paragraphe qui précède que les déplacements de l'espace peuvent être organisés suivant leurs points invariants. <table cellpadding="10" cellspacing="0" border="2">
+              <tr>
+                <td align="center">
+                  <strong>
+                    <em>Invariants</em>
+                  </strong>
+                </td>
+                <td align="center">
+                  <strong>
+                    <em>Déplacements</em>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">Espace E entier</td>
+                <td align="center">Identité</td>
+              </tr>
+              <tr>
+                <td align="center">Plan</td>
+                <td bgcolor="#FFFFFF"></td>
+              </tr>
+              <tr>
+                <td align="center">Droite</td>
+                <td align="center">Rotation</td>
+              </tr>
+              <tr>
+                <td align="center">Point</td>
+                <td align="center" bgcolor="#FFFFFF"></td>
+              </tr>
+              <tr>
+                <td align="center">&empty;</td>
+                <td align="center">Translation de vecteur non nul ou vissage</td>
+              </tr>
+            </table>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> It follows from the preceding paragraph that the displacements of space can be organized according to their invariant points. <table cellpadding="10" cellspacing="0" border="2">
+              <tr>
+                <td align="center">
+                  <strong>
+                    <em>Invariants</em>
+                  </strong>
+                </td>
+                <td align="center">
+                  <strong>
+                    <em>Displacements</em>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td align="center">Wholespace</td>
+                <td align="center">Identity</td>
+              </tr>
+              <tr>
+                <td align="center">Plane</td>
+                <td bgcolor="#FFFFFF"></td>
+              </tr>
+              <tr>
+                <td align="center">Line</td>
+                <td align="center">Rotation</td>
+              </tr>
+              <tr>
+                <td align="center">Point</td>
+                <td align="center" bgcolor="#FFFFFF"></td>
+              </tr>
+              <tr>
+                <td align="center">&empty;</td>
+                <td align="center">Non-zero vector translation or screwing</td>
+              </tr>
+            </table>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En outre il est clair que : </div>
+        <!-- /fr -->
+        <div lang="en"> Furthermore it is clear that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> L'axe d'un vissage est globalement invariant par ce vissage. Les points subissent une translation restant sur cet axe
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> The axis of a screwing is globally invariant by this screwing. Points are simply translated staying on this axis.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> Si f est un vissage f=t<font size="-1">o</font>r où t est une translation // à l'axe de r alors r et t commutent.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> If f is a screwing f=t<font size="-1">o</font>r where t is a translation // to the axis of r then r and t commute.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Animation vissage</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Animation screw displacement</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <table width="100%">
+          <tr>
+            <td>
+              <button type="button" id="button1" style="color:red" onclick="axisX()">Axe Ox</button>
+            </td>
+            <td>
+              <button type="button" id="button2" style="color:green" onclick="axisY()">Axe Oy</button>
+            </td>
+            <td>
+              <button type="button" id="button3" style="color:blue" onclick="axisZ()">Axe Oz</button>
+            </td>
+            <td>
+              <input type="text" id="mytext3">
+            </td>
+          </tr>
+        </table>
+        <table width="100%">
+          <tr>
+            <td width="400px">
+              <div lang="fr">Amplitude de la translation entre -3 et +3 :</div>
+              <!-- /fr -->
+              <div lang="en">Translation amplitude between -3 and +3</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange1" value='2' step='0.1' min='-3' max='3' onchange="changetrans(this.value)" />
+            </td>
+          </tr>
+        </table>
+        <table width="100%">
+          <tr>
+            <td width="400px">
+              <div lang="fr">Mesure de l'angle en degrés entre -180 et +180 :</div>
+              <!-- /fr -->
+              <div lang="en">Angle measure in degrees between -180 and +180:</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <input type='range' id="myRange2" value="90" step='10' min='-180' max='180' onchange="changeangle(this.value)" />
+            </td>
+          </tr>
+        </table>
+        <script src='js/rotate-cube.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacedep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacedep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

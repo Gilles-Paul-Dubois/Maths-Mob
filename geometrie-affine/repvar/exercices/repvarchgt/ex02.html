@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 02</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="e">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../repvarchgt.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>Cet exercice est identique à l'exercice 01 sauf que l'on a remplacé le corps &reals; par le corps &integers;/5&integers;. <br> Soit A l'espace vectoriel (&integers;/5&integers;)<sup>3</sup> muni de sa structure d'espace affine naturelle. <br> Soit B<sub>1</sub> la base formée des 3 vecteurs : <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{1}}=(1,0,0) \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v_{1}}=(1,1,0) \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w_{1}}=(1,1,1) \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Soit O<sub>1</sub> le point (1,2,1). <br> Et soit enfin R<sub>1</sub> le repère (O<sub>1</sub>,B<sub>1</sub>) <br> Soit B<sub>2</sub> la base formée des 3 vecteurs : <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u_{2}}=(0,1,1) \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v_{2}}=(1,0,1) \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w_{2}}=(1,1,1) \)
+            <!-- /FORMULE UNIV INLINE-->
+            <br> Soit O<sub>2</sub> le point (2,1,2). <br> Et soit enfin R<sub>2</sub> le repère (O<sub>2</sub>,B<sub>2</sub>) <br> Soit M le point ayant pour coordonnées (2,3,4) dans R<sub>1</sub>. <br> Quelles sont ses coordonnées dans R<sub>2</sub> ? <br> (On pourra faire le calcul avec un programme).
+          </p>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <p>Voici un programme Python qui résout le problème : <br>
+            <pre>
+# -*- coding: utf-8 -*-
+# Changement de repère
+from reperes import *
+
+def ex02():
+    C5=GenZp(5)
+    u1=VecteurKn([C5(1),C5(0),C5(0)])
+    v1= VecteurKn([C5(1),C5(1),C5(0)])
+    w1= VecteurKn([C5(1),C5(1),C5(1)])
+    B1=([u1,v1,w1])
+    O1=PointKn([C5(1),C5(2),C5(1)])
+    R1=Repere(O1,B1)
+    u2=VecteurKn([C5(0),C5(1),C5(1)])
+    v2= VecteurKn([C5(1),C5(0),C5(1)])
+    w2= VecteurKn([C5(1),C5(1),C5(0)])
+    B2=([u2,v2,w2])
+    O2=PointKn([C5(2),C5(1),C5(2)])
+    R2=Repere(O2,B2)
+    M=R1.Point([C5(2),C5(3),C5(4)])
+    X= R2.Coord(M)
+    for x in X:
+        print x
+
+def main():
+    ex02()
+
+if __name__ == "__main__":
+    main()
+</pre>
+            </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <p>Les coordonnées de M dans R<sub>2</sub> sont (4,4,4). </p>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../repvarchgt.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <p>This exercise is identical to exercise 01 except that we have replaced the field &reals; by the field &integers;/5&integers;. <br> Let A be the vector space (&integers;/5&integers;)<sup>3</sup> endowed with its natural affine space structure. <br> Let B<sub>1</sub> be the basis formed by the 3 vectors: <br>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{1}}=(1,0,0) \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v_{1}}=(1,1,0) \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w_{1}}=(1,1,1) \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br> Let O<sub>1</sub> be the point (1,2,1). <br> And finally let R<sub>1</sub> be the frame (O<sub>1</sub>,B<sub>1</sub>) <br> Let B<sub>2</sub> be the basis formed by the 3 vectors: <br>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u_{2}}=(0,1,1) \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v_{2}}=(1,0,1) \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w_{2}}=(1,1,1) \)
+            <!-- /INLINE UNIV FORMULA-->
+            <br> Let O<sub>2</sub> be the point (2,1,2). <br> And finally let R<sub>2</sub> be the frame (O<sub>2</sub>,B<sub>2</sub>) <br> Let M be the point having coordinates (2,3,4) in R<sub>1</sub>. <br> What are its coordinates in R<sub>2</sub>? <br> (You can do the calculation with a program).
+          </p>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <p>Here is a Python program solving the problem : <br>
+            <pre>
+# -*- coding: utf-8 -*-
+# Changement de repère
+from reperes import *
+
+def ex02():
+    C5=GenZp(5)
+    u1=VecteurKn([C5(1),C5(0),C5(0)])
+    v1= VecteurKn([C5(1),C5(1),C5(0)])
+    w1= VecteurKn([C5(1),C5(1),C5(1)])
+    B1=([u1,v1,w1])
+    O1=PointKn([C5(1),C5(2),C5(1)])
+    R1=Repere(O1,B1)
+    u2=VecteurKn([C5(0),C5(1),C5(1)])
+    v2= VecteurKn([C5(1),C5(0),C5(1)])
+    w2= VecteurKn([C5(1),C5(1),C5(0)])
+    B2=([u2,v2,w2])
+    O2=PointKn([C5(2),C5(1),C5(2)])
+    R2=Repere(O2,B2)
+    M=R1.Point([C5(2),C5(3),C5(4)])
+    X= R2.Coord(M)
+    for x in X:
+        print x
+
+def main():
+    ex02()
+
+if __name__ == "__main__":
+    main()
+</pre>
+            </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <p>The coordinates of M in R<sub>2</sub> are (4,4,4). </p>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

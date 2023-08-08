@@ -1,0 +1,221 @@
+<html>
+<head>
+<title>espacesvectKn.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">from </span><span class="s1">fractions </span><span class="s2">import </span><span class="s1">Fraction 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">MyError(Exception): 
+    </span><span class="s0">&quot;&quot;&quot;Erreur custom - custom error&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, value): 
+        self.value = value 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s2">return </span><span class="s1">repr(self.value) 
+ 
+ 
+</span><span class="s0"># #####Modélisation des corps Z/pZ avec p premier - Model for Z/pZ fields#####</span><span class="s1"> 
+</span><span class="s2">def </span><span class="s1">GenZp(p): 
+    </span><span class="s0">&quot;&quot;&quot;génère la classe paramétrée Z/pZ - generates parameterized class Z/pZ&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">class </span><span class="s1">C(object): 
+        car = p 
+ 
+        </span><span class="s2">def </span><span class="s1">__init__(self, m): 
+            </span><span class="s0">&quot;&quot;&quot;initialisation à partir d'un entier - constructor from integer&quot;&quot;&quot;</span><span class="s1"> 
+            self.m = m % self.car 
+ 
+        </span><span class="s2">def </span><span class="s1">__str__(self): 
+            </span><span class="s0">&quot;&quot;&quot;représentation externe pour print etc.. - converts to string.&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">str(self.m) 
+ 
+        </span><span class="s2">def </span><span class="s1">nul(self): 
+            </span><span class="s0">&quot;&quot;&quot;test de nullité - checks if null&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">self.m == </span><span class="s3">0</span><span class="s1"> 
+ 
+        </span><span class="s0">### les opérateurs unaires - unary operators</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__neg__(self): 
+            </span><span class="s0">&quot;&quot;&quot;opposé - opposite&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(-self.m) 
+ 
+        </span><span class="s2">def </span><span class="s1">__invert__(self): 
+            </span><span class="s0">&quot;&quot;&quot;inverse - mult. inverse&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">if not </span><span class="s1">self.nul(): 
+                y = </span><span class="s3">1</span><span class="s1"> 
+                </span><span class="s2">while </span><span class="s1">(self.m * y) % self.car != </span><span class="s3">1</span><span class="s1">: 
+                    y += </span><span class="s3">1</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(y) 
+ 
+        </span><span class="s0">### les opérations binaires - binary operators</span><span class="s1"> 
+        </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+            </span><span class="s0">&quot;&quot;&quot;addition&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.m + other.m) 
+ 
+        </span><span class="s2">def </span><span class="s1">__mul__(self, other): 
+            </span><span class="s0">&quot;&quot;&quot;multiplication&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">if </span><span class="s1">type(self) == type(other):  </span><span class="s0">#de deux éléments du même corps - of two elemnts of the same field</span><span class="s1"> 
+                </span><span class="s2">return </span><span class="s1">C(self.m * other.m) 
+            </span><span class="s2">else</span><span class="s1">:  </span><span class="s0">#produitd'un scalaire par un vecteur - scalar multiplication</span><span class="s1"> 
+                </span><span class="s2">return </span><span class="s1">other.__rmul__(self) 
+ 
+        </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+            </span><span class="s0">&quot;&quot;&quot;soustraction - subtraction&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">return </span><span class="s1">C(self.m - other.m) 
+ 
+        </span><span class="s2">def </span><span class="s1">__div__(self, other): 
+            </span><span class="s2">return </span><span class="s1">self * ~(other) 
+ 
+        </span><span class="s2">def </span><span class="s1">__pow__(self, k): 
+            </span><span class="s0">&quot;&quot;&quot;puissances - powers&quot;&quot;&quot;</span><span class="s1"> 
+            </span><span class="s2">if </span><span class="s1">k &gt;= </span><span class="s3">0</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">C(self.m ** k) 
+            </span><span class="s2">else</span><span class="s1">: 
+                </span><span class="s2">return </span><span class="s1">~self ** (-k) 
+ 
+    </span><span class="s2">return </span><span class="s1">C 
+ 
+ 
+</span><span class="s0">#####fin de la modélisation des corps Z/pZ - end of model for Z/pZ fields###############################</span><span class="s1"> 
+ 
+ 
+ 
+</span><span class="s0">####Espaces vectoriels K^n K corps quelconque n entier quelconque##############</span><span class="s1"> 
+</span><span class="s0">####Vector spaces K^n K any field n any integer##############</span><span class="s1"> 
+</span><span class="s2">class </span><span class="s1">VecteurKn: 
+    </span><span class="s0">&quot;&quot;&quot;modélisation des vecteurs à n dimensions corps quelconque - model for vectors with n dimensions (any field)&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur - constructor&quot;&quot;&quot;</span><span class="s1"> 
+        self.V = L 
+        self.n = len(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">&quot;&quot;&quot;représentation externe print, etc...- converts to string&quot;&quot;&quot;</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+        </span><span class="s2">return </span><span class="s4">'(' </span><span class="s1">+ </span><span class="s4">&quot;,&quot;</span><span class="s1">.join(L) + </span><span class="s4">')'</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__add__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;addition des vecteurs - addition of vectors&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">if </span><span class="s1">self.n != other.n: 
+            </span><span class="s2">raise </span><span class="s1">MyError(</span><span class="s4">&quot;Tailles non concordantes - sizes do not match&quot;</span><span class="s1">) 
+        </span><span class="s2">else</span><span class="s1">: 
+            L = [self.V[i] + other.V[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.n)] 
+            </span><span class="s2">return </span><span class="s1">VecteurKn(L) 
+ 
+    </span><span class="s2">def </span><span class="s1">__neg__(self): 
+        </span><span class="s0">&quot;&quot;&quot;opposé d'un vecteur- opposite of a vector&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">VecteurKn([-x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V]) 
+ 
+    </span><span class="s2">def </span><span class="s1">__sub__(self, other): 
+        </span><span class="s0">&quot;&quot;&quot;différence de deux vecteurs - difference of two vectors&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self + (-other) 
+ 
+    </span><span class="s2">def </span><span class="s1">__rmul__(self, k): 
+        </span><span class="s0">&quot;&quot;&quot; produit par un scalaire - external multiplication by scalar&quot;&quot;&quot;</span><span class="s1"> 
+        L = [k * x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.V] 
+        </span><span class="s2">return </span><span class="s1">VecteurKn(L) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">testR2(): 
+    </span><span class="s0">&quot;&quot;&quot;cas K=R et n=2 - case K=R and n=2&quot;&quot;&quot;</span><span class="s1"> 
+    U2 = VecteurKn([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">]) 
+    V2 = VecteurKn([</span><span class="s3">0.5</span><span class="s1">, -</span><span class="s3">0.3</span><span class="s1">]) 
+    print(U2) 
+    print(V2) 
+    print(U2 + V2) 
+    print(</span><span class="s3">2.5 </span><span class="s1">* U2) 
+    print(V2 - U2) 
+    print(-V2) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">testR3(): 
+    </span><span class="s0">&quot;&quot;&quot;cas K=R et n=3 - case K=R and n=3&quot;&quot;&quot;</span><span class="s1"> 
+    U3 = VecteurKn([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">]) 
+    V3 = VecteurKn([</span><span class="s3">0.5</span><span class="s1">, -</span><span class="s3">0.3</span><span class="s1">, </span><span class="s3">2.5</span><span class="s1">]) 
+    print(U3) 
+    print(V3) 
+    print(U3 + V3) 
+    print(</span><span class="s3">2.5 </span><span class="s1">* U3) 
+    print(V3 - U3) 
+    print(-V3) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">testQ2(): 
+    </span><span class="s0">&quot;&quot;&quot;cas K=Q et n=2 - case K=Q and n=2&quot;&quot;&quot;</span><span class="s1"> 
+    U2 = VecteurKn([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">]) 
+    V2 = VecteurKn([Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">), -Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)]) 
+    print(U2) 
+    print(V2) 
+    print(U2 + V2) 
+    print(Fraction(</span><span class="s3">5</span><span class="s1">, </span><span class="s3">2</span><span class="s1">) * U2) 
+    print(V2 - U2) 
+    print(-V2) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">testC2(): 
+    </span><span class="s0">&quot;&quot;&quot;cas K=C et n=2 - case K=C and n=2&quot;&quot;&quot;</span><span class="s1"> 
+    U2 = VecteurKn([complex(</span><span class="s3">1</span><span class="s1">), </span><span class="s3">2</span><span class="s1">]) 
+    V2 = VecteurKn([complex(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">), -complex(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">)]) 
+    print(U2) 
+    print(V2) 
+    print(U2 + V2) 
+    print(complex(</span><span class="s3">2</span><span class="s1">, -</span><span class="s3">2</span><span class="s1">) * U2) 
+    print(V2 - U2) 
+    print(-V2) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">provoqueErreur(): 
+    U2 = VecteurKn([</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">]) 
+    V3 = VecteurKn([</span><span class="s3">0.5</span><span class="s1">, -</span><span class="s3">0.3</span><span class="s1">, </span><span class="s3">4</span><span class="s1">]) 
+    print(U2) 
+    print(V3) 
+    </span><span class="s2">try</span><span class="s1">: 
+        print(U2 + V3) 
+    </span><span class="s2">except </span><span class="s1">MyError </span><span class="s2">as </span><span class="s1">e: 
+        print(e) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">testKp(): 
+    </span><span class="s0">&quot;&quot;&quot;teste le Cas ou K=Z/7Z et n=2 tests case xhere K=Z/7Z and n=2&quot;&quot;&quot;</span><span class="s1"> 
+    C7 = GenZp(</span><span class="s3">7</span><span class="s1">) 
+    U2 = VecteurKn([C7(</span><span class="s3">11</span><span class="s1">), C7(</span><span class="s3">5</span><span class="s1">)]) 
+    V2 = VecteurKn([C7(</span><span class="s3">12</span><span class="s1">), -C7(</span><span class="s3">9</span><span class="s1">)]) 
+    print(U2) 
+    print(V2) 
+    print(U2 + V2) 
+    print(C7(</span><span class="s3">3</span><span class="s1">) * U2) 
+    print(U2 - V2) 
+    print(-V2) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction de test - test function&quot;&quot;&quot;</span><span class="s1"> 
+    testR2() 
+    testR3() 
+    testQ2() 
+    testC2() 
+    provoqueErreur() 
+    testKp() 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Définition barycentrique</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/appaffbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/appaffbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Dans tout ce qui suit A<sub>1</sub> et A<sub>2</sub> représentent des espaces affines sur un même corps K. <br> f: A<sub>1</sub> &rarr; A<sub>2</sub> désigne une application de A<sub>1</sub> dans A<sub>2</sub>.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> In what follows A<sub>1</sub> and A<sub>2</sub> represent affine spaces over the same field K. <br> f: A<sub>1</sub> &rarr; A<sub>2</sub> denotes a mapping from A<sub>1</sub> into A<sub>2</sub>.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On dit que f est une application <strong>
+              <em>'affine'</em>
+            </strong> de A<sub>1</sub> dans A<sub>2</sub>, si elle possède la propriété suivante: <br /> Pour tout système pondéré S=((M<sub>1</sub>,λ<sub>1</sub>),(M<sub>2</sub>,λ<sub>2</sub>), ... ,(M<sub>n</sub>,λ<sub>n</sub>)) de points de A<sub>1</sub> de masse totale non nulle, si G est le barycentre de S alors f(G)=G' est le barycentre du système pondéré S'=((M'<sub>1</sub>,λ<sub>1</sub>),(M'<sub>2</sub>,λ<sub>2</sub>), ... ,(M'<sub>n</sub>,λ<sub>n</sub>)) où pour chaque indice i 1 ≤ i ≤ n M'<sub>i</sub>=f(M<sub>i</sub>). Nous résumerons cette propriété en disant que f <strong>
+              <em>'conserve les barycentres</em>
+            </strong>'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We say that f is an <strong>
+              <em>'affine'</em>
+            </strong> mapping from A<sub>1</sub> to A<sub>2</sub>, if it has the following property : <br /> For any mass points system S=((M<sub>1</sub>,λ<sub>1</sub>),(M<sub>2</sub>,λ<sub>2</sub>) , ... ,(M<sub>n</sub>,λ<sub>n</sub>)) of points of A<sub>1</sub> with nonzero total mass, if G is the barycenter of S then f(G)=G' is the barycenter of the system S'=((M'<sub>1</sub>,λ<sub>1</sub>),(M'<sub>2 </sub>,λ<sub>2</sub>), ... ,(M'<sub>n</sub>,λ<sub>n</sub>)) where for each index i 1 ≤ i ≤ n M'<sub>i</sub>=f(M<sub>i</sub>). We will summarize this property by saying that f <strong>
+              <em>'preserves barycenters</em>
+            </strong>'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Remarque: Le <input type="button" value="théorème d'associativité" onclick="go('../affines/affinesbar.html#thm5')" data-inline="true" /> nous permet d'affirmer que pour que f soit affine il suffit qu'elle conserve les barycentres des systèmes de DEUX points. C'est à dire que : </div>
+        <!-- /fr -->
+        <div lang="en"> Note: The <input type="button" value="associativity theorem" onclick="go('../affines/affinesbar.html#thm5')" data-inline="true" /> allows us to affirm that for f to be affine it suffices that it preserves the barycenters of the systems of TWO points. Which means : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> f est affine si et seulement si quels que soient les points O, M<sub>1</sub> et M<sub>2</sub> de A<sub>1</sub> et les scalaires &alpha; et &beta; de somme non nulle, si G est défini par :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{OG}=\frac{\alpha \overrightarrow{OA_{1}}+\beta \overrightarrow{OA_{2}}}{\alpha +\beta } \)</p>
+            <!-- /FORMULE UNIV INLINE--> Alors on a également :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{O'G'}=\frac{\alpha \overrightarrow{O'A_{1}'}+\beta \overrightarrow{O'A_{2}'}}{\alpha +\beta } \)</p>
+            <!-- /FORMULE UNIV INLINE--> où pour tout point M de A<sub>1</sub>, M' désigne l'image f(M) de M par f.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> f is affine if and only if whatever the points O, M<sub>1</sub> and M<sub>2</sub> of A<sub>1</sub> and the scalars &alpha; and &beta; with non-zero sum, if G is defined by:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \overrightarrow{OG}=\frac{\alpha \overrightarrow{OA_{1}}+\beta \overrightarrow{OA_{2}}}{\alpha +\beta } \)</p>
+            <!-- /INLINE UNIV FORMULA--> We also have:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \overrightarrow{O'G'}=\frac{\alpha \overrightarrow{O'A_{1}'}+\beta \overrightarrow{O'A_{2}'}}{\alpha +\beta } \)</p>
+            <!-- /INLINE UNIV FORMULA--> where for any point M of A<sub>1</sub>, M' denotes the image f(M) of M by f.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte imédiatement de la définition que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows immediately from the definition that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Si f est <input type="button" value="bijective" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" /> et affine, sa bijection réciproque est également affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> If f is <input type="button" value="bijective" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" /> and affine, its inverse bijection is also affine.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Dans le cas où A<sub>1</sub>=A<sub>2</sub>=A. Si f est affine et si l'application affine réciproque est égale à f on dit que f est <strong>
+              <em>'involutive'</em>
+            </strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> In case A<sub>1</sub>=A<sub>2</sub>=A. If f is affine and if the inverse affine map is equal to f we say that f is <strong>
+              <em>'involutory'</em>
+            </strong>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte immédiatement de la définition que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows immediately from the definition that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> L'image d'une <input type="button" value="partie convexe" onclick="go('../affines/affinesconv.html#def2')" data-inline="true" /> par une application affine est une partie convexe.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> The image of an <input type="button" value="convex subset" onclick="go('../affines/affinesconv.html#def2')" data-inline="true" /> by an application affine is a convex subset.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> L'image d'une <input type="button" value="variété linéaire" onclick="go('../affines/affinesvar.html#def1')" data-inline="true" /> B par une application affine est une variété linéaire B' de dimension au plus égale à celle de B.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> The image of an <input type="button" value="linear variety" onclick="go('../affines/affinesvar.html#def1')" data-inline="true" /> B by a affine map is a linear variety B' the dimension of which is at most equal to that of B.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> La composée de deux applications affines est encore une application affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> The composite of two affine mappings is still an affine mapping.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Exemples</h2> Dans tout ce qui suit nous supposons que A<sub>1</sub>=A<sub>2</sub>=A, c'est à dire que l'espace de départ et l'espace d'arrivée sont confondus. <br /> E désigne l'espace vectoriel associé à A. <h3>Translations</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Examples</h2> In what follows we assume that A<sub>1</sub>=A<sub>2</sub>=A, that is to say that the departure space and the arrival space coincide . <br /> E denotes the vector space associated with A. <h3>Translations</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Si
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /FORMULE UNIV INLINE--> est un vecteur quelconque la ' <strong>
+              <em>translation</em>
+            </strong>' de vecteur
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /FORMULE UNIV INLINE--> est l'application M &rarr; M' où M' est défini par
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{ MM'} \)
+            <!-- /FORMULE UNIV INLINE--> =
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /FORMULE UNIV INLINE--> .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> Whether
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /INLINE UNIV FORMULA--> is any vector the ' <strong>
+              <em>translation</em>
+            </strong>' of vector
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /INLINE UNIV FORMULA--> is the M &rarr; M' where M' is defined by
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{MM'} \)
+            <!-- /INLINE UNIV FORMULA--> =
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+            <!-- /INLINE UNIV FORMULA--> .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Les translations sont des applications affines.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> Translations are affine mappings
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour une démonstration rigoureuse voir <input type="button" value="cet exercice" onclick="go('exercices/appaffbar/ex02.html#')" data-inline="true" />. <br /> Voici une application qui montre une translation de vecteur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> en action sur un système de 2 points avec son barycentre. <br /> Vous pouvez faire varier le vecteur de translation
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> en tirant son extrêmité. <br /> Vous pouvez également déplacer les points A et B. <br /> Vous pouvez aussi, avec les curseurs, faire varier les masses de A et B.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> For a rigorous demonstration see <input type="button" value="this exercise" onclick="go('exercices/appaffbar/ex02.html#')" data-inline="true" />. <br /> Here is an application that shows a translation of vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> in action on a 2-points system with its barycentre. <br /> You can vary the translation vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> by dragging its end. <br /> You can also move points A and B. <br /> You can also, with the sliders, vary the masses of A and B.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/appaff1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Homothéties</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Dilations (homotheties)</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Si A est un espace affine quelconque, " <strong>
+              <em>l'homothétie</em>
+            </strong>" de centre O et de rapport &alpha; est ainsi définie. <br> A tout point M elle associe le point M' tel que <p>
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OM'} \)
+              <!-- /FORMULE UNIV INLINE--> = &alpha;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OM} \)
+              <!-- /FORMULE UNIV INLINE-->
+            </p>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> If A is any affine space, the ' <strong>
+              <em>dilation (homothety)</em>
+            </strong>' with center O and ratio &alpha; is thus defined. <br> At any point M it associates the point M' such that <p>
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OM'} \)
+              <!-- /INLINE UNIV FORMULA--> = &alpha;
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OM} \)
+              <!-- /INLINE UNIV FORMULA-->
+            </p>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte immédiatement de la définition que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows immediately from the definition that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 7</div> Les homothéties sont des applications affines.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 7</div> Dilations are affine transformations (mappings).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour une démonstration rigoureuse voir <input type="button" value="cet exercice" onclick="go('exercices/appaffbar/ex02.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> For a rigorous demonstration see <input type="button" value="this exercise" onclick="go('exercices/appaffbar/ex02.html#')" data-inline="true" />. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 8</div> Elles sont bijectives quand &alpha; &ne; 0, la bijection réciproque étant l'homothétie de rapport 1/&alpha; .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 8</div> They are bijective when &alpha; &born; 0, the inverse bijection being the dilation with ratio 1/&alpha; .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Quand &alpha;=1 on trouve l'application identique. </div>
+        <!-- /fr -->
+        <div lang="en"> When alpha;=1 we find the identity map. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> Quand &alpha; =-1 l'homothétie s'appelle alors <strong>
+              <em>'symétrie centrale'</em>
+            </strong>, elle est involutive dans ce cas.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> When &alpha; =-1 the dilatation is then called <strong>
+              <em>'point reflection'</em>
+            </strong>, it is involutory in this case.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une application qui montre une homothétie de centre O en action sur un système de 2 points avec son barycentre. <br> Vous pouvez faire varier le rapport de l'homothétie avec un curseur de -2 à +2. <br> Vous pouvez également déplacer les points A et B. <br> Vous pouvez aussi, avec les curseurs, faire varier les masses de A et B. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is an application that shows a dilation with center O in action on a 2-points system with its barycenter. <br> You can vary the scale ratio with a slider from -2 to +2. <br> You can also move points A and B. <br> You can also, with the sliders, vary the masses of A and B. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/appaff2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Projections</h3> Dans toute la suite nous supposons que E est de dimension finie et que B<sub>1</sub> et B<sub>2</sub> sont deux <input type="button" value="variétés linéaires" onclick="go('../affines/affinesvar.html#def1')" data-inline="true" /> de A telles que leurs sous espaces directeurs E<sub>1</sub> et E<sub>2</sub> soit en <input type="button" value="somme directe" onclick="go('../../algebre-lineaire/espaces/opsev.html#dirsum')" data-inline="true" />, alors E=E<sub>1</sub>⊕E<sub>2</sub>. <br /> Il résulte de nos hypothèses que toute variété de direction E<sub>1</sub> et toute variété de direction E<sub>2</sub>, se coupent en un point et un seul. <br /> La projection d'axe B<sub>1</sub> parallèlement à B<sub>2</sub> est définie ainsi :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Projections</h3> In the following we assume that E is of finite dimension and that B<sub>1</sub> and B<sub>2</sub> are two <input type="button" value="linear varieties" onclick="go('../affines/affinesvar.html#def1')" data-inline="true" /> of A such that their directions spaces E<sub>1</sub> and E<sub>2</sub> are in <input type="button" value="direct sum" onclick="go('../../algebre-lineaire/espaces/opsev.html#dirsume')" data-inline="true " />, then E=E<sub>1</sub>⊕E<sub>2</sub>. <br /> It follows from our hypotheses that any manifold of direction E<sub>1</sub> and any manifold of direction E<sub>2</sub> intersect at one and only one point. <br /> The projection on axis B<sub>1</sub> parallel to B<sub>2</sub> is defined as:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 6</div> Soit M un point de A et soit C<sub>2</sub> la variété parallèle à B<sub>2</sub> et passant par M. C<sub>2</sub> coupe B<sub>1</sub> en un point et un seul que nous notons M' et que nous appelons le <strong>
+              <em>projeté de M sur B<sub>1</sub> parallèlement à B<sub>2</sub>
+              </em>
+            </strong>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 6</div> Let M be a point of A and let C<sub>2</sub> be the manifold parallel to B<sub>2</sub> and passing through M. C<sub>2</sub> intersects B<sub>1 </sub> in a single point e that we denote M' and that we call the ' <strong>
+              <em>projection of M on B<sub>1</sub> parallel to B<sub>2</sub>
+              </em>
+            </strong>'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 9</div> L'application M &rarr; M' est affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 9</div> The transformation M &rarr; M' is affine.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici deux cas particuliers dans l'espace affine réel de dimension 3. <br> Projection sur un plan parallélement à une droite de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Here are two special cases in the real affine space of dimension 3. <br> Projection onto a plane parallel to a line with direction vector
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/projsurplan.png" width="319" height="371" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Projection sur une droite parallèlement à un plan de vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Projection on a straight line parallel to a plane with direction vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/projsurdroite.png" width="457" height="320" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h4>Affinités</h4> B<sub>1</sub> et B<sub>2</sub> sont comme ci-dessus. <br> Soit cette fois &alpha; un scalaire quelconque et M un point de A. Soit H le projeté de M sur B<sub>1</sub> parallèlement à B<sub>2</sub> et soit M' le point tel que <p>
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{HM'} \)
+            <!-- /FORMULE UNIV INLINE--> =&alpha;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{HM} \)
+            <!-- /FORMULE UNIV INLINE-->
+          </p> .
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Directional scaling (stretching)</h4> B<sub>1</sub> and B<sub>2</sub> are as above. <br> Let this time &alpha; be any scalar and M a point of A. Let H be the projection of M onto B<sub>1</sub> parallel to B<sub>2</sub> and let M' be the point such that <p>
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{HM'} \)
+            <!-- /INLINE UNIV FORMULA--> =&alpha;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{HM} \)
+            <!-- /INLINE UNIV FORMULA-->
+          </p>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 7</div> L'application M &rarr; M' s'appelle "l <strong>
+              <em>'affinité d'axe B<sub>1</sub> parallèlement à B<sub>2</sub> et de rapport &alpha; </em>
+            </strong> ".
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 7</div> The mapping M &rarr; M' is called " <strong>
+              <em>stretching with axis B<sub>1</sub> in the direction of B<sub>2</sub> and ratio &alpha; </em>
+            </strong>"
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop10"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 10</div> L'application M → M' est affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 10</div> The transformation M→ M' is affine.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Affinité ayant pour axe une droite, parallèlement à un plan de vecteurs directeurs
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> et de rapport 1/2.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Stretching having for axis a straight line, parallel to a plane of direction vectors
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> and ratio 1/2.
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/affparplan.png" width="360" height="312" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Affinité ayant pour axe un plan, parallèlement à une droite de vecteur directeur
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> et de rapport 1/2.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Directional scaling having a plane as its axis, parallel to a straight line with direction vector
+          <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULA UNIV INLINE--> and ratio 1/2.
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/affpardroite.png" width="390" height="296" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h4>Remarque 1 </h4> Quand α=0 on retrouve les projections vues plus haut. <h4>Remarque 2 </h4> Quand α=-1 on parle de <strong>
+            <em>symétrie</em>
+          </strong> d'axe B<sub>1</sub> parallèlement à B<sub>2</sub>. <br /> Les symétries sont évidemment des involutions. <h4>Applications non affines</h4> Pour un exemple d'application non affine, voir <input type="button" value="cet exercice" onclick="go('exercices/appaffbar/ex01.html#')" data-inline="true" />. <h2>Cas du plan affine réel</h2> On a vu que &reals;<sup>2</sup> s'identifie au corps &complexes; des <input type="button" value="nombres complexes" onclick="go('../../nombres/complexes/construction.html#')" data-inline="true" />. <br /> Un point M est ainsi identifié à son affixe complexe. Ainsi toute application f : M → M'=f(M) du plan dans lui-même (affine ou non) s'identifie à une application z'=f(z) de &complexes; dans &complexes;. On peut voir que les applications du type : <br /> z → z'=az+b correspondent à des applications affines. <br /> Pour une démonstration rigoureuse voir <input type="button" value="cet exercice" onclick="go('exercices/appaffbar/ex03.html#')" data-inline="true" />. <br /> Il en est de même de z → <span style="text-decoration: overline;">z</span>, et donc par composition de toute application du type z'=a <span style="text-decoration: overline;">z</span>+b <br /> Nous verrons un peu plus tard à quoi correspondent ces applications.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Note 1</h4> When α=0 we find the projections seen above. <h4>Note 2 </h4> When α=-1 we speak of <strong>
+            <em>reflection</em>
+          </strong> of axis B<sub>1</sub> parallel to B<sub>2</sub>. <br /> Reflections are obviously involutory. <h4>Non-affine maps</h4> For an example of a non-affine application, see <input type="button" value="this exercise" onclick="go('exercises/appaffbar/ex01.html#')" data-inline="true" />. <h2>Case of the real affine plane</h2> We have seen that &reals;<sup>2</sup> is identified with the body &complexes; <input type="button" value="complex numbers" onclick="go('../../nombres/complexes/construction.html#')" data-inline="true" />. <br /> A point M is thus identified with its complex affix. Thus any map f : M → M'=f(M) of the plane into itself (affine or not) is identified with a map z'=f(z) from &complexes; to &complexes;. We can see that transformations of the type: <br /> z → z'=az+b correspond to affine maps. <br /> For a rigorous demonstration see <input type="button" value="this exercise" onclick="go('exercises/appaffbar/ex03.html#')" data-inline="true" />. <br /> It is the same for z → <span style="text-decoration: overline;">z</span>, and therefore by composition of any application of the type z'=a <span style="text-decoration: overline ;">z</span>+b <br /> We will see a little later what these applications correspond to.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/appaffbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/appaffbar/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>appaff.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #0033b3;}
+.s3 { color: #8c8c8c; font-style: italic;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">include(</span><span class="s1">&quot;reperes.jl&quot;</span><span class="s0">)</span>
+
+<span class="s2">struct </span><span class="s0">appaffine{T}</span>
+<span class="s0">R1::OVS{T} </span><span class="s3">#premier repère - first frame</span>
+<span class="s0">O2::Point{T} </span><span class="s3">#origine du second repère avec la même base B que le premier, image de l'origine du premier'</span>
+<span class="s3">#origin of second frame with same basis B as first one , image of the origin of the first frame</span>
+<span class="s0">M::Matrix{T} </span><span class="s3">#matrice de l'app. linéaire associée relativement à la base B commune des deux repères</span>
+</span><span class="s3">#matrix of the linear map associated with respect to basis B common to both rames</span>
+<span class="s2">end</span>
+
+<span class="s3">#calcule les coordonnées de l'image d'un point - computes the coordinates of a point</span>
+<span class="s2">function </span><span class="s0">calcimage(aff::appaffine{T}, P::Point{T}) </span><span class="s2">where </span><span class="s0">T</span>
+    <span class="s0">P2=aff.O2</span>
+    <span class="s0">n=length(P2.C)</span>
+    <span class="s0">P1=aff.R1.O</span>
+    <span class="s0">U=P-P1</span>
+    <span class="s0">cds=coords(aff.R1.VS,U)</span>
+    <span class="s0">B=hcat(cds)</span>
+    <span class="s0">N=aff.M*B</span>
+    <span class="s0">V=[N[i,</span><span class="s4">1</span><span class="s0">] </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s4">1</span><span class="s0">:n]</span>
+    <span class="s0">I=P2+V</span>
+    <span class="s2">return </span><span class="s0">I  </span><span class="s3"># c'est l'image de P - it is the image of P</span>
+<span class="s2">end</span>
+
+<span class="s3">#fonction de test - test function</span>
+<span class="s2">function </span><span class="s0">test_calcimage()</span>
+    <span class="s0">e1=Rational{Int64}[</span><span class="s4">1</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">]</span>
+    <span class="s0">e2=Rational{Int64}[</span><span class="s4">0</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">4</span><span class="s0">]</span>
+    <span class="s0">e3=Rational{Int64}[</span><span class="s4">0</span><span class="s0">,</span><span class="s4">0</span><span class="s0">,</span><span class="s4">3</span><span class="s0">]</span>
+    <span class="s0">vs=VSQ([e1,e2,e3])</span>
+    <span class="s0">p1=QP([</span><span class="s4">1</span><span class="s0">,</span><span class="s4">1</span><span class="s0">,</span><span class="s4">1</span><span class="s0">])</span>
+    <span class="s0">p2=QP([</span><span class="s4">2</span><span class="s0">,</span><span class="s4">2</span><span class="s0">,</span><span class="s4">3</span><span class="s0">])</span>
+    <span class="s0">R1=OVS{Rational{Int64}}(p1,vs)</span>
+    <span class="s0">m=Rational{Int64}[</span><span class="s4">1 1 1</span><span class="s0">;</span><span class="s4">0 </span><span class="s0">-</span><span class="s4">1 </span><span class="s0">-</span><span class="s4">1</span><span class="s0">; </span><span class="s4">0 0 1</span><span class="s0">]</span>
+    <span class="s0">AFF=appaffine{Rational{Int64}}(R1,p2,m)</span>
+    <span class="s0">p=QP([</span><span class="s4">5</span><span class="s0">,</span><span class="s4">6</span><span class="s0">,</span><span class="s4">4</span><span class="s0">])</span>
+    <span class="s0">println(calcimage(AFF,p))</span>
+<span class="s2">end</span>
+
+<span class="s0">test_calcimage()</span></pre>
+</body>
+</html>

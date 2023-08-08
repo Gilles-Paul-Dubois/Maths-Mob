@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Exercice 03</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../../../css/myown.css" rel="stylesheet">
+    <link href="../../../../css/jquery.mobile-1.4.5.css" rel="stylesheet">
+    <script src="../../../../js/jquery-1.11.3.js"></script>
+    <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div data-role="content" data-theme="e">
+        <div lang="fr">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Retour au cours" onclick="go('../../coniquesparam.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Retour aux exercices" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <ol>
+            <li>Montrer en utilisant le paramétrage usuel de l'ellipse que la longueur d'un quart d'ellipse de demi-axe a et d'excentricité e vaut :
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle J = a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - e^{2}\sin^{2}(u)}}{du} \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>Montrer qu'on a le développement en série :
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle \sqrt{1 - e^{2}\sin^{2}(t)} = 1 - \frac{1}{2}e^{2}\sin^{2}(t) - \frac{1}{2} \times \frac{1}{4}e^{4}\sin^{4}(t) - \frac{1}{2} \times \frac{1}{4} \times \frac{3}{6}e^{6}\sin^{6}(t) - ... \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+            <li>Montrer que cette série est normalement convergente sur l'intervalle [0, &pi;/2].</li>
+            <li>En déduire par une intégration 'terme à terme' que la longueur totale de l'ellipse est donnée par la formule :
+              <!-- FORMULE UNIV INLINE -->
+              <p>\( \displaystyle L = 2{a\pi}\left( {1 - \left( \frac{1}{2} \right)^{2}\frac{e^{2}}{1} - \left( \frac{1}{2} \times \frac{3}{4} \right)^{2}\frac{e^{4}}{3} - \left( \frac{1}{2} \times \frac{3}{4} \times \frac{5}{6} \right)^{2}\frac{e^{6}}{5} - ....} \right) \)</p>
+              <!-- /FORMULE UNIV INLINE-->
+            </li>
+          </ol>
+          <div data-role="collapsible">
+            <h4>aide</h4>
+            <p>Revoir <input type="button" value="la mesure de la longueur d'un arc" onclick="go('../../../../analyse-reelle/integrales/intautresmesures.html#thm1')" data-inline="true" />. <br /> Utiliser le développement en série de (1+x)<sup>a</sup> ( <input type="button" value="revoir cette page" onclick="go('../../../../analyse-reelle/taylor/taylordlus.html#')" data-inline="true" />). <br /> Revoir <input type="button" value="l'intégration des séries de fonctions" onclick="go('../../../../analyse-reelle/integrales/intserie.html#')" data-inline="true" />. <br /> Revoir <input type="button" value="les intégrales de Wallis d'ordre pair" onclick="go('../../../../analyse-reelle/integrales/exercices/inttransfos/ex02.html#')" data-inline="true" />. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> Posons donc x(t)=a.cos(t) et y(t)=b.sin(t). <br> Nous avons alors x'(t)=-a.sin(t) et y'(t)=b.cos(t). <br> Le quart de l'ellipse vaut donc
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle \int_{0}^{\frac{\pi}{2}}\sqrt{a^{2}\sin^{2}(t) + b^{2}\sin^{2}(t)}{dt} \)</p>
+                <!-- /FORMULE UNIV INLINE--> Si maintenant on effectue le changement de variable u=&pi;/2-t notre intégrale vaut :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle \int_{\frac{\pi}{2}}^{0}\sqrt{a^{2}\cos^{2}(u) + b^{2}\sin^{2}(u)} \times \left( {- 1} \right){du} \)</p>
+                <!-- /FORMULE UNIV INLINE--> Soit en intervertissant les bornes et en posant u=t :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle \int_{0}^{\frac{\pi}{2}}\sqrt{a^{2}\cos^{2}(t) + b^{2}\sin^{2}(t)}{dt} \)</p>
+                <!-- /FORMULE UNIV INLINE--> Soit en mettant a<sup>2</sup> en facteur :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle \int_{0}^{\frac{\pi}{2}}a\sqrt{\cos^{2}(t) + \frac{b^{2}}{a^{2}}\sin^{2}(t)}{dt} \)</p>
+                <!-- /FORMULE UNIV INLINE--> ou encore :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - \sin^{2}(t) + \frac{b^{2}}{a^{2}}\sin^{2}(t)}{dt}} \)</p>
+                <!-- /FORMULE UNIV INLINE--> c'est à dire :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - \frac{a^{2} - b^{2}}{a^{2}}\sin^{2}(t)}{dt}} \)</p>
+                <!-- /FORMULE UNIV INLINE--> et sachant que c<sup>2</sup>=a<sup>2</sup>-b<sup>2</sup> et que e=c/a nous avons la valeur cherchée à savoir :
+                <!-- FORMULE UNIV INLINE -->
+                <p>\( \displaystyle J = a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - e^{2}\sin^{2}(u)}}{du} \)</p>
+                <!-- /FORMULE UNIV INLINE--> et la longueur totale de l'ellipse est donc 4J.
+              </li>
+              <li> La formule cherchée s'obtient en utilisant le développement en série de (1+x)<sup>1/2</sup> avec x=e<sup>2</sup>sin<sup>2</sup>(t) </li>
+              <li> La série est normalement convergente car sin(t)&le; 1 et e &lt; 1 pour une ellipse. En outre tous les coefficients sont majorés par 1. </li>
+              <li> En vertu des résultats de <input type="button" value="cette page" onclick="go('../../../../analyse-reelle/integrales/intserie.html#')" data-inline="true" /> une intégration terme à terme est possible. <br /> La formule annoncée résulte alors du calcul des <input type="button" value="intégrales de Wallis" onclick="go('../../../../analyse-reelle/integrales/exercices/inttransfos/ex02.html#')" data-inline="true" />. </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="navbar">
+            <ul>
+              <li>
+                <input type="button" value="Back to lesson" onclick="go('../../coniquesparam.html')" data-inline="false" />
+              </li>
+              <li>
+                <input type="button" value="Back to exercises" onclick="go('menu.html')" data-inline="false" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+          <ol>
+            <li>Show, using the usual parameterization of the ellipse, that the length of a quarter of an ellipse with semi-axi a and eccentricity e is:
+              <!-- UNIV INLINE FORMULA -->
+              <p>\( \displaystyle J = a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - e^{2}\sin^{2}(u)}}{du} \)</p>
+              <!-- /INLINE UNIV FORMULA-->
+            </li>
+            <li>Show that we have the series expansion:
+              <!-- UNIV INLINE FORMULA -->
+              <p>\( \displaystyle \sqrt{1 - e^{2}\sin^{2}(t)} = 1 - \frac{1}{2}e^{2}\sin^{2}(t) - \frac {1}{2} \times \frac{1}{4}e^{4}\sin^{4}(t) - \frac{1}{2} \times \frac{1}{4} \times \frac{3}{6}e^{6}\sin^{6}(t) - ... \)</p>
+              <!-- /INLINE UNIV FORMULA-->
+            </li>
+            <li>Show that this series is normally convergent on the interval [0, &pi;/2].</li>
+            <li>Deduce by a 'term by term' integration that the total length of the ellipse is given by the formula:
+              <!-- UNIV INLINE FORMULA -->
+              <p>\( \displaystyle L = 2{a\pi}\left( {1 - \left( \frac{1}{2} \right)^{2}\frac{e^{2}}{1} - \left( \frac{1}{2} \times \frac{3}{4} \right)^{2}\frac{e^{4}}{3} - \left( \frac{1}{2} \times \frac{3}{4} \times \frac{5}{6} \right)^{2}\frac{e^{6}}{5} - ....} \right) \)</p>
+              <!-- /INLINE UNIV FORMULA-->
+            </li>
+          </ol>
+          <div data-role="collapsible">
+            <h4>hint</h4>
+            <p>Review <input type="button" value="measure of the length of an arc" onclick="go('../../../../analyse-reelle/integrales/intautresmesures.html#thm1')" data-inline="true" />. <br /> Use the power series expansion of (1+x)<sup>a</sup> ( <input type="button" value="on this page" onclick="go('../../../../analyse-reelle/taylor/taylordlus.html#')" data-inline="true" />). <br /> Review <input type="button" value="integration of series of functions" onclick="go('../../../../analyse-reelle/integrales/intserie.html#')" data-inline="true" />. <br /> Review <input type="button" value="Wallis integrals of even order" onclick="go('../../../../analyse-reelle/integrales/exercices/inttransfos/ex02.html#')" data-inline="true" />. </p>
+          </div>
+          <!-- /aide -->
+          <div data-role="collapsible">
+            <h4>solution</h4>
+            <ol>
+              <li> So let's set x(t)=a.cos(t) and y(t)=b.sin(t). <br> We then have x'(t)=-a.sin(t) and y'(t)=b.cos(t). <br> The quarter of the ellipse is therefore worth
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle \int_{0}^{\frac{\pi}{2}}\sqrt{a^{2}\sin^{2}(t) + b^{2}\sin^{2}(t )}{dt} \)</p>
+                <!-- /INLINE UNIV FORMULA--> If now we make the change of variable u=&pi;/2-t our integral is:
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle \int_{\frac{\pi}{2}}^{0}\sqrt{a^{2}\cos^{2}(u) + b^{2}\sin^{2}(u )} \times \left( {- 1} \right){du} \)</p>
+                <!-- /INLINE UNIV FORMULA--> Either by inverting the terminals and setting u=t:
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle \int_{0}^{\frac{\pi}{2}}\sqrt{a^{2}\cos^{2}(t) + b^{2}\sin^{2}(t )}{dt} \)</p>
+                <!-- /INLINE UNIV FORMULA--> Either by factoring a<sup>2</sup>:
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle \int_{0}^{\frac{\pi}{2}}a\sqrt{\cos^{2}(t) + \frac{b^{2}}{a^{2}}\ sin^{2}(t)}{dt} \)</p>
+                <!-- /INLINE UNIV FORMULA--> or :
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - \sin^{2}(t) + \frac{b^{2}}{a^{2 }}\sin^{2}(t)}{dt}} \)</p>
+                <!-- /INLINE UNIV FORMULA--> that's to say :
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - \frac{a^{2} - b^{2}}{a^{2}}\sin ^{2}(t)}{dt}} \)</p>
+                <!-- /INLINE UNIV FORMULA--> and knowing that c<sup>2</sup>=a<sup>2</sup>-b<sup>2</sup> and that e=c/a we have the desired value, namely:
+                <!-- UNIV INLINE FORMULA -->
+                <p>\( \displaystyle J = a{\int_{0}^{\frac{\pi}{2}}\sqrt{1 - e^{2}\sin^{2}(u)}}{du} \)</p>
+                <!-- /INLINE UNIV FORMULA--> and the total length of the ellipse is therefore 4J.
+              </li>
+              <li> The sought formula is obtained by using the series expansion of (1+x)<sup>1/2</sup> with x=e<sup>2</sup>sin<sup>2</sup>( t) </li>
+              <li> The series is normally convergent because sin(t)&le; 1 and th &lt; 1 for an ellipse. In addition, all the coefficients are increased by 1. </li>
+              <li> Under the results of <input type="button" value="this page" onclick="go('../../../../analyse-reelle/integrales/intserie.html#')" data-inline="true" /> term-to-term integration is possible. <br /> The announced formula then results from the calculation of the <input type="button" value="Wallis integrals" onclick="go('../../../../analyse-reelle/integrales/exercices/inttransfos/ex02.html#')" data-inline="true" />. </li>
+            </ol>
+          </div>
+          <!-- /solution -->
+        </div>
+        <!-- /en -->
+      </div>
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

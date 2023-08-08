@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Surfaces de révolution</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/phoria/gl-matrix.js"></script>
+    <script src="../../js/phoria/phoria-util.js"></script>
+    <script src="../../js/phoria/phoria-entity.js"></script>
+    <script src="../../js/phoria/phoria-scene.js"></script>
+    <script src="../../js/phoria/phoria-renderer.js"></script>
+    <script src="../../js/phoria/phoria-view.js"></script>
+    <script src='../../js/phoria/dat.gui.min.js'></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacerevolution/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacerevolution/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Préliminaires</h2> Nous considérons une courbe paramétrée telle que définie <input type="button" value="ici" onclick="go('espacereglees.html#')" data-inline="true" /> : <br /> t → M(t)(x(t),y(t),z(t)) où t parcourt un <input type="button" value="intervalle" onclick="go('../../nombres/rationnels/intervalles.html#')" data-inline="true" /> I de &reals; et où pour tout t ∈ I le point M(t) reste dans un même plan. <br /> Si nous effectuons maintenant une <input type="button" value="rotation" onclick="go('espacedep.html#def2')" data-inline="true" /> d'une telle courbe autour d'un axe, que se passe-t-il ? <br /> Il est clair que la courbe est transformée en une autre courbe plane située dans un autre plan se déduisant du premier par la rotation. <br /> Traitons le problème analytiquement dans un repère orthonormé &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; où &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; est un vecteur directeur de l'axe de la rotation. <br /> Soit θ l'angle de la rotation relativement à l'axe orienté par &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;. <br /> La matrice de la rotation est donc :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \begin{pmatrix} {\cos(\theta)} & {- \sin(\theta)} & 0 \\ {\sin(\theta)} & {\cos(\theta)} & 0 \\ 0 & 0 & 1 \\ \end{pmatrix} \)</p>
+          <!-- /FORMULE UNIV INLINE--> De sorte que les coordonnées de l'image du point M(t) par la rotation d'angle &theta; a pour coordonnées :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \begin{pmatrix} {\cos(\theta)} & {- \sin(\theta)} & 0 \\ {\sin(\theta)} & {\cos(\theta)} & 0 \\ 0 & 0 & 1 \\ \end{pmatrix}\begin{pmatrix} {x(t)} \\ {y(t)} \\ {z(t)} \\ \end{pmatrix} = \begin{pmatrix} {x(t)\cos(\theta) - y(t)\sin(\theta)} \\ {x(t)\sin(\theta) + y(t)\cos(\theta)} \\ {z(t)} \\ \end{pmatrix} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <h2>Définitions</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Preliminaries</h2> We consider a parametric curve as defined <input type="button" value="here" onclick="go('espacereglees.html#')" data-inline="true" />: <br /> t → M(t)(x(t),y(t),z(t)) where t traverses an <input type="button" value="interval" onclick="go('../../nombres/rationnels/intervalles.html#')" data-inline="true" /> I of &reals; and where for all t ∈ I the point M(t) remains in the same plane. <br /> If we now perform an <input type="button" value="rotation" onclick="go('espacedep.html#def2')" data-inline="true" /> of such a curve around an axis , what's going on? <br /> It is clear that the curve is transformed into another plane curve located in another plane deduced from the first by the rotation. <br /> Let's treat the problem analytically in an orthonormal frame &nbsp;
+          <!-- FORMULA UNIV INLINE --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; where &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; is a direction vector of the axis of rotation. <br /> Let θ be the angle of rotation relative to the axis oriented by &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;. <br /> The rotation matrix is therefore:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \begin{pmatrix} {\cos(\theta)} & {- \sin(\theta)} & 0 \\ {\sin(\theta)} & {\cos(\theta)} & 0 \\ 0 & 0 & 1 \\ \end{pmatrix} \)</p>
+          <!-- /INLINE UNIV FORMULA--> So that the coordinates of the image of the point M(t) by the rotation of angle &theta; has the coordinates:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \begin{pmatrix} {\cos(\theta)} & {- \sin(\theta)} & 0 \\ {\sin(\theta)} & {\cos(\theta)} & 0 \\ 0 & 0 & 1 \\ \end{pmatrix}\begin{pmatrix} {x(t)} \\ {y(t)} \\ {z(t)} \\ \end{pmatrix} = \begin{pmatrix} {x(t)\cos(\theta) - y(t)\sin(\theta)} \\ {x(t)\sin(\theta) + y(t)\cos(\theta)} \\ {z(t)} \\ \end{pmatrix} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+          <h2>Definitions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une <b>
+              <i>'surface de révolution'</i>
+            </b> S est la partie de l'espace engendrée par la rotation d'une courbe paramétrée plane C autour d'un axe &Delta;. <br> Donc si C(&theta;) est la courbe obtenue par rotation de C d'un angle &theta; autour de &Delta;. <br> S est par définition la réunion de tous les ensembles C(&theta;) quand &theta; parcourt l'intervalle [0,2&pi;[.
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle S = \underset{\theta \in \lbrack 0,2\pi\lbrack}{\bigcup}C(\theta) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A <b>
+              <i>'surface of revolution'</i>
+            </b> S is the subset of space generated by the rotation of a plane parametric curve C around an axis &Delta;. <br> So if C(&theta;) is the curve obtained by rotating C through an angle &theta; around &Delta;. <br> S is by definition the union of all sets C(&theta;) when &theta; covers the interval [0,2&pi;[.
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle S = \underset{\theta \in \lbrack 0.2\pi\lbrack}{\bigcup}C(\theta) \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Il résulte de ce qui précède qu'une surface de révolution est un ensemble paramétré à deux paramètres c'est l'ensemble des points M(&theta;,t) de coordonnées :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \begin{pmatrix} {x(t)\cos(\theta) - y(t)\sin(\theta)} \\ {x(t)\sin(\theta) + y(t)\cos(\theta)} \\ {z(t)} \\ \end{pmatrix} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> It results from what precedes that a surface of revolution is a parametric set with two parameters it is the set of points M(&theta;,t) of coordinates:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \begin{pmatrix} {x(t)\cos(\theta) - y(t)\sin(\theta)} \\ {x(t)\sin(\theta) + y(t)\cos(\theta)} \\ {z(t)} \\ \end{pmatrix} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Notons que certaines surfaces connues sont des surfaces de révolution : <ul>
+            <li>Une <input type="button" value="sphère" onclick="go('espacespheres.html#')" data-inline="true" /> est obtenue en faisant tourner un grand cercle autour d'un diamètre. </li>
+            <li>Un <input type="button" value="cyclindre" onclick="go('espacereglees.html#def1')" data-inline="true" /> à base circulaire est obtenu en faisant tourner une droite parallèle à l'axe. </li>
+            <li>Un <input type="button" value="cône" onclick="go('espacereglees.html#def5')" data-inline="true" /> est obtenu en faisant tourner une droite sécante à l'axe. </li>
+          </ul> Pour voir ce qui se passe quand on fait tourner un cercle autour d'un axe qui n'est pas un diamètre, voir par exemple <input type="button" value="cet exercice" onclick="go('exercices/espacerevolution/ex01.html#')" data-inline="true" />. <br /> Pour voir ce qui se passe quand au lieu d'un cercle on fait tourner une ellipse autour de chacun de ses deux axes de symétrie, voir par exemple <input type="button" value="cet exercice" onclick="go('exercices/espacerevolution/ex02.html#')" data-inline="true" />. <br />
+          <h3>Exemple</h3> L'animation qui suit vous permet de voir la génération d'une surface de révolution engendrée par la rotation de la parabole d'équation y=x² autour de l'axe Δ=Oy.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Note that some known surfaces are surfaces of revolution: <ul>
+            <li>A <input type="button" value="sphere" onclick="go('espacespheres.html#')" data-inline="true" /> is obtained by rotating a large circle around a diameter. </li>
+            <li>A <input type="button" value="cyclinder" onclick="go('espacereglees.html#def1')" data-inline="true" /> with a circular base is obtained by rotating a parallel line to the axis. </li>
+            <li>A <input type="button" value="cone" onclick="go('espacereglees.html#def5')" data-inline="true" /> is obtained by rotating a secant line at the axis. </li>
+          </ul> To see what happens when we rotate a circle around an axis that is not a diameter, see for example <input type="button" value="this exercise" onclick="go('exercices/espacerevolution/ex01.html#')" data-inline="true" />. <br /> To see what happens when instead of a circle we rotate an ellipse around each of its two axes of symmetry, see for example <input type="button" value="this exercise" onclick="go(' exercices/espacerevolution/ex02.html#')" data-inline="true" />. <br />
+          <h3>Example</h3> The following animation allows you to see the generation of a surface of revolution generated by the rotation of the parabola with equation y=x² around the axis Δ=Oy.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Une telle surface s'appelle un <b>
+              <i>'paraboloïde'</i>
+            </b> de révolution.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> Such a surface is called a <b>
+              <i>'paraboloid'</i>
+            </b> of revolution.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas1" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <script src='js/paraboloide.js'></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/paraboloidederevolution.png" width="227" height="244" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <em>
+            <font size="-1">Image d'après: http://www.mathcurve.com/surfaces/paraboloidrevolution/paraboloidederevolution.jpg (Robert Ferréol)</font>
+          </em>
+          <h2>Equations cartésiennes</h2> Comme dans le cas des surfaces réglées nous avons une caractérisation des points d'une surface de révolution par un système de 3 équations à 2 inconnues :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = x(\theta,t)} \\ {y = y(\theta,t)} \\ {z = z(\theta,t)} \\ \end{matrix} \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Il est parfois possible de résumer ce système en une seule équation du type f(x,y,z)=0, caractéristique de la surface. <br /> Cela peut se faire par une technique d'élimination. Par exemple calculer t en fonction de x et θ avec la première équation, puis porter le résultat dans les deux autres. Calculer ensuite θ en fonction de x et y avec la deuxième équation et porter dans la troisième. <br /> En pratique la méthode ci-dessus conduit à des calculs assez complexes, de sorte qu'on aura souvent recours à des astuces pour parvenir à une équation simple. <br /> Traitons par exemple le paraboloïde de révolution ci-dessus. <br /> Soit θ un réel entre 0 et 2π posons pour simplifier c=cos(θ) et s=sin(θ), de sorte qu'on a c²+s²=1. <br /> Soit &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O,\overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; le repère orthonormé initial et &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;son transformé dans la rotation d'axe Oz et d'angle θ. <br /> Soit M un point du paraboloïde de coordonnées (x,y,z) dans le repère &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O,\overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; et X,Y,Z dans le repère &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br /> En utilisant les formules : <br /> X=cx-sy <br /> Y=sx+cy <br /> Z=z <br /> et en écrivant que Y=0 et Z=X<sup>2</sup>, il vient x<sup>2</sup>+y<sup>2</sup>-z=0. <br /> Vous pourrez dans <input type="button" value="cet exercice" onclick="go('exercices/espacerevolution/ex03.html#')" data-inline="true" /> établir d'autres formules liées à la rotation d'une hyperbole.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <em>
+            <font size="-1">Image from: http://www.mathcurve.com/surfaces/paraboloidrevolution/paraboloidederevolution.jpg (Robert Ferréol)</font>
+          </em>
+          <h2>Cartesian equations</h2> As in the case of ruled surfaces, we have a characterization of the points of a surface of revolution by a system of 3 equations with 2 unknowns:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \left\{ \begin{matrix} {x = x(\theta,t)} \\ {y = y(\theta,t)} \\ {z = z(\theta,t)} \\ \end{matrix} \right. \)</p>
+          <!-- /INLINE UNIV FORMULA--> It is sometimes possible to summarize this system in a single equation of the type f(x,y,z)=0, characteristic of the surface. <br /> This can be done by an elimination technique. For example, calculate t as a function of x and θ with the first equation, then carry the result into the other two. Then calculate θ as a function of x and y with the second equation and carry over to the third. <br /> In practice the above method leads to quite complex calculations, so that one will often resort to tricks to arrive at a simple equation. <br /> Let's treat for example the paraboloid of revolution above. <br /> Let θ be a real number between 0 and 2π let us put for simplicity c=cos(θ) and s=sin(θ), so that we have c²+s²=1. <br /> Let &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O,\overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; the initial orthonormal frame and &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;its transformed in the rotation of axis Oz and angle θ. <br /> Let M be a point of the paraboloid with coordinates (x,y,z) in the frame &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O,\overrightarrow{i},\overrightarrow{j},\overrightarrow{k} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; and X,Y,Z in the frame &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \left ( O,\overrightarrow{u},\overrightarrow{v},\overrightarrow{w} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br /> Using the formulas: <br /> X=cx-sy <br /> Y=sx+cy <br /> Z=z <br /> and writing that Y=0 and Z=X<sup>2</sup>, it comes x<sup>2</sup>+y<sup>2</sup>-z=0. <br /> You can in <input type="button" value="this exercise" onclick="go('exercices/espacerevolution/ex03.html#')" data-inline="true" /> establish other related formulas to the rotation of a hyperbola.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/espacerevolution/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/espacerevolution/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

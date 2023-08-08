@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>repaffines1.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">from </span><span class="s1">affines </span><span class="s2">import </span><span class="s1">* 
+</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Nul(x): 
+    </span><span class="s0">&quot;&quot;&quot;Teste la nullité d'un élément d'un corps fini ou infini - tests nullity of an element of a finite or infinite field&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">if </span><span class="s1">isinstance(x, int) </span><span class="s2">or </span><span class="s1">isinstance(x, float) </span><span class="s2">or </span><span class="s1">isinstance(x, complex) </span><span class="s2">or </span><span class="s1">isinstance(x, Fraction):  </span><span class="s0"># cas des nombres classiques - case of usual numbers</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">x == </span><span class="s3">0</span><span class="s1"> 
+    </span><span class="s2">else</span><span class="s1">: 
+        </span><span class="s2">return </span><span class="s1">x.nul()  </span><span class="s0"># cas des corps Z/pZ</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Systeme(): 
+    </span><span class="s0">&quot;&quot;&quot;Modélisation d'un système d'équations linéaires de Cramer à coefficients dans K=Q,R,C ou Z/pZ - model for a Cramer system of equatiions with coefs in Q,R,C or Z/pZ &quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, L): 
+        </span><span class="s0">&quot;&quot;&quot;constructeur à partir d'une liste de lignes - constructor from a list of rows&quot;&quot;&quot;</span><span class="s1"> 
+        self.coeffs = L  </span><span class="s0"># les coefficients - the coefficients</span><span class="s1"> 
+        self.ordre = len(L)  </span><span class="s0"># l'ordre du système - order of the system</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">&quot;&quot;&quot;représentation externe - conversion to string&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s4">'</span><span class="s2">\n</span><span class="s4">'</span><span class="s1">.join([str(v) </span><span class="s2">for </span><span class="s1">v </span><span class="s2">in </span><span class="s1">self.coeffs]) 
+ 
+    </span><span class="s2">def </span><span class="s1">Ligne(self, i): 
+        </span><span class="s0">&quot;&quot;&quot; la i-ème ligne de la matrice -i-th row of the matrix&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i][:] 
+ 
+    </span><span class="s2">def </span><span class="s1">Colonne(self, j): 
+        </span><span class="s0">&quot;&quot;&quot; la j-ième colonne de la matrice - j-th row of the matrix&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">[Y[j] </span><span class="s2">for </span><span class="s1">Y </span><span class="s2">in </span><span class="s1">[X </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">self.coeffs]] 
+ 
+    </span><span class="s2">def </span><span class="s1">GetCoef(self, i, j): 
+        </span><span class="s0">&quot;&quot;&quot;Obtenir un coefficient - get a coeff.&quot;&quot;&quot;</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s1">self.coeffs[i][j] 
+ 
+    </span><span class="s2">def </span><span class="s1">SetCoef(self, i, j, v): 
+        </span><span class="s0">&quot;&quot;&quot;Changer un coefficient - change a coef.&quot;&quot;&quot;</span><span class="s1"> 
+        self.coeffs[i][j] = v 
+ 
+    </span><span class="s2">def </span><span class="s1">EchLignes(self, i1, i2): 
+        </span><span class="s0">&quot;&quot;&quot; échange les lignes d'indices i1 et i2 - permute rows i1 and i2 &quot;&quot;&quot;</span><span class="s1"> 
+        V1 = self.Ligne(i1) 
+        V2 = self.Ligne(i2) 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.ordre + </span><span class="s3">1</span><span class="s1">): 
+            self.SetCoef(i1, j, V2[j]) 
+            self.SetCoef(i2, j, V1[j]) 
+ 
+    </span><span class="s2">def </span><span class="s1">Pivot(self, j): 
+        </span><span class="s0">&quot;&quot;&quot; calcul du pivot de Gauss de la colonne j - computation of Gauss pivot of j-th column&quot;&quot;&quot;</span><span class="s1"> 
+        Cj = self.Colonne(j) 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(j, self.ordre): 
+            </span><span class="s2">if not </span><span class="s1">Nul(Cj[i]): 
+                </span><span class="s2">return </span><span class="s1">i 
+        </span><span class="s2">return </span><span class="s1">-</span><span class="s3">1  </span><span class="s0"># ne doit jamais arriver avec un système de Cramer - should never happen with a Cramer system</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">Solve(self): 
+        </span><span class="s0">&quot;&quot;&quot; Résolution par la méthode de Gauss - Solving by Gauss method&quot;&quot;&quot;</span><span class="s1"> 
+        Solutions = [</span><span class="s3">0 </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.ordre)]  </span><span class="s0"># initialisation à zéros de la liste des solutions - initialize with zeros the list of solutions</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, self.ordre - </span><span class="s3">1</span><span class="s1">): 
+            p = self.Pivot(j)  </span><span class="s0"># détermination du pivot - finding the pivot</span><span class="s1"> 
+            </span><span class="s2">if </span><span class="s1">p != j: 
+                self.EchLignes(j, p)  </span><span class="s0"># échange de lignes si nécessaire - exchange lines if necessary</span><span class="s1"> 
+            c0 = self.GetCoef(j, j) 
+            L = self.Ligne(j) 
+            </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(j + </span><span class="s3">1</span><span class="s1">, self.ordre): 
+                c = self.GetCoef(i, j) 
+                </span><span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(j, self.ordre + </span><span class="s3">1</span><span class="s1">): 
+                    cik = self.GetCoef(i, k) 
+                    self.SetCoef(i, k, cik - L[k] * c / c0) 
+        Solutions[self.ordre - </span><span class="s3">1</span><span class="s1">] = self.GetCoef(self.ordre - </span><span class="s3">1</span><span class="s1">, self.ordre) / self.GetCoef(self.ordre - </span><span class="s3">1</span><span class="s1">, self.ordre - </span><span class="s3">1</span><span class="s1">)  </span><span class="s0"># calcul dernière variable - computation of the last variable</span><span class="s1"> 
+        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">[self.ordre - i </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">2</span><span class="s1">, self.ordre + </span><span class="s3">1</span><span class="s1">)]:  </span><span class="s0"># récurrence remontante - ascending induction</span><span class="s1"> 
+            s = self.GetCoef(i, self.ordre) 
+            </span><span class="s2">for </span><span class="s1">j </span><span class="s2">in </span><span class="s1">range(i + </span><span class="s3">1</span><span class="s1">, self.ordre): 
+                s = s - self.GetCoef(i, j) * Solutions[j] 
+            s = s / self.GetCoef(i, i) 
+            Solutions[i] = s 
+        </span><span class="s2">return </span><span class="s1">Solutions 
+ 
+ 
+</span><span class="s4">&quot;&quot;&quot; Fin de la classe Systeme - end of the system class &quot;&quot;&quot;</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">Repere: 
+    </span><span class="s0">&quot;&quot;&quot;Modélisation des repères affines - model for affine frames&quot;&quot;&quot;</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, P, B): 
+        </span><span class="s0">&quot;&quot;&quot;le constructeur - constructor&quot;&quot;&quot;</span><span class="s1"> 
+        self.Origine = P 
+        self.Base = B 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s0">&quot;&quot;&quot;Affichage - display&quot;&quot;&quot;</span><span class="s1"> 
+        L = [str(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">self.Base] 
+        b = </span><span class="s4">'(' </span><span class="s1">+ </span><span class="s4">&quot;,&quot;</span><span class="s1">.join(L) + </span><span class="s4">')'</span><span class="s1"> 
+        </span><span class="s2">return </span><span class="s4">'(' </span><span class="s1">+ str(self.Origine) + b + </span><span class="s4">')'</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">Coord(self, M): 
+        </span><span class="s0">&quot;&quot;&quot;Calcul des coordonnées d'un point M dans le repère R - computes coordinates of point M in frame R &quot;&quot;&quot;</span><span class="s1"> 
+        W = M - self.Origine 
+        n = len(self.Base) 
+        L = [Y.V </span><span class="s2">for </span><span class="s1">Y </span><span class="s2">in </span><span class="s1">self.Base] 
+        T = [[X[i] </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">L] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+        S = [T[i] + [W.V[i]] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+        Sys = Systeme(S) 
+        Coordonnees = Sys.Solve() 
+        </span><span class="s2">return </span><span class="s1">Coordonnees 
+ 
+    </span><span class="s2">def </span><span class="s1">Point(self, C): 
+        </span><span class="s0">&quot;&quot;&quot;Calcule un point de coordonnées données dans le repère - computes a point with given coordinates in the frame&quot;&quot;&quot;</span><span class="s1"> 
+        n = len(C) 
+        T = [C[i] * self.Base[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+        S = reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, T) 
+        </span><span class="s2">return </span><span class="s1">self.Origine + S 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    P = PointKn([Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    u = VecteurKn([Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    v = VecteurKn([Fraction(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">3</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    w = VecteurKn([Fraction(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">2</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    B = ([u, v, w]) 
+    R = Repere(P, B) 
+    M = PointKn([Fraction(</span><span class="s3">7</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">8</span><span class="s1">, </span><span class="s3">1</span><span class="s1">), Fraction(</span><span class="s3">9</span><span class="s1">, </span><span class="s3">1</span><span class="s1">)]) 
+    C = R.Coord(M) 
+    print(C) 
+    Q = R.Point(C) 
+    print(Q)  </span><span class="s0"># on retrouve M - we find M back</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

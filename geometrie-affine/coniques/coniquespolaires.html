@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Polaire d'un point</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquespolaires/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquespolaires/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Dans toute cette page, il est important de connaître ce qu'est une <input type="button" value="division harmonique" onclick="go('../theoremes/theorapport.html#def5')" data-inline="true" />. <br /> Il importe également de savoir que le birapport est conservé par projection centrale (voir <input type="button" value="cette page" onclick="go('../theoremes/theothales.html#thm6')" data-inline="true" />). <br /> Il faut enfin connaître la <input type="button" value="géométrie du cercle" onclick="go('../plan/plancercles.html#')" data-inline="true" />, et savoir ce que sont des <input type="button" value="cercles orthogonaux" onclick="go('../plan/exercices/plancercles/ex04.html#')" data-inline="true" />. <br /> Nous commençons par décrire le régionnement du plan associé à toute conique. <h2>Polaire d'un point par rapport à un cercle</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Throughout this page, it is important to know what is an <input type="button" value="harmonic division" onclick="go('../theoremes/theorapport.html#def5')" data-inline="true" />. <br /> It is also important to know that the cross ratio is preserved by central projection (see <input type="button" value="this page" onclick="go('../theoremes/theothales.html#thm6')" data-inline="true" />). <br /> Finally, you need to know the <input type="button" value="geometry of the circle" onclick="go('../plan/plancercles.html#')" data-inline="true" />, and know what what are <input type="button" value="orthogonal circles" onclick="go('../plan/exercices/plancercles/ex04.html#')" data-inline="true" />. <br /> We start by describing the region of the plane associated with any conic section. <h2>Polar of a point with respect to a circle</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Soit dans un même plan un cercle C de centre O et deux points A et B. On dit que A et B sont <b>
+              <i>'conjugués'</i>
+            </b> relativement à C si le cercle de diamètre [AB] est orthogonal à C.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> Let in the same plane be a circle C with center O and two points A and B. We say that A and B are <b>
+              <i>'conjugate'</i>
+            </b> relatively to C if the circle with diameter [AB] is orthogonal to C.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/polaires1.png" width="328" height="266" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <i>
+            <font size="-1">image générée avec GeoGebra</font>
+          </i>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <i>
+            <font size="-1">image generated with GeoGebra</font>
+          </i>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si la droite (AB) coupe le cercle C en M et M', il y a équivalence entre : <br>
+            <ul>
+              <li>A et B sont conjugués relativement à C.</li>
+              <li>(A,B,M,M') est une division harmonique.</li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If the line (AB) intersects the circle C in M and M', there is equivalence between: <br>
+            <ul>
+              <li>A and B are conjugated relatively to C.</li>
+              <li>(A,B,M,M') is a harmonic division.</li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour la preuve de cette proposition voir <input type="button" value="cet exercice" onclick="go('../plan/exercices/plancercles/ex04.html#')" data-inline="true" /> et sa solution. Soit C le cercle de centre O et de rayon R et soit A un point du plan de C distinct de O. </div>
+        <!-- /fr -->
+        <div lang="en"> For the proof of this proposition see <input type="button" value="this exercise" onclick="go('../plan/exercices/plancercles/ex04.html#')" data-inline="true" /> and its solution. Let C be the circle with center O and radius R and let A be a point on the plane of C distinct from O. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> On appelle <b>
+              <i>'polaire'</i>
+            </b> d'un point A par rapport à C l'ensemble des conjugués de A par rapport à C.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We call <b>
+              <i>'polar'</i>
+            </b> of a point A with respect to C the set of conjugates of A with respect to C.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> La polaire de A par rapport à C est une droite orthogonale à (OA) en H tel que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overrightarrow{OH} . \overrightarrow{OA} = R^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> The polar of A with respect to C is a straight line orthogonal to (OA) in H such that
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \overrightarrow{OH} . \overrightarrow{OA} = R^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3 et définition</div> Toute droite qui ne passe pas par O est la polaire relativement à C d'un point et d'un seul appelé son <b>
+              <i>'pôle'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3 and definition</div> Any line that does not pass through O is the polar with respect to C of a single point called its <b>
+              <i>'pole'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/polaires2.png" width="468" height="375" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <i>
+            <font size="-1">image générée avec GeoGebra</font>
+          </i>
+          <br> Soit en effet H la projection orthogonale sur (OA) d'un point B alors le cercle de diamètre [AB] passe par H. <br> Alors B conjugué de A par rapport à C &hArr; &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OH} . \overrightarrow{OA} = R^{2} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; (revoir la <input type="button" value="puissance d'un point par rapport à un cercle" onclick="go('../plan/plancercles.html#thm3')" data-inline="true" />)
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <i>
+            <font size="-1">image generated with GeoGebra</font>
+          </i>
+          <br> Let H be the orthogonal projection on (OA) of a point B then the circle with diameter [AB] passes through H. <br> Then B conjugate of A with respect to C &hArr; &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OH} . \overrightarrow{OA} = R^{2} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; (review the <input type="button" value="power of a point with respect to a circle" onclick="go('../plan/plancercles.html#thm3')" data-inline="true" />)
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Si A est extérieur à C, la polaire de A passe par les points de contact des tangentes menées de A à C.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> If A is exterior to C, the polar of A passes through the contact points of the tangents taken from A to C.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet, ces points sont visiblement conjugués de A. <h3>Première application</h3> Construction de la polaire d'un point extérieur à C. <br> Avec l'applet suivante vous pouvez déplacer le point A extérieur à C. <br> Vous pouvez également faire varier le diamètre du cercle avec le curseur. </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, these points are visibly conjugate of A. <h3>First application</h3> Construction of the polar from a point outside C. <br> With the following applet you can move the outer point A to C. <br> You can also vary the diameter of the circle with the slider. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/polaires1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Seconde application</h3> Construction du pôle d'une sécante à C. <br> L'applet suivante vous permet de voir la construction du pôle d'une droite sécante au cercle. <br> Vous pouvez déplacer M et M' sur C avec la souris ou le doigt et voir le pôle A de la droite (MM'). <br> Le rayon du cercle peut être modifié avec un curseur.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Second application</h3> Construction of the pole of a secant at C. <br> The following applet allows you to see the construction of the pole of a line secant to the circle. <br> You can move M and M' on C with mouse or finger and see the A pole of the line (MM'). <br> The radius of the circle can be changed with a slider.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/polaires2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Troisième application</h3> Construction de la polaire d'un point <input type="button" value="intérieur" onclick="go('coniquestangentes.html#def6')" data-inline="true" /> à C. <br /> Si A est intérieur à C construire deux sécantes à C passant par A. <br /> Construire les pôles G et H de ces deux sécantes. <br /> La droite (GH) est la polaire de A. <br /> L'applet suivante vous permet de déplacer A à l'intérieur du cercle et de voir sa polaire p<sub>A</sub> en vert.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Third application</h3> Construction of the polar of a point <input type="button" value="interior" onclick="go('coniquestangentes.html#def6')" data-inline="true" /> to C. <br /> If A is interior to C construct two secants to C passing through A. <br /> Construct the poles G and H of these two secants. <br /> The line (GH) is the polar of A. <br /> The following applet allows you to move A inside the circle and see its polar p<sub>A</sub> in green.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/polaires3.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Quatrième application</h3> Construction du pôle d'une droite non sécante au cercle. <br> Il suffit de prendre deux points distincts A et B de la droite. <br> Puis de construire les polaires de A et B par la première méthode. <br> Le pôle cherché est l'intersection de ces deux polaires. <br> L'applet suivante vous permet de déplacer les points A et B pour faire varier la droite (AB), de telle sorte que (AB) ne soit pas sécante à C. <br> Le pôle de la droite (AB) est le point vert noté 'P'. <br> Vous pouvez également faire varier le rayon du cercle C. <br> Notez que la droite (OP), ici en vert, est un axe de symétrie pour la figure formée par le cercle C et la droite (AB).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Fourth application</h3> Construction of the pole of a line not secant to the circle. <br> Just take two distinct points A and B from the line. <br> Then construct the polars of A and B by the first method. <br> The sought pole is the intersection of these two polars. <br> The following applet allows you to move points A and B to vary the line (AB), such that (AB) is not secant to C. <br> The pole of the line (AB) is the green point noted 'P'. <br> You can also vary the radius of circle C. <br> Note that the line (OP), here in green, is an axis of symmetry for the figure formed by the circle C and the line (AB).
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/polaires4.js"></script>
+        <!-- /STOP  APPLET-->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> Trois points sont alignés si et seulement si leurs polaires sont concourantes (ou parallèles si les points sont alignés avec le centre du cercle).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> Three points are aligned if and only if their polars are concurrent (or parallel if the points are aligned with the center of the circle).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet, le point de concours des polaires des deux premiers est le pôle de la droite qui les joint. </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, the meeting point of the polars of the first two is the pole of the line which joins them. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Enfin, quand le point est sur le cercle, sa polaire est la tangente au cercle en ce point.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> Finally, when the point is on the circle, its polar is the tangent to the circle at that point.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Polaire d'un point par rapport à une conique</h2> Nous avons vu qu'une conique est la transformée d'un cercle par une projection centrale. <br /> Soit un point A' du plan de la conique qui soit l'image d'un point A du plan du cercle tel que A ne soit pas le centre du cercle. <br /> Alors A a une polaire D relativement au cercle.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Polar of a point with respect to a conic section</h2> We have seen that a conic is the transform of a circle by a central projection. <br /> Let a point A' of the plane of the conic be the image of a point A of the plane of the circle such that A is not the center of the circle. <br /> Then A has a polar D relatively to the circle.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> L'image D' de D par la projection centrale sera appelée la 'polaire' de A' par rapport à la conique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> The image D' of D by the central projection will be called the 'polar' of A' with respect to the conic.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm7"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 7</div> Etant donné que les projections centrales conservent les birapports (mais pas les angles), nous pouvons aussi bien opter pour la définition des polaires par les divisions harmoniques.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 7</div> Given that the central projections preserve the cross-ratios (but not the angles), we can as well opt for the definition of the polars by the harmonic divisions.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Si A' est un point du plan de la conique et si &Delta; et &Delta;' sont deux sécantes à la conique passant par A. <br> Si M<sub>1</sub> et M<sub>2</sub> sont les points d'intersection de &Delta; avec la conique. <br> Si M'<sub>1</sub> et M'<sub>2</sub> sont les points d'intersection de &Delta;' avec la conique. <br> Si B est le conjugué harmonique de A' par rapport à (M<sub>1</sub>,M<sub>2</sub>) et si B' est le conjugué harmonique de A' par rapport à (M'<sub>1</sub>,M'<sub>2</sub>). <br> La polaire de A' par rapport à la conique est la droite (BB'). <br> En particulier : </div>
+        <!-- /fr -->
+        <div lang="en"> If A' is a point in the plane of the conic and if &Delta; and &Delta;' are two secants to the conic passing through A. <br> If M<sub>1</sub> and M<sub>2</sub> are the intersection points of &Delta; with the conical. <br> If M'<sub>1</sub> and M'<sub>2</sub> are the intersection points of &Delta;' with the conical. <br> If B is the harmonic conjugate of A' with respect to (M<sub>1</sub>,M<sub>2</sub>) and if B' is the harmonic conjugate of A' with respect to (M'<sub>1</sub>,M'<sub>2</sub>). <br> The polar of A' with respect to the conic is the line (BB'). <br> Especially : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm8"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 8</div> Par tout point <input type="button" value="extérieur" onclick="go('coniquestangentes.html#def9')" data-inline="true" /> à la conique passent deux tangentes à la conique. <br /> La droite joignant les deux points de contact est la polaire du point par rapport à la conique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 8</div> Through any point <input type="button" value="exterior" onclick="go('coniquestangentes.html#def9')" data-inline="true" /> to the conic pass two tangents to the conic. <br /> The line joining the two contact points is the polar of the point with respect to the conic.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Equation de la polaire</h2>
+          <h3>Cas des coniques à centre</h3> Considérons une conique à centre C d'équation
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{x^{2}}{a^{2}} \pm \frac{y^{2}}{b^{2}} = 1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Soit M<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>) un point extérieur à la conique. <br> Soit P<sub>1</sub> la droite d'équation
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{xx_{1}}{a^{2}} \pm \frac{yy_{1}}{b^{2}} = 1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Alors, compte tenu de ce que nous avons vu sur <input type="button" value="les équations des tangentes" onclick="go('coniquestangentes.html#thm4')" data-inline="true" />, son équation est satisfaite par le point de contact de la première tangente à la conique C, et également par le second point de contact.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Equation of the polar</h2>
+          <h3>Case of centered conics</h3> Consider a conic with center C with equation
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \frac{x^{2}}{a^{2}} \pm \frac{y^{2}}{b^{2}} = 1 \)</p>
+          <!-- /INLINE UNIV FORMULA--> Let M<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>) be a point outside the conic. <br> Let P<sub>1</sub> be the line with equation
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \frac{xx_{1}}{a^{2}} \pm \frac{yy_{1}}{b^{2}} = 1 \)</p>
+          <!-- /INLINE UNIV FORMULA--> So, given what we saw on <input type="button" value="tangent equations" onclick="go('coniquestangentes.html#thm4')" data-inline="true" />, its equation is satisfied by the point of contact of the first tangent to the conic C, and also by the second point of contact.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm9"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 9</div> Cette équation est donc l'équation de la polaire de M<sub>1</sub> par rapport à C.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 9</div> This equation is therefore the equation of the polar of M<sub>1</sub> with respect to C.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm10"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 10</div> Cette équation reste valable quand M<sub>1</sub> n'est plus extérieur à la conique.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 10</div> This equation remains valid when M<sub>1</sub> is no longer exterior to the conic.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <div lang="fr">
+          <div data-role="collapsible">
+            <h4>démonstration</h4> En effet si M<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>) est intérieur à la conique les ordonnées des points d'intersection de la conique avec la verticale menée en M<sub>1</sub> sont
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle b\sqrt{1 - \frac{{x_{1}}^{2}}{a^{2}}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> et
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle - b\sqrt{1 - \frac{{x_{1}}^{2}}{a^{2}}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> L'intersection de cette verticale avec la droite
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{xx_{1}}{a^{2}} \pm \frac{yy_{1}}{b^{2}} = 1 \)</p>
+            <!-- /FORMULE UNIV INLINE--> a pour ordonnée
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{b^{2}}{y_{1}}\left( {1 - \frac{{x_{1}}^{2}}{a^{2}}} \right) \)</p>
+            <!-- /FORMULE UNIV INLINE--> Posant
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \epsilon = \sqrt{\left( {1 - \frac{{x_{1}}^{2}}{a^{2}}} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Il suffit de montrer que
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{y_{1} - {b\epsilon}}{y_{1} + {b\epsilon}} = \frac{\frac{b^{2}\epsilon^{2}}{y_{1}} - {b\epsilon}}{\frac{b^{2}\epsilon^{2}}{y_{1}} + {b\epsilon}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> ce qui se vérifie instantanément.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div data-role="collapsible">
+            <h4>proof</h4> Indeed if M<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>) is inside the conic the ordinates of the points of intersection of the conic with the vertical led in M<sub>1</sub> are
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle b\sqrt{1 - \frac{{x_{1}}^{2}}{a^{2}}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> and
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle - b\sqrt{1 - \frac{{x_{1}}^{2}}{a^{2}}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> The intersection of this vertical with the line
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{xx_{1}}{a^{2}} \pm \frac{yy_{1}}{b^{2}} = 1 \)</p>
+            <!-- /INLINE UNIV FORMULA--> has for ordinate
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{b^{2}}{y_{1}}\left( {1 - \frac{{x_{1}}^{2}}{a^{2}}} \right) \)</p>
+            <!-- /INLINE UNIV FORMULA--> Posing
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \epsilon = \sqrt{\left( {1 - \frac{{x_{1}}^{2}}{a^{2}}} \right)} \)</p>
+            <!-- /INLINE UNIV FORMULA--> It suffices to show that
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{y_{1} - {b\epsilon}}{y_{1} + {b\epsilon}} = \frac{\frac{b^{2}\epsilon^{2}}{y_{ 1}} - {b\epsilon}}{\frac{b^{2}\epsilon^{2}}{y_{1}} + {b\epsilon}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> which is verified instantly.
+          </div>
+          <!--demo -->
+        </div>
+        <!-- /en -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Application à l'ellipse</h4> L'applet suivante vous permet de déplacer le point M<sub>1</sub> et de voir sa polaire par rapport à E. <br> Les paramètres a et b de l'ellipse sont modifiables par curseurs. <br> L'équation de la polaire est calculée par la formule ci-dessus.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Application to the ellipse</h4> The following applet allows you to move the point M<sub>1</sub> and see its polar with respect to E. <br> Parameters a and b of the ellipse can be modified by cursors. <br> The polar equation is calculated by the above formula.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box5" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/polaires5.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h4>Application à l'hyperbole</h4> L'applet suivante vous permet de déplacer le point M<sub>1</sub> et de voir sa polaire par rapport à H, tracée en rouge. <br> Noter également, quand M<sub>1</sub> est extérieur à H, la position des points de contact des tangentes (représentés en bleu) selon le quadrant dans lequel M<sub>1</sub> se trouve. <br> On parle ici des quadrants délimités par les asymptotes (représentées en vert). <br> Observez ce qui se passe quand M<sub>1</sub> est sur H. <br> Oservez ce qui se passe quand M<sub>1</sub> est intérieur à H et se déplace sur l'axe x'Ox.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Application to the hyperbola</h4> The following applet allows you to move the point M<sub>1</sub> and see its polar with respect to H, plotted in red. <br> Also note, when M<sub>1</sub> is exterior to H, the position of the tangent contact points (shown in blue) according to the quadrant in which M<sub>1</sub> lies. <br> We are talking here about the quadrants delimited by the asymptotes (represented in green). <br> Observe what happens when M<sub>1</sub> is on H. <br> Observe what happens when M<sub>1</sub> is inside H and moves on the x'Ox axis.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box6" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/polaires6.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Cas des paraboles</h3> On montre de la même façon que pour les coniques à centre que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Case of parabolas</h3> We show in the same way as for the centered conics that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm11"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 11</div> Pour la parabole d'équation
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle y = \frac{1}{2p}x^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> la polaire du point M<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>) a pour équation
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle xx_{1} = p\left( {y + y_{1}} \right) \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 11</div> For the parabola of equation
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle y = \frac{1}{2p}x^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> the polar of the point M<sub>1</sub>(x<sub>1</sub>,y<sub>1</sub>) has the equation
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle xx_{1} = p\left( {y + y_{1}} \right) \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h4>Application</h4> Nous utilisons le théorème ci-dessus pour calculer la polaire d'un point M<sub>1</sub>. <br> Vous pouvez déplacer ce point avec l'applet ci-après.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Application</h4> We use the above theorem to calculate the polar of a point M<sub>1</sub>. <br> You can move this point with the applet below.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box7" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/polaires7.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/coniquespolaires/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/coniquespolaires/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

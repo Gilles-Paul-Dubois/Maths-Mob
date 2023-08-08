@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>reperes.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #0033b3;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">include(</span><span class="s1">&quot;BasesAffines.jl&quot;</span><span class="s0">)</span>
+
+<span class="s2">#test pour savoir si un système de vecteur est une base</span>
+<span class="s3">function </span><span class="s0">base(VS::VectorsSystem{T}) </span><span class="s3">where </span><span class="s0">{T}</span>
+    <span class="s0">s1, s2 = size(VS, </span><span class="s4">1</span><span class="s0">), size(VS, </span><span class="s4">2</span><span class="s0">)</span>
+    <span class="s3">if </span><span class="s0">s1 != s2</span>
+        <span class="s3">return false</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s0">rang(VS) == s1 ? </span><span class="s3">true </span><span class="s0">: </span><span class="s3">false</span>
+<span class="s3">end</span>
+
+
+<span class="s3">struct </span><span class="s0">OVS{T}</span>
+    <span class="s0">O::Point{T}</span>
+    <span class="s0">VS::VectorsSystem{T}</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">repere(ovs::OVS{T}) </span><span class="s3">where </span><span class="s0">{T}</span>
+    <span class="s3">if </span><span class="s0">!base(ovs.VS)</span>
+        <span class="s3">return false</span>
+    <span class="s3">end</span>
+    <span class="s0">n = length(ovs.O.C)</span>
+    <span class="s0">s = size(ovs.VS, </span><span class="s4">1</span><span class="s0">)</span>
+    <span class="s3">if </span><span class="s0">n != s</span>
+        <span class="s3">return false</span>
+    <span class="s3">end</span>
+    <span class="s3">return true</span>
+<span class="s3">end</span>
+
+
+<span class="s3">function </span><span class="s0">coords(B::VectorsSystem{T}, V) </span><span class="s3">where </span><span class="s0">{T}</span>
+    <span class="s3">if </span><span class="s0">gettype(B) != typeof(V[</span><span class="s4">1</span><span class="s0">])</span>
+        <span class="s3">return </span><span class="s0">nothing</span>
+    <span class="s3">end</span>
+    <span class="s0">n = length(V)</span>
+    <span class="s3">if </span><span class="s0">size(B, </span><span class="s4">1</span><span class="s0">) != n</span>
+        <span class="s3">return </span><span class="s0">nothing</span>
+    <span class="s3">end</span>
+    <span class="s3">if </span><span class="s0">!base(B)</span>
+        <span class="s3">return </span><span class="s0">nothing</span>
+    <span class="s3">end</span>
+    <span class="s0">M = matrice(B)</span>
+    <span class="s3">return </span><span class="s0">transpose(M) \ V</span>
+<span class="s3">end</span>
+
+<span class="s3">function </span><span class="s0">coords(REP::OVS{T},P::Point{T}) </span><span class="s3">where </span><span class="s0">T</span>
+    <span class="s0">O=REP.O</span>
+    <span class="s0">V=P-O</span>
+    <span class="s0">B=REP.VS</span>
+    <span class="s3">return </span><span class="s0">coords(B,V)</span>
+<span class="s3">end</span>
+
+
+</pre>
+</body>
+</html>

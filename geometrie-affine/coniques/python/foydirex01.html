@@ -1,0 +1,337 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #008080; font-weight: bold;}
+.s5 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0"># -*- coding: utf-8 -*-</span>
+<span class="s0"># python version 3.4</span>
+<span class="s2">import </span><span class="s1">math</span>
+
+<span class="s2">global </span><span class="s1">epsilon</span>
+<span class="s1">epsilon = </span><span class="s3">1.0e-12  </span><span class="s0"># problèmes d'arrondi - rounding problems</span>
+
+<span class="s2">def </span><span class="s1">arrondi(x):</span>
+    <span class="s1">delta=abs(x-round(x))</span>
+    <span class="s2">if </span><span class="s1">delta &lt;epsilon:</span>
+        <span class="s2">return </span><span class="s1">round(x)</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">x</span>
+
+<span class="s0"># toutes les quantités calculées inférieures à epsilon seront considérées comme nulles</span>
+<span class="s0"># all computed quantities less than epsilon will be considered as zero</span>
+<span class="s2">class </span><span class="s1">ConiqueG():</span>
+    <span class="s0">&quot;&quot;&quot;les coniques algébriques les plus générales, pouvant comporter des termes en xy&quot;&quot;&quot;</span>
+    <span class="s0">&quot;&quot;&quot;the most general algebraic conics, can include terms in xy xy&quot;&quot;&quot;</span>    
+
+    <span class="s2">def </span><span class="s1">__init__(self, L):</span>
+        <span class="s0">&quot;&quot;&quot; constructeur recevant en argument la liste des 6 coefficients&quot;&quot;&quot;</span>
+        <span class="s0">&quot;&quot;&quot; constructor from a list of 6 coefficients&quot;&quot;&quot;</span>        
+        <span class="s1">self.A = L[</span><span class="s3">0</span><span class="s1">]</span>
+        <span class="s1">self.B = L[</span><span class="s3">1</span><span class="s1">]</span>
+        <span class="s1">self.C = L[</span><span class="s3">2</span><span class="s1">]</span>
+        <span class="s1">self.D = L[</span><span class="s3">3</span><span class="s1">]</span>
+        <span class="s1">self.E = L[</span><span class="s3">4</span><span class="s1">]</span>
+        <span class="s1">self.F = L[</span><span class="s3">5</span><span class="s1">]</span>
+
+    <span class="s2">def </span><span class="s1">__str__(self):</span>
+        <span class="s0">&quot;&quot;&quot;représentation externe - convert to string&quot;&quot;&quot;</span>
+        <span class="s1">Ap= </span><span class="s4">&quot;&quot; </span><span class="s2">if </span><span class="s1">self.A==</span><span class="s3">0 </span><span class="s2">else </span><span class="s1">str(self.A)+</span><span class="s4">&quot;x²&quot;</span>
+        <span class="s2">return </span><span class="s1">Ap+ (</span><span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.B &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.B) + </span><span class="s4">&quot;xy&quot; </span><span class="s1">+ (</span>
+            <span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.C &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.C) + </span><span class="s4">&quot;y²&quot; </span><span class="s1">+ (</span><span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.D &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.D) + </span><span class="s4">&quot;x&quot; </span><span class="s1">+ (</span>
+                   <span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.E &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.E) + </span><span class="s4">&quot;y&quot; </span><span class="s1">+ (</span><span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.F &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.F);</span>
+
+    <span class="s2">def </span><span class="s1">reduceSR(self):</span>
+        <span class="s0">&quot;&quot;&quot;disparition du terme en xy dans un repère convenable&quot;&quot;&quot;</span>
+        <span class="s0">&quot;&quot;&quot;cancellation of  xy term in proper frame&quot;&quot;&quot;</span>        
+        <span class="s2">if </span><span class="s1">self.B == </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s1">u = [</span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">]</span>
+            <span class="s1">v = [</span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">]</span>
+            <span class="s1">o1 = o2 = </span><span class="s3">0</span>
+            <span class="s2">if </span><span class="s1">self.A != </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s1">o1 = -self.D / (</span><span class="s3">2.0 </span><span class="s1">* self.A)</span>
+            <span class="s2">if </span><span class="s1">self.C != </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s1">o2 = -self.E / (</span><span class="s3">2.0 </span><span class="s1">* self.C)</span>
+            <span class="s2">if </span><span class="s1">abs(o1) &lt; epsilon:</span>
+                <span class="s1">o1 = </span><span class="s3">0</span>
+            <span class="s2">if </span><span class="s1">abs(o2) &lt; epsilon:</span>
+                <span class="s1">o2 = </span><span class="s3">0</span>
+            <span class="s1">O = [o1, o2]</span>
+            <span class="s2">return </span><span class="s1">ConiqueSR([self.A, self.C, self.D, self.E, self.F], [u, v], O)</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">self.A == self.C:</span>
+                <span class="s1">theta = math.pi / </span><span class="s3">4</span>
+            <span class="s2">else</span><span class="s1">:</span>
+                <span class="s1">theta = </span><span class="s3">0.5 </span><span class="s1">* math.atan(float(self.B) / float(self.A - self.C))</span>
+            <span class="s1">c = math.cos(theta)</span>
+            <span class="s1">s = math.sin(theta)</span>
+            <span class="s1">u = [c, s]</span>
+            <span class="s1">v = [-s, c]</span>
+            <span class="s1">A1 = self.A * c * c + self.B * c * s + self.C * s * s</span>
+            <span class="s1">C1 = self.A * s * s - self.B * c * s + self.C * c * c</span>
+            <span class="s1">D1 = self.D * c + self.E * s</span>
+            <span class="s1">E1 = self.E * c - self.D * s</span>
+            <span class="s1">F1 = self.F</span>
+            <span class="s1">o1 = o2 = </span><span class="s3">0</span>
+            <span class="s1">A1=arrondi(A1)</span>
+            <span class="s1">C1 = arrondi(C1)</span>
+            <span class="s1">D1 = arrondi(D1)</span>
+            <span class="s1">E1 = arrondi(E1)</span>
+            <span class="s1">F1 = arrondi(F1)</span>
+            <span class="s1">L = [A1, C1, D1, E1, F1]</span>
+            <span class="s2">if </span><span class="s1">A1 != </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s1">o1 = -D1 / (</span><span class="s3">2.0 </span><span class="s1">* A1)</span>
+            <span class="s2">if </span><span class="s1">C1 != </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s1">o2 = -E1 / (</span><span class="s3">2.0 </span><span class="s1">* C1)</span>
+            <span class="s1">o1=arrondi(o1)</span>
+            <span class="s1">o2=arrondi(o2)</span>
+            <span class="s1">o3 = c * o1 - s * o2</span>
+            <span class="s1">o4 = s * o1 + c * o2</span>
+            <span class="s1">o3=arrondi(o3)</span>
+            <span class="s1">o4=arrondi(o4)</span>
+            <span class="s1">O = [o3, o4]</span>
+            <span class="s2">return </span><span class="s1">ConiqueSR(L, [u, v], O)</span>
+
+
+<span class="s2">class </span><span class="s1">ConiqueSR():</span>
+    <span class="s0">&quot;&quot;&quot; les coniques algébriques semi-réduites sans terme en xy&quot;&quot;&quot;</span>
+    <span class="s0">&quot;&quot;&quot; half-reduced algebraic conics without xy term&quot;&quot;&quot;</span>    
+
+    <span class="s2">def </span><span class="s1">__init__(self, L, B, O):  </span><span class="s0"># constructeur prenant en argument une liste de 5 coefficients et un repère - constructor from a list of 5 coeffs and a frame</span>
+    
+        <span class="s1">self.A = L[</span><span class="s3">0</span><span class="s1">]</span>
+        <span class="s1">self.C = L[</span><span class="s3">1</span><span class="s1">]</span>
+        <span class="s1">self.D = L[</span><span class="s3">2</span><span class="s1">]</span>
+        <span class="s1">self.E = L[</span><span class="s3">3</span><span class="s1">]</span>
+        <span class="s1">self.F = L[</span><span class="s3">4</span><span class="s1">]</span>
+        <span class="s1">self.Base = B</span>
+        <span class="s1">self.Omega = O</span>
+
+    <span class="s2">def </span><span class="s1">__str__(self):</span>
+        <span class="s0">&quot;&quot;&quot;représentation externe - convert to string&quot;&quot;&quot;</span>
+        <span class="s1">Ap = </span><span class="s4">&quot;&quot; </span><span class="s2">if </span><span class="s1">self.A == </span><span class="s3">0 </span><span class="s2">else </span><span class="s1">str(self.A) + </span><span class="s4">&quot;x²&quot;</span>
+        <span class="s1">Cp=</span><span class="s4">&quot;&quot; </span><span class="s2">if </span><span class="s1">self.C==</span><span class="s3">0 </span><span class="s2">else  </span><span class="s1">(</span><span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.C &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.C) + </span><span class="s4">&quot;y²&quot;</span>
+        <span class="s1">Dp=</span><span class="s4">&quot;&quot; </span><span class="s2">if </span><span class="s1">self.D==</span><span class="s3">0 </span><span class="s2">else </span><span class="s1">(</span><span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.D &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.D) + </span><span class="s4">&quot;x&quot;</span>
+        <span class="s1">Ep=</span><span class="s4">&quot;&quot; </span><span class="s2">if </span><span class="s1">self.E==</span><span class="s3">0 </span><span class="s2">else </span><span class="s1">(</span><span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.E &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.E) + </span><span class="s4">&quot;y&quot;</span>
+        <span class="s1">Fp=</span><span class="s4">&quot;&quot; </span><span class="s2">if </span><span class="s1">self.F==</span><span class="s3">0 </span><span class="s2">else </span><span class="s1">(</span><span class="s4">&quot;+&quot; </span><span class="s2">if </span><span class="s1">self.F &gt;= </span><span class="s3">0 </span><span class="s2">else </span><span class="s4">&quot;&quot;</span><span class="s1">) + str(self.F) + </span><span class="s4">&quot;=0&quot;</span>
+        <span class="s1">equar = Ap + Cp + Dp + Ep + Fp</span>
+        <span class="s1">strbase = </span><span class="s4">&quot;dans la base: &quot; </span><span class="s1">+ str(self.Base)</span>
+        <span class="s1">strorigine = </span><span class="s4">&quot;Origine: &quot; </span><span class="s1">+ str(self.Omega)</span>
+        <span class="s2">return </span><span class="s1">equar + </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ strbase + </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ strorigine</span>
+
+
+<span class="s2">class </span><span class="s1">ConiqueR(ConiqueSR):</span>
+    <span class="s0">&quot;&quot;&quot;Les coniques réduites dérivent de la classe précédente&quot;&quot;&quot;</span>
+    <span class="s0">&quot;&quot;&quot;Reduced conics inherit from previous class&quot;&quot;&quot;</span>    
+
+    <span class="s2">def </span><span class="s1">__init__(self, CSR):</span>
+        <span class="s1">self.A = CSR.A</span>
+        <span class="s1">self.C = CSR.C</span>
+        <span class="s1">self.D = CSR.D</span>
+        <span class="s1">self.E = CSR.E</span>
+        <span class="s1">self.F = CSR.F</span>
+        <span class="s1">self.Base = CSR.Base</span>
+        <span class="s1">self.Omega = CSR.Omega</span>
+        <span class="s0"># détermination du type par l'algorithme donné dans le tableau ci-dessus - determination of type using algorithm givn in the course</span>
+        <span class="s1">self.AC = self.A * self.C</span>
+        <span class="s1">self.T = </span><span class="s2">None  </span><span class="s0"># type non défini a priori- type to be defined</span>
+        <span class="s1">self.AxePara = </span><span class="s2">None  </span><span class="s0"># direction de l'axe de symétrie si parabole - direction of axis if parabola</span>
+        <span class="s1">self.a = </span><span class="s2">None  </span><span class="s0"># demi-axe a si conique à centre - semi-axe a if centered conic</span>
+        <span class="s1">self.b = </span><span class="s2">None  </span><span class="s0"># demi-axe b si conique à centre t semi-axe b if centered conic</span>
+        <span class="s1">self.e = </span><span class="s2">None</span>
+        <span class="s1">self.d = </span><span class="s2">None</span>
+        <span class="s1">self.p = </span><span class="s2">None</span>
+        <span class="s1">self.alpha = </span><span class="s2">None</span>
+        <span class="s2">if </span><span class="s1">self.AC != </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s1">self.N = (self.D * self.D) / (</span><span class="s3">4.0 </span><span class="s1">* self.A) + (self.E * self.E) / (</span><span class="s3">4.0 </span><span class="s1">* self.C) - self.F</span>
+            <span class="s2">if </span><span class="s1">abs(self.N) &lt; epsilon:</span>
+                <span class="s1">self.N = </span><span class="s3">0</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s1">self.N = </span><span class="s2">None</span>
+        <span class="s2">if </span><span class="s1">self.AC != </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">self.N &gt; </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s2">if </span><span class="s1">self.A &gt; </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.C &gt; </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Ellipse&quot;</span>
+                    <span class="s1">self.a = math.sqrt(float(self.N) / float(self.A))</span>
+                    <span class="s1">self.b = math.sqrt(float(self.N) / float(self.C))</span>
+                    <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                        <span class="s1">self.a = </span><span class="s3">0</span>
+                    <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                        <span class="s1">self.b = </span><span class="s3">0</span>
+                    <span class="s2">if </span><span class="s1">self.a &lt; self.b:</span>
+                        <span class="s1">h = self.Base[</span><span class="s3">0</span><span class="s1">]</span>
+                        <span class="s1">k = self.Base[</span><span class="s3">1</span><span class="s1">]</span>
+                        <span class="s1">self.Base = [k, h]  </span><span class="s0"># inversion des x et des y - permuting x and y</span>
+                        <span class="s1">self.a = math.sqrt(float(self.N) / float(self.C))</span>
+                        <span class="s1">self.b = math.sqrt(float(self.N) / float(self.A))</span>
+                        <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                            <span class="s1">self.a = </span><span class="s3">0</span>
+                        <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                            <span class="s1">self.b = </span><span class="s3">0</span>
+
+                    <span class="s1">self.c = math.sqrt(self.a * self.a - self.b * self.b)</span>
+                    <span class="s2">if </span><span class="s1">self.c != </span><span class="s3">0</span><span class="s1">:</span>
+                        <span class="s1">self.d = self.a * self.a / self.c</span>
+                    <span class="s1">self.e = self.c / self.a</span>
+                    <span class="s1">self.p = self.b * self.b / self.a</span>
+                <span class="s2">if </span><span class="s1">self.A &lt; </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.C &lt; </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Ensemble Vide&quot;</span>
+                <span class="s2">if </span><span class="s1">self.AC &lt; </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Hyperbole&quot;</span>
+                    <span class="s2">if </span><span class="s1">self.A &gt; </span><span class="s3">0</span><span class="s1">:</span>
+                        <span class="s1">self.a = math.sqrt(float(self.N) / float(self.A))</span>
+                        <span class="s1">self.b = math.sqrt(-float(self.N) / float(self.C))</span>
+                        <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                            <span class="s1">self.a = </span><span class="s3">0</span>
+                        <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                            <span class="s1">self.b = </span><span class="s3">0</span>
+                    <span class="s2">else</span><span class="s1">:</span>
+                        <span class="s1">k = self.Base[</span><span class="s3">0</span><span class="s1">]</span>
+                        <span class="s1">h = self.Base[</span><span class="s3">1</span><span class="s1">]</span>
+                        <span class="s1">self.Base = [h, k]  </span><span class="s0"># inversion des x et des y - permuting x and y</span>
+                        <span class="s1">self.a = math.sqrt(float(self.N) / float(self.C))</span>
+                        <span class="s1">self.b = math.sqrt(-float(self.N) / float(self.A))</span>
+                        <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                            <span class="s1">self.a = </span><span class="s3">0</span>
+                        <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                            <span class="s1">self.b = </span><span class="s3">0</span>
+                    <span class="s1">self.c = math.sqrt(self.a * self.a + self.b * self.b)</span>
+                    <span class="s1">self.d = self.a * self.a / self.c</span>
+                    <span class="s1">self.e = self.c / self.a</span>
+                    <span class="s1">self.p = self.b * self.b / self.a</span>
+                    <span class="s1">self.alpha = self.b / self.a</span>
+            <span class="s2">if </span><span class="s1">self.N == </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s2">if </span><span class="s1">self.AC &gt; </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Un point&quot;</span>
+                <span class="s2">else</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Couple de droites sécantes&quot;</span>
+            <span class="s2">if </span><span class="s1">self.N &lt; </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s2">if </span><span class="s1">self.A &gt; </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.C &gt; </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Ensemble vide&quot;</span>
+                <span class="s2">if </span><span class="s1">self.A &lt; </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.C &lt; </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Ellipse&quot;</span>
+                    <span class="s1">self.a = math.sqrt(float(self.N) / float(self.A))</span>
+                    <span class="s1">self.b = math.sqrt(float(self.N) / float(self.C))</span>
+                    <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                        <span class="s1">self.a = </span><span class="s3">0</span>
+                    <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                        <span class="s1">self.b = </span><span class="s3">0</span>
+                    <span class="s2">if </span><span class="s1">self.a &lt; self.b:</span>
+                        <span class="s1">h = self.Base[</span><span class="s3">0</span><span class="s1">]</span>
+                        <span class="s1">k = self.Base[</span><span class="s3">1</span><span class="s1">]</span>
+                        <span class="s1">self.Base = [k, h]  </span><span class="s0"># inversion des x et des y - permuting x and y</span>
+                        <span class="s1">self.a = math.sqrt(float(self.N) / float(self.C))</span>
+                        <span class="s1">self.b = math.sqrt(-float(self.N) / float(self.A))</span>
+                        <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                            <span class="s1">self.a = </span><span class="s3">0</span>
+                        <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                            <span class="s1">self.b = </span><span class="s3">0</span>
+                    <span class="s1">self.c = math.sqrt(self.a * self.a - self.b * self.b)</span>
+                    <span class="s1">self.d = self.a * self.a / self.c</span>
+                    <span class="s1">self.e = self.c / self.a</span>
+                    <span class="s1">self.p = self.b * self.b / self.a</span>
+                <span class="s2">if </span><span class="s1">self.AC &lt; </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Hyperbole&quot;</span>
+                    <span class="s2">if </span><span class="s1">self.A &lt; </span><span class="s3">0</span><span class="s1">:</span>
+                        <span class="s1">self.a = math.sqrt(float(self.N) / float(self.A))</span>
+                        <span class="s1">self.b = math.sqrt(-float(self.N) / float(self.C))</span>
+                        <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                            <span class="s1">self.a = </span><span class="s3">0</span>
+                        <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                            <span class="s1">self.b = </span><span class="s3">0</span>
+                    <span class="s2">else</span><span class="s1">:</span>
+                        <span class="s1">k = self.Base[</span><span class="s3">0</span><span class="s1">]</span>
+                        <span class="s1">h = self.Base[</span><span class="s3">1</span><span class="s1">]</span>
+                        <span class="s1">self.Base = [h, k]  </span><span class="s0"># inversion des x et des y</span>
+                        <span class="s1">self.a = math.sqrt(float(self.N) / float(self.C))</span>
+                        <span class="s1">self.b = math.sqrt(-float(self.N) / float(self.A))</span>
+                        <span class="s2">if </span><span class="s1">abs(self.a) &lt; epsilon:</span>
+                            <span class="s1">self.a = </span><span class="s3">0</span>
+                        <span class="s2">if </span><span class="s1">abs(self.b) &lt; epsilon:</span>
+                            <span class="s1">self.b = </span><span class="s3">0</span>
+                    <span class="s1">self.c = math.sqrt(self.a * self.a + self.b * self.b)</span>
+                    <span class="s1">self.d = self.a * self.a / self.c;</span>
+                    <span class="s1">self.e = self.c / self.a;</span>
+                    <span class="s1">self.p = self.b * self.b / self.a;</span>
+                    <span class="s1">self.alpha = self.b / self.a</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s2">if </span><span class="s1">self.A == </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.C != </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s2">if </span><span class="s1">self.D != </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Parabole&quot;</span>
+                    <span class="s1">self.AxePara = </span><span class="s4">&quot;Ox&quot;</span>
+                    <span class="s1">self.p = (</span><span class="s3">0.5 </span><span class="s1">* self.D / self.C)</span>
+                    <span class="s1">self.e = </span><span class="s3">1</span>
+                <span class="s2">else</span><span class="s1">:</span>
+                    <span class="s1">G = self.E * self.E / </span><span class="s3">4.0 </span><span class="s1">- self.F * self.C</span>
+                    <span class="s2">if </span><span class="s1">abs(G) &lt; epsilon:</span>
+                        <span class="s1">G = </span><span class="s3">0</span>
+                    <span class="s2">if </span><span class="s1">G == </span><span class="s3">0</span><span class="s1">:</span>
+                        <span class="s1">self.T = </span><span class="s4">&quot;Une droite&quot;</span>
+                    <span class="s2">else</span><span class="s1">:</span>
+                        <span class="s1">self.T = </span><span class="s4">&quot;Deux doites parallèles&quot;</span>
+            <span class="s2">if </span><span class="s1">self.A != </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.C == </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s2">if </span><span class="s1">self.E != </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Parabole&quot;</span>
+                    <span class="s1">self.AxePara = </span><span class="s4">&quot;Oy&quot;</span>
+                    <span class="s1">self.p = (</span><span class="s3">0.5 </span><span class="s1">* self.E / self.A)</span>
+                    <span class="s1">self.e = </span><span class="s3">1</span>
+                <span class="s2">else</span><span class="s1">:</span>
+                    <span class="s1">G = self.E * self.E / </span><span class="s3">4.0 </span><span class="s1">- self.F * self.C</span>
+                    <span class="s2">if </span><span class="s1">abs(G) &lt; epsilon:</span>
+                        <span class="s1">G = </span><span class="s3">0</span>
+                    <span class="s2">if </span><span class="s1">G == </span><span class="s3">0</span><span class="s1">:</span>
+                        <span class="s1">self.T = </span><span class="s4">&quot;Une droite&quot;</span>
+                    <span class="s2">else</span><span class="s1">:</span>
+                        <span class="s1">self.T = </span><span class="s4">&quot;Deux droites parallèles&quot;</span>
+            <span class="s2">if </span><span class="s1">self.A == </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.C == </span><span class="s3">0</span><span class="s1">:</span>
+                <span class="s2">if </span><span class="s1">self.D == </span><span class="s3">0 </span><span class="s2">and </span><span class="s1">self.E == </span><span class="s3">0</span><span class="s1">:</span>
+                    <span class="s2">if </span><span class="s1">F == </span><span class="s3">0</span><span class="s1">:</span>
+                        <span class="s1">self.T = </span><span class="s4">&quot;Plan entier&quot;</span>
+                    <span class="s2">else</span><span class="s1">:</span>
+                        <span class="s1">self.T = </span><span class="s4">&quot;Ensemble vide&quot;</span>
+                <span class="s2">else</span><span class="s1">:</span>
+                    <span class="s1">self.T = </span><span class="s4">&quot;Une droite&quot;</span>
+
+    <span class="s2">def </span><span class="s1">__str__(self):</span>
+        <span class="s1">s = ConiqueSR.__str__(self)  </span><span class="s0"># appel de la méthode homonyme de la classe parente - call to the homonym method in parent class</span>
+        <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ self.T</span>
+        <span class="s2">if </span><span class="s1">self.a != </span><span class="s2">None</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;demi-axe a:&quot; </span><span class="s1">+ str(self.a)</span>
+        <span class="s2">if </span><span class="s1">self.b != </span><span class="s2">None</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;demi-axe b:&quot; </span><span class="s1">+ str(self.b)</span>
+        <span class="s2">if </span><span class="s1">self.AxePara != </span><span class="s2">None</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;Axe parabole:&quot; </span><span class="s1">+ str(self.AxePara)</span>
+        <span class="s2">if </span><span class="s1">self.e != </span><span class="s2">None</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;Excentricité:&quot; </span><span class="s1">+ str(self.e)</span>
+        <span class="s2">if </span><span class="s1">self.d != </span><span class="s2">None</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;Directrices: x=+/-&quot; </span><span class="s1">+ str(self.d)</span>
+        <span class="s2">if </span><span class="s1">self.p != </span><span class="s2">None</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;Paramètre: &quot; </span><span class="s1">+ str(self.p)</span>
+        <span class="s2">if </span><span class="s1">self.e == </span><span class="s3">0</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;c'est un cercle&quot;</span>
+        <span class="s2">if </span><span class="s1">self.alpha != </span><span class="s2">None</span><span class="s1">:</span>
+            <span class="s1">s += </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">&quot; </span><span class="s1">+ </span><span class="s4">&quot;Asymptotes: y=+/-&quot; </span><span class="s1">+ str(self.alpha) + </span><span class="s4">&quot;x&quot;</span>
+        <span class="s2">return </span><span class="s1">s</span>
+
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s2">for </span><span class="s1">L </span><span class="s2">in </span><span class="s1">[[</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">6</span><span class="s1">, -</span><span class="s3">6</span><span class="s1">, </span><span class="s3">21</span><span class="s1">], [</span><span class="s3">1</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, -</span><span class="s3">4</span><span class="s1">, </span><span class="s3">6</span><span class="s1">, </span><span class="s3">9</span><span class="s1">], [</span><span class="s3">325</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">52</span><span class="s1">, </span><span class="s3">500</span><span class="s1">, </span><span class="s3">480</span><span class="s1">, </span><span class="s3">0</span><span class="s1">], [</span><span class="s3">3</span><span class="s1">, -</span><span class="s3">4</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">8</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, -</span><span class="s3">1</span><span class="s1">],</span>
+              <span class="s1">[</span><span class="s3">4</span><span class="s1">, </span><span class="s3">4</span><span class="s1">, </span><span class="s3">1</span><span class="s1">, </span><span class="s3">8</span><span class="s1">, -</span><span class="s3">16</span><span class="s1">, </span><span class="s3">0</span><span class="s1">], [</span><span class="s3">17</span><span class="s1">, -</span><span class="s3">12</span><span class="s1">, </span><span class="s3">8</span><span class="s1">, -</span><span class="s3">68</span><span class="s1">, </span><span class="s3">24</span><span class="s1">, -</span><span class="s3">12</span><span class="s1">], [</span><span class="s3">1</span><span class="s1">, -</span><span class="s3">6</span><span class="s1">, </span><span class="s3">9</span><span class="s1">, </span><span class="s3">4</span><span class="s1">, -</span><span class="s3">12</span><span class="s1">, </span><span class="s3">4</span><span class="s1">], [</span><span class="s3">4</span><span class="s1">, -</span><span class="s3">12</span><span class="s1">, </span><span class="s3">9</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, -</span><span class="s3">3</span><span class="s1">, -</span><span class="s3">12</span><span class="s1">],</span>
+              <span class="s1">[</span><span class="s3">14</span><span class="s1">, -</span><span class="s3">4</span><span class="s1">, </span><span class="s3">11</span><span class="s1">, -</span><span class="s3">88</span><span class="s1">, </span><span class="s3">34</span><span class="s1">, </span><span class="s3">149</span><span class="s1">], [</span><span class="s3">1</span><span class="s1">, </span><span class="s3">3</span><span class="s1">, -</span><span class="s3">3</span><span class="s1">, </span><span class="s3">6</span><span class="s1">, </span><span class="s3">9</span><span class="s1">, </span><span class="s3">9</span><span class="s1">], [</span><span class="s3">95</span><span class="s1">, </span><span class="s3">56</span><span class="s1">, -</span><span class="s3">10</span><span class="s1">, -</span><span class="s3">56</span><span class="s1">, </span><span class="s3">20</span><span class="s1">, </span><span class="s3">194</span><span class="s1">],</span>
+              <span class="s1">[</span><span class="s3">16</span><span class="s1">, -</span><span class="s3">24</span><span class="s1">, </span><span class="s3">9</span><span class="s1">, -</span><span class="s3">60</span><span class="s1">, -</span><span class="s3">80</span><span class="s1">, </span><span class="s3">400</span><span class="s1">]]:</span>
+        <span class="s1">print(ConiqueR(ConiqueG(L).reduceSR()), </span><span class="s4">&quot;</span><span class="s5">\n</span><span class="s4">-----------------</span><span class="s5">\n</span><span class="s4">&quot;</span><span class="s1">)</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">&quot;__main__&quot;</span><span class="s1">:</span>
+    <span class="s1">main()</span></pre>
+</body>
+</html>

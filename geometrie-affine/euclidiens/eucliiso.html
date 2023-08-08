@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Isométries</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/eucliiso/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/eucliiso/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2> On se place toujours dans le cadre d'un espace affine euclidien de dimension finie A ayant E pour espace vectoriel directeur. <br /> On suppose connus les résultats relatifs aux <input type="button" value="endomorphismes orthogonaux" onclick="go('../../algebre-lineaire/orthogonalite/grouporth.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2> We still eal with an affine Euclidean space of finite dimension A having E as its associated vector space. <br /> We assume that the results relating to <input type="button" value="orthogonal endomorphisms" onclick="go('../../algebre-lineaire/orthogonalite/grouporth.html#')" data-inline=" true" /> are known.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une application f : A &rarr; A est appelée une <strong>
+              <em>'isométrie'</em>
+            </strong> si elle conserve les distances c'est à dire si &forall; (M,N) &isin; A &times; A on a d(f(M),f(N))=d(M,N).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A map f: A &rarr; A is called an <strong>
+              <em>'isometry'</em>
+            </strong> if it preserves distances i.e. if &forall; (M,N) &isin; At &times; A we have d(f(M),f(N))=d(M,N).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/isomet1.png" width="287" height="266" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Montrons tout de suite que : </div>
+        <!-- /fr -->
+        <div lang="en"> We immediately show that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Une telle application est nécessairement affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Such a mapping is necessarily affine.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Fixons une origine et soit u: E &rarr; E l'application &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OM} \mapsto \overrightarrow{O'M'} \)
+          <!-- /FORMULE UNIV INLINE--> . <br> u est une application de E dans E vérifiant &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle {\parallel \overrightarrow{u(v)} \parallel} = {\parallel \overrightarrow{v} \parallel} \)
+          <!-- /FORMULE UNIV INLINE--> . <br> Donc, sachant que &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} . \overrightarrow{w} = \frac{1}{2}\left( {\parallel \overrightarrow{v} + \overrightarrow{w} \parallel}^{2} - {\parallel \overrightarrow{v} \parallel}^{2} - {\parallel \overrightarrow{w} \parallel}^{2} \right) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; , il en résulte que u conserve le produit scalaire en ce sens que &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle u\left( \overrightarrow{v} \right) . u\left( \overrightarrow{w} \right) = \overrightarrow{v} . \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; pour tout couple de vecteurs (&nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;,&nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;) de E. <br> u transforme donc toute <input type="button" value="base orthonormale" onclick="go('../../algebre-lineaire/orthogonalite/basorth.html#')" data-inline="true" /> en une base orthonormale. <br /> Nous montrons maintenant que u est linéaire. <br> Soit B=(e<sub>1</sub>, e<sub>2</sub>, ... , e<sub>n</sub>)une base orthonormale, de sorte que B'=(u(e<sub>1</sub>), u(e<sub>2</sub>), ... ,u(e<sub>n</sub>)) est aussi une base orthonormale. <br> Si v est un vecteur de coordonnées (&lambda;<sub>1</sub>, &lambda;<sub>2</sub>, ... , &lambda;<sub>n</sub>) on a :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \lambda_{i} = \overrightarrow{v} . \overrightarrow{e_{i}} = u\left( \overrightarrow{v} \right) . u\left( \overrightarrow{e_{i}} \right) \)</p>
+          <!-- /FORMULE UNIV INLINE--> Ce qui prouve que
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle u\left( \overrightarrow{v} \right) = {\sum\limits_{i = 1}^{n}\lambda_{i}u\left( \overrightarrow{e_{i}} \right)} \)</p>
+          <!-- /FORMULE UNIV INLINE--> et donc que u est linéaire. <br> En outre, u transformant une base orthonormale en une base orthonormale est bijective. <br> Nous tirons immédiatement de là le résultat suivant :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Fix an origin and let u: E &rarr; And the app &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OM} \mapsto \overrightarrow{O'M'} \)
+          <!-- /INLINE UNIV FORMULA--> . <br> u is an application from E to E satisfying &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle {\parallel \overrightarrow{u(v)} \parallel} = {\parallel \overrightarrow{v} \parallel} \)
+          <!-- /INLINE UNIV FORMULA--> . <br> So knowing that &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} . \overrightarrow{w} = \frac{1}{2}\left( {\parallel \overrightarrow{v} + \overrightarrow{w} \parallel}^{2} - {\parallel \overrightarrow{v} \parallel} ^{2} - {\parallel \overrightarrow{w} \parallel}^{2} \right) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; , it follows that u preserves the scalar product in the sense that &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle u\left( \overrightarrow{v} \right) . u\left( \overrightarrow{w} \right) = \overrightarrow{v} . \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; for any pair of vectors (&nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{v} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;,&nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{w} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;) by E. <br> so u transform any <input type="button" value="orthonormal basis" onclick="go('../../algebre-lineaire/orthogonalite/basorth.html#')" data-inline="true" /> to an orthonormal basis. <br /> We now show that u is linear. <br> Let B=(e<sub>1</sub>, e<sub>2</sub>, ... , e<sub>n</sub>) be an orthonormal basis, so that B'=(u (e<sub>1</sub>), u(e<sub>2</sub>), ... ,u(e<sub>n</sub>)) is also an orthonormal basis. <br> If v is a coordinate vector (&lambda;<sub>1</sub>, &lambda;<sub>2</sub>, ... , &lambda;<sub>n</sub>) we have:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \lambda_{i} = \overrightarrow{v} . \overrightarrow{e_{i}} = u\left( \overrightarrow{v} \right) . u\left( \overrightarrow{e_{i}} \right) \)</p>
+          <!-- /INLINE UNIV FORMULA--> Which proves that
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle u\left( \overrightarrow{v} \right) = {\sum\limits_{i = 1}^{n}\lambda_{i}u\left( \overrightarrow{e_{i}} \right)} \)</p>
+          <!-- /INLINE UNIV FORMULA--> and therefore u is linear. <br> Also, u transforming an orthonormal basis into an orthonormal basis is one-to-one. <br> From this we immediately get the following result:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Pour que f soit une isométrie, il faut et il suffit que f soit affine et que son application linéaire associée soit orthogonale.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> For f to be an isometry, it is necessary and sufficient that f is affine and that its associated linear map is orthogonal.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Exemples</h2> Il résulte de la définition que : <ul>
+            <li>L'application identique est une isométrie.</li>
+            <li>Plus généralement, toute translation est une isométrie. <br>
+              <img src="images/translat2.png" width="414" height="294" border="0" alt="">
+            </li>
+            <li>Une symétrie centrale (homothétie de rapport -1) est une isométrie. <br>
+              <img src="images/symcent1.png" width="469" height="330" border="0" alt="">
+            </li>
+          </ul> Alors que : <ul>
+            <li>Une homothétie de rapport non égal à 1 ou à -1 n'est pas une isométrie. <br>
+              <img src="images/homrap2.png" width="432" height="293" border="0" alt="">
+            </li>
+            <li>Une projection sur une variété linéaire parallèlement à une direction donnée n'est pas en général une isométrie.</li>
+            <li>Une affinité de rapport non égal à 1 ou -1 n'est pas une isométrie. <br>
+              <img src="images/aff_un_demi.png" width="430" height="286" border="0" alt="">
+            </li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Examples</h2> It follows from the definition that: <ul>
+            <li>The identical map is an isometric.</li>
+            <li>More generally, any translation is an isometry. <br>
+              <img src="images/translat2.png" width="414" height="294" border="0" alt="">
+            </li>
+            <li>A central reflection (dilation with ratio -1) is an isometry. <br>
+              <img src="images/symcent1.png" width="469" height="330" border="0" alt="">
+            </li>
+          </ul> While : <ul>
+            <li>A dilation with a ratio not equal to 1 or -1 is not an isometry. <br>
+              <img src="images/homrap2.png" width="432" height="293" border="0" alt="">
+            </li>
+            <li>A projection onto a linear manifold parallel to a given direction is not in general an isometry.</li>
+            <li>An affinity with a ratio not equal to 1 or -1 is not an isometry. <br>
+              <img src="images/aff_un_demi.png" width="430" height="286" border="0" alt="">
+            </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Figures isométriques</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Isometric figures</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Le mot <strong>
+              <em>'figure'</em>
+            </strong> (géométrique) sera utilisé dorénavant et dans tout ce module comme synonyme d'ensemble de points d'un espace affine.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> The word <strong>
+              <em>'figure'</em>
+            </strong> (geometric) will be used from now on and throughout this module as a synonym for a set of points in an affine space.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Comme exemple de figure on parlera parfois du <strong>
+            <em>'triangle'</em>
+          </strong> ABC soit pour désigner : <ul>
+            <li>L'ensemble fini des 3 sommets</li>
+            <li>L'ensemble de tous les points des 3 segments [AB], [AC] et [BC]</li>
+            <li>L'ensemble précédent des points du pourtour augmenté de tous les points intérieurs </li>
+          </ul> Dans de nombreux cas cela n'a pas d'importance, mais pour certaines figures il faudra être plus précis. <br> Ainsi par exemple pour l'ensemble des points du plan situés à la distance R de A, nous dirons le <strong>
+            <em>'cercle'</em>
+          </strong> de centre A et de rayon R. <br> Mais si on veut parler de l'ensemble des points du plan situés à une distance d &le; R de A, nous devrons dire le <strong>
+            <em>'disque fermé'</em>
+          </strong> de centre A et de rayon R. </div>
+        <!-- /fr -->
+        <div lang="en"> As an example of a figure, we will sometimes speak of the <strong>
+            <em>'triangle'</em>
+          </strong> ABC either to designate: <ul>
+            <li>The finite set of the 3 vertices</li>
+            <li>The set of all points of the 3 segments [AB], [AC] and [BC]</li>
+            <li>The previous set of boundary points plus all interior points</li>
+          </ul> In many cases it does not matter, but for some figures you will have to be more precise. <br> So for example for all the points of the plane located at the distance R from A, we will say the <strong>
+            <em>'circle'</em>
+          </strong> with center A and radius R. <br> But if we want to talk about the set of points of the plane located at a distance d &le; R of A, we will have to say the <strong>
+            <em>'closed disk'</em>
+          </strong> with center A and radius R. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Deux figures F et F' d'un même espace affine A sont dites 'isométriques' si elles se correspondent dans une isométrie, c'est à dire s'il existe une isométrie f: A &rarr; A telle que f(F)=F'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> Two figures F and F' of the same affine space A are said to be 'isometric' if they correspond in an isometry, ie if there is an isometry f: A &rarr; A such that f(F)=F'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il va de soi que : </div>
+        <!-- /fr -->
+        <div lang="en"> It is obvious that : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> La relation ci-dessus est une <input type="button" value="relation d'équivalence" onclick="go('../../bases/relations/equivalence.html#')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> The relation above is an <input type="button" value="equivalence relation" onclick="go('../../bases/relations/equivalence.html#')" data-inline=" true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Toute figure est en effet isométrique à elle-même (l'application identique est une isométrie). <br> Si F et F' se correspondent par f alors F' et F se correspondent par f<sup>-1</sup> (qui est aussi une isométrie). <br> Enfin si F correspond à F' par f et F' correspond à F" par g alors F correspond à F" par g<font size="-1">o</font>f, c'est la transitivité. <br> Deux figures isométriques : <br>
+          <img src="images/figiso1.png" width="366" height="405" border="0" alt="">
+          <h3>Remarque</h3> Dans les traités de géométrie anciens on parlait de figures 'égales' au lieu de figures 'isométriques'. Cet usage n'est pas conforme aux conventions de la théorie des ensembles, cependant il est possible de rencontrer encore cette appellation dans des exposés peu rigoureux (on parlera par exemple de 'triangles égaux'). <h2>Groupe des isométries</h2> Il résulte de ce que nous avons vu plus haut que :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Any figure is indeed isometric to itself (the identical map is an isometry). <br> If F and F' correspond by f then F' and F correspond by f<sup>-1</sup> (which is also an isometry). <br> Finally if F corresponds to F' by f and F' matches F" by g then F matches F" by g<font size="-1">o</font>f, this is transitivity. <br> Two isometric figures: <br>
+          <img src="images/figiso1.png" width="366" height="405" border="0" alt="">
+          <h3>Note</h3> In ancient treatises on geometry they spoke of 'equal' figures instead of 'isometric' figures. This usage does not conform to the conventions of set theory, however it is possible to still encounter this designation in less rigorous presentations (one will speak for example of 'equal triangles'). <h2>Group of isometries</h2> It follows from what we have seen above that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 4</div> Les isométries de A sont des applications bijectives.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 4</div> The isometries of A are one-to-one mappings.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 5</div> La composée de deux isométries est encore une isométrie.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 5</div> The composite of two isometries is still an isometry.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous voyons donc que : </div>
+        <!-- /fr -->
+        <div lang="en"> So we see that : </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 6</div> Les isométries de A forment un sous-groupe du <input type="button" value="groupe affine" onclick="go('../appaffines/appaffiso.html#def1')" data-inline="true" /> de A. Nous noterons ce groupe Is(A)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 6</div> The isometries of A form a subgroup of the <input type="button" value="affine group" onclick="go('../appaffines/appaffiso.html#def1')" data-inline="true" /> of A. We will denote this group Is(A)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/eucliiso/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/eucliiso/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

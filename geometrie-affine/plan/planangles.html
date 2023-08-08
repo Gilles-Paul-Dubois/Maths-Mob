@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Angles dans le plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/planangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/planangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Demi-droites</h2> Soit D une droite dans un espace affine quelconque, O un point de cette droite et &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; un vecteur directeur. Les points de D sont caractérisés par leur paramétre dans une <input type="button" value="représentation paramétrique" onclick="go('../repvar/repvarparam.html#def1')" data-inline="true" /> liée au repère &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle R=\left ( O,\overrightarrow{u} \right ) \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp;.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let D be a line in any affine space, O a point on this line and &nbsp;
+          <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{u} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; a directing vector. The points of D are characterized by their parameter in an <input type="button" value="parametric representation" onclick="go('../repvar/repvarparam.html#def1')" data-inline="true" /> linked to &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle R=\left ( O,\overrightarrow{u} \right ) \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp;.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On définit la <b>
+              <i>'demi-droite positive'</i>
+            </b> comme le sous-ensemble de D formé des points M de paramètre &lambda; &gt; 0, c'est à dire l'ensemble des points M définis par &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OM}=\lambda \overrightarrow{u} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; avec &lambda; &ge; 0. <br> On définit de la même façon la <strong>
+              <em>'demi-droite négative'</em>
+            </strong> d'origine O.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We define the <b>
+              <i>'positive half-line'</i>
+            </b> or ' <strong>
+              <em>positive ray</em>
+            </strong>' as the subset of D consisting of the points M with parameter &lambda; &gt; 0, that is to say the set of points M defined by &nbsp;
+            <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{OM}=\lambda \overrightarrow{u} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; with &lambda; &ge; 0. <br> We define in the same way the <strong>
+              <em>'negative half-line'</em>
+            </strong> with origin O.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Nous nous intéressons particulièrement à la figure formée par deux demi-droites de même origine. </div>
+        <!-- /fr -->
+        <div lang="en"> We are particularly interested in the figure formed by two half-lines (rays) with the same origin. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/planangles1.png" width="455" height="294" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Formellement un tel objet correspond à un <input type="button" value="couple" onclick="go('../../bases/relations/cartesien.html#')" data-inline="true" /> et se notera donc (Ox,Oy). <br /> On se place dans le plan affine euclidien orienté P. <br /> Considérons maintenant sur l'ensemble de tels objets la relation binaire suivante : <br /> (Ox,Oy) ≡ (O'x',O'y') si et seulement si il existe un <input type="button" value="déplacement" onclick="go('plandep.html#thm1')" data-inline="true" /> f de P tel que f(Ox)=O'x' et f(Oy)=O'y'. <br /> Trois couples équivalents : </div>
+        <!-- /fr -->
+        <div lang="en"> Formally such an object corresponds to an <input type="button" value="ordered pair" onclick="go('../../bases/relations/cartesien.html#')" data-inline="true" /> and will therefore be noted (Ox,Oy). <br /> We place ourselves in the affine Euclidean plane oriented P. <br /> Let us now consider the following binary relation on the set of such objects: <br /> (Ox,Oy) ≡ (O'x',O'y') if and only if there is an <input type="button" value="proper isometry" onclick="go('plandep.html#thm1')" data-inline="true" /> f of P such that f(Ox)=O'x' and f(Oy)=O'y'. <br /> Three equivalent couples: </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/planangles2.png" width="460" height="423" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Nous affirmons que : </div>
+        <!-- /fr -->
+        <div lang="en"> We affirm that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Cette relation est une <input type="button" value="relation d'équivalence" onclick="go('../../bases/relations/equivalence.html#')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> This relation is an <input type="button" value="equivalence relation" onclick="go('../../bases/relations/equivalence.html#')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est évidente. <h2>Angles orientés</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is obvious. <h2>Oriented angles</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Nous appelons <b>
+              <i>'angle orienté'</i>
+            </b> une <input type="button" value="classe d'équivalence" onclick="go('../../bases/relations/quotients.html#')" data-inline="true" /> pour cette relation. <br /> La classe (l'angle) de (Ox,Oy) sera notée &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( Ox,Oy \right )} \)
+            <!-- /FORMULE UNIV INLINE--> .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> We call <b>
+              <i>'oriented angle'</i>
+            </b> an <input type="button" value="equivalence class" onclick="go('../../bases/relations/quotients.html#')" data-inline="true" /> for this relation. <br /> The class (angle) of (Ox,Oy) will be noted &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( Ox,Oy \right )} \)
+            <!-- /INLINE UNIV FORMULA--> .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voyons maintenant un résultat important. </div>
+        <!-- /fr -->
+        <div lang="en"> Let us now look at an important result. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Il existe une bijetcion du groupe des <input type="button" value="rotations vectorielles" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true" /> du plan sur l'ensemble des angles.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> There is a bijection of the group of <input type="button" value="vector rotations" onclick="go('../../algebre-lineaire/orthogonalite/rotations.html#')" data-inline="true " /> of the plane onto the set of angles.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour ce résultat nous avons besoin du lemme suivant : </div>
+        <!-- /fr -->
+        <div lang="en"> For this result we need the following lemma: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="lem1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 1</div> Soient Ox et Oy deux demi-droites, il existe un déplacement et un seul transformant Ox en Oy.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 1</div> Let Ox and Oy be two half-lines, there is one and only one proper isometry transforming Ox into Oy.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet tout déplacement transformant Ox en Oy laisse forcément fixe le point O. <br /> Soit alors A un point de Ox tel que &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OA} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; soit unitaire et B ∈ Oy tel que &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{OB} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; soit unitaire aussi. <br /> Alors tout déplacement transformant Ox en Oy doit transformer A en B. <br /> Cela dit il n'existe qu'un seul déplacement transformant deux points distincts en deux autres points distincts équidistants. <br /> Soient maintenant (Ox,Oy) et (O'x',O'y') deux couples représentant un même angle. <br /> Soit d le déplacement transformant (Ox,Oy) en (O'x',O'y'). <br /> Soit r le déplacement transformant Ox en Oy. <br /> Soit r' le déplacement transformant O'x' en O'y'. <br /> On a alors nécessairement r'=d<font size="-1">o</font>r<font size="-1">o</font>d<sup>-1</sup>
+          <br /> Soient maintenant R,R' et D les matrices des applications linéaires associées à r,r' et d relativement à n'importe quelle base orthonormée du plan. <br /> On a R'=DRD<sup>-1</sup> les 4 matrices sont des matrices de rotations vectorielles, donc : &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle R = \begin{pmatrix} a & {- b} \\ b & a \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle D = \begin{pmatrix} x & {- y} \\ y & x \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle D^{- 1} = \begin{pmatrix} x & y \\ {- y} & x \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br /> avec a<sup>2</sup>+b<sup>2</sup>=1 et x<sup>2</sup>+y<sup>2</sup>=1 <br /> Le calcul donne R'=R. <br /> On en déduit que l'application qui à un couple (Ox,Oy) associe la rotation vectorielle associée à l'unique déplacement transformant Ox en Oy est compatible avec la relation d'équivalence définissant les angles. <br /> On vérifie que cette application est <input type="button" value="bijective" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" />. <br /> Elle permet de transporter la structure de <input type="button" value="groupe abélien" onclick="go('../../bases/operations/groupe.html#')" data-inline="true" /> (multiplicatif) de l'ensemble des rotations vectorielles sur l'ensemble des angles, cependant la loi sur les angles sera <input type="button" value="notée additivement" onclick="go('../../bases/operations/multiples.html#')" data-inline="true" />. <br /> En résumé :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed any proper isometry transforming Ox into Oy necessarily leaves the point O fixed. <br /> Let A be a point of Ox such that &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{OA} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; be unitary and B ∈ Oy such that &nbsp;
+          <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{OB} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; also be unitary. <br /> So any move that transforms Ox into Oy must transform A into B. <br /> That said, there is only one proper isometry transforming two distinct points into two other distinct equidistant points. <br /> Now let (Ox,Oy) and (O'x',O'y') be two pairs representing the same angle. <br /> Let d be the proper isometry transforming (Ox,Oy) into (O'x',O'y'). <br /> Let r be the proper isometry transforming Ox into Oy. <br /> Let r' be the proper isometry transforming O'x' into O'y'. <br /> We then necessarily have r'=d<font size="-1">o</font>r<font size="-1">o</font>d <font>-1 </sup>
+            <br /> Let R,R' and D be the matrices of the linear maps associated with r,r' and d relatively to any orthonormal basis of the plane. <br /> We have R'=DRD<sup>-1</sup> the 4 matrices are vector rotation matrices, so: &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle R = \begin{pmatrix} a & {-b} \\ b&a\\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle D = \begin{pmatrix} x & {-y} \\ y & x \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle D^{- 1} = \begin{pmatrix} x&y\\ {- y } & x \\ \end{pmatrix} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; <br /> with a<sup>2</sup>+b<sup>2</sup>=1 and x<sup>2</sup>+y<sup>2</sup>=1 <br /> The calculation gives R'=R. <br /> We deduce that the map which to a couple (Ox,Oy) associates the vectorial rotation associated with the unique proper isometry transforming Ox into Oy is compatible with the equivalence relation defining the angles. <br /> We check that this application is <input type="button" value="bijective" onclick="go('../../bases/applications/bijections.html#')" data-inline="true" /> . <br /> It allows to transport the structure of <input type="button" value="abelian group" onclick="go('../../bases/operations/groupe.html#')" data-inline="true" /> (multiplicative) of the set of vector rotations on the set of angles, however the law on the angles will be <input type="button" value="noted additively" onclick="go('../../bases/operations/multiples.html#')" data-inline="true" />. <br /> In summary :
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> La <strong>
+              <em>'somme'</em>
+            </strong> des angles &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( Ox,Oy \right )} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; et &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( O'x',O'y' \right )} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; admet pour représentant tout couple (O"x",O"y") tel que la rotation vectorielle associée au déplacement amenant O"x" sur O"y" est égale au produit de la rotation vectorielle associée au déplacement amenant Ox sur Oy par la rotation vectorielle associée au déplacement amenant O'x' sur O'y'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> The <strong>
+              <em>'sum'</em>
+            </strong> of the angles &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( Ox,Oy \right )} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; And &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( O'x',O'y' \right )} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; admits as a representative any couple (O"x",O"y") such that the vector rotation associated with the proper isometry bringing O"x" onto O"y" is equal to the product of the vector rotation associated with the proper isometry bringing Ox onto Oy by the vector rotation associated with the proper isometry bringing O'x' to O'y'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> En particulier si O=O' et Oy=Ox'. <br>Un représentant de la somme &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( Ox,Oy \right )}+\widehat{\left ( Oy,O' \right )} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; est (Ox,Oy'). <br> C'est ce qu'on appelle la <b>
+              <i>'relation de Chasles'</i>
+            </b> pour les angles : <br> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( Ox,Oy \right )}+\widehat{\left ( Oy,Oy' \right )}=\widehat{\left ( Ox,Oy' \right )} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> In particular if O=O' and Oy=Ox'. <br>A representative of the sum &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( Ox,Oy \right )}+\widehat{\left ( Oy,O' \right )} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; is (Ox,Oy'). <br> This is called the <b>
+              <i>'Chasles relation'</i>
+            </b> for angles: <br> &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( Ox,Oy \right )}+\widehat{\left ( Oy,Oy' \right )}=\widehat{\left ( Ox,Oy' \right )} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp;
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/planangles3.png" width="456" height="330" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Il résulte en particulier de la relation de Chasles que : <ul>
+              <li>&nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( Ox,Ox \right )}=0 \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp;
+              </li>
+              <li>&nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( Ox,Oy \right )}=-\widehat{\left ( Oy,Ox \right )} \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp;
+              </li>
+            </ul>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> It results in particular from the relation of Chasles that: <ul>
+              <li>&nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( Ox,Ox \right )}=0 \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp;
+              </li>
+              <li>&nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( Ox,Oy \right )}=-\widehat{\left ( Oy,Ox \right )} \)
+                <!-- /INLINE UNIV FORMULA--> &nbsp;
+              </li>
+            </ul>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Angles particuliers</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Special angles</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> L'angle nul a exactement deux 'moitiés'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> The zero angle has exactly two 'halves'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet quand on cherche les matrices orthogonales du type &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle R = \begin{pmatrix} a & {- b} \\ b & a \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br> vérifiant <br> &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle R^{2} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br> On trouve les deux matrices <br> &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle R_{1} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br> et <br> &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle R_{2} = \begin{pmatrix} {- 1} & 0 \\ 0 & {- 1} \\ \end{pmatrix} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br> La première correspond à l'application identique (angle nul). <br> La seconde correspond à une symétrie centrale (angle dit <b>
+            <i>'plat'</i>
+          </b> notation &piv; suivant André Cerezo) <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed when one seeks the orthogonal matrices of the type &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle R = \begin{pmatrix} a & {-b} \\ b&a\\ \end{pmatrix} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br> checking <br> &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle R^{2} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \end{pmatrix} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br> We find the two matrices <br> &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle R_{1} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ \end{pmatrix} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br> and <br> &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle R_{2} = \begin{pmatrix} {- 1} & 0 \\ 0 & {- 1} \\ \end{pmatrix} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br> The first corresponds to the identical application (zero angle). <br> The second corresponds to a point reflection (angle called <b>
+            <i>'flat'</i>
+          </b> &piv; notation according to André Cerezo) <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/planangles6.png" width="612" height="220" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> L'angle plat a lui même deux moitiés qu'on appelle des angles <b>
+            <i>'droits'</i>
+          </b> et qui correspondent au cas de demi-droites orthogonales. </div>
+        <!-- /fr -->
+        <div lang="en"> The straight angle itself has two halves which are called <b>
+            <i>'right'</i>
+          </b> angles and which correspond to the case of orthogonal half-lines. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/planangles7.png" width="446" height="379" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> 2&alpha;=2&beta;=&piv; <h2>Extension à des demi-droites d'origines distinctes.</h2> Soient Ox et O'y deux demi-droites d'origines distinctes O et O' pour tout point O" nous pouvons amener par translation Ox sur une demi-droite O"x" parallèle à Ox et O'y' sur une demi-droite O"y" parallèle à O'y'. Il est alors clair que : </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Extension to half-lines of distinct origins.</h2> Let Ox and O'y be two half-lines of distinct origins O and O' for any point O" we can bring by translation Ox on a half-line O"x" parallel to Ox and O'y' on a half-line line O"y" parallel to O'y'. It is then clear that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> L'angle &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left ( O''x'',O''y'' \right )} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; ne dépend pas du point O".
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> The angle &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left ( O''x'',O''y'' \right )} \)
+            <!-- /INLINE UNIV FORMULA--> &nbsp; does not depend on the point O".
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Nous appelerons cet angle l'angle des demi-droites Ox et O'y'.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> We will call this angle the angle of the half-lines (rays) Ox and O'y'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/planangles4.png" width="552" height="457" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <h2>Angles non orientés</h2> Nous pouvons refaire tout le travail fait précédemment en changeant la relation d'équivalence entre couples de demi-droites par : (Ox,Oy) ≡ (O'x',O'y') si et seulement si il existe un <input type="button" value="isométrie" onclick="go('../euclidiens/eucliiso.html#def1')" data-inline="true" /> f de P tel que f(Ox)=O'x' et f(Oy)=O'y'. <br /> Mais alors qu'il existe seulement un déplacement qui amène Ox sur Oy il existe deux isométries amenant Ox sur Oy à savoir une rotation affine comme précédemment, mais aussi une <input type="button" value="réflexion" onclick="go('plananti.html#')" data-inline="true" /> par rapport à une <input type="button" value="bissectrice" onclick="go('../euclidiens/euclihybiss.html#def1')" data-inline="true" /> du couple des deux droites x'Ox, y'Oy supports de Ox et Oy.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Undirected angles</h2> We can redo all the work done previously by changing the equivalence relation between pairs of half-lines by: (Ox,Oy) ≡ (O'x',O'y') if and only if there is an <input type="button" value="isometry" onclick="go('../euclidiens/eucliiso.html#def1')" data-inline="true" /> f of P such that f(Ox)=O'x' and f(Oy)=O'y'. <br /> But while there is only one proper isometry that brings Ox to Oy there are two isometries bringing Ox to Oy, namely an affine rotation as before, but also an <input type="button" value="reflection" onclick="go( 'plananti.html#')" data-inline="true" /> with respect to an <input type="button" value="bisector" onclick="go('../euclidiens/euclihybiss.html#def1' )" data-inline="true" /> of the couple of the two straight lines x'Ox, y'Oy supports of Ox and Oy.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> Ce travail conduit à la définition d'une <b>
+              <i>'angle non orienté'</i>
+            </b> ou encore <b>
+              <i>'angle géométrique'</i>
+            </b> de deux demi-droites Ox et Oy parfois noté &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{xOy} \)
+            <!-- /FORMULE UNIV INLINE--> .
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> This work leads to the definition of a <b>
+              <i>'non-oriented angle'</i>
+            </b> or even <b>
+              <i>'geometric angle'</i>
+            </b> of two half-lines Ox and Oy sometimes noted &nbsp;
+            <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{xOy} \)
+            <!-- /INLINE UNIV FORMULA--> .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Angle d'un couple de droites</h2> On peut naturellement considérer les couples de droites sécantes (&Delta; &Delta;') et définir un angle de deux droites comme une classe d'équivalence modulo un déplacement. <br> Mais on peut aussi tirer parti du travail déjà fait pour les demi-droites et remarquer que si &Delta; et &Delta;' sont sécantes en O, on peut écrire &Delta;=x'Ox et &Delta;'=y'Oy, faisant intervenir quatre demi-droites Ox, Ox', Oy, Oy' deux à deux opposées par le sommet. Tout déplacement amenant &Delta; sur &Delta;' amène donc Ox sur une demi droite de &Delta;' résultat d'une translation de Oy ou de Oy'. <br> A une translation près ces déplacements sont : <ul>
+            <li>La rotation amenant Ox sur Oy (angle &alpha;)</li>
+            <li>La rotation amenant Ox sur Oy' (angle &alpha;+&piv;)</li>
+          </ul> On voit donc que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Angle of a pair of lines</h2> We can naturally consider the pairs of secant lines (&Delta; &Delta;') and define an angle of two lines as an equivalence class modulo a proper isometry. <br> But we can also take advantage of the work already done for the rays and notice that if &Delta; and &Delta;' secant at O, we can write &Delta;=x'Ox and &Delta;'=y'Oy, involving four half-lines Ox, Ox', Oy, Oy' opposite each other at the vertex. Any move that brings &Delta; on &Delta;' therefore brings Ox on a half right of &Delta;' result of a translation of Oy or Oy'. <br> Up to a translation, these proper isometrys are: <ul>
+            <li>The rotation bringing Ox to Oy (angle &alpha;)</li>
+            <li>The rotation bringing Ox to Oy' (angle &alpha;+&piv;)</li>
+          </ul> We therefore see that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Un angle de droites correspond à un angle orienté de deux demi-droites à un demi-tour près.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> An angle of lines corresponds to an oriented angle of two half-lines to within a half-turn.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/planangles5.png" width="592" height="359" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE --> &beta;=&alpha;+&piv; <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/planangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/planangles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

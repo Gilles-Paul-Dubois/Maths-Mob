@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Intersection d'un cône et d'un plan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/phoria/gl-matrix.js"></script>
+    <script src="../../js/phoria/phoria-util.js"></script>
+    <script src="../../js/phoria/phoria-entity.js"></script>
+    <script src="../../js/phoria/phoria-scene.js"></script>
+    <script src="../../js/phoria/phoria-renderer.js"></script>
+    <script src="../../js/phoria/phoria-view.js"></script>
+    <script src='../../js/phoria/dat.gui.min.js'></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="e">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="e">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> L'appliquette suivante vous montre le cône d'axe Oz, d'équation x<sup>2</sup>+y<sup>2</sup>-z<sup>2</sup>=0. <br> Ce cône possède un demi-angle d'ouverture de 45°. <br> Vous voyez également un plan P qui tourne autour d'une droite (AB) où A(1,0,0) et B(0,1,0). <br> L'angle d'indidence est l'angle que fait la normale au plan P avec l'axe Oz. <br> Avec le curseur vous pouvez faire varier l'angle d'incidence du plan P d'équation cx+cy+z=c, où c est une constante qui détermine la rotation de P autour de (AB). Le curseur vous permet de faire varier c entre 0.3 et 1.5 ce qui change l'angle du plan avec l'axe Oz, donc l'intersection du cône et du plan. <br> Avec la souris sur ordinateur, par tirer-déplacer, vous pouvez faire varier le point de vue de la figure. <br> En noir la courbe intersection de cône et du plan. </div>
+        <!-- /fr -->
+        <div lang="en"> The following applet shows you the cone with axis Oz, with equation x<sup>2</sup>+y<sup>2</sup>-z<sup>2</sup>=0. <br> This cone has a half-opening angle of 45°. <br> You also see a plane P that revolves around a straight line (AB) where A(1,0,0) and B(0,1,0). <br> The angle of incidence is the angle that the normal to the plane P makes with the Oz axis. <br> With the slider you can vary the angle of incidence of the plane P with the equation cx+cy+z=c, where c is a constant which determines the rotation of P around (AB). The slider allows you to vary c between 0.3 and 1.5 which changes the angle of the plane with the Oz axis, therefore the intersection of the cone and the plane. <br> With the mouse on computer, by drag-and-drop, you can vary the point of view of the figure. <br> In black the intersection curve of cone and plane. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div>
+          <canvas id="canvas1" width="512" height="512" style="background-color: #eee"></canvas>
+        </div>
+        <input type='range' id="myRange1" step='0.01' min='0.3' max='1.5' value="1" onchange="nameSpace1.changec(this.value)" />
+        <script src='js/histocon1.js'></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> En faisant varier l'angle i que fait la normale au plan P avec l'axe du cône (l'axe Oz) nous observons les cas suivants : <ol>
+            <li>i=0°, l'intersection se réduit au sommet du cône (dégénérescence du premier type)</li>
+            <li>0° &lt; i &lt; 45° , l'intersection est une courbe fermée bornée (ellipse)</li>
+            <li>i=45°, l'intersection est une courbe non bornée composée d'une seule branche (parabole).</li>
+            <li>45° &lt; i &lt; 135° , l'intersection est une courbe composée de deux branches (hyperpole)</li>
+            <li>i=135°, l'intersection est à nouveau une parabole</li>
+            <li>135° &lt; i &lt; 180° , l'intersection est à nouveau une ellipse</li>
+            <li>i=180°, l'intersection se réduit à nouveau au sommet du cône (dégénérescence du premier type)</li>
+          </ol>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> By varying the angle i that the normal to the plane P makes with the axis of the cone (the Oz axis) we observe the following cases: <ol>
+            <li>i=0°, the intersection is reduced at the top of the cone (degeneracy of the first type)</li>
+            <li>0° &lt; i &lt; 45° , the intersection is a bounded closed curve (ellipse)</li>
+            <li>i=45°, the intersection is an unbounded curve composed of a single branch (parabola).</li>
+            <li>45° &lt; i &lt; 135° , the intersection is a curve composed of two branches (hyperpole)</li>
+            <li>i=135°, the intersection is again a parabola</li>
+            <li>135° &lt; i &lt; 180° , the intersection is again an ellipse</li>
+            <li>i=180°, the intersection reduces again to the top of the cone (degeneracy of the first type)</li>
+          </ol>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois</div>
+              <div lang="en">Created by Gilles Dubois</div>
+            </td>
+            <td>
+              <div lang="fr">Janvier 2022</div>
+              <div lang="en">January 2022</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>
