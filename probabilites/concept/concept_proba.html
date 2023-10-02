@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Probabiité d'un évènement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="g">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="g">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_proba/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_proba/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définitions</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definitions</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> La <strong>
+              <em>'probabilité'</em>
+            </strong> d'un évènement correspond au pourcentage de chances que cet évènement a de se produire. <br> Cette probabilité peut s'exprimer en pourcentage, mais plus généralement on l'exprime en rapport à l'unité 25% sera traduit par 1/4.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> The <strong>
+              <em>'probability'</em>
+            </strong> of an event corresponds to the percentage of chances that this event has to occur. <br> This probability can be expressed as a percentage, but more generally it is expressed in relation to the unit 25% will be translated by 1/4.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette définition présuppose que ce rapport existe, mais ce n'est pas une évidence. Aussi nous allons commencer à étudier quelques cas particuliers simples dans lesquels cette notion est sinon évidente, au moins très intuitive. <h2>Cas de l'équiprobabilité</h2> Nous examinons une série de cas simples, déjà étudiés auparavant, où les évènements élémentaires doivent avoir chacun la même propabilité de se produire. <h3>Lancer d'une pièce</h3> Si la pièce est 'normale', (symétrique et homogène) chaque face doit avoir la même probabilité d'apparaître, soit 1/2. <h3>Lancer d'un dé</h3> Nous qualifions un dé de 'parfait' s'il est géométriquement et physiquement homogène, si son centre de gravité correspond bien avec son centre géométrique, si ses faces sont bien planes et lisses, bref si aucune face n'est privilégiée par la forme ou par la densité du matériau. <br> Pour un tel dé il est logique de présumer que la probabilité d'apparition de chaque face est de 1/6. <h3>Tirage d'une carte</h3> Comme dans les cas précédent si les cartes sont indistinguables au verso, si elles sont neuves et glissent parfaitement, la probabilité qu'une carte particulière soit tirée est de 1/52 (pour un jeu de bridge standard). <h2>Probabilités statistiques</h2> Dans tous les cas étudiés jusqu'ici nous avons affaire à des probabilités 'a priori' estimées sur la base de la description de l'épreuve et du protocole, mais peut-on décider qu'un dé est 'parfait' avant de l'avoir mis à l'épreuve ? <br> Comme nous l'avons vu précédemment la répétition d'une même épreuve un grand nombre de fois, disons n, permet de constituer une série statistique dont les modalités sont les résultats possibles de l'expérience (évènement élémentaires). <br> Ainsi, si nous lançons notre dé n fois, et si la face 1 apparait n<sub>1</sub> fois, la <input type="button" value="fréquence" onclick="go('../statistique/statistique_definitions.html#def7')" data-inline="true" /> de cette face sera n<sub>1</sub>/n. Plus généralement si la face i apparait ni fois, sa fréquence sera n<sub>i</sub>/n, et on aura toujours
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle {\sum\limits_{i = 1}^{6}\frac{n_{i}}{n}} = 1 \)</p>
+          <!-- /FORMULE UNIV INLINE--> Evidemment, les fréquences n<sub>i</sub>/n seront à chaque fois différentes. <br> Voici une appliquette qui permet de simuler le lancer répété d'un dé, en simulant d'un seul coup 1000 lancers. On utilise ici un générateur de nombres pseudo-aléatoires et nous ne faisons, bien sûr, que vérifier ce générateur et non un quelconque dé physique. Ce générateur est construit à partir de la fonction Javascript Math.random(), censée renvoyer un flottant uniformément réparti sur l'intervalle [0,1].
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This definition presupposes that this relationship exists, but it is not obvious. So we will begin to study some simple particular cases in which this notion is if not obvious, at least very intuitive. <h2>Equiprobability case</h2> We examine a series of simple cases, already studied before, where the elementary events must each have the same probability of occurring. <h3>Toss a coin</h3> If the piece is 'normal', (symmetrical and homogeneous) each side must have the same probability of appearing, ie 1/2. <h3>Rolling a dice</h3> We qualify a die as 'perfect' if it is geometrically and physically homogeneous, if its center of gravity corresponds well with its geometric center, if its faces are flat and smooth, in short if no face is favored by the shape or by the density of the material. <br> For such a die it is logical to assume that the probability of each face appearing is 1/6. <h3>Drawing a card</h3> As in the previous cases if the cards are indistinguishable on the back, if they are new and slide perfectly, the probability that a particular card is drawn is 1/52 (or usual bridge game). <h2>Statistical probabilities</h2> In all the cases studied so far we are dealing with 'a priori' probabilities estimated on the basis of the description of the test and the protocol, but can we decide that a die is 'perfect' before put to the test? <br> As we have seen previously, the repetition of the same test a large number of times, say n, makes it possible to constitute a statistical series whose modalities are the possible results of the experiment (elementary event). <br> Thus, if we roll our die n times, and if face 1 appears n<sub>1</sub> times, the <input type="button" value="frequency" onclick="go('../statistique/statistique_definitions.html#def7')" data-inline="true" /> of this face will be n<sub>1</sub>/n. More generally if face i appears n times, its frequency will be n<sub>i</sub>/n, and we will always have
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle {\sum\limits_{i=1}^{6}\frac{n_{i}}{n}}=1 \)</p>
+          <!-- /INLINE UNIV FORMULA--> Obviously, the frequencies n<sub>i</sub>/n will be different each time. <br> Here is an applet that allows you to simulate the repeated rolling of a dice, by simulating 1000 throws at once. We use here a pseudo-random number generator and we are, of course, only checking this generator and not any physical die. This generator is built from the Javascript Math.random() function, which is supposed to return a float uniformly distributed over the interval [0,1].
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace1.plus1000()"> +1000 </button>
+        <button type="button" onclick="nameSpace1.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/proba1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Appuyer, à répétition, plusieurs fois sur le bouton '+1000' et vous aurez un effet cumulatif des résultats. <br> Le bouton 'Recommencer' vous permet de remettre les compteurs à zéro. <br> Ce que vous constatez c'est que plus le nombre de lancers est grand et plus la hauteur des barres de l'histogramme semble s'uniformiser, ce qui tend à prouver 'expérimentalement' notre propos sur l'uniformité du générateur et donc sur le fait que notre 'dé électronique' est parfait. <h2>Probabilités non uniformes</h2> Nous considérons maintenant des situations où tous les résultats de l'expérience n'ont pas la même chance de se produire. <br> Voici une appliquette qui permet de simuler le lancer répété d'un dé pipé ayant 2 faces 1 et aucune face 6, en simulant d'un seul coup 1000 lancers. </div>
+        <!-- /fr -->
+        <div lang="en"> Repeatedly press the '+1000' button several times and you will have a cumulative effect of the results. <br> The 'Restart' button allows you to reset the counters to zero. <br> What you notice is that the greater the number of throws, the more the height of the bars of the histogram seems to become uniform, which tends to prove 'experimentally' our point on the uniformity of the generator and therefore on the makes our 'electronic dice' perfect. <h2>Non-uniform probabilities</h2> We now consider situations where not all results of the experiment have an equal chance of occurring. <br> Here is an applet that allows you to simulate the repeated rolling of a loaded die with 2 1-sides and no 6-sides, by simulating 1000 throws all at once. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <button type="button" onclick="nameSpace2.plus1000()"> +1000 </button>
+        <button type="button" onclick="nameSpace2.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <script src="js/proba2.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Dans ce cas le modèle sera plutôt : <ul>
+            <li>Probabilité d'apparition de la face 1 : 1/3</li>
+            <li>Probabilité d'apparition des faces 2,3,4,5 : 1/6</li>
+            <li>Probabilité d'apparition de la face 6 :0</li>
+          </ul>
+          <h2>Distribution de probabilité</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> In this case the model will rather be: <ul>
+            <li>Probability of face 1 appearing: 1/3</li>
+            <li>Probability of appearance of faces 2,3,4,5: 1/6</li>
+            <li>Probability of face appearance 6:0</li>
+          </ul>
+          <h2>Distribution of probability </h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Dans le cas des univers finis à n évènements élémentaires &omega;<sub>1</sub>, ... ,&omega;<sub>n</sub> on appelle <b>
+              <i>'distribution de probabilité'</i>
+            </b> la suite des couples (&omega;<sub>i</sub>, p<sub>i</sub>) où la suite p<sub>i</sub>
+           <sub>(1&le;i&le;n)</sub> est une suite de nombres entre 0 et 1 telle que p<sub>1</sub>+p<sub>2</sub>+ ... +p<sub>n</sub>=1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> In the case of finite universes with n elementary events &omega;<sub>1</sub>, ... ,&omega;<sub>n</sub> we call <b>
+              <i>'probability distribution'</i>
+            </b> the sequence of pairs (&omega;<sub>i</sub>, p<sub>i</sub>) where the sequence p<sub>i</sub>
+           <sub>(1&le; i&le;n)</sub> is a sequence of numbers between 0 and 1 such that p<sub>1</sub>+p<sub>2</sub>+ ... +p<sub>n</sub>=1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <ul>
+            <li>Donc dans le cas du dé parfait notre distribution est ((1,1/6),(2,1/6),(3,1/6),(4,1/6),(5,1/6),(6,1/6)).</li>
+            <li>Dans le cas du dé pipé que nous avons simulé notre distribution est ((1,1/3),(2,1/6),(3,1/6),(4,1/6),(5,1/6),(6,0)).</li>
+          </ul>
+          <h2>Probabilité d'un évènement non nécessairement élémentaire (cas fini)</h2> Nous nous limitons ici au cas des distributions sur des univers <b>finis</b>.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <ul>
+            <li>So in the case of the perfect die our distribution is ((1.1/6),(2.1/6),(3.1/6),(4.1/6),(5.1 /6),(6,1/6)).</li>
+            <li>In the case of the loaded dice we simulated our distribution is ((1,1/3),(2,1/6),(3,1/6),(4,1/6),( 5.1/6),(6.0)).</li>
+          </ul>
+          <h2>Probability of an event not necessarily elementary (finite case)</h2> We limit ourselves here to the case of distributions on <b>finite</b> spaces.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Nous définissons dans ce cas la probabilité d'un évènement est la somme des probabilités des évènements élémentaires qui le composent, soit formellement :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P(E) = {\sum\limits_{i \mid \omega_{i} \in E}^{}p_{i}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> We define in this case the probability of an event is the sum of the probabilities of the elementary events that compose it, or formally:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle P(E) = {\sum\limits_{i \mid \omega_{i} \in E}^{}p_{i}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce qui fait que dans le cas des distributions uniformes (équiprobabilité des évenements élémentaires) nous retrouvons la formule bien connue : </div>
+        <!-- /fr -->
+        <div lang="en"> This means that in the case of uniform distributions (equiprobability of elementary events) we find the well-known formula: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P(E) = \frac{\text {nombre de cas favorables}}{\text {nombre de cas possibles}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle P(E) = \frac{\text {number of favorable cases}}{\text {number of possible cases}} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <a name="calc"></a>
+        <div lang="fr">
+          <h3>Exemples de calcul</h3>
+          <h4>Probabilités uniformes</h4> Avec un jeu de bridge : <ul>
+            <li>La probabilité de tirer un as est 4/52=1/13</li>
+            <li>La probabilité de tirer un pique est 13/52=1/4</li>
+            <li>La probabilité de tirer une carte rouge (carreau ou coeur) est 1/2</li>
+          </ul>
+          <h4>Probabilités non uniformes</h4> Avec notre dé pipé ayant deux faces 1 et aucune face 6 : <ul>
+            <li>la probabilité que la face apparue soit &le; 3 est 1/3+1/6+1/6=2/3</li>
+            <li>La probabilité que la face apparue soit &ge;5 est 1/6</li>
+          </ul>
+          <h2>Cas des univers infinis</h2> Nous reprenons ici le cas du tir aléatoire uniforme dans un carré de côté 1. L'application suivante permet de générer 100 tirs aléatoires dans le carré. Un succès correspond à un tir dans le cercle. Après chaque série de 100 tirs s'affiche le rapport succès/total.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Examples of calculation</h3>
+          <h4>Uniform probabilities</h4> With a game of bridge: <ul>
+            <li>The probability of drawing an ace is 4/52=1/13</li>
+            <li>The probability of drawing a spade is 13/52=1/4</li>
+            <li>The probability of drawing a red card (diamond or heart) is 1/2</li>
+          </ul>
+          <h4>Non-uniform probabilities</h4> With our loaded die having two sides 1 and no side 6: <ul>
+            <li>the probability that the face that appeared is &le; 3 is 1/3+1/6+1/6=2/3</li>
+            <li>The probability that the face that appeared is &ge;5 is 1/6</li>
+          </ul>
+          <h2>Case of infinite spaces</h2> We return here to the case of uniform random shooting in a square of side 1. The following application makes it possible to generate 100 random shootings in the square. A success corresponds to a shot in the circle. After each series of 100 shots the success/total ratio is displayed.
+        </div>
+        <!-- /en -->
+        <a name="disk"></a>
+        <!-- STOP  APPLET-->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <input type="text" id="text3" />
+        <script src="js/proba3.js"></script>
+        <button id="button3" type="button" onclick="nameSpace3.plus100()">+100</button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> On considère l'évènement E "le tir est à l'intérieur du cercle de rayon 0.5". <br> Quelle est la probabilité de cet évènement ? <br> Il est logique, si le tir est vraiment uniforme, de considérer que la probabilité de cet évènement est directement proportionnelle à la surface du cercle (revoir <input type="button" value="méthode de Monte-Carlo" onclick="go('../../analyse-reelle/integrales/intapprox.html#alea')" data-inline="true" />) donc &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle P(E) = \frac{\pi}{4} \)
+          <!-- /FORMULE UNIV INLINE--> &asymp;0.78540 <br> Et plus généralement, puisque le carré entier a pour surface 1, la probabilité d'une partie mesurable du carré (ayant une aire) comme étant l'aire de cette partie. <br> Donc si K est un carré de côté 2&epsilon; tracé dans notre carré de référence P(K)=4&epsilon;<sup>2</sup>. <br> Si maintenant M est un point particulier du carré, associé à l'évènement élémentaire {M}, quelle peut être la probabilité de cet évènement élémentaire ? <br> Il est raisonnable d'attendre que si E implique F alors P(E) &le; P(F); elle doit donc être inférieure à tous les nombres K=4&epsilon;<sup>2</sup>. Or ces quantités tendent vers 0 quand &epsilon; tend vers 0. <br> Il s'en suit que P({M}) ne peut être que nulle !
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We consider the event E "the shot is inside the circle of radius 0.5". <br> What is the probability of this event? <br> It is logical, if the shooting is really uniform, to consider that the probability of this event is directly proportional to the surface of the circle (review <input type="button" value="Monte-Carlo method" onclick="go('../../analyse-reelle/integrales/intapprox.html#alea')" data-inline="true" />) so &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle P(E) = \frac{\pi}{4} \)
+          <!-- /INLINE UNIV FORMULA--> &asymp;0.78540 <br> And more generally, since the entire square has area 1, the probability of a measurable part of the square (having an area) to be the area of that part. <br> So if K is a square of side 2&epsilon; plotted in our reference square P(K)=4&epsilon;<sup>2</sup>. <br> If now M is a particular point of the square, associated with the elementary event {M}, what can be the probability of this elementary event? <br> It is reasonable to expect that if E implies F then P(E) &le; P(F); it must therefore be less than all the numbers K=4&epsilon;<sup>2</sup>. However, these quantities tend to 0 when &epsilon; tends to 0. <br> It follows that P({M}) can only be zero!
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Donc dans ce cas, la situation est plus complexe, tous les évènements élémentaires ont une probabilité nulle, mais les évènements plus généraux peuvent avoir des probabilités non nulles.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> So in this case, the situation is more complex, all elementary events have zero probability, but more general events can have non-zero probabilities.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Un autre exemple, l'aiguille de Buffon</h2> C'est un problème classique. On dispose d'un parquet avec des lattes de largeur a. <br> On laisse tomber sur ce parquet un aiguille de longueur l. <br> Quelle est en fonction de a et l la probabilité que l'aiguille chevauche deux lattes ? <br> Voici une applet qui simule cettte épreuve aléatoire. <br> Vous pouvez faire varier les paramètres a et l avec les curseurs. <br> Appuyer sur le bouton 'Lâcher aiguille' pour simuler la chute d'une aiguille.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Another example, Buffon's needle</h2> It's a classic problem. We have a parquet with strips of width a. <br> We drop on this parquet a needle of length l. <br> What is, as a function of a and l, the probability that the needle overlaps two strips? <br> Here is an applet that simulates this random test. <br> You can vary the a and l parameters with the sliders. <br> Press the 'Drop needle' button to simulate the dropping of a needle.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <input type="text" id="text4" />
+        <script src="js/proba4.js"></script>
+        <button id="button4" type="button" onclick="nameSpace4.bouton()">
+          <div lang="fr">Lâcher aiguille</div>
+          <!-- /fr -->
+          <div lang="en">Drop needle</div>
+          <!-- /en -->
+        </button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Pour une solution complète de ce problème voir <input type="button" value="exercice 01" onclick="go('exercices/concept_proba/ex01.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> For a complete solution of this problem see <input type="button" value="exercise 01" onclick="go('exercices/concept_proba/ex01.html#')" data-inline="true" />. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_proba/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_proba/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Evénement aléatoire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+    <script>
+      language = "JavaScript"
+
+      function pausecomp(millis) {
+        var date = new Date();
+        var curDate = null;
+        do {
+          curDate = new Date();
+        }
+        while (curDate - date < millis);
+      }
+
+      function alea(m, M) {
+        var d = M - m;
+        var r = Math.random();
+        r *= 100;
+        r = parseInt(r);
+        r = m + r % d;
+        return r;
+      }
+
+      function face1() {
+        var result = alea(1, 7);
+        if (result == 1) {
+          document.getElementById("DE1").src = "images/de_un.gif";
+        }
+        if (result == 2) {
+          document.getElementById("DE1").src = "images/de_deux.gif";
+        }
+        if (result == 3) {
+          document.getElementById("DE1").src = "images/de_trois.gif";
+        }
+        if (result == 4) {
+          document.getElementById("DE1").src = "images/de_quatre.gif";
+        }
+        if (result == 5) {
+          document.getElementById("DE1").src = "images/de_cinq.gif";
+        }
+        if (result == 6) {
+          document.getElementById("DE1").src = "images/de_six.gif";
+        }
+        document.getElementById("TF5").style.visibility = 'hidden';
+        swapimage(result);
+      }
+
+      function face3() {
+        var result = alea(1, 7);
+        if (result == 1) {
+          document.getElementById("DE2").src = "images/de_un.gif";
+        }
+        if (result == 2) {
+          document.getElementById("DE2").src = "images/de_deux.gif";
+        }
+        if (result == 3) {
+          document.getElementById("DE2").src = "images/de_trois.gif";
+        }
+        if (result == 4) {
+          document.getElementById("DE2").src = "images/de_quatre.gif";
+        }
+        if (result == 5) {
+          document.getElementById("DE2").src = "images/de_cinq.gif";
+        }
+        if (result == 6) {
+          document.getElementById("DE2").src = "images/de_six.gif";
+        }
+        document.getElementById("TF6").style.visibility = 'hidden';
+        swapimage2(result);
+      }
+
+      function swapimage(result) {
+        if (result == 1) {
+          document.getElementById("TF5").src = "images/cards/faux.gif";
+        }
+        if (result == 2) {
+          document.getElementById("TF5").src = "images/cards/vrai.gif";
+        }
+        if (result == 3) {
+          document.getElementById("TF5").src = "images/cards/vrai.gif";
+        }
+        if (result == 4) {
+          document.getElementById("TF5").src = "images/cards/faux.gif";
+        }
+        if (result == 5) {
+          document.getElementById("TF5").src = "images/cards/vrai.gif";
+        }
+        if (result == 6) {
+          document.getElementById("TF5").src = "images/cards/faux.gif";
+        }
+      }
+
+      function swapimage2(result) {
+        if (result == 1) {
+          document.getElementById("TF6").src = "images/cards/faux.gif";
+        }
+        if (result == 2) {
+          document.getElementById("TF6").src = "images/cards/vrai.gif";
+        }
+        if (result == 3) {
+          document.getElementById("TF6").src = "images/cards/faux.gif";
+        }
+        if (result == 4) {
+          document.getElementById("TF6").src = "images/cards/vrai.gif";
+        }
+        if (result == 5) {
+          document.getElementById("TF6").src = "images/cards/faux.gif";
+        }
+        if (result == 6) {
+          document.getElementById("TF6").src = "images/cards/vrai.gif";
+        }
+      }
+
+      function face2() {
+        document.getElementById("DE1").src = "images/main.png";
+        document.getElementById("TF5").style.visibility = 'visible';
+      }
+
+      function face4() {
+        document.getElementById("DE2").src = "images/main.png";
+        document.getElementById("TF6").style.visibility = 'visible';
+      }
+
+      function carte1() {
+        var result = alea(0, 52);
+        var couleur = result % 4;
+        if (couleur == 3) document.getElementById("TF1").src = "images/cards/vrai.gif";
+        else document.getElementById("TF1").src = "images/cards/faux.gif";
+        return "images/cards/" + result + ".gif";
+      }
+
+      function carte2() {
+        document.getElementById("TF1").src = "images/cards/question.gif";
+        return "images/cards/52.gif";
+      }
+
+      function carte3() {
+        var result = alea(0, 52);
+        if (result >= 36 && result <= 39) document.getElementById("TF2").src = "images/cards/vrai.gif";
+        else document.getElementById("TF2").src = "images/cards/faux.gif";
+        return "images/cards/" + result + ".gif";
+      }
+
+      function carte4() {
+        document.getElementById("TF2").src = "images/cards/question.gif";
+        return "images/cards/52.gif";
+      }
+
+      function carte5() {
+        var result = alea(0, 52);
+        if (result >= 36 || result <= 4) document.getElementById("TF3").src = "images/cards/vrai.gif";
+        else document.getElementById("TF3").src = "images/cards/faux.gif";
+        return "images/cards/" + result + ".gif";
+      }
+
+      function carte6() {
+        document.getElementById("TF3").src = "images/cards/question.gif";
+        return "images/cards/52.gif";
+      }
+
+      function carte7() {
+        var result = alea(0, 52);
+        if (result >= 36) document.getElementById("TF4").src = "images/cards/vrai.gif";
+        else document.getElementById("TF4").src = "images/cards/faux.gif";
+        return "images/cards/" + result + ".gif";
+      }
+
+      function carte8() {
+        document.getElementById("TF4").src = "images/cards/question.gif";
+        return "images/cards/52.gif";
+      }
+
+      function tir() {
+        document.ggbApplet.setCoords('M', Math.random(), Math.random());
+      }
+    </script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="g">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="g">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_evenement/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_evenement/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Introduction à la notion générale d'évènement</h2>
+          <h3>Exemple du lancer du dé</h3> On lance le dé, mais on ne s'intéresse pas vraiment à la face qui sort, mais seulement aux faits suivants: <br> Placez le curseur dans le <u>cadre de gauche</u> pour lancer le dé, <b>puis</b> dans le <u>cadre de droite</u> pour voir le résultat. <br> S'agit-il d'un nombre premier ?
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Introduction to the general notion of event</h2>
+          <h3>Example of throwing the dice</h3> We roll the dice, but we are not really interested in the face that comes out, but only in the following facts: <br> Place the cursor in the <u>left frame</u> to roll the die, <b>then</b> in the <u>right frame</u> to see the result. <br> Is it a prime number ?
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <table cellpadding="0" cellspacing="0" border="2">
+          <tr>
+            <td>
+              <img src="images/main.png" width="140" height="120" border="0" id="DE1" alt="" onmouseout="javascript:face2();" onmouseover="javascript:face1();" />
+            </td>
+            <td>
+              <img src="images/cards/question.gif" width="71" height="96" border="0" id="TF5" alt="" onmouseover="document.getElementById(" TF5").style.visibility='hidden' ;" />
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> S'agit-il d'un nombre pair ? </div>
+        <!-- /fr -->
+        <div lang="en"> Is it an even number ? </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        </table>
+        </td>
+        <td>
+          <table cellpadding="0" cellspacing="0" border="2" bgcolor="#FFFFFF">
+            <tr>
+              <td>
+                <img src="images/main.png" width="140" height="120" border="0" id="DE2" alt="" onmouseout="javascript:face4();" onmouseover="javascript:face3();" />
+              </td>
+              <td>
+                <img src="images/cards/question.gif" width="71" height="96" border="0" id="TF6" alt="" onmouseover="document.getElementById(" TF6").style.visibility='hidden' ;" />
+              </td>
+            </tr>
+          </table <!-- /STOP APPLET-->
+          <div lang="fr">
+            <h3>Exemple du tirage d'une carte</h3> Nous reprenons l'exemple du <input type="button" value="jeu de bridge" onclick="go('concept_epreuve.html#bridge')" data-inline="true" />. <br /> On tire une carte au hasard, on s'intéresse aux propriétés suivantes : <br> La carte est-elle de la couleur pique ? (13 cas)
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Example of drawing a card</h3> We take the example of the <input type="button" value="bridge game" onclick="go('concept_epreuve.html#bridge')" data-inline="true" />. <br /> We draw a card at random, we are interested in the following properties: <br> Is it a spade ? (13 cases)
+          </div>
+          <!-- /en -->
+          <!-- STOP  APPLET-->
+          <table>
+            <tr>
+              <td>
+                <img src="images/cards/52.gif" width="71" height="96" border="0" id="C1" alt="" onmouseout="javascript:this.src=carte2();" onmouseover="javascript:this.src=carte1();" />
+              </td>
+              <td>
+                <img src="images/cards/question.gif" width="71" height="96" border="0" id="TF1" alt="">
+              </td>
+            </tr>
+          </table>
+          <!-- /STOP  APPLET-->
+          <div lang="fr"> La carte est-elle un as ? (4 cas) </div>
+          <!-- /fr -->
+          <div lang="en"> Is the card an ace ? (4 cases) </div>
+          <!-- /en -->
+          <!-- STOP  APPLET-->
+          <table>
+            <tr>
+              <td>
+                <img src="images/cards/52.gif" width="71" height="96" border="0" id="C2" alt="" onmouseout="javascript:this.src=carte4();" onmouseover="javascript:this.src=carte3();" />
+              </td>
+              <td>
+                <img src="images/cards/question.gif" width="71" height="96" border="0" id="TF2" alt="">
+              </td>
+            </tr>
+          </table>
+          <!-- /STOP  APPLET-->
+          <div lang="fr"> La carte est-elle un honneur ? (20 cas) </div>
+          <!-- /fr -->
+          <div lang="en"> Is it an honor ? (20 cases) </div>
+          <!-- /en -->
+          <!-- STOP  APPLET-->
+          <table>
+            <tr>
+              <td>
+                <img src="images/cards/52.gif" width="71" height="96" border="0" id="C3" alt="" onmouseout="javascript:this.src=carte6();" onmouseover="javascript:this.src=carte5();" />
+              </td>
+              <td>
+                <img src="images/cards/question.gif" width="71" height="96" border="0" id="TF3" alt="">
+              </td>
+            </tr>
+          </table>
+          <!-- /STOP  APPLET-->
+          <div lang="fr"> La carte est-elle un honneur à points ? (16 cas) </div>
+          <!-- /fr -->
+          <div lang="en"> Is it an honor with points ? (16 cases) </div>
+          <!-- /en -->
+          <!-- STOP  APPLET-->
+          <table>
+            <tr>
+              <td>
+                <img src="images/cards/52.gif" width="71" height="96" border="0" id="C4" alt="" onmouseout="javascript:this.src=carte8();" onmouseover="javascript:this.src=carte7();" />
+              </td>
+              <td>
+                <img src="images/cards/question.gif" width="71" height="96" border="0" id="TF4" alt="">
+              </td>
+            </tr>
+          </table>
+          <!-- /STOP  APPLET-->
+          <div lang="fr">
+            <h3>Exemple du 'tir aléatoire'</h3> Nous pouvons considérer la propriété suivante : <ul>
+              <li>Le tir est dans le cercle de centre (0.5,0.5) et de rayon 3/10.</li>
+            </ul> Voici une applet simulant cette expérience. <br> Cliquez n'importe où sur le graphique pour une épreuve aléatoire. <br> La réalisation ou non de l'évènement apparaît en lettres rouges en bas.
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Example of the 'random shot'</h3> We can consider the following property: <ul>
+              <li>The shot is in the center circle (0.5,0.5) and radius 3/10.</li>
+            </ul> Here is an applet simulating this experience. <br> Click anywhere on the graph for a random test. <br> The realization or not of the event appears in red letters at the bottom.
+          </div>
+          <!-- /en -->
+          <!-- STOP  APPLET-->
+          <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+          <script src="js/concept2.js"></script>
+          <!-- /STOP  APPLET-->
+          <div lang="fr">
+            <h2>Définitions</h2> Nous sommes maintenant en mesure de poser une définition générale rassemblant tous les cas particuliers vus ci-dessus.
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h2>Definitions</h2> We are now in a position to give a general definition covering all the special cases seen above.
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def1"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 1</div> Un <b>
+                <i>'évènement'</i>
+              </b> correspond à une <input type="button" value="partie" onclick="go('../../bases/ensembles/parties.html#')" data-inline="true" /> de l'ensemble Ω, univers des possibles.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 1</div> An <b>
+                <i>'event'</i>
+              </b> corresponds to an <input type="button" value="subset" onclick="go('../../bases/ensembles/parties.html#')" data-inline="true" /> of the set Ω, space of all possibilities.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h3>Cas des évènements élémentaires</h3> Selon nos définitions antérieures un événement élémentaire ω est un élément de Ω. Mais du point de vue de la réalisation, la survenue de l'élément ω correspond avec notre nouvelle définition à l'évènement <input type="button" value="singleton" onclick="go('../../bases/ensembles/singletons.html#')" data-inline="true" /> {ω}. <br /> Bien que ces objets soient formellement différents, il est courant d'identifier ω avec {ω}, ce que nous ferons de façon systématique.
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Case of elementary (atomic) events</h3> According to our previous definitions an elementary event ω is an element of Ω. But from the point of view of the realization, the occurrence of the element ω corresponds with our new definition to the <input type="button" value="singleton" onclick="go('../../bases/ensembles/singletons.html#')" data-inline="true" /> event {ω}. <br /> Although these objects are formally different, it is common to identify ω with {ω}, what we will do systematically.
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <h2>Logique des évènements</h2> Sur l'ensemble des évènements, ensemble des parties de Ω il existe des <input type="button" value="lois de composition" onclick="go('../../bases/operations/lois.html#')" data-inline="true" /> que nous connaissons déjà, et qui confère à cet ensemble une structure algébrique. <h3>Evènement impossible</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h2>Logic of events</h2> On the set of events, set of subsets of Ω there exist <input type="button" value="operations" onclick="go('../../bases/operations/lois.html#')" data-inline="true" /> which we already know, and which gives this set an algebraic structure. <h3>Impossible event</h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def2"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 2</div> L'évènement <b>
+                <i>'impossible'</i>
+              </b> est celui qui correspond à la <input type="button" value="partie vide" onclick="go('../../bases/ensembles/vide.html#')" data-inline="true" /> {} ou &empty; de &Omega;. C'est celui qui n'est <b>jamais</b> réalisé.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 2</div> The <b>
+                <i>'impossible'</i>
+              </b> event is the one that corresponds to the <input type="button" value="empty subset" onclick="go('../../bases/ensembles/vide.html#')" data-inline="true" /> {} or &empty; from &Omega;. It is the one that is <b>never</b> realized.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h3>Evènement certain</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Sure event</h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def3"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 3</div> L'évènement <b>
+                <i>'certain'</i>
+              </b> est celui qui correspond à la partie pleine &Omega; de &Omega;. C'est celui qui est <b>toujours</b> réalisé.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 3</div> The <b>
+                <i>'sure'</i>
+              </b> event is the one that corresponds to the whole subset &Omega; from &Omega;. It is the one that is <b>always</b> realized.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h3>Conjonction</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Conjunction</h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def4"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 4</div> La <b>
+                <i>'conjonction'</i>
+              </b> des évènements A et B correspond à <input type="button" value="l'intersection" onclick="go('../../bases/ensembles/intersection.html#')" data-inline="true" /> A∩B.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 4</div> The <b>
+                <i>'conjunction'</i>
+              </b> of events A and B corresponds to <input type="button" value="the intersection" onclick="go('../../bases/ensembles/intersection.html#')" data-inline="true" /> A∩B.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h4>Exemples</h4>
+            <ul>
+              <li>Dans le cas du dé, si A est l'évenement "la face est un nombre premier" et si B est l'évènement "la face est un nombre pair", la conjonction de A et B correspond à l'évènement élémentaire {2}.</li>
+              <li>Dans le cas du tirage d'une carte si A est l'évènement "La carte est un pique" et si B est l'évènement "la carte est un honneur" la conjonction de A et B correspond à l'évènement {AP,RP,DP,VP,XP}.</li>
+            </ul>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h4>Examples</h4>
+            <ul>
+              <li>In the case of the die, if A is the event "the face is a prime number" and if B is the event "the face is an even number", the conjunction of A and B corresponds to the event elementary {2}.</li>
+              <li>In the case of drawing a card if A is the event "The card is a spade" and if B is the event "the card is an honor" the conjunction of A and B corresponds to the event {AS,KS,QS,JS,XS}.</li>
+            </ul>
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <h3>Disjonction</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Disjonction</h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def5"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 5</div> La <b>
+                <i>'disjonction'</i>
+              </b> des évènements A et B correspond à la <input type="button" value="réunion" onclick="go('../../bases/ensembles/union.html#')" data-inline="true" /> A∪B.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 5</div> The <b>
+                <i>'disjunction'</i>
+              </b> of events A and B corresponds to the <input type="button" value="union" onclick="go('../../bases/ensembles/union.html#')" data-inline="true" /> A∪B.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h4>Exemples</h4>
+            <ul>
+              <li>Dans le cas du dé, si A est l'évenement "la face est un nombre premier" et si B est l'évènement "la face est un nombre pair", la disjonction de A et B correspond à l'évènement élémentaire {2,4,6,3,5}.</li>
+              <li>Dans le cas du tirage d'une carte si A est l'évènement "La carte est un pique" et si B est l'évènement "la carte est un roi" la conjonction de A et B correspond à l'évènement {AP,RP,DP,VP,XP,9P,8P,7P,6P,5P,4P,3P,2P,RC,RK,RT}.</li>
+            </ul>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h4>Examples</h4>
+            <ul>
+              <li>In the case of the die, if A is the event "the face is a prime number" and if B is the event "the face is an even number", the disjunction of A and B corresponds to the event elementary {2,4,6,3,5}.</li>
+              <li>In the case of drawing a card if A is the event "The card is a spade" and if B is the event "the card is a king" the conjunction of A and B corresponds to the event {AS,KS,QS,JS,XS,9S,8S,7S,6S,5S,4S,3S,2S,KH,KD,KC}.</li>
+            </ul>
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <h3>Evènement contraire</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h3>Conmplementary (opposite) event</h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def6"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 6</div> L'évènement <b>
+                <i>'contraire'</i>
+              </b> de A correspond au <input type="button" value="complémentaire" onclick="go('../../bases/ensembles/difference.html#')" data-inline="true" /> de A dans Ω, on le note <span style="text-decoration: overline; ">A</span>.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 6</div> The <b>
+                <i>'opposite'</i>
+              </b> event of A corresponds to the <input type="button" value="difference" onclick="go('../../bases/ensembles/difference.html#')" data-inline="true" /> of A in Ω, we denote it <span style="text-decoration: overline; ">A</span>.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h4>Exemples</h4>
+            <ul>
+              <li>Le contraire de l'évènement "la carte est un pique" est l'évènement "la carte n'est pas un pique" (39 possibilités) c'est la disjonction des 3 évènements "la carte est un coeur", "la carte est un carreau", "la carte est un trèfle".</li>
+              <li>La disjonction d'un évènement et de son contraire constitue toujours l'évènement certain.</li>
+            </ul>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h4>Examples</h4>
+            <ul>
+              <li>The opposite of the event "the card is a spade" is the event "the card is not a spade" (39 possibilities) it is the disjunction of the 3 events "the card is a heart", "the card is a diamond", "the card is a club".</li>
+              <li>The disjunction of an event and its opposite always constitutes the certain event.</li>
+            </ul>
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <h4>Evènements incompatibles</h4>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h4>Incompatible events</h4>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def7"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 7</div> La notion d'évènements <b>
+                <i>'incompatibles'</i>
+              </b> ou <b>
+                <i>'mutuellement exclusifs'</i>
+              </b>, correspond à celle de parties <input type="button" value="disjointes" onclick="go('../../bases/ensembles/disjoints.html#')" data-inline="true" />.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 7</div> The notion of <b>
+                <i>'incompatible'</i>
+              </b> or <b>
+                <i>'mutually exclusive'</i>
+              </b> events corresponds to that of <input type="button" value="disjoint" onclick="go('../../bases/ensembles/disjoints.html#')" data-inline="true" /> subsets.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h4>Exemples</h4>
+            <ul>
+              <li>L'évènement "la carte est un pique" est incompatible avec l'évènement "la carte est un coeur", mais n'est pas incompatible avec l'évènement "la carte est un roi".</li>
+              <li>Un évènement et son contraire sont toujours incompatibles.</li>
+            </ul>
+            <h3>Implication</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h4>Examples</h4>
+            <ul>
+              <li>The event "the card is a spade" is incompatible with the event "the card is a heart", but is not incompatible with the event "the card is a king".</li>
+              <li>An event and its opposite are always incompatible.</li>
+            </ul>
+            <h3>Material conditional</h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def8"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 8</div> On dit qu'un évènement E<sub>1</sub>
+              <b>
+                <i>'implique'</i>
+              </b> ( <b>
+                <i>'entraîne'</i>
+              </b> ou <b>
+                <i>'force'</i>
+              </b>) un évènement E<sub>2</sub> si E<sub>1</sub> &sube; E<sub>2</sub>.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 8</div> An event E<sub>1</sub> is said to <b>
+                <i>'force'</i>
+              </b> ( or <b>
+                <i>'imply'</i>
+              </b>) an event E<sub>2</sub> if E<sub>1</sub> &sube; E<sub>2</sub>.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h4>Exemples</h4>
+            <ul>
+              <li>L'évènement "La carte est un coeur" implique "la carte est rouge".</li>
+              <li>L'évènement "La carte est un roi" implique "la carte est un honneur".</li>
+            </ul>
+            <h3>Systèmes complets</h3>
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h4>Examples</h4>
+            <ul>
+              <li>The event "The card is a heart" implies "the card is red".</li>
+              <li>The event "The card is a king" implies "the card is an honor".</li>
+            </ul>
+            <h3>Complete systems</h3>
+          </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="def9"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">définition 9</div> Dans le langage des probabilités la notion de <b>
+                <i>'système complet'</i>
+              </b> correspond à la notion ensembliste de <input type="button" value="partition" onclick="go('../../bases/ensembles/partitions.html#')" data-inline="true" />.
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">definition 9</div> In the language of probability, the notion of <b>
+                <i>'complete system'</i>
+              </b> corresponds to the set notion of <input type="button" value="partition" onclick="go('../../bases/ensembles/partitions.html#')" data-inline="true" />.
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr"> Autrement dit : </div>
+          <!-- /fr -->
+          <div lang="en"> In other words : </div>
+          <!-- /en -->
+          <!-- STOP -->
+          <a name="prop1"></a>
+          <div id="container">
+            <div lang="fr">
+              <div id="label">propriété 1</div> Une famille d'évènements E<sub>1</sub>,E<sub>2</sub>, ... ,E<sub>n</sub> forment un système complet si <ul>
+                <li>Aucun d'eux n'est impossible</li>
+                <li>Ils sont deux à deux incompatibles.</li>
+                <li>Leur disjonction est l'évènement certain.</li>
+              </ul>
+            </div>
+            <!--/fr-->
+            <div lang="en">
+              <div id="label">property 1</div> A family of events E<sub>1</sub>,E<sub>2</sub>, ... ,E<sub>n</sub> form a complete system if <ul>
+                <li>None of them are impossible</li>
+                <li>They are two by two incompatible.</li>
+                <li>Their disjunction is the sure event.</li>
+              </ul>
+            </div>
+            <!-- /en -->
+          </div>
+          <!-- /cont -->
+          <!-- /STOP -->
+          <div lang="fr">
+            <h4>Exemples</h4>
+            <ul>
+              <li>Un évènement ni certain ni impossible et son contraire forment un système complet.</li>
+              <li>Pour le tirage d'une carte les 4 évènements "la carte est un trèfle", "la carte est un carreau", "la carte est un coeur", "la carte est un pique", forment un système complet.</li>
+            </ul>
+            <h3>Propriétés des opérations</h3> Ce sont celles des lois ensemblistes classiques que l'on peut trouver, par exemple, dans <input type="button" value="ce chapitre" onclick="go('../../bases/ensembles/index.html#')" data-inline="true" />.
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <h4>Examples</h4>
+            <ul>
+              <li>An event neither sure nor impossible and its opposite form a complete system.</li>
+              <li>For the drawing of a card, the 4 events "the card is a club", "the card is a diamond", "the card is a heart", "the card is a spade", form a complete system. </li>
+            </ul>
+            <h3>Properties of operations</h3> These are those of the classical operations on sets that can be found, for example, in <input type="button" value="this chapter" onclick="go('../../bases/ensembles/index.html#')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+          <div lang="fr">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercices" onclick="go('exercices/concept_evenement/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+            <!-- /navbar -->
+          </div>
+          <!-- /fr -->
+          <div lang="en">
+            <div>
+              <ul style=list-style-type:'';>
+                <li>
+                  <input type="button" value="Exercises" onclick="go('exercices/concept_evenement/menu.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+                </li>
+                <li>
+                  <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

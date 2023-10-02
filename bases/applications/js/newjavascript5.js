@@ -346,7 +346,7 @@ function relgraph(C, G)
         tz.fillStyle = 'black';
         //tz.style.backgroundColor = "#00FF00";
         tz.value = this.stringtoprint;
-        tz.style.width = this.stringtoprint.length * 8 + "px";
+        tz.style.width = this.stringtoprint.length * 11 + "px";
 
     }
 

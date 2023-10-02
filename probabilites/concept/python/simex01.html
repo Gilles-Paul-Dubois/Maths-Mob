@@ -1,0 +1,72 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>ex01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s0">&quot;&quot;&quot;Knuth et Lewis - Knoth and Lewis method &quot;&quot;&quot;</span><span class="s1"> 
+</span><span class="s2">global </span><span class="s1">c 
+c = </span><span class="s3">1024 </span><span class="s1">* </span><span class="s3">1024 </span><span class="s1">* </span><span class="s3">1024 </span><span class="s1">* </span><span class="s3">4</span><span class="s1"> 
+ 
+</span><span class="s2">def </span><span class="s1">GCL(a, b, c, x0): 
+    </span><span class="s0">&quot;&quot;&quot;le générateur congruence linéaire général the general LCG generator&quot;&quot;&quot;</span><span class="s1"> 
+    x = x0 
+    </span><span class="s2">yield </span><span class="s1">x 
+    </span><span class="s2">while True</span><span class="s1">: 
+        x = (a * x + b) % c 
+        </span><span class="s2">yield </span><span class="s1">x 
+ 
+</span><span class="s2">def </span><span class="s1">KLfloat(): 
+    </span><span class="s0">&quot;&quot;&quot;générateur de flottants utilisant Knuth-Lewis - float generator using KL&quot;&quot;&quot;</span><span class="s1"> 
+    KL = GCL(</span><span class="s3">1664525</span><span class="s1">, </span><span class="s3">1013904223</span><span class="s1">, c, </span><span class="s3">1</span><span class="s1">)</span><span class="s0">#Knuth-Lewis</span><span class="s1"> 
+    fc=c*</span><span class="s3">1.0 </span><span class="s0">#pour assurer la division dans les flottants  - to ensure float division</span><span class="s1"> 
+    </span><span class="s2">while True</span><span class="s1">: 
+        </span><span class="s2">yield </span><span class="s1">next(KL)/fc 
+ 
+</span><span class="s2">def </span><span class="s1">test(m): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction de test - test function&quot;&quot;&quot;</span><span class="s1"> 
+    Comptes=[</span><span class="s3">0</span><span class="s1">]*</span><span class="s3">10</span><span class="s1"> 
+    M=m*</span><span class="s3">1.0</span><span class="s1"> 
+    KLF = KLfloat() 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,m): 
+        x=next(KLF)*</span><span class="s3">10</span><span class="s1"> 
+        Comptes[int (x)]+=</span><span class="s3">1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">[x/M </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">Comptes]</span><span class="s0">#pour les fréquences - for frequencies</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    print (test(</span><span class="s3">2000</span><span class="s1">)) 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
+    main() 
+</span><span class="s4">&quot;&quot;&quot; 
+résultat de l'exécution result of running
+[0.106, 0.1, 0.0915, 0.1035, 0.0945, 0.086, 0.1085, 0.114, 0.096, 0.1] 
+ 
+&quot;&quot;&quot;</span><span class="s1"> 
+</span></pre>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>GCL03.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">c = </span><span class="s1">1024 </span><span class="s0">* </span><span class="s1">1024 </span><span class="s0">* </span><span class="s1">1024 </span><span class="s0">* </span><span class="s1">2 </span>
+
+<span class="s2">function </span><span class="s0">gcl(a,b,c,x0,channel)</span>
+    <span class="s0">x=x0</span>
+    <span class="s0">put!(channel,x0)</span>
+    <span class="s2">while true</span>
+        <span class="s0">x=(a*x+b)%c</span>
+        <span class="s0">put!(channel,x)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">RANDU=Channel((channel_arg)-&gt;gcl(</span><span class="s1">65539</span><span class="s0">,</span><span class="s1">0</span><span class="s0">,c,</span><span class="s1">1</span><span class="s0">,channel_arg))</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">10</span>
+        <span class="s0">print(take!(RANDU),</span><span class="s3">&quot; , &quot;</span><span class="s0">)</span>
+    <span class="s2">end</span>
+    <span class="s0">print(</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">-------------------------</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s0">)</span>
+    <span class="s0">PASCAL=Channel((channel_arg)-&gt;gcl(</span><span class="s1">129</span><span class="s0">,</span><span class="s1">907633385</span><span class="s0">,</span><span class="s1">2</span><span class="s0">*c,</span><span class="s1">0</span><span class="s0">,channel_arg))</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">10</span>
+        <span class="s0">print(take!(PASCAL),</span><span class="s3">&quot; , &quot;</span><span class="s0">)</span>
+    <span class="s2">end</span>
+    <span class="s0">print(</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">-------------------------</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s0">)</span>
+    <span class="s0">UNIX=Channel((channel_arg)-&gt;gcl(</span><span class="s1">1103515245</span><span class="s0">,</span><span class="s1">12345</span><span class="s0">,c,</span><span class="s1">0</span><span class="s0">,channel_arg))</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">10</span>
+        <span class="s0">print(take!(UNIX),</span><span class="s3">&quot; , &quot;</span><span class="s0">)</span>
+    <span class="s2">end</span>
+    <span class="s0">print(</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">-------------------------&quot;</span><span class="s0">)    </span>
+<span class="s2">end</span>
+<span class="s0">main()</span></pre>
+</body>
+</html>

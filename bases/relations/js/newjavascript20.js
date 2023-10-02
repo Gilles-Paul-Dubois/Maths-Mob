@@ -299,7 +299,7 @@ function relgraph(C, G)
         tz.value = prefix + this.stringtoprint;
         var long = tz.value.length;
         long = Math.max(long, 50);
-        tz.style.width = long * 6 + "px";
+        tz.style.width = long * 7 + "px";
 
     }
 
@@ -418,7 +418,7 @@ function relgraph(C, G)
     {
 
         tz.value = this.allimagesstr();
-        tz.style.width = this.allimagesstr().length * 7 + "px";
+        tz.style.width = this.allimagesstr().length * 8 + "px";
 
     }
 }

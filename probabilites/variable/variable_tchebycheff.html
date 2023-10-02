@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Inégalité de Bienaymé-Tchebycheff</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/variable_tchebycheff/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/variable_tchebycheff/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Galerie des portraits</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Portrait gallery</h2>
+        </div>
+        <!-- /en -->
+        <table cellpadding="10" cellspacing="0" border="10" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font color="#FFFFFF">Irénée-Jules Byenaimé <br>(1796-1878/FR) </font>
+            </td>
+            <td align="center">
+              <font color="#FFFFFF">Pafnuti Lvovich Tchebichev <br>(1821-1894/RU) </font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/220px-Irénée-Jules_Bienaymé.jpeg" width="220" height="268" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/Chebyshev.jpg" width="240" height="326" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <div lang="fr">
+          <h2>Le théorème</h2> Commençons par un lemme technique :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The theorem</h2> Let's start with a technical lemma:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="lem1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">lemme 1</div> Soit X une variable aléatoire sur un espace probabilisé (&Omega;, \( \mathfrak{T}\),P). On suppose que l'on est dans l'un des deux cas suivants : <ul>
+              <li>&Omega; est un ensemble fini ou dénombrable</li>
+              <li>X est absolument continue et a une densité continue</li>
+            </ul> et que X possède une espérance E(X). Dans ces conditions si X &ge; 0 alors E(X) &ge; 0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">lemma 1</div> Let X be a random variable on a probability space (&Omega;, \( \mathfrak{T}\),P). We assume that we are in one of the following two cases: <ul>
+              <li>&Omega; is a finite or countable set</li>
+              <li>X is absolutely continuous and has continuous density</li>
+            </ul> and that X has an expectation E(X). Under these conditions if X &ge; 0 then E(X) &ge; 0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Le résultat est évident dans le premier cas. <br> Dans le second cas il est clair que la fonction f est nulle sur ]-&infin;,0[ car si f(x<sub>0</sub>) &gt; 0 pour un certain x<sub>0</sub> &lt;0 alors par continuité f sera positive sur un intervalle [a,b] contenant x<sub>0</sub> et contenu dans ]-&infin;,0[ on aura donc
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle P\left( {X \in \lbrack a,b\rbrack} \right) = {\int_{a}^{b}f(x)}{dx} > 0 \)</p>
+          <!-- /FORMULE UNIV INLINE--> ce qui contredit X &ge; 0. <br> Nous supposons désormais que toutes les variables aléatoires considéres vérifient les conditions de notre lemme. De là nous tirons l'inégalité de Markov :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The result is obvious in the first case. <br> In the second case it is clear that the function f is zero on ]-&infin;,0[ because if f(x<sub>0</sub>) &gt; 0 for a certain x<sub>0</sub> &lt;0 then by continuity f will be positive on an interval [a,b] containing x<sub>0</sub> and contained in ]-&infin;,0[ we will therefore have
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle P\left( {X \in \lbrack a,b\rbrack} \right) = {\int_{a}^{b}f(x)}{dx} > 0 \)</p>
+          <!-- /UNIV INLINE FORMULA--> which contradicts X &ge; 0. <br> We now assume that all the random variables considered satisfy the conditions of our lemma. From here we derive the Markov inequality:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> &forall; a &gt; 0
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P\left( {X \geq a} \right) \leq \frac{E(X)}{a} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> &forall; a &gt; 0
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P\left( {X \geq a} \right) \leq \frac{E(X)}{a} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Soit E l'évènement X≥a et soit Y la fonction caractéristique de E, alors Y est une variable aléatoire (nous l'avons vu comme exemple dans <input type="button" value="cette page" onclick="go('variable_definition.html#premex')" data-inline="true" />) et E(Y)=P(E). <br /> On a donc X ≥ aY. <br /> C'est à dire encore X-aY ≥ 0. <br /> D'où nous tirons E(X-aY) ≥ 0 d'après notre lemme. <br /> Compte tenu des propriétés de l'espérance mathématique on a E(X-aY) = E(X)-aE(Y) <br /> Donc E(X)-aE(Y) ≥ 0 <br /> Soit encore E(X)-aP(E) ≥ 0 <br /> ce qui nous donne l'inégalité cherchée. <br /> L'inégalité de Markov possède un corollaire important : </div>
+        <!-- /fr -->
+        <div lang="en"> Let E be the event X≥a and let Y be the characteristic function of E, then Y is a random variable (we saw it as an example in <input type="button" value="this page" onclick="go( 'variable_definition.html#premex')" data-inline="true" />) and E(Y)=P(E). <br /> We therefore have X ≥ aY. <br /> That is to say again X-aY ≥ 0. <br /> From where we draw E(X-aY) ≥ 0 according to our lemma. <br /> Taking into account the properties of mathematical expectation we have E(X-aY) = E(X)-aE(Y) <br /> So E(X)-aE(Y) ≥ 0 <br /> Let again E(X)-aP(E) ≥ 0 <br /> which gives us the desired inequality. <br /> Markov's inequality has an important corollary: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div> Soit &Phi; une fonction croissante, continue, positive ou nulle sur l'intervalle I. <br> Soit Y une v.a. réelle définie sur un espace probabilisé (&Omega;, \( \mathfrak{T}\),P) et telle que l'image de Y soit contenue dans I. <br> Dans ces conditions
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P\left( {Y \geq b} \right) \leq \frac{E\left( \Phi(Y) \right)}{\Phi(b)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div> Let &Phi; an increasing, continuous, positive or zero function on the interval I. <br> Let Y be a real r.v. defined on a probability space (&Omega;, \( \mathfrak{T}\),P) and such that the image of Y is contained in I. <br> In these conditions
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle P\left( {Y \geq b} \right) \leq \frac{E\left( \Phi(Y) \right)}{\Phi(b)} \)</p>
+            <!-- /UNIV INLINE FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> On applique l'inégalité de Markov à X=&Phi;(Y) et a = &Phi;(b). <br> Nous obtenons ainsi que &forall; b &gt; 0
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle P\left( \Phi(Y) \geq \Phi(b) \right) \leq \frac{E\left( \Phi(Y) \right)}{\Phi(b)} \)</p>
+          <!-- /FORMULE UNIV INLINE--> La croissance de &Phi; entraîne que : <br> {Y&ge;b} &sube; {&Phi;(Y) &ge; &Phi;(b)} <br> Donc que <br> P(Y &ge; b) &le; P(&Phi;(Y)&ge;&Phi;(b)). <br> De là nous tirons l'inégalité de Bienaymé-Tchebycheff, dont l' énoncé suit :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We apply Markov's inequality to X=&Phi;(Y) and a = &Phi;(b). <br> We thus obtain that &forall; b &gt; 0
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle P\left( \Phi(Y) \geq \Phi(b) \right) \leq \frac{E\left( \Phi(Y) \right)}{\Phi(b)} \)</p>
+          <!-- /UNIV INLINE FORMULA--> The growth of &Phi; results in: <br> {Y&ge;b} &sube; {&Phi;(Y) &ge; &Phi;(b)} <br> So that <br> P(Y &ge; b) &le; P(&Phi;(Y)&ge;&Phi;(b)). <br> From there we derive the Chebychev inequality, the statement of which follows:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 3</div> On suppose que X possède une espérance et une variance. <br> Dans ces conditions : <br> &forall; &alpha; &gt; 0
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P\left( {\mid X - E(X) \mid \geq \alpha} \right) \leq \frac{v(X)}{\alpha^{2}} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 3</div> We assume that X has an expectation and a variance. <br> Under these conditions: <br> &forall; &alpha; &gt; 0
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle P\left( {\mid X - E(X) \mid \geq \alpha} \right) \leq \frac{v(X)}{\alpha^{2}} \)</p>
+            <!-- /UNIV INLINE FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La démonstration s'obtient en utilisant le corollaire avec Y=|X-E(X)|, I=[0,+&infin;[ et &Phi;(x)=x². </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is obtained using the corollary with Y=|X-E(X)|, I=[0,+&infin;[ and &Phi;(x)=x². </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/variable_tchebycheff/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/variable_tchebycheff/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

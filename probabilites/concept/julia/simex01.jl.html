@@ -1,0 +1,60 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>exo1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">c=</span><span class="s1">1024</span><span class="s0">*</span><span class="s1">1024</span><span class="s0">*</span><span class="s1">1024</span><span class="s0">*</span><span class="s1">4</span>
+
+<span class="s2">function </span><span class="s0">gcl(a,b,c,x0,channel)</span>
+    <span class="s0">x=x0</span>
+    <span class="s0">put!(channel,x0)</span>
+    <span class="s2">while true</span>
+        <span class="s0">x=(a*x+b)%c</span>
+        <span class="s0">put!(channel,x)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+    
+<span class="s2">function </span><span class="s0">KLfloat(channel)</span>
+    <span class="s0">KL=Channel((channel_arg)-&gt;gcl(</span><span class="s1">1664525</span><span class="s0">,</span><span class="s1">1013904223</span><span class="s0">,c,</span><span class="s1">1</span><span class="s0">,channel_arg))</span>
+    <span class="s2">while true</span>
+        <span class="s0">put!(channel,take!(KL)/c)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">test(m)</span>
+    <span class="s0">Comptes=repeat([</span><span class="s1">0</span><span class="s0">],</span><span class="s1">10</span><span class="s0">)</span>
+    <span class="s0">KLF=Channel(KLfloat)</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:m</span>
+        <span class="s0">x=take!(KLF)*</span><span class="s1">10</span>
+        <span class="s0">k=Int(floor(x))+</span><span class="s1">1</span>
+        <span class="s0">Comptes[k]+=</span><span class="s1">1</span>
+    <span class="s2">end</span>
+    <span class="s2">return </span><span class="s0">[x/m </span><span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s0">Comptes]</span>
+<span class="s2">end</span>
+        
+        
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">println(test(</span><span class="s1">2000</span><span class="s0">))</span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

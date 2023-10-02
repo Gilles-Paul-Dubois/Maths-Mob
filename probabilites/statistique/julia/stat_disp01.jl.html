@@ -1,0 +1,68 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>stat_disp01.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">Statistics</span>
+<span class="s1">genere_serie_alea(n,p)=[rand(</span><span class="s2">0</span><span class="s1">:p) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:n]</span>
+
+<span class="s0">function </span><span class="s1">calcule_max(L)</span>
+    <span class="s1">Max=L[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">L</span>
+        <span class="s0">if </span><span class="s1">x&gt;Max</span>
+            <span class="s1">Max=x</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Max</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">calcule_min(L)</span>
+    <span class="s1">Min=L[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">L</span>
+        <span class="s0">if </span><span class="s1">x&lt;Min</span>
+            <span class="s1">Min=x</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Min</span>
+<span class="s0">end</span>
+
+<span class="s1">E1(L)=calcule_max(L)-calcule_min(L)     </span>
+
+<span class="s0">function </span><span class="s1">E2(L)</span>
+    <span class="s1">Min=Max=L[</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">L</span>
+        <span class="s0">if </span><span class="s1">x&lt;Min</span>
+            <span class="s1">Min=x</span>
+        <span class="s0">end</span>
+        <span class="s0">if </span><span class="s1">x&gt;Max</span>
+            <span class="s1">Max=x</span>
+        <span class="s0">end</span>
+    <span class="s0">end</span>
+    <span class="s0">return </span><span class="s1">Min,Max,Max-Min</span>
+<span class="s0">end</span>
+
+<span class="s1">L=genere_serie_alea(</span><span class="s2">30</span><span class="s1">,</span><span class="s2">40</span><span class="s1">)</span>
+<span class="s1">println(L)</span>
+<span class="s1">println(calcule_max(L))</span>
+<span class="s1">println(calcule_min(L))</span>
+<span class="s1">println(E1(L))</span>
+<span class="s1">println(E2(L))</span></pre>
+</body>
+</html>

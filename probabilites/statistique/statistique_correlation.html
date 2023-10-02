@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Corrélation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/statistique_correlation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/statistique_correlation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> On s'intéresse maintenant à plusieurs caractères distincts sur les individus d'une même population. <br>
+          <h2>Séries doubles</h2> Commençons avec le cas de deux caractères <b>numériques</b> X et Y. <br> Les individus sont assimilés à des numéros 1,2, ... ,n. <br> Pour chaque individu i 1 &le; i &le; n on a donc une valeur x<sub>i</sub>=X(i) et une valeur y<sub>i</sub>=Y(i), déterminant un point du plan de coordonnées (x<sub>i</sub>,y<sub>i</sub>).
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We are now interested in several distinct variables on individuals of the same population. <br>
+          <h2>Double series</h2> Let's start with the case of two <b>numeric</b> characters X and Y. <br> Individuals are assimilated to numbers 1,2, ... ,n. <br> For each individual 1 &le; i &le; n we therefore have a value x<sub>i</sub>=X(i) and a value y<sub>i</sub>=Y(i), determining a point (x<sub> i</sub>,y<sub>i</sub>) of the coordinate plane.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> L'ensemble de ces points forme un <b>
+              <i>'nuage'</i>
+            </b>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> All of these points form a <b>
+              <i>'cloud'</i>
+            </b>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Un point particulier joue un rôle important, c'est le point moyen. </div>
+        <!-- /fr -->
+        <div lang="en"> A particular point plays an important role, it is the middle point. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Le <b>
+              <i>'point moyen'</i>
+            </b> du nuage est le point donc les coordonnées sont la moyenne des x<sub>i</sub> et la moyenne des y<sub>i</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> The <b>
+              <i>'average point'</i>
+            </b> of the cloud is the point the coordinates of which are the average of the x<sub>i</sub> and the average of the y<sub>i</sub>. Such point can be referred to as 'mean point', 'center point', 'center of gravity', or sometimes 'middle point'.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte immédiatement de la définition que : </div>
+        <!-- /fr -->
+        <div lang="en"> It follows immediately from the definition that: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Le point moyen est <input type="button" value="l'isobarycentre" onclick="go('../../geometrie-affine/affines/affinesbar.html#def6')" data-inline="true" /> des points du nuage.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> The middle point is the <input type="button" value="isobarycenter" onclick="go('../../geometrie-affine/affines/affinesbar.html#def6')" data-inline="true " /> of the cloud .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Voici une représentation graphique d'une série double avec point moyen. </div>
+        <!-- /fr -->
+        <div lang="en"> Here is a graphical representation of a double series with midpoint. </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/series_doubles_01.png" width="754" height="358" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> NB : La notion de 'nuage' comme ensemble de points dans un espace produit existe également pour des caractères non quantitatifs, mais dans ce cas la notion de 'point-moyen' n'a aucun sens. <h2>Distributions conditionnelles</h2> Lorsque nous affirmons qu'un caractère est 'indépendant du sexe' nous voulons dire que pour chaque modalité de ce caractère la fréquence totale (rapportée à la population) est égale à la fréquence de cette modalité restreinte à la population mâle et encore égale à la fréquence de cette modalité restreinte à la population femelle. <br> Nous allons maintenant donner un sens précis à tout cela. <br> Nous considérons une population P d'effectif n et sur cette population 2 caractères X et Y (non nécessairement quantitatifs). <br> Pour le caractère X nous supposons qu'il y a p modalités distinctes x<sub>1</sub>, x<sub>2</sub>, ... ,x<sub>p</sub>. <br> Pour le caractère Y nous supposons qu'il y a q modalités distinctes y<sub>1</sub>, y<sub>2</sub>, ... ,y<sub>q</sub>. <br> Pour chaque couple (x<sub>i</sub>,y<sub>j</sub>) nous désignons par n<sub>ij</sub> le nombre d'individus dont le caractère X vaut x<sub>i</sub> et le caractère Y vaut y<sub>j</sub>. <br> Autrement dit, en language ensembliste : n<sub>ij</sub>=Card(X<sup>-1</sup>(x<sub>i</sub>)&cap;Y<sup>-1</sup>(y<sub>j</sub>)). <br> Les données peuvent donc être représentées par une matrice rectangulaire (ci-après en blanc) à coefficients entiers à p lignes et q colonnes. </div>
+        <!-- /fr -->
+        <div lang="en"> NB: The notion of 'cloud' as a set of points in a product space also exists for non-quantitative characters, but in this case the notion of 'average point' has no meaning. <h2>Conditional distributions</h2> When we affirm that a character is 'independent of sex' we mean that for each modality of this character the total frequency (relative to the population) is equal to the frequency of this modality restricted to the male population and again equal to the frequency of this modality restricted to the female population. <br> We will now give a precise meaning to all of this. <br> We consider a population P of size n and on this population 2 characters X and Y (not necessarily quantitative). <br> For character X we assume that there are p distinct modalities x<sub>1</sub>, x<sub>2</sub>, ... ,x<sub>p</sub>. <br> For character Y we assume that there are q distinct modalities y<sub>1</sub>, y<sub>2</sub>, ... ,y<sub>q</sub>. <br> For each couple (x<sub>i</sub>,y<sub>j</sub>) we denote by n<sub>ij</sub> the number of individuals whose character X is equal to x<sub>i</sub> and character Y is y<sub>j</sub>. <br> In other words, in set language: n<sub>ij</sub>=Card(X<sup>-1</sup>(x<sub>i</sub>)&cap;Y<sup>-1</sup>(y<sub>j</sub>)). <br> The data can therefore be represented by a rectangular matrix (hereafter in white with integer coefficients with p rows and q columns. </div>
+        <!-- /en -->
+        <table cellpadding="10" cellspacing="0" border="1">
+          <tbody>
+            <tr>
+              <td style="vertical-align: top; text-align: center;">X\Y <br />
+              </td>
+              <td style=" text-align: center;">y<sub>1</sub>
+                <br />
+              </td>
+              <td style=" text-align: center;">y<sub>2</sub>
+                <br />
+              </td>
+              <td style=" text-align: center;">... <br />
+              </td>
+              <td style=" text-align: center;">y<sub>q</sub>
+                <br />
+              </td>
+              <td style="vertical-align: top; text-align: center;">
+                <div lang="fr">Sommes <br /> des lignes </div>
+                <!-- /fr -->
+                <div lang="en">Sums <br> of rows </div>
+                <!-- /en -->
+              </td>
+            </tr>
+            <tr>
+              <td style=" text-align: center;">x<sub>1</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>11</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>12</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">... <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>1q</sub>
+                <br />
+              </td>
+              <td style=" text-align: center;">n<sub>1+</sub>
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td style=" text-align: center;">x<sub>2</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>21</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>22</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">... <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>2q</sub>
+                <br />
+              </td>
+              <td style=" text-align: center;">n<sub>2+</sub>
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td style=" text-align: center;">... <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">... <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">... <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">... <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">... <br />
+              </td>
+              <td style=" text-align: center;">... <br />
+              </td>
+            </tr>
+            <tr>
+              <td style=" text-align: center;">x<sub>p</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>p1</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>p2</sub>
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">
+                <br />
+              </td>
+              <td style="background-color: rgb(255,255,255); text-align: center;">n<sub>pq</sub>
+                <br />
+              </td>
+              <td style=" text-align: center;">n<sub>p+</sub>
+                <br />
+              </td>
+            </tr>
+            <tr>
+              <td style="text-align: center;">
+                <div lang="fr">Sommes <br /> des colonnes </div>
+                <!-- /fr -->
+                <div lang="en">Sums <br> of columns </div>
+                <!-- /en -->
+              </td>
+              <td style=" text-align: center;">n<sub>+1</sub>
+                <br />
+              </td>
+              <td style=" text-align: center;">n<sub>+2</sub>
+                <br />
+              </td>
+              <td style=" text-align: center;">... <br />
+              </td>
+              <td style=" text-align: center;">n<sub>+q</sub>
+                <br />
+              </td>
+              <td style="text-align: center;">n <br />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div lang="fr"> Nous avons ici adopté les notations suivantes :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle n_{i +} = {\sum\limits_{j = 1}^{q}n_{ij}} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle n_{+ j} = {\sum\limits_{i = 1}^{p}n_{ij}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> De sorte que n<sub>i+</sub> est l'effectif de la modalité x<sub>i</sub>, et n<sub>+j</sub> est l'effectif de la modalité y<sub>j</sub>. <br> Nous avons donc :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle {\sum\limits_{i,j}^{}n_{ij}} = {\sum\limits_{i = 1}^{p}n_{i +} = {\sum\limits_{j = 1}^{q}n_{+ j}} = n} \)</p>
+          <!-- /FORMULE UNIV INLINE--> La suite ((x<sub>1</sub>,n<sub>1+</sub>),(x<sub>2</sub>,n<sub>2+</sub>), ... ,(x<sub>p</sub>,n<sub>p+</sub>)) constitue donc la <input type="button" value="distribution" onclick="go('statistique_definitions.html#def8')" data-inline="true" /> en effectifs du caractère X indépendamment de Y, de même que la suite ((y<sub>1</sub>,n<sub>+1</sub>),(y<sub>2</sub>,n<sub>+2</sub>), ... ,(y<sub>q</sub>,n<sub>+q</sub>)) constitue la distribution de Y indépendamment de X. <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Here we have adopted the following notations:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle n_{i+}={\sum\limits_{j=1}^{q}n_{ij}} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle n_{+j}={\sum\limits_{i=1}^{p}n_{ij}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> So that n<sub>i+</sub> is the frequency of modality x<sub>i</sub>, and n<sub>+j</sub> is the frequency of modality y<sub>j</sub>. <br> So we have :
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle {\sum\limits_{i,j}^{}n_{ij}} = {\sum\limits_{i = 1}^{p}n_{i +} = {\sum\limits_{j = 1 }^{q}n_{+ j}} = n} \)</p>
+          <!-- /INLINE UNIV FORMULA--> The sequence ((x<sub>1</sub>,n<sub>1+</sub>),(x<sub>2</sub>,n<sub>2+</sub>), . .. ,(x<sub>p</sub>,n<sub>p+</sub>)) therefore constitutes the <input type="button" value="distribution" onclick="go('statistique_definitions.html#def8')" data-inline="true" /> in tallies of the variable X independently of Y, as well as the sequence ((y<sub>1</sub>,n<sub>+1</sub>) ,(y<sub>2</sub>,n<sub>+2</sub>), ... ,(y<sub>q</sub>,n<sub>+q</sub>) ) is the distribution of Y independent of X. <br />
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Ces deux distributions sont qualifiées de <b>
+              <i>'marginales'</i>
+            </b> (dans la marge).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> These two distributions are referred to as <b>
+              <i>'marginal'</i>
+            </b> (in the margin).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Les distributions marginales en fréquences s'obtiennent en divisant les effectifs par n, l'effectif total. <br>
+          <h3>Distribution conditionnelle de Y pour X=x<sub>i</sub>
+          </h3> On considère seulement la partie de la population totale dont la modalité pour X est x<sub>i</sub>, soit en langage ensembliste X<sup>-1</sup>(x<sub>i</sub>). <br> Alors la restriction de Y à cette partie est un caractère dont la distribution en effectifs est donnée par la ligne i de la matrice ci-dessus. <br> Par ailleurs, la distribution en fréquences s'obtient en divisant chaque coefficient par n<sub>i+</sub>. <h3>Distribution conditionnelle de X pour Y=y<sub>j</sub>
+          </h3> On considère seulement la partie de la population totale dont la modalité pour Y est y<sub>j</sub>, soit en langage ensembliste Y<sup>-1</sup>(y<sub>j</sub>). <br> Alors la restriction de X à cette partie est un caractère dont la distribution en effectifs est donnée par la colonne j de la matrice ci-dessus. <br> Par ailleurs, la distribution en fréquences s'obtient en divisant chaque coefficient par n<sub>+j</sub>. <h2>Indépendance statistique</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Marginal frequency distributions are obtained by dividing the counts by n, the total count. <br>
+          <h3>Conditional distribution of Y for X=x<sub>i</sub>
+          </h3> We consider only the part of the total population whose modality for X is x<sub>i</sub>, i.e. in set theoretic language X<sup>-1</sup>(x<sub>i</sub>) . <br> Then the restriction of Y to this part is a variable whose frequency distribution is given by row i of the matrix above. <br> Moreover, the frequency distribution is obtained by dividing each coefficient by n<sub>i+</sub>. <h3>Conditional distribution of X for Y=y<sub>j</sub>
+          </h3> We consider only the part of the total population whose modality for Y is y<sub>j</sub>, i.e. in set theoretic language Y<sup>-1</sup>(y<sub>j</sub>) . <br> Then the restriction of X to this part is a variable whose frequency distribution is given by column j of the matrix above. <br> Furthermore, the frequency distribution is obtained by dividing each coefficient by n<sub>+j</sub>. <h2>Statistical independence</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Reprenant les définitions et les notations ci-dessus on dit que <b>
+              <i>'X est indépendant de Y'</i>
+            </b> si chaque distribution conditionnelle de X pour Y=y<sub>j</sub> en fréquences est égale à la distribution marginale de X en fréquences.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> Using the above definitions and notations, we say that <b>
+              <i>'X is independent of Y'</i>
+            </b> if each conditional distribution of X for Y=y<sub>j</sub> in frequencies is equal to the marginal distribution of X in frequencies.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela revient donc à dire qu'on a les égalités :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{n_{ij}}{n_{i +}} = \frac{n_{+ j}}{n} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Soit encore :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle n_{ij} = \frac{n_{i +} \times n_{+ j}}{n} \)</p>
+          <!-- /FORMULE UNIV INLINE--> ou bien :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{n_{ij}}{n} = \frac{n_{i +}}{n} \times \frac{n_{+ j}}{n} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Cette dernière égalité peut s'exprimer ainsi en termes de fréquences : <br> f((X=x<sub>i</sub>)et(Y=y<sub>j</sub>))=f(X=x<sub>i</sub>)&times;f(Y=y<sub>j</sub>)
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This means that we have the equalities:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \frac{n_{ij}}{n_{i +}} = \frac{n_{+ j}}{n} \)</p>
+          <!-- /INLINE UNIV FORMULA--> Or again:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle n_{ij} = \frac{n_{i +} \times n_{+ j}}{n} \)</p>
+          <!-- /INLINE UNIV FORMULA--> or :
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \frac{n_{ij}}{n} = \frac{n_{i +}}{n} \times \frac{n_{+ j}}{n} \)</p>
+          <!-- /INLINE UNIV FORMULA--> This last equality can be expressed in terms of frequencies as follows: <br> f((X=x<sub>i</sub>)and(Y=y<sub>j</sub>))=f(X=x<sub>i</sub>)&times;f(Y =y<sub>j</sub>)
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Il en resulte immédiatement que cette relation d'indépendance est symétrique en (X,Y).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> It immediately follows that this independence relation is symmetric in (X,Y).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> Si X et Y sont deux caractères numériques indépendants :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \overline{XY} = \overline{X}.\overline{Y} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> If X and Y are two independent numeric variables:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \overline{XY} = \overline{X}.\overline{Y} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overline{XY} = \frac{1}{n}{\sum\limits_{i = 1}^{p}{\sum\limits_{j = 1}^{q}n_{ij}x_{i}y_{j}}} = \frac{1}{n}{\sum\limits_{i = 1}^{p}x_{i}{\sum\limits_{j = 1}^{q}\frac{n_{i +}n_{+ j}}{n}y_{j}}} = \frac{1}{n}{\sum\limits_{i = 1}^{p}x_{i}n_{i +}\frac{1}{n}{\sum\limits_{j = 1}^{q}n_{+ j}y_{j}}} = \frac{1}{n}{\sum\limits_{i = 1}^{p}x_{i}n_{i +}\overline{Y}} = \overline{X}.\overline{Y} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> La réciproque est fausse! <br> Voir plus bas un contre exemple.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed :
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overline{XY} = \frac{1}{n}{\sum\limits_{i = 1}^{p}{\sum\limits_{j = 1}^{q}n_{ij}x_{ i}y_{j}}} = \frac{1}{n}{\sum\limits_{i = 1}^{p}x_{i}{\sum\limits_{j = 1}^{q}\ frac{n_{i +}n_{+ j}}{n}y_{j}}} = \frac{1}{n}{\sum\limits_{i = 1}^{p}x_{i}n_ {i +}\frac{1}{n}{\sum\limits_{j = 1}^{q}n_{+ j}y_{j}}} = \frac{1}{n}{\sum\ limits_{i = 1}^{p}x_{i}n_{i +}\overline{Y}} = \overline{X}.\overline{Y} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" /> The converse is false! <br> See a counterexample below.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>covariance</h2> Ce paragraphe ne concerne que les caractères numériques. <br> Nous cherchons un critère (la covariance) pour mesurer la dépendance (ou son contraire) de deux caractères X<sub>1</sub> et X<sub>2</sub>. Si X<sub>1</sub> et X<sub>2</sub> sont fortement liés, on pourrait penser définir la covariance en développant l'idée suivante : <ul>
+            <li>Quand X<sub>1</sub> prend une valeur positive, alors X<sub>2</sub> prend vraisemblablement aussi une valeur positive. </li>
+            <li>Quand X<sub>1</sub> prend une valeur négative alors X<sub>2</sub> prend vraisemblablement aussi une valeur négative. </li>
+          </ul> Cette idée ne convient pas, car nous voulons que la covariance reste inchangée quand les distributions de probabilité des caractères sont translatées par des quantités arbitraires. Au lieu de mesurer X<sub>1</sub> et X<sub>2</sub> à partir de 0, nous allons donc les mesurer à partir de références qui se translatent en même temps que les distributions, par exemple leurs moyennes µ<sub>1</sub> et µ<sub>2</sub>. Notre idée originale devient maintenant : <ul>
+            <li>Quand (X<sub>1</sub> - µ<sub>1</sub>) prend une valeur positive, alors (X<sub>2</sub> - µ<sub>2</sub> ) prend vraisemblablement aussi une valeur positive. </li>
+            <li>Quand (X<sub>1</sub> - µ<sub>1</sub>) prend une valeur négative alors (X<sub>2</sub> - µ<sub>2</sub> ) prend vraisemblablement aussi une valeur négative. </li>
+          </ul> Ainsi, si X<sub>1</sub> et X<sub>2</sub> sont fortement liés, les quantités (X<sub>1</sub> - µ<sub>1</sub>) et (X<sub>2</sub> - µ<sub>2</sub> ) seront le plus souvent : <ul>
+            <li>Simultanément positives, ou</li>
+            <li>Simultanément négatives.</li>
+          </ul> Le produit (X<sub>1</sub>- µ<sub>1</sub>).(X<sub>2</sub> - µ<sub>2</sub> ) sera donc alors le plus souvent positif : <ul>
+            <li>Soit parce que les deux quantités sont positives,</li>
+            <li>Soit parce que les deux quantités sont négatives.</li>
+          </ul> Le produit (X<sub>1</sub> - µ<sub>1</sub>).(X<sub>2</sub> - µ<sub>2</sub>) est un caractère, et nous voulons un nombre fixe. Mais un caractère dont les modalités sont principalement positives doit vraisemblablement avoir une moyenne positive. Nous considérerons donc la moyenne du produit (X<sub>1</sub> - µ<sub>1</sub>).(X<sub>2</sub> - µ<sub>2</sub>), que nous appellerons covariance de X<sub>1</sub> et X<sub>2</sub>.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This paragraph concerns only numeric variables. <br> We are looking for a criterion (the covariance) to measure the dependence (or its opposite) of two variables X<sub>1</sub> and X<sub>2</sub>. If X<sub>1</sub> and X<sub>2</sub> are strongly related, one could think of defining the covariance by developing the following idea: <ul>
+            <li>When X<sub>1</sub> takes a positive value, then X<sub>2</sub> is also likely to take a positive value. </li>
+            <li>When X<sub>1</sub> takes a negative value then X<sub>2</sub> is also likely to take a negative value. </li>
+          </ul> This idea is not suitable, because we want the covariance to remain unchanged when the probability distributions of the variables are translated by arbitrary quantities. Instead of measuring X<sub>1</sub> and X<sub>2</sub> from 0, we will therefore measure them from references that translate at the same time as the distributions, for example their averages µ<sub>1</sub> and µ<sub>2</sub>. Our original idea now becomes: <ul>
+            <li>When (X<sub>1</sub> - µ<sub>1</sub>) takes a positive value, then (X<sub>2</sub> - µ<sub>2</sub> ) presumably also takes a positive value. </li>
+            <li>When (X<sub>1</sub> - µ<sub>1</sub>) takes a negative value then (X<sub>2</sub> - µ<sub>2</sub> ) presumably also takes a negative value. </li>
+          </ul> Thus, if X<sub>1</sub> and X<sub>2</sub> are strongly related, the quantities (X<sub>1</sub> - µ<sub>1</sub>) and (X<sub>2</sub> - µ<sub>2</sub> ) will most often be: <ul>
+            <li>Simultaneously positive, or</li>
+            <li>Simultaneously negative.</li>
+          </ul> The product (X<sub>1</sub> - µ<sub>1</sub>).(X<sub>2</sub> - µ<sub>2</sub> ) will then be the most often positive: <ul>
+            <li>Either because both quantities are positive,</li>
+            <li>Either because both quantities are negative.</li>
+          </ul> The product (X<sub>1</sub> - µ<sub>1</sub>).(X<sub>2</sub> - µ<sub>2</sub>) is a variable, and we want a fixed number. But a variable whose modalities are mainly positive is likely to have a positive mean. We will therefore consider the average of the product (X<sub>1</sub> - µ<sub>1</sub>).(X<sub>2</sub> - µ<sub>2</sub>) , which we will call covariance of X<sub>1</sub> and X<sub>2</sub>. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> Nous définissons donc ainsi la <b>
+              <i>'covariance'</i>
+            </b> de X et Y :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle Cov(X,Y)=\overline{\left( {X - \overline{X}} \right)\left( {Y - \overline{Y}} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> So we define the <b>
+              <i>'covariance'</i>
+            </b> of X and Y as follows:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle Cov(X,Y)=\overline{\left( {X - \overline{X}} \right)\left( {Y - \overline{Y}} \right)} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> On montre facilement qu'une définition équivalente est :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {Cov}(X,Y) = \overline{XY} - \overline{X}.\overline{Y} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> It is easily shown that an equivalent definition is:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {Cov}(X,Y) = \overline{XY} - \overline{X}.\overline{Y} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Il résulte de cela et du paragraphe précédent que : X et Y indépendants &rArr; Cov(X,Y)=0.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> It follows from this and from the previous paragraph that: X and Y independent &rArr; Cov(X,Y)=0.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />La réciproque est fausse ! <br> Prendre par exemple une population à 3 éléments et le caractère X=(-1,0,1) et prendre Y=X<sup>2</sup>. <br> On a
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overline{X} = \overline{X^{3}} = 0 \)</p>
+          <!-- /FORMULE UNIV INLINE--> X et Y ne sont pas indépendants puisque la matrice des n<sub>ij</sub> est
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \begin{pmatrix} 0 & 1 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} \)</p>
+          <!-- /FORMULE UNIV INLINE--> On a cependant
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle {Cov}(X,Y) = \overline{XY} - \overline{X}.\overline{Y}=0 \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />The converse is false! <br> Take for example a population with 3 elements and the variable X=(-1,0,1) and take Y=X<sup>2</sup>. <br> We have
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overline{X} = \overline{X^{3}} = 0 \)</p>
+          <!-- /INLINE UNIV FORMULA--> X and Y are not independent since the matrix of n<sub>ij</sub> is
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \begin{pmatrix} 0 & 1 \\ 1 & 0 \\ 0 & 1 \end{pmatrix} \)</p>
+          <!-- /INLINE UNIV FORMULA--> We have however
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle {Cov}(X,Y) = \overline{XY} - \overline{X}.\overline{Y}=0 \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> Si X, Y, W, and V sont des caractères numériques et a, b, c, d des constantes (c'est à dire des caractères n'ayant qu'une seule modalité) alors les propriétés suivantes sont des conséquences immédiates de la définition : <ol>
+              <li>Cov(X,a)=0</li>
+              <li>Cov(X,X)=Var(X)</li>
+              <li>Cov(X,Y)=Cov(Y,X)</li>
+              <li>Cov(aX,bY)=abCov(X,Y)</li>
+              <li>Cov(X+a,Y+b)=Cov(X,Y)</li>
+              <li>Cov(aX+bY,cW+dV)=acCov(X,W)+adCov(X,V)+bcCov(Y,W)+bdCov(Y,V)</li>
+            </ol> C'est à dire que Cov est une <input type="button" value="forme bilinéaire symétrique" onclick="go('../../algebre-lineaire/determinants/multilat.html#')" data-inline="true" />.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> If X, Y, W, and V are numeric variables and a, b, c, d are constants (i.e. variables with only one modality) then the following properties are immediate consequences of the definition : <ol>
+              <li>Cov(X,a)=0</li>
+              <li>Cov(X,X)=Var(X)</li>
+              <li>Cov(X,Y)=Cov(Y,X)</li>
+              <li>Cov(aX,bY)=abCov(X,Y)</li>
+              <li>Cov(X+a,Y+b)=Cov(X,Y)</li>
+              <li>Cov(aX+bY,cW+dV)=acCov(X,W)+adCov(X,V)+bcCov(Y,W)+bdCov(Y,V)</li>
+            </ol> That is, Cov is a <input type="button" value="symmetric bilinear form" onclick="go('../../algebre-lineaire/determinants/multilat.html#')" data-inline="true" />.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Ce programme calcule une covariance :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> This program calculates a covariance:
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/stat_cor01.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Équivalent avec Julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>Equivalent with Julia 1.6:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/stat_cor01.jl.html" type="text/html" border="3" height="220" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/statistique_correlation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/statistique_correlation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

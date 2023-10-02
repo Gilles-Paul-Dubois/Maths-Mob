@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
     <meta charset="utf-8" />
     <title>Exercice 04</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +22,7 @@
     <script src="../../../../js/jquery-1.11.3.js"></script>
     <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
     <script src="../../../../js/custom.js"></script>
-	 <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
   </head>
   <body style="overflow: auto; " class="fr">
     <script>
@@ -51,12 +61,43 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>Le problème dit de Chicago est le suivant. <br /> n hommes arrivent dans un bar chacun avec un chapeau. <br /> Ils accrochent en arrivant leur chapeau au porte manteau. <br /> En repartant, complètement saouls ils prennent n'importe quel chapeau. <br /> Quelle est la probabilité pour qu'au moins un homme retrouve son chapeau. <br /> Ce problème était déjà connu comme 'le problème de Bernoulli-Euler des lettres mal adressées' (Nicolaus I Bernoulli 1687-1759): <br />
+            <img alt="" border="0" height="475" src="../../images/bernoutree.png" width="772" />
+            <br /> Une secrétaire rédige n lettres et les n enveloppes correspondantes. A la fin, pressée par le temps, elle emballe les lettres dans les enveloppes tout à fait au hasard. <br /> Quelle est la probabilité pour qu'au moins une lettre parvienne à son destinataire. <br /> D'une façon générale le problème est le suivant, étant donné une <input type="button" value="permutation" onclick="go('../../../../bases/applications/permutations.html#')" data-inline="true" /> σ d'un ensemble fini à n éléments, quelle est la probabilité pour que σ possède au moins un <input type="button" value="point fixe" onclick="go('../../../../bases/applications/fixes.html#')" data-inline="true" /> ? <br /> Ecrire une simulation en langage Python et/ou Julia.
+          </p>
           <div data-role="collapsible">
             <h4>aide</h4>
+            <p>Soit &sigma; une permutation de {1,2, ... ,n} <br> Calculer la probabilité que &sigma; ait pour point fixe i. <br> Calculer la probabilité que &sigma; ait pour points fixes i et j . <br> Appliquer la formule du crible de Poincaré. </p>
           </div>
           <!-- /aide -->
           <div data-role="collapsible">
             <h4>solution</h4>
+            <p>Soit A<sub>i</sub> l'évènement: "i est un point fixe de &sigma;". La probabilité de A<sub>i</sub> est : </p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\left( {n - 1} \right)!}{n!} = \frac{1}{n} \)</p>
+            <!-- /FORMULE UNIV INLINE--> La probabilité de A<sub>i</sub>&cap;A<sub>j</sub> est :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\left( {n - 2} \right)!}{n!} = \frac{1}{n\left( {n - 1} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Notre évènement A est A<sub>1</sub>&cup;A<sub>2</sub>&cup; ... &cup;A<sub>n</sub>. <br> Nous avons donc :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum\limits_{i}P\left( A_{i} \right) = 1 \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {\sum\limits_{i \neq j}P\left( A_{i} \cap A_{j} \right) = C_{n}^{2}} . \frac{1}{n\left( {n - 1} \right)} = \frac{1}{2!} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum\limits_{}P\left( {\bigcap\limits_{1 \leq i \leq p}A_{i}} \right) = C_{n}^{p} . \frac{1}{n\left( {n - 1} \right)...\left( {n - p + 1} \right)} = \frac{1}{p!} \)</p>
+            <!-- /FORMULE UNIV INLINE--> En appliquant la formule du crible de Poincaré :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P\left( {\bigcup\limits_{1 \leq i \leq n}A_{i}} \right) = 1 - \frac{1}{2!} + \frac{1}{3!} - .... + \left( {- 1} \right)^{n + 1}\frac{1}{n!} \)</p>
+            <!-- /FORMULE UNIV INLINE--> La limite de cette probabilité est 1-1/e. <br> Elle évolue peu quand n grandit. <p>Programme Python :</p>
+            <p>
+              <object data="../../python/axex04.html" type="text/html" border="3" height="400" width="100%"></object>
+            </p>
+            <p>Soit avec Julia :</p>
+            <p>
+              <object data="../../julia/axex04.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+            </p>
           </div>
           <!-- /solution -->
         </div>
@@ -73,12 +114,43 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>The so-called Chicago problem is as follows. <br /> n men arrive at a bar each with a hat. <br /> They hang their hat on the coat rack when they arrive. <br /> When they leave, completely drunk, they take any hat. <br /> What is the probability that at least one man finds his hat back. <br /> This problem was already known as 'the Bernoulli-Euler problem of misaddressed letters' (Nicolaus I Bernoulli 1687-1759): <br />
+            <img alt="" border="0" height="475" src="../../images/bernoutree.png" width="772" />
+            <br /> A secretary writes n letters and the corresponding n envelopes. At the end, pressed for time, she packs the letters in the envelopes quite at random. <br /> What is the probability that at least one letter will reach its addressee. <br /> Generally the problem is the following, given a <input type="button" value="permutation" onclick="go('../../../../bases/applications/permutations.html#')" data-inline="true" /> σ of a finite n-element set, what is the probability that σ has at least one <input type="button" value="fixed point" onclick="go('../../../../bases/applications/fixes.html#')" data-inline="true" /> ? <br /> Write a simulation in Python and/or Julia language.
+          </p>
           <div data-role="collapsible">
             <h4>hint</h4>
+            <p>Let &sigma; a permutation of {1,2, ... ,n} <br> Calculate the probability that &sigma; has a fixed point i. <br> Calculate the probability that &sigma; has as fixed points i and j . <br> Apply the inclusion-exclusion formula. </p>
           </div>
           <!-- /aide -->
           <div data-role="collapsible">
             <h4>solution</h4>
+            <p>Let A<sub>i</sub> be the event: "i is a fixed point of &sigma;". The probability of A<sub>i</sub> is: </p>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\left( {n - 1} \right)!}{n!} = \frac{1}{n} \)</p>
+            <!-- /INLINE UNIV FORMULA--> The probability of A<sub>i</sub>&cap;A<sub>j</sub> is:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\left( {n - 2} \right)!}{n!} = \frac{1}{n\left( {n - 1} \right)} \)</p>
+            <!-- /INLINE UNIV FORMULA--> Our event A is A<sub>1</sub>&cup;A<sub>2</sub>&cup; ... &cup;A<sub>n</sub>. <br> So we have :
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \sum\limits_{i}P\left( A_{i} \right) = 1 \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {\sum\limits_{i \neq j}P\left( A_{i} \cap A_{j} \right) = C_{n}^{2}} . \frac{1}{n\left( {n - 1} \right)} = \frac{1}{2!} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \sum\limits_{}P\left( {\bigcap\limits_{1 \leq i \leq p}A_{i}} \right) = C_{n}^{p} . \frac{1}{n\left( {n - 1} \right)...\left( {n - p + 1} \right)} = \frac{1}{p!} \)</p>
+            <!-- /INLINE UNIV FORMULA--> By applying the inclusion-exclusion formula:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle P\left( {\bigcup\limits_{1 \leq i \leq n}A_{i}} \right) = 1 - \frac{1}{2!} + \frac{1}{3!} - .... + \left( {- 1} \right)^{n + 1}\frac{1}{n!} \)</p>
+            <!-- /INLINE UNIV FORMULA--> The limit of this probability is 1-1/e. <br> It changes little when n grows. <p>Python program:</p>
+            <p>
+              <object data="../../python/axex04.html" type="text/html" border="3" height="400" width="100%"></object>
+            </p>
+            <p>Either with Julia:</p>
+            <p>
+              <object data="../../julia/axex04.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+            </p>
           </div>
           <!-- /solution -->
         </div>
@@ -88,12 +160,12 @@
         <table cellpadding="10">
           <tr>
             <td>
-              <div lang="fr">Création Gilles Dubois</div>
-              <div lang="en">Created by Gilles Dubois</div>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
             </td>
             <td>
-              <div lang="fr">Janvier 2022</div>
-              <div lang="en">January 2022</div>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
             </td>
             <td>
               <div lang="fr">Version mobile Jquery</div>
@@ -103,7 +175,7 @@
               <a href="https://www.mathjax.org">
                 <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
               </a>
-            </td>                
+            </td>
           </tr>
         </table>
       </div>
@@ -118,7 +190,7 @@
           </div>
         </li>
         <li>
-          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
         </li>
       </ul>
     </div>

@@ -1,0 +1,100 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>ex01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s2">import </span><span class="s1">random 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">CarteBridge(): 
+    couleurs = [</span><span class="s3">'Trèfle'</span><span class="s1">, </span><span class="s3">'Carreau'</span><span class="s1">, </span><span class="s3">'Coeur'</span><span class="s1">, </span><span class="s3">'Pique'</span><span class="s1">] 
+    niveaux = [</span><span class="s3">'Deux'</span><span class="s1">, </span><span class="s3">'Trois'</span><span class="s1">, </span><span class="s3">'Quatre'</span><span class="s1">, </span><span class="s3">'Cinq'</span><span class="s1">, </span><span class="s3">'Six'</span><span class="s1">, </span><span class="s3">'Sept'</span><span class="s1">, </span><span class="s3">'Huit'</span><span class="s1">, </span><span class="s3">'Neuf'</span><span class="s1">, </span><span class="s3">'Dix'</span><span class="s1">, </span><span class="s3">'Valet'</span><span class="s1">, </span><span class="s3">'Dame'</span><span class="s1">, </span><span class="s3">'Roi'</span><span class="s1">, </span><span class="s3">'As'</span><span class="s1">] 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, n): 
+        self.code = n 
+        self.code_couleur = n // </span><span class="s4">13</span><span class="s1"> 
+        self.code_niveau = n % </span><span class="s4">13</span><span class="s1"> 
+        self.couleur = CarteBridge.couleurs[self.code_couleur] 
+        self.niveau = CarteBridge.niveaux[self.code_niveau] 
+        self.PH = self.code_niveau - </span><span class="s4">8 </span><span class="s2">if </span><span class="s1">self.code_niveau &gt;= </span><span class="s4">9 </span><span class="s2">else </span><span class="s4">0  </span><span class="s0"># points d'honneur - honnor points</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s2">return </span><span class="s1">self.niveau + </span><span class="s3">&quot; de &quot; </span><span class="s1">+ self.couleur 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Carte_au_hasard(): 
+    </span><span class="s0">&quot;&quot;&quot;Tirage d'une carte dans le jeu - random drawing of a card in the deck&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">CarteBridge(random.randint(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">52</span><span class="s1">)) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Main_au_hasard(): 
+    </span><span class="s0">&quot;&quot;&quot;13 cartes au hasard dans le jeu - 13 random cards in the deck&quot;&quot;&quot;</span><span class="s1"> 
+    Liste_codes = random.sample(range(</span><span class="s4">0</span><span class="s1">, </span><span class="s4">52</span><span class="s1">), </span><span class="s4">13</span><span class="s1">) 
+    </span><span class="s2">return </span><span class="s1">[CarteBridge(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">Liste_codes] 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">Points(M): 
+    </span><span class="s0">&quot;&quot;&quot;calcul des points d'honneur d'une main - computation of honor points in a hand&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">sum([c.PH </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">M]) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction principale - main function&quot;&quot;&quot;</span><span class="s1"> 
+    CB = Carte_au_hasard() 
+    print(CB) 
+    print(</span><span class="s3">'--------------'</span><span class="s1">) 
+    M = Main_au_hasard() 
+    </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">M: 
+        print(c) 
+    print(</span><span class="s3">'--------------'</span><span class="s1">) 
+    print(Points(M)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">&quot;__main__&quot;</span><span class="s1">: 
+    main() 
+ 
+</span><span class="s3">&quot;&quot;&quot; Résultat d'une exécution - result of running : 
+Trois de Trèfle 
+-------------- 
+Neuf de Pique 
+Valet de Coeur 
+Cinq de Carreau 
+Quatre de Pique 
+Trois de Carreau 
+Sept de Carreau 
+As de Trèfle 
+Deux de Pique 
+Deux de Coeur 
+Neuf de Trèfle 
+Six de Trèfle 
+Dix de Trèfle 
+Roi de Coeur 
+-------------- 
+8 
+&quot;&quot;&quot;</span><span class="s1"> 
+</span></pre>
+</body>
+</html>

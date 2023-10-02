@@ -1,0 +1,52 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>calvar01.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">struct </span><span class="s1">UniversFini</span>
+    <span class="s1">P::Vector{Float64}</span>
+    <span class="s1">n::Int64</span>
+<span class="s0">end</span>
+
+<span class="s0">struct </span><span class="s1">Variable</span>
+    <span class="s1">U::UniversFini</span>
+    <span class="s1">X::Vector{Float64}</span>
+<span class="s0">end</span>
+
+<span class="s1">esperance(V::Variable)=reduce(+,[V.X[i]*V.U.P[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:V.U.n])</span>
+<span class="s1">carre(V::Variable) = Variable(V.U, [V.X[i]*V.X[i] </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:V.U.n])</span>
+<span class="s1">variance(V::Variable)=esperance(carre(V))-esperance(V)*esperance(V)</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">m=</span><span class="s2">36</span>
+    <span class="s1">L1=[i/m </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">6</span><span class="s1">]</span>
+    <span class="s1">L2=[i/m </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">5</span><span class="s1">:-</span><span class="s2">1</span><span class="s1">:</span><span class="s2">1</span><span class="s1">]</span>
+    <span class="s1">L=append!(L1,L2)</span>
+    <span class="s1">U=UniversFini(L, length(L))</span>
+    <span class="s1">V=collect(</span><span class="s2">2</span><span class="s1">:</span><span class="s2">12</span><span class="s1">)</span>
+    <span class="s1">X=Variable(U,V)</span>
+    <span class="s1">println(esperance(X))</span>
+    <span class="s1">println(variance(X))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+    </pre>
+</body>
+</html>

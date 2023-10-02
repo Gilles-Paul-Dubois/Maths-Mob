@@ -23,7 +23,6 @@ var c1 = document.getElementById("myCanvas1");
 var ctx1 = c1.getContext("2d");
 var c2 = document.getElementById("myCanvas2");
 var ctx2 = c2.getContext("2d");
-var textzone1 = document.getElementById("mytext1");
 var textzone2 = document.getElementById("mytext2");
 
 var kw;
@@ -306,7 +305,7 @@ function relgraph(C, G)
          tz.value = prefix + this.stringtoprint;
         var long = tz.value.length;
         long = Math.max(long, 50);
-        tz.style.width = long * 8 + "px";
+        tz.style.width = long * 9 + "px";
 
     }
 
@@ -425,7 +424,7 @@ function relgraph(C, G)
     {
 
         tz.value = this.allimagesstr();
-        tz.style.width = this.allimagesstr().length * 8 + "px";
+        tz.style.width = this.allimagesstr().length * 9 + "px";
 
     }    
 }
@@ -494,11 +493,7 @@ function Paint()
     var R = new relgraph(C, G);
     R.show(c1);
     R.saggital(c2);
-  if (document.body.className=="fr") 
-       R.showstring(textzone1, "graphe : ");
-  if (document.body.className=="en")
-       R.showstring(textzone1, "graph : ");
-     R.showimages(textzone2);
+    R.showimages(textzone2);
 
 }
 

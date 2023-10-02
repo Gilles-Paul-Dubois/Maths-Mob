@@ -319,7 +319,7 @@ function relgraph(C, G)
     {
 
         tz.value = this.stringtoprint;
-        tz.style.width = this.stringtoprint.length * 7 + "px";
+        tz.style.width = this.stringtoprint.length * 11 + "px";
 
     }
 
@@ -442,7 +442,7 @@ this.showantecedents = function (tz)
     {
 
         tz.value = this.allantecedentsstr();
-        tz.style.width = this.allantecedentsstr().length * 7 + "px";
+        tz.style.width = this.allantecedentsstr().length * 11 + "px";
 
     }        
 }

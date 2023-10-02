@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Probabilités totales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_totales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_totales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>La formule des probabilités totales</h2> On se donne un espace probabilisé (&Omega;,\( \mathfrak{T}\),P) et un <input type="button" value="système complet" onclick="go('concept_evenement.html#def9')" data-inline="true" /> d'évènements A<sub>1</sub>, A<sub>2</sub>, ..., A<sub>n</sub> ayant chacun une probabilité p<sub>i</sub> &gt; 0. <br> Dans ces conditions il est possible de reconstituer la probabilité 'totale' P(B) de tout évènement B en fonction de ses probabilités conditionnelles P(B|A<sub>i</sub>) sachant les évènements A<sub>i</sub> réalisés. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The formula of total probabilities</h2> We consider a probability space (&Omega;,\( \mathfrak{T}\),P) and a <input type="button" value="complete system" onclick="go('concept_evenement.html#def9') " data-inline="true" /> of events A<sub>1</sub>, A<sub>2</sub>, ..., A<sub>n</sub> each having a probability p<sub>i</sub> &gt; 0. <br> Under these conditions it is possible to reconstruct the 'total' probability P(B) of any event B as a function from its conditional probabilities P(B|A<sub>i</sub>) knowing that the events A<sub>i</sub> occured. <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Le calcul est donné par une formule dite des <b>
+              <i>'probabilités totales'</i>
+            </b> et qui est la suivante :
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> The calculation is given by a formula called <b>
+              <i>'total probability law'</i>
+            </b> which is as follows:
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P(B) = {\sum\limits_{i = 1}^{n}P\left( {B \mid A_{i}} \right) \times P\left( A_{i} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P(B) = {\sum\limits_{i = 1}^{n}P\left( {B \mid A_{i}} \right) \times P\left( A_{i} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve en est fort simple
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle B = {\bigcup\limits_{1 \leq i \leq n}B \cap A_{i}} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle P(B) = {\sum\limits_{i = 1}^{n}P\left( {B \cap A_{i}} \right) = {\sum\limits_{i = 1}^{n}P\left( {B \mid A_{i}} \right)}}P\left( A_{i} \right) \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+          <h3>Exemple d'application:</h3> Une compagnie d’assurance estime que les gens peuvent être répartis en deux classes : <ul>
+            <li>Ceux qui sont enclins aux accidents 'à haut risque' soit 30% de la population </li>
+            <li>Les autres dits 'à risque modéré'</li>
+          </ul> Les statistiques de cette compagnie montrent qu’un individu à haut risque a une probabilité de 0.40 d’avoir un accident en l’espace d’un an ; cette probabilité tombe à 0.20 pour les gens à risque modéré. <br> Quelle est la probabilié qu’un nouvel assuré soit victime d’un accident durant l’année qui suit la signature de son contrat ? <br> Définissons les évènements suivants: <ul>
+            <li>B : le nouvel assuré a un accident durant l’année qui suit la signature de son contrat</li>
+            <li>A<sub>1</sub> : le nouvel assuré est 'à haut risque' </li>
+            <li>A<sub>2</sub> : le nouvel assuré est à risque modéré </li>
+          </ul> En appliquant la formule des probabilités totales, il vient : <br> P(B)=0.4&times;0.3+0.2&times;0.7=0.26 <h2>Le théorème de Bayes</h2>
+          <em>
+            <font size="-1">Extrait de l'encyclopédie Wikipédia :</font>
+          </em>
+          <br> Thomas Bayes est un mathématicien britannique et pasteur de l'Église presbytérienne, connu pour avoir formulé le théorème dit de Bayes. <br> Ses découvertes en probabilités ont été résumées dans son Essais sur la manière de résoudre un problème dans la doctrine des risques (Essay Towards Solving a Problem in the Doctrine of Chances - 1763) publié à titre posthume dans les comptes-rendus de l'Académie royale de Londres (the Philosophical Transactions of the Royal Society of London). Ce résultat est très utilisé en classification automatique. Un exemple parmi d'autres est la lutte contre le spam, par la méthode dite d'inférence bayésienne. <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is very simple
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle B = {\bigcup\limits_{1 \leq i \leq n}B \cap A_{i}} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle P(B) = {\sum\limits_{i = 1}^{n}P\left( {B \cap A_{i}} \right) = {\sum\limits_{i = 1}^{ n}P\left( {B \mid A_{i}} \right)}}P\left( A_{i} \right) \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+          <h3>Application example:</h3> One insurance company believes that people can be divided into two classes: <ul>
+            <li>Those who are prone to 'high risk' accidents, i.e. 30% of the population </li>
+            <li>The others said to be 'moderate risk'</li>
+          </ul> This company's statistics show that a high-risk individual has a probability of 0.40 of having an accident within one year; this probability falls at 0.20 for people at moderate risk. <br> What is the probability that a new policyholder will be the victim of a accident during the year following the signing of his contract? <br> Let's define the following events: <ul>
+            <li>B: the new insured has an accident during the year following the signing of his contract</li>
+            <li>A<sub>1</sub>: the new insured is 'high risk' </li>
+            <li>A<sub>2</sub>: the new insured is at moderate risk </li>
+          </ul> By applying the formula for total probabilities, it comes: <br> P(B)=0.4&times;0.3+0.2&times;0.7=0.26 <h2>Bayes' theorem</h2>
+          <em>
+            <font size="-1">Extract from the Wikipedia encyclopedia:</font>
+          </em>
+          <br> Thomas Bayes was a British mathematician and Presbyterian minister, known for formulating the so-called Bayes' theorem. <br> His discoveries in probability were summarized in his Essay Towards Solving a Problem in the Doctrine of Chances (1763) published posthumously in the Proceedings of the Royal Academy of London (the Philosophical Transactions of the Royal Society of London). This result is widely used in automatic classification. One example among others is the fight against spam, using the so-called Bayesian inference method. <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <table cellpadding="10" cellspacing="0" border="10" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font color="#FFFFFF">Thomas Bayes (1702-1761/UK)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/Thomas_Bayes.gif" width="304" height="326" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> On se place dans les hypothèses du paragraphe précédent, le système complet A<sub>i</sub> étant considéré comme les 'causes'. <br> On sait maintenant qu'un évènement B, de probabilité non nulle, s'est produit dont on connait les probabilités conditionnelles suivant le système Ai, on cherche inversement à connaître pour chaque 'cause' la probabilité qu'elle soit à l'origine de l'évènement. <br> En somme il faut reconstituer P(A<sub>i</sub>|B) en fonction des P(B|A<sub>i</sub>). Le théorème de Bayes est souvent appelé 'théorème de probabilité des causes'. Il s'énonce ainsi sous forme d'une formule : </div>
+        <!-- /fr -->
+        <div lang="en"> We place ourselves within the hypotheses of the previous paragraph, the complete system A<sub>i</sub> being considered as the 'causes'. <br> We now know that an event B, of non-zero probability, has occurred for which we know the conditional probabilities according to the system Ai, we seek conversely to know for each 'cause' the probability that it is at the origin of the event. <br> In short, we must reconstitute P(A<sub>i</sub>|B) as a function of P(B|A<sub>i</sub>). Bayes' theorem is often called the 'causal inference theorem'. It is stated as follows in the form of a formula: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P\left( A_{i} \mid B \right) = \frac{P\left( A_{i} \right) \times P\left( {B \mid A_{i}} \right)}{\sum\limits_{i = 1}^{n}P\left( {B \mid A_{i}} \right)P\left( A_{i} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P\left( A_{i} \mid B \right) = \frac{P\left( A_{i} \right) \times P\left( {B \mid A_{i}} \right)}{\sum\limits_{i = 1}^{n}P\left( {B \mid A_{i}} \right)P\left( A_{i} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est simple, dans le quotient de droite de la formule de Bayes, le dénominateur est simplement P(B) par la formule des probabilités totales, le numérateur est P(A<sub>i</sub>&cap;B). <br> Compte tenu de la formule des probabilités totales, le théorème de Bayes se résume à la définition d'une probabilité conditionnelle. <h3>Exemple (la compagnie d'assurance, suite et fin)</h3> Un nouveau signataire a un accident dans l’année qui suit la signature de son contrat. <br> Quelle est la probabilité qu’il fasse partie de la classe 'haut risque' ?
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle P\left( A_{1} \mid B \right) = \frac{P\left( {B \cap A_{1}} \right)}{P(B)} = \frac{P\left( {B \mid A_{1}} \right) \times P\left( A_{1} \right)}{P(B)} = \frac{0.4 \times 0.3}{0.26} = \frac{6}{13} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is simple, in the right-hand quotient of Bayes' formula, the denominator is simply P(B) by the total probabilities formula, the numerator is P(A<sub>i</sub>&cap;B). <br> Given the formula for total probabilities, Bayes' theorem boils down to the definition of a conditional probability. <h3>Example (the insurance company, continuation and end)</h3> A new signatory has an accident within a year of signing his contract. <br> What is the probability that he is in the 'high risk' class?
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle P\left( A_{1} \mid B \right) = \frac{P\left( {B \cap A_{1}} \right)}{P(B)} = \frac{P\left ( {B \mid A_{1}} \right) \times P\left( A_{1} \right)}{P(B)} = \frac{0.4 \times 0.3}{0.26} = \frac{6 }{13} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un exemple de script Python utilisant le théorème de Bayes.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's corner</h2> Here is an example Python script using Bayes' theorem.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/bayes.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+          <p>Équivalent avec Julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+          <p>Equivalent with Julia 1.6:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/bayes.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_totales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_totales/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

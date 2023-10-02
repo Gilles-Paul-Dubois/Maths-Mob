@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Epreuve aléatoire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+    <script>
+      language = "JavaScript"
+
+      function alea(m, M) {
+        var d = M - m;
+        var r = Math.random();
+        r *= 100;
+        r = parseInt(r);
+        r = m + r % d;
+        return r;
+      }
+
+      function face() {
+        var result = alea(1, 7);
+        if (result == 1) return "images/de_un.gif";
+        if (result == 2) return "images/de_deux.gif";
+        if (result == 3) return "images/de_trois.gif";
+        if (result == 4) return "images/de_quatre.gif";
+        if (result == 5) return "images/de_cinq.gif";
+        return "images/de_six.gif";
+      }
+
+      function carte() {
+        var result = alea(0, 52);
+        return "images/cards/" + result + ".gif";
+      }
+
+      function piece() {
+        var result = alea(0, 2);
+        if (result == 0) return "images/europile.png";
+        else return "images/euroface.png";
+      }
+    </script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_epreuve/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_epreuve/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le concept d'épreuve aléatoire</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The concept of random experiment (trial)</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Une <b>
+              <i>'épreuve aléatoire'</i>
+            </b> est un procédé (matérialisé par un dispositif, un protocole, une expérience parfaitement décrite) destiné à générer, de façon aléatoire à chaque expérimentation, et avec éventuellement répétition, les éléments d'un ensemble connu a priori. Cet ensemble, qui est donc l'ensemble des résultats de l'épreuve (ou de l'expérience), appelés également <b>
+              <i>'évènements élémentaires'</i>
+            </b> peut être fini ou infini.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> A <b>
+              <i>'random trial'</i>
+            </b> is a process (embodied by a device, a protocol, a perfectly described experiment) intended to generate, randomly at each experiment, and possibly with repetition, the elements of a set known a priori. This set, which is therefore the set of results of the test (or of the experiment), also called <b>
+              <i>'elementary events'</i>
+            </b> can be finite or infinite.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Le qualificatif 'aléatoire' est ici relatif à l'état d'ignorance de l'expérimentateur. <br> En somme, l'expérimentateur ne sait pas quel sera le résultat de son expérience, mais il connait l'ensemble des possibilités, même si cet ensemble est très grand ou même infini. <br> La réalité peut être un peu plus complexe comme le montre les exemples caricaturaux qui suivent mais la 'vraie vie' est toujours plus complexe que toutes les modélisations. </div>
+        <!-- /fr -->
+        <div lang="en"> The qualifier 'random' here relates to the state of ignorance of the experimenter. <br> In short, the experimenter does not know what the result of his experiment will be, but he knows the set of possibilities, even if this set is very large or even infinite. <br> Reality can be a bit more complex as shown in the caricatural examples that follow, but 'real life' is always more complex than any modeling. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> L'ensemble des résultats élémentaires se notent souvent U ou &Omega; et s'appelle <b>
+              <i>"l'univers"</i>
+            </b> (univers des possibles).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> The set of elementary results is often denoted U or &Omega; and is called <b>
+              <i>"the sample space"</i>
+            </b> (alternatively <strong>
+              <em>sample description space</em>
+            </strong>, <strong>
+              <em>possibility space</em>
+            </strong> or <strong>
+              <em>outcome space</em>
+            </strong>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Quelques exemples</h2>
+          <h3>Pile ou face</h3> Le lancer d'une pièce donne deux évènements élémentaires possibles donc un univers fini &Omega;={P,F} <br> Résultat P : apparition du côté 'PILE' portant la valeur de la piece. <br> Résultat F : apparition du côté 'FACE'. <br> Pour simuler un tirage à pile ou face, <br> passer la souris ou le doigt sur l'image de la main !
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Some examples</h2>
+          <h3>Heads or tails</h3> Tossing a coin gives two possible elementary events, therefore a finite universe &Omega;={P,F} <br> Result H: appearance of the 'HEAD' side showing an image symbol of the country. <br> Result T: appearance of the 'TAIL' side showing the value of the coin. <br> To simulate a coin toss, <br> hover with mouse or finger over the image of the hand!
+        </div>
+        <!-- /en -->
+        <img src="images/pileouface.gif" width="160" height="160" border="0" alt="" onmouseout="javascript:this.src='images/pileouface.gif';" onmouseover="javascript:this.src=piece();" />
+        <div lang="fr"> PROTOCOLE: <br> Pour valider un lancer et garantir le côté aléatoire du résultat <ul>
+            <li>La pièce doit être lancée suffisamment haut.</li>
+            <li>On peut s'assurer que le lanceur ne connait pas la position initiale de la pièce dans sa main, en la faisant déposer par une tierce personne.</li>
+            <li>Elle doit tourner sur elle-même un minimum de fois.</li>
+            <li>On peut exiger un rebond préalable.</li>
+            <li>On peut exiger que le lanceur change à chaque fois.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> PROTOCOL: <br> To validate a toss and guarantee the randomness of the result <ul>
+            <li>The coin must be thrown high enough.</li>
+            <li>We can make sure that the thrower does not know the initial position of the piece in his hand, by having it deposited by a third person.</li>
+            <li>It must turn on itself a minimum of times.</li>
+            <li>You may require a prior rebound.</li>
+            <li>You can require the launcher to change each time.</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h3>Lancer d'un dé</h3> Considérons un dé cubique, parfaitement équilibré avec les sommets arrondis pour permettre un roulement facile. Si on jette le dé sur une surface plane avec une énergie suffisante, il finit par s'immobilier en montrant sa face supérieure. <br> Nous avons donc là à nouveau un univers fini &Omega;={1,2,3,4,5,6} si on identifie l'entier n avec l'évènement élémentaire 'apparition de la face portant le numéro n'. <br> Pour simuler le lancer d'un dé <br>passer la souris ou le doigt sur l'image de la main ! <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Rolling a dice</h3> Consider a cubic die, perfectly balanced with the tops rounded to allow for easy rolling. If the die is thrown on a flat surface with sufficient energy, it eventually becomes real estate showing its upper face. <br> We therefore have here again a finite universe &Omega;={1,2,3,4,5,6} if we identify the integer n with the elementary event 'appearance of the face bearing the number n'. <br> To simulate throwing a dice, hover the mouse or finger over the image of the hand! <br>
+        </div>
+        <!-- /en -->
+        <img src="images/main.png" width="140" height="120" border="0" alt="" onmouseout="javascript:this.src='images/main.png';" onmouseover="javascript:this.src=face();" />
+        <div lang="fr"> PROTOCOLE: <br> Pour valider un lancer et garantir le côté aléatoire du résultat <ul>
+            <li>On peut exiger que le dé soit préalablement agité dans un godet plutôt que tenu à la main.</li>
+            <li>On peut exiger que le lanceur change à chaque fois.</li>
+            <li>On peut exiger une vitesse initiale minimale.</li>
+            <li>On peut exiger une distance de roulement minimale.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> PROTOCOL: <br> To validate a roll and guarantee the randomness of the result <ul>
+            <li>The die may be required to be shaken beforehand in a cup rather than held by hand.</li>
+            <li>You can require the launcher to change each time.</li>
+            <li>A minimum initial velocity may be required.</li>
+            <li>A minimum rolling distance may be required.</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <a name="bridge"></a>
+        <div lang="fr">
+          <h3>Tirage d'une carte</h3> Un jeu de bridge se compose de 52 cartes voir (détail ci-dessous). Le tirage d'une carte au hasard génère donc un univers fini &Omega; à 52 éléments pouvant être codés avec deux caractères ('DP'=Dame de pique, 'AC'=As de coeur, 'XK'=10 de carreau', '2T'= 2 de trèfle, etc...). Les quatre couleurs sont : <ul>
+            <li>Trèfle</li>
+            <li>Carreau</li>
+            <li>Coeur</li>
+            <li>Pique</li>
+          </ul> les 13 figures sont : <ul>
+            <li>As</li>
+            <li>Roi</li>
+            <li>Dame</li>
+            <li>Valet</li>
+            <li>10</li>
+            <li>9</li>
+            <li>8</li>
+            <li>7</li>
+            <li>6</li>
+            <li>5</li>
+            <li>4</li>
+            <li>3</li>
+            <li>2</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Drawing a card</h3> A deck of bridge consists of 52 cards see (detail below). Drawing a card at random therefore generates a finite space &Omega; 52 elements that can be coded with two characters ('QS'=Queen of spades, 'AH'=Ace of hearts, 'XD'=10 of diamonds', '2C'= 2 of clubs, etc...). The four suits are: <ul>
+            <li>Club</li>
+            <li>Diamond</li>
+            <li>Heart</li>
+            <li>Spade</li>
+          </ul> the 13 figures are: <ul>
+            <li>Ace</li>
+            <li>King</li>
+            <li>Queen</li>
+            <li>Jack</li>
+            <li>10</li>
+            <li>9</li>
+            <li>8</li>
+            <li>7</li>
+            <li>6</li>
+            <li>5</li>
+            <li>4</li>
+            <li>3</li>
+            <li>2</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/jeu_bridge.jpg" width="610" height="276" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Les cartes les plus fortes As-Rois-Dames-Valets et 10 s'appellent des 'honneurs'. <br> Les honneurs se voient attribuer des points reflétant leur force : <ul>
+            <li>As: 4 points</li>
+            <li>Roi: 3 points</li>
+            <li>Dame: 2 points</li>
+            <li>Valet: 1 point</li>
+            <li>Dix : 0 point</li>
+          </ul> Pour simuler le tirage d'une carte, passer la souris ou le doigt sur le dos du paquet ! <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The highest cards Aces-Kings-Queens-Jacks and 10s are called 'honors'. <br> Honors are awarded points reflecting their strength: <ul>
+            <li>Ace: 4 points</li>
+            <li>King: 3 points</li>
+            <li>Queen: 2 points</li>
+            <li>Jack: 1 point</li>
+            <li>Ten: 0 points</li>
+          </ul> To simulate the drawing of a card, pass the mouse or finger over the back of the deck! <br>
+        </div>
+        <!-- /en -->
+        <img src="images/cards/52.gif" width="71" height="96" border="0" alt="" onmouseout="javascript:this.src='images/cards/52.gif';" onmouseover="javascript:this.src=carte();" />
+        <div lang="fr"> PROTOCOLE: <br> Pour valider un tirage et garantir le côté aléatoire du résultat <ul>
+            <li>La composition du jeu doit être soigneusement vérifiée au départ.</li>
+            <li>Les cartes doivent être neuves lisses et indistinguables au verso.</li>
+            <li>Le jeu doit être à chaque fois, longuement battu, si possible par des personnes différentes.</li>
+            <li>Le tirage doit être effectué si possible par des personnes différentes. </li>
+          </ul> etc., etc. </div>
+        <!-- /fr -->
+        <div lang="en"> PROTOCOL: <br> To validate a draw and guarantee the randomness of the result <ul>
+            <li>The composition of the game should be carefully checked at the start.</li>
+            <li>Cards must be new, smooth and indistinguishable on the back.</li>
+            <li>The game must be shuffled each time, for a long time, if possible by different people.</li>
+            <li>The draw should be done by different people if possible. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h3>Autres exemples</h3> Le choix 'au hasard' d'un individu dans une population (revoir les concepts de base de la <input type="button" value="statistique descriptive" onclick="go('../statistique/statistique_definitions.html#')" data-inline="true" />) constitue une épreuve aléatoire. <br> Dans une population diverse et nombreuse le protocole risque d'être complexe. <ul>
+            <li>Si la population est urbaine à 80% et rurale à 20% il faudra commencer par tirer un entier aléatoire entre 1 et 10. Si le tirage donne 1 ou 2 on le choisira en zone rurale, sinon en zone urbaine.</li>
+            <li>Si le nombfre des hommes est égal à celui des femmes on pourra lancer une pièce pour savoir si on prend un homme ou une femme.</li>
+            <li>Il faudra ensuite faire un test pour choisir une tranche d'âge en fonction de la pyramide des âges.</li>
+            <li>Faire un test sur le niveau de revenus, etc..</li>
+            <li>Choisir le département ou la province d'habitation en fonction de la répartition des populations</li>
+            <li>etc., etc.</li>
+          </ul> Bref, par exemple, faute d'avoir donné à chacun un numéro individuel et d'opérer le tirage avec un ordinateur, choisir un français 'au hasard' (vraiment au hasard) est un processus long et difficile, tant les critères de différentiation sont nombreux et variés. <h3>Exemple d'expérience à univers théoriquement infini</h3> Définissons l'expérience 'géométrique' suivante : Tirage d'un point dans un carré de côté 1. <br> Le résultat est un couple de réels disons (x,y) avec (par exemple) 0 &le; x &le; 1 et 0 &le; y &le; 1. <br> &Omega; est donc un ensemble ayant la puissance du continu. <br> Voici une applet simulant cette expérience.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Other examples</h3> The 'random' choice of an individual in a population (review the basic concepts of <input type="button" value="descriptive statistics" onclick="go('../statistique/statistique_definitions.html#' )" data-inline="true" />) is a random experiment. <br> In a diverse and large population, the protocol may be complex. <ul>
+            <li>If the population is 80% urban and 20% rural, you will have to start by drawing a random integer between 1 and 10. If the draw gives 1 or 2, it will be chosen in a rural area, otherwise in an urban area. </ li>
+            <li>If the number of men is equal to that of women, we can toss a coin to see if we take a man or a woman.</li>
+            <li>You will then have to do a test to choose an age group based on the age pyramid.</li>
+            <li>Test on income level, etc.</li>
+            <li>Choose the department or province of residence according to the distribution of populations</li>
+            <li>etc., etc.</li>
+          </ul> In short, for example, for lack of having given everyone an individual number and of operating the draw with a computer, choosing a Frenchman 'at random' (really at random) is a long and difficult process, as the differentiation criteria are so many and varied. <h3>Example of a theoretically infinite space experiment</h3> Let's define the following 'geometric' experiment: Draw a point in a square of side 1. <br> The result is a pair of real numbers say (x,y) with (for example) 0 &le; x &le; 1 and 0 &le; y &le; 1. <br> &Omega; is therefore a set having the power of the continuum. <br> Here is an applet simulating this experiment.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <div lang="fr">Cliquez n'importe où sur la fenêtre !</div>
+        <!-- /fr -->
+        <div lang="en">Click anywhere on the window !</div>
+        <!-- /en -->
+        <br>
+        <script src="js/concept1.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h4>Remarque importante sur ce type d'épreuve</h4> La simulation ci-dessus a étée réalisée au moyen d'un point dont les cordonnées sont x(M)=Math.random() y(M)=Math.random(). <br> La fonction Math.random() est une fonction interne du système (elle-même empruntée au langage JavaScript), dont nous savons seulement qu'elle renvoie une variable de type 'double' (réel double précision) entre 0 et 1. <br> Nous avons ici demandé en option d'affichage le nombre maximal de décimales autorisé soit 15. Mais de fait, les valeurs retournées par la fonction random() sont en nombre fini, même si ce nombre est très grand. <br> Un nombre réel, considéré comme un <input type="button" value="DDI" onclick="go('../../nombres/reels/ddi.html#')" data-inline="true" /> contient une information infinie et l'expérience décrite (choix aléatoire d'un couple de réels) est tout simplement impossible à réaliser ni physiquement ni avec un calculateur-simulateur. <br> Il n'en reste pas moins que nous aurons besoin de ce concept d'univers des possibles infini dénombrable ou continu. L'utilisation du calcul intégral permet en effet des calculs plus simples que des calculs finis portant sur de très grandes quantités de variables. <h2>De la théorie à la pratique</h2>
+          <h3>Les imprévus</h3> Dans le modèle du tirage à pile ou face ou du lancer du dé, des évènements tels que ceux décrits ci-après sont considérés comme impossibles. Ils se produisent quand même quelquefois. <br> On peut les éliminer en considérant l'expérience comme 'non valide'.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h4>Important note on this type of test</h4> The above simulation was performed using a point whose coordinates are x(M)=Math.random() y(M)=Math.random(). <br> The Math.random() function is an internal function of the system (itself borrowed from the JavaScript language), which we only know returns a variable of type 'double' (double precision real) between 0 and 1. <br> We have asked here as a display option for the maximum number of decimal places authorized, i.e. 15. But in fact, the values returned by the random() function are a finite number, even if this number is very large. <br> A real number, considered a <input type="button" value="UDE" onclick="go('../../nombres/reels/ddi.html#')" data-inline="true" /> contains infinite information and the experiment described (random choice of a couple of real numbers) is simply impossible to perform either physically or with a calculator-simulator. <br> The fact remains that we will need this concept of a countably infinite or continuous universe of possibilities. The use of integral calculus indeed allows simpler calculations than finite calculations relating to very large quantities of variables. <h2>From theory to practice</h2>
+          <h3>The unexpected</h3> In the coin toss or die roll model, events such as those described below are considered impossible. They still happen sometimes. <br> They can be eliminated by considering the experience as 'invalid'.
+        </div>
+        <!-- /en -->
+        <table>
+          <tr>
+            <td>
+              <div lang="fr">Pièce sur tranche</div>
+              <!-- /fr -->
+              <div lang="en">Coin on slice</div>
+              <!-- /en -->
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/piece sur tranche.jpg" width="377" height="270" border="0" alt="">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div lang="fr">Dé 'cassé'</div>
+              <!-- /fr -->
+              <div lang="en">Broken dice</div>
+              <!-- /en -->
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="images/decasse.png" width="266" height="239" alt="">
+            </td>
+          </tr>
+        </table>
+        <div lang="fr">
+          <h3>le coût du hasard</h3> Nous avons vu que plus nous voulons assurer le côté aléatoire du résultat d'une expérience et plus nous devons renforcer le protocole. <br /> Cela est vrai pour les expériences physiques comme pour les simulations par ordinateur. Nous verrons par la suite certains procédés utilisés de façon courante pour de telles simulations. Aucune n'est parfaite et nous devons mélanger de nombreuses techniques pour assurer un côté vraiment aléatoire, si tant est que cette notion existe vraiment. <br /> Tout cela pour dire que la production d'un 'bon' nombre aléatoire peut être coûteuse en temps de calcul. <br /> Cette remarque n'aurait guère d'importance si les simulateurs, pour vérifier certaines lois ne devaient pas simuler la répétition d'un très grand nombre d'épreuves aléatoires. <h3>Note sur les simulations de cette page</h3> Le lecteur pourra par une répétition de ces simulations se persuader qu'il s'agit bien d'épreuves 'aléatoires'. <br /> De fait il n'en est rien dans la mesure où il est fait appel à des fonctions aléatoires prédéfinies des langages de programmation utilisés. <br /> Mais il se trouve que l'auteur et le lecteur se trouvent dans le même état d'ignorance quand au processus utilisé. <br /> Par exemple pour les gifs animés nous utilisons un code javascript du genre :
+          <pre>
+function alea (m,M)
+{
+ 		 var d=M-m;
+		 var r=Math.random();
+		 r*=100;
+		 r=parseInt(r);
+		 r=m+r%d;
+		 return r;
+ }
+</pre> Nous pouvons donc estimer qu'il s'agit de hasard, avec la définition que nous en avons donnée dans <input type="button" value="l'introduction à ce chapitre" onclick="go('index.html#')" data-inline="true" />.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>the cost of randomness</h3> We have seen that the more we want to ensure the randomness of the outcome of an experiment, the more we must strengthen the protocol. <br /> This is true for physical experiments as well as computer simulations. We will see later some processes commonly used for such simulations. None is perfect and we have to mix many techniques to ensure a truly random feature, if such a notion really exists. <br /> All this to say that producing a 'good' random number can be computationally expensive. <br /> This remark would be of little importance if the simulators, in order to verify certain laws, did not have to simulate the repetition of a very large number of random tests. <h3>Note on the simulations of this page</h3> The reader will be able by repeating these simulations to convince himself that they are indeed 'random' tests. <br /> In fact, this is not the case insofar as predefined random functions of the programming languages are used. <br /> But it turns out that the author and the reader are in the same state of ignorance as to the process used. <br /> For example for animated gifs we use a javascript code like:
+          <pre>
+function random (m,M)
+{
+  var d=M-m;
+var r=Math.random();
+r*=100;
+r=parseInt(r);
+r=m+r%d;
+return r;
+  }
+</pre> We can therefore consider that it is a matter of chance, with the definition that we have given in <input type="button" value="the introduction to this chapter" onclick="go('index.html#' )" data-inline="true" />.
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Epreuves répétées ou parallèles, univers produit</h2> On suppose maintenant qu'on a défini deux épreuves aléatoires E<sub>1</sub> et E<sub>2</sub> ayant des univers des possibles respectifs &Omega;<sub>1</sub> et &Omega;<sub>2</sub>. <br> On suppose qu'on effectue E<sub>1</sub> puis E<sub>2</sub> de manières totalement indépendantes (le résultat de E<sub>1</sub> n'affectant pas le protocole de E<sub>2</sub>). <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Repeated or parallel tests, product space</h2> We now suppose that we have defined two random trials E<sub>1</sub> and E<sub>2</sub> having respective possibility spaces &Omega;<sub>1</sub> and &Omega;< sub>2 </sub>. <br> We assume that we perform E<sub>1</sub> then E<sub>2</sub> in totally independent ways (the result of E<sub>1</sub> does not affect the protocol of E<sub>2</sub>).
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Le résultat de cette expérience combinée pourra donc s'exprimer sous la forme d'un couple (ω<sub>1</sub>, ω<sub>2</sub>) élément d'un <input type="button" value="ensemble produit" onclick="go('../../bases/relations/cartesien.html#')" data-inline="true" /> Ω<sub>1</sub>×Ω<sub>2</sub> appelé <b>
+              <i>'univers produit'</i>
+            </b>. <br /> Cette remarque reste vraie quand E<sub>2</sub>=E<sub>1</sub>, l'univers devient alors Ω<sub>1</sub>
+           <sup>2</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> The result of this combined experiment can therefore be expressed in the form of a pair (ω<sub>1</sub>, ω<sub>2</sub>) element of an <input type="button" value="product set" onclick="go('../../bases/relations/cartesien.html#')" data-inline="true" /> Ω<sub>1</sub>×Ω<sub>2</sub> called <b>
+              <i>'product space'</i>
+            </b>. <br /> This remark remains true when E<sub>2</sub>=E<sub>1</sub>, the universe then becomes Ω<sub>1</sub>
+           <sup>2</sup>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />Le fait de tirer une carte d'un jeu puis une seconde sans remettre la première (tirage dit sans remise) ne correspond pas au cas précédent, puisque le premier résultat ne peut plus se produire et que les couples (&omega;<sub>1</sub>,&omega;<sub>1</sub>) sont de fait exclus. <br> Evidemment, rien n'empêche de considérer plus de deux expériences, le résultat de trois lancers successifs de la même pièce pourra être noté par exemple (P,F,P). Il y a alors 2<sup>3</sup>=8 résultats possibles.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />Drawing a card from a deck and then a second without replacing the first (so-called draw without replacement) does not correspond to the previous case, since the first result can no longer occur and the pairs (&omega;<sub>1</sub>,&omega;<sub>1</sub>) are effectively excluded. <br> Obviously, nothing prevents to consider more than two experiments, the result of three successive throws of the same part could be noted for example (P, F, P). There are then 2<sup>3</sup>=8 possible outcomes.
+        </div>
+        <!-- /en -->
+        <a name="prog"></a>
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un petit programme de démonstration des fonctions élémentaires du module 'random' du langage Python :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> Here is a small demonstration program of the elementary functions of the 'random' module of the Python language:
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/randompython.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/randomjulia.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin du C</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The corner of C</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="C/rand2.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_epreuve/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_epreuve/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

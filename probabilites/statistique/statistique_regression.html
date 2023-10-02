@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Regression</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="g">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="g">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/statistique_regression/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/statistique_regression/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le problème</h2> Nous avons vu à la <input type="button" value="page précédente" onclick="go('statistique_correlation.html#def4')" data-inline="true" />, ce que signifie des caractères indépendants. <br /> A l'opposé complet de cette notion se trouvent des caractères liés l'un à l'autre par une dépendance fonctionnelle, du type Y=f(X), c'est à dire si toute modalité y<sub>i</sub> se déduit d'une modalité x<sub>i</sub> par une application f : x<sub>i</sub> → y<sub>i</sub>. <br /> Dans ce cas la connaissance de la série statistique X détermine entièrement la série Y, et si on représente la courbe y=f(x) les points du nuage viennent se placer sur le graphe de la fonction f. <br /> Dans ce cas toujours la connaissance de la série Y n'apporte aucune information nouvelle par rapport à X. <br /> Un des buts de la statistique est de trouver des relations entre les caractères. Ainsi les sociétés d'assurance, pour établir leurs contrats d'assurance-vie commence par dresser des tables liant l'espérance de vie restante, liée au sexe, à l'âge, aux habitudes de vie, au rapport taille-poids etc... <br /> Quant on cherche une relation entre deux caractères numériques la première chose à faire est de représenter le nuage de points matérialisant ces deux caractères et de voir si les points semblent dessiner une courbe connue. <br /> Ainsi dans les exemples ci-dessous, et dans le premier cas la répartition des points semble totalement aléatoire, dans le second cas, les points semblent s'aligner sur une droite, et dans le troisième cas les points semblent dessiner une parabole.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The problem</h2> We saw at the <input type="button" value="previous page" onclick="go('statistique_correlation.html#def4')" data-inline="true" />, what it means independent variables. <br /> At the complete opposite of this notion are variables linked to each other by a functional dependence, of the type Y=f(X), i.e. if any modality y<sub>i</sub> is deduced from a modality x<sub>i</sub> by an application f: x<sub>i</sub> → y<sub>i</sub>. <br /> In this case the knowledge of the statistical series X entirely determines the series Y, and if we represent the curve y=f(x) the points of the cloud are placed on the graph of the function f. <br /> In this case the knowledge of the series Y does not bring any new information compared to X. <br /> One of the purposes of statistics is to find relationships between variables. Thus insurance companies, to establish their life insurance contracts, begin by drawing up tables linking the remaining life expectancy, linked to sex, age, lifestyle, height-weight ratio, etc. .. <br /> When looking for a relationship between two numeric variables, the first thing to do is to represent the cloud of points materializing these two variables and to see if the points seem to draw a known curve. <br /> Thus in the examples below, and in the first case, the distribution of the points seems completely random, in the second case, the points seem to be aligned on a straight line, and in the third case the points seem to draw a parabola.
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Premier cas </div>
+        <!-- /fr -->
+        <div lang="en"> First case </div>
+        <!-- /en -->
+        <p>
+          <img src="images/indep01.png" width="547" height="635" border="0" alt="">
+        </p>
+        <div lang="fr"> Second cas </div>
+        <!-- /fr -->
+        <div lang="en"> Second case </div>
+        <!-- /en -->
+        <p>
+          <img src="images/reglin01.png" width="420" height="556" border="0" alt="">
+        </p>
+        <div lang="fr"> Troisième cas </div>
+        <!-- /fr -->
+        <div lang="en"> Third case </div>
+        <!-- /en -->
+        <p>
+          <img src="images/regpara01.png" width="510" height="568" border="0" alt="">
+        </p>
+        <div lang="fr"> Nous nous intéressons ici spécialement au second cas quand la fonction f est une fonction affine du type y=ax+b. <br> En fait le cas général n'est pas très différent car dire que Y est lié à X par une fonction du second degré du type ax<sup>2</sup>+b revient à dire qu'il y a une relation linéaire entre les caractères X et Y=X<sup>2</sup>. <h2>La méthode des moindres carrés</h2> Nous cherchons à résoudre le problème suivant : <br> Etant donné un nuage M<sub>i</sub>(x<sub>i</sub>,y<sub>i</sub>) et une droite D d'équation y=ax+b, nous posons
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \Sigma = {\sum\limits_{i = 1}^{n}\left( y_{i} - ax_{i} - b \right)^{2}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Nous cherchons la droite D qui minimise &Sigma;.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We are especially interested here in the second case when the function f is an affine function of the type y=ax+b. <br> In fact the general case is not very different because to say that Y is linked to X by a quadratic function of the type ax<sup>2</sup>+b amounts to saying that there is a linear relation between the variables X and Y=X<sup>2</sup>. <h2>The method of least squares</h2> We are looking to resolve the following issue: <br> Given a cloud M<sub>i</sub>(x<sub>i</sub>,y<sub>i</sub>) and a line D with equation y=ax+b, we set
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \Sigma = {\sum\limits_{i = 1}^{n}\left( y_{i} - ax_{i} - b \right)^{2}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> We are looking for the line D which minimizes &Sigma;.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> C'est la droite qui passe <b>
+              <i>'au plus près'</i>
+            </b> des points du nuage suivant les moindres carrés. <br> Nous l'appelons la <b>
+              <i>'droite de régression'</i>
+            </b> de Y en X (ou de Y sur X).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> It is the line which passes <b>
+              <i>'closest'</i>
+            </b> to the points of the cloud according to the least squares. <br> We call it the <b>
+              <i>'regression line'</i>
+            </b> from Y to X (or from Y to X).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Pour cela nous observons que &Sigma;=&phi;(a,b) est une fonction du second degré en a et b. <br> A ce stade nous n'avons pas encore étudié les extrema des fonctions de deux variables, cependant, considérons à a fixé la fonction d'une seule variable b &rarr; &phi;(a,b). <br> On se place dans l'hypothèse où la variance de X est non nulle. <br> Son minimum correspond à une annulation de la dérivée de cette fonction partielle. Cette dérivée se note traditionnellement
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{\partial\varphi}{\partial b} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Elle se calcule facilement comme une dérivée d'une fonction d'une seule variable a étant considéré comme une constante.
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{\partial\varphi}{\partial b}\left( {a,b} \right) = 0\left. \Leftrightarrow\overline{Y} = a\overline{X} + b \right. \)</p>
+          <!-- /FORMULE UNIV INLINE--> Ce qui prouve au passage que la solution passe par le <input type="button" value="point moyen" onclick="go('statistique_correlation.html#def2')" data-inline="true" />.. <br> Il reste maintenant à trouver la valeur de a réalisant ce minimum. <br> Nous remplaçons pour cela b par son expression ci-dessus en fonction de a soit
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle b = \overline{Y} - a\overline{X} \)</p>
+          <!-- /FORMULE UNIV INLINE--> pour avoir une fonction d'une seule variable a, dont nous cherchons le minimum. <br> Nous avons alors
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{{\partial \varphi}\left( {a,b(a)} \right)}{\partial a} = - \frac{2}{n}{\sum\limits_{i = 1}^{n}\left( x_{i} - \overline{X} \right)\left( \left( y_{i} - \overline{Y} \right) - a\left( x_{i} - \overline{X} \right) \right)}
+\)</p>
+																									<!-- /FORMULE UNIV INLINE-->
+de sorte que l'annulation se produit pour
+
+																									<!-- FORMULE UNIV INLINE -->
+																									<p>\(
+\displaystyle a = \frac{{Cov}\left( {X,Y} \right)}{{Var}(X)}
+\)</p>
+																									<!-- /FORMULE UNIV INLINE-->
+																								</div>
+																								<!-- /fr -->
+																								<div lang="en">
+For this we observe that &Sigma;=&phi;(a,b) is a quadratic function in a and b.
+																									<br>
+At this stage we have not yet studied the extrema of functions of two variables, however, let us consider at a fixed the function of a single variable b &rarr; &phi;(a,b).
+																										<br>
+We assume that the variance of X is non-zero.
+																											<br>
+Its minimum corresponds to a cancellation of the derivative of this partial function. This derivative is traditionally noted
+
+																												<!-- UNIV INLINE FORMULA -->
+																												<p>\(
+\displaystyle \frac{\partial\varphi}{\partial b}
+\)</p>
+																												<!-- /INLINE UNIV FORMULA-->
+It is easily calculated as a derivative of a function of a single variable a being considered as a constant.
+
+																												<!-- UNIV INLINE FORMULA -->
+																												<p>\(
+\displaystyle \frac{\partial\varphi}{\partial b}\left( {a,b} \right) = 0\left. \Leftrightarrow\overline{Y} = a\overline{X} + b \right.
+\)</p>
+																												<!-- /INLINE UNIV FORMULA-->
+Which proves in passing that the solution goes through the
+																												<input type="button" value="mean point" onclick="go('statistique_correlation.html#def2')" data-inline="true" />..
+																												<br >
+It now remains to find the value realizing this minimum.
+																													<br>
+For this, we replace b by its expression above as a function of a, i.e.
+
+																														<!-- UNIV INLINE FORMULA -->
+																														<p>\(
+\displaystyle b = \overline{Y} - a\overline{X}
+\)</p>
+																														<!-- /INLINE UNIV FORMULA-->
+  to have a function of a single variable a, of which we are looking for the minimum.
+																														<br>
+We then have
+
+																															<!-- UNIV INLINE FORMULA -->
+																															<p>\(
+\displaystyle \frac{{\partial \varphi}\left( {a,b(a)} \right)}{\partial a} = - \frac{2}{n}{\sum\limits_{i = 1 }^{n}\left( x_{i} - \overline{X} \right)\left( \left( y_{i} - \overline{Y} \right) - a\left( x_{i} - \overline{X} \right) \right)}
+\)</p>
+																															<!-- /INLINE UNIV FORMULA-->
+so that the cancellation occurs for
+
+																															<!-- UNIV INLINE FORMULA -->
+																															<p>\(
+\displaystyle a = \frac{{Cov}\left( {X,Y} \right)}{{Var}(X)}
+\)</p>
+																															<!-- /INLINE UNIV FORMULA-->
+																														</div>
+																														<!-- /en -->
+																														<div lang="fr">
+Sur l'applet suivante nous avons représenté un nuage de points (couleur bleue).
+																															<br>
+Nous avons également représenté le point moyen en rouge, ainsi que la droite de régression R de Y en X (couleur rouge).
+																																<br>
+Vous voyez également une droite variale D d'équation y=ax+b.
+																																	<br>
+Vous pouvez avec les curseurs faire varier la pente a de D ainsi que son ordonnée à l'origine b.
+																																		<br>
+Lorsque vous faites varier a et b vous voyez s'afficher le nombre &Sigma;
+
+																																			<!-- FORMULE UNIV INLINE -->
+																																			<p>\(
+\displaystyle \Sigma = {\sum\limits_{i = 1}^{n}\left( y_{i} - ax_{i} - b \right)^{2}} \)</p>
+          <!-- /FORMULE UNIV INLINE--> Observez que le minimum de &Sigma; est bien atteint quand D=R. <br> Pour cela donner d'abord à a la valeur correspondant au parallélisme de D avec R, puis faites varier b jusqu'à ce que les deux droites coïncident.
+        </div>
+        <!-- /fr -->
+        <div lang="en"> On the following applet we have represented a cloud of points (blue color). <br> We have also represented the mean point in red, as well as the regression line R from Y to X (red color). <br> You also see a variable line D with equation y=ax+b. <br> You can use the cursors to vary the slope a of D as well as its ordinate at the origin b. <br> When you vary a and b you see the number &Sigma;
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \Sigma = {\sum\limits_{i = 1}^{n}\left( y_{i} - ax_{i} - b \right)^{2}} \)</p>
+          <!-- /INLINE UNIV FORMULA--> Observe that the minimum of &Sigma; is achieved when D=R. <br> To do this, first give a the correct value for parallelism with R, then vary b until the two lines coincide.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/regression.js"></script>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />Le problème n'est pas symétrique en X et Y la pente de la droite de régression de X en Y est
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{{Cov}\left( {X,Y} \right)}{{Var}(Y)}
+\)</p>
+																																									<!-- /FORMULE UNIV INLINE-->
+Par contre les deux droites passent par le point moyen.
+																																									<br>
+Le terme régression a une origine curieuse. Il remonte à l’étude du
+physiologiste et anthropologue Sir Francis Galton (voir photo ci-dessous) sur la
+relation entre la taille des parents et celle des enfants. Galton était un
+cousin de Charles Darwin. Il observa que les enfants de parents courts de
+taille, lorsqu’ils étaient rendus à l’âge adulte, avaient tendance à être de
+petite taille eux aussi, mais pas autant que leurs parents. Ils avaient plutôt
+une taille les rapprochant de la moyenne de la population. Il en était de
+même des enfants de parents de grande taille: leurs enfants semblaient
+régresser vers la moyenne (dans le sens de “retourner vers un état
+antérieur”), comme semblait le montrer le diagramme de dispersion.
+Galton appela “rapport de régression filiale” la pente de la relation
+graphique linéaire entre la taille des parents et celle des enfants.
+																																										<br>
+																																											<i>
+																																												<font size="-1">(d'après Pierre Legendre & Daniel Borcard, Université de Montréal)</font>
+																																											</i>
+																																											<h2>Coefficient de regression linéaire</h2>
+Par application du paragraphe précédent on peut toujours, si la variance de X n'est pas nulle , tracer la droite de régression de Y en X.
+																																											<br>
+Le problème est de savoir si ce tradé a un sens.
+																																												<br>
+Ce tracé a un sens chaque fois que les points du nuage semblent alignés.
+																																													<br>
+Mais ici nous nous fions seulement à une impression visuelle. Le but est maintenant de remplacer cela par une estimation plus rigoureuse.
+																																														<br>
+Les principaux contributeurs de cette théorie sont les messieurs dont les portraits suivent.
+
+																																														</div>
+																																														<!-- /fr -->
+																																														<div lang="en">
+																																															<img alt="" border="0" height="40" src="../../images/attention.gif" width="40"/>The problem is not symmetrical in X and Y the slope of the regression line from X to Y is
+
+																																															<!-- UNIV INLINE FORMULA -->
+																																															<p>\(
+\displaystyle \frac{{Cov}\left( {X,Y} \right)}{{Var}(Y)}
+\)</p>
+																																															<!-- /INLINE UNIV FORMULA-->
+On the other hand, the two straight lines pass through the middle point.
+																																															<br>
+The term regression has a curious origin. It dates back to the study of
+physiologist and anthropologist Sir Francis Galton (see photo below) on the
+relationship between the height of the parents and that of the children. Galton was a
+cousin of Charles Darwin. He observed that the children of parents short of
+height, when they reached adulthood, tended to be
+small in size too, but not as much as their parents. Rather they had
+a size bringing them closer to the average of the population. It was about
+the same for children of tall parents: their children seemed
+regress towards the mean (in the sense of “returning to an anterior state”), as the scatter plot seemed to show.
+Galton called the "filial regression ratio" the slope of the relationship
+line graph between parent height and child height.
+																																																<br>
+																																																	<i>
+																																																		<font size="-1">(after Pierre Legendre & Daniel Borcard, University of Montreal)</font>
+																																																	</i>
+																																																	<h2>Linear regression coefficient</h2>
+By applying the previous paragraph we can always, if the variance of X is not zero, draw the regression line from Y to X.
+																																																	<br>
+The problem is whether this operation makes sense.
+																																																		<br>
+This is making  sense whenever the points on the cloud appear rather aligned.
+																																																			<br>
+But here we rely only on a visual impression. The goal now is to replace that with a more rigorous estimate.
+																																																				<br>
+The main contributors to this theory are the gentlemen whose portraits follow.
+
+																																																				</div>
+																																																				<!-- /en -->
+																																																				<table cellpadding="10" cellspacing="0" border="2" bgcolor="#000000">
+																																																					<tr>
+																																																						<td align="center">
+																																																							<font color="#FFFFFF">Francis Galton (1822-1911/UK)</font>
+																																																						</td>
+																																																						<td align="center">
+																																																							<font color="#FFFFFF">Auguste Bravais (1811-1863)/FR)</font>
+																																																						</td>
+																																																						<td align="center">
+																																																							<font color="#FFFFFF">Karl Pearson (1857-1927/UK)</font>
+																																																						</td>
+																																																					</tr>
+																																																					<tr>
+																																																						<td align="center">
+																																																							<img src="images/galton.jpg" width="155" height="237" border="0" alt="">
+																																																							</td>
+																																																							<td align="center">
+																																																								<img src="images/Bravais2.gif" width="256" height="256" border="0" alt="">
+																																																								</td>
+																																																								<td align="center">
+																																																									<img src="images/Karl_Pearson.jpg" width="296" height="326" border="0" alt="">
+																																																									</td>
+																																																								</tr>
+																																																							</table>
+																																																							<!-- STOP -->
+																																																							<div lang="fr">
+C'est Pearson qui a mis au point de façon définitive un estimateur appelé 'coefficient de corrélation linéaire', dont voici la définition
+</div>
+																																																							<!-- /fr -->
+																																																							<div lang="en">
+It was Pearson who finally developed an estimator called the 'linear correlation coefficient', the definition of which is as follows:
+</div>
+																																																							<!-- /en -->
+																																																							<a name="def2"></a>
+																																																							<div id="container">
+																																																								<div lang="fr">
+																																																									<div id="label">définition 2</div>
+Soient X et Y deux caractères sur une même population, tous deux de variance non nulle.
+																																																									<br>
+On appelle
+																																																										<b>
+																																																											<i>'coefficient de corrélation linéaire de X et Y'</i>
+																																																										</b> (de Bravais-Pearson) le nombre :
+
+																																																										<!-- FORMULE UNIV INLINE -->
+																																																										<p>\(
+\displaystyle r\left( {X,Y} \right) = \frac{{Cov}(X,Y)}{\sigma(X)\sigma(Y)}
+\)</p>
+																																																										<!-- /FORMULE UNIV INLINE-->
+																																																									</div>
+																																																									<!--/fr-->
+																																																									<div lang="en">
+																																																										<div id="label">definition 2</div>
+Let X and Y be two variables on the same population, both of non-zero variance.
+																																																										<br>
+We call
+																																																											<b>
+																																																												<i>'linear correlation coefficient of X and Y'</i>
+																																																											</b> (Bravais-Pearson) the number:
+
+																																																											<!-- UNIV INLINE FORMULA -->
+																																																											<p>\(
+\displaystyle r\left( {X,Y} \right) = \frac{{Cov}(X,Y)}{\sigma(X)\sigma(Y)}
+\)</p>
+																																																											<!-- /INLINE UNIV FORMULA-->
+																																																										</div>
+																																																										<!-- /en -->
+																																																									</div>
+																																																									<!-- /cont -->
+																																																									<!-- /STOP -->
+																																																									<div lang="fr">
+Introduisons maintenant les vecteurs
+
+																																																										<!-- FORMULE UNIV INLINE -->
+																																																										<p>\(
+\displaystyle \overrightarrow{U} = \begin{pmatrix}
+{x_{1} - \overline{X}} \\ {x_{2} - \overline{X}} \\ {...} \\ {x_{n} - \overline{X}} \end{pmatrix} \)</p>
+          <!-- /FORMULE UNIV INLINE--> et
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \overrightarrow{V} = \begin{pmatrix} {y_{1} - \overline{Y}} \\ {y_{2} - \overline{Y}} \\ {...} \\ {y_{n} - \overline{Y}} \end{pmatrix} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Let us now introduce the vectors
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{U} = \begin{pmatrix} {x_{1} - \overline{X}} \\ {x_{2} - \overline{X}} \\ {...} \\ {x_{n} - \overline{X}} \end{pmatrix} \)</p>
+          <!-- /INLINE UNIV FORMULA--> and
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \overrightarrow{V} = \begin{pmatrix} {y_{1} - \overline{Y}} \\ {y_{2} - \overline{Y}} \\ {...} \\ {y_{n} - \overline{Y}} \end{pmatrix} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Le coefficient de corrélation linéaire peut s'écrire :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle r\left( {X,Y} \right) = \frac{\overset{\rightarrow}{U} . \overset{\rightarrow}{V}}{\parallel \overset{\rightarrow}{U} \parallel {\parallel \overset{\rightarrow}{V} \parallel}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> C'est donc d'après <input type="button" value="l'inégalité de Cauchy-Schwarz" onclick="go('../../algebre-lineaire/orthogonalite/exercices/normes/ex02.html#')" data-inline="true" /> un nombre dans l'intervalle [-1,+1] correspondant à un cosinus d'un angle de deux vecteurs dans l'espace &reals;<sup>n</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> The linear correlation coefficient can be written:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle r\left( {X,Y} \right) = \frac{\overset{\rightarrow}{U} . \overset{\rightarrow}{V}}{\parallel \overset{\rightarrow}{U} \parallel {\parallel \overset{\rightarrow}{V} \parallel}} \)</p>
+            <!-- /INLINE UNIV FORMULA--> It is therefore according to <input type="button" value="the Cauchy-Schwarz inequality" onclick="go('../../algebre-lineaire/orthogonalite/exercices/normes/ex02.html#')" data-inline="true" /> a number in the interval [-1,+1] corresponding to a cosine of an angle of two vectors in &reals;<sup>n</sup space>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Interprétation</h3>
+          <ul>
+            <li> Dire que r(X,Y)=1 correspond à &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left (\overrightarrow{U},\overrightarrow{V} \right )}=0 ~~ mod(2\pi ) \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp; donc il existe un coefficient de proportionnalité positif k tel que &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{V}=k\overrightarrow{U} \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp;. <br> De là nous tirons &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{Y} = k\overrightarrow{X} + \left( \overline{Y} - k\overline{X} \right)\overrightarrow{I} \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp; où &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \overrightarrow{I} \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp; est le vecteur ayant toutes ses composantes égales à 1. <br> Posant &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle h = \overline{Y} - k\overline{X} \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp; on a bien Y=kX+h avec k &gt; 0.
+            </li>
+            <li> Si r(X,Y)=-1 &nbsp;
+              <!-- FORMULE UNIV INLINE --> \( \displaystyle \widehat{\left (\overrightarrow{U},\overrightarrow{V} \right )}=\pi ~~ mod(2\pi ) \)
+              <!-- /FORMULE UNIV INLINE--> &nbsp; on arrive donc à la même conclusion que ci-dessus mais avec k &lt; 0.
+            </li>
+            <li> Enfin si X et Y sont indépendantes on a bien r(X,Y)=0, la réciproque étant fausse, comme on l'a vu précédemment. </li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Interpretation</h3>
+          <ul>
+            <li> Say that r(X,Y)=1 corresponds to &nbsp;
+              <!-- INLINE UNIV FORMULA --> \( \displaystyle \widehat{\left (\overrightarrow{U},\overrightarrow{V} \right )}=0 ~~ mod(2\pi ) \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp; so there is a positive proportionality coefficient k such that &nbsp;
+              <!-- FORMULA UNIV INLINE --> \( \displaystyle \overrightarrow{V}=k\overrightarrow{U} \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp;. <br> From there we derive &nbsp;
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{Y} = k\overrightarrow{X} + \left( \overline{Y} - k\overline{X} \right)\overrightarrow{I} \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp; Or &nbsp;
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \overrightarrow{I} \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp; is the vector having all its components equal to 1. <br> Setting &nbsp;
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle h = \overline{Y} - k\overline{X} \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp; we have Y=kX+h with k &gt; 0.
+            </li>
+            <li> If r(X,Y)=-1 &nbsp;
+              <!-- UNIV INLINE FORMULA --> \( \displaystyle \widehat{\left (\overrightarrow{U},\overrightarrow{V} \right )}=\pi ~~ mod(2\pi ) \)
+              <!-- /INLINE UNIV FORMULA--> &nbsp; we therefore arrive at the same conclusion as above but with k &lt; 0.
+            </li>
+            <li> Finally, if X and Y are independent, we have r(X,Y)=0, the reciprocal being false, as we saw previously. </li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />Le coefficient r n'exprime qu'une relation de dépendance linéaire. Une variable Y peut être égale au carré de l'autre X avec r(X,Y)=0 (voir contre-exemple page précédente). <br>
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />Relation fonctionnelle (linéaire ou non) ne signifie pas forcément causalité. Si les ventes de crèmes glacées sont corrélées aux ventes de ventilateurs, il n’y a pas de lien direct entre ces deux évolutions mais avec un troisième phénomène qui est la chaleur…
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />The coefficient r only expresses a linear dependency relationship. A variable Y can be equal to the square of the other X with r(X,Y)=0 (see counter-example on the previous page). <br>
+          <img alt="" border="0" height="40" src="../../images/attention.gif" width="40" />Functional relationship (linear or not) does not mean necessarily causation. If ice cream sales are correlated with cooler fan sales, there is no direct link between these two developments but with a third phenomenon which is heat...
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/pearson.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/stat_regression.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/statistique_regression/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/statistique_regression/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

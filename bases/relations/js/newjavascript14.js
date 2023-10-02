@@ -300,7 +300,7 @@ function relgraph(C, G)
         tz.value = prefix + this.stringtoprint;
         var long = tz.value.length+15;
         long = Math.max(long, 50);
-        tz.style.width = long * 6 + "px";
+        tz.style.width = long * 7 + "px";
 
     }
 

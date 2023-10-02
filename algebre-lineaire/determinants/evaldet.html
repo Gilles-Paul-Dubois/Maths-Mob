@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
     <meta charset="utf-8" />
     <title>Evaluation des déterminants</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -196,12 +206,14 @@
           <p> Soit donc D= |α<sub>i,j</sub>| un déterminant. Le résultat suivant est intéressant: </p>
           <a name="th1"></a>
           <div id="container">
-            <div id="label">théorème</div> Si i est un indice ligne quelconque \[D=\sum_{1\leqslant j\leqslant n}^{}(-1)^{i+j}\alpha _{i,j}D_{i,j}\]
+            <div id="label">théorème</div> Si i est un indice ligne quelconque \(D=\sum_{1\leqslant j\leqslant n}^{}(-1)^{i+j}\alpha _{i,j}D_{i,j}\)
           </div>
           <div data-role="collapsible">
             <h4>démonstration</h4>
             <p>Donnons la démonstration pour n=3. Dans le cas général elle n'est pas plus difficile, mais les notations indicées sont assez lourdes et posent un problème essentiellement typographique. </p>
-            <p>Etant donné que le déterminant est multilinéaire :</p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& b& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& 0& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} \] <p>Etant donné qu'il est alterné :</p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} - \begin{vmatrix} b& 0& 0\\ e& d& f\\ h& g& i\\ \end{vmatrix} - \begin{vmatrix} c& 0& 0\\ f& e& d\\ i& h& g\\ \end{vmatrix} \] <p>Considérons maintenant le déterminant: </p> \[\begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix}\] <p>On s'aperçoit en le développant que tous les termes correspondant à des permutations changeant le premier indice sont nuls. Ce déterminant vaut donc: </p> \[a\begin{vmatrix} e& f \\ h& i\\ \end{vmatrix}\] <p>et il en est de même des deux autres: </p> \[b\begin{vmatrix} d& f \\ g& i\\ \end{vmatrix}\] <p>et</p> \[c\begin{vmatrix} e& d \\ h& g\\ \end{vmatrix}\] <p>La somme des 3 est donc avec nos notations: aD<sub>1,1</sub>-bD<sub>1,2</sub>-c(-D<sub>1,3</sub>)=aD<sub>1,1</sub>-bD<sub>1,2</sub>+cD<sub>1,3</sub>
+            <p>Etant donné que le déterminant est multilinéaire :</p><p><img src="images/det1.gif" width="356" height="67" alt=""></p> <p>Etant donné qu'il est alterné :</p>
+            <p><img src="images/det2.gif" width="366" height="67" alt=""></p>
+             <p>Considérons maintenant le déterminant: </p> <p><img src="images/det3.gif" width="78" height="67" alt=""></p> <p>On s'aperçoit en le développant que tous les termes correspondant à des permutations changeant le premier indice sont nuls. Ce déterminant vaut donc: </p> <p><img src="images/det4.gif" width="59" height="45" alt=""></p> <p>et il en est de même des deux autres: </p> <p><img src="images/det5.gif" width="56" height="45" alt=""></p> <p>et</p> <p><img src="images/det6.gif" width="56" height="45" alt=""></p> <p>La somme des 3 est donc avec nos notations: aD<sub>1,1</sub>-bD<sub>1,2</sub>-c(-D<sub>1,3</sub>)=aD<sub>1,1</sub>-bD<sub>1,2</sub>+cD<sub>1,3</sub>
               <br> CQFD dans le cas n=3 donc.
             </p>
           </div>
@@ -214,7 +226,7 @@
           <p> On privilégiera donc les lignes et les colonnes comportant un maximum de zéros à chaque étape du calcul et de façon récursive.</p>
           <p> Du point de vue de l'efficacité, cependant ce n'est guère meilleur que la méthode précédente. le nombre des multiplications reste en O(n!).</p>
           <h2> Le pivot de Gauss </h2>
-          <p>Supposons que notre matrice A soit de la forme:</p> \[A=\begin{pmatrix} a& x & y& . & z \\ 0& & & & \\ 0& & {\huge B} & & \\ 0& & & & \\ 0& & & & \\ \end{pmatrix}\] <p>Alors en développant suivant la première colonne. Det(A)=aDet(B). Le calcul du déterminant de A se résume à un calcul de déterminant d'ordre n-1 et une multiplication.</p>
+          <p>Supposons que notre matrice A soit de la forme:</p> \(A=\begin{pmatrix} a& x & y& . & z \\ 0& & & & \\ 0& & {\huge B} & & \\ 0& & & & \\ 0& & & & \\ \end{pmatrix}\) <p>Alors en développant suivant la première colonne. Det(A)=aDet(B). Le calcul du déterminant de A se résume à un calcul de déterminant d'ordre n-1 et une multiplication.</p>
           <p> L'idée de la méthode de Gauss est d'amener la matrice A à une forme telle que celle montrée ici, par des manipulations sur les lignes ne changeant pas la valeur du déterminant (ajout à une ligne d'une combinaison linéaire des autres lignes).</p>
           <p> Remarquons tout d'abord que si tous les coefficients de la première colonne sont nuls alors le calcul est terminé, le déterminant est nul. Soit donc le premier indice i tel que le premier coefficient de la ligne i ne soit pas nul, coefficient que nous appelerons le 'pivot'. Quitte à changer le signe du déterminant nous pouvons par permutation des lignes, amener la ligne i en première position. Cela fait, nous soustrayons à chaque ligne i pour i &gt; 1 la ligne α<sub>i,1</sub>/α<sub>1,1</sub>L<sub>1</sub> où L<sub>1</sub> est la première ligne. Notre matrice prend la forme voulue. On peut montrer que cet algorithme est polynomial en n<sup>3</sup>, ce qui est nettement meilleur que n!. </p>
           <p> Voici une appliquette qui montre comment fonctionne l'algorithme, étape par étape.</p>
@@ -230,12 +242,14 @@
           <p>Let D= |α<sub>i,j</sub>| a determinant. The following result is interesting: </p>
           <a name="th1e"></a>
           <div id="container">
-            <div id="label">theorem </div>If i is any row index \[D=\sum_{1\leqslant j\leqslant n}^{}(-1)^{i+j}\alpha _{i,j}D_{i,j}\]
+            <div id="label">theorem </div>If i is any row index \(D=\sum_{1\leqslant j\leqslant n}^{}(-1)^{i+j}\alpha _{i,j}D_{i,j}\)
           </div>
           <div data-role="collapsible">
             <h4>proof</h4>
             <p>We give the proof for n=3. In the general case it is not more difficult, but the indexed notations are quite cumbersome and cause a problem essentially typographic. </p>
-            <p>Since the determinant is multilinear: </p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& b& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} + \begin{vmatrix} 0& 0& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} \] <p>Since it is alternating: </p> \[\begin{vmatrix} a& b& c\\ d& e& f\\ g& h& i\\ \end{vmatrix} = \begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix} - \begin{vmatrix} b& 0& 0\\ e& d& f\\ h& g& i\\ \end{vmatrix} - \begin{vmatrix} c& 0& 0\\ f& e& d\\ i& h& g\\ \end{vmatrix} \] <p>Now consider the determinant: </p> \[\begin{vmatrix} a& 0& 0\\ d& e& f\\ g& h& i\\ \end{vmatrix}\] <p>One realizes by developing it that all the terms corresponding to permutations changing the first index are zero. This determinant is therefore: </p> \[a\begin{vmatrix} e& f \\ h& i\\ \end{vmatrix}\] <p>and the same goes for the other two: </p> \[b\begin{vmatrix} d& f \\ g& i\\ \end{vmatrix}\] <p>and</p> \[c\begin{vmatrix} e& d \\ h& g\\ \end{vmatrix}\] <p>The sum of the 3 is therefore with our notations: aD<sub>1.1</sub>-bD<sub>1.2</sub>-c(-D<sub>1.3</sub>)=aD<sub>1.1</sub>-bD<sub>1.2</sub>+cD<sub>1.3</sub>
+            <p>Since the determinant is multilinear: </p> <p><img src="images/det1.gif" width="356" height="67" alt=""></p> <p>Since it is alternating :</p>
+            <p><img src="images/det2.gif" width="366" height="67" alt=""></p>
+             <p>Consider now the determinant: </p> <p><img src="images/det3.gif" width="78" height="67" alt=""></p> <p>We see that all the terms corresponding to permutations changing the first index are zero. So the value of this determinant is: </p> <p><img src="images/det4.gif" width="59" height="45" alt=""></p> <p>And it is the same for the other two: </p> <p><img src="images/det5.gif" width="56" height="45" alt=""></p> <p>and</p> <p><img src="images/det6.gif" width="56" height="45" alt=""></p><p>The sum of the 3 is therefore with our notations: aD<sub>1.1</sub>-bD<sub>1.2</sub>-c(-D<sub>1.3</sub>)=aD<sub>1.1</sub>-bD<sub>1.2</sub>+cD<sub>1.3</sub>
               <br> QED in the case n=3 .
             </p>
           </div>
@@ -248,7 +262,7 @@
           <p>Rows and columns with a maximum of zeros at each stage of the calculation and recursively will therefore be preferred. </p>
           <p>From an efficiency point of view, however it is not much better than the previous method. The number of multiplications remains in O(n!). </p>
           <h2> Gauss' pivot </h2>
-          <p>Suppose our matrix A is of the form: </p> \[A=\begin{pmatrix} a& x & y& . & z \\ 0& & & & \\ 0& & {\huge B} & & \\ 0& & & & \\ 0& & & & \\ \end{pmatrix}\] <p>Then by expanding along the first column. Det(A)=aDet(B). The calculation of the determinant of A boils down to a calculation of determinant of order n-1 and a multiplication. </p>
+          <p>Suppose our matrix A is of the form: </p> \(A=\begin{pmatrix} a& x & y& . & z \\ 0& & & & \\ 0& & {\huge B} & & \\ 0& & & & \\ 0& & & & \\ \end{pmatrix}\) <p>Then by expanding along the first column. Det(A)=aDet(B). The calculation of the determinant of A boils down to a calculation of determinant of order n-1 and a multiplication. </p>
           <p>The idea of ​​Gauss's method is to bring the matrix A to a form such as the one shown here, by manipulations on the lines not changing the value of the determinant (addition to a line of a linear combination of the other lines). </p>
           <p>Note first that if all the coefficients of the first column are null then the calculation is finished, the determinant is null. Let the first index i be such that the first coefficient of the line i is not zero, coefficient that we will call the 'pivot'. Even if it means changing the sign of the determinant, we can by permutating rows, bring row i to the first position. This done, we subtract from each line i for i &gt; 1 the line α<sub>i,1</sub>/α<sub>1,1</sub>L<sub>1</sub> where L<sub>1</sub> is the first line. Our matrix takes the desired shape. We can show that this algorithm is polynomial in n<sup>3</sup>, which is clearly better than n!. </p>
           <p>Here is an applet that shows how the algorithm works, step by step. </p>
@@ -323,12 +337,12 @@
         <div lang="fr">
         <a name="blocs"></a>
           <h2> Calcul par blocs </h2>
-          <p> Supposons que notre matrice M soit de la forme:</p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) \] <p>où A et C sont des matrices carrées sur la diagonale, 0 désignant ici une matrice nulle et B une matrice quelconque. Dans ces conditions:</p>
+          <p> Supposons que notre matrice M soit de la forme:</p> \( \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) \) <p>où A et C sont des matrices carrées sur la diagonale, 0 désignant ici une matrice nulle et B une matrice quelconque. Dans ces conditions:</p>
           <a name="th2"></a>
           <div id="container">
             <div id="label">théorème</div> Det(M)=Det(A)Det(C)
           </div>
-          <p>La preuve résulte dans le produit:</p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) = \left( \begin{array}{c|c} I & O \\ \hline O & C \end{array} \right) \times \left( \begin{array}{c|c} A & B \\ \hline O & I \end{array} \right) \] <p>et le théorème sur le <input type="button" value="déterminant d'un produit" onclick="go('detmatrice.html#th8')" data-inline="true" />. </p>
+          <p>La preuve résulte dans le produit:</p> \( \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) = \left( \begin{array}{c|c} I & O \\ \hline O & C \end{array} \right) \times \left( \begin{array}{c|c} A & B \\ \hline O & I \end{array} \right) \) <p>et le théorème sur le <input type="button" value="déterminant d'un produit" onclick="go('detmatrice.html#th8')" data-inline="true" />. </p>
           <p> Cela se généralise récursivement au cas où M est 'triangulaire par blocs'.</p>
           <a name="th3"></a>
           <div id="container">
@@ -344,12 +358,12 @@
         <div lang="en">
         <a name="blocse"></a>
           <h2> Calculation by blocks </h2>
-          <p>Suppose our matrix M is of the form: </p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) \] <p>where A and C are square matrices on the diagonal, 0 here designating a zero matrix and B any matrix. In these conditions: </p>
+          <p>Suppose our matrix M is of the form: </p> \( \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) \) <p>where A and C are square matrices on the diagonal, 0 here designating a zero matrix and B any matrix. In these conditions: </p>
           <a name="th2e"></a>
           <div id="container">
             <div id="label">theorem </div>Det(M)=Det(A)Det(C)
           </div>
-          <p>The proof results in the product: </p> \[ \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) = \left( \begin{array}{c|c} I & O \\ \hline O & C \end{array} \right) \times \left( \begin{array}{c|c} A & B \\ \hline O & I \end{array} \right) \] <p>and the theorem on the <input type="button" value="determinant of a product" onclick="go('detmatrice.html#th8e')" data-inline="true">. </p>
+          <p>The proof results in the product: </p> \( \left( \begin{array}{c|c} A & B \\ \hline O & C \end{array} \right) = \left( \begin{array}{c|c} I & O \\ \hline O & C \end{array} \right) \times \left( \begin{array}{c|c} A & B \\ \hline O & I \end{array} \right) \) <p>and the theorem on the <input type="button" value="determinant of a product" onclick="go('detmatrice.html#th8e')" data-inline="true">. </p>
           <p>This generalizes recursively to the case where M is 'triangular by blocks'. </p>
           <a name="th3e"></a>
           <div id="container">
@@ -607,12 +621,12 @@
         <table cellpadding="10">
           <tr>
             <td>
-              <div lang="fr">Création Gilles Dubois</div>
-              <div lang="en">Created by Gilles Dubois</div>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
             </td>
             <td>
-              <div lang="fr">Janvier 2022</div>
-              <div lang="en">January 2022</div>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
             </td>
             <td>
               <div lang="fr">Version mobile Jquery</div>
@@ -637,7 +651,7 @@
           </div>
         </li>
         <li>
-          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
         </li>
       </ul>
     </div>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Paramètres de dispersion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/statistique_dispersion/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/statistique_dispersion/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> La première question qui se pose quand on connait les paramètres de position comme la moyenne est : La moyenne est-elle significative ? <br> Par exemple, si la moyenne générale d'une classe d'élève en mathématiques est 10, s'agit-il d'une classe moyenne ? <br> Voici 3 histogrammes correspondant à des profils distincts de classes pour lesquelles la moyenne générale est exactement 10/20 : </div>
+        <!-- /fr -->
+        <div lang="en"> The first question that arises when we know the position parameters as the mean is: Is the mean significant? <br> For example, if the overall average mark of a class of students in mathematics is 10, is it an average class? <br> Here are 3 histograms corresponding to distinct profiles of classes for which the general average is exactly 10/20: </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/stat_disp01.png" width="388" height="296" border="0" alt="">
+        </p>
+        <p>
+          <img src="images/stat_disp02.png" width="378" height="285" border="0" alt="">
+        </p>
+        <p>
+          <img src="images/stat_disp03.png" width="380" height="290" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> On voit clairement que, sur le premier diagramme, les notes sont uniformément réparties (il y a de tout). <br> Dans le troisième cas il y a un groupe d'élèves extrêmement faible et un groupe d'élève extrêmement fort. Les mauvais résultats des uns sont compensés par les performances des autres, ce qui explique une moyenne générale de 10, mais cette classe est tout sauf 'moyenne'. <br> Enfin pour le second cas (diagramme du milieu) les notes se concentrent autour de la moyenne. Il semble bien que dans ce cas précis on ait affaire à un groupe vraiment moyen. <br> Nous nous fixons pour but ici de définir des critères quantitatifs précis nous permettant de dire si une population est homogène ou non du point de vue d'un caractère particulier. <br> Nous pourrons donc mesurer l'homogénéité ou son contraire l'hétérogénéité. <h2>Étendue</h2> La première mesure qui peut venir à l'esprit est de mesurer la différence entre les extrêmes. </div>
+        <!-- /fr -->
+        <div lang="en"> We can clearly see that, on the first diagram, the marks are evenly distributed (there is everything). <br> In the third case there is an extremely weak group of students and an extremely strong group of students. The poor results of some are compensated by the performance of others, which explains an overall average of 10, but this class is anything but 'average'. <br> Finally for the second case (diagram in the middle) the scores are concentrated around the average. It seems that in this specific case we are dealing with a really average group. <br> We aim here to define precise quantitative criteria allowing us to say whether a population is homogeneous or not from the point of view of a particular character. <br> We can therefore measure homogeneity or its opposite, heterogeneity. <h2>Range</h2> The first measurement that may come to mind is to measure the difference between extremes . </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On appelle <b>
+              <i>'amplitude'</i>
+            </b> (ou <b>
+              <i>'étendue'</i>
+            </b>) d'une série statistique S la différence max(S)-min(S) entre les modalités extrêmes.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We call <b>
+              <i>'range'</i>
+            </b> of a statistical series S the difference max(S)-min(S) between extreme modalities.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> A coup sûr, une faible amplitude est la garantie d'un groupe homogène. <br> Mais peut-on dire réciproquement que si l'amplitude est élevée le groupe n'est pas homogène ? <br> Considérons cet histogramme : </div>
+        <!-- /fr -->
+        <div lang="en"> For sure, a low range is the guarantee of a homogeneous group. <br> But can we reciprocally say that if the amplitude is high the group is not homogeneous? <br> Consider this histogram: </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/stat_disp04.png" width="378" height="283" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> L'amplitude est manifestement forte, mais ceci est dû à deux exceptions. <br> Si l'on excepte l'unique élève ayant obtenu un résultat brillant et celui ayant obtenu des résultats catastophiques, le reste du groupe est homogène. <br> Ainsi si l'étendue est une bonne mesure de l'homogénéité lorsqu'elle est faible, elle n'est pas significative lorsqu'elle est élevée. <br> Il nous faut donc d'autres instruments de mesure pour affiner notre diagnostic. <h2>Écart absolu moyen</h2> La première idée qui peut venir est de constituer à partir de la série S=(x<sub>0</sub>, x<sub>1</sub>, ... ,x<sub>n-1</sub>) la série des écarts y<sub>i</sub>=x<sub>i</sub>-&mu; (0 &le; i &le; n-1) où &mu; est la moyenne de la série. <br> Cependant, si nous faisons la moyenne de ces écarts elle sera toujours nulle les écarts positifs étant compensés exactement par les écarts négatifs. <br> Il existe une première façon de remédier à cet état de chose, c'est de considérer les valeurs absolues de ces écarts. C'est ainsi qu'on définit l'écart absolu moyen. </div>
+        <!-- /fr -->
+        <div lang="en"> The range is obviously strong, but this is due to two exceptions. <br> If we except the only student who obtained a brilliant result and the one who obtained catastrophic results, the rest of the group is homogeneous. <br> So while the spread is a good measure of homogeneity when it is low, it is not meaningful when it is high. <br> We therefore need other measuring instruments to refine our diagnosis. <h2>Absolute mean deviation</h2> The first idea that can come is to constitute from the series S=(x<sub>0</sub>, x<sub>1</sub>, ... ,x<sub>n-1</sub>) the series of deviations y<sub>i</sub>=x<sub>i</sub>-&mu; (0 &le; i &le; n-1) where &mu; is the mean of the series. <br> However, if we take the average of these deviations, it will always be zero, the positive deviations being exactly compensated by the negative deviations. <br> There is a first way to remedy this state of affairs, and that is to consider the absolute values of these deviations. This is how the absolute mean deviation is defined. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div>
+            <b>
+              <i>"L'écart absolu moyen"</i>
+            </b> est la moyenne de la série |x<sub>i</sub>-&mu;|
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle e = \frac{\sum\limits_{i = 0}^{n - 1}{\mid x_{i} - \mu \mid}}{n} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div>
+            <b>
+              <i>"The absolute mean deviation"</i>
+            </b> is the mean of the series |x<sub>i</sub>-&mu;|
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle e = \frac{\sum\limits_{i = 0}^{n - 1}{\mid x_{i} - \mu \mid}}{n} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> L'écart absolu moyen est peu utilisé, on lui préfère une autre mesure définie ci-après. <h2>Variance</h2> Au lieu de prendre la valeur absolue des écarts on peut tout aussi bien élever ces écarts au carré et faire la moyenne des résultats, c'est précisément ce qu'on appelle la variance de la série statistique. </div>
+        <!-- /fr -->
+        <div lang="en"> The average absolute deviation is little used, we prefer another measure defined below. <h2>Variance</h2> Instead of taking the absolute value of the deviations, we can just as well square these deviations and average the results, this is precisely what is called the variance of the statistical series. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> La <b>
+              <i>'variance'</i>
+            </b> d'une série est la moyenne de la série (x<sub>i</sub>-&mu;)<sup>2</sup>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v = \frac{\sum\limits_{i = 0}^{n - 1}\left( x_{i} - \mu \right)^{2}}{n} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> The <b>
+              <i>'variance'</i>
+            </b> of a series is the mean of the series (x<sub>i</sub>-&mu;)<sup>2</sup>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle v = \frac{\sum\limits_{i = 0}^{n - 1}\left( x_{i} - \mu \right)^{2}}{n} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Autre formule pour la variance (théorème de König-Huygens): </div>
+        <!-- /fr -->
+        <div lang="en"> Another formula for the variance (König-Huygens theorem): </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> La variance peut également être calculée par la formule suivante (plus simple) :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v = \frac{\sum\limits_{i = 0}^{n - 1}{x_{i}}^{2}}{n} - \mu^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> soit encore pour un caractère X :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v(X) = \overline{X^{2}} - \left( \overline{X} \right)^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> La variance est donc la différence entre la moyenne des carrés et le carré de la moyenne.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> The variance can also be calculated by the following (simpler) formula:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle v = \frac{\sum\limits_{i = 0}^{n - 1}{x_{i}}^{2}}{n} - \mu^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> or again for a quantitative variable X:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle v(X) = \overline{X^{2}} - \left( \overline{X} \right)^{2} \)</p>
+            <!-- /INLINE UNIV FORMULA--> The variance is therefore the difference between the mean of the squares and the square of the mean.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La preuve est instantanée en développant (x<sub>i</sub>-&mu;)<sup>2 </sup>=x<sub>i</sub>
+         <sup>2</sup>-2&mu;x<sub>i</sub>+&mu;<sup>2</sup>. <br> Voyons ce que deviennent ces formules dans le cas d'une série triée et regroupée avec les effectifs des modalités S=((x<sub>i</sub>,e<sub>i</sub>))<sub>0&le;i&le;p-1</sub>. <br> Un calcul rapide nous donne :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> The proof is instantaneous by expanding (x<sub>i</sub>-&mu;)<sup>2 </sup>=x<sub>i</sub>
+         <sup>2</sup>-2&mu;x<sub>i</sub>+&mu;<sup>2</sup>. <br> Let's see what becomes of these formulas in the case of a sorted and grouped series with the numbers of the modalities S=((x<sub>i</sub>,e<sub>i</sub>))<sub>0&le ;i&le;p-1</sub>. <br> A quick calculation gives us:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 2</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v = {\sum\limits_{i = 0}^{p - 1}f_{i}\left( x_{i} - \mu \right)^{2}} = {\sum\limits_{i = 0}^{p - 1}f_{i}{x_{i}}^{2}} - \mu^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où chaque f<sub>i</sub>=e<sub>i</sub>/n est la fréquence de x<sub>i</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 2</div>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v = {\sum\limits_{i = 0}^{p - 1}f_{i}\left( x_{i} - \mu \right)^{2}} = {\sum\limits_{i = 0}^{p - 1}f_{i}{x_{i}}^{2}} - \mu^{2} \)</p>
+            <!-- /FORMULE UNIV INLINE--> where each f<sub>i</sub>=e<sub>i</sub>/n is the frequency of the value x<sub>i</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Écart-type</h2> De par la mise au carré des écarts, l'unité de la variance est le carré de celle du caractère (si le caractère est en kg, sa moyenne est en kg mais sa variance est en kg<sup>2</sup>) d'où l'impossibilité d'additionner la moyenne et la variance.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Standard deviation</h2> By squaring the deviations, the unit of the variance is the square of that of the variable (if the variable is in kg, its mean is in kg but its variance is in kg<sup>2</sup>) hence the impossibility of adding the mean and the variance.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> L'écart type (noté &sigma;) est la racine de la variance (son unité est donc la même que celle de la moyenne).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> The standard deviation (denoted &sigma;) is the root of the variance (its unit is therefore the same as that of the mean).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela a l'air anecdotique mais la possibilité d'additionner moyenne et écart type est fondamentale, en particulier pour le calcul d'intervalle de confiance. <br> Par exemple, lorsque le caractère statistique a une distribution particulière assez courante dite 'normale gaussienne' (nous verrons en probabilités de quoi il s'agit), grossièrement en forme de cloche, l'écart type prend tout son sens. <ul>
+            <li>Dans l'intervalle [&mu;-&sigma;,&mu;+&sigma;], on trouve 68% de la population.</li>
+            <li>Dans l'intervalle [&mu;-2&sigma;,&mu;+2&sigma;], on trouve 95% de la population.</li>
+            <li>Dans l'intervalle [&mu;-3&sigma;,&mu;+3&sigma;], on trouve 99,7% de la population.</li>
+          </ul>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It seems anecdotal but the possibility of adding mean and standard deviation is fundamental, in particular for the calculation of confidence interval. <br> For example, when the variable has a rather common particular distribution called 'Gaussian normal' (we will see in probabilities what it is), roughly in the shape of a bell, the standard deviation takes on its full meaning. <ul>
+            <li>In the interval [&mu;-&sigma;,&mu;+&sigma;], we find 68% of the population.</li>
+            <li>In the interval [&mu;-2&sigma;,&mu;+2&sigma;], we find 95% of the population.</li>
+            <li>In the interval [&mu;-3&sigma;,&mu;+3&sigma;], we find 99.7% of the population.</li>
+          </ul>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/350px-Standard_deviation_diagram.svg.png" width="350" height="175" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr">
+          <font size="-1">
+            <em>Image wikipédia</em>
+          </font>
+          <h3>Propriétés</h3> Les propriétés suivantes se vérifient immédiatement sur la définition.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <font size="-1">
+            <em>Wikipedia image</em>
+          </font>
+          <h3>Properties</h3> The following properties hold immediately on the definition.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Invariance par translation : <br> L'écart type n'est pas modifié si on ajoute ou retranche une même constante à tous les termes de la série statistique. <br> Si y<sub>i</sub> = x<sub>i</sub> + C alors σ<sub>y</sub> = σ<sub>x</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> Invariance by translation: <br> The standard deviation is not modified if a same constant is added or subtracted from all the terms of the statistical series. <br> If y<sub>i</sub> = x<sub>i</sub> + C then σ<sub>y</sub> = σ<sub>x</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> Stabilité par multiplication par une constante : <br> Si on multiplie une série par une constante positive, l'écart type est multiplié par la même constante. <br> Si y<sub>i</sub> = Kx<sub>i</sub> alors σ<sub>y</sub> = Kσ<sub>x</sub>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> Stability by multiplication by a constant: <br> If you multiply a series by a positive constant, the standard deviation is multiplied by the same constant. <br> If y<sub>i</sub> = Kx<sub>i</sub> then σ<sub>y</sub> = Kσ<sub>x</sub>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> L'écart type est toujours positif et est nul si et seulement si la série statistique est constante.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> The standard deviation is always positive and is zero if and only if the statistical series is constant.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cela résulte du fait qu'on peut évidemment dire la même chose de la variance. <h3>Ecart-type relatif</h3> Un écart-type fort ne révèle une grande hétérogénéité que pour des valeurs moyennes faibles du caractère. <br> Pour une mesure relative de l'hétérogénéité (ou de son contraire) on introduit donc, quand la moyenne n'est pas nulle, l'écart-type relatif : </div>
+        <!-- /fr -->
+        <div lang="en"> This follows from the fact that the same can obviously be said of the variance. <h3>Relative standard deviation</h3> A high standard deviation only reveals great heterogeneity for low mean values of the variable. <br> For a relative measure of heterogeneity (or its opposite) we therefore introduce, when the mean is not zero, the relative standard deviation: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div>
+            <b>
+              <i>"L'écart-type relatif"</i>
+            </b> ou <b>
+              <i>"coefficient de variation"</i>
+            </b> est le rapport &sigma;/&mu;.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div>
+            <b>
+              <i>"The relative standard deviation"</i>
+            </b> or <b>
+              <i>"coefficient of variation"</i>
+            </b> is the ratio &sigma;/&mu; .
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un programme qui génère une série statistique et qui calcule le maximum, le minimum et l'étendue de la série :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's Corner</h2> Here is a program that generates a statistical series and calculates the maximum, minimum and range of the series:
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/stat_disp01.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Le programme suivant fait la même chose en utilisant les fonctions prédéfinies max et min. </div>
+        <!-- /fr -->
+        <div lang="en"> The following program does the same thing using the predefined max and min functions. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/stat_disp02.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Le programme suivant calcule l'écart absolu moyen. </div>
+        <!-- /fr -->
+        <div lang="en"> The following program calculates the absolute mean deviation. </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/stat_disp03.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Pour un calcul de variance, écart-type, voir <input type="button" value="cet exercice" onclick="go('exercices/statistique_dispersion/ex01.html#')" data-inline="true" />. <h2>Le coin de Julia</h2>
+          <p>Et voici l'équivalent avec Julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> For a calculation of variance, standard deviation, see <input type="button" value="this exercise" onclick="go('exercices/statistique_dispersion/ex01.html#')" data-inline="true" /> . <h2>Julia's corner</h2>
+          <p>And here is the equivalent with Julia 1.6:</p>
+        </div>
+        <!-- /en -->
+        <object data="julia/stat_disp01.jl.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <p>
+          <object data="julia/stat_disp02.jl.html" type="text/html" border="3" height="120" width="100%"></object>
+        </p>
+        <p>
+          <object data="julia/stat_disp03.jl.html" type="text/html" border="3" height="200" width="100%"></object>
+        </p>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/statistique_dispersion/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/statistique_dispersion/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

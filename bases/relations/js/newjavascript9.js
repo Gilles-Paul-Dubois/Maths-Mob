@@ -491,14 +491,14 @@ function relgraph(C, G)
     {
 
         tz.value = this.allimagesstr();
-        tz.style.width = this.allimagesstr().length * 7 + "px";
+        tz.style.width = this.allimagesstr().length * 11 + "px";
 
     }
     this.showimdir = function (tz, P)
     {
 
         tz.value = this.imdirstr(P);
-        tz.style.width = this.imdirstr(P).length * 7 + "px";
+        tz.style.width = this.imdirstr(P).length * 11 + "px";
 
     }
 }

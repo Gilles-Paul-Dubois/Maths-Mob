@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Fonction de répartition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/variable_foncrep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/variable_foncrep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Définition</h2> Nous vous conseillons, si vous ne l'avez déjà fait, de voir en préambule <input type="button" value="cette page" onclick="go('../statistique/statistique_classes.html#')" data-inline="true" /> du cours de statistique concernant le partage d'une population en classes.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Definition</h2> We advise you, if you have not already done so, to see as a preamble <input type="button" value="this page" onclick="go('../statistique/statistique_classes.html#')" data-inline="true" /> of the statistics course concerning the division of a population into classes.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Pour toute variable aléatoire X sur un espace probabilisé (&Omega;, \(\mathfrak{T}\),P), et à valeurs réelles, on définit la <b>
+              <i>'fonction de répartition'</i>
+            </b> F<sub>X</sub> de X (notée tout simplement F quand il n'y a pas d'ambiguïté sur X) par : <br> F(x)=P(X &le; x)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> For any random variable X on a probability space (&Omega;, \(\mathfrak{T}\),P), and with real vaues, we define the ' <strong>
+              <em>cumulative distribution function</em>
+            </strong>' F<sub>X</sub> of X (simply denoted F when there is no ambiguity about X) by: <br> F(x)=P(X &le; x)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ici X≤x est une écriture raccourcie pour {ω ∈ Ω | X(ω)≤x} (qui est bien un évènement, compte tenu de la définition générale des v.a. puisque c'est X<sup>-1</sup>(]-∞,x])). <br />
+          <h2>Propriétés</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Here X≤x is a shorthand writing for {ω ∈ Ω | X(ω)≤x} (which is indeed an event, given the general definition of a r.v. since it is X<sup>-1</sup>(]-∞,x])). <br />
+          <h2>Properties</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Il résulte immédiatement de la définition que la fonction de répartition d'une v.a. est une fonction <input type="button" value="croissante au sens large" onclick="go('../../analyse-reelle/foncnum/foncnummonotones.html#def4')" data-inline="true" /> prenant ses valeurs dans l'intervalle [0,1].
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> It immediately follows from the definition that the distribution function of a r.v. is an <input type="button" value="increasing function in the wider sense" onclick="go('../../analyse-reelle/foncnum/foncnummonotones.html#def4')" data-inline="true" /> taking its values in the interval [0,1].
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet si x<sub>2</sub> &gt; x<sub>1</sub> F(x<sub>2</sub>)=F(x<sub>1</sub>)+P( x<sub>1</sub> &lt; X &le; x<sub>2</sub>) et <br> P( x<sub>1</sub> &lt; X &le; x<sub>2</sub>) &ge; 0. </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed if x<sub>2</sub> &gt; x<sub>1</sub> F(x<sub>2</sub>)=F(x<sub>1</sub>)+P( x<sub>1</sub> &lt; X &le; x<sub>2</sub>) and <br> P( x<sub>1</sub> &lt; X &le; x<sub>2</sub>) &ge; 0. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> En tout point x, la fonction de répartition d'une v.a. possède une limite à droite et une limite à gauche.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> At any point x, the cumulative distribution function of a r.v. has a limit on the right and a limit on the left.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> C'est en effet une propriété des fonctions monotones (revoir <input type="button" value="cette page" onclick="go('../../analyse-reelle/foncnum/foncnumlimagauche.html#def2')" data-inline="true" />). </div>
+        <!-- /fr -->
+        <div lang="en"> It is indeed a property of monotonic functions (see <input type="button" value="this page" onclick="go('../../analyse-reelle/foncnum/foncnumlimagauche.html#def2')" data-inline="true" />). </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> La fonction de répartition d'une v.a. est <input type="button" value="continue à droite" onclick="go('../../analyse-reelle/continuite/contagauche.html#def2')" data-inline="true" /> en tout point x.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> The cumulative distribution function of a r.v. is <input type="button" value="right-continuous" onclick="go('../../analyse-reelle/continuite/contagauche.html#def2')" data-inline="true" /> at any point x.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> En effet soit (x<sub>i</sub>)<sub>0&le;i&le;n</sub> une suite strictement décroissante tendant vers x. <br> Pour tout i soit P<sub>i</sub> l'évènement x &lt; X &le; x<sub>i</sub>. <br> Alors P(P<sub>i</sub>)=F(x<sub>i</sub>)-F(x). <br> On a P<sub>i+1</sub> &sube; P<sub>i</sub> &forall; i. <br> En outre &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \bigcap\limits_{i}P_{i} = Ø \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br> La démonstration résulte donc de <input type="button" value="ce résultat" onclick="go('../concept/exercices/concept_axiomatique/ex05.html#')" data-inline="true" /> (axiome de continuité).
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Indeed, let (x<sub>i</sub>)<sub>0&le;i&le;n</sub> be a strictly decreasing sequence tending towards x. <br> For all i let P<sub>i</sub> be the event x &lt; X &le; x<sub>i</sub>. <br> Then P(P<sub>i</sub>)=F(x<sub>i</sub>)-F(x). <br> We have P<sub>i+1</sub> &sube; P<sub>i</sub> &forall; i. <br> Furthermore &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \bigcap\limits_{i}P_{i} = Ø \)
+          <!-- /UNIV INLINE FORMULA--> &nbsp; <br> The demonstration therefore results from <input type="button" value="this result" onclick="go('../concept/exercices/concept_axiomatique/ex05.html#')" data-inline="true" /> (axiom of continuity).
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim\limits_{x\rightarrow{- \infty}}{F(x) = 0} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; et &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim\limits_{x\rightarrow{+ \infty}}{F(x) = 1} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim\limits_{x\rightarrow{- \infty}}{F(x) = 0} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp; and &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle \lim\limits_{x\rightarrow{+ \infty}}{F(x) = 1} \)
+            <!-- /FORMULE UNIV INLINE--> &nbsp;
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> La démonstration utilise l'axiome de continuité, elle est analogue à la précédente, en considérant une suite tendant vers -&infin; et une autre tendant vers +&infin;. </div>
+        <!-- /fr -->
+        <div lang="en"> The proof uses the axiom of continuity, it is analogous to the previous one, by considering a sequence tending towards -&infin; and another tending towards +&infin;. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> L'ensemble des points de discontinuité d'une fonction de répartition est au plus dénombrable.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> The set of discontinuity points of a cumulative distribution function is at most countable.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> C'est une propriété plus générale des fonctions monotones. <br /> En effet si F présente un saut en x, pour raison de <input type="button" value="densité" onclick="go('../../nombres/reels/densite.html#')" data-inline="true" />, on peut toujours trouver un rationnel dans l'intervalle ]F(x), F(x<sub>+</sub>)[. On fabrique ainsi une application <input type="button" value="injective" onclick="go('../../bases/applications/injections.html#')" data-inline="true" /> de l'ensemble des discontinuités de F dans l'ensemble <input type="button" value="dénombrable" onclick="go('../../nombres/rationnels/cardinal.html#')" data-inline="true" /> des rationnels, car si y &gt; x les deux intervalles ]F(x), F(x<sub>+</sub>)[ et ]F(y), F(y<sub>+</sub>)[ sont <input type="button" value="disjoints" onclick="go('../../bases/ensembles/disjoints.html#')" data-inline="true" />. </div>
+        <!-- /fr -->
+        <div lang="en"> This is a more general property of monotonic functions. <br /> Indeed if F presents a jump at x for reason of <input type="button" value="density" onclick="go('../../nombres/reels/densite.html#')" data-inline="true" /> , we can always find a rational in the interval ]F(x), F(x<sub>+</sub>)[. We thus create an <input type="button" value="injective" onclick="go('../../bases/applications/injections.html#')" data-inline="true" /> mapping of the set of discontinuities of F in the set <input type="button" value="countable" onclick="go('../../nombres/rationnels/cardinal.html#')" data-inline="true" /> of rationals, because if y &gt; x the two intervals ]F(x), F(x<sub>+</sub>)[ and ]F(y), F(y<sub>+</sub>)[ are <input type="button" value="disjoints" onclick="go('../../bases/ensembles/disjoints.html#')" data-inline="true" />. </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Par la suite, nous désignerons par <b>
+              <i>'propriétés caractéristiques'</i>
+            </b> les 4 propriétés précédentes des fonctions de répartition des variables aléatoires. <ol>
+              <li>F est croissante</li>
+              <li>F est partout continue à droite</li>
+              <li>&nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle {\lim\limits_{x\rightarrow{- \infty}}F(x)} = 0 \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp;
+              </li>
+              <li>&nbsp;
+                <!-- FORMULE UNIV INLINE --> \( \displaystyle {\lim\limits_{x\rightarrow{+ \infty}}F(x)} = 1 \)
+                <!-- /FORMULE UNIV INLINE--> &nbsp;
+              </li>
+            </ol>
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> Subsequently, we will designate by <b>
+              <i>'characteristic properties'</i>
+            </b> the 4 previous properties of the distribution functions of random variables. <ol>
+              <li>F is increasing</li>
+              <li>F is everywhere right-continuous</li>
+              <li>&nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle {\lim\limits_{x\rightarrow{-\infty}}F(x)} = 0 \)
+                <!-- /UNIV INLINE FORMULA--> &nbsp;
+              </li>
+              <li>&nbsp;
+                <!-- UNIV INLINE FORMULA --> \( \displaystyle {\lim\limits_{x\rightarrow{+ \infty}}F(x)} = 1 \)
+                <!-- /UNIV INLINE FORMULA--> &nbsp;
+              </li>
+            </ol>
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Cas des univers finis</h2> La fonction de répartition s'obtient par cumul de la loi de répartition. <br /> Voici ce que cela donne dans le cas de l'exemple de la <input type="button" value="page précédente" onclick="go('variable_definition.html#deuxdes')" data-inline="true" /> (somme des deux dés). <br />
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of finite universes</h2> As its name indicates, the cumulative distribution function is obtained by cumulation of the distribution law. <br /> Here's what it looks like in the case of the example of <input type="button" value="previous page" onclick="go('variable_definition.html#deuxdes')" data-inline="true" /> (sum of the two dice). <br>
+        </div>
+        <!-- /en -->
+        <table cellpadding="10" cellspacing="0" border="2">
+          <tr>
+            <td>-&infin;&lt;x&lt;2</td>
+            <td>F(x)=0</td>
+          </tr>
+          <tr>
+            <td>2&le;x&lt;3</td>
+            <td>F(x)=1/36</td>
+          </tr>
+          <tr>
+            <td>3&le;x&lt;4</td>
+            <td>F(x)=3/36</td>
+          </tr>
+          <tr>
+            <td>4&le;x&lt;5</td>
+            <td>F(x)=6/36</td>
+          </tr>
+          <tr>
+            <td>5&le;x&lt;6</td>
+            <td>F(x)=10/36</td>
+          </tr>
+          <tr>
+            <td>6&le;x&lt;7</td>
+            <td>F(x)=15/36</td>
+          </tr>
+          <tr>
+            <td>7&le;x&lt;8</td>
+            <td>F(x)=21/36</td>
+          </tr>
+          <tr>
+            <td>8&le;x&lt;9</td>
+            <td>F(x)=26/36</td>
+          </tr>
+          <tr>
+            <td>9&le;x&lt;10</td>
+            <td>F(x)=30/36</td>
+          </tr>
+          <tr>
+            <td>10&le;x&lt;11</td>
+            <td>F(x)=33/36</td>
+          </tr>
+          <tr>
+            <td>11&le;x&lt;12</td>
+            <td>F(x)=35/36</td>
+          </tr>
+          <tr>
+            <td>12&le;x&lt;+&infin;</td>
+            <td>F(x)=1</td>
+          </tr>
+        </table>
+        <p>
+          <img src="images/foncrep1.png" width="689" height="339" border="0" alt="">
+          </td>
+        </p>
+        <div lang="fr">
+          <h2>Cas des univers dénombrables</h2> Considérons la <input type="button" value="loi géométrique" onclick="go('../concept/exercices/concept_axiomatique/ex02.html#')" data-inline="true" /> de paramètre p. <br /> Pour cette loi l'univers des possibles est {1,2, ...., n, ...}=&naturals;<sup>*</sup> et &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle P\left( \left\{ i \right\} \right) = pq^{i - 1} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; où q=1-p <br>
+          <br> Posant X(n)=n, nous obtenons ainsi une variable aléatoire. <br> Soit F la fonction de répartition de X.
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle F(n) = p{\sum\limits_{i = 1}^{i < n}q^{i - 1}=p{\sum\limits_{i=0}^{n - 2}q^{i}}=1 - q^{n - 1}} \) </p>
+              <!-- /FORMULE UNIV INLINE--> En outre F est constante sur chaque intervalle ]n,n+1[.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of countable spaces</h2> Consider the <input type="button" value="geometric distribution" onclick="go('../concept/exercices/concept_axiomatique/ex02.html#')" data-inline="true" /> of parameter p. <br /> For this law the universe of possibilities is {1,2, ...., n, ...}=&naturals;<sup>*</sup> and &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle P\left( \left\{ i \right\} \right) = pq^{i - 1} \)
+          <!-- /UNIV INLINE FORMULA--> &nbsp; where q=1-p <br>
+          <br> Setting X(n)=n, we thus obtain a random variable. <br> Let F be the distribution function of X.
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle F(n) = p{\sum\limits_{i = 1}^{i < n}q^{i - 1}=p{\sum\limits_{i=0}^{n - 2}q ^{i}}=1 - q^{n - 1}} \) </p>
+              <!-- /UNIV INLINE FORMULA--> In addition F is constant on each interval ]n,n+1[.
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/Geometriccdf.jpg" width="560" height="363" border="0" alt="">
+          <br>
+          <font size="-1">
+            <em>Image wikipédia</em>
+          </font>
+        </p>
+        <!-- /STOP IMAGE -->
+        <a name="cascont"></a>
+        <div lang="fr">
+          <h2>Cas des univers de cardinal au moins continu</h2>
+          <h3>Un exemple simple</h3> Prenons un tir aléatoire uniforme dans un disque de rayon R. <br> Ainsi l'univers des possibles se confond avec les couples &omega;=(u,v) tels que u²+v²&le;1. <br> Soit X la variable aléatoire X(&omega;)=&radic;(u²+v²). <br> Alors si F est la fonction de répartition de X on a F(x)=P(u²+v²&le;x²). <br> Cet évènement correspond à : <br>
+          <ul>
+            <li>L'évènement impossible si x&lt;0</li>
+            <li>Au cercle de centre O(0,0) et de rayon x, si x &lt;R</li>
+            <li>L'évènement certain si x&ge;R</li>
+          </ul> Sa probabilité est donc : <ul>
+            <li>0 si x&lt;0</li>
+            <li>x²/R² si x &lt;R</li>
+            <li>1 si x&ge;R</li>
+          </ul> Voici la représentation graphique de cette fonction de répartition dans le cas où R=1 :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of spaces with cardinalities equal or greater than continuous (&reals;)</h2>
+          <h3>A simple example</h3> Consider a uniform random shot in a disk of radius R. <br> Thus the space of possibilities corresponds to the pairs &omega;=(u,v) such that u²+v²&le;1. <br> Let X be the random variable X(&omega;)=&radic;(u²+v²). <br> So if F is the distribution function of X we have F(x)=P(u²+v²&le;x²). <br> This event corresponds to: <br>
+          <ul>
+            <li>The impossible event if x&lt;0</li>
+            <li>To the circle with center O(0,0) and radius x, if x &lt;R</li>
+            <li>The certain event if x&ge;R</li>
+          </ul> Its probability is therefore: <ul>
+            <li>0 if x&lt;0</li>
+            <li>x²/R² if x &lt;R</li>
+            <li>1 if x&ge;R</li>
+          </ul> Here is the graphic representation of this distribution function in the case where R=1:
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/foncrep2.png" width="574" height="247" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> Cette fonction est la primitive de la fonction linéaire par morceaux suivante : <br>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> This function is the integral of the following piecewise linear function: <br>
+        </div>
+        <!-- /en -->
+        <!-- STOP IMAGE -->
+        <p>
+          <img src="images/foncrep3.png" width="570" height="288" border="0" alt="">
+        </p>
+        <!-- /STOP IMAGE -->
+        <div lang="fr"> que nous appelerons sa densité. <br>
+          <h3>Variables aléatoires absolument continues</h3> Bien que cette définition, dans le cadre de la théorie de l'intégration de Lebesgue (cadre idéal pour la présentation du calcul des probabilités), soit un peu plus complexe, nous adopterons la version simplifiée suivante :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> which we will call its density. <br>
+          <h3>Absolutely continuous random variables</h3> Although this definition, within the framework of Lebesgue's integration theory (ideal framework for the presentation of the calculation of probabilities), is a little more complex, we will adopt the following simplified version:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Une fonction F est dite <strong>
+              <em>'absolument continue'</em>
+            </strong>, si elle est dérivable sauf peut-être en quelques points et si, f étant sa dérivée on a :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle F(x) = {\int_{- \infty}^{x}f(u){du}} \)</p>
+            <!-- /FORMULE UNIV INLINE--> f s'appelle alors la <b>
+              <i>'densité'</i>
+            </b> de F.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> A function F is said to be <strong>
+              <em>'absolutely continuous'</em>
+            </strong>, if it is differentiable except perhaps at a few points and if, f being its derivative, we have:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle F(x) = {\int_{- \infty}^{x}f(u){du}} \)</p>
+            <!-- /UNIV INLINE FORMULA--> f is then called the <b>
+              <i>'density'</i>
+            </b> of F.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> C'est par exemple le cas dans l'exemple précédent la fonction F étant dérivable en tous points sauf en x=1. <br> Dans le cadre de ce cours, pour les univers non dénombrables, nous ne considérerons en pratique que le cas des v.a. à densité. <br> Dans ce cas on a la formule : </div>
+        <!-- /fr -->
+        <div lang="en"> This is for example the case in the previous example, the function F being differentiable at all points except at x=1. <br> As part of this course, for non-countable universes, we will only consider in practice the case of r.v. with densities. <br> In this case we have the formula: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop6"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 6</div> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle P\left( {a < X \leq b} \right)={\int_{a}^{b}f(u)}{du} \) <!-- /FORMULE UNIV INLINE--> &nbsp;
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 6</div> &nbsp;
+            <!-- FORMULE UNIV INLINE --> \( \displaystyle P\left( {a < X \leq b} \right)={\int_{a}^{b}f(u)}{du} \) <!-- /FORMULE UNIV INLINE--> &nbsp;
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Répartition uniforme</h3>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Uniform distribution</h3>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Une v.a. X, absolument continue est dite <b>
+              <i>'uniformément répartie'</i>
+            </b> sur un intervalle [a,b], si sa densité de probabilité est constante sur cet intervalle et nulle en dehors.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> An absolutely continuous r.v. X is said to be <b>
+              <i>'uniformly distributed'</i>
+            </b> over an interval [a,b], if its probability density is constant over this interval and zero outside it.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de cette définition que si X est uniformément répartie sur [a,b], sa fonction de répartition vérifie :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle F(x) = \left\{ \begin{matrix} {0\ {si}\ x < a} \\ {\frac{x - a}{b - a}\ {si}\ x \in \left\lbrack {a,b} \right\rbrack} \\ {1\ {si}\ x> b} \end{matrix} \right. \) </p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from this definition that if X is uniformly distributed over [a, b], its distribution function verifies :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle F(x) = \left\{ \begin{matrix} {0\ {si}\ x < a} \\ {\frac{x - a}{b - a}\ {si}\ x \in \left\lbrack {a,b} \right\rbrack} \\ {1\ {si}\ x> b} \end{matrix} \right. \) </p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le théorème de la réciproque</h2> Ce théorème affirme que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The converse theorem</h2> This theorem states that :
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Toute fonction F satisfaisant aux 4 propriétés caractéristiques énoncées plus haut, est la fonction de répartition d'une variable aléatoire X définie sur l'espace probabilisé ([0,1],\(\mathfrak{T}\),P) où \(\mathfrak{T}\) est la tribu des boréliens sur [0,1] et P la mesure uniforme définie dans <input type="button" value="cette page" onclick="go('../concept/concept_axiomatique.html#def2')" data-inline="true" />. <br /> La fonction X est donnée par :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle X(\omega) = {Inf}\left\{ x \in \mathbb{R} \mid F(x) \geq \omega \right\} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Si F est une bijection bicontinue d'un intervalle I sur [0,1] X est tout simplement la réciproque de F.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> Any function F satisfying the 4 characteristic properties stated above is the distribution function of a random variable X defined on the probabilized space ([0,1],\(\mathfrak{T}\),P) where \(\mathfrak{T}\) is the &sigma;-algebra of Borelians on [0,1] and P the uniform measure defined in <input type="button" value="this page" onclick="go('../concept/concept_axiomatique.html#def2')" data-inline="true" />. <br /> The function X is given by :
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle X(\omega) = {Inf}\left\{ x \in \mathbb{R} \mid F(x) \geq \omega \right\} \)</p>
+            <!-- /UNIV INLINE FORMULA--> If F is a bicontinuous bijection of an interval I on [0,1] X is simply the inverse of F.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ce résultat sera simplement admis. </div>
+        <!-- /fr -->
+        <div lang="en"> This result will simply be admitted. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/variable_foncrep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/variable_foncrep/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

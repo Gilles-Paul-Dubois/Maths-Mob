@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Simulation processus aléatoire</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <link href="../../css/jsxgraph.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../js/jsxgraphcore.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme="g">
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme="g">
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_simulation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_simulation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to 'intro-menu of the chapter'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine Geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Comme nous l'avons vu dans le <input type="button" value="préambule à ce cours" onclick="go('index.html#topo')" data-inline="true" />, le hasard est une notion relativement difficile à définir. <br /> La nécessité de produire de longues séries de nombres simulant le hasard, c'est à dire aussi imprévisibles que possible, tout en ayant d'autres qualités, comme une répartition aussi uniforme que possible est une préoccupation permanente des informaticiens et cela depuis le début de cette science. <br /> En général, ces séries sont utilisées pour des programmes de simulation consistant bien souvent à vérifier des lois statistiques ou à déterminer expérimentalement des probabilités dont le calcul est difficile. Il y a donc un impératif de coût, les nombres 'aléatoires' que nous appelerons plus justement 'pseudo-aléatoires' doivent être produits par des procédés simples n'impliquant pas des temps de calculs trop longs. <br /> L'utilisation d'algorithmes précis permet en outre la reproductibilité, ce qui peut être intéressant quand on veut comparer deux lois différentes avec la même série aléatoire. Il existe donc des méthodes orientées vers des algorithmes déterministes et d'autres mélangeant les techniques en faisant appel à des données physiques imprévisibles comme le contenu de certains registres volatiles de l'ordinateur. <br /> Voici pour commencer les portraits de quelques mathématiciens ayant largement contribué à la solution de ce problème. <h2>Galerie des portraits</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> As we saw in the <input type="button" value="preamble to this course" onclick="go('index.html#topoe')" data-inline="true" />, chance is a relatively difficult notion to define. <br /> The need to produce long series of numbers simulating chance, that is to say as unpredictable as possible, while having other qualities, such as a distribution as uniform as possible, is a permanent concern of computer scientists and this since the beginning of this science. <br /> In general, these series are used for simulation programs often consisting of verifying statistical laws or experimentally determining probabilities whose calculation is difficult. There is therefore a cost imperative, the 'random' numbers which we will more aptly call 'pseudo-random' must be produced by simple processes that do not involve too long calculation times. <br /> The use of precise algorithms also allows reproducibility, which can be interesting when you want to compare two different laws with the same random series. There are therefore methods oriented towards deterministic algorithms and others mixing techniques by using unpredictable physical data such as the content of certain volatile computer registers. <br /> To begin with, here are the portraits of some mathematicians who have largely contributed to the solution of this problem. <h2>Portrait gallery</h2>
+        </div>
+        <!-- /en -->
+        <table cellpadding="10" cellspacing="0" border="10" bgcolor="#000000">
+          <tr>
+            <td align="center">
+              <font size="3" color="#FFFFFF">John Von Neumann (1903-1957/H-USA)</font>
+            </td>
+            <td align="center">
+              <font size="3" color="#FFFFFF">Derrick Henry Lehmer (1905-1991/USA)</font>
+            </td>
+            <td align="center">
+              <font size="3" color="#FFFFFF">Donald Ervin Knuth (1938-.../USA)</font>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img src="images/VonNeumann.jpeg" width="160" height="188" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/Lehmer.jpeg" width="215" height="234" border="0" alt="">
+            </td>
+            <td align="center">
+              <img src="images/220px-KnuthAtOpenContentAlliance.jpg" width="220" height="260" border="0" alt="">
+            </td>
+          </tr>
+        </table>
+        <div lang="fr">
+          <h3>Citations </h3>
+          <em>"Quiconque considère des méthodes arithmétiques pour produire des nombres aléatoires est, bien sûr, en train de commettre un péché. "</em> (John Von Neumann). <br />
+          <em> "Les générateurs de nombres aléatoires ne doivent pas être choisis au hasard."</em> (D. Knuth) <h2>Générateurs congruentiels linéaires</h2> Il s'agit de l'algorithme le plus utilisé pour produire des nombres aléatoires depuis qu'il a été inventé en 1948 par D.H Lehmer. <br /> Ce sont les <input type="button" value="sequences" onclick="go('../../analyse-reelle/suites/suitesdef.html#')" data-inline="true" /> récurrentes : <br /> x<sub>n+1</sub> = ( a * x<sub>n</sub> + b) mod c <br /> Elles dépendent des constantes a,b et c ainsi que du terme initial x<sub>0</sub> ('seed'). <br /> Dans tous les cas les nombres générés (sauf éventuellement le premier) sont compris entre 0 et c-1. <br />
+          <h4>Premiers essais (peu concluants)</h4> Pour les valeurs (25,16,256,12) tous les nombres générés sont pairs... <br /> Pour les valeurs (25,16,256,11) tous les nombres générés sont impairs... <br /> Pour les valeurs (25,16,256,10) c'est encore pire, la suite est stationnaire... <p>Programme Python :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Quotes </h3>
+          <em>"Anyone who attempts to generate random numbers by deterministic means is, of course, living in a state of sin."</em> (John Von Neumann). <br />
+          <em> "Random numbers should not be generated with a method chosen at random."</em> (D. Knuth) <h2>Linear congruential generators</h2> It is the most widely used algorithm for producing random numbers since it was invented in 1948 by D.H Lehmer. <br /> These are the recurring <input type="button" value="sequences" onclick="go('../../analyse-reelle/suites/suitesdef.html#')" data-inline="true" /> : <br /> x<sub>n+1</sub> = ( a * x<sub>n</sub> + b) mod c <br /> They depend on the constants a,b and c as well as the initial term x<sub>0</sub> ('seed'). <br /> In all cases the numbers generated (except possibly the first) are between 0 and c-1. <br />
+          <h4>First attempts (inconclusive)</h4> For the values (25,16,256,12) all generated numbers are even... <br /> For the values (25,16,256,11) all numbers generated are odd... <br /> For the values (25,16,256,10) it's even worse, the sequence is stationary... <p>Python program:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/GCL01.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Équivalent julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Julia 1.6 equivalent:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/GCL01.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h3>Suivons maintenant les conseils de Knuth</h3> Pour ne pas retrouver les défauts graves rencontrés ci-dessus, il faut regarder cette suite d'un peu plus près. Si on choisit b non nul , il est toujours possible d'obtenir une période de longueur c (donc pas de risque de bloquage puisqu'on va retrouver tous les nombres entre 0 et c-1 dans la suite). <br> D. Knuth établit une liste de critères que doivent remplir a,b et c pour cela : <ol>
+            <li>b et c doivent être premiers entre eux</li>
+            <li>a-1 doit être un multiple de p, pour tout p nombre premier diviseur de c</li>
+            <li>a-1 doit être un multiple de 4 si c est un multiple de 4</li>
+            <li>si c est une puissance de 2, le bit de poids faible des nombres produits vaut alternativement 0 et 1 </li>
+          </ol> Bon, pour notre second essai, soyons plus prudents et respectons scrupuleusement les critères précédents : <br> a=31415821 b=1 c=100000000 x<sub>0</sub>=0 <p>Code Python :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Let's now follow Knuth's advice</h3> In order not to find the serious faults encountered above, it is necessary to look at this suite a little more closely. If we choose b non-zero , it is always possible to obtain a period of length c (therefore no risk of blocking since we will find all the numbers between 0 and c-1 in the sequence). <br> D. Knuth establishes a list of criteria that a, b and c must meet for this: <ol>
+            <li>b and c must be relatively prime</li>
+            <li>a-1 must be a multiple of p, for any p prime divisor of c</li>
+            <li>a-1 must be a multiple of 4 if c is a multiple of 4</li>
+            <li>if c is a power of 2, the least significant bit of the numbers produced is alternately 0 and 1</li>
+          </ol> Well, for our second try, let's be more careful and scrupulously respect the previous criteria: <br> a=31415821 b=1 c=100000000 x<sub>0</sub>=0 <p>Python code:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/GCL02.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Équivalent Julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Julia 1.6 equivalent:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/GCL02.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Regardons maintenant les chiffres des unités de la suite générée. C'est Robert Sedgewick qui donne cet exemple. <h4>Encore quelques exemples célèbres et biaisés</h4> Le premier 'RANDU' était le générateur proposé par IBM pour sa série 370, le second était intégré à Turbo-Pascal, le troisième était le générateur d'UNIX. <p>Code Python :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Now let's look at the unit digits of the generated sequence. It is Robert Sedgewick who gives this example. <h4>A few more famous and biased examples</h4> The first 'RANDU' was the generator proposed by IBM for its 370 series, the second was integrated into Turbo-Pascal, the third was the UNIX generator. <p>Python code:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/GCL03.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Équivalent julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Julia 1.6 equivalent:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/GCL03.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p <!-- /STOP CODE-->
+        <div lang="fr">
+          <h2>Alors que faire ?</h2> Il existe de 'bons' générateurs utilisant la technique GCL, citons par exemple, parmi d'autres, le 'standard minimal' de Park et Miller. <p>Code Python :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>So what to do?</h2> There are 'good' generators using the LCG technique, including, among others, the 'minimum standard' of Park and Miller. <p>Python code :</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/GCL04.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Équivalent Julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Julia 1.6 equivalent:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/GCL04.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Générateurs à congruence additive</h2> C'est une généralisation des suites de Fibonnaci, chaque terme étant obtenu par une addition de deux termes pris parmi les k précédents. On dit aussi suites de Fibonnaci 'lacunaires'. <br /> La méthode nécessite le stockage permanent de k nombres. <br /> Naturellement on combine avec une congruence, donc : <br /> x<sub>n</sub>=x<sub>n-1</sub>+x<sub>n-k</sub> (mod c) <br /> La méthode est rapide surtout quand c est une puissance de 2. <br /> Mitchell et Moore, après une étude théorique poussée, ont proposé le générateur suivant : <br /> x<sub>n+1</sub> = ( x<sub>n-24</sub> + x<sub>n-55</sub> ) mod m <br /> Cette suite passe avec succès de nombreux critères de qualité. <p>Code Python :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Additive congruence generators</h2> It is a generalization of Fibonacci sequences, each term being obtained by adding two terms taken from the previous k. Also known as 'lacunary' Fibonacci sequences. <br /> The method requires the permanent storage of k numbers. <br /> Naturally we combine with a congruence, so: <br /> x<sub>n</sub>=x<sub>n-1</sub>+x<sub>n-k</sub> (mod c) <br /> The method is fast especially when c is a power of 2. <br /> Mitchell and Moore, after extensive theoretical study, have proposed the following generator: <br /> x<sub>n+1</sub> = ( x<sub>n-24</sub> + x<sub>n-55</sub> ) mod m <br /> This suite successfully passes many quality criteria. <p>Python code:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/GCA01.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <p>Équivalent Julia 1.6 :</p>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <p>Julia 1.6 equivalent:</p>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/GCA01.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le nombre π</h2> Une équipe de physiciens conduits par Ephraïm Fischbach du Collède des Sciences de l'université Purdue de West Lafayette (Indiana), a réalisé une étude comparative comparant l'aspect aléatoire des décimales du nombre π avec les séries produites par 30 générateurs populaires classiques. <br /> Leur conclusion est que π est un bon générateur, source acceptable de hasard, mais pas toujours le meilleur. <h2>Une liste (non exhaustive) des algorithmes modernes</h2>
+          <ul>
+            <li>Blum Blum Shub. Basé sur une formule utilisant des nombres premiers.</li>
+            <li>Mersenne twister. Par Matsumoto Nishimura, rapide, a une périodicité très longue.</li>
+            <li>Lagged Fibonacci generator. Améliore le générateur à congruence linéaire en utilisant la séquence de Fibonacci.</li>
+            <li>Linear congruential generator. Un des plus anciens, non le meilleur, génère une séquence à partir de trois nombres.</li>
+            <li>Yarrow algorithm, par Bruce Schneier, John Kelsey, and Niels Ferguson. Générateur cryptographiquement sûr, peut être utilisé pour générer des nombres réellement aléatoires à partir d'entrées de périphériques analogiques.</li>
+            <li>Fortuna. Présenté comme une amélioration de l'algorithme de Yarrow.</li>
+            <li>Linear feedback shift register. Registre à décalage dont l'entrée est une fonction linéaire de son contenu précédent. Le contenu initial est le "seed" (grain).</li>
+          </ul>
+          <h2>Simulation de 'tirs' aléatoires</h2> Nous avons vu que les méthodes dites de 'Monte-Carlo' utilisent des 'cribles' à base de générateurs de points de l'espace [0,1]<sup>n</sup> ayant pour coordonnées des variables dont les types représentent (ou essaient de représenter) les nombres réels ('float', 'double'). <br /> Or dès qu'on a une suite aléatoire d'entiers (u<sub>n</sub>) répartie uniformément dans l'intervalle [0,c] la suite x<sub>n</sub>=u<sub>n</sub>/c nous donne une solution. Plus c est grand et plus la précision sera grande. Comme on sait produire de telles suites pour c arbitrairement grand, on peut atteindre toute précision en décimales donnée à l'avance. <br /> La plupart des langages fournissent de tels générateurs (random.random() en python, Math.random() en JavaScript, etc... <br /> On peut revoir, par exemple sur <input type="button" value="cette page" onclick="go('concept_epreuve.html#prog')" data-inline="true" />, des programmes de démonstration pour les langages Python et C. <br /> On peut se faire une idée très rapidement de la qualité de ces générateurs en visualisant le tir aléatoire par un nuage de points sur une surface ou dans un volume donné. <br /> Voici une applet JavaScript qui test le simulateur Math.random(). <br /> Appuyer sur le bouton '+100' pour déclencher 100 tirs aléatoires. <br /> Appuyer sur 'Recommencer' pour tout remettre à zéro.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>The number π</h2> A team of physicists led by Ephraïm Fischbach from the College of Sciences at Purdue University in West Lafayette (Indiana), carried out a comparative study comparing the random aspect of the decimal places of the number π with the series produced by 30 popular classic generators. br/> Their conclusion is that π is a good generator, an acceptable source of randomness, but not always the best. <h2>A (non-exhaustive) list of modern algorithms</h2>
+          <ul>
+            <li>Blum Blum Shub. Based on a formula using prime numbers.</li>
+            <li>Mersenne twister. By Matsumoto Nishimura, fast, has a very long periodicity.</li>
+            <li>Lagged Fibonacci generator. Improves the linear congruence generator using the Fibonacci sequence.</li>
+            <li>Linear congruential generator. One of the oldest, not the best, generates a sequence from three numbers.</li>
+            <li>Yarrow algorithm, by Bruce Schneier, John Kelsey, and Niels Ferguson. Cryptographically secure generator, can be used to generate truly random numbers from analog device inputs.</li>
+            <li>Fortuna. Presented as an improvement on Yarrow's algorithm.</li>
+            <li>Linear feedback shift register. Shift register whose input is a linear function of its previous contents. The initial content is the “seed”.</li>
+          </ul>
+          <h2>Simulation of random 'shots'</h2> We have seen that the so-called 'Monte-Carlo' methods use 'screens' based on generators of points in the space [0,1]<sup>n</sup> having as coordinates variables whose types represent (or try to represent) real numbers ('float', 'double'). <br /> Now as soon as we have a random sequence of integers (u<sub>n</sub>) distributed uniformly in the interval [0,c] the sequence x<sub>n</sub>=u<sub> n</sub>/c gives us a solution. The larger it is, the greater the precision will be. As we know how to produce such sequences for arbitrarily large c, we can achieve any precision in decimals given in advance. <br /> Most languages provide such generators (random.random() in Python, Math.random() in JavaScript, etc... <br /> You can review, for example on <input type="button" value="this page" onclick="go('concept_epreuve.html#prog')" data-inline="true" />, demonstration programs for Python and C languages. <br /> We can get an idea very quickly of the quality of these generators by visualizing the random firing by a cloud of points on a surface or in a given volume. <br /> Here is a JavaScript applet that tests the Math.random() simulator. <br /> Press the '+100' button to trigger 100 random shots. <br /> Press 'Restart' to reset everything.
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box1" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/gen1.js"></script>
+        <button id="button11" type="button" onclick="nameSpace1.plus100()">+100</button>
+        <button id="button12" type="button" onclick="nameSpace1.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <h3>Tirs uniformes sur une figure non rectangulaire</h3> Supposons que nous voulions déclencher un tir uniforme sur le disque de rayon 1 inscrit dans un carré de côté 2. <br /> On peut bien entendu déclencher un tir uniforme sur le carré et 'ignorer' les tirs qui sont hors du cercle (revoir par exemple <input type="button" value="cette page" onclick="go('concept_proba.html#disk')" data-inline="true" />). <br /> Cependant, pour plus d'efficacité, on peut vouloir déclencher un tir dont on sûr a priori qu'il sera dans le disque. <br /> Une possibilité consiste à tirer une abscisse aléatoire dans l'intervalle [-1,+1] par exemple X=1-2*random.random() en python, puis à tirer ensuite un Y aléatoire uniforme dans l'intervalle [-√(1-X²),+√(1-X²)]. <br /> C'est un mauvais choix car on favorise une densité de points plus grande sur les cordes x=X lorsque X est près de -1 ou de +1. <br /> Voir par exemple l'applet suivante fondée sur ce principe :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Uniform shots on a non-rectangular figure</h3> Suppose we want to trigger a uniform shot on the disc of radius 1 inscribed in a square of side 2. <br /> You can of course trigger a uniform shot on the square and 'ignore' shots that are outside the circle (see for example <input type="button" value="this page" onclick="go('concept_proba.html#disk')" data-inline="true" />). <br /> However, for more efficiency, you may want to trigger a shot that you know a priori will be in the disc. <br /> One possibility is to draw a random abscissa in the interval [-1,+1] for example X=1-2*random.random() in python, then to draw a uniform random Y in the interval [-√ (1-X²),+√(1-X²)]. <br /> This is a bad choice because it favors a higher density of points on the x=X strings when X is close to -1 or +1. <br /> See for example the following applet based on this principle:
+        </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box2" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/gen2.js"></script>
+        <button id="button21" type="button" onclick="nameSpace2.plus100()">+100</button>
+        <button id="button22" type="button" onclick="nameSpace2.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr"> Le passage en coordonnées polaires, crée un autre défaut. Il favorise une densité de points élevée sur les cercles de petit rayon, donc une densité plus élevée au voisinage de l'origine. <br> C'est parce qu'avec notre modèle P(&rho;&le;R)=R, alors que dans la réalité pour une distribution uniforme des points sur le disque P(&rho;&le;R)=R². </div>
+        <!-- /fr -->
+        <div lang="en"> Switching to polar coordinates creates another defect. It favors a high density of points on circles of small radius, therefore a higher density near the origin. <br> This is because with our model P(&rho;&le;R)=R, while in reality for a uniform distribution of points on the disk P(&rho;&le;R)=R². </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <div id="box3" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/gen3.js"></script>
+        <button id="button31" type="button" onclick="nameSpace3.plus100()">+100</button>
+        <button id="button32" type="button" onclick="nameSpace3.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <!-- /STOP  CODE-->
+        <div lang="fr"> Il est pourtant possible de générer un tir aléatoire uniforme sur un disque. <br> Compte tenu de la remarque précédente, il suffit pour cela de générer un angle &theta; uniforme sur [0,2&pi;[ ainsi qu'un réel &rho; uniforme sur [0,1], le point aléatoire étant M(&radic;&rho;.cos(&theta;),&radic;&rho;.sin(&theta;)). <br> L'évènement &radic;&rho; &le; R étant alors équivalent à &rho; &le; R². <br> Vous pouvez, ci-dessous, observer cette simulation. </div>
+        <!-- /fr -->
+        <div lang="en"> However, it is possible to generate a uniform random shot on a disk. <br> Taking into account the previous remark, it is enough to generate an angle &theta; uniform on [0.2&pi;[ as well as a real &rho; uniform on [0,1], the random point being M(&radic;&rho;.cos(&theta;),&radic;&rho;.sin(&theta;)). <br> The event &radic;&rho; &le; R then being equivalent to &rho; &le; R². <br> You can observe this simulation below. </div>
+        <!-- /en -->
+        <!-- STOP  APPLET-->
+        <div id="box4" class="jxgbox" style="width:500px; height:500px;"></div>
+        <script src="js/gen4.js"></script>
+        <button id="button41" type="button" onclick="nameSpace4.plus100()">+100</button>
+        <button id="button42" type="button" onclick="nameSpace4.restart()">
+          <div lang="fr">Recommencer</div>
+          <!-- /fr -->
+          <div lang="en">Restart</div>
+          <!-- /en -->
+        </button>
+        <!-- /STOP  APPLET-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_simulation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_simulation/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

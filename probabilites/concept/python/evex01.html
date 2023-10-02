@@ -1,0 +1,57 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>ex01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+</span><span class="s0">&quot;&quot;&quot;Lister tous les 64 évènements liés au lancer unique d'un dé&quot;&quot;&quot;</span><span class="s1"> 
+</span><span class="s0">&quot;&quot;&quot;List all the 64 events connected with rolling a unique dice&quot;&quot;&quot;</span><span class="s1">
+ 
+ 
+</span><span class="s2">def </span><span class="s1">PartiesDe(E): 
+    P = [[]] 
+    </span><span class="s2">yield </span><span class="s1">P  </span><span class="s0"># retourner [[]] au premier appel - return [[]] for the first call</span><span class="s1"> 
+    </span><span class="s2">while </span><span class="s1">E:  </span><span class="s0"># appels suivants - next calls</span><span class="s1"> 
+        P = [x + [a] </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">P </span><span class="s2">for </span><span class="s1">a </span><span class="s2">in </span><span class="s1">E </span><span class="s2">if </span><span class="s1">all(a &gt; y </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">x)]  </span><span class="s0"># marche si E est pourvu d'un ordre - works only if E endowed with an order</span><span class="s1"> 
+        </span><span class="s2">yield </span><span class="s1">P 
+    </span><span class="s2">return</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction principal - main functione&quot;&quot;&quot;</span><span class="s1"> 
+    Omega = range(</span><span class="s3">1</span><span class="s1">, </span><span class="s3">7</span><span class="s1">) 
+    Y = PartiesDe(Omega) 
+    Evenements = [] 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">7</span><span class="s1">): 
+        Evenements += next(Y) 
+    print(Evenements) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">&quot;__main__&quot;</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>

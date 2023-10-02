@@ -1,0 +1,45 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>GCA01.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">c = </span><span class="s1">1024 </span><span class="s0">* </span><span class="s1">1024 </span><span class="s0">* </span><span class="s1">1024  </span>
+
+<span class="s2">function </span><span class="s0">gca(channel)</span>
+    <span class="s0">L=[rand(</span><span class="s1">1</span><span class="s0">:</span><span class="s1">100</span><span class="s0">) </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">56</span><span class="s0">]</span>
+    <span class="s2">while true</span>
+        <span class="s0">x=(L[</span><span class="s1">1</span><span class="s0">]+L[</span><span class="s1">32</span><span class="s0">])%c</span>
+        <span class="s0">push!(L,x)</span>
+        <span class="s0">L=L[</span><span class="s1">2</span><span class="s0">:end]</span>
+        <span class="s0">put!(channel,x)</span>
+    <span class="s2">end</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">main()</span>
+    <span class="s0">MM=Channel((channel_arg)-&gt;gca(channel_arg))</span>
+    <span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:</span><span class="s1">20</span>
+        <span class="s0">print(take!(MM),</span><span class="s3">&quot; &quot;</span><span class="s0">)</span>
+    <span class="s2">end    </span>
+<span class="s2">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>bayes.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #067d17;}
+.s2 { color: #1750eb;}
+.s3 { color: #0033b3;}
+.s4 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">sample_space=Dict(</span><span class="s1">&quot;UK&quot;</span><span class="s0">=&gt;Dict(</span><span class="s1">&quot;Homme&quot;</span><span class="s0">=&gt;</span><span class="s2">10</span><span class="s0">,</span><span class="s1">&quot;Femme&quot;</span><span class="s0">=&gt;</span><span class="s2">20</span><span class="s0">),</span><span class="s1">&quot;FR&quot;</span><span class="s0">=&gt;Dict(</span><span class="s1">&quot;Homme&quot;</span><span class="s0">=&gt;</span><span class="s2">10</span><span class="s0">,</span><span class="s1">&quot;Femme&quot;</span><span class="s0">=&gt;</span><span class="s2">10</span><span class="s0">),</span><span class="s1">&quot;CA&quot;</span><span class="s0">=&gt;Dict(</span><span class="s1">&quot;Homme&quot;</span><span class="s0">=&gt;</span><span class="s2">10</span><span class="s0">,</span><span class="s1">&quot;Femme&quot;</span><span class="s0">=&gt;</span><span class="s2">30</span><span class="s0">))</span>
+
+<span class="s3">function </span><span class="s0">get_outcomes(sample_space,f_name=</span><span class="s1">&quot;&quot;</span><span class="s0">,e_name=</span><span class="s1">&quot;&quot;</span><span class="s0">)</span>
+    <span class="s0">outcomes=</span><span class="s2">0</span>
+    <span class="s3">for </span><span class="s0">(e_k,e_v) </span><span class="s3">in </span><span class="s0">sample_space</span>
+        <span class="s3">if </span><span class="s0">f_name==</span><span class="s1">&quot;&quot; </span><span class="s0">|| f_name==e_k</span>
+            <span class="s3">for </span><span class="s0">(se_k,se_v) </span><span class="s3">in </span><span class="s0">e_v</span>
+                <span class="s3">if </span><span class="s0">e_name != </span><span class="s1">&quot;&quot; </span><span class="s0">&amp;&amp; se_k==e_name</span>
+                    <span class="s0">outcomes += se_v</span>
+                <span class="s3">elseif </span><span class="s0">e_name==</span><span class="s1">&quot;&quot;</span>
+                    <span class="s0">outcomes += se_v</span>
+                <span class="s3">end</span>
+            <span class="s3">end</span>
+        <span class="s3">end</span>
+    <span class="s3">end</span>
+    <span class="s3">return </span><span class="s0">outcomes</span>
+<span class="s3">end</span>
+
+<span class="s0">p(sample_space,f_name)=get_outcomes(sample_space,f_name)/get_outcomes(sample_space,</span><span class="s1">&quot;&quot;</span><span class="s0">,</span><span class="s1">&quot;&quot;</span><span class="s0">)</span>
+<span class="s0">p_inters(sample_space,f_name,e_name)=get_outcomes(sample_space,f_name,e_name)/get_outcomes(sample_space,</span><span class="s1">&quot;&quot;</span><span class="s0">,</span><span class="s1">&quot;&quot;</span><span class="s0">)</span>
+<span class="s0">p_conditional(sample_space,f_name,e_name)=p_inters(sample_space,f_name,e_name)/p(sample_space,f_name)</span>
+<span class="s3">function </span><span class="s0">bayes(sample_space,f,given_e)</span>
+    <span class="s0">sum=reduce(+,(p(sample_space,e_k)*p_conditional(sample_space,e_k,given_e) </span><span class="s3">for </span><span class="s0">(e_k,e_v) </span><span class="s3">in </span><span class="s0">sample_space))</span>
+    <span class="s3">return </span><span class="s0">p(sample_space,f)*p_conditional(sample_space,f,given_e)/sum</span>
+<span class="s3">end</span>
+    
+<span class="s3">function </span><span class="s0">main()</span>
+    <span class="s0">print(</span><span class="s1">&quot;Probabilité d'être français: &quot;</span><span class="s0">, p(sample_space, </span><span class="s1">&quot;FR&quot;</span><span class="s0">),</span><span class="s1">&quot;</span><span class="s4">\n</span><span class="s1">&quot;</span><span class="s0">) </span>
+    <span class="s0">print(</span><span class="s1">&quot;Probabilité d'etre un homme français: &quot;</span><span class="s0">, p_inters(sample_space, </span><span class="s1">&quot;FR&quot;</span><span class="s0">, </span><span class="s1">&quot;Homme&quot;</span><span class="s0">),</span><span class="s1">&quot;</span><span class="s4">\n</span><span class="s1">&quot;</span><span class="s0">)</span>
+    <span class="s0">print(</span><span class="s1">&quot;Probabilité d'être un homme sachant qu'on est français: &quot;</span><span class="s0">, p_conditional(sample_space, </span><span class="s1">&quot;FR&quot;</span><span class="s0">, </span><span class="s1">&quot;Homme&quot;</span><span class="s0">),</span><span class="s1">&quot;</span><span class="s4">\n</span><span class="s1">&quot;</span><span class="s0">) </span>
+    <span class="s0">print(</span><span class="s1">&quot;Probabilité d'être français sachant qu'on est un homme: &quot;</span><span class="s0">, bayes(sample_space, </span><span class="s1">&quot;FR&quot;</span><span class="s0">, </span><span class="s1">&quot;Homme&quot;</span><span class="s0">))    </span>
+<span class="s3">end</span>
+
+<span class="s0">main()</span></pre>
+</body>
+</html>

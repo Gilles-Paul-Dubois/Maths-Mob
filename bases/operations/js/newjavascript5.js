@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 // variables globales
+
 var sizeofelt = 50;
 var marginofelt = 3;
 var yellow = "#FFCC33";
@@ -310,7 +311,7 @@ function sym(m, n)
 
 
 function Paint()
-{
+{   
     CreateElements();
     InitCanvas1();
     var k1 = 3 + Random(4);

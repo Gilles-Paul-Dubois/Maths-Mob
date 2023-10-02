@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Probabilités conditionnelles</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_conditionnelles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_conditionnelles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Introduction</h2> Reprenons l'exemple du tirage d'une carte dans un <input type="button" value="jeu de bridge" onclick="go('concept_epreuve.html#bridge')" data-inline="true" />. <br> Nous considérons les deux évènements suivants : <ul>
+            <li>H: la carte est un honneur (A,R,D,V,10)</li>
+            <li>R: La carte est un roi</li>
+          </ul> On sait que P(R)=1/13 et P(H)=5/13. <br> Supposons maintenant que le tirage soit effectué par une tierce personne et qu'elle vous donne cette information : <br> "la carte tirée est un honneur". <br> Quelle est alors pour vous, dans ce nouvel état de connaissance (le hasard est subjectif...) la probabilité que la carte tirée soit un roi ? <br> La réponse est évidemment 4/20=1/5. <br> On peut voir encore les choses d'une autre manière ; supposons que les dos des cartes soient de couleurs différentes (rouge pour les honneurs, bleu pour les autres). Alors en tirant une carte au hasard parmi les 52 en occultant la couleur du dos vous avez une chance sur 13 de tirer un roi, mais si vous tirez volontairement une carte à dos rouge votre pourcentage de chances s'élève à 20%=1/5. <br> Inversement si on vous dit que la carte n'est pas un honneur, la probabilité pour que ce soit un roi tombe à 0. <br> La situation est un peu particulière parce que l'évènement R implique l'évènement H. <br> Prenons maintenant l'exemple du lancer du dé. <br> Soient les évènements : <ul>
+            <li>A: le nombre sorti est premier A={2,3,5}</li>
+            <li>B: le nombre sorti est pair B={2,4,6}</li>
+            <li>C: le nombre sorti est impair C={1,3,5}= <span style="text-decoration: overline; ">B</span>
+            </li>
+            <li>D: le nombre sorti est non premier D={1,4,6}= <span style="text-decoration: overline; ">A</span>
+            </li>
+          </ul> On a donc P(A)=P(B)=1/2. <br> Maintenant on peut se poser, entre autres, les questions suivantes : <ol>
+            <li>Quelle est la probabilité pour qu'un nombre soit premier si on sait qu'il est pair, cette probabilité se note P(A|B) ?</li>
+            <li>Quelle est la probabilité pour qu'un nombre soit premier si on sait qu'il est impair, P(A|C) ?</li>
+            <li>Quelle est la probabilité pour qu'un nombre soit pair si on sait qu'il est premier, P(B|A) ?</li>
+            <li>Quelle est la probabilité pour qu'un nombre soit impair si on sait qu'il est premier, P(C|A) ?</li>
+          </ol> Les réponses s'obtiennent dans ce cas (équiprobabilité) avec la formule &nbsp;
+          <!-- FORMULE UNIV INLINE --> \( \displaystyle \frac{\text {nombre de cas favorables}}{\text {nombre d cas possibles}} \)
+          <!-- /FORMULE UNIV INLINE--> &nbsp; <br> Or ici pour calculer P(X|Y) le nombre de cas possibles est le cardinal de Y, card(Y) ; le nombre des cas favorables est card(X&cap;Y), d'où les réponses : <ol>
+            <li>1/3</li>
+            <li>2/3</li>
+            <li>1/3</li>
+            <li>2/3</li>
+          </ol> La conclusion est que les évènements A et B ne sont pas idépendants en ce sens que la connaissance de la réalisation de l'un modifie la probabilité d'apparition de l'autre. <br> Inversement des évènements indépendants sont des évènements pour lesquels la réalisation de l'un n'a aucune influence sur la probabilité de réalisation de l'autre. Par exemple si on prend un dé et une pièce qui ne sont pas de connivence, le lancer de la pièce n'a aucune raison d'intervenir sur le lancer du dé (et vice-versa) ainsi dans l'univers produit {P,F}&times;{1,2,3,4,5,6} dont les évènements élémentaires sont les couples (&omega;<sub>1</sub>,&omega;<sub>2</sub>) les probabilités : <ol>
+            <li>P(&omega;<sub>2</sub> &isin;A|&omega;<sub>1</sub>=P) </li>
+            <li>P(&omega;<sub>2</sub> &isin;A|&omega;<sub>1</sub>=F) </li>
+            <li>P(&omega;<sub>2</sub> &isin;A)) </li>
+          </ol> sont toutes les mêmes et valent dans notre cas 1/2. <h2>Définitions</h2> Nous généralisons maintenant le concept précédent à des univers quelconques, finis ou infinis, avec des probabilités uniformes ou non. <br> Soit (&Omega;, \( \mathfrak{T}\),P) un espace probabilisé et soit A un évènement <u>de probabilité non nulle</u> de \( \mathfrak{T}\).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Intro</h2> Let's take the example of drawing a card in a <input type="button" value="bridge game" onclick="go('concept_epreuve.html#bridge')" data-inline="true" />. <br> We consider the following two events: <ul>
+            <li>H: the card is an honor (Q,R,Q,K,10)</li>
+            <li>A: The card is king</li>
+          </ul> We know that P(R)=1/13 and P(H)=5/13. <br> Now suppose that the draw is made by a third party and they give you this information: <br> "the card drawn is an honor". <br> What is then for you, in this new state of knowledge (chance is subjective...) the probability that the drawn card is a king? <br> The answer is obviously 4/20=1/5. <br> We can still see things in another way; suppose the backs of the cards are different colors (red for honors, blue for others). So by drawing a random card among the 52 by concealing the color of the back you have a chance in 13 of drawing a king, but if you voluntarily draw a card with a red back your percentage of chances rises to 20%=1/ 5. <br> Conversely if you are told that the card is not an honor, the probability that it is a king drops to 0. <br> The situation is a bit peculiar because the event R implies the event H. <br> Now let's take the example of throwing the dice. <br> Let the events be: <ul>
+            <li>A: the output number is prime A={2,3,5}</li>
+            <li>B: the output number is even B={2,4,6}</li>
+            <li>C: number output is odd C={1,3,5}= <span style="text-decoration: overline; ">B</span>
+            </li>
+            <li>D: output number is non-prime D={1,4,6}= <span style="text-decoration: overline; ">A</span>
+            </li>
+          </ul> So we have P(A)=P(B)=1/2. <br> Now we can ask ourselves the following questions, among others: <ol>
+            <li>What is the probability that a number is prime if we know that it is even, this probability is noted P(A|B)?</li>
+            <li>What is the probability that a number is prime if it is known to be odd, P(A|C)?</li>
+            <li>What is the probability that a number is even if it is known to be prime, P(B|A)?</li>
+            <li>What is the probability that a number is odd if it is known to be prime, P(C|A)?</li>
+          </ol> The answers are obtained in this case (equiprobability) with the formula &nbsp;
+          <!-- UNIV INLINE FORMULA --> \( \displaystyle \frac{\text {number of favorable cases}}{\text {number of possible cases}} \)
+          <!-- /INLINE UNIV FORMULA--> &nbsp; <br> But here to calculate P(X|Y) the number of possible cases is the cardinal of Y, card(Y) ; the number of favorable cases is card(X&cap;Y), hence the answers: <ol>
+            <li>1/3</li>
+            <li>2/3</li>
+            <li>1/3</li>
+            <li>2/3</li>
+          </ol> The conclusion is that events A and B are not independent in the sense that knowledge of the occurrence of one modifies the probability of occurrence of the other. <br> Conversely, independent events are events for which the occurrence of one has no influence on the probability of occurrence of the other. For example, if we take a dice and a coin which are not colluding, the tossing of the coin has no reason to intervene on the rolling of the dice (and vice versa) thus in the product universe {T, H}&times;{1,2,3,4,5,6} whose elementary events are the pairs (&omega;<sub>1</sub>,&omega;<sub>2</sub>) the probabilities: <ol>
+            <li>P(&omega;<sub>2</sub> &isin;A|&omega;<sub>1</sub>=T) </li>
+            <li>P(&omega;<sub>2</sub> &isin;A|&omega;<sub>1</sub>=H) </li>
+            <li>P(&omega;<sub>2</sub> &isin;A)) </li>
+          </ol> are all the same and are worth in our case 1/2. <h2>Definitions</h2> We now generalize the previous concept to any space, finite or infinite, with uniform probabilities or not. <br> Let (&Omega;, \( \mathfrak{T}\),P) be a probability space and let A be an event <u>of nonzero probability</u> of \( \mathfrak{T}\).
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> Pour tout évènement B, on appelle <b>
+              <i>'probabilité de B sachant l'évènement A réalisé'</i>
+            </b> ou encore plus simplement <b>
+              <i>'probabilité de B sachant A'</i>
+            </b> le nombre :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P(B \mid A) = \frac{P\left( {A \cap B} \right)}{P(A)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> For any event B, we call <b>
+              <i>'probability of B knowing that event A has occurred'</i>
+            </b> or even more simply <b>
+              <i>'probability of B knowing A'</i>
+            </b> the number:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle P(B \mid A) = \frac{P\left( {A \cap B} \right)}{P(A)} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Remarquons tout de suite que si X est un évènement quelconque de \( \mathfrak{T}\), l'application X → P(X|A) définit une nouvelle probabilité sur Ω, pour laquelle tout évènement impliqué par A est certain et tout évènement exclusif de A est impossible. <br />
+          <h2>Indépendance</h2>
+          <h3>Première approche de l'indépendance</h3> Nous considérons que l'évènement B est indépendant de A si l'information 'A est réalisé' n'apporte aucune modification pour ce qui concerne la probabilité de réalisation de B, autrement dit si avec les notations ci-dessus : P(B|A)=P(B). <br /> Par exemple pour le tirage d'une carte l'évènement B: la 'carte est un roi' est indépendant de l'évènement A: 'La carte est un carreau' car P(B|A)=P(B)=1/13. <br /> La condition ci-dessus peut encore s'écrire P(A∩B)=P(A)P(B). <br /> Notons tout d'abord que si B est lui-même de probabilité non nulle, la condition 'B est indépendant de A' est rigoureusement équivalente à 'A est indépendant de B'. La relation d'indépendance est donc <input type="button" value="symétrique" onclick="go('../../bases/relations/symetrie.html#')" data-inline="true" /> en A et B. <br />
+          <h3>Définition formelle</h3> En vertu de ce qui précède nous adopterons la définition suivante :
+        </div>
+        <!-- /fr -->
+        <div lang="en"> Note immediately that if X is any event of \( \mathfrak{T}\), the map X → P(X|A) defines a new probability on Ω, for which any event implied by A is certain and any exclusive event of A is impossible. <br />
+          <h2>Independence</h2>
+          <h3>First approach to independence</h3> We consider that the event B is independent of A if the information 'A is realized' does not bring any modification with regard to the probability of realization of B, in other words if with the notations above: P(B|A)=P(B). <br /> For example for the drawing of a card the event B: the 'card is a king' is independent of the event A: 'The card is a diamond' because P(B|A)=P(B)=1 /13. <br /> The above condition can still be written P(A∩B)=P(A)P(B). <br /> Note first that if B is itself of non-zero probability, the condition 'B is independent of A' is strictly equivalent to 'A is independent of B'. The independence relation is therefore <input type="button" value="symmetric" onclick="go('../../bases/relations/symetrie.html#')" data-inline="true" /> in A and B. <br />
+          <h3>Formal definition</h3> Based on the foregoing, we adopt the following definition:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Les évènements A et B sont ' <strong>
+              <em>indépendants</em>
+            </strong>' si on a la relation P(A&cap;B)=P(A)P(B).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> Events A and B are ' <strong>
+              <em>independent</em>
+            </strong>' if we have the relation P(A&cap;B)=P(A)P(B).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Cette définition a l'avantage de mettre en relief la symétrie et d'être valide quand bien même un évènement (ou les deux) est (sont) de probabilité nulle. <h3>Quelques propriétés évidentes</h3> Les propriétés suivantes résultent de la définition où s'en déduisent par un calcul simple : <ul>
+            <li>Tout évènement est indépendant d'un évènement certain.</li>
+            <li>Tout évènement est indépendant d'un évènement impossible.</li>
+            <li>Aucun évènement de probabilité p, 0&lt;p&lt;1 ne peut être indépendant de lui même ni de son contraire.</li>
+            <li>Si A implique B alors B ne peut être indépendant de A que s'il est certain.</li>
+            <li>Si B est indépendant de A il en est de même de son contraire.</li>
+            <li>Si A et B sont indépendants leurs contraires le sont également.</li>
+            <li>Si A<sub>1</sub> et A<sub>2</sub> sont deux évènements incompatibles et si B est indépendant de chacun d'eux alors B est indépendant de leur disjonction. </li>
+          </ul>
+          <a name="2a2"></a>
+          <h2>Extension à un nombre fini d'évènements</h2> Une urne contient quatre jetons : un bleu, un blanc, un rouge et un tricolore bleu-blanc-rouge. On en tire un au hasard. Considérons les trois ́évènements : <ul>
+            <li>A : "le jeton tiré ́ contient du bleu"</li>
+            <li>B : "le jeton tiré ́ contient du blanc"</li>
+            <li>C : "le jeton tiré ́ contient du rouge"</li>
+            <li>T : "le jeton tiré est tricolore (bleu-blanc-rouge)"</li>
+          </ul> Il est clair que P(A) = P(B) = P(C) = 2/4 = 1/2. <br> D’autre part : <br> P(A∩B) = P(T) =1/4=P(A)P(B) <br> De la même façon : <br> P(A∩C) = P(T) =1/4=P(A)P(C) <br> P(B∩C) = P(T) =1/4=P(B)P(C) <br> Les 3 évènements A,B, C sont deux à deux indépendants, mais P(A|B∩C) = 1 car B ∩ C = T et T implique A, ce qui prouve que A n'est pas indépendant de B&cap;C. <br> La notion d'indépendance mutuelle, pour une famille finie d'évènements sera donc plus forte que celle d'indépendance deux à deux, un peu comme l'indépendance linéaire de n vecteurs est plus forte que leur indépendance deux à deux.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+This definition has the advantage of highlighting the symmetry and of being valid even if an event (or both) has (are) zero probability. <h3>Some obvious properties</h3> The following properties result from the definition or are deduced by a simple calculation: <ul>
+             <li>Every event is independent of a certain event.</li>
+             <li>Every event is independent of an impossible event.</li>
+             <li>No event with probability p, 0&lt;p&lt;1 can be independent of itself or of its opposite.</li>
+             <li>If A implies B then B can only be independent of A if it is certain.</li>
+             <li>If B is independent of A, the same is true of its opposite.</li>
+             <li>If A and B are independent, their opposites are also independent.</li>
+             <li>If A<sub>1</sub> and A<sub>2</sub> are two incompatible events and if B is independent of each of them then B is independent of their disjunction. </li>
+           </ul> 
+          <a name="2a2e"></a>        
+          <h2>Extension to a finite number of events</h2> An urn contains four tokens: one blue, one white, one red and one tricolor blue-white-red. We draw one at random. Consider the three events: <ul>
+            <li>A: "the drawn token ́ contains blue"</li>
+            <li>B: "the drawn token ́ contains white"</li>
+            <li>C: "the drawn token ́ contains red"</li>
+            <li>T: "the drawn token is tricolor (blue-white-red)"</li>
+          </ul> It is clear that P(A) = P(B) = P(C) = 2/4 = 1/2. <br> On the other hand: <br> P(A∩B) = P(T) =1/4=P(A)P(B) <br> Similarly: <br> P(A∩C) = P(T) =1/4=P(A)P(C) <br> P(B∩C) = P(T) =1/4=P(B)P(C) <br> The 3 events A, B, C are two by two independent, but P(A|B∩C) = 1 because B ∩ C = T and T implies A, which proves that A is not independent of B&cap;C. <br> The notion of mutual independence, for a finite family of events, will therefore be stronger than that of pairwise independence, much like the linear independence of n vectors is stronger than their pairwise independence.
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Soient donc n évènements A<sub>1</sub>,A<sub>2</sub>, ... , A<sub>n</sub> d'un espace probabilisé (&Omega;,P). <br> On dit que les A<sub>i</sub> sont <b>
+              <i>'mutuellement indépendants'</i>
+            </b> si pour toute famille de p indices 1&le;i<sub>1</sub>&le; i<sub>2</sub>&le; ... &le;i<sub>p</sub>&le;n on a : <br> P(A<sub>i<sub>1</sub>
+            </sub>∩...∩A<sub>i<sub>k</sub>
+            </sub> ) = P(A<sub>i<sub>1</sub>
+            </sub>)×···×P(A<sub>i<sub>k</sub>
+            </sub>)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> Let therefore be n events A<sub>1</sub>, A<sub>2</sub>, ... , A<sub>n</sub> of a probability space (&Omega;,P).<br> We say that the A<sub>i</sub> are <b>
+                <i>'mutually independent'</i>
+              </b> if for any family of p indices 1&le;i<sub>1</sub> &le; i<sub>2</sub>&le; ... &le;i<sub>p</sub>&le;n we have: <br> P(A<sub>i<sub>1</sub>
+              </sub>∩...∩A<sub>i<sub>k</sub>
+              </sub> ) = P(A<sub>i<sub>1</sub>
+              </sub>)×···×P(A<sub>i<sub>k</sub>
+              </sub>)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il résulte de cette définition que </div>
+        <!-- /fr -->
+        <div lang="en"> It follows from this definition that </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="thm1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">théorème 1</div> Si dans une famille d'évènements mutuellement indépendants on remplace un ou plusieurs évènements par leurs contraires on obtient encore une famille d'évènements mutuellement indépendants.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">theorem 1</div> If in a family of mutually independent events we replace one or more events by their opposites we still obtain a family of mutually independent events.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Supposons pour simplifier qu'on remplace par exemple A<sub>1</sub> par <span style="text-decoration: overline; ">A</span>
+         <sub>1</sub> dans (A<sub>1</sub>,A<sub>2</sub>, ... ,A<sub>p</sub>) soit B=A<sub>2</sub>&cap;A<sub>3</sub>&cap;...&cap;A<sub>p</sub>. Alors A<sub>1</sub> est indépendant de B donc indépendant de <span style="text-decoration: overline; ">A</span>
+         <sub>1</sub>, ce que l'on peut écrire P( <span style="text-decoration: overline; ">A</span>
+         <sub>1</sub>&cap;B)=P( <span style="text-decoration: overline; ">A</span>
+         <sub>1</sub>)&times;P(B)=(1-P(A<sub>1</sub>))&times;P(A<sub>2</sub>)&times;....&times;P(A<sub>p</sub>).
+        </div>
+        <!-- /fr -->
+        <div lang="en">Suppose for simplicity that we replace for example A<sub>1</sub> by <span style="text-decoration: overline; ">A</span>
+          <sub>1</sub> in (A<sub>1</sub>,A<sub>2</sub>, ... ,A<sub>p</sub>) i.e. B=A<sub >2</sub>&cap;A<sub>3</sub>&cap;...&cap;A<sub>p</sub>. Then A<sub>1</sub> is independent from B and therefore independent from <span style="text-decoration: overline; ">A</span>
+          <sub>1</sub>, what we can write P( <span style="text-decoration: overline; ">A</span>
+          <sub>1</sub>&cap;B)=P( <span style="text-decoration: overline; ">A</span>
+          <sub>1</sub>)&times;P(B)=(1-P(A<sub>1</sub>))&times;P(A<sub>2</sub>)&times;.. ..&times;P(A<sub>p</sub>).
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/concept_conditionnelles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/concept_conditionnelles/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>GCL01.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
+.s3 { color: #067d17;}
+.s4 { color: #0037a6;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">function </span><span class="s1">gcl(a,b,c,x0,channel)</span>
+    <span class="s1">x=x0</span>
+    <span class="s1">put!(channel,x0)</span>
+    <span class="s0">while true</span>
+        <span class="s1">x=(a*x+b)%c</span>
+        <span class="s1">put!(channel,x)</span>
+    <span class="s0">end</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">Gen1=Channel((channel_arg)-&gt;gcl(</span><span class="s2">25</span><span class="s1">,</span><span class="s2">16</span><span class="s1">,</span><span class="s2">256</span><span class="s1">,</span><span class="s2">12</span><span class="s1">,channel_arg))</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span>
+        <span class="s1">print(take!(Gen1),</span><span class="s3">&quot; , &quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s1">print(</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">-------------------------</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+    <span class="s1">Gen2=Channel((channel_arg)-&gt;gcl(</span><span class="s2">25</span><span class="s1">,</span><span class="s2">16</span><span class="s1">,</span><span class="s2">256</span><span class="s1">,</span><span class="s2">11</span><span class="s1">,channel_arg))</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span>
+        <span class="s1">print(take!(Gen2),</span><span class="s3">&quot; , &quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s1">print(</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">-------------------------</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+    <span class="s1">Gen3=Channel((channel_arg)-&gt;gcl(</span><span class="s2">25</span><span class="s1">,</span><span class="s2">16</span><span class="s1">,</span><span class="s2">256</span><span class="s1">,</span><span class="s2">10</span><span class="s1">,channel_arg))</span>
+    <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">10</span>
+        <span class="s1">print(take!(Gen3),</span><span class="s3">&quot; , &quot;</span><span class="s1">)</span>
+    <span class="s0">end</span>
+    <span class="s1">print(</span><span class="s3">&quot;</span><span class="s4">\n</span><span class="s3">-------------------------&quot;</span><span class="s1">)    </span>
+<span class="s0">end</span>
+
+
+<span class="s1">main()</span>
+        </pre>
+</body>
+</html>

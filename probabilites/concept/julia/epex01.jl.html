@@ -1,0 +1,68 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>exo1.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">using </span><span class="s1">StatsBase</span>
+<span class="s1">couleurs = [</span><span class="s2">&quot;Trèfle&quot;</span><span class="s1">, </span><span class="s2">&quot;Carreau&quot;</span><span class="s1">, </span><span class="s2">&quot;Coeur&quot;</span><span class="s1">, </span><span class="s2">&quot;Pique&quot;</span><span class="s1">] </span>
+<span class="s1">niveaux = [</span><span class="s2">&quot;Deux&quot;</span><span class="s1">, </span><span class="s2">&quot;Trois&quot;</span><span class="s1">, </span><span class="s2">&quot;Quatre&quot;</span><span class="s1">, </span><span class="s2">&quot;Cinq&quot;</span><span class="s1">, </span><span class="s2">&quot;Six&quot;</span><span class="s1">, </span><span class="s2">&quot;Sept&quot;</span><span class="s1">, </span><span class="s2">&quot;Huit&quot;</span><span class="s1">, </span><span class="s2">&quot;Neuf&quot;</span><span class="s1">, </span><span class="s2">&quot;Dix&quot;</span><span class="s1">, </span><span class="s2">&quot;Valet&quot;</span><span class="s1">, </span><span class="s2">&quot;Dame&quot;</span><span class="s1">, </span><span class="s2">&quot;Roi&quot;</span><span class="s1">, </span><span class="s2">&quot;As&quot;</span><span class="s1">] </span>
+<span class="s0">struct </span><span class="s1">CarteBridge</span>
+    <span class="s1">code::Int8</span>
+    <span class="s1">code_couleur::Int8</span>
+    <span class="s1">code_niveau::Int8</span>
+    <span class="s1">couleur::String</span>
+    <span class="s1">niveau::String</span>
+    <span class="s1">PH::Int8</span>
+<span class="s0">end</span>
+
+<span class="s0">function </span><span class="s1">CarteBridge(n)</span>
+    <span class="s1">code=Int8(n)</span>
+    <span class="s1">code_couleur=Int8(n÷13)</span>
+    <span class="s1">code_niveau=Int8(n%</span><span class="s3">13</span><span class="s1">)</span>
+    <span class="s1">couleur=couleurs[</span><span class="s3">1</span><span class="s1">+code_couleur]</span>
+    <span class="s1">niveau=niveaux[</span><span class="s3">1</span><span class="s1">+code_niveau]</span>
+    <span class="s1">PH=code_niveau &gt;=</span><span class="s3">9 </span><span class="s1">? code_niveau-</span><span class="s3">8 </span><span class="s1">: </span><span class="s3">0</span>
+    <span class="s0">return </span><span class="s1">CarteBridge(code,code_couleur,code_niveau,couleur,niveau,PH)</span>
+<span class="s0">end</span>
+
+<span class="s1">Base.show(io::IO, C::CarteBridge) = print(io,C.niveau,</span><span class="s2">&quot; de &quot;</span><span class="s1">,C.couleur)</span>
+
+<span class="s1">carte_au_hasard()=CarteBridge(rand(</span><span class="s3">0</span><span class="s1">:</span><span class="s3">51</span><span class="s1">))</span>
+<span class="s1">main_au_hasard()=[CarteBridge(i) </span><span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">sample(</span><span class="s3">0</span><span class="s1">:</span><span class="s3">51</span><span class="s1">,</span><span class="s3">13</span><span class="s1">,replace=</span><span class="s0">false</span><span class="s1">)] </span>
+
+<span class="s1">points(M)=reduce(+,(c.PH </span><span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">M))</span>
+
+<span class="s0">function </span><span class="s1">main()</span>
+    <span class="s1">CB=carte_au_hasard()</span>
+    <span class="s1">println(CB)</span>
+    <span class="s1">println(</span><span class="s2">&quot;-----------------&quot;</span><span class="s1">)</span>
+    <span class="s1">M=main_au_hasard()</span>
+    <span class="s0">for </span><span class="s1">c </span><span class="s0">in </span><span class="s1">M</span>
+        <span class="s1">println(c)</span>
+    <span class="s0">end</span>
+    <span class="s1">println(</span><span class="s2">&quot;-----------------&quot;</span><span class="s1">)</span>
+    <span class="s1">println(points(M))</span>
+<span class="s0">end</span>
+
+<span class="s1">main()</span>
+    </pre>
+</body>
+</html>

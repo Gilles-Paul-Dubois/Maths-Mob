@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+    <meta charset="utf-8" />
+    <title>Variance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/themes/myown.css" />
+    <link rel="stylesheet" href="../../css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="../../css/jquery.mobile.structure-1.4.5.min.css" />
+    <link href="../../css/myown.css" rel="stylesheet">
+    <script src="../../js/jquery-1.11.3.js"></script>
+    <script src="../../js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../../js/custom.js"></script>
+    <script src="../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
+  </head>
+  <body style="overflow: auto; " class="fr">
+    <script>
+      window.onload = get();
+    </script>
+    <a name="beg"></a>
+    <div data-role="page" data-theme='g'>
+      <div data-role="header">
+        <table>
+          <tr>
+            <td>Choisissez votre langue !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('fr')">
+                <img src="../../images/fr.png" width="64" height="32" alt="Français">
+              </button>
+            </td>
+            <td>Choose your language !</td>
+            <td>
+              <button class="ui-btn ui-btn-inline" onclick="changelang('en')">
+                <img src="../../images/uk.png" width="64" height="32" alt="English">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /header -->
+      <div style="overflow: auto; " data-role="content" data-theme='g'>
+        <button type="button" id="scroller" style="display: none ; background-color: #54524b; color: white; font-weight: normal;" onclick="goback()">
+          <div lang="fr">revenir au point de départ après retour à cette page</div>
+          <!-- /fr -->
+          <div lang="en">come back to starting point after return to this page</div>
+          <!-- /en -->
+        </button>
+        <script>
+          showscroll();
+        </script>
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/variable_variance/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu du chapitre" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Probabilités'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/variable_variance/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Probability" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /en -->
+        <div lang="fr"> Comme dans la page précédente consacrée à l'espérance mathématique, nous ne considérons ici que des variables aléatoires à valeurs réelles. <br /> Pour ce qui concerbe la motivation, nous encourageons le lecteur à commencer par lire ou relire la page consacrée aux <input type="button" value="paramètres de dispersion" onclick="go('../statistique/statistique_dispersion.html#')" data-inline="true" /> en statistique descriptive. <br /> Une approche 'globalisante' du sujet suppose connue la théorie générale de l'intégration de Lebesgue, nous adopterons donc, cette fois encore, une approche progressive au cas par cas. <h2>Cas des univers finis</h2> Soit donc Ω un univers fini et X une v.a. sur cet univers. Soit E(X) l'espérance de X et soient x<sub>1</sub>,x<sub>2</sub>, ... ,x<sub>p</sub> les valeurs distinctes que prend la variable X. </div>
+        <!-- /fr -->
+        <div lang="en"> As in the previous page devoted to mathematical expectation, we only consider real-valued random variables here. <br /> Regarding motivation, we encourage the reader to start by reading or rereading the page devoted to <input type="button" value="dispersion parameters" onclick="go('../statistique/statistique_dispersion.html# ')" data-inline="true" /> in descriptive statistics. <br /> A 'globalizing' approach to the subject assumes that Lebesgue's general theory of integration is known, so we will adopt, this time again, a progressive approach on a case-by-case basis. <h2>Case of finite spaces</h2> Let Ω be a finite space and X a r.v. on this space. Let E(X) be the expectation of X and let x<sub>1</sub>,x<sub>2</sub>, ... ,x<sub>p</sub> be the distinct values that the variable takes </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 1</div> On appelle <b>
+              <i>'variance'</i>
+            </b> de X, le nombre :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v(X) = {\sum\limits_{i = 1}^{p}\left( x_{i} - E(x) \right)^{2}P\left( {X = x_{i}} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 1</div> We call <b>
+              <i>'variance'</i>
+            </b> of X, the number:
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v(X) = {\sum\limits_{i = 1}^{p}\left( x_{i} - E(x) \right)^{2}P\left( {X = x_{i}} \right)} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop1"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 1</div> Une formule équivalente est :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v(X) = \sum\limits_{i = 1}^{n}\left( x_{i} - E(X) \right)^{2}p_{i} \)</p>
+            <!-- /FORMULE UNIV INLINE--> où &Omega;={&omega;<sub>1</sub>, &omega;<sub>2</sub>, ... ,&omega;<sub>n</sub>} <br> p<sub>i</sub>=P({&omega;<sub>i</sub>}) <br> x<sub>i</sub>=X(&omega;<sub>i</sub>).
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 1</div> An equivalent formula is:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle v(X) = \sum\limits_{i = 1}^{n}\left( x_{i} - E(X) \right)^{2}p_{i} \)</p>
+            <!-- /INLINE UNIV FORMULA--> where &Omega;={&omega;<sub>1</sub>, &omega;<sub>2</sub>, ... ,&omega;<sub>n</sub>} <br> p<sub>i</sub>=P({&omega;<sub>i</sub>}) <br> x<sub>i</sub>=X(&omega;<sub>i</sub>).
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple de calcul</h3> Reprenons <input type="button" value="l'exemple du lancer des deux dés" onclick="go('variable_definition.html#deuxdes')" data-inline="true" /> et de la variable somme des deux faces.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Calculation example</h3> Let's take another look at <input type="button" value="the example of rolling two dice" onclick="go('variable_definition.html#deuxdes')" data-inline="true" /> and the variable sum of the two faces.
+        </div>
+        <!-- /en -->
+        <table cellpadding="10" cellspacing="0" border="2">
+          <tr>
+            <td>
+              <div lang="fr">Tableau récapitulatif</div>
+              <!-- /fr -->
+              <div lang="en">Summary</div>
+              <!-- /en -->
+              <div lang="fr">de toutes les situations possibles </div>
+              <!-- /fr -->
+              <div lang="en">of all possible situations</div>
+              <!-- /en -->
+            </td>
+            <td>
+              <div lang="fr">Loi de X</div>
+              <!-- /fr -->
+              <div lang="en">Law of X </div>
+              <!-- /en -->
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="middle">
+              <table border="1" style="width: 210px;">
+                <tbody>
+                  <tr>
+                    <td style="width: 210px;" align="center">d<sub>2</sub>\d<sub>1</sub>
+                      <br />
+                    </td>
+                    <td style="width: 210px;" align="center">1 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">2 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">3 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">4 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">5 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">6 <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 210px;" align="center">1 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">2 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">3 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">4 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">5 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">6 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">7 <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 210px;" align="center">2 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">3 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">4 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">5 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">6 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">7 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">8 <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 210px;" align="center">3 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">4 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">5 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">6 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">7 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">8 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">9 <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 210px;" align="center">4 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">5 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">6 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">7 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">8 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">9 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">10 <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 210px;" align="center">5 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">6 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">7 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">8 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">9 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">10 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">11 <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="width: 210px;" align="center">6 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">7 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">8 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">9 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">10 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">11 <br />
+                    </td>
+                    <td style="width: 210px;" align="center">12 <br />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td align="center" valign="middle">
+              <table border="1" style="width: 60px;">
+                <tbody>
+                  <tr>
+                    <td align="center">P(X=2) <br />
+                    </td>
+                    <td align="center">1/36 <br />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=3)</td>
+                    <td align="center">2/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=4)</td>
+                    <td align="center">3/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=5)</td>
+                    <td align="center">4/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=6)</td>
+                    <td align="center">5/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=7)</td>
+                    <td align="center">6/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=8)</td>
+                    <td align="center">5/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=9)</td>
+                    <td align="center">4/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=10)</td>
+                    <td align="center">3/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=11)</td>
+                    <td align="center">2/36</td>
+                  </tr>
+                  <tr>
+                    <td align="center">P(X=12)</td>
+                    <td align="center">1/36</td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+        </table>
+        <div lang="fr"> Nous avons vu à la <input type="button" value="page précédente" onclick="go('variable_esperance.html#')" data-inline="true" /> que l'espérance est 7. <br /> Le calcul de la variance donne :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{5^{2} \times 1 + 4^{2} \times 2 + 3^{2} \times 3 + 2^{2} \times 4 + 1^{2} \times 5 + 0^{2} \times 6 + 1^{2} \times 5 + 2^{2} \times 4 + 3^{2} \times 3 + 4^{2} \times 2 + 5^{2} \times 1}{36} = \frac{105}{18} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en"> We saw in the <input type="button" value="previous page" onclick="go('variable_esperance.html#')" data-inline="true" /> that the expectation is 7. <br /> The calculation of the variance gives:
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \frac{5^{2} \times 1 + 4^{2} \times 2 + 3^{2} \times 3 + 2^{2} \times 4 + 1^{2} \times 5 + 0^{2} \times 6 + 1^{2} \times 5 + 2^{2} \times 4 + 3^{2} \times 3 + 4^{2} \times 2 + 5^{2} \times 1}{36} = \frac{105}{18} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Cas des univers discrets dénombrables</h2> On suppose qu'on a une distribution de probabilité sur l'ensemble &naturals; avec une suite P(n)=p<sub>n</sub> de sorte que :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle \sum\limits_{n = 0}^{\infty}p_{n} = 1 \)</p>
+          <!-- /FORMULE UNIV INLINE-->On suppose également qu'on a une v.a. X sur &naturals; possédant une espérance mathématique E(X).
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of countable discrete spaces</h2> We assume that we have a probability distribution over the set &naturals; with a sequence P(n)=p<sub>n</sub> so that:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle \sum\limits_{n = 0}^{\infty}p_{n} = 1 \)</p>
+          <!-- /UNIV INLINE FORMULA-->We also assume that we have a r.v. having a mathematical expectation E(X).
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 2</div> Dans ces conditions si la série
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \sum\limits_{n = 0}^{\infty}\left( X(n) - E(x) \right)^{2}p_{n} \)</p>
+            <!-- /FORMULE UNIV INLINE--> converge, sa somme notée v(X) s'apelle la <b>
+              <i>variance</i>
+            </b> de X.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 2</div> Under these conditions if the series
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \sum\limits_{n = 0}^{\infty}\left( X(n) - E(x) \right)^{2}p_{n} \)</p>
+            <!-- /INLINE UNIV FORMULA--> converges, its sum denoted v(X) is called the <b>
+              <i>variance</i>
+            </b> of X.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple de calcul</h3> Reprenons l'exemple de la <input type="button" value="distribution géométrique" onclick="go('../concept/exercices/concept_axiomatique/ex02.html#')" data-inline="true" />. <br /> Pour tout n ≥ 1 posons X(n)=k<sup>n</sup> où k est un nombre vérifiant -p &lt; k &lt; p. <br /> On sait que l'espérance est :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle E(X) = \frac{kpq}{p - k} \)</p>
+          <!-- /FORMULE UNIV INLINE--> En utilisant le theorème de König Huygens ci-dessous on trouve :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle v(X) = \frac{{pq}k^{\text{2}}}{p - k^{2}} - \frac{p^{2}q^{2}k^{2}}{\left( {p - k} \right)^{2}} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Calculation example</h3> Let's take the example of the <input type="button" value="geometric distribution" onclick="go('../concept/exercices/concept_axiomatique/ex02.html#')" data-inline="true" /> . <br /> For all n ≥ 1 let X(n)=k<sup>n</sup> where k is a verifying number -p &lt; k &lt; p. <br /> We know that the expectation is:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle E(X) = \frac{kpq}{p - k} \)</p>
+          <!-- /INLINE UNIV FORMULA--> By using the theorem of Koenig Huygens hereunder we find:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle v(X) = \frac{{pq}k^{\text{2}}}{p - k^{2}} - \frac{p^{2}q^{2}k^{2 }}{\left( {p - k} \right)^{2}} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Cas des v.a. à densité</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Case of the r.v. with density</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 3</div> Si X est une variable absolument continue de densité f, la <b>
+              <i>variance</i>
+            </b> de X sera définie par :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle v(X) = {\int_{- \infty}^{+ \infty}\left( {x - E(x)} \right)^{2}f(x)}{dx} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 3</div> If X is an absolutely continuous variable with density f, the <b>
+              <i>variance</i>
+            </b> of X will be defined by:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle v(X) = {\int_{- \infty}^{+ \infty}\left( {x - E(x)} \right)^{2}f(x)}{dx} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h3>Exemple de calcul</h3> Reprenons l'exemple de la <input type="button" value="page précédente" onclick="go('variable_foncrep.html#cascont')" data-inline="true" />. <br /> La densité est représentée par la fonction : <br />
+          <img alt="" border="0" height="288" src="images/foncrep3.png" width="570" />
+          <br /> Sachant, comme on l'a démontré <input type="button" value="ici" onclick="go('variable_esperance.html#def3')" data-inline="true" /> que E(X)=2/3, on a donc :
+          <!-- FORMULE UNIV INLINE -->
+          <p>\( \displaystyle v(X) = {\int_{0}^{1}\left( {x - \frac{2}{3}} \right)^{2}2{xdx} = \frac{1}{18}} \)</p>
+          <!-- /FORMULE UNIV INLINE-->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h3>Calculation example</h3> Let's take the example of <input type="button" value="previous page" onclick="go('variable_foncrep.html#cascont')" data-inline="true" />. <br /> Density is represented by the function: <br />
+          <img alt="" border="0" height="288" src="images/foncrep3.png" width="570" />
+          <br /> Knowing, as we demonstrated <input type="button" value="here" onclick="go('variable_esperance.html#def3')" data-inline="true" /> that E(X)=2 /3, so we have:
+          <!-- UNIV INLINE FORMULA -->
+          <p>\( \displaystyle v(X) = {\int_{0}^{1}\left( {x - \frac{2}{3}} \right)^{2}2{xdx} = \frac{1}{ 18}} \)</p>
+          <!-- /INLINE UNIV FORMULA-->
+        </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Propriétés</h2> Dans tous les cas, il résulte des définitions de l'espérance et de la variance que :
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Properties</h2> In all cases, it follows from the definitions of expectation and variance that:
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop2"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 2</div> On peut définir la variance comme l'espérance de la variable (X-E(X))<sup>2</sup>.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 2</div> We can define the variance as the expectation of the variable (X-E(X))<sup>2</sup>.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Théorème de König-Huygens : </div>
+        <!-- /fr -->
+        <div lang="en"> König-Huygens theorem: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop3"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 3</div> La variance de X peut être calculée par la formule v(X)=E(X²)-E(X)²
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 3</div> The variance of X can be calculated by the formula v(X)=E(X²)-E(X)²
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Ceci s'obtient en développant le carré (X-E(X))<sup>2</sup> et en appliquant les propriétés de l'espérance. <br> Les deux propriétés suivantes résultent des définitions : </div>
+        <!-- /fr -->
+        <div lang="en"> This is obtained by expanding the square (X-E(X))<sup>2</sup> and applying the properties of expectation. <br> The following two properties result from the definitions: </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="prop4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 4</div> Var(X+b)=Var(X) pour toute constante b.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 4</div> Var(X+b)=Var(X) for any constant b.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <!-- STOP -->
+        <a name="prop5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">propriété 5</div> Var(aX)=a²var(X) pour toute constante réelle a.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">property 5</div> Var(aX)=a²var(X) for any real constant a.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Ecart-type</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Standard deviation</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def4"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 4</div> Comme en <input type="button" value="statistique descriptive" onclick="go('../statistique/statistique_dispersion.html#def4')" data-inline="true" />, <b>
+              <i>l'écart-type</i>
+            </b> est défini comme la racine carrée de la variance : <br /> σ(X)=√v(X)
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 4</div> As in <input type="button" value="descriptive statistic" onclick="go('../statistique/statistique_dispersion.html#def4')" data-inline="true" />, <b>
+              <i> standard deviation</i>
+            </b> is defined as the square root of the variance: <br /> σ(X)=√v(X)
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr">
+          <h2>Variables réduites</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Reduced variables</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP -->
+        <a name="def5"></a>
+        <div id="container">
+          <div lang="fr">
+            <div id="label">définition 5</div> On dit que la variable X est 'réduite' si elle est de variance 1.
+          </div>
+          <!--/fr-->
+          <div lang="en">
+            <div id="label">definition 5</div> We say that the variable X is 'reduced' if it has variance 1.
+          </div>
+          <!-- /en -->
+        </div>
+        <!-- /cont -->
+        <!-- /STOP -->
+        <div lang="fr"> Il est facile de réduire une variable quelconque de variance non nulle. En effet, il résulte de ce qui précède que si v(X) est non nulle la variable X/&sigma;(X) est réduite. <br> En outre la variable (X-E(X))/&sigma;(X) est à la fois centrée et réduite. </div>
+        <!-- /fr -->
+        <div lang="en"> It is easy to reduce any variable with non-zero variance. Indeed, it follows from the above that if v(X) is non-zero the variable X/&sigma;(X) is reduced. <br> In addition the variable (X-E(X))/&sigma;(X) is both centered and reduced. We say that it is a standardization of X. </div>
+        <!-- /en -->
+        <div lang="fr">
+          <h2>Le coin de Python</h2> Voici un petit programme qui calcule l'espérance et la variance dans le cas de variables aléatoires définies sur un ensemble fini. <br /> Ce programme vérifie l'exactitude des calculs d'espérance et de variance donnés dans l'exemple de cette page.
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Python's corner</h2> Here is a small program which calculates the expectation and the variance in the case of random variables defined on a finite set. <br /> This program checks the correctness of the expectation and variance calculations given in the example on this page.
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="python/calvar01.html" type="text/html" border="3" height="400" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <h2>Le coin de Julia</h2>
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <h2>Julia's corner</h2>
+        </div>
+        <!-- /en -->
+        <!-- STOP CODE -->
+        <p>
+          <object data="julia/calvar01.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+        </p>
+        <!-- /STOP  CODE-->
+        <div lang="fr">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercices" onclick="go('exercices/variable_variance/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au début de cette page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'intro-menu  du chapitre'" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour au menu 'Géométrie affine'" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Retour à l'accueil" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+          <!-- /navbar -->
+        </div>
+        <!-- /fr -->
+        <div lang="en">
+          <div>
+            <ul style=list-style-type:'';>
+              <li>
+                <input type="button" value="Exercises" onclick="go('exercices/variable_variance/menu.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to the beginning of this page" onclick="go('#beg')" />
+              </li>
+              <li>
+                <input type="button" value="Back to intro-menu of the chapter" onclick="go('index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to Affine geometry" onclick="go('../index.html')" />
+              </li>
+              <li>
+                <input type="button" value="Back to home page" onclick="go('../../index.html')" />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- /en -->
+      </div>
+      <!-- /content -->
+      <div data-role="footer">
+        <table cellpadding="10">
+          <tr>
+            <td>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
+            </td>
+            <td>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
+            </td>
+            <td>
+              <div lang="fr">Version mobile Jquery</div>
+              <div lang="en">Mobile Jquery version</div>
+            </td>
+            <td>
+              <a href="https://www.mathjax.org">
+                <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
+              </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <!-- /footer -->
+      <ul style=list-style-type:'';>
+        <li>
+          <div lang="fr">
+            <input type="button" value="Auteur" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+          <div lang="en">
+            <input type="button" value="Author" onclick="goext('../../presentation.html')" data-inline="false" />
+          </div>
+        </li>
+        <li>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /page -->
+  </body>
+</html>

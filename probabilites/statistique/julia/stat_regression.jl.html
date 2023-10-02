@@ -1,0 +1,48 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>stat_regression.jl</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #080808;}
+.s1 { color: #1750eb;}
+.s2 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+
+<pre><span class="s0">genere_serie_alea(n,p)=[rand(</span><span class="s1">0</span><span class="s0">:p) </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:n]</span>
+
+<span class="s0">moyenne(L)=reduce(+,L)/length(L)</span>
+
+<span class="s2">function </span><span class="s0">covariance(L1,L2)</span>
+    <span class="s0">m1,m2=moyenne(L1),moyenne(L2)</span>
+    <span class="s0">M=[(L1[i]-m1)*(L2[i]-m2) </span><span class="s2">for </span><span class="s0">i </span><span class="s2">in </span><span class="s1">1</span><span class="s0">:length(L1)]</span>
+    <span class="s2">return </span><span class="s0">moyenne(M)</span>
+<span class="s2">end</span>
+
+<span class="s2">function </span><span class="s0">variance(L)</span>
+    <span class="s0">M=[x*x </span><span class="s2">for </span><span class="s0">x </span><span class="s2">in </span><span class="s0">L]</span>
+    <span class="s2">return </span><span class="s0">moyenne(M) - moyenne(L)*moyenne(L)</span>
+<span class="s2">end</span>
+
+<span class="s0">ecart_type(L)=sqrt(variance(L))</span>
+
+<span class="s0">pearson(L1,L2)=covariance(L1,L2)/(ecart_type(L1)*ecart_type(L2))</span>
+
+<span class="s0">L1=genere_serie_alea(</span><span class="s1">30</span><span class="s0">,</span><span class="s1">20</span><span class="s0">)</span>
+<span class="s0">L2=genere_serie_alea(</span><span class="s1">30</span><span class="s0">,</span><span class="s1">20</span><span class="s0">)</span>
+<span class="s0">println(pearson(L1,L2))</span>
+            
+            </pre>
+</body>
+</html>

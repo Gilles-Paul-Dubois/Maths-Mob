@@ -1,0 +1,96 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>stat_disp01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(0,128,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1">
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+ 
+</span><span class="s2">import </span><span class="s1">random 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">GenereSerieAlea(n, p): 
+    </span><span class="s0">&quot;&quot;&quot;génère une série statistique aléatoire de n entiers entre 0 et p&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;generates a random data series of n integers between 0 and p&quot;&quot;&quot;</span><span class="s1">    
+    </span><span class="s2">return </span><span class="s1">[random.randint(</span><span class="s3">0</span><span class="s1">, p) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, n)] 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">CalculeMax(L): 
+    </span><span class="s0">&quot;&quot;&quot;Calcule la plus grande modalité - computes the greatest modality&quot;&quot;&quot;</span><span class="s1"> 
+    Max = L[</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L[</span><span class="s3">1</span><span class="s1">:]: 
+        </span><span class="s2">if </span><span class="s1">x &gt; Max: 
+            Max = x 
+    </span><span class="s2">return </span><span class="s1">Max 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">CalculeMin(L): 
+    </span><span class="s0">&quot;&quot;&quot;Calcule la plus petite modalité - computes the samllest modality&quot;&quot;&quot;</span><span class="s1"> 
+    Min = L[</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L[</span><span class="s3">1</span><span class="s1">:]: 
+        </span><span class="s2">if </span><span class="s1">x &lt; Min: 
+            Min = x 
+    </span><span class="s2">return </span><span class="s1">Min 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">CalculeEtendue(L):  </span><span class="s0"># premiere version - first version</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Calcule l'étendue ou l'amplitude de L - computes the range of L&quot;&quot;&quot;</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">CalculeMax(L) - CalculeMin(L) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">CalculeAmplitude(L):  </span><span class="s0"># seconde version plus efficace - second version with better efficiency</span><span class="s1"> 
+    </span><span class="s0">&quot;&quot;&quot;Calcule l'étendue ou l'amplitude en un seul balayage de la liste - computes the range in only one path&quot;&quot;&quot;</span><span class="s1"> 
+    Min = Max = L[</span><span class="s3">0</span><span class="s1">] 
+    </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">L[</span><span class="s3">1</span><span class="s1">:]: 
+        </span><span class="s2">if </span><span class="s1">x &lt; Min: 
+            Min = x 
+        </span><span class="s2">if </span><span class="s1">x &gt; Max: 
+            Max = x 
+    </span><span class="s2">return </span><span class="s1">Max - Min 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    </span><span class="s0">&quot;&quot;&quot;Fonction principale- main function&quot;&quot;&quot;</span><span class="s1"> 
+    L = GenereSerieAlea(</span><span class="s3">30</span><span class="s1">, </span><span class="s3">40</span><span class="s1">) 
+    print(L) 
+    print(CalculeMax(L)) 
+    print(CalculeMin(L)) 
+    print(CalculeEtendue(L)) 
+    print(CalculeAmplitude(L)) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">&quot;__main__&quot;</span><span class="s1">: 
+    main() 
+</span><span class="s4">&quot;&quot;&quot; résultat de l'exécution - result of running
+[4, 27, 35, 24, 3, 2, 14, 34, 32, 38, 21, 4, 14, 38, 8, 22, 11, 5, 3, 5, 31, 37, 31, 10, 21, 14, 15, 20, 21, 32] 
+38 
+2 
+36 
+36 
+&quot;&quot;&quot;</span><span class="s1"> 
+ 
+</span></pre>
+</body>
+</html>

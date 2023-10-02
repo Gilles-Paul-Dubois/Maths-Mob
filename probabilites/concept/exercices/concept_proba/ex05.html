@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
     <meta charset="utf-8" />
     <title>Exercice 05</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +22,7 @@
     <script src="../../../../js/jquery-1.11.3.js"></script>
     <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
     <script src="../../../../js/custom.js"></script>
- 	 <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
   </head>
   <body style="overflow: auto; " class="fr">
     <script>
@@ -51,12 +61,34 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>Au jeu de bridge une 'main' comporte 13 cartes prises dans un jeu de 52. <br> Donner une formule pour la probabilité d'avoir exactement 2 couleurs ( trèfle, carreau, coeur, pique) parmi les 13 cartes. <br> Calculer exactement ce nombre avec un programme Python et/ou Julia. </p>
           <div data-role="collapsible">
             <h4>aide</h4>
+            <p>Si nous cherchons les mains qui n'ont que du coeur et du pique, nous trouvons :</p> pour les mains n'ayant qu'un seul coeur et 12 piques.
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle C_{13}^{1} \times C_{13}^{12} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Pour les mains n'ayant que 2 coeurs et 11 piques
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle C_{13}^{2} \times C_{13}^{11} \)</p>
+            <!-- /FORMULE UNIV INLINE--> etc . <br /> Pour la programmation voir par exemple <input type="button" value="cette page" onclick="go('../../../../bases/ensembles/cpn.html#prog')" data-inline="true" />.
           </div>
           <!-- /aide -->
           <div data-role="collapsible">
             <h4>solution</h4>
+            <p>Le nombre de mains n'ayant que du coeur et du pique et ayant au moins ces deux couleurs est donc :</p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle {S=\sum\limits_{i = 1}^{12}C_{13}^{i}} \times C_{13}^{13 - i} \)</p>
+            <!-- /FORMULE UNIV INLINE--> Comme il y a 6 façons de choisir 2 couleurs parmi 4 , le nombre des favorables est 6&times;S. <br> Le nombre des possibles est
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle C_{52}^{13} \)</p>
+            <!-- /FORMULE UNIV INLINE--> La probabilité est le rapport des deux. <br> On trouve un peu moins de 1/10000. <p>Ce qui donne avec Python :</p>
+            <p>
+              <object data="../../python/proex05.html" type="text/html" border="3" height="400" width="100%"></object>
+            </p>
+            <p>Soit avec julia :</p>
+            <p>
+              <object data="../../julia/proex05.jl.html" type="text/html" border="3" height="100" width="100%"></object>
+            </p>
           </div>
           <!-- /solution -->
         </div>
@@ -73,12 +105,34 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>In the game of bridge, a 'hand' consists of 13 cards taken from a deck of 52. <br> Give a formula for the probability of having exactly 2 suits (clubs, diamonds, hearts, spades) among the 13 cards. <br> Calculate exactly this number with a Python and/or Julia program. </p>
           <div data-role="collapsible">
             <h4>hint</h4>
+            <p>If we look for hands that have only hearts and spades, we find:</p> for hands with only one heart and 12 spades.
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle C_{13}^{1} \times C_{13}^{12} \)</p>
+            <!-- /INLINE UNIV FORMULA--> For hands with only 2 hearts and 11 spades
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle C_{13}^{2} \times C_{13}^{11} \)</p>
+            <!-- /INLINE UNIV FORMULA--> etc. <br /> For programming see for example <input type="button" value="this page" onclick="go('../../../../bases/ensembles/cpn.html#prog')" data-inline="true" />.
           </div>
           <!-- /aide -->
           <div data-role="collapsible">
             <h4>solution</h4>
+            <p>The number of hands having only hearts and spades and having at least these two suits is therefore:</p>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle {S=\sum\limits_{i=1}^{12}C_{13}^{i}} \times C_{13}^{13 - i} \)</p>
+            <!-- /INLINE UNIV FORMULA--> As there are 6 ways to choose 2 colors from 4, the number of favorables is 6&times;S. <br> The number of possibilities is
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle C_{52}^{13} \)</p>
+            <!-- /INLINE UNIV FORMULA--> Probability is the ratio of the two. <br> We find a little less than 1/10000. <p>What gives with Python:</p>
+            <p>
+              <object data="../../python/proex05.html" type="text/html" border="3" height="400" width="100%"></object>
+            </p>
+            <p>Or with julia:</p>
+            <p>
+              <object data="../../julia/proex05.jl.html" type="text/html" border="3" height="100" width="100%"></object>
+            </p>
           </div>
           <!-- /solution -->
         </div>
@@ -88,12 +142,12 @@
         <table cellpadding="10">
           <tr>
             <td>
-              <div lang="fr">Création Gilles Dubois</div>
-              <div lang="en">Created by Gilles Dubois</div>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
             </td>
             <td>
-              <div lang="fr">Janvier 2022</div>
-              <div lang="en">January 2022</div>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
             </td>
             <td>
               <div lang="fr">Version mobile Jquery</div>
@@ -103,7 +157,7 @@
               <a href="https://www.mathjax.org">
                 <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
               </a>
-            </td>                
+            </td>
           </tr>
         </table>
       </div>
@@ -118,7 +172,7 @@
           </div>
         </li>
         <li>
-          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
         </li>
       </ul>
     </div>

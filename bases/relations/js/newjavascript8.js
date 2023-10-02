@@ -319,7 +319,7 @@ function relgraph(C, G)
     {
 
         tz.value = this.stringtoprint;
-        tz.style.width = this.stringtoprint.length * 7 + "px";
+        tz.style.width = this.stringtoprint.length * 11 + "px";
 
     }
 
@@ -465,7 +465,7 @@ function relgraph(C, G)
     {
 
         tz.value = this.allimagesstr();
-        tz.style.width = this.allimagesstr().length * 7 + "px";
+        tz.style.width = this.allimagesstr().length * 11 + "px";
 
     }
     this.showimdir = function (tz, P)

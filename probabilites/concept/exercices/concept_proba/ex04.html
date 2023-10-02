@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
     <meta charset="utf-8" />
     <title>Exercice 04</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +22,7 @@
     <script src="../../../../js/jquery-1.11.3.js"></script>
     <script src="../../../../js/jquery.mobile-1.4.5.min.js"></script>
     <script src="../../../../js/custom.js"></script>
-	 <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>    
+    <script src="../../../../mathjax/tex-chtml.js" id="MathJax-script" async></script>
   </head>
   <body style="overflow: auto; " class="fr">
     <script>
@@ -51,12 +61,41 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>On dispose de deux urnes U<sub>1</sub> et U<sub>2</sub> et de 2n boules dont n sont blanches et n sont noires. <br> Au départ toutes les boules sont dans U<sub>1</sub>. <br> L'épreuve consiste à extraire successivement les 2n boules de U<sub>1</sub> pour les transvaser dans U<sub>2</sub>. <br> Quelle est la probabilité pour que, pendant l'opération de transfert, l'urne U<sub>2</sub> contienne toujours un nombre de boules blanches supérieur ou égal au nombre de boules noires ? <br> Effectuer une simulation avec un programme Python et/ou Julia. </p>
           <div data-role="collapsible">
             <h4>aide</h4>
+            <p>On représente une épreuve par un graphe sous forme de ligne brisée. <br> Le tirage d'une blanche correspond à une montée d'une unité. <br> Le tirage d'une noire correspond à une descente d'une unité. <br> Toutes les lignes doivent se finir sur la droite y=0 puisqu'il y a autant de boules blanches que de noires. <br> Voici un graphique correspondant à un succès (ici n=10). <br>
+              <img src="../../images/proex04_01.png" width="612" height="195" border="0" alt="">
+              <br> Une possibilité correspond à un choix de n montées parmi 2n possibles. <br> Le nombre total de cas possibles est donc. <br>
+            </p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle C_{2n}^{n} = \frac{(2n)!}{n!n!} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
           </div>
           <!-- /aide -->
           <div data-role="collapsible">
             <h4>solution</h4>
+            <p>Nous reprenons la représentation donnée dans l'aide. <br> Examinons le cas d'un échec. <br> Cela signifie qu'à partir d'un certain rang on a un point d'ordonnée -1. <br> Traçons en pointillés la ligne brisée symétrique de celle de l'épreuve échec par rapport à la droite y=-1. <br>
+              <img src="../../images/proex04_02.png" width="566" height="201" border="0" alt="">
+              <br> Cette ligne aboutira au point (2n,-2). <br> Donc, compter les échecs revient à compter toutes les lignes partant de (0,0) pour aboutir à (2n,-2). <br> Ce sont des lignes correspondant à n-1 montées et n+1 descentes. <br> Leur nombre est donc
+            </p>
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\left( {2n} \right)!}{\left( {n + 1} \right)!\left( {n - 1} \right)!} \)</p>
+            <!-- /FORMULE UNIV INLINE--> On en déduit le nombre des succès :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle \frac{\left( {2n} \right)!}{n!n!} - \frac{\left( {2n} \right)!}{\left( {n + 1} \right)!\left( {n - 1} \right)!} \)</p>
+            <!-- /FORMULE UNIV INLINE--> et la probabilité qui est le rapport de ce nombre sur le nombre total des possibilités. <br> Après simplification, il vient :
+            <!-- FORMULE UNIV INLINE -->
+            <p>\( \displaystyle P = \frac{1}{n + 1} \)</p>
+            <!-- /FORMULE UNIV INLINE-->
+            <p>Donc avec Python :</p>
+            <p>
+              <object data="../../python/proex04.html" type="text/html" border="3" height="400" width="100%"></object>
+            </p>
+            <p>Soit avec Julia :</p>
+            <p>
+              <object data="../../julia/proex04.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+            </p>
           </div>
           <!-- /solution -->
         </div>
@@ -73,12 +112,41 @@
             </ul>
           </div>
           <!-- /navbar -->
+          <p>We have two urns U<sub>1</sub> and U<sub>2</sub> and 2n balls of which n are white and n are black. <br> Initially all the balls are in U<sub>1</sub>. <br> The test consists of successively extracting the 2n balls from U<sub>1</sub> to transfer them to U<sub>2</sub>. <br> What is the probability that, during the transfer operation, the urn U<sub>2</sub> always contains a number of white balls greater than or equal to the number of black balls? <br> Perform a simulation with a Python and/or Julia program. </p>
           <div data-role="collapsible">
             <h4>hint</h4>
+            <p>A test is represented by a graph in the form of a broken line. <br> The drawing of a white ball corresponds to a rise of one unit. <br> The drawing of a black ball corresponds to a descent of one unit. <br> All the lines must end on the line y=0 since there are as many white balls as black ones. <br> Here is a graph corresponding to a success (here n=10). <br>
+              <img src="../../images/proex04_01.png" width="612" height="195" border="0" alt="">
+              <br> A possibility corresponds to a choice of n climbs among 2n possible. <br> So the total number of possible cases is. <br>
+            </p>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle C_{2n}^{n} = \frac{(2n)!}{n!n!} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
           </div>
           <!-- /aide -->
           <div data-role="collapsible">
             <h4>solution</h4>
+            <p>We use the representation given in the help. <br> Let's look at the failure case. <br> This means that from a certain rank we have a point with ordinate -1. <br> Let's draw the broken line symmetrical to that of the failed test with respect to the line y=-1. <br>
+              <img src="../../images/proex04_02.png" width="566" height="201" border="0" alt="">
+              <br> This line will end at the point (2n,-2). <br> So counting failures is like counting all the rows from (0,0) to (2n,-2). <br> These are lines corresponding to n-1 ascents and n+1 descents. <br> Their number is therefore
+            </p>
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\left( {2n} \right)!}{\left( {n + 1} \right)!\left( {n - 1} \right)!} \)</p>
+            <!-- /INLINE UNIV FORMULA--> We deduce the number of successes:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle \frac{\left( {2n} \right)!}{n!n!} - \frac{\left( {2n} \right)!}{\left( {n + 1} \right)! \left( {n - 1} \right)!} \)</p>
+            <!-- /INLINE UNIV FORMULA--> and the probability which is the ratio of this number to the total number of possibilities. <br> After simplification, it comes:
+            <!-- UNIV INLINE FORMULA -->
+            <p>\( \displaystyle P = \frac{1}{n + 1} \)</p>
+            <!-- /INLINE UNIV FORMULA-->
+            <p>So with Python:</p>
+            <p>
+              <object data="../../python/proex04.html" type="text/html" border="3" height="400" width="100%"></object>
+            </p>
+            <p>Or with Julia:</p>
+            <p>
+              <object data="../../julia/proex04.jl.html" type="text/html" border="3" height="300" width="100%"></object>
+            </p>
           </div>
           <!-- /solution -->
         </div>
@@ -88,12 +156,12 @@
         <table cellpadding="10">
           <tr>
             <td>
-              <div lang="fr">Création Gilles Dubois</div>
-              <div lang="en">Created by Gilles Dubois</div>
+              <div lang="fr">Création Gilles Dubois - licence CC-BY-SA</div>
+              <div lang="en">Created by Gilles Dubois - licence CC-BY-SA</div>
             </td>
             <td>
-              <div lang="fr">Janvier 2022</div>
-              <div lang="en">January 2022</div>
+              <div lang="fr">Septembre 2023</div>
+              <div lang="en">September 2023</div>
             </td>
             <td>
               <div lang="fr">Version mobile Jquery</div>
@@ -103,7 +171,7 @@
               <a href="https://www.mathjax.org">
                 <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" border="0" alt="Powered by MathJax" />
               </a>
-            </td>                
+            </td>
           </tr>
         </table>
       </div>
@@ -118,7 +186,7 @@
           </div>
         </li>
         <li>
-          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external">Mail</a>
+          <a href="mailto:gilles.paul.dubois@free.fr" data-role="button" rel="external"><div lang="fr">Mail pour erreurs, remarques, suggestions</div><div lang="en">Mail for errors, notes, suggestions</div></a>
         </li>
       </ul>
     </div>

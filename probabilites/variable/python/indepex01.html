@@ -1,0 +1,125 @@
+<html>
+
+    <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2LMLVPDR6E');
+</script>
+    
+<title>indepex01.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(128,128,128); font-style: italic; }
+.s1 { }
+.s2 { color: rgb(0,0,128); font-weight: bold; }
+.s3 { color: rgb(0,128,128); font-weight: bold; }
+.s4 { color: rgb(0,0,255); }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+
+<pre>
+<span class="s0"># -*- coding: utf-8 -*-</span><span class="s1"> 
+</span><span class="s0"># python version 3.4</span><span class="s1"> 
+ 
+</span><span class="s2">import </span><span class="s1">itertools </span><span class="s2">as </span><span class="s1">it 
+</span><span class="s2">import </span><span class="s1">random 
+</span><span class="s0"># jeu de bridge - game of bridge</span><span class="s1"> 
+ 
+</span><span class="s2">class </span><span class="s1">carte(): 
+    couleurs = [</span><span class="s3">'trèfle'</span><span class="s1">, </span><span class="s3">'carreau'</span><span class="s1">, </span><span class="s3">'coeur'</span><span class="s1">, </span><span class="s3">'pique'</span><span class="s1">] 
+    figures = [</span><span class="s3">'deux'</span><span class="s1">, </span><span class="s3">'trois'</span><span class="s1">, </span><span class="s3">'quatre'</span><span class="s1">, </span><span class="s3">'cinq'</span><span class="s1">, </span><span class="s3">'six'</span><span class="s1">, </span><span class="s3">'sept'</span><span class="s1">, </span><span class="s3">'huit'</span><span class="s1">, </span><span class="s3">'neuf'</span><span class="s1">, </span><span class="s3">'dix'</span><span class="s1">, </span><span class="s3">'valet'</span><span class="s1">, </span><span class="s3">'dame'</span><span class="s1">, </span><span class="s3">'roi'</span><span class="s1">, </span><span class="s3">'as'</span><span class="s1">] 
+ 
+    </span><span class="s2">def </span><span class="s1">__init__(self, n): 
+        self.n = n 
+        self.couleur = n // </span><span class="s4">13</span><span class="s1"> 
+        self.figure = n % </span><span class="s4">13</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">valeur(self): 
+        </span><span class="s2">if </span><span class="s1">(self.figure) &lt; </span><span class="s4">9</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s4">0</span><span class="s1"> 
+        </span><span class="s2">else</span><span class="s1">: 
+            </span><span class="s2">return </span><span class="s1">self.figure - </span><span class="s4">8</span><span class="s1"> 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s2">return </span><span class="s1">carte.figures[self.figure] + </span><span class="s3">&quot; de &quot; </span><span class="s1">+ carte.couleurs[self.couleur] + </span><span class="s3">&quot; valeur:&quot; </span><span class="s1">+ str(self.valeur()) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">random_combination(p, r): 
+    </span><span class="s0">&quot;Random selection from itertools.combinations(iterable, r)&quot;</span><span class="s1"> 
+    iterable = range(p) 
+    pool = tuple(iterable) 
+    n = len(pool) 
+    indices = sorted(random.sample(range(n), r)) 
+    </span><span class="s2">return </span><span class="s1">tuple(pool[i] </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">indices) 
+ 
+ 
+</span><span class="s2">class </span><span class="s1">mainB():  </span><span class="s0"># modélisation d'une main de 13 cartes - model for a hand of 13 cards</span><span class="s1"> 
+    </span><span class="s2">def </span><span class="s1">__init__(self): 
+        L = random_combination(</span><span class="s4">52</span><span class="s1">, </span><span class="s4">13</span><span class="s1">) 
+        self.cartes = [carte(i) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">L] 
+ 
+    </span><span class="s2">def </span><span class="s1">difCol(self): </span><span class="s0">#nombre de couleurs différentes dans la main - number of distinct suits in the hand</span><span class="s1"> 
+        L=[c.couleur </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">self.cartes] 
+        S=set(L) 
+        </span><span class="s2">return </span><span class="s1">len(S) 
+ 
+    </span><span class="s2">def </span><span class="s1">strlist(self): 
+        </span><span class="s2">return </span><span class="s1">[str(c) </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">self.cartes] 
+ 
+    </span><span class="s2">def </span><span class="s1">__str__(self): 
+        </span><span class="s2">return </span><span class="s3">&quot;</span><span class="s2">\n</span><span class="s3">&quot;</span><span class="s1">.join(self.strlist()) 
+ 
+    </span><span class="s2">def </span><span class="s1">valMain(self): 
+        </span><span class="s2">return </span><span class="s1">sum(c.valeur() </span><span class="s2">for </span><span class="s1">c </span><span class="s2">in </span><span class="s1">self.cartes) 
+ 
+ 
+</span><span class="s2">def </span><span class="s1">calFreqVal (k1,k2, repeat): 
+    count=</span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(repeat): 
+        uneMain=mainB() 
+        </span><span class="s2">if </span><span class="s1">uneMain.valMain()&gt;=k1 </span><span class="s2">and </span><span class="s1">uneMain.valMain()&lt;=k2 : 
+            count+=</span><span class="s4">1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">count/repeat 
+ 
+</span><span class="s2">def </span><span class="s1">calFreqDifCol(k1,k2, repeat): 
+    count=</span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(repeat): 
+        uneMain=mainB() 
+        </span><span class="s2">if </span><span class="s1">uneMain.difCol()&gt;=k1 </span><span class="s2">and </span><span class="s1">uneMain.difCol()&lt;=k2: 
+            count+=</span><span class="s4">1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">count/repeat 
+ 
+</span><span class="s2">def </span><span class="s1">calFreqValEtDifCol(v1,v2,c1,c2,repeat): 
+    count=</span><span class="s4">0</span><span class="s1"> 
+    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(repeat): 
+        uneMain=mainB() 
+        </span><span class="s2">if </span><span class="s1">uneMain.valMain()&gt;=v1 </span><span class="s2">and </span><span class="s1">uneMain.valMain()&lt;=v2  </span><span class="s2">and </span><span class="s1">uneMain.difCol()&gt;=c1 </span><span class="s2">and </span><span class="s1">uneMain.difCol()&lt;=c2: 
+            count+=</span><span class="s4">1</span><span class="s1"> 
+    </span><span class="s2">return </span><span class="s1">count/repeat 
+ 
+</span><span class="s2">def </span><span class="s1">main(): 
+    v1=</span><span class="s4">16</span><span class="s1"> 
+    v2=</span><span class="s4">25</span><span class="s1"> 
+    c1=</span><span class="s4">2</span><span class="s1"> 
+    c2=</span><span class="s4">3</span><span class="s1"> 
+    x1=calFreqVal(v1,v2,</span><span class="s4">20000</span><span class="s1">) 
+    x2= calFreqDifCol(c1,c2,</span><span class="s4">20000</span><span class="s1">) 
+    x3=calFreqValEtDifCol(v1,v2,c1,c2,</span><span class="s4">20000</span><span class="s1">) 
+    print(x1) 
+    print(x2) 
+    print(x3) 
+    print(x1*x2) 
+ 
+ 
+</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
+    main() 
+ 
+</span></pre>
+</body>
+</html>
