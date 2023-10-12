@@ -1,54 +1,40 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   antecedents.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,128,128); font-weight: bold; }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># version python3.4</span><span class="s1"> 
- 
+<pre><span class="s0"># version python3.8</span>
+<span class="s0"># Trouver les antécédents d'un élément</span>
+<span class="s0"># finds preimages of an element</span>
 
-</span><span class="s0">#Trouver les antécédents d'un élément</span><span class="s1"> 
- 
-</span><span class="s0">#la relation</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">R(x,y): 
-    </span><span class="s2">return </span><span class="s1">x&lt;y; </span><span class="s0">#ordre alphabétique des caractères</span><span class="s1"> 
- 
-</span><span class="s0">#pour simplifier on retourne une simple liste qu'on ne transforme pas en ensemble</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">Antecedents(y,E,Rel): 
-    </span><span class="s2">return </span><span class="s1">[x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">E </span><span class="s2">if </span><span class="s1">Rel(x,y)] 
- 
-</span><span class="s0">#Afficher les antécédents pour chaque élément du but</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">main(): 
-    E=set(</span><span class="s3">'abuvy'</span><span class="s1">) </span><span class="s0">#la source</span><span class="s1"> 
-    F=set(</span><span class="s3">'bdaz'</span><span class="s1">) </span><span class="s0"># le but</span><span class="s1"> 
-    </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">F:</span><span class="s0">#affichage standard en tant que liste</span><span class="s1"> 
-        print (y,end=</span><span class="s3">':'</span><span class="s1">) 
-        print(Antecedents(y,E,R)) 
- 
- 
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
-    main() 
-</span></pre>
- </body>
+<span class="s0"># la relation- the relation</span>
+<span class="s2">def </span><span class="s1">R(x :str, y :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">x &lt; y;  </span><span class="s0"># ordre alphabétique des caractères</span>
+
+<span class="s0"># retourne l'ensemble des antécédents de y par Rel dans Ee</span>
+<span class="s0">#computes the set of preimages of an element of the codomain</span>
+<span class="s2">def </span><span class="s1">Antecedents(y :str, E :set, Rel : callable)-&gt;set:</span>
+    <span class="s2">return </span><span class="s1">{x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">E </span><span class="s2">if </span><span class="s1">Rel(x, y)}</span>
+
+<span class="s0"># Afficher les antécédents pour chaque élément du but</span>
+<span class="s0"># displays  preimages of  every element of codomain</span>
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">E = set(</span><span class="s3">'abuvy'</span><span class="s1">)  </span><span class="s0"># la source - the domain</span>
+    <span class="s1">F = set(</span><span class="s3">'bdaz'</span><span class="s1">)  </span><span class="s0"># le but - the codomain</span>
+    <span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">F:  </span>
+        <span class="s1">print(</span><span class="s3">&quot;antécédents de&quot;</span><span class="s1">,y, end=</span><span class="s3">'='</span><span class="s1">)</span>
+        <span class="s1">print(Antecedents(y, E, R))</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main() </span></pre>
+</body>
 </html>

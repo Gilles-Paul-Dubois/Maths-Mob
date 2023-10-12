@@ -1,49 +1,43 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   majorants.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,128,128); font-weight: bold; }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># version python 3.4</span><span class="s1"> 
- 
-</span><span class="s0">#Relation d'ordre</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">R(x,y): 
-    </span><span class="s2">return </span><span class="s1">x&lt;=y; </span><span class="s0">#comparaison alpha</span><span class="s1"> 
- 
-</span><span class="s0"># test y majorant de X pour la relation Rel</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">EstMajorant(y,X,Rel): 
-    </span><span class="s2">return </span><span class="s1">all([Rel(x,y) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">X]) 
-</span><span class="s0">#retourne l'ensemble des majorants de la partie X de E pour la relation Rel</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">Majorants(X,E,Rel): 
-    </span><span class="s2">return </span><span class="s1">set([y </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">E </span><span class="s2">if </span><span class="s1">EstMajorant(y,X,Rel)]) 
- 
-</span><span class="s2">def </span><span class="s1">main(): 
-    E=set(</span><span class="s3">'abuvy'</span><span class="s1">) </span><span class="s0">#l'ensemble</span><span class="s1"> 
-    X=set(</span><span class="s3">'bu'</span><span class="s1">) 
-    print (Majorants(X,E,R)) 
- 
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
-    main()</span></pre>
- </body>
+<pre><span class="s0"># version python 3.4 </span>
+<span class="s0"># Relation d'ordre</span>
+<span class="s0"># partial order</span>
+
+<span class="s0">#the relation to test</span>
+<span class="s0"># la relation à tester</span>
+<span class="s2">def </span><span class="s1">R(x :str, y :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">x &lt;= y;  </span><span class="s0"># comparaison alpha </span>
+
+<span class="s0"># test y majorant de X pour la relation Rel</span>
+<span class="s0"># checks y majorant of X for Rel on E</span>
+<span class="s2">def </span><span class="s1">EstMajorant(y :str, X :set, Rel :callable)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">all((Rel(x, y) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">X))</span>
+
+<span class="s0"># retourne l'ensemble des majorants de la partie X de E pour la relation Rel</span>
+<span class="s0"># return the set of majorants</span>
+<span class="s2">def </span><span class="s1">Majorants(X :set, E :set, Rel :callable)-&gt;set :</span>
+    <span class="s2">return </span><span class="s1">set((y </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">E </span><span class="s2">if </span><span class="s1">EstMajorant(y, X, Rel)))</span>
+
+<span class="s0">#main function - fonction principale</span>
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">E = set(</span><span class="s3">'abuvy'</span><span class="s1">)  </span><span class="s0"># l'ensemble </span>
+    <span class="s1">X = set(</span><span class="s3">'bu'</span><span class="s1">)</span>
+    <span class="s1">print(Majorants(X, E, R))</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span></pre>
+</body>
 </html>

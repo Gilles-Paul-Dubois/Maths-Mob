@@ -1,78 +1,41 @@
 <html>
-
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-<title>sets.jl</title>
+<head>
+<title>repaffines.py</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
-.s0 { color: #080808;}
-.s1 { color: #8c8c8c; font-style: italic;}
-.s2 { color: #067d17;}
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
 .s3 { color: #1750eb;}
-.s4 { color: #0033b3;}
-.s5 { color: #0037a6;}
+.s4 { color: #067d17;}
 </style>
 </head>
 <body bgcolor="#ffffff">
-<pre><span class="s0">V = Set([]) </span><span class="s1">#ensemble vide</span>
-<span class="s0">C1 = Set([</span><span class="s2">'a'</span><span class="s0">, </span><span class="s2">'b'</span><span class="s0">, </span><span class="s2">'c'</span><span class="s0">]) </span><span class="s1">#ensemble de caractères généré par une liste</span>
-<span class="s0">C2 = Set(</span><span class="s2">&quot;abc&quot;</span><span class="s0">) </span><span class="s1">#même chose avec une chaîne</span>
-<span class="s0">N1 = Set([</span><span class="s3">0</span><span class="s0">, </span><span class="s3">1</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s3">3</span><span class="s0">, </span><span class="s3">4</span><span class="s0">, </span><span class="s3">5</span><span class="s0">])  </span><span class="s1"># ensemble de nombres</span>
-<span class="s0">N2 = Set(</span><span class="s3">0</span><span class="s0">:</span><span class="s3">5</span><span class="s0">)  </span><span class="s1">#autre possibilité</span>
-<span class="s0">M = Set([</span><span class="s3">1</span><span class="s0">, </span><span class="s3">2</span><span class="s0">, </span><span class="s2">'a'</span><span class="s0">, </span><span class="s2">'B'</span><span class="s0">])  </span><span class="s1"># ensemble mixte</span>
 
-<span class="s4">function </span><span class="s0">test1() </span><span class="s1">#impression standard</span>
-  <span class="s0">println(</span><span class="s2">&quot;</span><span class="s5">\n</span><span class="s2">affichage standard julia&quot;</span><span class="s0">)</span>
-  <span class="s0">println(V)</span>
-  <span class="s0">println(C1)</span>
-  <span class="s0">println(C2)</span>
-  <span class="s0">println(N1)</span>
-  <span class="s0">println(N2)</span>
-  <span class="s0">println(M)</span>
-<span class="s4">end</span>
+<pre><span class="s0"># -*- coding: utf_8 -*-</span>
+<span class="s0"># python  version 3.8</span>
+<span class="s0"># fabrication d'ensembles - constructing sets from keyboard</span>
+<span class="s0"># visualisation  -displaying them</span>
+<span class="s1">E=set()</span>
+<span class="s0"># lecture au clavier- reading from keyboard (as strings)</span>
+<span class="s2">def </span><span class="s1">lire_ensemble():</span>
+    <span class="s2">global </span><span class="s1">E</span>
+    <span class="s2">while </span><span class="s3">1</span><span class="s1">:  </span><span class="s0"># boucle infinie - infinite loop</span>
+        <span class="s1">S = input()</span>
+        <span class="s2">if </span><span class="s1">(S == </span><span class="s4">&quot;-1&quot;</span><span class="s1">):  </span><span class="s0"># sortie de boucle si valeur entrée est -1 - break if value entered=-1</span>
+            <span class="s2">break</span>
+        <span class="s2">else</span><span class="s1">:</span>
+            <span class="s1">E.add(S)  </span><span class="s0"># ajout de l'élément saisi S à l'ensemble E - add element entered from keyboard</span>
 
-<span class="s4">function </span><span class="s0">test2() </span><span class="s1">#impression personnalisée</span>
-  <span class="s0">println(</span><span class="s2">&quot;</span><span class="s5">\n</span><span class="s2">Affichage usuel maths&quot;</span><span class="s0">)</span>
-  <span class="s0">imprime(V)</span>
-  <span class="s0">imprime(C1)</span>
-  <span class="s0">imprime(C2)</span>
-  <span class="s0">imprime(N1)</span>
-  <span class="s0">imprime(N2)</span>
-  <span class="s0">imprime(M)</span>
-<span class="s4">end</span>
-
-<span class="s4">function </span><span class="s0">imprime(S) </span><span class="s1">#écriture classique des maths</span>
-  <span class="s0">println(</span><span class="s2">&quot;&quot;</span><span class="s0">)</span>
-  <span class="s0">print(</span><span class="s2">'{'</span><span class="s0">) </span><span class="s1">#début de l'écriture</span>
-  <span class="s0">n = length(S)</span>
-  <span class="s0">i = </span><span class="s3">0</span>
-  <span class="s4">for </span><span class="s0">x </span><span class="s4">in </span><span class="s0">S</span>
-    <span class="s0">i = i + </span><span class="s3">1</span>
-    <span class="s0">print(x)</span>
-    <span class="s4">if </span><span class="s0">i &lt; n</span>
-      <span class="s0">print(</span><span class="s2">','</span><span class="s0">) </span><span class="s1">#seulement si ce n'est pas le dernier</span>
-    <span class="s4">end</span>
-  <span class="s4">end</span>
-  <span class="s0">println(</span><span class="s2">'}'</span><span class="s0">) </span><span class="s1">#fin de l'écriture</span>
-<span class="s4">end</span>
+<span class="s0"># programme principal</span>
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">print(</span><span class="s4">'Saisir des elements - taper -1 pour finir'</span><span class="s1">) </span><span class="s0"># instruction for user</span>
+    <span class="s1">lire_ensemble() </span><span class="s0"># filling the set</span>
+    <span class="s1">print(E) </span><span class="s0"># displaying it</span>
 
 
 
-<span class="s4">function </span><span class="s0">main()</span>
-  <span class="s0">test1()</span>
-  <span class="s0">test2()</span>
-<span class="s4">end</span>
-
-
-<span class="s0">main()</span>
-</pre>
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span></pre>
 </body>
 </html>

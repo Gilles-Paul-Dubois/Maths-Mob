@@ -1,51 +1,55 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   ens8.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,0,255); }
-.s4 { color: rgb(0,128,0); font-weight: bold; }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># -*- coding: utf_8 -*-</span><span class="s1"> 
-</span><span class="s0">#python  version 3.4</span><span class="s1"> 
- 
-</span><span class="s0"># calcule l'ensemble des parties de E si E est donné sous forme de liste sans répétition</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">PartsOf(E): 
-    P=[[]] 
-    </span><span class="s2">while </span><span class="s1">E: 
-        a=E[</span><span class="s3">0</span><span class="s1">] 
-        E=E[</span><span class="s3">1</span><span class="s1">:] 
-        Q=[x+[a] </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">P]+P 
-        P=Q 
-    </span><span class="s2">return </span><span class="s1">P 
- 
-</span><span class="s2">def </span><span class="s1">main(): 
-    </span><span class="s2">print </span><span class="s1">(PartsOf([])) 
-    </span><span class="s2">print </span><span class="s1">(PartsOf([</span><span class="s3">1</span><span class="s1">])) 
-    </span><span class="s2">print </span><span class="s1">(PartsOf([</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">])) 
- 
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
-    main() 
-</span></pre>
- </body>
+<pre><span class="s0">#python 3.8</span>
+
+<span class="s2">import </span><span class="s1">itertools  </span><span class="s0"># pour combinations</span>
+
+<span class="s0"># un objet frozenset est comme un objet set mais immuable</span>
+<span class="s0"># a frozenset is just like a set but immutable</span>
+<span class="s0"># on ne peut pas changer son contenu par add, discard, pop, clear, etc... - impossible to change content through add, discard, etc.</span>
+<span class="s0"># les frozensets sont introduits ici parce que en Python les ensembles ne peuvent être éléments d'autres ensembles que s'ils sont immuables</span>
+<span class="s0"># We use frozenset because python sets cannot have mutable sets as elements</span>
+
+<span class="s0"># itertools fournit une fonction  'combinations' qui génère toutes les combinaisons d'un ensemble à k éléments</span>
+<span class="s0"># itertools modules provides a 'combinations' function which generates all combinations with k elemnts from any set</span>
+<span class="s0"># notre fonction combinaisons ne fait que constituer la liste engendrée.</span>
+<span class="s0"># Our function just generates the corresponding list</span>
+<span class="s2">def </span><span class="s1">combinaisons(E :set, k :int) -&gt;list :</span>
+    <span class="s2">return </span><span class="s1">list(itertools.combinations(E, k))</span>
+
+<span class="s0"># la fonction suivante calcule l'ensemble des parties de E ayant exactement k éléments</span>
+<span class="s0"># This function computes the sets of all subsets of E with k elements</span>
+<span class="s2">def </span><span class="s1">parties_a_k_elements(E :set, k :int) -&gt;set :</span>
+    <span class="s2">return </span><span class="s1">{frozenset(x) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">combinaisons(E, k)}</span>
+
+<span class="s0"># maintenant on va calculer toutes les parties de E ayant 0,1,2,... jusqu'à n éléments où n est le nombre d'éléemnts de E</span>
+<span class="s0"># now we will computes ALL subsets of E whatever their cardinality</span>
+<span class="s2">def </span><span class="s1">parties(E :set) -&gt;set :</span>
+    <span class="s1">result = set()  </span><span class="s0"># accumulateur vide au départ - accumulateur empty to begin with</span>
+    <span class="s2">for </span><span class="s1">k </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, len(E) + </span><span class="s3">1</span><span class="s1">):</span>
+        <span class="s1">result = result | parties_a_k_elements(E, k)  </span><span class="s0"># on ajoute toutes les parties de E à k éléments - we had all subsets with k elements</span>
+    <span class="s2">return </span><span class="s1">result</span>
+
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">S = {</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">, </span><span class="s3">4</span><span class="s1">}</span>
+    <span class="s1">print(S)</span>
+    <span class="s1">print(parties_a_k_elements(S, </span><span class="s3">2</span><span class="s1">))  </span><span class="s0"># parties de S à deux éléments - subsets of S with 2 elements</span>
+    <span class="s1">print(parties(S))  </span><span class="s0"># toutes les parties de S - all subsets of S</span>
+
+<span class="s1">main()</span>
+
+
+</pre>
+</body>
 </html>

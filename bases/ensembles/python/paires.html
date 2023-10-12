@@ -1,50 +1,39 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   ens3.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,0,255); }
-.s4 { color: rgb(0,128,0); font-weight: bold; }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #0033b3;}
+.s1 { color: #080808;}
+.s2 { color: #8c8c8c; font-style: italic;}
+.s3 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># -*- coding: utf_8 -*-</span><span class="s1"> 
-</span><span class="s0">#python  version 3.4</span><span class="s1"> 
- 
-</span><span class="s0"># liste les paires d'un ensemble</span><span class="s1"> 
- 
- 
-</span><span class="s2">def </span><span class="s1">Paires(E): 
-    L=[set([x,y]) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">E </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">E </span><span class="s2">if </span><span class="s1">y !=x] 
-    R=[] 
-    </span><span class="s2">for </span><span class="s1">z </span><span class="s2">in </span><span class="s1">L: </span><span class="s0">#elimination des doubles</span><span class="s1"> 
-        </span><span class="s2">if </span><span class="s1">z </span><span class="s2">not in </span><span class="s1">R: 
-            R.append(z) 
-    </span><span class="s2">return </span><span class="s1">R 
- 
-</span><span class="s2">def </span><span class="s1">main(): 
-    E=set([</span><span class="s3">1</span><span class="s1">,</span><span class="s3">2</span><span class="s1">,</span><span class="s3">3</span><span class="s1">,</span><span class="s3">4</span><span class="s1">]) 
-    </span><span class="s2">print </span><span class="s1">(Paires(E)) 
- 
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
-    main()</span></pre>
- </body>
+<pre><span class="s0">import </span><span class="s1">itertools  </span><span class="s2"># pour combinations</span>
+
+<span class="s2"># un objet frozenset est comme un objet set mais immuable</span>
+<span class="s2"># a frozenset is imumtable</span>
+<span class="s2"># les frozensets sont introduits ici parce que en Python les ensembles ne peuvent être éléments d'autres ensembles que s'ils sont immuables</span>
+<span class="s2"># We use frozensets here because Python sets can contain sets as elements only if they are immutable</span>
+<span class="s2"># itertools fournit une fonctions 'combinations' qui génère toutes les combinaisons d'un ensemble à k éléments</span>
+<span class="s2"># the itertools modu provides a 'combinations' function which generates all combinations with k elements of of set</span>
+<span class="s2"># notre fonction combinaisons ne fait que constituer la liste engendrée.</span>
+<span class="s2"># Our own 'combinaisons' juste create the list of these combinations</span>
+<span class="s0">def </span><span class="s1">combinaisons(E :set, k :int) -&gt;list:</span>
+    <span class="s0">return </span><span class="s1">list(itertools.combinations(E, k))</span>
+
+<span class="s2"># la fonction suivante calcule l'ensemble des parties de E ayant exactement k éléments</span>
+<span class="s2">#the following function lists all pairs of a given set</span>
+<span class="s0">def </span><span class="s1">paires(E :set) -&gt;set:</span>
+    <span class="s0">return </span><span class="s1">{frozenset(x) </span><span class="s0">for </span><span class="s1">x </span><span class="s0">in </span><span class="s1">combinaisons(E, </span><span class="s3">2</span><span class="s1">)}</span>
+
+<span class="s0">def </span><span class="s1">main():</span>
+    <span class="s1">S = {</span><span class="s3">1</span><span class="s1">, </span><span class="s3">2</span><span class="s1">, </span><span class="s3">3</span><span class="s1">, </span><span class="s3">4</span><span class="s1">}</span>
+    <span class="s1">print(paires(S))  </span><span class="s2"># parties de S à deux éléments</span>
+
+<span class="s1">main()</span>
+</pre>
+</body>
 </html>

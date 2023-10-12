@@ -1,54 +1,44 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   imrec.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,128,128); font-weight: bold; }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># version python3.4</span><span class="s1"> 
- 
-</span><span class="s0">#Trouver l'image réciproque d'une partie du but</span><span class="s1"> 
- 
-</span><span class="s0">#la relation</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">R(x,y): 
-    </span><span class="s2">return </span><span class="s1">x&lt;y; </span><span class="s0">#ordre alphabétique des caractères</span><span class="s1"> 
- 
-</span><span class="s0"># Calcule l'image réciproque de la partie Y de F</span><span class="s1"> 
-</span><span class="s0"># pour la relation R de E dans F</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">ImRec(Y,E,Rel): 
-    </span><span class="s2">return </span><span class="s1">set([x </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">E </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">Y </span><span class="s2">if </span><span class="s1">Rel(x,y)]) 
- 
- 
-</span><span class="s0">#Afficher l'image réciproque de Y</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">main(): 
-    E=set(</span><span class="s3">'abuvy'</span><span class="s1">) </span><span class="s0">#la source</span><span class="s1"> 
-    Y=set(</span><span class="s3">'bd'</span><span class="s1">) 
-    F=set(</span><span class="s3">'bdaz'</span><span class="s1">) </span><span class="s0"># le but</span><span class="s1"> 
-    print (Y,end=</span><span class="s3">":"</span><span class="s1">) 
-    print (ImRec(Y,E,R))</span><span class="s0">#affichage standard en tant qu'objet Set</span><span class="s1"> 
-      
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
-    main() 
-    </span></pre>
- </body>
+<pre><span class="s0"># version python3.8</span>
+<span class="s0"># Trouver l'image réciproque d'une partie du but</span>
+<span class="s0"># find preimage of a subset of the codomain</span>
+
+<span class="s0"># la relation - the relation</span>
+<span class="s2">def </span><span class="s1">R(x :str, y :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">x &lt; y;  </span><span class="s0"># ordre alphabétique des caractères- alphabetic ordzer</span>
+
+
+<span class="s0"># Calcule l'image réciproque de la partie Y de F - compute the preimage of subset y</span>
+<span class="s0"># pour la relation Rel de E dans F - for relation Rel from E to F</span>
+<span class="s2">def </span><span class="s1">ImRec(Y :set, E :set, Rel :callable) -&gt;set:</span>
+    <span class="s1">L= {(x,y) </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">E </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">Y </span><span class="s2">if </span><span class="s1">Rel(x,y)}</span>
+    <span class="s2">return </span><span class="s1">{z[</span><span class="s3">0</span><span class="s1">] </span><span class="s2">for </span><span class="s1">z </span><span class="s2">in </span><span class="s1">L}</span>
+
+
+<span class="s0"># Afficher l'image réciproque de Y- print preimage of Y</span>
+<span class="s2">def </span><span class="s1">main():</span>
+    <span class="s1">E = set(</span><span class="s4">'abuvy'</span><span class="s1">)  </span><span class="s0"># la source</span>
+    <span class="s1">Y = set(</span><span class="s4">'bd'</span><span class="s1">)</span>
+    <span class="s1">F = set(</span><span class="s4">'bdaz'</span><span class="s1">)  </span><span class="s0"># le but</span>
+    <span class="s1">print(</span><span class="s4">&quot;Imrec&quot;</span><span class="s1">,Y, end=</span><span class="s4">&quot;=&quot;</span><span class="s1">)</span>
+    <span class="s1">print(ImRec(Y, E, R))  </span><span class="s0"># affichage standard en tant qu'objet Set</span>
+
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
 </html>
