@@ -1,67 +1,54 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   genperms.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,0,255); }
-.s4 { color: rgb(0,128,128); font-weight: bold; }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #1750eb;}
+.s4 { color: #067d17;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># version python 3.4</span><span class="s1"> 
- 
-</span><span class="s0"># génération des permutations d'un ensemble fini</span><span class="s1"> 
-</span><span class="s0"># par un procédé itératif utilisant les générateurs de python</span><span class="s1"> 
-</span><span class="s0"># fonction d'insertion</span><span class="s1"> 
- 
-</span><span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce 
- 
-</span><span class="s2">def </span><span class="s1">ins(X,i,L): 
-    R=L[:] </span><span class="s0">#copie de L</span><span class="s1"> 
-    R.insert(i,X) </span><span class="s0"># insertion de X à l'index i dans R</span><span class="s1"> 
-    </span><span class="s2">return </span><span class="s1">R 
- 
-</span><span class="s0"># fait tourner X dans L à toutes les positions</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">turn (X,L): 
-    </span><span class="s2">return </span><span class="s1">[ins(X,i,L) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,len(L)+</span><span class="s3">1</span><span class="s1">)] 
- 
-</span><span class="s0"># un générateur</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">permutations(): 
-    i,P=</span><span class="s3">0</span><span class="s1">,[[]] 
-    </span><span class="s2">yield </span><span class="s1">P </span><span class="s0"># stoppe l'exécution pour la reprendre à cet endroit précis</span><span class="s1"> 
-    </span><span class="s2">while True</span><span class="s1">: </span><span class="s0"># fait passer d'une génération à la suivante</span><span class="s1"> 
-        i=i+</span><span class="s3">1</span><span class="s1"> 
-        Q=[turn(i,X) </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">P] 
-        P=reduce( </span><span class="s2">lambda </span><span class="s1">x,y:x+y,Q) </span><span class="s0"># concaténation à répétition</span><span class="s1"> 
-        </span><span class="s2">yield </span><span class="s1">P </span><span class="s0">#stoppe l'exécution pour la reprendre à cet endroit précis</span><span class="s1"> 
- 
-</span><span class="s2">def </span><span class="s1">main(): 
-    Perm=permutations() 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">,</span><span class="s3">6</span><span class="s1">): </span><span class="s0"># permutations d'un ensemble à 5 éléments</span><span class="s1"> 
-        X=next(Perm) 
-    print (len(X)) 
-    print (X) 
- 
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">: 
-    main() 
-</span></pre>
- </body>
+<pre><span class="s0"># version python 3.8</span>
+<span class="s0"># génération des permutations d'un ensemble fini</span>
+<span class="s0"># generation of permutations of a finite set</span>
+<span class="s0"># par un procédé itératif utilisant les générateurs de python</span>
+<span class="s0"># by an iterative process using a generator</span>
+
+<span class="s2">from </span><span class="s1">functools </span><span class="s2">import </span><span class="s1">reduce</span>
+
+<span class="s0">#fonction d'insertion - insert function</span>
+<span class="s2">def </span><span class="s1">ins(X :int, i :int, L :list)-&gt;list:</span>
+    <span class="s1">R = L[:]  </span><span class="s0"># copie de L - copy of L</span>
+    <span class="s1">R.insert(i, X)  </span><span class="s0"># insertion de X à l'index i dans R - insert X at index i in L</span>
+    <span class="s2">return </span><span class="s1">R</span>
+
+<span class="s0"># fait tourner X dans L à toutes les positions</span>
+<span class="s0"># rotate x in L at all possible positions</span>
+<span class="s2">def </span><span class="s1">turn(X :int, L : list)-&gt;list:</span>
+    <span class="s2">return </span><span class="s1">[ins(X, i, L) </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, len(L) + </span><span class="s3">1</span><span class="s1">)]</span>
+
+<span class="s0"># le générateur - the generator</span>
+<span class="s2">def </span><span class="s1">permutations()-&gt;list:</span>
+    <span class="s1">i, P = </span><span class="s3">0</span><span class="s1">, [[]]</span>
+    <span class="s2">yield </span><span class="s1">P  </span><span class="s0"># stoppe l'exécution pour la reprendre à cet endroit précis- stop execution to restart at this precise point</span>
+    <span class="s2">while True</span><span class="s1">:  </span><span class="s0"># fait passer d'une génération à la suivante - allows to pass from one generation to next one</span>
+        <span class="s1">i = i + </span><span class="s3">1</span>
+        <span class="s1">Q = [turn(i, X) </span><span class="s2">for </span><span class="s1">X </span><span class="s2">in </span><span class="s1">P]</span>
+        <span class="s1">P = reduce(</span><span class="s2">lambda </span><span class="s1">x, y: x + y, Q)  </span><span class="s0"># concaténation à répétition - repeated concatenation</span>
+        <span class="s2">yield </span><span class="s1">P  </span><span class="s0"># stoppe l'exécution pour la reprendre à cet endroit précis - stops executions and return result</span>
+
+<span class="s2">def </span><span class="s1">main(): </span><span class="s0">#fonction principale - main function</span>
+    <span class="s1">Perm = permutations()</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">6</span><span class="s1">):  </span><span class="s0"># permutations d'un ensemble à 5 éléments - permutations of a set with 6 elements</span>
+        <span class="s1">X = next(Perm)</span>
+    <span class="s1">print(len(X))</span>
+    <span class="s1">print(X)</span>
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s4">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span></pre>
+</body>
 </html>

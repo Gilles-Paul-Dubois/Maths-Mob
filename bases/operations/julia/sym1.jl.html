@@ -1,66 +1,60 @@
 <html>
-
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-<title>sym1.jl</title>
+<head>
+<title>test.jl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
-.s0 { color: #080808;}
-.s1 { color: #1750eb;}
-.s2 { color: #8c8c8c; font-style: italic;}
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #1750eb;}
 .s3 { color: #0033b3;}
 .s4 { color: #067d17;}
 </style>
 </head>
 <body bgcolor="#ffffff">
 
-<pre>
-<span class="s0">n=</span><span class="s1">4</span>
-<span class="s0">E=collect(</span><span class="s1">0</span><span class="s0">:n)</span>
-<span class="s0">E2=Set(collect(Base.product(E,E)))</span>
+<pre><span class="s0"># julia 1.6</span>
+<span class="s0"># neutre - éléments symétriques</span>
+<span class="s0"># neutral element - inverses</span>
 
-<span class="s2">#génération d'une loi avec élément neutre</span>
-<span class="s3">function </span><span class="s0">genere2()</span>
-    <span class="s0">Table=Dict()</span>
-    <span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n</span>
-        <span class="s3">for </span><span class="s0">j </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n</span>
-            <span class="s0">Table[(i,j)]=(i+j)%(n+</span><span class="s1">1</span><span class="s0">)</span>
+<span class="s1">n=</span><span class="s2">4</span>
+<span class="s1">E=collect(</span><span class="s2">0</span><span class="s1">:n)</span>
+<span class="s1">E2=Set(collect(Base.product(E,E)))</span>
+
+<span class="s0"># génération d'une loi avec élément neutre</span>
+<span class="s0"># generation of an operation with neutral element</span>
+<span class="s3">function </span><span class="s1">genere2()</span>
+    <span class="s1">Table=Dict()</span>
+    <span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">0</span><span class="s1">:n</span>
+        <span class="s3">for </span><span class="s1">j </span><span class="s3">in </span><span class="s2">0</span><span class="s1">:n</span>
+            <span class="s1">Table[(i,j)]=(i+j)%(n+</span><span class="s2">1</span><span class="s1">)</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">return </span><span class="s0">Table</span>
+    <span class="s3">return </span><span class="s1">Table</span>
 <span class="s3">end</span>
 
-<span class="s0">Table2=genere2()</span>
+<span class="s1">Table2=genere2()</span>
 
-<span class="s0">neutre(x,T)= all([T[(x,i)]==i &amp;&amp; T[(i,x)]==i </span><span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n])</span>
+<span class="s1">neutre(x,T)= all([T[(x,i)]==i &amp;&amp; T[(i,x)]==i </span><span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">0</span><span class="s1">:n])</span>
 
-<span class="s3">function </span><span class="s0">TrouveNeutre(T)</span>
-    <span class="s3">for </span><span class="s0">x </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n</span>
-        <span class="s3">if </span><span class="s0">neutre(x,T)</span>
-            <span class="s0">println(x)</span>
+<span class="s3">function </span><span class="s1">TrouveNeutre(T) </span><span class="s0">#finds neutral</span>
+    <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s2">0</span><span class="s1">:n</span>
+        <span class="s3">if </span><span class="s1">neutre(x,T)</span>
+            <span class="s1">println(x)</span>
          <span class="s3">end</span>
      <span class="s3">end</span>
 <span class="s3">end</span>
 
-<span class="s3">function </span><span class="s0">main()</span>
-    <span class="s0">println(</span><span class="s4">&quot;Neutre de Table2&quot;</span><span class="s0">)</span>
-    <span class="s0">TrouveNeutre(Table2) </span><span class="s2"># affiche 0</span>
-    <span class="s2">#recherche des symétriques</span>
-    <span class="s0">println(</span><span class="s4">&quot;couples de symétriques&quot;</span><span class="s0">)</span>
-    <span class="s0">S= ((i,j) </span><span class="s3">for </span><span class="s0">i </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n </span><span class="s3">for </span><span class="s0">j </span><span class="s3">in </span><span class="s1">0</span><span class="s0">:n </span><span class="s3">if </span><span class="s0">Table2[(i,j)]==</span><span class="s1">0 </span><span class="s0">&amp;&amp; Table2[(j,i)]==</span><span class="s1">0 </span><span class="s0">&amp;&amp; i&lt;=j)</span>
-    <span class="s3">for </span><span class="s0">c </span><span class="s3">in </span><span class="s0">S</span>
-       <span class="s0">println(c)</span>
+<span class="s3">function </span><span class="s1">main() </span><span class="s0">#fonction principale - main function</span>
+    <span class="s1">println(</span><span class="s4">&quot;Neutre de Table2&quot;</span><span class="s1">)</span>
+    <span class="s1">TrouveNeutre(Table2) </span><span class="s0"># affiche 0 -displays 0</span>
+    <span class="s0">#recherche des symétriques - looking for inverses</span>
+    <span class="s1">println(</span><span class="s4">&quot;couples de symétriques&quot;</span><span class="s1">)</span>
+    <span class="s1">S= ((i,j) </span><span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">0</span><span class="s1">:n </span><span class="s3">for </span><span class="s1">j </span><span class="s3">in </span><span class="s2">0</span><span class="s1">:n </span><span class="s3">if </span><span class="s1">Table2[(i,j)]==</span><span class="s2">0 </span><span class="s1">&amp;&amp; Table2[(j,i)]==</span><span class="s2">0 </span><span class="s1">&amp;&amp; i&lt;=j)</span>
+    <span class="s3">for </span><span class="s1">c </span><span class="s3">in </span><span class="s1">S</span>
+       <span class="s1">println(c)</span>
     <span class="s3">end</span>
 <span class="s3">end</span>
 
-<span class="s0">main()</span></pre>
+<span class="s1">main()</span></pre>
 </body>
 </html>

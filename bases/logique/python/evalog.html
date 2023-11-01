@@ -1,131 +1,116 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   evalog.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,128,128); font-weight: bold; }
-.s4 { color: rgb(0,0,255); }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># Python version 3.4</span><span class="s1"> 
-</span><span class="s0">#Programme d'évaluation de formules du calcul propositionnel</span><span class="s1"> 
- 
-</span><span class="s2">def </span><span class="s1">ConstantP(X): 
-    </span><span class="s2">return </span><span class="s1">X==</span><span class="s3">'0' </span><span class="s2">or </span><span class="s1">X==</span><span class="s3">'1'</span><span class="s1"> 
- 
-</span><span class="s2">def </span><span class="s1">VariableP(X): 
-    </span><span class="s2">return  </span><span class="s1">len(X)==</span><span class="s4">1 </span><span class="s2">and</span><span class="s3">'A' </span><span class="s1">&lt;=X &lt;=</span><span class="s3">'Z'</span><span class="s1"> 
- 
-</span><span class="s2">def </span><span class="s1">AtomP(X): 
-    </span><span class="s2">return </span><span class="s1">ConstantP(X) </span><span class="s2">or </span><span class="s1">VariableP(X) 
- 
-</span><span class="s2">def </span><span class="s1">ProP (X): 
-    </span><span class="s2">if </span><span class="s1">AtomP(X): 
-        </span><span class="s2">return True</span><span class="s1"> 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'('</span><span class="s1">: 
-        n=</span><span class="s4">1</span><span class="s1"> 
-        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">,len(X)): 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'('</span><span class="s1">: 
-                n=n+</span><span class="s4">1</span><span class="s1"> 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">')'</span><span class="s1">: 
-                n=n-</span><span class="s4">1</span><span class="s1"> 
-                </span><span class="s2">if </span><span class="s1">n==</span><span class="s4">0</span><span class="s1">: 
-                    </span><span class="s2">return </span><span class="s1">ProP(</span><span class="s3">"1"</span><span class="s1">+X[i+</span><span class="s4">1</span><span class="s1">:]) 
-        </span><span class="s2">return False</span><span class="s1"> 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]): 
-        </span><span class="s2">return True</span><span class="s1"> 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i+</span><span class="s4">1</span><span class="s1">:]): 
-            </span><span class="s2">return True</span><span class="s1"> 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i+</span><span class="s4">1</span><span class="s1">:]): 
-            </span><span class="s2">return True</span><span class="s1"> 
- 
-</span><span class="s0">#l'environnement en cours P vraie et Q fausse</span><span class="s1"> 
-Envir={</span><span class="s3">'P'</span><span class="s1">:</span><span class="s4">1</span><span class="s1">,</span><span class="s3">'Q'</span><span class="s1">:</span><span class="s4">0</span><span class="s1">} 
- 
- 
-</span><span class="s0"># Evaluation constantes logiques 0= Faux 1=Vrai</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">Eval_Constant(X): 
-    </span><span class="s2">if </span><span class="s1">X==</span><span class="s3">'0'</span><span class="s1">: 
-        </span><span class="s2">return </span><span class="s4">0</span><span class="s1"> 
-    </span><span class="s2">else</span><span class="s1">: 
-        </span><span class="s2">return </span><span class="s4">1</span><span class="s1"> 
- 
-</span><span class="s0">#Evaluation variables propositionnelles</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">Eval_Variable(X,Env): 
-    </span><span class="s2">return  </span><span class="s1">Env[X] 
- 
-</span><span class="s0">#Evaluation propositions atomiques</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">Eval_Atom(X,Env): 
-    </span><span class="s2">if </span><span class="s1">ConstantP(X): 
-        </span><span class="s2">return </span><span class="s1">Eval_Constant(X) 
-    </span><span class="s2">else</span><span class="s1">: 
-        </span><span class="s2">return </span><span class="s1">Eval_Variable(X,Env) 
- 
-</span><span class="s0"># Evaluation récursive des propositions</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">Eval_Pro(X,Env): 
-    </span><span class="s2">if </span><span class="s1">AtomP(X): 
-        </span><span class="s2">return </span><span class="s1">Eval_Atom(X,Env) 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'('</span><span class="s1">: </span><span class="s0">#cas des parenthèses</span><span class="s1"> 
-        n=</span><span class="s4">1</span><span class="s1"> 
-        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">,len(X)): 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'('</span><span class="s1">: 
-                n=n+</span><span class="s4">1 </span><span class="s0">#incrémente les parenthèses ouvrantes</span><span class="s1"> 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">')'</span><span class="s1">: 
-                n=n-</span><span class="s4">1 </span><span class="s0">#décrémente les parenthèses fermantes</span><span class="s1"> 
-                </span><span class="s2">if </span><span class="s1">n==</span><span class="s4">0</span><span class="s1">: </span><span class="s0"># on a trouvé la parenthèse fermante de la première</span><span class="s1"> 
-                    </span><span class="s0">#on remplace la première expression parenthésée par son évaluation</span><span class="s1"> 
-                    </span><span class="s2">return </span><span class="s1">Eval_Pro(str(Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:i],Env))+X[i+</span><span class="s4">1</span><span class="s1">:],Env) 
-        </span><span class="s2">return False</span><span class="s1"> 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'('</span><span class="s2">and </span><span class="s1">X[len(X)-</span><span class="s4">1</span><span class="s1">]==</span><span class="s3">')'</span><span class="s1">: 
-        </span><span class="s2">return </span><span class="s1">Eval_Pro (X[</span><span class="s4">1</span><span class="s1">:len(X)-</span><span class="s4">1</span><span class="s1">],Env) 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]): 
-        </span><span class="s2">if </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:],Env)==</span><span class="s4">0</span><span class="s1">: 
-            </span><span class="s2">return </span><span class="s4">1</span><span class="s1"> 
-        </span><span class="s2">if </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:],Env)==</span><span class="s4">1</span><span class="s1">: 
-            </span><span class="s2">return </span><span class="s4">0</span><span class="s1"> 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i+</span><span class="s4">1</span><span class="s1">:]): 
-            </span><span class="s2">return </span><span class="s1">Eval_Pro(X[</span><span class="s4">0</span><span class="s1">:i],Env)*Eval_Pro (X[i+</span><span class="s4">1</span><span class="s1">:],Env) 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i+</span><span class="s4">1</span><span class="s1">:]): 
-            </span><span class="s2">return </span><span class="s1">max(Eval_Pro(X[</span><span class="s4">0</span><span class="s1">:i],Env),Eval_Pro (X[i+</span><span class="s4">1</span><span class="s1">:],Env)) 
- 
- 
-</span><span class="s2">def </span><span class="s1">main(): 
-    print (Eval_Pro(</span><span class="s3">"0"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"1"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"P"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"Q"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"-P"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"(P)"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"P&amp;Q"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"P|Q"</span><span class="s1">,Envir)) 
-    print (Eval_Pro(</span><span class="s3">"(P|Q)&amp;P"</span><span class="s1">,Envir)) 
- 
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
-    main() 
- 
-</span></pre>
- </body>
+<pre><span class="s0"># Python version 3.8</span>
+<span class="s0"># Programme d'évaluation de formules du calcul propositionnel</span>
+<span class="s0"># Evaluating formulas of propositional calculus</span>
+
+<span class="s2">def </span><span class="s1">ConstantP(X :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">X == </span><span class="s3">'0' </span><span class="s2">or </span><span class="s1">X == </span><span class="s3">'1'</span>
+
+<span class="s2">def </span><span class="s1">VariableP(X :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">len(X) == </span><span class="s4">1 </span><span class="s2">and </span><span class="s3">'A' </span><span class="s1">&lt;= X &lt;= </span><span class="s3">'Z'</span>
+
+<span class="s2">def </span><span class="s1">AtomP(X :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">ConstantP(X) </span><span class="s2">or </span><span class="s1">VariableP(X)</span>
+
+<span class="s2">def </span><span class="s1">ProP(X :str)-&gt;bool:</span>
+    <span class="s2">if </span><span class="s1">AtomP(X):</span>
+        <span class="s2">return True</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:</span>
+        <span class="s1">n = </span><span class="s4">1</span>
+        <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, len(X)):</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'('</span><span class="s1">:</span>
+                <span class="s1">n = n + </span><span class="s4">1</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">')'</span><span class="s1">:</span>
+                <span class="s1">n = n - </span><span class="s4">1</span>
+                <span class="s2">if </span><span class="s1">n == </span><span class="s4">0</span><span class="s1">:</span>
+                    <span class="s2">return </span><span class="s1">ProP(</span><span class="s3">&quot;1&quot; </span><span class="s1">+ X[i + </span><span class="s4">1</span><span class="s1">:])</span>
+        <span class="s2">return False</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]):</span>
+        <span class="s2">return True</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return True</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return True</span>
+
+ <span class="s0"># l'environnement en cours P vraie et Q fausse - current environment P True and Q Fale</span>
+<span class="s1">Envir = {</span><span class="s3">'P'</span><span class="s1">: </span><span class="s4">1</span><span class="s1">, </span><span class="s3">'Q'</span><span class="s1">: </span><span class="s4">0</span><span class="s1">}</span>
+
+<span class="s0"># Evaluation constantes logiques 0= Faux 1=Vrai</span>
+<span class="s0"># Evaluation of logical constants 0=False 1=True</span>
+<span class="s2">def </span><span class="s1">Eval_Constant(X :str)-&gt;int:</span>
+    <span class="s2">if </span><span class="s1">X == </span><span class="s3">'0'</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s4">0</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s4">1</span>
+
+<span class="s0"># Evaluation variables propositionnelles - Evaluation of variables</span>
+<span class="s2">def </span><span class="s1">Eval_Variable(X :str, Env :dict)-&gt;int:</span>
+    <span class="s2">return </span><span class="s1">Env[X]</span>
+
+<span class="s0"># Evaluation propositions atomiques - Evaluations of atoms</span>
+<span class="s2">def </span><span class="s1">Eval_Atom(X :str, Env :dict)-&gt;int:</span>
+    <span class="s2">if </span><span class="s1">ConstantP(X):</span>
+        <span class="s2">return </span><span class="s1">Eval_Constant(X)</span>
+    <span class="s2">else</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">Eval_Variable(X, Env)</span>
+
+<span class="s0"># Evaluation récursive des propositions - recursive evaluation of propositions</span>
+<span class="s2">def </span><span class="s1">Eval_Pro(X, Env):</span>
+    <span class="s2">if </span><span class="s1">AtomP(X):</span>
+        <span class="s2">return </span><span class="s1">Eval_Atom(X, Env)</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:  </span><span class="s0"># cas des parenthèses - case of parentheses</span>
+        <span class="s1">n = </span><span class="s4">1</span>
+        <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, len(X)):</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'('</span><span class="s1">:</span>
+                <span class="s1">n = n + </span><span class="s4">1  </span><span class="s0"># incrémente les parenthèses ouvrantes - increment counter of opening par.</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">')'</span><span class="s1">:</span>
+                <span class="s1">n = n - </span><span class="s4">1  </span><span class="s0"># décrémente les parenthèses fermantes - decrement counter of closing par.</span>
+                <span class="s2">if </span><span class="s1">n == </span><span class="s4">0</span><span class="s1">:  </span><span class="s0"># on a trouvé la parenthèse fermante de la première - found closing pa. matching the first one</span>
+                    <span class="s0"># on remplace la première expression parenthésée par son évaluation - replace first parenthesized exp. by its value</span>
+                    <span class="s2">return </span><span class="s1">Eval_Pro(str(Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:i], Env)) + X[i + </span><span class="s4">1</span><span class="s1">:], Env)</span>
+        <span class="s2">return False</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'(' </span><span class="s2">and </span><span class="s1">X[len(X) - </span><span class="s4">1</span><span class="s1">] == </span><span class="s3">')'</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:len(X) - </span><span class="s4">1</span><span class="s1">], Env)</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]):</span>
+        <span class="s2">if </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:], Env) == </span><span class="s4">0</span><span class="s1">:</span>
+            <span class="s2">return </span><span class="s4">1</span>
+        <span class="s2">if </span><span class="s1">Eval_Pro(X[</span><span class="s4">1</span><span class="s1">:], Env) == </span><span class="s4">1</span><span class="s1">:</span>
+            <span class="s2">return </span><span class="s4">0</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return </span><span class="s1">Eval_Pro(X[</span><span class="s4">0</span><span class="s1">:i], Env) * Eval_Pro(X[i + </span><span class="s4">1</span><span class="s1">:], Env)</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return </span><span class="s1">max(Eval_Pro(X[</span><span class="s4">0</span><span class="s1">:i], Env), Eval_Pro(X[i + </span><span class="s4">1</span><span class="s1">:], Env))</span>
+
+<span class="s2">def </span><span class="s1">main():</span><span class="s0">#prposition principale - main function</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;0&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;1&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;P&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;Q&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;-P&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;(P)&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;P&amp;Q&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;P|Q&quot;</span><span class="s1">, Envir))</span>
+    <span class="s1">print(Eval_Pro(</span><span class="s3">&quot;(P|Q)&amp;P&quot;</span><span class="s1">, Envir))</span>
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
 </html>

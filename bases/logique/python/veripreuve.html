@@ -1,16 +1,6 @@
 <html>
-
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-<title>main.py</title>
+<head>
+<title>test.py</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 .s0 { color: #8c8c8c; font-style: italic;}
@@ -22,19 +12,21 @@
 </head>
 <body bgcolor="#ffffff">
 
-<pre><span class="s0"># Python version 3.4</span>
+<pre><span class="s0"># Python version 3.8</span>
+<span class="s0"># vérification de preuve</span>
+<span class="s0"># proof checking</span>
 
 <span class="s0"># analyseur syntaxique - parser</span>
-<span class="s2">def </span><span class="s1">ConstantP(X):</span>
+<span class="s2">def </span><span class="s1">ConstantP(X :str)-&gt;bool:</span>
     <span class="s2">return </span><span class="s1">X == </span><span class="s3">'0' </span><span class="s2">or </span><span class="s1">X == </span><span class="s3">'1'</span>
 
-<span class="s2">def </span><span class="s1">VariableP(X):</span>
+<span class="s2">def </span><span class="s1">VariableP(X :str)-&gt;bool:</span>
     <span class="s2">return </span><span class="s1">len(X) == </span><span class="s4">1 </span><span class="s2">and </span><span class="s3">'A' </span><span class="s1">&lt;= X &lt;= </span><span class="s3">'Z'</span>
 
-<span class="s2">def </span><span class="s1">AtomP(X):</span>
+<span class="s2">def </span><span class="s1">AtomP(X :str)-&gt;bool:</span>
     <span class="s2">return </span><span class="s1">ConstantP(X) </span><span class="s2">or </span><span class="s1">VariableP(X)</span>
 
-<span class="s2">def </span><span class="s1">ProP(X):</span>
+<span class="s2">def </span><span class="s1">ProP(X :str)-&gt;bool:</span>
     <span class="s2">if </span><span class="s1">AtomP(X):</span>
         <span class="s2">return True</span>
     <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:</span>
@@ -55,26 +47,25 @@
     <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
         <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
             <span class="s2">return True</span>
- <span class="s0">#fin de l'analyseur - end of parser</span>
-
+<span class="s0">#fin de l'analyseur - end of parser</span>
 
 <span class="s0"># Evaluator - evaluateur</span>
-<span class="s2">def </span><span class="s1">Eval_Constant(X):</span>
+<span class="s2">def </span><span class="s1">Eval_Constant(X :str)-&gt;int:</span>
     <span class="s2">if </span><span class="s1">X == </span><span class="s3">'0'</span><span class="s1">:</span>
         <span class="s2">return </span><span class="s4">0</span>
     <span class="s2">else</span><span class="s1">:</span>
         <span class="s2">return </span><span class="s4">1</span>
 
-<span class="s2">def </span><span class="s1">Eval_Variable(X, Env):</span>
+<span class="s2">def </span><span class="s1">Eval_Variable(X :str, Env :dict)-&gt;bool:</span>
     <span class="s2">return </span><span class="s1">Env[X]</span>
 
-<span class="s2">def </span><span class="s1">Eval_Atom(X, Env):</span>
+<span class="s2">def </span><span class="s1">Eval_Atom(X :str, Env :dict)-&gt;int:</span>
     <span class="s2">if </span><span class="s1">ConstantP(X):</span>
         <span class="s2">return </span><span class="s1">Eval_Constant(X)</span>
     <span class="s2">else</span><span class="s1">:</span>
         <span class="s2">return </span><span class="s1">Eval_Variable(X, Env)</span>
 
-<span class="s2">def </span><span class="s1">Eval_Pro(X, Env):</span>
+<span class="s2">def </span><span class="s1">Eval_Pro(X :str, Env :dict)-&gt;int:</span>
     <span class="s2">if </span><span class="s1">AtomP(X):</span>
         <span class="s2">return </span><span class="s1">Eval_Atom(X, Env)</span>
     <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:</span>
@@ -102,10 +93,9 @@
             <span class="s2">return </span><span class="s1">max(Eval_Pro(X[</span><span class="s4">0</span><span class="s1">:i], Env), Eval_Pro(X[i + </span><span class="s4">1</span><span class="s1">:], Env))</span>
  <span class="s0"># fin du module d'évaluation - end of evaluator</span>
 
-
 <span class="s0"># Calcule l'ensemble des variables figurant dans la formule F</span>
 <span class="s0">#set of variables in F</span>
-<span class="s2">def </span><span class="s1">VariablesDans(F):</span>
+<span class="s2">def </span><span class="s1">VariablesDans(F :str)-&gt;set:</span>
     <span class="s2">if </span><span class="s1">ConstantP(F):</span>
         <span class="s2">return </span><span class="s1">set([])</span>
     <span class="s2">if </span><span class="s1">VariableP(F):</span>
@@ -123,7 +113,7 @@
 
  <span class="s0"># Calcule les variables communes à toute une liste de formules</span>
  <span class="s0"># variables common to a list of formulas</span>
-<span class="s2">def </span><span class="s1">VarCom(L):</span>
+<span class="s2">def </span><span class="s1">VarCom(L :list)-&gt;set:</span>
     <span class="s1">VC = VariablesDans(L[</span><span class="s4">0</span><span class="s1">])</span>
     <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, len(L)):</span>
         <span class="s1">VC = VC | VariablesDans(L[i])</span>
@@ -132,13 +122,13 @@
 <span class="s0"># les deux fonctions suivantes ont pour but de lister tous les environnements possibles</span>
 <span class="s0"># pour l'ensemble des variables entrant dans une formule</span>
 <span class="s0">#two following functions list all possible environments for the set of variables of a formula</span>
-<span class="s2">def </span><span class="s1">power(n, F):</span>
+<span class="s2">def </span><span class="s1">power(n :int, F :str)-&gt;list:</span>
     <span class="s1">G = [[x] </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">F]</span>
     <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, n - </span><span class="s4">1</span><span class="s1">):</span>
         <span class="s1">G = [y + [x] </span><span class="s2">for </span><span class="s1">y </span><span class="s2">in </span><span class="s1">G </span><span class="s2">for </span><span class="s1">x </span><span class="s2">in </span><span class="s1">F]</span>
     <span class="s2">return </span><span class="s1">G</span>
 
-<span class="s2">def </span><span class="s1">ListEnv(S):</span>
+<span class="s2">def </span><span class="s1">ListEnv(S :set)-&gt;list:</span>
     <span class="s1">R = []</span>
     <span class="s1">K = list(S)</span>
     <span class="s1">V = power(len(S), [</span><span class="s4">0</span><span class="s1">, </span><span class="s4">1</span><span class="s1">])</span>
@@ -150,29 +140,26 @@
     <span class="s2">return </span><span class="s1">R</span>
 
 <span class="s0"># Précise si un environnement satisfait (vérifie une formule)</span>
-<span class="s0"># checks if evironment E staisfies formula F</span>
-<span class="s2">def </span><span class="s1">RendVraiUne(F, E):</span>
+<span class="s0"># checks if evironment E satisfies formula F</span>
+<span class="s2">def </span><span class="s1">RendVraiUne(F :str, E :dict)-&gt;bool:</span>
     <span class="s2">return </span><span class="s1">Eval_Pro(F, E) == </span><span class="s4">1</span>
-
 
 <span class="s0"># Précise si un environnement satisfait à toute une liste de formules</span>
 <span class="s0"># checks if E satisfies all formulas in a list</span>
-<span class="s2">def </span><span class="s1">VerifieToutes(LF, E):</span>
+<span class="s2">def </span><span class="s1">VerifieToutes(LF :list, E :dict)-&gt;bool:</span>
     <span class="s2">for </span><span class="s1">F </span><span class="s2">in </span><span class="s1">LF:</span>
         <span class="s2">if not </span><span class="s1">RendVraiUne(F, E):</span>
             <span class="s2">return False</span>
     <span class="s2">return True</span>
 
-
 <span class="s0"># Retourne tous les environnements d'une liste LE satisfaisant une liste de formules LF</span>
 <span class="s0"># return all environments satisfying list of formulas</span>
-<span class="s2">def </span><span class="s1">Valide(LF, LE):</span>
+<span class="s2">def </span><span class="s1">Valide(LF :list, LE :list) -&gt;list:</span>
     <span class="s2">return </span><span class="s1">[E </span><span class="s2">for </span><span class="s1">E </span><span class="s2">in </span><span class="s1">LE </span><span class="s2">if </span><span class="s1">VerifieToutes(LF, E)]</span>
-
 
 <span class="s0"># vérifie si une conclusion C est conséquence logique d'une suite de prémisses SP</span>
 <span class="s0"># check if conclusion C is logical consequence of a sequence of premises</span>
-<span class="s2">def </span><span class="s1">Preuve(SP, C):</span>
+<span class="s2">def </span><span class="s1">Preuve(SP :list, C :str)-&gt;bool:</span>
     <span class="s1">VC = VarCom(SP)</span>
     <span class="s1">ENVS = ListEnv(VC)</span>
     <span class="s1">EVLF = Valide(SP, ENVS)</span>
@@ -181,8 +168,7 @@
             <span class="s2">return False</span>
     <span class="s2">return True</span>
 
-
-<span class="s2">def </span><span class="s1">main():</span>
+<span class="s2">def </span><span class="s1">main(): </span><span class="s0">#fonction principale -main function</span>
     <span class="s1">F1 = </span><span class="s3">&quot;(R&amp;S)|(-P)&quot;</span>
     <span class="s1">F2 = </span><span class="s3">&quot;-R&quot;</span>
     <span class="s1">SP = [F1, F2]</span>
@@ -190,10 +176,8 @@
     <span class="s1">VC = VarCom(SP)</span>
     <span class="s1">print(Preuve(SP, C))</span>
 
-
 <span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">:</span>
     <span class="s1">main()</span>
-
 </pre>
 </body>
 </html>

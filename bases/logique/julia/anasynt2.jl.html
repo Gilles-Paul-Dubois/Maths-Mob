@@ -1,16 +1,6 @@
 <html>
-
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-<title>cons1.jl</title>
+<head>
+<title>test.jl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 .s0 { color: #8c8c8c; font-style: italic;}
@@ -22,37 +12,39 @@
 </head>
 <body bgcolor="#ffffff">
 
-<pre><span class="s0">#les deux constantes Vrai et faux</span>
+<pre><span class="s0"># julia 1.6</span>
+<span class="s0"># analyseur syntaxique avec ajout des connecteurs implication (&gt;) et équivalence (#)</span>
+<span class="s0"># parser for formulas with 5 connectors not (!) and (&amp;) or (|) implies (&gt;) equivalent (#)</span>
+
+<span class="s0"># les deux constantes Vrai et Faux - both constants true and false</span>
 <span class="s1">constP(f) = length(f) == </span><span class="s2">1 </span><span class="s1">&amp;&amp; f[</span><span class="s2">1</span><span class="s1">] </span><span class="s3">in </span><span class="s4">&quot;VF&quot;</span>
-<span class="s0">#variable, toute autre lettre majuscule que V ou F</span>
+<span class="s0"># variable, toute autre lettre majuscule que V ou F - variable, any uppercase letter except V and F</span>
 <span class="s1">varP(f) = length(f) == </span><span class="s2">1 </span><span class="s1">&amp;&amp; f[</span><span class="s2">1</span><span class="s1">] </span><span class="s3">in </span><span class="s4">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span>
-<span class="s0">#test de parenthèsage</span>
+<span class="s0"># test de parenthèsage - are there parentheses</span>
 <span class="s1">inparP(f) = f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'(' </span><span class="s1">&amp;&amp; f[length(f)] == </span><span class="s4">')'</span>
-<span class="s0">#ramène l'expression entre parenthèses'</span>
+<span class="s0"># ramène l'expression entre parenthèses - returns formula between parentheses</span>
 <span class="s1">betweenpar(f) = f[</span><span class="s2">2</span><span class="s1">:length(f)-</span><span class="s2">1</span><span class="s1">]</span>
-<span class="s0"># variables distinctes dans la formule f</span>
 
-
-<span class="s3">function </span><span class="s1">parseP(f) </span><span class="s0">#analyseur syntaxique</span>
-    <span class="s3">if </span><span class="s1">constP(f) </span><span class="s0"># c'est une constante simple</span>
+<span class="s3">function </span><span class="s1">parseP(f) </span><span class="s0"># analyseur syntaxique - parser</span>
+    <span class="s3">if </span><span class="s1">constP(f) </span><span class="s0"># c'est une constante simple - simple constant</span>
         <span class="s3">return </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">]</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s1">varP(f) </span><span class="s0"># c'est une variable simple</span>
+    <span class="s3">if </span><span class="s1">varP(f) </span><span class="s0"># c'est une variable simple - simple variable</span>
         <span class="s3">return </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">]</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s1">inparP(f) </span><span class="s0"># l'expression est entre parenthèses'</span>
+    <span class="s3">if </span><span class="s1">inparP(f) </span><span class="s0"># l'expression est entre parenthèses - formula between parentheses</span>
         <span class="s1">a = parseP(betweenpar(f))</span>
         <span class="s3">if </span><span class="s1">a != nothing</span>
             <span class="s3">return </span><span class="s1">a</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'!' </span><span class="s0"># nous avons une négation</span>
+    <span class="s3">if </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'!' </span><span class="s0"># nous avons une négation - we have a negation</span>
         <span class="s1">a = parseP(f[</span><span class="s2">2</span><span class="s1">:end])</span>
         <span class="s3">if </span><span class="s1">a != nothing</span>
             <span class="s3">return </span><span class="s1">[</span><span class="s4">'!'</span><span class="s1">, a]</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s4">'&amp;' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une conjonction</span>
+    <span class="s3">if </span><span class="s4">'&amp;' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une conjonction - we have a conjunction</span>
         <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
             <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'&amp;'</span>
                 <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i-</span><span class="s2">1</span><span class="s1">])</span>
@@ -63,7 +55,7 @@
             <span class="s3">end</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s4">'|' </span><span class="s3">in </span><span class="s1">f </span><span class="s0">#nous avons une disjonction</span>
+    <span class="s3">if </span><span class="s4">'|' </span><span class="s3">in </span><span class="s1">f </span><span class="s0">#nous avons une disjonction - we have a disjunction</span>
         <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
             <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'|'</span>
                 <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i-</span><span class="s2">1</span><span class="s1">])</span>
@@ -74,7 +66,7 @@
             <span class="s3">end</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s4">'&gt;' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une implication</span>
+    <span class="s3">if </span><span class="s4">'&gt;' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une implication - we have an implication</span>
     <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
         <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'&gt;'</span>
             <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i-</span><span class="s2">1</span><span class="s1">])</span>
@@ -85,7 +77,7 @@
         <span class="s3">end</span>
     <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s4">'#' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une équivalence</span>
+    <span class="s3">if </span><span class="s4">'#' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une équivalence - we have an equivalence</span>
         <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
             <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'#'</span>
                 <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i-</span><span class="s2">1</span><span class="s1">])</span>
@@ -99,13 +91,12 @@
     <span class="s3">return </span><span class="s1">nothing</span>
 <span class="s3">end</span>
 
-<span class="s0"># fonction principale,</span>
+<span class="s0"># fonction principale - main function</span>
 <span class="s3">function </span><span class="s1">main()</span>
 <span class="s1">println(parseP(</span><span class="s4">&quot;((!B)&amp;A)|((C&gt;B)&amp;F)&quot;</span><span class="s1">))</span>
 <span class="s1">println(parseP(</span><span class="s4">&quot;(A&amp;B)#(!C)&quot;</span><span class="s1">))</span>
 <span class="s3">end</span>
 
-<span class="s1">main()</span>
-</pre>
+<span class="s1">main()</span></pre>
 </body>
 </html>

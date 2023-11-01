@@ -1,110 +1,107 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   sousform.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,0,128); font-weight: bold; }
-.s3 { color: rgb(0,128,128); font-weight: bold; }
-.s4 { color: rgb(0,0,255); }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #0033b3;}
+.s3 { color: #067d17;}
+.s4 { color: #1750eb;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># Python version 3.4</span><span class="s1"> 
-</span><span class="s0">#Programme de détermination des sous-formules d'une formule</span><span class="s1"> 
-</span><span class="s0">#Pour la logique propositionnelle du premier ordre</span><span class="s1"> 
-</span><span class="s0"># avec les seuls connecteurs non, et, ou</span><span class="s1"> 
-</span><span class="s0"># représentés respectivement par - , &amp;, |</span><span class="s1"> 
- 
-</span><span class="s0"># constantes logiques 0= Faux 1=Vrai</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">ConstantP(X): 
-    </span><span class="s2">return </span><span class="s1">X==</span><span class="s3">'0' </span><span class="s2">or </span><span class="s1">X==</span><span class="s3">'1'</span><span class="s1"> 
-</span><span class="s0">#variables propositionnelles</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">VariableP(X): 
-    </span><span class="s2">return  </span><span class="s1">len(X)==</span><span class="s4">1 </span><span class="s2">and </span><span class="s3">'A'</span><span class="s1">&lt;=X &lt;=</span><span class="s3">'Z'</span><span class="s1"> 
-</span><span class="s0">#propositions atomiques</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">AtomP(X): 
-    </span><span class="s2">return </span><span class="s1">ConstantP(X) </span><span class="s2">or </span><span class="s1">VariableP(X) 
- 
-</span><span class="s0">#teste si X est une proposition</span><span class="s1"> 
-</span><span class="s0"># fonction récursive</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">ProP (X): 
-    </span><span class="s2">if </span><span class="s1">AtomP(X): </span><span class="s0"># les atomes sont des propositions</span><span class="s1"> 
-        </span><span class="s2">return True</span><span class="s1"> 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'('</span><span class="s1">: </span><span class="s0">#cas des parenthèses</span><span class="s1"> 
-        n=</span><span class="s4">1</span><span class="s1"> 
-        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">,len(X)): 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'('</span><span class="s1">: 
-                n=n+</span><span class="s4">1 </span><span class="s0">#incrémente les parenthèses ouvrantes</span><span class="s1"> 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">')'</span><span class="s1">: 
-                n=n-</span><span class="s4">1 </span><span class="s0">#décrémente les parenthèses fermantes</span><span class="s1"> 
-                </span><span class="s2">if </span><span class="s1">n==</span><span class="s4">0</span><span class="s1">: </span><span class="s0"># on a trouvé la parenthèse fermante de la première</span><span class="s1"> 
-                    </span><span class="s0">#on remplace la première expression parenthésée par une constante 1</span><span class="s1"> 
-                    </span><span class="s2">return </span><span class="s1">ProP(</span><span class="s3">"1"</span><span class="s1">+X[i+</span><span class="s4">1</span><span class="s1">:]) 
-        </span><span class="s2">return False</span><span class="s1"> 
-    </span><span class="s0"># recherche si on a une négation (signe -)</span><span class="s1"> 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]): 
-        </span><span class="s2">return True</span><span class="s1"> 
-    </span><span class="s0"># recherche si on a une conjonction (signe &amp;)</span><span class="s1"> 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i+</span><span class="s4">1</span><span class="s1">:]): 
-            </span><span class="s2">return True</span><span class="s1"> 
-    </span><span class="s0"># recherche si on a une disjonction (signe |)</span><span class="s1"> 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i+</span><span class="s4">1</span><span class="s1">:]): 
-            </span><span class="s2">return True</span><span class="s1"> 
- 
-</span><span class="s0"># Fournit l'ensemble des sous-formules de X</span><span class="s1"> 
-</span><span class="s2">def </span><span class="s1">SousForm(X): 
-    </span><span class="s2">if </span><span class="s1">len(X)==</span><span class="s4">0</span><span class="s1">: 
-        </span><span class="s2">return </span><span class="s1">set([]) 
-    </span><span class="s2">if </span><span class="s1">AtomP(X): 
-        </span><span class="s2">return </span><span class="s1">set([X]) 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'('</span><span class="s1">: </span><span class="s0">#cas des parenthèses</span><span class="s1"> 
-        n=</span><span class="s4">1</span><span class="s1"> 
-        </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">,len(X)): 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'('</span><span class="s1">: 
-                n=n+</span><span class="s4">1 </span><span class="s0">#incrémente les parenthèses ouvrantes</span><span class="s1"> 
-            </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">')'</span><span class="s1">: 
-                n=n-</span><span class="s4">1 </span><span class="s0">#décrémente les parenthèses fermantes</span><span class="s1"> 
-                </span><span class="s2">if </span><span class="s1">n==</span><span class="s4">0</span><span class="s1">: </span><span class="s0"># on a trouvé la parenthèse fermante de la première</span><span class="s1"> 
-                    </span><span class="s2">if </span><span class="s1">i&lt;(len(X)-</span><span class="s4">1</span><span class="s1">): 
-                        </span><span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">1</span><span class="s1">:i])|SousForm(X[i+</span><span class="s4">2</span><span class="s1">:])|set([X]) 
-                    </span><span class="s2">else</span><span class="s1">: 
-                        </span><span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">1</span><span class="s1">:i]) 
-    </span><span class="s0"># recherche si on a une négation (signe -)</span><span class="s1"> 
-    </span><span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">]==</span><span class="s3">'-'</span><span class="s1">: 
-        Y=X[</span><span class="s4">1</span><span class="s1">:] 
-        </span><span class="s2">return </span><span class="s1">set([X])|SousForm(Y) 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'&amp;'</span><span class="s1">: 
-            </span><span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">0</span><span class="s1">:i])|SousForm(X[i+</span><span class="s4">1</span><span class="s1">:])|set([X]) 
-    </span><span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">,len(X)): 
-        </span><span class="s2">if </span><span class="s1">X[i]==</span><span class="s3">'|'</span><span class="s1">: 
-            </span><span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">0</span><span class="s1">:i])|SousForm(X[i+</span><span class="s4">1</span><span class="s1">:])|set([X]) 
- 
-</span><span class="s2">def </span><span class="s1">main(): 
-    print (SousForm(</span><span class="s3">"((-A)&amp;B)|C"</span><span class="s1">)) 
- 
-</span><span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">: 
-    main() 
- 
-</span></pre>
- </body>
+<pre><span class="s0"># Python version 3.8</span>
+<span class="s0"># Programme de détermination des sous-formules d'une formule</span>
+<span class="s0"># Determination of subformulas of a formula</span>
+<span class="s0"># Pour la logique propositionnelle du premier ordre</span>
+<span class="s0"># for propositional logic of the first order</span>
+<span class="s0"># avec les seuls connecteurs non, et, ou</span>
+<span class="s0"># with for connectors only not, and, or</span>
+<span class="s0"># représentés respectivement par - , &amp;, |</span>
+<span class="s0"># represented by symbols -,&amp;,|</span>
+
+<span class="s0"># constantes logiques 0= Faux 1=Vrai</span>
+<span class="s0"># logical constants 0=False, 1= True</span>
+<span class="s2">def </span><span class="s1">ConstantP(X :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">X == </span><span class="s3">'0' </span><span class="s2">or </span><span class="s1">X == </span><span class="s3">'1'</span>
+
+<span class="s0"># variables propositionnelles</span>
+<span class="s0"># propositional variables</span>
+<span class="s2">def </span><span class="s1">VariableP(X : str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">len(X) == </span><span class="s4">1 </span><span class="s2">and </span><span class="s3">'A' </span><span class="s1">&lt;= X &lt;= </span><span class="s3">'Z'</span>
+
+<span class="s0"># propositions atomiques</span>
+<span class="s0"># atoms</span>
+<span class="s2">def </span><span class="s1">AtomP(X :str)-&gt;bool:</span>
+    <span class="s2">return </span><span class="s1">ConstantP(X) </span><span class="s2">or </span><span class="s1">VariableP(X)</span>
+
+<span class="s0"># teste si X est une proposition</span>
+<span class="s0"># parser to recognize propositions</span>
+<span class="s0"># fonction récursive - recursive function</span>
+<span class="s2">def </span><span class="s1">ProP(X :str)-&gt;bool:</span>
+    <span class="s2">if </span><span class="s1">AtomP(X):  </span><span class="s0"># les atomes sont des propositions - atoms are propositions</span>
+        <span class="s2">return True</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:  </span><span class="s0"># cas des parenthèses - case of parentheses</span>
+        <span class="s1">n = </span><span class="s4">1</span>
+        <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, len(X)):</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'('</span><span class="s1">:</span>
+                <span class="s1">n = n + </span><span class="s4">1  </span><span class="s0"># incrémente les parenthèses ouvrantes - increase counter of opening</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">')'</span><span class="s1">:</span>
+                <span class="s1">n = n - </span><span class="s4">1  </span><span class="s0"># décrémente les parenthèses fermantes - decrease closing ones</span>
+                <span class="s2">if </span><span class="s1">n == </span><span class="s4">0</span><span class="s1">:  </span><span class="s0"># on a trouvé la parenthèse fermante de la première - we found the closing one matching the first</span>
+                    <span class="s0"># on remplace la première expression parenthésée par une constante 1 - replace the first exp between parentheses by 1</span>
+                    <span class="s2">return </span><span class="s1">ProP(</span><span class="s3">&quot;1&quot; </span><span class="s1">+ X[i + </span><span class="s4">1</span><span class="s1">:])</span>
+        <span class="s2">return False</span>
+        <span class="s0"># recherche si on a une négation (signe -) - lookning for unary minus = negation</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'-' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">1</span><span class="s1">:]):</span>
+        <span class="s2">return True</span>
+        <span class="s0"># recherche si on a une conjonction (signe &amp;) - looking for conjunction</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'&amp;' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return True</span>
+            <span class="s0"># recherche si on a une disjonction (signe |) - looking for disjunction</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)):</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'|' </span><span class="s2">and </span><span class="s1">ProP(X[</span><span class="s4">0</span><span class="s1">:i]) </span><span class="s2">and </span><span class="s1">ProP(X[i + </span><span class="s4">1</span><span class="s1">:]):</span>
+            <span class="s2">return True</span>
+
+<span class="s0"># Fournit l'ensemble des sous-formules de X</span>
+<span class="s0"># gives the set of all subformulas of X</span>
+<span class="s2">def </span><span class="s1">SousForm(X :str)-&gt;set:</span>
+    <span class="s2">if </span><span class="s1">len(X) == </span><span class="s4">0</span><span class="s1">:</span>
+        <span class="s2">return </span><span class="s1">set([])</span>
+    <span class="s2">if </span><span class="s1">AtomP(X):</span>
+        <span class="s2">return </span><span class="s1">set([X])</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'('</span><span class="s1">:  </span><span class="s0"># cas des parenthèses -case of parentheses</span>
+        <span class="s1">n = </span><span class="s4">1</span>
+        <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">1</span><span class="s1">, len(X)):</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'('</span><span class="s1">:</span>
+                <span class="s1">n = n + </span><span class="s4">1  </span><span class="s0"># incrémente les parenthèses ouvrantes - same as above</span>
+            <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">')'</span><span class="s1">:</span>
+                <span class="s1">n = n - </span><span class="s4">1  </span><span class="s0"># décrémente les parenthèses fermantes - same as above</span>
+                <span class="s2">if </span><span class="s1">n == </span><span class="s4">0</span><span class="s1">:  </span><span class="s0"># on a trouvé la parenthèse fermante de la première -same as above</span>
+                    <span class="s2">if </span><span class="s1">i &lt; (len(X) - </span><span class="s4">1</span><span class="s1">):</span>
+                        <span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">1</span><span class="s1">:i]) | SousForm(X[i + </span><span class="s4">2</span><span class="s1">:]) | set([X])</span>
+                    <span class="s2">else</span><span class="s1">:</span>
+                        <span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">1</span><span class="s1">:i])</span>
+    <span class="s0"># recherche si on a une négation (signe -)- looking for negation</span>
+    <span class="s2">if </span><span class="s1">X[</span><span class="s4">0</span><span class="s1">] == </span><span class="s3">'-'</span><span class="s1">:</span>
+        <span class="s1">Y = X[</span><span class="s4">1</span><span class="s1">:]</span>
+        <span class="s2">return </span><span class="s1">set([X]) | SousForm(Y)</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)): </span><span class="s0">#conjonction</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'&amp;'</span><span class="s1">:</span>
+            <span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">0</span><span class="s1">:i]) | SousForm(X[i + </span><span class="s4">1</span><span class="s1">:]) | set([X])</span>
+    <span class="s2">for </span><span class="s1">i </span><span class="s2">in </span><span class="s1">range(</span><span class="s4">0</span><span class="s1">, len(X)): </span><span class="s0">#disjonction</span>
+        <span class="s2">if </span><span class="s1">X[i] == </span><span class="s3">'|'</span><span class="s1">:</span>
+            <span class="s2">return </span><span class="s1">SousForm(X[</span><span class="s4">0</span><span class="s1">:i]) | SousForm(X[i + </span><span class="s4">1</span><span class="s1">:]) | set([X])</span>
+
+<span class="s2">def </span><span class="s1">main(): </span><span class="s0">#fonction principale -main function</span>
+    <span class="s1">print(SousForm(</span><span class="s3">&quot;((-A)&amp;B)|C&quot;</span><span class="s1">))</span>
+
+<span class="s2">if </span><span class="s1">__name__ == </span><span class="s3">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main() </span>
+
+</pre>
+</body>
 </html>

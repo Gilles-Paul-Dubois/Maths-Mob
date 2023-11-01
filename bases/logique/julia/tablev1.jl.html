@@ -1,16 +1,6 @@
 <html>
-
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-<title>tablev1.jl</title>
+<head>
+<title>test.jl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 .s0 { color: #8c8c8c; font-style: italic;}
@@ -22,42 +12,49 @@
 </head>
 <body bgcolor="#ffffff">
 
-<pre><span class="s0">#les deux constantes Vrai et faux</span>
+<pre><span class="s0"># julia 1.6</span>
+<span class="s0"># établissement d'une table de vérité</span>
+<span class="s0"># making of a truth table</span>
+
+<span class="s0"># les deux constantes Vrai et faux</span>
+<span class="s0"># both constants true and false</span>
 <span class="s1">constP(f) = length(f) == </span><span class="s2">1 </span><span class="s1">&amp;&amp; f[</span><span class="s2">1</span><span class="s1">] </span><span class="s3">in </span><span class="s4">&quot;VF&quot;</span>
-<span class="s0">#variable, toute autre lettre majuscule que V ou F</span>
+<span class="s0"># variable, toute autre lettre majuscule que V ou F</span>
+<span class="s0"># variable, any upper case letter except V or F</span>
 <span class="s1">varP(f) = length(f) == </span><span class="s2">1 </span><span class="s1">&amp;&amp; f[</span><span class="s2">1</span><span class="s1">] </span><span class="s3">in </span><span class="s4">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span>
-<span class="s0">#test de parenthèsage</span>
+<span class="s0">#test de parenthèsage - parenthesing test</span>
 <span class="s1">inparP(f) = f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'('</span><span class="s1">&amp;&amp; f[length(f)] == </span><span class="s4">')'</span><span class="s1">&amp;&amp; !(</span><span class="s4">'(' </span><span class="s3">in </span><span class="s1">f[</span><span class="s2">2</span><span class="s1">:end])</span>
-<span class="s0">#ramène l'expression entre parenthèses'</span>
+<span class="s0">#ramène l'expression entre parenthèses - return expression between parentheses</span>
 <span class="s1">betweenpar(f) = f[</span><span class="s2">2</span><span class="s1">:length(f) - </span><span class="s2">1</span><span class="s1">]</span>
 
-<span class="s0">#les 8 environnements possibles pour le triplet (A,B,C)</span>
+<span class="s0"># les 8 environnements possibles pour le triplet (A,B,C)</span>
+<span class="s0"># the 8 possible environments for the triple (A,B,C)</span>
 <span class="s1">E=(</span><span class="s4">'A'</span><span class="s1">,</span><span class="s4">'B'</span><span class="s1">,</span><span class="s4">'C'</span><span class="s1">)</span>
 <span class="s1">PowerX_n(X, n) = Iterators.product(ntuple(i-&gt;X, n)...)</span>
-<span class="s1">LV=[</span><span class="s3">true</span><span class="s1">,</span><span class="s3">false</span><span class="s1">] </span><span class="s0">#logique binaire</span>
-<span class="s1">F3=collect(PowerX_n(LV,</span><span class="s2">3</span><span class="s1">)) </span><span class="s0">#puissance trois</span>
-<span class="s1">Env(n)=Dict(E .=&gt; F3[n]) </span><span class="s0">#renvoie un environnement sous forme d'un dictionaire'</span>
+<span class="s1">LV=[</span><span class="s3">true</span><span class="s1">,</span><span class="s3">false</span><span class="s1">] </span><span class="s0">#logique binaire - binary logic</span>
+<span class="s1">F3=collect(PowerX_n(LV,</span><span class="s2">3</span><span class="s1">)) </span><span class="s0">#puissance trois - third power</span>
+<span class="s1">Env(n)=Dict(E .=&gt; F3[n]) </span><span class="s0">#renvoie un environnement sous forme d'un dictionaire- returns an environment as a dictionary</span>
 
-<span class="s3">function </span><span class="s1">parseP(f) </span><span class="s0">#analyseur syntaxique</span>
-    <span class="s3">if </span><span class="s1">constP(f) </span><span class="s0"># c'est une constante simple</span>
+<span class="s3">function </span><span class="s1">parseP(f) </span><span class="s0">#analyseur syntaxique - parser</span>
+    <span class="s3">if </span><span class="s1">constP(f) </span><span class="s0"># c'est une constante simple - a simple constant</span>
         <span class="s3">return </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">]</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s1">varP(f) </span><span class="s0"># c'est une variable simple</span>
+    <span class="s3">if </span><span class="s1">varP(f) </span><span class="s0"># c'est une variable simple - a simple variable</span>
         <span class="s3">return </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">]</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s1">inparP(f) </span><span class="s0"># l'expression est entre parenthèses'</span>
+    <span class="s3">if </span><span class="s1">inparP(f) </span><span class="s0"># l'expression est entre parenthèses - the xpression between parentheses</span>
         <span class="s1">a = parseP(betweenpar(f))</span>
         <span class="s3">if </span><span class="s1">a != nothing</span>
             <span class="s3">return </span><span class="s1">a</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'!' </span><span class="s0"># nous avons une négation</span>
+    <span class="s3">if </span><span class="s1">f[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'!' </span><span class="s0"># nous avons une négation - we have a negation</span>
         <span class="s1">a = parseP(f[</span><span class="s2">2</span><span class="s1">:end])</span>
         <span class="s3">if </span><span class="s1">a != nothing</span>
             <span class="s3">return </span><span class="s1">[</span><span class="s4">'!'</span><span class="s1">, a]</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s4">'&amp;' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une conjonction</span>
+    <span class="s3">if </span><span class="s4">'&amp;' </span><span class="s3">in </span><span class="s1">f </span><span class="s0"># nous avons une conjonction - we have a conjunction</span>
         <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
             <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'&amp;'</span>
                 <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i - </span><span class="s2">1</span><span class="s1">])</span>
@@ -68,7 +65,7 @@
             <span class="s3">end</span>
         <span class="s3">end</span>
     <span class="s3">end</span>
-    <span class="s3">if </span><span class="s4">'|' </span><span class="s3">in </span><span class="s1">f </span><span class="s0">#nous avons une disjonction</span>
+    <span class="s3">if </span><span class="s4">'|' </span><span class="s3">in </span><span class="s1">f </span><span class="s0">#nous avons une disjonction - we have a disjunction</span>
         <span class="s3">for </span><span class="s1">i = </span><span class="s2">1</span><span class="s1">:length(f)</span>
             <span class="s3">if </span><span class="s1">f[i] == </span><span class="s4">'|'</span>
                 <span class="s1">a = parseP(f[</span><span class="s2">1</span><span class="s1">:i - </span><span class="s2">1</span><span class="s1">])</span>
@@ -81,7 +78,9 @@
     <span class="s3">end</span>
     <span class="s3">return </span><span class="s1">nothing</span>
 <span class="s3">end</span>
-<span class="s0">#fonction d'évaluation, également récursive</span>
+
+<span class="s0"># fonction d'évaluation, également récursive</span>
+<span class="s0"># evaluation function - recursvive as well</span>
 <span class="s3">function </span><span class="s1">evalP(Tree, Env)</span>
     <span class="s3">if </span><span class="s1">Tree == </span><span class="s4">'V'</span>
         <span class="s3">return true</span>
@@ -90,14 +89,14 @@
     <span class="s3">elseif </span><span class="s1">Tree </span><span class="s3">in </span><span class="s4">&quot;ABCDEGHIJKLMNOPQRSTUWXYZ&quot;</span>
         <span class="s3">return </span><span class="s1">Env[Tree]</span>
     <span class="s3">elseif </span><span class="s1">Tree[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'!'</span>
-        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env) </span><span class="s0">#appel récursif</span>
+        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env) </span><span class="s0">#appel récursif - recursive call</span>
         <span class="s3">return </span><span class="s1">!a</span>
     <span class="s3">elseif </span><span class="s1">Tree[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'&amp;'</span>
-        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env) </span><span class="s0">#appels récursifs</span>
+        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env) </span><span class="s0">#appels récursifs - multiple recursive ca&amp;lls</span>
         <span class="s1">b = evalP(Tree[</span><span class="s2">3</span><span class="s1">],Env)</span>
         <span class="s3">return </span><span class="s1">a&amp;&amp;b</span>
     <span class="s3">elseif </span><span class="s1">Tree[</span><span class="s2">1</span><span class="s1">] == </span><span class="s4">'|'</span>
-        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env)</span><span class="s0">#appels récursifs</span>
+        <span class="s1">a = evalP(Tree[</span><span class="s2">2</span><span class="s1">],Env)</span><span class="s0">#appels récursifs - recursivity again</span>
         <span class="s1">b = evalP(Tree[</span><span class="s2">3</span><span class="s1">],Env)</span>
         <span class="s3">return </span><span class="s1">a||b</span>
     <span class="s3">else</span>
@@ -105,9 +104,10 @@
 <span class="s3">end</span>
 
 <span class="s0"># fonction principale, établissement de la table de vérité</span>
+<span class="s0"># main function - building truth table</span>
 <span class="s3">function </span><span class="s1">main()</span>
-   <span class="s1">Formule =parseP(</span><span class="s4">&quot;(!A)&amp;(B|C)&quot;</span><span class="s1">) </span><span class="s0">#la formule testée</span>
-   <span class="s0"># Affichage de la table de vérité</span>
+   <span class="s1">Formule =parseP(</span><span class="s4">&quot;(!A)&amp;(B|C)&quot;</span><span class="s1">) </span><span class="s0">#la formule testée - the formula which we check</span>
+   <span class="s0"># Affichage de la table de vérité - display of truth table</span>
    <span class="s1">println(Formule)</span>
    <span class="s3">for </span><span class="s1">i </span><span class="s3">in </span><span class="s2">1</span><span class="s1">:</span><span class="s2">8</span>
         <span class="s1">print(</span><span class="s4">&quot;Pour l'environnement &quot;</span><span class="s1">)</span>
@@ -117,7 +117,6 @@
     <span class="s3">end</span>
  <span class="s3">end</span>
 
-<span class="s1">main()</span>
-</pre>
+<span class="s1">main()</span></pre>
 </body>
 </html>

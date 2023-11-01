@@ -1,16 +1,6 @@
 <html>
-
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-<title>setop.jl</title>
+<head>
+<title>test.jl</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 .s0 { color: #8c8c8c; font-style: italic;}
@@ -23,64 +13,64 @@
 <body bgcolor="#ffffff">
 
 <pre><span class="s0">#julia  version 1.6</span>
-<span class="s0"># opérations avec les ensembles</span>
-<span class="s0"># réunion et intersection</span>
-<span class="s0"># complémentaire et différence symétrique</span>
+<span class="s0"># opérations avec les ensembles- operations with sets</span>
+<span class="s0"># réunion et intersection - union and intersection</span>
+<span class="s0"># complémentaire et différence symétrique - difference and symmetric difference</span>
 
 
-<span class="s0"># ensembles de nombres</span>
+<span class="s0"># ensembles de nombres -sets of numbers</span>
 <span class="s1">V=Set([])</span>
 <span class="s1">E=Set([</span><span class="s2">1</span><span class="s1">,</span><span class="s2">2</span><span class="s1">,</span><span class="s2">3</span><span class="s1">,</span><span class="s2">4</span><span class="s1">])</span>
 <span class="s1">F=Set([</span><span class="s2">0</span><span class="s1">,</span><span class="s2">2</span><span class="s1">,</span><span class="s2">3</span><span class="s1">])</span>
 
-<span class="s3">function </span><span class="s1">imprime(X) </span><span class="s0">#écriture classique des maths</span>
+<span class="s3">function </span><span class="s1">imprime(X) </span><span class="s0">#écriture classique des maths - classical writing in maths</span>
   <span class="s1">println(</span><span class="s4">&quot;&quot;</span><span class="s1">)</span>
-  <span class="s1">print(</span><span class="s4">'{'</span><span class="s1">) </span><span class="s0">#début de l'écriture</span>
+  <span class="s1">print(</span><span class="s4">'{'</span><span class="s1">) </span><span class="s0">#début de l'écriture - beginning of display</span>
   <span class="s1">n = length(X)</span>
   <span class="s1">i = </span><span class="s2">0</span>
   <span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">X</span>
     <span class="s1">i = i + </span><span class="s2">1</span>
     <span class="s1">print(x)</span>
     <span class="s3">if </span><span class="s1">i &lt; n</span>
-      <span class="s1">print(</span><span class="s4">','</span><span class="s1">) </span><span class="s0">#seulement si ce n'est pas le dernier</span>
+      <span class="s1">print(</span><span class="s4">','</span><span class="s1">) </span><span class="s0">#seulement si ce n'est pas le dernier - only if not last</span>
     <span class="s3">end</span>
   <span class="s3">end</span>
-  <span class="s1">println(</span><span class="s4">'}'</span><span class="s1">) </span><span class="s0">#fin de l'écriture</span>
+  <span class="s1">println(</span><span class="s4">'}'</span><span class="s1">) </span><span class="s0">#fin de l'écriture - end of display</span>
 <span class="s3">end</span>
 
-<span class="s0"># l'intersection</span>
+<span class="s0"># l'intersection - intersection</span>
 <span class="s3">function </span><span class="s1">test1()</span>
   <span class="s1">println(</span><span class="s4">&quot;intersection&quot;</span><span class="s1">)</span>
-  <span class="s1">imprime(intersect(V, E)) </span><span class="s0"># doit être vide</span>
-  <span class="s1">imprime(intersect(E, E)) </span><span class="s0"># doit donner E</span>
-  <span class="s1">imprime(intersect(E, F)) </span><span class="s0"># soit {2 3}</span>
+  <span class="s1">imprime(intersect(V, E)) </span><span class="s0"># doit être vide - shoud be empty</span>
+  <span class="s1">imprime(intersect(E, E)) </span><span class="s0"># doit donner E - should give E</span>
+  <span class="s1">imprime(intersect(E, F)) </span><span class="s0"># soit {2 3} - will return {2,3}</span>
 <span class="s3">end</span>
 
-<span class="s0"># la réunion</span>
+<span class="s0"># la réunion - union</span>
 <span class="s3">function </span><span class="s1">test2()</span>
   <span class="s1">println(</span><span class="s4">&quot;réunion&quot;</span><span class="s1">)</span>
-  <span class="s1">imprime(</span><span class="s3">union</span><span class="s1">(V, E)) </span><span class="s0"># doit être E</span>
-  <span class="s1">imprime(</span><span class="s3">union</span><span class="s1">(E, E)) </span><span class="s0"># doit donner V</span>
-  <span class="s1">imprime(</span><span class="s3">union</span><span class="s1">(E, F)) </span><span class="s0"># soit {0,4,2,3,1}</span>
+  <span class="s1">imprime(</span><span class="s3">union</span><span class="s1">(V, E)) </span><span class="s0"># doit être E - should be E</span>
+  <span class="s1">imprime(</span><span class="s3">union</span><span class="s1">(E, E)) </span><span class="s0"># doit donner V -should be V</span>
+  <span class="s1">imprime(</span><span class="s3">union</span><span class="s1">(E, F)) </span><span class="s0"># soit {0,4,2,3,1} - gives {0,1,2,3,4}</span>
 <span class="s3">end</span>
 
-<span class="s0"># le complémentaire</span>
+<span class="s0"># le complémentaire - difference</span>
 <span class="s3">function </span><span class="s1">test3()</span>
   <span class="s1">println(</span><span class="s4">&quot;complémentaire&quot;</span><span class="s1">)</span>
-  <span class="s1">imprime(setdiff(V, E)) </span><span class="s0"># doit être vide</span>
-  <span class="s1">imprime(setdiff(E, V)) </span><span class="s0"># doit donner V</span>
-  <span class="s1">imprime(setdiff(E, F)) </span><span class="s0"># reste deux éléments</span>
+  <span class="s1">imprime(setdiff(V, E)) </span><span class="s0"># doit être vide - should be empty</span>
+  <span class="s1">imprime(setdiff(E, V)) </span><span class="s0"># doit donner V - should give V</span>
+  <span class="s1">imprime(setdiff(E, F)) </span><span class="s0"># reste deux éléments - two elements left</span>
 <span class="s3">end</span>
 
-
-<span class="s0"># différence sysmétrique</span>
+<span class="s0"># différence sysmétrique - symmetric difference</span>
 <span class="s3">function </span><span class="s1">test4()</span>
   <span class="s1">println(</span><span class="s4">&quot;différence symétrique&quot;</span><span class="s1">)</span>
-  <span class="s1">imprime(symdiff(V, E)) </span><span class="s0"># doit être vide</span>
-  <span class="s1">imprime(symdiff(E, V)) </span><span class="s0"># doit donner V</span>
-  <span class="s1">imprime(symdiff(E, F)) </span><span class="s0"># reste deux éléments</span>
+  <span class="s1">imprime(symdiff(V, E)) </span><span class="s0"># doit être vide - should be empty</span>
+  <span class="s1">imprime(symdiff(E, V)) </span><span class="s0"># doit donner V - should give V</span>
+  <span class="s1">imprime(symdiff(E, F)) </span><span class="s0"># reste deux éléments - two elements left</span>
 <span class="s3">end</span>
-<span class="s0">#fonction principale</span>
+
+<span class="s0">#fonction principale - main function</span>
 <span class="s3">function </span><span class="s1">main()</span>
   <span class="s1">test1()</span>
   <span class="s1">test2()</span>
@@ -88,7 +78,6 @@
   <span class="s1">test4()</span>
 <span class="s3">end</span>
 
-<span class="s1">main()</span>
-</pre>
+<span class="s1">main()</span></pre>
 </body>
 </html>

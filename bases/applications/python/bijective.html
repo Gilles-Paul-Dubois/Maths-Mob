@@ -1,55 +1,60 @@
-﻿<html>
- 
-    <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2LMLVPDR6E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-2LMLVPDR6E');
-</script>
-    
-  <title>
-   bijective.py
-  </title>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <style type="text/css">
-   .ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
-.s0 { color: rgb(128,128,128); font-style: italic; }
-.s1 { }
-.s2 { color: rgb(0,128,128); font-weight: bold; }
-.s3 { color: rgb(0,0,128); font-weight: bold; }
-  </style>
- </head>
- <body bgcolor="#ffffff">
-  <pre>
+<html>
+<head>
+<title>test.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #8c8c8c; font-style: italic;}
+.s1 { color: #080808;}
+.s2 { color: #067d17;}
+.s3 { color: #0033b3;}
+</style>
+</head>
+<body bgcolor="#ffffff">
 
-<span class="s0"># version python 3.4</span><span class="s1"> 
- 
-assoc={ </span><span class="s2">'a'</span><span class="s1">:</span><span class="s2">'v'</span><span class="s1">, </span><span class="s2">'b'</span><span class="s1">:</span><span class="s2">'x'</span><span class="s1">, </span><span class="s2">'c'</span><span class="s1">:</span><span class="s2">'z'</span><span class="s1">,</span><span class="s2">'d'</span><span class="s1">:</span><span class="s2">'x'</span><span class="s1">} 
- 
-assoc={ </span><span class="s2">'a'</span><span class="s1">:</span><span class="s2">'v'</span><span class="s1">, </span><span class="s2">'b'</span><span class="s1">:</span><span class="s2">'x'</span><span class="s1">, </span><span class="s2">'c'</span><span class="s1">:</span><span class="s2">'z'</span><span class="s1">,</span><span class="s2">'d'</span><span class="s1">:</span><span class="s2">'t'</span><span class="s1">} 
- 
-</span><span class="s3">def </span><span class="s1">EstInjective(f): 
-    </span><span class="s3">return </span><span class="s1">len(assoc.values())==len(set(assoc.values())) 
- 
-</span><span class="s3">def </span><span class="s1">EstSurjective(f,F): 
-    </span><span class="s3">return </span><span class="s1">len(F)==len(set(assoc.values())) 
- 
-</span><span class="s0"># F est l'ensemble but contenant au moins toutes les valeurs de assoc</span><span class="s1"> 
-</span><span class="s3">def </span><span class="s1">EstBijective(f,F): 
-    </span><span class="s3">return </span><span class="s1">EstInjective(f) </span><span class="s3">and </span><span class="s1">EstSurjective(f,F) 
- 
-</span><span class="s3">def </span><span class="s1">f(c): 
-    </span><span class="s3">return </span><span class="s1">assoc.get(c) 
- 
-</span><span class="s3">def </span><span class="s1">main(): 
-    F1=set([</span><span class="s2">'v'</span><span class="s1">,</span><span class="s2">'x'</span><span class="s1">,</span><span class="s2">'z'</span><span class="s1">,</span><span class="s2">'t'</span><span class="s1">]) 
-    print (EstBijective(f,F1)) 
- 
-</span><span class="s3">if </span><span class="s1">__name__ == </span><span class="s2">'__main__'</span><span class="s1">: 
-    main() 
-</span></pre>
- </body>
+<pre><span class="s0"># version python 3.8</span>
+<span class="s0"># test de bijectivité pour une application définie par un dictionnaire</span>
+<span class="s0"># test of bijectivity for a map defined with a dictionary</span>
+
+<span class="s0"># les dictionnaires - the dictionaries</span>
+<span class="s1">assoc1 = {</span><span class="s2">'a'</span><span class="s1">: </span><span class="s2">'v'</span><span class="s1">, </span><span class="s2">'b'</span><span class="s1">: </span><span class="s2">'x'</span><span class="s1">, </span><span class="s2">'c'</span><span class="s1">: </span><span class="s2">'z'</span><span class="s1">, </span><span class="s2">'d'</span><span class="s1">: </span><span class="s2">'t'</span><span class="s1">}</span>
+<span class="s1">assoc2 = {</span><span class="s2">'a'</span><span class="s1">: </span><span class="s2">'v'</span><span class="s1">, </span><span class="s2">'b'</span><span class="s1">: </span><span class="s2">'x'</span><span class="s1">, </span><span class="s2">'c'</span><span class="s1">: </span><span class="s2">'z'</span><span class="s1">, </span><span class="s2">'d'</span><span class="s1">: </span><span class="s2">'x'</span><span class="s1">}</span>
+
+<span class="s0"># fonction associée à un dictionaire D</span>
+<span class="s0">#function associated with dictionary D</span>
+<span class="s3">def </span><span class="s1">f(D :dict )-&gt;callable :</span>
+    <span class="s3">return lambda </span><span class="s1">x : D[x]</span>
+
+<span class="s0">#fonctions définie au moyen des dictionnaires</span>
+<span class="s0"># functions defined using  dictionaries</span>
+<span class="s1">fonc1=f(assoc1)</span>
+<span class="s1">fonc2=f(assoc2)</span>
+
+<span class="s0"># test d'injectivité</span>
+<span class="s0">#injectivity checking</span>
+<span class="s3">def </span><span class="s1">estInjective(f :callable, E :set)-&gt;bool: </span><span class="s0"># utilise la définition - using definition</span>
+    <span class="s3">return not </span><span class="s1">any (f(x)==f(y) </span><span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">E </span><span class="s3">for </span><span class="s1">y </span><span class="s3">in </span><span class="s1">E </span><span class="s3">if </span><span class="s1">x!=y)</span>
+
+<span class="s0"># test de surjectivité</span>
+<span class="s0">#surjectivity checking</span>
+<span class="s3">def </span><span class="s1">estSurjective(f :callable, E :set,F :set)-&gt;bool:</span>
+    <span class="s3">return </span><span class="s1">len(F) == len([f(x) </span><span class="s3">for </span><span class="s1">x </span><span class="s3">in </span><span class="s1">E])</span>
+
+<span class="s0"># F est l'ensemble but contenant au moins toutes les valeurs de assoc</span>
+<span class="s0">#E est la source c'est à dire l'ensemble des clés</span>
+<span class="s0"># E is domain that is the set of keys</span>
+<span class="s0"># F is the codomain containing at least all the values of dictionary assoc</span>
+<span class="s3">def </span><span class="s1">estBijective(f :callable, E :set,F :set)-&gt;bool:</span>
+    <span class="s3">return </span><span class="s1">estInjective(f,E) </span><span class="s3">and </span><span class="s1">estSurjective(f,E, F)</span>
+
+<span class="s3">def </span><span class="s1">main(): </span><span class="s0">#fonction principale - main function</span>
+    <span class="s1">E=set(</span><span class="s2">&quot;abcd&quot;</span><span class="s1">)</span>
+    <span class="s1">F1 = set(</span><span class="s2">&quot;vxzt&quot;</span><span class="s1">)</span>
+    <span class="s1">F2=set(</span><span class="s2">&quot;vxz&quot;</span><span class="s1">)</span>
+    <span class="s1">print(estBijective(fonc1, E, F1))</span>
+    <span class="s1">print(estBijective(fonc2,E,F2))</span>
+
+<span class="s3">if </span><span class="s1">__name__ == </span><span class="s2">'__main__'</span><span class="s1">:</span>
+    <span class="s1">main()</span>
+</pre>
+</body>
 </html>
